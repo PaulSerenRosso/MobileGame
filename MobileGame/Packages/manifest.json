@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+    "com.jetbrains.riderflow": "2022.1.5-248",
     "com.pserenrosso.utilities": "https://github.com/PaulSerenRosso/Utilities.git?path=/Utilities/Assets/src",
     "com.unity.addressables": "1.19.19",
     "com.unity.collab-proxy": "1.17.7",
@@ -46,5 +47,14 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
-  }
+  },
+  "scopedRegistries": [
+    {
+      "name": "JetBrains",
+      "url": "https://npm.pkg.jetbrains.space/public/p/jetbrains-gamedev/jetbrains-gamedev/",
+      "scopes": [
+        "com.jetbrains"
+      ]
+    }
+  ]
 }
