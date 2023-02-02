@@ -9,7 +9,7 @@ namespace Service
     {
         private GameObject _mainMenu;
 
-        [DependsOnService] private ISceneService _sceneService;
+        [DependsOnService] private IGameService _gameService;
         
         public void LoadMainMenu()
         {
@@ -27,7 +27,7 @@ namespace Service
         private void AssignMainMenu(GameObject gameObject)
         {
             _mainMenu = Object.Instantiate(gameObject);
-            _mainMenu.GetComponent<MenuManager>().SetupMenu(_sceneService);
+            _mainMenu.GetComponent<MenuManager>().SetupMenu(_gameService);
             Release(gameObject);
         }
     }

@@ -17,9 +17,9 @@ public class MenuManager : MonoBehaviour
         _settingsMenu.transform.DOScale(0f, 0f).SetEase(Ease.OutBack);
     }
 
-    public void SetupMenu(ISceneService sceneService)
+    public void SetupMenu(IGameService gameService)
     {
-        if (_sceneToLoad != null) _playButton.onClick.AddListener(() => sceneService.LoadScene(_sceneToLoad));
+        if (_sceneToLoad != null) _playButton.onClick.AddListener(() => gameService.StartGame());
         _openSettingsButton.onClick.AddListener(OpenSettings);
         _closeSettingsButton.onClick.AddListener(CloseSettings);
         // _reportButton.onClick.AddListener();
