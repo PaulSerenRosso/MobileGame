@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
+    [Header("Menu UI")]
     [SerializeField] private Button _playButton;
+    [Header("Settings UI")]
     [SerializeField] private Button _openSettingsButton;
     [SerializeField] private Image _settingsMenu;
     [SerializeField] private Button _closeSettingsButton;
@@ -17,9 +19,9 @@ public class MenuManager : MonoBehaviour
         _settingsMenu.transform.DOScale(0f, 0f).SetEase(Ease.OutBack);
     }
 
-    public void SetupMenu(IGameService gameService)
+    public void SetupMenu(IFightService fightService, string nextEnvironnementName)
     {
-        if (_sceneToLoad != null) _playButton.onClick.AddListener(() => gameService.StartGame());
+        if (_sceneToLoad != null) _playButton.onClick.AddListener(() => fightService.StartFight(nextEnvironnementName));
         _openSettingsButton.onClick.AddListener(OpenSettings);
         _closeSettingsButton.onClick.AddListener(CloseSettings);
         // _reportButton.onClick.AddListener();

@@ -1,55 +1,36 @@
 ﻿using Addressables;
 using Attributes;
-using Service.AudioService;
-using UnityEngine;
-using static UnityEngine.AddressableAssets.Addressables;
 
 namespace Service
 {
     public class GameService : IGameService
     {
-        [DependsOnService] private IAudioService _audioService;
-
-        [DependsOnService] private ISceneService _sceneService;
-
         [DependsOnService] private IUICanvasSwitchableService _canvasService;
 
-        private PlayerManager _playerManager;
-        private CameraController _cameraController;
+        [DependsOnService] private IInputService _inputService;
+        
+        public GlobalSettingsGameSO GlobalSettingsSO
+        {
+            get => _globalSettingsSO;
+        }
+
+        private GlobalSettingsGameSO _globalSettingsSO;
+
+        // todo: get so with all environment string addressable
+        // todo: launch fight
 
         [ServiceInit]
         private void Initialize()
         {
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GlobalSettingsGameSO>("GlobalSettingsGame",
+                LoadGlobalSettingsSO);
+        }
+
+        private void LoadGlobalSettingsSO(GlobalSettingsGameSO so)
+        {
+            _inputService.EnablePlayerMap(true);
+            _globalSettingsSO = so;
             _canvasService.LoadMainMenu();
-        }
-
-        public void StartGame()
-        {
-            _sceneService.LoadScene("GameScene");
-            // Instantiate environment
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Environment", GenerateEnvironment);
-        }
-
-        private void GenerateEnvironment(GameObject gameObject)
-        {
-            var environment = Object.Instantiate(gameObject);
-            // Release(environment);
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Player", GeneratePlayer);
-        }
-
-        private void GenerateCamera(GameObject gameObject)
-        {
-            var camera = Object.Instantiate(gameObject);
-            _cameraController = camera.GetComponent<CameraController>();
-            _cameraController.PlayerManager = _playerManager;
-        }
-
-        private void GeneratePlayer(GameObject gameObject)
-        {
-            var player = Object.Instantiate(gameObject);
-            _playerManager = player.GetComponent<PlayerManager>();
-            // Release(player);
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Camera", GenerateCamera);
         }
     }
 }

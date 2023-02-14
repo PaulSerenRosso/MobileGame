@@ -11,9 +11,18 @@ namespace Service
 
         [DependsOnService] private IGameService _gameService;
         
+        [DependsOnService] private IFightService _fightService;
+
+        [DependsOnService] private ISceneService _sceneService;
+
         public void LoadMainMenu()
         {
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("MainMenu", AssignMainMenu);
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("MainMenu", GenerateMainMenu);
+        }
+
+        public void LoadInGameMenu()
+        {
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("InGameMenu", GenerateInGameMenu);
         }
 
         public void LoadPopUpCanvas() { }
@@ -24,11 +33,18 @@ namespace Service
 
         public bool GetIsActiveService { get; }
 
-        private void AssignMainMenu(GameObject gameObject)
+        private void GenerateMainMenu(GameObject gameObject)
         {
             _mainMenu = Object.Instantiate(gameObject);
-            _mainMenu.GetComponent<MenuManager>().SetupMenu(_gameService);
+            _mainMenu.GetComponent<MenuManager>().SetupMenu(_fightService, _gameService.GlobalSettingsSO.AllEnvironmentsAdressableName[0]);
             Release(gameObject);
+        }
+
+        private void GenerateInGameMenu(GameObject gameObject)
+        {
+            var inGameMenu = Object.Instantiate(gameObject);
+            // Release(inGameMenu);
+            inGameMenu.GetComponent<InGameMenuManager>().SetupMenu(_sceneService);
         }
     }
 }
