@@ -12,7 +12,7 @@ namespace Service
     private float tickRate = 10f;
     private float tickTimer;
     private static float tickTime;
-    public static event Action tickEvent;
+    public  event Action tickEvent;
     public bool isActive;
 // les ref c'est comme un pointeur
     [ServiceInit]
@@ -23,7 +23,7 @@ namespace Service
         Tick();
         EnabledService();
     }
-    public static float getTickTime
+    public float GetTickTime
     {
         get => tickTime;
     } 

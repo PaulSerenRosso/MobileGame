@@ -1,8 +1,11 @@
 using UnityEngine;
 using DG.Tweening;
 using Service;
+using Service.Fight;
 using UnityEngine.UI;
 
+namespace Service.UI
+{
 public class MenuManager : MonoBehaviour
 {
     [Header("Menu UI")]
@@ -41,4 +44,6 @@ public class MenuManager : MonoBehaviour
         _openSettingsButton.transform.DOKill();
         _openSettingsButton.transform.DOScale(1f, 0.25f).SetEase(Ease.OutBack);
     }
+}
+    
 }

@@ -1,4 +1,4 @@
-namespace Service
+namespace Service.UI
 {
     public interface IUICanvasService : IService
     {

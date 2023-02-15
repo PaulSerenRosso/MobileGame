@@ -2,8 +2,11 @@ using Addressables;
 using UnityEngine;
 using static UnityEngine.AddressableAssets.Addressables;
 
+namespace Service.Fight
+{
 public class EnvironmentGridManager : MonoBehaviour
 {
+    [SerializeField]
     private MovePoint[] _movePoints;
 
     private float[] _circleRadius;
@@ -56,8 +59,8 @@ public class EnvironmentGridManager : MonoBehaviour
     {
         for (i = 0; i < _movePointsByCircle; i++)
         {
-            _movePoints[i].Neighbors.Add(_movePoints[^1]);
-            _movePoints[^1].Neighbors.Add(_movePoints[i]);
+            _movePoints[i].Neighbors.Add(_movePoints.Length-1);
+            _movePoints[^1].Neighbors.Add(i);
         }
 
         // premier cercle voisin le point center
@@ -70,12 +73,12 @@ public class EnvironmentGridManager : MonoBehaviour
         
         for (i = _movePointsByCircle; i < _movePoints.Length - 1; i++)
         {
-            _movePoints[i].Neighbors.Add(_movePoints[i - _movePointsByCircle]);
+            _movePoints[i].Neighbors.Add(i - _movePointsByCircle);
         }
 
         for (i = 0; i < _movePoints.Length - 1 - _movePointsByCircle; i++)
         {
-            _movePoints[i].Neighbors.Add(_movePoints[i + _movePointsByCircle]);
+            _movePoints[i].Neighbors.Add(i + _movePointsByCircle);
         }
 
         for (i = 0; i < _circleRadius.Length; i++)
@@ -84,25 +87,26 @@ public class EnvironmentGridManager : MonoBehaviour
             for (j = 1; j < _movePointsByCircle; j++)
             {
                 int currentIndex = currentCircleIndex + j;
-                _movePoints[currentIndex].Neighbors.Add(_movePoints[currentIndex - 1]);
+                _movePoints[currentIndex].Neighbors.Add(currentIndex - 1);
             }
 
             for (j = 0; j < _movePointsByCircle - 1; j++)
             {
                 int currentIndex = currentCircleIndex + j;
-                _movePoints[currentIndex].Neighbors.Add(_movePoints[currentIndex + 1]);
+                _movePoints[currentIndex].Neighbors.Add(currentIndex + 1);
             }
 
-            _movePoints[currentCircleIndex].Neighbors.Add(_movePoints[currentCircleIndex + _movePointsByCircle - 1]);
-            _movePoints[currentCircleIndex + _movePointsByCircle - 1].Neighbors.Add(_movePoints[currentCircleIndex]);
+            _movePoints[currentCircleIndex].Neighbors.Add(currentCircleIndex + _movePointsByCircle - 1);
+            _movePoints[currentCircleIndex + _movePointsByCircle - 1].Neighbors.Add(currentCircleIndex);
         }
 
         foreach (var movePoint in _movePoints)
         {
             foreach (var neighbor in movePoint.Neighbors)
             {
-                Debug.Log($"movePoint: {movePoint.Position}, Neighbor: {neighbor.Position}");
+                Debug.Log($"movePoint: {movePoint.Position}, Neighbor: {neighbor}");
             }
         }
     }
+}
 }

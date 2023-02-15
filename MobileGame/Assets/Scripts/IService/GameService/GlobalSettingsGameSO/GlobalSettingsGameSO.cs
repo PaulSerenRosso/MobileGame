@@ -4,4 +4,5 @@ using UnityEngine;
 public class GlobalSettingsGameSO : ScriptableObject
 {
     public string[] AllEnvironmentsAdressableName;
+ 
 }

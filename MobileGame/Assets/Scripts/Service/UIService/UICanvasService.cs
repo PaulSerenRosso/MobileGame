@@ -1,9 +1,10 @@
 ﻿using Addressables;
 using Attributes;
+using Service.Fight;
 using UnityEngine;
 using static UnityEngine.AddressableAssets.Addressables;
 
-namespace Service
+namespace Service.UI
 {
     public class UICanvasService : IUICanvasSwitchableService
     {

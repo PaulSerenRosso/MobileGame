@@ -9,6 +9,9 @@ using UnityEngine;
 using System.Runtime.CompilerServices;
 using Cysharp.Threading.Tasks;
 using Service.AudioService;
+using Service.Fight;
+using Service.Inputs;
+using Service.UI;
 using Unity.VisualScripting;
 
 public class Compositor : MonoBehaviour
@@ -21,7 +24,7 @@ public class Compositor : MonoBehaviour
 
     protected readonly Dictionary<Type, IService> m_services = new Dictionary<Type, IService>();
     protected readonly Dictionary<Type, List<FieldEntry>> m_dependencySlots = new Dictionary<Type, List<FieldEntry>>();
-
+    ITickeableService iTickeableService;
     private bool ResolveDependencies()
     {
         foreach (KeyValuePair<Type, List<FieldEntry>> slotsForType in m_dependencySlots)
@@ -196,7 +199,7 @@ public class Compositor : MonoBehaviour
                     continue;
                 foreach (TickServiceFunction _tickServiceFunction in tickAttributes)
                 {
-                    TickService.tickEvent += () => methodInfo.Invoke(service, null);
+                    iTickeableService.tickEvent += () => methodInfo.Invoke(service, null);
                 }
             }
         }
@@ -204,13 +207,14 @@ public class Compositor : MonoBehaviour
 
     private void CreateAndWireObjects()
     {
-        AddService<ITickeableSwitchableService>(new TickService());
-        AddService<IGameService>(new GameService());
+        iTickeableService = new TickService();  
+        AddService<ITickeableSwitchableService>((ITickeableSwitchableService)iTickeableService);
         AddService<IAudioService>(new AudioService());
         AddService<ISceneService>(new SceneService());
         AddService<IUICanvasSwitchableService>(new UICanvasService());
         AddService<IFightService>(new FightService());
         AddService<IInputService>(new InputService());
+        AddService<IGameService>(new GameService());
     }
 
     private void Awake()

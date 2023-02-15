@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [Serializable]
 public class MovePoint
 {
-    public List<MovePoint> Neighbors;
+    public List<int> Neighbors;
     public Vector3 Position;
 
-    private MeshRenderer _meshRenderer;
+    public MeshRenderer MeshRenderer;
     private bool _isOccupied;
 
     public MovePoint(MeshRenderer meshRenderer, Vector3 position)
     {
-        _meshRenderer = meshRenderer;
+        MeshRenderer = meshRenderer;
         Position = position;
-        Neighbors = new List<MovePoint>();
+        Neighbors = new List<int>();
     }
 }

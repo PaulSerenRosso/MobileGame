@@ -1,5 +1,7 @@
 ﻿using Addressables;
 using Attributes;
+using Service.Inputs;
+using Service.UI;
 
 namespace Service
 {
@@ -28,7 +30,6 @@ namespace Service
 
         private void LoadGlobalSettingsSO(GlobalSettingsGameSO so)
         {
-            _inputService.EnablePlayerMap(true);
             _globalSettingsSO = so;
             _canvasService.LoadMainMenu();
         }

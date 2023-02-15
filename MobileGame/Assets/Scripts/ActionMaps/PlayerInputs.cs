@@ -24,60 +24,92 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
     ""name"": ""PlayerInputs"",
     ""maps"": [
         {
-            ""name"": ""Movements"",
+            ""name"": ""GenericInputs"",
             ""id"": ""0fe16c24-7996-4c08-b9d0-bae906b2f32b"",
             ""actions"": [
                 {
-                    ""name"": ""PrimaryTouch"",
+                    ""name"": ""PressTouch"",
                     ""type"": ""PassThrough"",
-                    ""id"": ""6fff4d37-0f91-412f-80e2-783388b6752d"",
+                    ""id"": ""e7a7c6a9-a037-4db7-b958-330bb06db31c"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""PressTouch"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""e7a7c6a9-a037-4db7-b958-330bb06db31c"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""name"": ""ReleaseTouch"",
+                    ""type"": ""Button"",
+                    ""id"": ""349fd740-5ffa-4315-9d5c-1b25377274ac"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MoveTouch"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""289fc2e3-2369-481f-bb0f-b626a3e5e58b"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""4f530cea-c7aa-4127-9c3b-9472b914f3f8"",
+                    ""id"": ""d6c56e85-bfd8-45f2-b06a-cc50592873b7"",
                     ""path"": ""<Touchscreen>/primaryTouch/press"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press(behavior=1)"",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PrimaryTouch"",
+                    ""groups"": ""Mobile"",
+                    ""action"": ""ReleaseTouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
                     ""id"": ""2c54f2fb-e9b0-4b5f-8e4e-33bb4aab49cf"",
+                    ""path"": ""<Touchscreen>/primaryTouch/press"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Mobile"",
+                    ""action"": ""PressTouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3e81c5ae-bf3a-401f-85ea-a27af60e96f4"",
                     ""path"": ""<Touchscreen>/position"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PressTouch"",
+                    ""groups"": ""Mobile"",
+                    ""action"": ""MoveTouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""Mobile"",
+            ""bindingGroup"": ""Mobile"",
+            ""devices"": []
+        },
+        {
+            ""name"": ""PC"",
+            ""bindingGroup"": ""PC"",
+            ""devices"": []
+        }
+    ]
 }");
-        // Movements
-        m_Movements = asset.FindActionMap("Movements", throwIfNotFound: true);
-        m_Movements_PrimaryTouch = m_Movements.FindAction("PrimaryTouch", throwIfNotFound: true);
-        m_Movements_PressTouch = m_Movements.FindAction("PressTouch", throwIfNotFound: true);
+        // GenericInputs
+        m_GenericInputs = asset.FindActionMap("GenericInputs", throwIfNotFound: true);
+        m_GenericInputs_PressTouch = m_GenericInputs.FindAction("PressTouch", throwIfNotFound: true);
+        m_GenericInputs_ReleaseTouch = m_GenericInputs.FindAction("ReleaseTouch", throwIfNotFound: true);
+        m_GenericInputs_MoveTouch = m_GenericInputs.FindAction("MoveTouch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -134,49 +166,76 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Movements
-    private readonly InputActionMap m_Movements;
-    private IMovementsActions m_MovementsActionsCallbackInterface;
-    private readonly InputAction m_Movements_PrimaryTouch;
-    private readonly InputAction m_Movements_PressTouch;
-    public struct MovementsActions
+    // GenericInputs
+    private readonly InputActionMap m_GenericInputs;
+    private IGenericInputsActions m_GenericInputsActionsCallbackInterface;
+    private readonly InputAction m_GenericInputs_PressTouch;
+    private readonly InputAction m_GenericInputs_ReleaseTouch;
+    private readonly InputAction m_GenericInputs_MoveTouch;
+    public struct GenericInputsActions
     {
         private @PlayerInputs m_Wrapper;
-        public MovementsActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
-        public InputAction @PrimaryTouch => m_Wrapper.m_Movements_PrimaryTouch;
-        public InputAction @PressTouch => m_Wrapper.m_Movements_PressTouch;
-        public InputActionMap Get() { return m_Wrapper.m_Movements; }
+        public GenericInputsActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @PressTouch => m_Wrapper.m_GenericInputs_PressTouch;
+        public InputAction @ReleaseTouch => m_Wrapper.m_GenericInputs_ReleaseTouch;
+        public InputAction @MoveTouch => m_Wrapper.m_GenericInputs_MoveTouch;
+        public InputActionMap Get() { return m_Wrapper.m_GenericInputs; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(MovementsActions set) { return set.Get(); }
-        public void SetCallbacks(IMovementsActions instance)
+        public static implicit operator InputActionMap(GenericInputsActions set) { return set.Get(); }
+        public void SetCallbacks(IGenericInputsActions instance)
         {
-            if (m_Wrapper.m_MovementsActionsCallbackInterface != null)
+            if (m_Wrapper.m_GenericInputsActionsCallbackInterface != null)
             {
-                @PrimaryTouch.started -= m_Wrapper.m_MovementsActionsCallbackInterface.OnPrimaryTouch;
-                @PrimaryTouch.performed -= m_Wrapper.m_MovementsActionsCallbackInterface.OnPrimaryTouch;
-                @PrimaryTouch.canceled -= m_Wrapper.m_MovementsActionsCallbackInterface.OnPrimaryTouch;
-                @PressTouch.started -= m_Wrapper.m_MovementsActionsCallbackInterface.OnPressTouch;
-                @PressTouch.performed -= m_Wrapper.m_MovementsActionsCallbackInterface.OnPressTouch;
-                @PressTouch.canceled -= m_Wrapper.m_MovementsActionsCallbackInterface.OnPressTouch;
+                @PressTouch.started -= m_Wrapper.m_GenericInputsActionsCallbackInterface.OnPressTouch;
+                @PressTouch.performed -= m_Wrapper.m_GenericInputsActionsCallbackInterface.OnPressTouch;
+                @PressTouch.canceled -= m_Wrapper.m_GenericInputsActionsCallbackInterface.OnPressTouch;
+                @ReleaseTouch.started -= m_Wrapper.m_GenericInputsActionsCallbackInterface.OnReleaseTouch;
+                @ReleaseTouch.performed -= m_Wrapper.m_GenericInputsActionsCallbackInterface.OnReleaseTouch;
+                @ReleaseTouch.canceled -= m_Wrapper.m_GenericInputsActionsCallbackInterface.OnReleaseTouch;
+                @MoveTouch.started -= m_Wrapper.m_GenericInputsActionsCallbackInterface.OnMoveTouch;
+                @MoveTouch.performed -= m_Wrapper.m_GenericInputsActionsCallbackInterface.OnMoveTouch;
+                @MoveTouch.canceled -= m_Wrapper.m_GenericInputsActionsCallbackInterface.OnMoveTouch;
             }
-            m_Wrapper.m_MovementsActionsCallbackInterface = instance;
+            m_Wrapper.m_GenericInputsActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @PrimaryTouch.started += instance.OnPrimaryTouch;
-                @PrimaryTouch.performed += instance.OnPrimaryTouch;
-                @PrimaryTouch.canceled += instance.OnPrimaryTouch;
                 @PressTouch.started += instance.OnPressTouch;
                 @PressTouch.performed += instance.OnPressTouch;
                 @PressTouch.canceled += instance.OnPressTouch;
+                @ReleaseTouch.started += instance.OnReleaseTouch;
+                @ReleaseTouch.performed += instance.OnReleaseTouch;
+                @ReleaseTouch.canceled += instance.OnReleaseTouch;
+                @MoveTouch.started += instance.OnMoveTouch;
+                @MoveTouch.performed += instance.OnMoveTouch;
+                @MoveTouch.canceled += instance.OnMoveTouch;
             }
         }
     }
-    public MovementsActions @Movements => new MovementsActions(this);
-    public interface IMovementsActions
+    public GenericInputsActions @GenericInputs => new GenericInputsActions(this);
+    private int m_MobileSchemeIndex = -1;
+    public InputControlScheme MobileScheme
     {
-        void OnPrimaryTouch(InputAction.CallbackContext context);
+        get
+        {
+            if (m_MobileSchemeIndex == -1) m_MobileSchemeIndex = asset.FindControlSchemeIndex("Mobile");
+            return asset.controlSchemes[m_MobileSchemeIndex];
+        }
+    }
+    private int m_PCSchemeIndex = -1;
+    public InputControlScheme PCScheme
+    {
+        get
+        {
+            if (m_PCSchemeIndex == -1) m_PCSchemeIndex = asset.FindControlSchemeIndex("PC");
+            return asset.controlSchemes[m_PCSchemeIndex];
+        }
+    }
+    public interface IGenericInputsActions
+    {
         void OnPressTouch(InputAction.CallbackContext context);
+        void OnReleaseTouch(InputAction.CallbackContext context);
+        void OnMoveTouch(InputAction.CallbackContext context);
     }
 }

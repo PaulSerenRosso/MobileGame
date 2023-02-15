@@ -1,9 +1,10 @@
 using Addressables;
 using Attributes;
+using Service.UI;
 using UnityEngine;
 using static UnityEngine.AddressableAssets.Addressables;
 
-namespace Service
+namespace Service.Fight
 {
     public class FightService : IFightService
     {
