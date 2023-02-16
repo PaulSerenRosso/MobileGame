@@ -1,11 +1,12 @@
-﻿using HelperPSR.Singletons;
+using HelperPSR.Singletons;
+using Player;
 using UnityEngine;
 
 namespace Service
 {
     public class CameraController : GenericSingleton<CameraController>
     {
-        [HideInInspector] public PlayerManager PlayerManager;
+        [HideInInspector] public PlayerController PlayerController;
 
         [Header("Camera Settings")] 
         [SerializeField] private Vector3 _positionBehind;
@@ -16,7 +17,7 @@ namespace Service
         private void Start()
         {
             transform.position = _positionBehind;
-            transform.LookAt(PlayerManager.transform);
+            transform.LookAt(PlayerController.transform);
             _isBehind = true;
         }
 
@@ -27,8 +28,8 @@ namespace Service
 
         public void UpdateCamera()
         {
-            if (!PlayerManager) return;
-            var positionCamera = PlayerManager.transform.position + _positionBehind;
+            if (!PlayerController) return;
+            var positionCamera = PlayerController.transform.position + _positionBehind;
             transform.position = positionCamera;
         }
 
@@ -37,13 +38,13 @@ namespace Service
             if (_isBehind)
             {
                 transform.position = _positionTopDown;
-                transform.LookAt(PlayerManager.transform);
+                transform.LookAt(PlayerController.transform);
                 _isBehind = false;
             }
             else
             {
                 transform.position = _positionBehind;
-                transform.LookAt(PlayerManager.transform);
+                transform.LookAt(PlayerController.transform);
                 _isBehind = true;
             }
         }

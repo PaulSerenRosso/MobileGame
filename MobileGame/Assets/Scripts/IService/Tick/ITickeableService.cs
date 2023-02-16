@@ -6,8 +6,7 @@ using UnityEngine;
 
 public interface ITickeableService : IService
 {
-  void Tick();
-
-  float GetTickTime { get; }
-  event Action tickEvent;
+    void Tick();
+    float GetTickTime { get; }
+    event Action tickEvent;
 }

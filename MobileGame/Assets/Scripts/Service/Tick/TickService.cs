@@ -8,58 +8,67 @@ using UnityEngine;
 namespace Service
 {
     public class TickService : ITickeableSwitchableService
-{
-    private float tickRate = 10f;
-    private float tickTimer;
-    private static float tickTime;
-    public  event Action tickEvent;
-    public bool isActive;
-// les ref c'est comme un pointeur
-    [ServiceInit]
-    void SetUp()
     {
-        tickTime = 1 / tickRate;
-        tickTimer = 0;
-        Tick();
-        EnabledService();
-    }
-    public float GetTickTime
-    {
-        get => tickTime;
-    } 
-    public async void Tick()
-    {
-        while (true)
+        private float tickRate = 10f;
+        private float tickTimer;
+        private static float tickTime;
+        public event Action tickEvent;
+
+        public bool isActive;
+
+        // les ref c'est comme un pointeur
+        [ServiceInit]
+        void SetUp()
         {
-            if (!isActive)
+            tickTime = 1 / tickRate;
+            tickTimer = 0;
+            Tick();
+            EnabledService();
+        }
+
+        public float GetTickTime
+        {
+            get => tickTime;
+        }
+
+        public async void Tick()
+        {
+            while (true)
             {
-                await UniTask.WaitUntil((PredicateIsActiveService));
+                if (!isActive)
+                {
+                    await UniTask.WaitUntil((PredicateIsActiveService));
+                }
+
+                if (tickTimer >= tickTime)
+                {
+                    tickTimer -= tickTime;
+                    tickEvent?.Invoke();
+                }
+                else tickTimer += Time.deltaTime;
+
+                await UniTask.DelayFrame(0);
             }
-            if (tickTimer >= tickTime)
+        }
+
+        private bool PredicateIsActiveService()
         {
-            tickTimer -= tickTime;
-            tickEvent?.Invoke();
+            return GetIsActiveService;
         }
-        else tickTimer += Time.deltaTime;
-        await UniTask.DelayFrame(0);
+
+        public void EnabledService()
+        {
+            isActive = true;
+        }
+
+        public void DisabledService()
+        {
+            isActive = false;
+        }
+
+        public bool GetIsActiveService
+        {
+            get => isActive;
         }
     }
-
-    private bool PredicateIsActiveService()
-    {
-        return GetIsActiveService;
-    }
-
-    public void EnabledService()
-    {
-        isActive = true;
-    }
-
-    public void DisabledService()
-    {
-        isActive = false;
-    }
-
-    public bool GetIsActiveService { get => isActive; }
-}
 }

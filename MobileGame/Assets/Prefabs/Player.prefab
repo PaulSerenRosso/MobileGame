@@ -12,7 +12,14 @@ GameObject:
   - component: {fileID: 1171904605101970617}
   - component: {fileID: 456503986889792210}
   - component: {fileID: 1359273171462430657}
-  - component: {fileID: 9086106094894434768}
+  - component: {fileID: 1800965582552254606}
+  - component: {fileID: 8581481885147205113}
+  - component: {fileID: 4050711209515336914}
+  - component: {fileID: 7053842336820709435}
+  - component: {fileID: 241883989640212697}
+  - component: {fileID: 4376894764709761957}
+  - component: {fileID: 2056379011037417376}
+  - component: {fileID: 7948611063154184754}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -99,7 +106,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &9086106094894434768
+--- !u!114 &1800965582552254606
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,6 +115,101 @@ MonoBehaviour:
   m_GameObject: {fileID: 6686433966917593852}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e3aa5cac20accf419e4b6883d83006e, type: 3}
+  m_Script: {fileID: 11500000, guid: 9db1cd9ba7b5b8e48a3016c6f10042f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8581481885147205113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6686433966917593852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3426c2f37c59cc4b93d4343fc78e25d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4050711209515336914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6686433966917593852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e09a74ab3abd24d8a477a13569420d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentSwipe:
+    SwipeSO: {fileID: 0}
+  CurrentMovePoint:
+    Neighbors: 
+    Position: {x: 0, y: 0, z: 0}
+    MeshRenderer: {fileID: 0}
+--- !u!114 &7053842336820709435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6686433966917593852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db8a5fc1ea032b04fbb2d95a82a75b91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerMovementSO: {fileID: 11400000, guid: 5f75cc58e513a344889c01a14d27ddc4, type: 2}
+--- !u!114 &241883989640212697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6686433966917593852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ada34d298d0314489aa1e8baaddc0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4376894764709761957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6686433966917593852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfe8ad773e02bbb44b76456c4c4964f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2056379011037417376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6686433966917593852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fafdc554ab9a70d4a8b2a34e299206cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _allMovementSwipesSO:
+  - {fileID: 11400000, guid: 9720e0f248129384db64111ff269294d, type: 2}
+  _playerMovementHandler: {fileID: 7053842336820709435}
+  _playerMovementAction: {fileID: 4050711209515336914}
+--- !u!114 &7948611063154184754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6686433966917593852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b60235b3475bb1a4a9eac3ca01ecd70f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

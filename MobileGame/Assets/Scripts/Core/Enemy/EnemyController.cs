@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyManager : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
     private void Start()
     {

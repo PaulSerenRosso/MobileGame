@@ -1,5 +1,7 @@
 using Addressables;
 using Attributes;
+using Player;
+using Service.Inputs;
 using Service.UI;
 using UnityEngine;
 using static UnityEngine.AddressableAssets.Addressables;
@@ -12,9 +14,12 @@ namespace Service.Fight
 
         [DependsOnService] private IUICanvasSwitchableService _canvasService;
 
+        [DependsOnService] private IInputService _inputService;
+
         private CameraController _cameraController;
-        private PlayerManager _playerManager;
-        private EnemyManager _enemyManager;
+        private PlayerController _playerController;
+        private EnemyController _enemyManager;
+        private EnvironmentGridManager _environmentGridManager;
 
         private EnvironmentSO _currentEnvironmentSO;
 
@@ -27,10 +32,10 @@ namespace Service.Fight
         // todo: link player grid to input
         // todo: generate enemy
 
-        public void StartFight(string environmentSOAdressableName)
+        public void StartFight(string environmentAddressableName)
         {
             _sceneService.LoadScene("GameScene");
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<EnvironmentSO>(environmentSOAdressableName,
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<EnvironmentSO>(environmentAddressableName,
                 LoadEnvironmentSO);
         }
 
@@ -44,27 +49,30 @@ namespace Service.Fight
         private void GenerateEnvironment(GameObject gameObject)
         {
             var environment = Object.Instantiate(gameObject);
-            Release(gameObject);
-            environment.GetComponent<EnvironmentGridManager>().SetupGrid(
+            _environmentGridManager = environment.GetComponent<EnvironmentGridManager>();
+            _environmentGridManager.SetupGrid(
                 _currentEnvironmentSO.GridOfEnvironment.CircleRadius,
                 _currentEnvironmentSO.GridOfEnvironment.MovePoints,
                 _currentEnvironmentSO.RendererMovePointAddressableName);
+            Debug.Log($"Length: {_environmentGridManager.MovePoints.Length}");
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Player", GeneratePlayer);
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Enemy", GenerateEnemy);
+            Release(gameObject);
         }
 
         private void GeneratePlayer(GameObject gameObject)
         {
             var player = Object.Instantiate(gameObject);
-            _playerManager = player.GetComponent<PlayerManager>();
-            Release(gameObject);
+            _playerController = player.GetComponent<PlayerController>();
+            _playerController.SetupPlayer(_inputService, _environmentGridManager, _currentEnvironmentSO);
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Camera", GenerateCamera);
+            Release(gameObject);
         }
 
         private void GenerateEnemy(GameObject gameObject)
         {
             var enemy = Object.Instantiate(gameObject);
-            _enemyManager = enemy.GetComponent<EnemyManager>();
+            _enemyManager = enemy.GetComponent<EnemyController>();
             Release(gameObject);
         }
 
@@ -73,7 +81,7 @@ namespace Service.Fight
             var camera = Object.Instantiate(gameObject);
             Release(gameObject);
             _cameraController = camera.GetComponent<CameraController>();
-            _cameraController.PlayerManager = _playerManager;
+            _cameraController.PlayerController = _playerController;
             _canvasService.LoadInGameMenu();
         }
     }
