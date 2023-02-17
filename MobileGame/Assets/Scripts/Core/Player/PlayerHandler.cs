@@ -7,8 +7,7 @@ namespace Player
     public abstract class PlayerHandler<AC> : MonoBehaviour where AC : IPlayerAction
     {
         protected AC _action;
-
-        private List<Func<bool>> _conditions;
+        protected List<Func<bool>> _conditions;
 
         protected void TryMakeAction()
         {

@@ -21,7 +21,7 @@ namespace Player
                 _inputService.AddSwipe(movementSwipeSO, _playerMovementHandler.TryMakeMovementAction);
             }
 
-            _playerMovementHandler.Setup(environmentGridManager, environmentSO.Index);
+            _playerMovementHandler.Setup(environmentGridManager, environmentSO.Index, _playerMovementAction);
         }
     }
 }

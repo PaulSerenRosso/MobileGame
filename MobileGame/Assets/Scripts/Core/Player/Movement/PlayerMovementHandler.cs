@@ -1,4 +1,5 @@
-using System.Linq;
+using System;
+using System.Collections.Generic;
 using Service.Fight;
 using Service.Inputs;
 using UnityEngine;
@@ -8,6 +9,7 @@ namespace Player.Movement
     public class PlayerMovementHandler : PlayerHandler<PlayerMovementAction>
     {
         [SerializeField] private PlayerMovementSO _playerMovementSO;
+        
         private EnvironmentGridManager _environmentGridManager;
         private Swipe _currentSwipe;
         private int _index;
@@ -61,12 +63,13 @@ namespace Player.Movement
 
         public override void Setup(params object[] arguments)
         {
+            // Move our champion when the player swipe
             _environmentGridManager = (EnvironmentGridManager)arguments[0];
             _index = (int)arguments[1];
-            Debug.Log($"index: {_index}");
-            Debug.Log($"Count: {_environmentGridManager.MovePoints.Length}");
+            _action = (PlayerMovementAction)arguments[2];
             _action.CurrentMovePoint = _environmentGridManager.MovePoints[_index];
             _action.PlayerMovementSO = _playerMovementSO;
+            _conditions = new List<Func<bool>>();
             AddCondition(CheckIsMoving);
             AddCondition(CheckIsOccupied);
             AddCondition(CheckIsOutOfRange);

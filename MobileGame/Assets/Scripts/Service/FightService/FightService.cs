@@ -53,8 +53,7 @@ namespace Service.Fight
             _environmentGridManager.SetupGrid(
                 _currentEnvironmentSO.GridOfEnvironment.CircleRadius,
                 _currentEnvironmentSO.GridOfEnvironment.MovePoints,
-                _currentEnvironmentSO.RendererMovePointAddressableName);
-            Debug.Log($"Length: {_environmentGridManager.MovePoints.Length}");
+                _currentEnvironmentSO.RendererMovePoint);
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Player", GeneratePlayer);
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Enemy", GenerateEnemy);
             Release(gameObject);

@@ -1,4 +1,3 @@
-using Addressables;
 using UnityEngine;
 using static UnityEngine.AddressableAssets.Addressables;
 
@@ -13,12 +12,11 @@ namespace Service.Fight
         private int _i;
         private int _j;
 
-        public void SetupGrid(float[] circles, int movePointsByCircle, string rendererAddressableName)
+        public void SetupGrid(float[] circles, int movePointsByCircle, GameObject rendererMovePoints)
         {
             _circleRadius = circles;
             _movePointsByCircle = movePointsByCircle;
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>(rendererAddressableName,
-                GenerateRendererMovePoint);
+            GenerateRendererMovePoint(rendererMovePoints);
         }
 
         private void GenerateRendererMovePoint(GameObject gameObject)
@@ -50,7 +48,7 @@ namespace Service.Fight
             MovePoints[^1] = new MovePoint(rendererMoveCenterPoint.GetComponent<MeshRenderer>(), Vector3.zero);
 
             Release(gameObject);
-
+            
             GenerateNeighbors();
         }
 

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d211d13dd08a531498eb8f2ba4f93267, type: 3}
   m_Name: FirstEnvironment
   m_EditorClassIdentifier: 
+  Index: 1
   EnvironmentAddressableName: Environment
   GridOfEnvironment: {fileID: 11400000, guid: 0d904d8bcbb70ec41b8bb352adb94f85, type: 2}
-  RendererMovePointAddressableName: MovePoints
+  RendererMovePoint: {fileID: 4654665101463204143, guid: 427fe9ac0c70c274d97006ea3eebeeb4,
+    type: 3}
