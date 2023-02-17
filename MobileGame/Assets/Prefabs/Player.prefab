@@ -142,12 +142,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9e09a74ab3abd24d8a477a13569420d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentSwipe:
-    SwipeSO: {fileID: 0}
-  CurrentMovePoint:
-    Neighbors: 
-    Position: {x: 0, y: 0, z: 0}
-    MeshRenderer: {fileID: 0}
+  Destination: {x: 0, y: 0, z: 0}
+  MovementSo: {fileID: 0}
 --- !u!114 &7053842336820709435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,7 +156,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db8a5fc1ea032b04fbb2d95a82a75b91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerMovementSO: {fileID: 11400000, guid: 5f75cc58e513a344889c01a14d27ddc4, type: 2}
+  _action: {fileID: 4050711209515336914}
+  movementSo: {fileID: 11400000, guid: 5f75cc58e513a344889c01a14d27ddc4, type: 2}
 --- !u!114 &241883989640212697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,7 +197,6 @@ MonoBehaviour:
   _allMovementSwipesSO:
   - {fileID: 11400000, guid: 9720e0f248129384db64111ff269294d, type: 2}
   _playerMovementHandler: {fileID: 7053842336820709435}
-  _playerMovementAction: {fileID: 4050711209515336914}
 --- !u!114 &7948611063154184754
 MonoBehaviour:
   m_ObjectHideFlags: 0

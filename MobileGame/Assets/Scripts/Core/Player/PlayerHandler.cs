@@ -4,10 +4,12 @@ using UnityEngine;
 
 namespace Player
 {
-    public abstract class PlayerHandler<AC> : MonoBehaviour where AC : IPlayerAction
+    
+    public abstract class PlayerHandler<AC> : MonoBehaviour where AC : IAction
     {
+        [SerializeField]
         protected AC _action;
-        protected List<Func<bool>> _conditions;
+        protected List<Func<bool>> _conditions = new List<Func<bool>>();
 
         protected void TryMakeAction()
         {

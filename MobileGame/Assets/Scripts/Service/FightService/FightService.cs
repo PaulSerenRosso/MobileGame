@@ -1,5 +1,6 @@
 using Addressables;
 using Attributes;
+using Environnement.MoveGrid;
 using Player;
 using Service.Inputs;
 using Service.UI;
@@ -53,7 +54,11 @@ namespace Service.Fight
             _environmentGridManager.SetupGrid(
                 _currentEnvironmentSO.GridOfEnvironment.CircleRadius,
                 _currentEnvironmentSO.GridOfEnvironment.MovePoints,
-                _currentEnvironmentSO.RendererMovePoint);
+                _currentEnvironmentSO.RendererMovePointAdressableName,() => GenerateFighters(gameObject));
+        }
+
+        private void GenerateFighters(GameObject gameObject)
+        {
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Player", GeneratePlayer);
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Enemy", GenerateEnemy);
             Release(gameObject);

@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using Environnement.MoveGrid;
 using Player.Movement;
 using Service.Fight;
 using Service.Inputs;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Player
 {
@@ -10,7 +12,6 @@ namespace Player
     {
         [SerializeField] private List<SwipeSO> _allMovementSwipesSO;
         [SerializeField] private PlayerMovementHandler _playerMovementHandler;
-        [SerializeField] private PlayerMovementAction _playerMovementAction;
         private IInputService _inputService;
 
         public void SetupPlayer(IInputService inputService, EnvironmentGridManager environmentGridManager, EnvironmentSO environmentSO)
@@ -21,7 +22,7 @@ namespace Player
                 _inputService.AddSwipe(movementSwipeSO, _playerMovementHandler.TryMakeMovementAction);
             }
 
-            _playerMovementHandler.Setup(environmentGridManager, environmentSO.Index, _playerMovementAction);
+            _playerMovementHandler.Setup(environmentGridManager, environmentSO.Index);
         }
     }
 }

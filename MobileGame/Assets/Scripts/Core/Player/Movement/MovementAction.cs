@@ -1,14 +1,14 @@
 using HelperPSR.MonoLoopFunctions;
 using Service.Inputs;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Player.Movement
 {
-    public class PlayerMovementAction : MonoBehaviour, IPlayerAction, IUpdatable
+    public class MovementAction : MonoBehaviour, IAction, IUpdatable
     {
-        public Swipe CurrentSwipe;
-        public MovePoint CurrentMovePoint;
-        public PlayerMovementSO PlayerMovementSO;
+        public Vector3 Destination;
+        public MovementSO MovementSo;
 
         private Vector3 _startPosition;
         private float _timer;
@@ -17,16 +17,16 @@ namespace Player.Movement
 
         public void OnUpdate()
         {
-            if (_timer >= PlayerMovementSO.MaxTime)
+            if (_timer >= MovementSo.MaxTime)
             {
                 _isMoving = false;
                 UpdateManager.UnRegister(this);
-                transform.position = CurrentMovePoint.Position;
+                transform.position = Destination;
                 return;
             }
             _timer += Time.deltaTime;
-            _ratioTime = _timer / PlayerMovementSO.MaxTime;
-            transform.position = Vector3.Lerp(_startPosition, CurrentMovePoint.Position, PlayerMovementSO.CurvePosition.Evaluate(_ratioTime));
+            _ratioTime = _timer / MovementSo.MaxTime;
+            transform.position = Vector3.Lerp(_startPosition, Destination, MovementSo.CurvePosition.Evaluate(_ratioTime));
         }
 
         public bool IsMoving()
@@ -42,9 +42,9 @@ namespace Player.Movement
             _timer = 0;
         }
 
-        public void Move()
+        public void MoveToDestination()
         {
-            transform.position = CurrentMovePoint.Position;
+            transform.position = Destination;
         }
     }
 }

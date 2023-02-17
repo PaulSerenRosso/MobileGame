@@ -1,19 +1,22 @@
+using System.Linq;
+using Environnement.MoveGrid;
 using System;
 using System.Collections.Generic;
 using Service.Fight;
 using Service.Inputs;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Player.Movement
 {
-    public class PlayerMovementHandler : PlayerHandler<PlayerMovementAction>
+    public class PlayerMovementHandler : PlayerHandler<MovementAction>
     {
-        [SerializeField] private PlayerMovementSO _playerMovementSO;
-        
+        [FormerlySerializedAs("_playerMovementSO")] [SerializeField] private MovementSO movementSo;
         private EnvironmentGridManager _environmentGridManager;
         private Swipe _currentSwipe;
         private int _index;
         private int _maxDestionationIndex;
+        private MovePoint _currentMovePoint;
 
         public void TryMakeMovementAction(Swipe swipe)
         {
@@ -31,10 +34,10 @@ namespace Player.Movement
             var inverseDirection = transform.InverseTransformDirection(_currentSwipe.SwipeSO.Direction);
             var maxResult = -1f;
             _maxDestionationIndex = -1;
-            foreach (var indexNeighbor in _action.CurrentMovePoint.Neighbors)
+            foreach (var indexNeighbor in _currentMovePoint.Neighbors)
             {
                 var result = Vector2.Dot(
-                    (_environmentGridManager.MovePoints[indexNeighbor].Position - _action.CurrentMovePoint.Position)
+                    (_environmentGridManager.MovePoints[indexNeighbor].Position - _currentMovePoint.Position)
                     .normalized, inverseDirection
                 );
                 if (result >= maxResult)
@@ -66,20 +69,23 @@ namespace Player.Movement
             // Move our champion when the player swipe
             _environmentGridManager = (EnvironmentGridManager)arguments[0];
             _index = (int)arguments[1];
-            _action = (PlayerMovementAction)arguments[2];
-            _action.CurrentMovePoint = _environmentGridManager.MovePoints[_index];
-            _action.PlayerMovementSO = _playerMovementSO;
+            Debug.Log($"index: {_index}");
+            Debug.Log($"Count: {_environmentGridManager.MovePoints.Length}");
+            _currentMovePoint = _environmentGridManager.MovePoints[_index];
+            _action.MovementSo = movementSo;
             _conditions = new List<Func<bool>>();
             AddCondition(CheckIsMoving);
             AddCondition(CheckIsOccupied);
             AddCondition(CheckIsOutOfRange);
-            _action.Move();
+            _action.Destination = _currentMovePoint.Position;
+            _action.MoveToDestination();
         }
 
         public override void InitializeAction()
         {
-            _action.CurrentSwipe = _currentSwipe;
-            _action.CurrentMovePoint = _environmentGridManager.MovePoints[_maxDestionationIndex];
+
+            _currentMovePoint = _environmentGridManager.MovePoints[_maxDestionationIndex];
+            _action.Destination = _currentMovePoint.Position;
             _index = _maxDestionationIndex;
         }
     }

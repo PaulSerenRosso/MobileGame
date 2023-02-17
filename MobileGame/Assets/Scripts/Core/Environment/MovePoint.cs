@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace Environnement.MoveGrid
+{
 [Serializable]
 public class MovePoint
 {
@@ -17,4 +19,5 @@ public class MovePoint
         Position = position;
         Neighbors = new List<int>();
     }
+}
 }

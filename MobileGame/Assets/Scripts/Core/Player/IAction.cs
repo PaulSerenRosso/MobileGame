@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public interface IPlayerAction
+    public interface IAction
     {
         public void MakeAction();
     }

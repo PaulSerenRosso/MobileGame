@@ -1,7 +1,10 @@
+using System;
+using Addressables;
 using UnityEngine;
 using static UnityEngine.AddressableAssets.Addressables;
+using Object = UnityEngine.Object;
 
-namespace Service.Fight
+namespace Environnement.MoveGrid
 {
     public class EnvironmentGridManager : MonoBehaviour
     {
@@ -11,12 +14,16 @@ namespace Service.Fight
         private int _movePointsByCircle;
         private int _i;
         private int _j;
+        private Action _callback;
 
-        public void SetupGrid(float[] circles, int movePointsByCircle, GameObject rendererMovePoints)
+        public void SetupGrid(float[] circles, int movePointsByCircle, string rendererMovePointsAdressableName,
+            Action callback)
         {
             _circleRadius = circles;
             _movePointsByCircle = movePointsByCircle;
-            GenerateRendererMovePoint(rendererMovePoints);
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>(rendererMovePointsAdressableName,
+                GenerateRendererMovePoint);
+            _callback = callback;
         }
 
         private void GenerateRendererMovePoint(GameObject gameObject)
@@ -48,8 +55,9 @@ namespace Service.Fight
             MovePoints[^1] = new MovePoint(rendererMoveCenterPoint.GetComponent<MeshRenderer>(), Vector3.zero);
 
             Release(gameObject);
-            
+
             GenerateNeighbors();
+            _callback?.Invoke();
         }
 
         private void GenerateNeighbors()

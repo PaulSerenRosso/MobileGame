@@ -9,7 +9,7 @@ public class EnvironmentSO : ScriptableObject
 
     [Tooltip("Type of grid in the Environment")] public GridSO GridOfEnvironment;
 
-    [Tooltip("Name in Addressable for MovePoint")] public GameObject RendererMovePoint;
+    [Tooltip("Name in Addressable for MovePoint")] public string RendererMovePointAdressableName;
 
     // todo: reference boss
 }
