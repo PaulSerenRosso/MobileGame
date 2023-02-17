@@ -7,7 +7,6 @@ public class InGameMenuManager : MonoBehaviour
 {
     [Header("InGame UI")]
     [SerializeField] private Button _tauntButton;
-    [SerializeField] private Button _swapCamera;
     
     [Header("Settings UI")]
     [SerializeField] private Button _openSettingsButton;
@@ -27,19 +26,12 @@ public class InGameMenuManager : MonoBehaviour
     {
         _sceneService = sceneService;
         // _tauntButton.onClick.AddListener();
-        _swapCamera.onClick.AddListener(SwapCamera);
         _openSettingsButton.onClick.AddListener(OpenSettings);
         _closeSettingsButton.onClick.AddListener(CloseSettings);
         // _reportButton.onClick.AddListener();
         _leaveGame.onClick.AddListener(() => sceneService.LoadScene("MenuScene"));
     }
-
-    private void SwapCamera()
-    {
-        _swapCamera.transform.DOKill();
-        _swapCamera.transform.DOScale(0.75f, 0.25f).SetEase(Ease.OutBack).OnComplete(() => _swapCamera.transform.DOScale(1f, 0.25f));
-        CameraController.instance.SwapCamera();
-    }
+    
     
     private void OpenSettings()
     {

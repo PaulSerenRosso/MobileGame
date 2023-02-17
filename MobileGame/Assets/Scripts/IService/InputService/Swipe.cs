@@ -28,13 +28,12 @@ namespace Service.Inputs
             if ((_playerInput.GenericInputs.MoveTouch.ReadValue<Vector2>() - _startPos).sqrMagnitude >=
                 _minScreenDistanceSq)
             {
-                if (Vector2.Dot(SwipeSO.Direction,
+                if (Vector2.Dot(SwipeSO.DirectionV2,
                         (_playerInput.GenericInputs.MoveTouch.ReadValue<Vector2>() - _startPos).normalized) >
                     SwipeSO.DirectionTolerance)
                 {
                     if ((ctx.time - ctx.startTime) < SwipeSO.Time)
                     {
-                        Debug.Log("end swipe ");
                         _successEvent?.Invoke(this);
                     }
                 }
@@ -45,7 +44,6 @@ namespace Service.Inputs
 
         public void CancelSwipe()
         {
-            Debug.Log("cancel swipe");
             _isCancel = true;
         }
 
@@ -55,7 +53,7 @@ namespace Service.Inputs
             SwipeSO = swipeSo;
             _successEvent = successEvent;
             _minScreenDistanceSq =
-                (new Vector2(swipeSo.Direction.x * Screen.width, swipeSo.Direction.y * Screen.height) *
+                (new Vector2(swipeSo.DirectionV2.x * Screen.width, swipeSo.DirectionV2.y * Screen.height) *
                  swipeSo.MinDistancePercentage).sqrMagnitude;
         }
     }

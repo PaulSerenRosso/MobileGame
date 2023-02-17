@@ -19,7 +19,7 @@ namespace Service.Fight
 
         private CameraController _cameraController;
         private PlayerController _playerController;
-        private EnemyController _enemyManager;
+        private EnemyController _enemyController;
         private EnvironmentGridManager _environmentGridManager;
 
         private EnvironmentSO _currentEnvironmentSO;
@@ -60,7 +60,6 @@ namespace Service.Fight
         private void GenerateFighters(GameObject gameObject)
         {
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Player", GeneratePlayer);
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Enemy", GenerateEnemy);
             Release(gameObject);
         }
 
@@ -68,15 +67,16 @@ namespace Service.Fight
         {
             var player = Object.Instantiate(gameObject);
             _playerController = player.GetComponent<PlayerController>();
-            _playerController.SetupPlayer(_inputService, _environmentGridManager, _currentEnvironmentSO);
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Camera", GenerateCamera);
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Enemy", GenerateEnemy);
             Release(gameObject);
         }
 
         private void GenerateEnemy(GameObject gameObject)
         {
             var enemy = Object.Instantiate(gameObject);
-            _enemyManager = enemy.GetComponent<EnemyController>();
+            _enemyController = enemy.GetComponent<EnemyController>();
+            _playerController.SetupPlayer(_inputService, _environmentGridManager, _currentEnvironmentSO, _enemyController);
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Camera", GenerateCamera);
             Release(gameObject);
         }
 
@@ -85,7 +85,7 @@ namespace Service.Fight
             var camera = Object.Instantiate(gameObject);
             Release(gameObject);
             _cameraController = camera.GetComponent<CameraController>();
-            _cameraController.PlayerController = _playerController;
+            _cameraController.Setup(_playerController.transform, _enemyController.transform);
             _canvasService.LoadInGameMenu();
         }
     }

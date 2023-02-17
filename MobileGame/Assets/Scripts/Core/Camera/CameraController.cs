@@ -1,52 +1,35 @@
-using HelperPSR.Singletons;
-using Player;
+using HelperPSR.MonoLoopFunctions;
 using UnityEngine;
 
 namespace Service
 {
-    public class CameraController : GenericSingleton<CameraController>
+    public class CameraController : MonoBehaviour, IUpdatable
     {
-        [HideInInspector] public PlayerController PlayerController;
+        [Header("Camera Settings")]
+        [SerializeField] private CameraSettingsSO _cameraSettingsSO;
 
-        [Header("Camera Settings")] 
-        [SerializeField] private Vector3 _positionBehind;
-        [SerializeField] private Vector3 _positionTopDown;
+        private Transform _player;
+        private Transform _enemy;
 
-        private bool _isBehind;
-
-        private void Start()
-        {
-            transform.position = _positionBehind;
-            transform.LookAt(PlayerController.transform);
-            _isBehind = true;
-        }
-
-        private void Update()
+        public void OnUpdate()
         {
             UpdateCamera();
         }
 
-        public void UpdateCamera()
+        private void UpdateCamera()
         {
-            if (!PlayerController) return;
-            var positionCamera = PlayerController.transform.position + _positionBehind;
-            transform.position = positionCamera;
+            if (!_player || !_enemy) return;
+            transform.position = Vector3.Lerp(transform.position, _player.position + _player.TransformPoint(_cameraSettingsSO.Offset), _cameraSettingsSO.SpeedPosition * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_enemy.position - transform.position), _cameraSettingsSO.SpeedRotation * Time.deltaTime);
         }
 
-        public void SwapCamera()
+        public void Setup(Transform player, Transform enemy)
         {
-            if (_isBehind)
-            {
-                transform.position = _positionTopDown;
-                transform.LookAt(PlayerController.transform);
-                _isBehind = false;
-            }
-            else
-            {
-                transform.position = _positionBehind;
-                transform.LookAt(PlayerController.transform);
-                _isBehind = true;
-            }
+            _player = player;
+            _enemy = enemy;
+            transform.position = _player.position + _player.TransformPoint(_cameraSettingsSO.Offset);
+            transform.LookAt(_enemy);
+            UpdateManager.Register(this);
         }
     }
 }

@@ -17,15 +17,10 @@ namespace Service.UI
         [SerializeField] private Button _reportButton;
         [SerializeField] private string _sceneToLoad;
 
-        private void Awake()
-        {
-            _settingsMenu.transform.DOScale(0f, 0f).SetEase(Ease.OutBack);
-        }
-
         public void SetupMenu(IFightService fightService, string nextEnvironmentName)
         {
-            if (_sceneToLoad != null)
-                _playButton.onClick.AddListener(() => fightService.StartFight(nextEnvironmentName));
+            _settingsMenu.transform.DOScale(0f, 0f).SetEase(Ease.OutBack);
+            if (_sceneToLoad != null) _playButton.onClick.AddListener(() => fightService.StartFight(nextEnvironmentName));
             _openSettingsButton.onClick.AddListener(OpenSettings);
             _closeSettingsButton.onClick.AddListener(CloseSettings);
             // _reportButton.onClick.AddListener();

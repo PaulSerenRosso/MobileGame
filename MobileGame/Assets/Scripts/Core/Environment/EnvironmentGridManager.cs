@@ -16,12 +16,12 @@ namespace Environnement.MoveGrid
         private int _j;
         private Action _callback;
 
-        public void SetupGrid(float[] circles, int movePointsByCircle, string rendererMovePointsAdressableName,
+        public void SetupGrid(float[] circles, int movePointsByCircle, string rendererMovePointsAddressableName,
             Action callback)
         {
             _circleRadius = circles;
             _movePointsByCircle = movePointsByCircle;
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>(rendererMovePointsAdressableName,
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>(rendererMovePointsAddressableName,
                 GenerateRendererMovePoint);
             _callback = callback;
         }
@@ -100,7 +100,7 @@ namespace Environnement.MoveGrid
 
         public bool CheckIfMovePointInIsLastCircle(int index)
         {
-            return index >= _movePointsByCircle * _circleRadius.Length - 1;
+            return index >= _movePointsByCircle * (_circleRadius.Length - 1);
         }
     }
 }

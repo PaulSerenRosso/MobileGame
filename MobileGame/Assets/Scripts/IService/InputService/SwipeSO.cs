@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Service.Inputs
@@ -7,13 +6,16 @@ namespace Service.Inputs
     public class SwipeSO : ScriptableObject
     {
         public float Time;
-        public Vector2 Direction;
+        public Vector2 DirectionV2;
         public float MinDistancePercentage;
         public float DirectionTolerance;
+        
+        [HideInInspector] public Vector3 DirectionV3;
 
         private void OnValidate()
         {
-            Direction = Direction.normalized;
+            DirectionV2 = DirectionV2.normalized;
+            DirectionV3 = new Vector3(DirectionV2.x, 0, DirectionV2.y);
         }
     }
 }
