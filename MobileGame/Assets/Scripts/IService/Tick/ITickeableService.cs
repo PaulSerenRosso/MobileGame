@@ -1,12 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using HelperPSR.Tick;
 using Service;
-using UnityEngine;
 
 public interface ITickeableService : IService
 {
-    void Tick();
-    float GetTickTime { get; }
+    TickManager GetTickManager { get;  }
     event Action tickEvent;
 }

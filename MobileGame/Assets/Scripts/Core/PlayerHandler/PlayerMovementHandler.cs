@@ -10,6 +10,9 @@ namespace Player.Handler
     public class PlayerMovementHandler : PlayerHandler<MovementAction>
     {
         [SerializeField] private MovementSO movementSO;
+        [SerializeField] private List<SwipeSO> _allMovementSwipesSO;
+        [SerializeField] private AttackAction _attackAction;
+        
         private EnvironmentGridManager _environmentGridManager;
         private Swipe _currentSwipe;
         private int _index;
@@ -24,7 +27,7 @@ namespace Player.Handler
 
         private bool CheckIsMoving()
         {
-            return !_action.IsMoving();
+            return !_action.IsInAction;
         }
 
         private bool CheckIsOccupied()
@@ -62,18 +65,27 @@ namespace Player.Handler
             return true;
         }
 
+        private bool CheckIsInAttack()
+        {
+            return !_attackAction.IsInAction || (_attackAction.IsInAction && _attackAction.IsCancelTimeOn);
+        }
+
         public override void Setup(params object[] arguments)
         {
+            var inputService = (IInputService)arguments[2];
+            foreach (var movementSwipeSO in _allMovementSwipesSO)
+            {
+                inputService.AddSwipe(movementSwipeSO, TryMakeMovementAction);
+            }
             _environmentGridManager = (EnvironmentGridManager)arguments[0];
             _index = (int)arguments[1];
             _currentMovePoint = _environmentGridManager.MovePoints[_index];
-            _action.MovementSo = movementSO;
             _conditions = new List<Func<bool>>();
             AddCondition(CheckIsMoving);
             AddCondition(CheckIsOutOfRange);
             AddCondition(CheckIsOccupied);
-            _action.Destination = _currentMovePoint.Position;
-            _action.MoveToDestination();
+            AddCondition(CheckIsInAttack);
+            _action.SetupAction(_currentMovePoint.Position);
         }
 
         public override void InitializeAction()

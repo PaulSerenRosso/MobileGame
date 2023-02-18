@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9db1cd9ba7b5b8e48a3016c6f10042f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attackSO: {fileID: 11400000, guid: bf2c907eb3301924d8f9fea6a61d572d, type: 2}
 --- !u!114 &8581481885147205113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,6 +166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3426c2f37c59cc4b93d4343fc78e25d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _action: {fileID: 1800965582552254606}
+  _movementAction: {fileID: 4050711209515336914}
 --- !u!114 &4050711209515336914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,7 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Destination: {x: 0, y: 0, z: 0}
-  MovementSo: {fileID: 0}
+  _movementSO: {fileID: 11400000, guid: 5f75cc58e513a344889c01a14d27ddc4, type: 2}
 --- !u!114 &7053842336820709435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,6 +196,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _action: {fileID: 4050711209515336914}
   movementSO: {fileID: 11400000, guid: 5f75cc58e513a344889c01a14d27ddc4, type: 2}
+  _allMovementSwipesSO:
+  - {fileID: 11400000, guid: 252e4747d50b64344b15cb81660e8378, type: 2}
+  - {fileID: 11400000, guid: 5cb4ac7a5108fd544831bd89fadf65ab, type: 2}
+  - {fileID: 11400000, guid: 9720e0f248129384db64111ff269294d, type: 2}
+  - {fileID: 11400000, guid: 828f16dff8413474a8bcf0f53cc3cc2d, type: 2}
+  _attackAction: {fileID: 1800965582552254606}
 --- !u!114 &241883989640212697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,7 +238,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b325b1ff9f279a8408ced7650cf1579f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LookTarget: {fileID: 0}
 --- !u!114 &1740439073084344159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,13 +275,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fafdc554ab9a70d4a8b2a34e299206cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _allMovementSwipesSO:
-  - {fileID: 11400000, guid: 828f16dff8413474a8bcf0f53cc3cc2d, type: 2}
-  - {fileID: 11400000, guid: 252e4747d50b64344b15cb81660e8378, type: 2}
-  - {fileID: 11400000, guid: 5cb4ac7a5108fd544831bd89fadf65ab, type: 2}
-  - {fileID: 11400000, guid: 9720e0f248129384db64111ff269294d, type: 2}
   _playerMovementHandler: {fileID: 7053842336820709435}
   _playerRotationHandler: {fileID: 1740439073084344159}
+  _playerAttackHandler: {fileID: 8581481885147205113}
 --- !u!1 &8674137917818090564
 GameObject:
   m_ObjectHideFlags: 0

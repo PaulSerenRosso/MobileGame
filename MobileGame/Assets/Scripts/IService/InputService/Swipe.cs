@@ -18,7 +18,6 @@ namespace Service.Inputs
         {
             _isCancel = false;
             _startPos = _playerInput.GenericInputs.MoveTouch.ReadValue<Vector2>();
-            Debug.Log(_startPos);
         }
 
         public void EndSwipe(InputAction.CallbackContext ctx)

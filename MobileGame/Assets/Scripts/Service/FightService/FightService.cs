@@ -17,6 +17,8 @@ namespace Service.Fight
 
         [DependsOnService] private IInputService _inputService;
 
+        [DependsOnService] private ITickeableService _tickeableService;
+
         private CameraController _cameraController;
         private PlayerController _playerController;
         private EnemyController _enemyController;
@@ -75,7 +77,7 @@ namespace Service.Fight
         {
             var enemy = Object.Instantiate(gameObject);
             _enemyController = enemy.GetComponent<EnemyController>();
-            _playerController.SetupPlayer(_inputService, _environmentGridManager, _currentEnvironmentSO, _enemyController);
+            _playerController.SetupPlayer(_inputService, _tickeableService, _environmentGridManager, _currentEnvironmentSO, _enemyController);
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Camera", GenerateCamera);
             Release(gameObject);
         }

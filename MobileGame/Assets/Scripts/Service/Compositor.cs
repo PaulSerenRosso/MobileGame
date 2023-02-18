@@ -208,7 +208,7 @@ public class Compositor : MonoBehaviour
     private void CreateAndWireObjects()
     {
         iTickeableService = new TickService();  
-        AddService<ITickeableSwitchableService>((ITickeableSwitchableService)iTickeableService);
+        AddService<ITickeableService>((ITickeableService)iTickeableService);
         AddService<IAudioService>(new AudioService());
         AddService<ISceneService>(new SceneService());
         AddService<IUICanvasSwitchableService>(new UICanvasService());

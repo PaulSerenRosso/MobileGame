@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Environnement.MoveGrid;
 using Player.Handler;
 using Service.Inputs;
@@ -8,22 +7,22 @@ namespace Player
 {
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] private List<SwipeSO> _allMovementSwipesSO;
+        
         [SerializeField] private PlayerMovementHandler _playerMovementHandler;
         [SerializeField] private PlayerRotationHandler _playerRotationHandler;
+        [SerializeField] private PlayerAttackHandler _playerAttackHandler;
         private IInputService _inputService;
+        private ITickeableService _tickeableService;
         private EnemyController _enemyController;
 
-        public void SetupPlayer(IInputService inputService, EnvironmentGridManager environmentGridManager, EnvironmentSO environmentSO, EnemyController enemyController)
+        public void SetupPlayer(IInputService inputService, ITickeableService tickeableService, EnvironmentGridManager environmentGridManager, EnvironmentSO environmentSO, EnemyController enemyController)
         {
             _inputService = inputService;
-            foreach (var movementSwipeSO in _allMovementSwipesSO)
-            {
-                _inputService.AddSwipe(movementSwipeSO, _playerMovementHandler.TryMakeMovementAction);
-            }
+            _tickeableService = tickeableService;
             _enemyController = enemyController;
-            _playerMovementHandler.Setup(environmentGridManager, environmentSO.Index, _enemyController.transform);
+            _playerMovementHandler.Setup(environmentGridManager, environmentSO.Index, _inputService);
             _playerRotationHandler.Setup(_enemyController.transform);
+            _playerAttackHandler.Setup(_inputService, _tickeableService.GetTickManager);
         }
     }
 }

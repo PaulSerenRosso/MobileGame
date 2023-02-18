@@ -1,74 +1,22 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Attributes;
-using Cysharp.Threading.Tasks;
-using UnityEngine;
+using HelperPSR.Tick;
 
 namespace Service
 {
-    public class TickService : ITickeableSwitchableService
+    public class TickService : ITickeableService
     {
-        private float tickRate = 10f;
-        private float tickTimer;
-        private static float tickTime;
         public event Action tickEvent;
 
-        public bool isActive;
+        private TickManager _tickManager;
+        private float _tickRate = 10f;
 
-        // les ref c'est comme un pointeur
+        public TickManager GetTickManager { get => _tickManager; }
+
         [ServiceInit]
-        void SetUp()
+        private void Setup()
         {
-            tickTime = 1 / tickRate;
-            tickTimer = 0;
-            Tick();
-            EnabledService();
-        }
-
-        public float GetTickTime
-        {
-            get => tickTime;
-        }
-
-        public async void Tick()
-        {
-            while (true)
-            {
-                if (!isActive)
-                {
-                    await UniTask.WaitUntil((PredicateIsActiveService));
-                }
-
-                if (tickTimer >= tickTime)
-                {
-                    tickTimer -= tickTime;
-                    tickEvent?.Invoke();
-                }
-                else tickTimer += Time.deltaTime;
-
-                await UniTask.DelayFrame(0);
-            }
-        }
-
-        private bool PredicateIsActiveService()
-        {
-            return GetIsActiveService;
-        }
-
-        public void EnabledService()
-        {
-            isActive = true;
-        }
-
-        public void DisabledService()
-        {
-            isActive = false;
-        }
-
-        public bool GetIsActiveService
-        {
-            get => isActive;
+            _tickManager = new TickManager(_tickRate);
         }
     }
 }

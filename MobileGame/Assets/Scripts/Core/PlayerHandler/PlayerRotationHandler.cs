@@ -12,7 +12,7 @@ namespace Player.Handler
 
         public override void Setup(params object[] arguments)
         {
-            _action.LookTarget = (Transform)arguments[0];
+            _action.SetupAction((Transform)arguments[0]);
             _action.MakeAction();
         }
     }

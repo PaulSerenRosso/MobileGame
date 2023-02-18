@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Attributes;
+using UnityEngine.InputSystem;
 
 namespace Service.Inputs
 {
@@ -15,6 +16,16 @@ namespace Service.Inputs
         {
             PlayerInputs = new PlayerInputs();
             PlayerInputs.Enable();
+        }
+
+        public void AddTap(Action<InputAction.CallbackContext> successEvent)
+        {
+            PlayerInputs.GenericInputs.TapTouch.performed += successEvent;
+        }
+
+        public void RemoveTap(Action<InputAction.CallbackContext> successEvent)
+        {
+            PlayerInputs.GenericInputs.TapTouch.performed -= successEvent;
         }
 
         public void AddSwipe(SwipeSO swipeSo, Action<Swipe> successEvent)
