@@ -10,6 +10,8 @@ namespace Action
         public bool IsCancelTimeOn;
 
         [SerializeField] private AttackSO _attackSO;
+        [SerializeField] private Material[] _materials;
+        [SerializeField] private MeshRenderer _meshRenderer;
 
         private Pool<GameObject>[] _hitPools;
         private bool _isAttacking;
@@ -53,6 +55,7 @@ namespace Action
         private void InitiateCancelTimer()
         {
             Debug.Log("CancelTime");
+            _meshRenderer.material = _materials[0];
             AttackTimer.ResetEvents();
             AttackTimer.Time = _attackSO.HitsSO[_comboCount].CancelTime;
             AttackTimer.TickEvent += InitiateBeforeHitTimer;
@@ -64,6 +67,7 @@ namespace Action
         private void BreakCombo()
         {
             Debug.Log("BreakCombo");
+            _meshRenderer.material = _materials[3];
             AttackTimer.ResetEvents();
             AttackTimer.Cancel();
             _comboCount = 0;
@@ -74,6 +78,7 @@ namespace Action
         private void InitiateBeforeHitTimer()
         {
             Debug.Log("BeforeHit");
+            _meshRenderer.material = _materials[1];
             AttackTimer.ResetEvents();
             IsCancelTimeOn = false;
             InitBeforeHitEvent?.Invoke();
@@ -112,6 +117,7 @@ namespace Action
         private void InitiateComboTimer()
         {
             Debug.Log("ComboTime");
+            _meshRenderer.material = _materials[2];
             AttackTimer.ResetEvents();
             _isAttacking = false;
             AttackTimer.Time = _attackSO.HitsSO[_comboCount].ComboTime;
