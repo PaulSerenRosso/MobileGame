@@ -6,8 +6,7 @@ using UnityEngine.UI;
 public class InGameMenuManager : MonoBehaviour
 {
     [Header("InGame UI")]
-    [SerializeField] private Button _tauntButton;
-    
+
     [Header("Settings UI")]
     [SerializeField] private Button _openSettingsButton;
     [SerializeField] private Image _settingsMenu;

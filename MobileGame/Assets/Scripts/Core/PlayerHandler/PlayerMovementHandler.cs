@@ -12,7 +12,7 @@ namespace Player.Handler
         [SerializeField] private MovementSO movementSO;
         [SerializeField] private List<SwipeSO> _allMovementSwipesSO;
         [SerializeField] private AttackAction _attackAction;
-        
+        [SerializeField] private TauntAction _tauntAction;
         private EnvironmentGridManager _environmentGridManager;
         private Swipe _currentSwipe;
         private int _index;
@@ -70,10 +70,15 @@ namespace Player.Handler
             return !_attackAction.IsInAction || (_attackAction.IsInAction && _attackAction.IsCancelTimeOn);
         }
 
+        private bool CheckIsInTaunt()
+        {
+            return !_tauntAction.IsInAction;
+        }
         public override void Setup(params object[] arguments)
         {
             var inputService = (IInputService)arguments[2];
-            foreach (var movementSwipeSO in _allMovementSwipesSO)
+      
+           foreach (var movementSwipeSO in _allMovementSwipesSO)
             {
                 inputService.AddSwipe(movementSwipeSO, TryMakeMovementAction);
             }
@@ -83,6 +88,7 @@ namespace Player.Handler
             _conditions = new List<Func<bool>>();
             AddCondition(CheckIsMoving);
             AddCondition(CheckIsOutOfRange);
+            AddCondition(CheckIsInTaunt);
             AddCondition(CheckIsOccupied);
             AddCondition(CheckIsInAttack);
             _action.SetupAction(_currentMovePoint.Position);

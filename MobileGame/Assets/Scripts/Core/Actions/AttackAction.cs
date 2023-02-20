@@ -9,10 +9,11 @@ namespace Action
         public TickTimer AttackTimer;
         public bool IsCancelTimeOn;
 
-        [SerializeField] private AttackSO _attackSO;
+        [SerializeField] private AttackActionSO attackActionSo;
         [SerializeField] private Material[] _materials;
         [SerializeField] private MeshRenderer _meshRenderer;
 
+       
         private Pool<GameObject>[] _hitPools;
         private bool _isAttacking;
         private int _comboCount;
@@ -41,23 +42,24 @@ namespace Action
         public void SetupAction(params object[] arguments)
         {
             AttackTimer = new TickTimer(0, (TickManager)arguments[0]);
-            _hitPools = new Pool<GameObject>[_attackSO.HitsSO.Length];
+            _hitPools = new Pool<GameObject>[attackActionSo.HitsSO.Length];
             for (int i = 0; i < _hitPools.Length; i++)
             {
-                _hitPools[i] = new Pool<GameObject>(_attackSO.HitsSO[i].Particle, 2);
+                _hitPools[i] = new Pool<GameObject>(attackActionSo.HitsSO[i].Particle, 2);
             }
         }
 
         public event System.Action MakeActionEvent;
         public event System.Action InitCancelAttackEvent;
         public event System.Action InitBeforeHitEvent;
+        public event System.Action EndRecoveryEvent;
 
         private void InitiateCancelTimer()
         {
             Debug.Log("CancelTime");
             _meshRenderer.material = _materials[0];
             AttackTimer.ResetEvents();
-            AttackTimer.Time = _attackSO.HitsSO[_comboCount].CancelTime;
+            AttackTimer.Time = attackActionSo.HitsSO[_comboCount].CancelTime;
             AttackTimer.TickEvent += InitiateBeforeHitTimer;
             AttackTimer.CancelEvent += BreakCombo;
             AttackTimer.CancelEvent += AttackTimer.ResetCancelEvent;
@@ -82,18 +84,19 @@ namespace Action
             AttackTimer.ResetEvents();
             IsCancelTimeOn = false;
             InitBeforeHitEvent?.Invoke();
-            AttackTimer.Time = _attackSO.HitsSO[_comboCount].TimeBeforeHit;
+            AttackTimer.Time = attackActionSo.HitsSO[_comboCount].TimeBeforeHit;
             AttackTimer.TickEvent += InitiateRecoveryTimer;
             AttackTimer.Initiate();
         }
 
+        
         private void InitiateRecoveryTimer()
         {
             Debug.Log("RecoveryTime");
             AttackTimer.ResetEvents();
             Hit();
-            AttackTimer.Time = _attackSO.HitsSO[_comboCount].RecoveryTime;
-            if (_comboCount != _attackSO.HitsSO.Length - 1)
+            AttackTimer.Time = attackActionSo.HitsSO[_comboCount].RecoveryTime;
+            if (_comboCount != attackActionSo.HitsSO.Length - 1)
             {
                 AttackTimer.TickEvent += InitiateComboTimer;
             }
@@ -101,8 +104,14 @@ namespace Action
             {
                 AttackTimer.TickEvent += BreakCombo;
             }
-
+            AttackTimer.TickEvent += RaiseEndRecovery;
             AttackTimer.Initiate();
+        }
+
+        private void RaiseEndRecovery()
+        {
+            EndRecoveryEvent?.Invoke();
+            AttackTimer.TickEvent -= RaiseEndRecovery;
         }
 
         private void Hit()
@@ -120,7 +129,7 @@ namespace Action
             _meshRenderer.material = _materials[2];
             AttackTimer.ResetEvents();
             _isAttacking = false;
-            AttackTimer.Time = _attackSO.HitsSO[_comboCount].ComboTime;
+            AttackTimer.Time = attackActionSo.HitsSO[_comboCount].ComboTime;
             _comboCount++;
             AttackTimer.TickEvent += BreakCombo;
             AttackTimer.Initiate();

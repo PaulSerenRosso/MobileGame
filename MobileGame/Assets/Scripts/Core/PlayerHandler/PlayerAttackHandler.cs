@@ -10,7 +10,7 @@ namespace Player.Handler
     public class PlayerAttackHandler : PlayerHandler<AttackAction>
     {
         [SerializeField] private MovementAction _movementAction;
-        
+        [SerializeField] private TauntAction _tauntAction;
         public override void InitializeAction()
         {
             
@@ -26,6 +26,10 @@ namespace Player.Handler
             return !_action.IsInAction;
         }
 
+        private bool CheckIsInTaunt()
+        {
+            return !_tauntAction.IsInAction;
+        }
         private bool CheckIsInMovement()
         {
             return !_movementAction.IsInAction;
@@ -37,6 +41,7 @@ namespace Player.Handler
             inputService.AddTap(TryMakeAttackAction);
             AddCondition(CheckIsInAttack);
             AddCondition(CheckIsInMovement);
+            AddCondition(CheckIsInTaunt);
             _action.SetupAction((TickManager)arguments[1]);
             _action.InitCancelAttackEvent += () => _movementAction.MakeActionEvent += _action.AttackTimer.Cancel;
             _action.InitBeforeHitEvent += () => _movementAction.MakeActionEvent -= _action.AttackTimer.Cancel;

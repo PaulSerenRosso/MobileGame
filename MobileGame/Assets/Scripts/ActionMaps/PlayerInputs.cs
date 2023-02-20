@@ -62,6 +62,15 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HoldTouch"",
+                    ""type"": ""Button"",
+                    ""id"": ""77b1a83e-7f29-45aa-9068-220ac04aaf60"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -108,6 +117,17 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""action"": ""TapTouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b7de83fb-a4a6-4de3-b46e-b04d2d6f44e9"",
+                    ""path"": ""<Touchscreen>/primaryTouch/press"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HoldTouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -131,6 +151,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         m_GenericInputs_ReleaseTouch = m_GenericInputs.FindAction("ReleaseTouch", throwIfNotFound: true);
         m_GenericInputs_MoveTouch = m_GenericInputs.FindAction("MoveTouch", throwIfNotFound: true);
         m_GenericInputs_TapTouch = m_GenericInputs.FindAction("TapTouch", throwIfNotFound: true);
+        m_GenericInputs_HoldTouch = m_GenericInputs.FindAction("HoldTouch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -194,6 +215,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_GenericInputs_ReleaseTouch;
     private readonly InputAction m_GenericInputs_MoveTouch;
     private readonly InputAction m_GenericInputs_TapTouch;
+    private readonly InputAction m_GenericInputs_HoldTouch;
     public struct GenericInputsActions
     {
         private @PlayerInputs m_Wrapper;
@@ -202,6 +224,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         public InputAction @ReleaseTouch => m_Wrapper.m_GenericInputs_ReleaseTouch;
         public InputAction @MoveTouch => m_Wrapper.m_GenericInputs_MoveTouch;
         public InputAction @TapTouch => m_Wrapper.m_GenericInputs_TapTouch;
+        public InputAction @HoldTouch => m_Wrapper.m_GenericInputs_HoldTouch;
         public InputActionMap Get() { return m_Wrapper.m_GenericInputs; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -223,6 +246,9 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @TapTouch.started -= m_Wrapper.m_GenericInputsActionsCallbackInterface.OnTapTouch;
                 @TapTouch.performed -= m_Wrapper.m_GenericInputsActionsCallbackInterface.OnTapTouch;
                 @TapTouch.canceled -= m_Wrapper.m_GenericInputsActionsCallbackInterface.OnTapTouch;
+                @HoldTouch.started -= m_Wrapper.m_GenericInputsActionsCallbackInterface.OnHoldTouch;
+                @HoldTouch.performed -= m_Wrapper.m_GenericInputsActionsCallbackInterface.OnHoldTouch;
+                @HoldTouch.canceled -= m_Wrapper.m_GenericInputsActionsCallbackInterface.OnHoldTouch;
             }
             m_Wrapper.m_GenericInputsActionsCallbackInterface = instance;
             if (instance != null)
@@ -239,6 +265,9 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @TapTouch.started += instance.OnTapTouch;
                 @TapTouch.performed += instance.OnTapTouch;
                 @TapTouch.canceled += instance.OnTapTouch;
+                @HoldTouch.started += instance.OnHoldTouch;
+                @HoldTouch.performed += instance.OnHoldTouch;
+                @HoldTouch.canceled += instance.OnHoldTouch;
             }
         }
     }
@@ -267,5 +296,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         void OnReleaseTouch(InputAction.CallbackContext context);
         void OnMoveTouch(InputAction.CallbackContext context);
         void OnTapTouch(InputAction.CallbackContext context);
+        void OnHoldTouch(InputAction.CallbackContext context);
     }
 }

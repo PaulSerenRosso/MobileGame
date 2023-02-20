@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Action
 {
-    [CreateAssetMenu(menuName = "PlayerMovementSO", fileName = "new PlayerMovement")]
+    [CreateAssetMenu(menuName = "MovementActionSO", fileName = "new MovementAction")]
     public class MovementSO : ScriptableObject
     {
         public float MaxTime;
