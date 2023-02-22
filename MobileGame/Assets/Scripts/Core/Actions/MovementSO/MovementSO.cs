@@ -1,3 +1,5 @@
+using System;
+using HelperPSR.RemoteConfig;
 using UnityEngine;
 
 namespace Action
@@ -7,5 +9,10 @@ namespace Action
     {
         public float MaxTime;
         public AnimationCurve CurvePosition;
+
+        private void OnEnable()
+        {
+          
+        }
     }
 }
