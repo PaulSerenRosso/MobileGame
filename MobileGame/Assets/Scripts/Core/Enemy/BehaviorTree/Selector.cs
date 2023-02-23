@@ -2,11 +2,11 @@
 
 namespace BehaviorTree
 {
+    
     public class Selector : Node
     {
         public Selector() { }
-
-        public Selector(List<Node> children) : base(children) { }
+        
 
         public override NodeState Evaluate()
         {
@@ -31,4 +31,5 @@ namespace BehaviorTree
             return _state;
         }
     }
+    
 }

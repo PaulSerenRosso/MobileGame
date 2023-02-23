@@ -2,12 +2,13 @@ using Environnement.MoveGrid;
 using System;
 using System.Collections.Generic;
 using Action;
+using HelperPSR.RemoteConfigs;
 using Service.Inputs;
 using UnityEngine;
 
 namespace Player.Handler
 {
-    public class PlayerMovementHandler : PlayerHandler<MovementAction>
+    public class PlayerMovementHandler : PlayerHandler<MovementAction>, IRemoteConfigurable
     {
         [SerializeField] private MovementSO movementSO;
         [SerializeField] private List<SwipeSO> _allMovementSwipesSO;
@@ -18,7 +19,7 @@ namespace Player.Handler
         private int _index;
         private int _maxDestionationIndex;
         private MovePoint _currentMovePoint;
-
+        private const string _swipeName = "Swipe";
         public void TryMakeMovementAction(Swipe swipe)
         {
             _currentSwipe = swipe;
@@ -74,14 +75,16 @@ namespace Player.Handler
         {
             return !_tauntAction.IsInAction;
         }
+
         public override void Setup(params object[] arguments)
         {
             var inputService = (IInputService)arguments[2];
-      
-           foreach (var movementSwipeSO in _allMovementSwipesSO)
+
+            foreach (var movementSwipeSO in _allMovementSwipesSO)
             {
                 inputService.AddSwipe(movementSwipeSO, TryMakeMovementAction);
             }
+
             _environmentGridManager = (EnvironmentGridManager)arguments[0];
             _index = (int)arguments[1];
             _currentMovePoint = _environmentGridManager.MovePoints[_index];
@@ -92,6 +95,7 @@ namespace Player.Handler
             AddCondition(CheckIsOccupied);
             AddCondition(CheckIsInAttack);
             _action.SetupAction(_currentMovePoint.Position);
+            RemoteConfigManager.RegisterRemoteConfigurable(this);
         }
 
         public override void InitializeAction()
@@ -100,5 +104,70 @@ namespace Player.Handler
             _action.Destination = _currentMovePoint.Position;
             _index = _maxDestionationIndex;
         }
+
+        public void SetRemoteConfigurableValues()
+        {
+            foreach (var swipeSo in _allMovementSwipesSO)
+            {
+                switch (swipeSo.DirectionV2)
+                {
+                    case var v when v.Equals(Vector2.up):
+                    {
+                        SetSwipeSO(swipeSo, Enums.Direction.Top);
+                        break;
+                    }
+                    case var v when v.Equals(Vector2.down):
+                    {
+                        SetSwipeSO(swipeSo, Enums.Direction.Down);
+                        break;
+                    }
+                    case var v when v.Equals(Vector2.right):
+                    {
+                        SetSwipeSO(swipeSo, Enums.Direction.Right);
+                        break;
+                    }
+                    case var v when v.Equals(Vector2.left):
+                    {
+                        SetSwipeSO(swipeSo, Enums.Direction.Left);
+                        break;
+                    }
+                }
+            }
+            movementSO.MaxTime = RemoteConfigManager.Config.GetFloat("PlayerMovementMaxTime");
+        }
+
+        public void SetSwipeSO(SwipeSO so, Enums.Direction direction)
+        {
+            string dirString = "";
+            switch (direction)
+            {
+                case Enums.Direction.Down:
+                {
+                    dirString = "Down";
+                    break;
+                }
+                case Enums.Direction.Top:
+                {
+                    dirString = "Up";
+                    break;
+                }
+                case Enums.Direction.Left:
+                {
+                    dirString = "Left";
+                    break;
+                }
+                case Enums.Direction.Right:
+                {
+                    dirString = "Right";
+                    break;
+                }
+            }
+            so.Time = RemoteConfigManager.Config.GetFloat(_swipeName + dirString + "Time");
+            so.MinDistancePercentage= RemoteConfigManager.Config.GetFloat(_swipeName + dirString + "MinDistancePercentage");
+            so.DirectionTolerance = RemoteConfigManager.Config.GetFloat(_swipeName + dirString + "DirectionTolerance");
+        }
+        
+        
+     
     }
 }

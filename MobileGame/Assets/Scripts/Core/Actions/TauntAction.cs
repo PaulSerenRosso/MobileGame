@@ -1,3 +1,4 @@
+using HelperPSR.RemoteConfigs;
 using HelperPSR.Tick;
 using TMPro;
 using UnityEngine;
@@ -6,7 +7,7 @@ namespace Action
 {
     public class TauntAction : MonoBehaviour, IAction
     {
-        [SerializeField] private TauntActionSO so;
+        public TauntActionSO so;
 
         private TickTimer endTauntTimer;
         [SerializeField] private TextMeshPro _tauntText;
@@ -50,5 +51,7 @@ namespace Action
             isTaunting = false;
             _tauntText.text = "";
         }
+
+
     }
 }

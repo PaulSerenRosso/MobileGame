@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace BehaviorTree
@@ -9,33 +10,32 @@ namespace BehaviorTree
         FAILURE
     }
 
-    public class Node
+    public abstract class Node
     {
         public Node Parent;
 
         protected NodeState _state;
-        protected List<Node> _children = new();
+        public List<Node> _children = new();
 
         private Dictionary<string, object> _dataContext = new();
 
+
+        public static Node CreateNodeSO(StructNodeSO so)
+        {
+          return (Node) Activator.CreateInstance(so.GetTypeNode());
+        }
         public Node()
         {
             Parent = null;
         }
-
-        public Node(List<Node> children)
-        {
-            foreach (Node child in children)
-                Attach(child);
-        }
-
-        private void Attach(Node node)
+        
+        public void Attach(Node node)
         {
             node.Parent = this;
             _children.Add(node);
         }
 
-        public virtual NodeState Evaluate() => NodeState.FAILURE;
+        public abstract NodeState Evaluate();
 
         public void SetData(string key, object value)
         {

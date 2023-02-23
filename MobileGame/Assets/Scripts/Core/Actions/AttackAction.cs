@@ -9,7 +9,7 @@ namespace Action
         public TickTimer AttackTimer;
         public bool IsCancelTimeOn;
 
-        [SerializeField] private AttackActionSO attackActionSo;
+        public AttackActionSO attackActionSo;
         [SerializeField] private Material[] _materials;
         [SerializeField] private MeshRenderer _meshRenderer;
 

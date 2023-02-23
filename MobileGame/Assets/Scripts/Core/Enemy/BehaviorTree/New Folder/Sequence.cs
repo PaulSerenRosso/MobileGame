@@ -6,7 +6,6 @@ namespace BehaviorTree
     {
         public Sequence() { }
 
-        public Sequence(List<Node> children) : base(children) { }
 
         public override NodeState Evaluate()
         {

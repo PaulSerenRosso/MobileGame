@@ -1,9 +1,10 @@
 using HelperPSR.MonoLoopFunctions;
+using HelperPSR.RemoteConfigs;
 using UnityEngine;
 
 namespace Service
 {
-    public class CameraController : MonoBehaviour, IUpdatable
+    public class CameraController : MonoBehaviour, IUpdatable, IRemoteConfigurable
     {
         [Header("Camera Settings")]
         [SerializeField] private CameraSettingsSO _cameraSettingsSO;
@@ -30,6 +31,12 @@ namespace Service
             transform.position = _player.position + _player.TransformPoint(_cameraSettingsSO.Offset);
             transform.LookAt(_enemy);
             UpdateManager.Register(this);
+            RemoteConfigManager.RegisterRemoteConfigurable(this);
+        }
+        public void SetRemoteConfigurableValues()
+        {
+            _cameraSettingsSO.SpeedPosition = RemoteConfigManager.Config.GetFloat("CameraSpeedPosition");
+           _cameraSettingsSO.SpeedRotation = RemoteConfigManager.Config.GetFloat("CameraSpeedRotation");
         }
     }
 }

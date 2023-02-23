@@ -14,17 +14,17 @@ namespace Player
         [SerializeField] private PlayerTauntHandler _playerTauntHandler;
         private IInputService _inputService;
         private ITickeableService _tickeableService;
-        private EnemyController _enemyController;
+        private EnemyManager _enemyManager;
         [SerializeField] private bool isMultiTapAttack;
 
         public void SetupPlayer(IInputService inputService, ITickeableService tickeableService,
-            EnvironmentGridManager environmentGridManager, EnvironmentSO environmentSO, EnemyController enemyController)
+            EnvironmentGridManager environmentGridManager, EnvironmentSO environmentSO, EnemyManager enemyManager)
         {
             _inputService = inputService;
             _tickeableService = tickeableService;
-            _enemyController = enemyController;
+            _enemyManager = enemyManager;
             _playerMovementHandler.Setup(environmentGridManager, environmentSO.Index, _inputService);
-            _playerRotationHandler.Setup(_enemyController.transform);
+            _playerRotationHandler.Setup(_enemyManager.transform);
             if (isMultiTapAttack)
             {
                 _playerAttackMultiTapHandler.Setup(_inputService, _tickeableService.GetTickManager);

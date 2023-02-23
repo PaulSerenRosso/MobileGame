@@ -1,4 +1,5 @@
 using Action;
+using HelperPSR.RemoteConfigs;
 using HelperPSR.Tick;
 using Service.Inputs;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine.InputSystem;
 
 namespace Player.Handler
 {
-    public class PlayerTauntHandler : PlayerHandler<TauntAction>
+    public class PlayerTauntHandler : PlayerHandler<TauntAction>, IRemoteConfigurable
     {
 
         [SerializeField] private MovementAction _movementAction;
@@ -37,11 +38,16 @@ namespace Player.Handler
             AddCondition(CheckIsInMovement);
             inputService.SetHold(TryMakeTauntAction, CancelTaunt);
             _action.SetupAction((TickManager)arguments[1]);
+            RemoteConfigManager.RegisterRemoteConfigurable(this);
         }
 
         private void CancelTaunt(InputAction.CallbackContext obj)
         {
             _action.CancelTaunt();
+        }
+        public void SetRemoteConfigurableValues()
+        {
+            _action.so.endTime = RemoteConfigManager.Config.GetFloat("PlayerTauntEndTime");
         }
     }   
 }

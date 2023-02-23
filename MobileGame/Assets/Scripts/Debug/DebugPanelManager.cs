@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using HelperPSR.Debugs;
 using HelperPSR.MonoLoopFunctions;
-using HelperPSR.RemoteConfig;
+using HelperPSR.RemoteConfigs;
 using TMPro;
 using UnityEngine;
 
+namespace UIDebugs
+{
 public class DebugPanelManager : MonoBehaviour, IUpdatable
 {
     [SerializeField]
@@ -47,4 +49,6 @@ public class DebugPanelManager : MonoBehaviour, IUpdatable
         frameRate = DebugHelper.GetFrameRate();
         frameRateText.text = frameRate.ToString("F2");
     }
+}
+    
 }

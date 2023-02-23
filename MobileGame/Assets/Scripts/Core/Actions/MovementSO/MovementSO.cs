@@ -1,5 +1,5 @@
 using System;
-using HelperPSR.RemoteConfig;
+using HelperPSR.RemoteConfigs;
 using UnityEngine;
 
 namespace Action

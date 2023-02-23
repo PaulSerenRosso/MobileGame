@@ -21,7 +21,7 @@ namespace Service.Fight
 
         private CameraController _cameraController;
         private PlayerController _playerController;
-        private EnemyController _enemyController;
+        private EnemyManager _enemyManager;
         private EnvironmentGridManager _environmentGridManager;
 
         private EnvironmentSO _currentEnvironmentSO;
@@ -76,8 +76,8 @@ namespace Service.Fight
         private void GenerateEnemy(GameObject gameObject)
         {
             var enemy = Object.Instantiate(gameObject);
-            _enemyController = enemy.GetComponent<EnemyController>();
-            _playerController.SetupPlayer(_inputService, _tickeableService, _environmentGridManager, _currentEnvironmentSO, _enemyController);
+            _enemyManager = enemy.GetComponent<EnemyManager>();
+            _playerController.SetupPlayer(_inputService, _tickeableService, _environmentGridManager, _currentEnvironmentSO, _enemyManager);
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Camera", GenerateCamera);
             Release(gameObject);
         }
@@ -87,7 +87,7 @@ namespace Service.Fight
             var camera = Object.Instantiate(gameObject);
             Release(gameObject);
             _cameraController = camera.GetComponent<CameraController>();
-            _cameraController.Setup(_playerController.transform, _enemyController.transform);
+            _cameraController.Setup(_playerController.transform, _enemyManager.transform);
             _canvasService.LoadInGameMenu();
         }
     }
