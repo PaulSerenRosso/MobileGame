@@ -39,7 +39,7 @@ namespace Environnement.MoveGrid
                 allDirections[i] = new Vector3(Mathf.Cos(currentAngle), 0, Mathf.Sin(currentAngle)).normalized;
             }
 
-            MovePoints = new MovePoint[_circleRadius.Length * _movePointsByCircle + 1];
+            MovePoints = new MovePoint[_circleRadius.Length * _movePointsByCircle ];
             for (_i = 0; _i < _circleRadius.Length; _i++)
             {
                 for (_j = 0; _j < _movePointsByCircle; _j++)
@@ -51,9 +51,9 @@ namespace Environnement.MoveGrid
                 }
             }
 
+            /*
             var rendererMoveCenterPoint = Object.Instantiate(gameObject, Vector3.zero, Quaternion.identity);
-            MovePoints[^1] = new MovePoint(rendererMoveCenterPoint.GetComponent<MeshRenderer>(), Vector3.zero);
-
+            MovePoints[^1] = new MovePoint(rendererMoveCenterPoint.GetComponent<MeshRenderer>(), Vector3.zero);*/
             Release(gameObject);
 
             GenerateNeighbors();
@@ -62,20 +62,22 @@ namespace Environnement.MoveGrid
 
         private void GenerateNeighbors()
         {
+            /*
             for (_i = 0; _i < _movePointsByCircle; _i++)
             {
                 MovePoints[_i].Neighbors.Add(MovePoints.Length - 1);
                 MovePoints[^1].Neighbors.Add(_i);
             }
+            */
 
             for (_i = _movePointsByCircle; _i < MovePoints.Length - 1; _i++)
             {
-                MovePoints[_i].Neighbors.Add(_i - _movePointsByCircle);
+                MovePoints[_i].neighborTopIndex = (_i - _movePointsByCircle);
             }
 
-            for (_i = 0; _i < MovePoints.Length - 1 - _movePointsByCircle; _i++)
+            for (_i = 0; _i < MovePoints.Length - _movePointsByCircle; _i++)
             {
-                MovePoints[_i].Neighbors.Add(_i + _movePointsByCircle);
+                MovePoints[_i].neighborDownIndex = (_i + _movePointsByCircle);
             }
 
             for (_i = 0; _i < _circleRadius.Length; _i++)
@@ -84,17 +86,17 @@ namespace Environnement.MoveGrid
                 for (_j = 1; _j < _movePointsByCircle; _j++)
                 {
                     int currentIndex = currentCircleIndex + _j;
-                    MovePoints[currentIndex].Neighbors.Add(currentIndex - 1);
+                    MovePoints[currentIndex].neighborLeftIndex = currentIndex - 1;
                 }
 
                 for (_j = 0; _j < _movePointsByCircle - 1; _j++)
                 {
                     int currentIndex = currentCircleIndex + _j;
-                    MovePoints[currentIndex].Neighbors.Add(currentIndex + 1);
+                    MovePoints[currentIndex].neighborRightIndex = (currentIndex + 1);
                 }
 
-                MovePoints[currentCircleIndex].Neighbors.Add(currentCircleIndex + _movePointsByCircle - 1);
-                MovePoints[currentCircleIndex + _movePointsByCircle - 1].Neighbors.Add(currentCircleIndex);
+                MovePoints[currentCircleIndex].neighborLeftIndex = (currentCircleIndex + _movePointsByCircle - 1);
+                MovePoints[currentCircleIndex + _movePointsByCircle - 1].neighborRightIndex = (currentCircleIndex);
             }
         }
 

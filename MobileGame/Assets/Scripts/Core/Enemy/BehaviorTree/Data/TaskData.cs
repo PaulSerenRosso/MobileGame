@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enums : MonoBehaviour
+namespace BehaviorTree.Data
 {
-    public enum Direction
+    public abstract class TaskDataSO : ActionNodeDataSO
     {
-        Left, Right, Top, Down
+
     }
 }

@@ -7,7 +7,11 @@ namespace Environnement.MoveGrid
 [Serializable]
 public class MovePoint
 {
-    public List<int> Neighbors;
+    
+    public int neighborTopIndex;
+    public int neighborDownIndex;
+    public int neighborLeftIndex;
+    public int neighborRightIndex;
     public Vector3 Position;
     public bool IsOccupied;
 
@@ -17,7 +21,10 @@ public class MovePoint
     {
         MeshRenderer = meshRenderer;
         Position = position;
-        Neighbors = new List<int>();
+        neighborDownIndex = -1;
+        neighborLeftIndex = -1;
+        neighborRightIndex = -1;
+        neighborTopIndex = -1;
     }
 }
 }

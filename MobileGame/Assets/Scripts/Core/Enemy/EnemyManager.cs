@@ -1,10 +1,10 @@
 using Environnement.MoveGrid;
 using UnityEngine;
-using Tree = BehaviorTree.Tree;
+using Tree = BehaviorTree.Trees;
 
 public class EnemyManager : MonoBehaviour
 {
-    [SerializeField] private Tree _tree; 
+    [SerializeField] private Tree.Tree _tree; 
     private void Start()
     {
         transform.position = new Vector3(0, 2, 0);
