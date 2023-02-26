@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-namespace BehaviorTree.Struct
+namespace BehaviorTree
 {
-    public abstract class StructNodeSO : ScriptableObject
+    public abstract class NodeSO : ScriptableObject
     {
         public abstract Type GetTypeNode();
     }

@@ -1,15 +1,14 @@
 using System;
+using BehaviorTree.InnerNode;
 using UnityEngine;
 
-namespace BehaviorTree.Data
+namespace BehaviorTree.Actions
 {
-    public abstract class ActionNodeDataSO : ScriptableObject
+    public abstract class ActionNodeSO : NodeSO
     {
         [Header("Ne pas Modifier")] 
         public BehaviourTreeEnums.TreeExternValues[] ExternValues;
         public BehaviourTreeEnums.TreeEnemyValues[] EnemyValues;
         public BehaviourTreeEnums.TreeInternValues[] InternValues;
-
-        public abstract Type GetTypeNode();
     }
 }

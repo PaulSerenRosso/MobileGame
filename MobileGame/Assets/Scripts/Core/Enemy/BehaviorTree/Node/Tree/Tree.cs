@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using BehaviorTree.Actions;
 using BehaviorTree.Nodes;
-using BehaviorTree.Struct;
+using BehaviorTree.InnerNode;
 using Environment.MoveGrid;
 using UnityEngine;
 using Object = System.Object;
@@ -9,7 +10,7 @@ namespace BehaviorTree.Trees
 {
     public class Tree : MonoBehaviour
     {
-        [SerializeField] private InnerNodeStructSO _rootSO;
+        [SerializeField] private InnerNodeSO _rootSO;
         [SerializeField] private NodeValuesInitializer _nodeValuesInitializer;
         
         private Node _root;
@@ -24,30 +25,30 @@ namespace BehaviorTree.Trees
             LoopSetUpChild(_root, _rootSO.Childs);
         }
 
-        void LoopSetUpChild(Node parent, StructNodeSO[] childsSO)
+        void LoopSetUpChild(Node parent, NodeSO[] childsSO)
         {
             foreach (var childSO in childsSO)
             {
                 var child = Node.CreateNodeSO(childSO);
                 parent.Attach(child);
-                if (childSO is InnerNodeStructSO innerNodeStructSO)
+                if (childSO is InnerNodeSO innerNodeStructSO)
                 {
                     if (innerNodeStructSO.Childs.Length != 0)
                     {
                         LoopSetUpChild(child, innerNodeStructSO.Childs);
                     }
                 }
-                else if (childSO is ActionNodeStructSO actionNodeStructSo)
+                else if (childSO is ActionNodeSO actionNodeSo)
                 {
-                    SetActionNode(child, actionNodeStructSo);
+                    SetActionNode(child, actionNodeSo);
                 }
             }
         }
 
-        private void SetActionNode(Node child, ActionNodeStructSO actionNodeStructSo)
+        private void SetActionNode(Node child, ActionNodeSO actionNodeSo)
         {
             var actionChild = (ActionNode)child;
-            actionChild.SetDataSO(actionNodeStructSo.Data);
+            actionChild.SetDataSO(actionNodeSo);
             var dependencyValuesType = actionChild.GetDependencyValues();
             Dictionary<BehaviourTreeEnums.TreeExternValues, Object> dependencyExternValuesObjects =
                 new Dictionary<BehaviourTreeEnums.TreeExternValues, Object>();

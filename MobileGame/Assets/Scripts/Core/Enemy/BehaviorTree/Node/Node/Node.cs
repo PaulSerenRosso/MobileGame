@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using BehaviorTree.Struct;
+using BehaviorTree.InnerNode;
 
 namespace BehaviorTree.Nodes
 {
@@ -13,7 +13,7 @@ namespace BehaviorTree.Nodes
 
         private Dictionary<string, object> _dataContext = new();
 
-        public static Node CreateNodeSO(StructNodeSO so)
+        public static Node CreateNodeSO(NodeSO so)
         {
             return (Node)Activator.CreateInstance(so.GetTypeNode());
         }

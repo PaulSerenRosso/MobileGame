@@ -2,10 +2,10 @@ using System;
 using BehaviorTree.Nodes;
 using UnityEngine;
 
-namespace BehaviorTree.Struct
+namespace BehaviorTree.InnerNode
 {
     [CreateAssetMenu(menuName = "BehaviorTree/StructSequenceSO", fileName = "new StructSequenceSO")]
-    public class StructSequenceSO : InnerNodeStructSO
+    public class SequenceSo : InnerNodeSO
     {
         public override Type GetTypeNode()
         {
