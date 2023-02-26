@@ -655,9 +655,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7346d9ed6741c4b40805c1f624f956e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  root: {fileID: 1184646612}
-  console: {fileID: 1947867331}
-  frameRateText: {fileID: 493843199}
+  _root: {fileID: 1184646612}
+  _console: {fileID: 961175248}
+  _frameRateText: {fileID: 493843199}
 --- !u!4 &596214266
 Transform:
   m_ObjectHideFlags: 0
@@ -1029,6 +1029,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &961175248 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 814346997162332554, guid: 8b0af6b94a3baa243a7808099c5e81dd,
+    type: 3}
+  m_PrefabInstance: {fileID: 2110134187}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1067654940
 GameObject:
   m_ObjectHideFlags: 0
@@ -1799,12 +1805,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 99
   m_TargetDisplay: 0
---- !u!1 &1947867331 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 814346997366065606, guid: 8b0af6b94a3baa243a7808099c5e81dd,
-    type: 3}
-  m_PrefabInstance: {fileID: 2110134187}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1947867332 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 814346997366065603, guid: 8b0af6b94a3baa243a7808099c5e81dd,

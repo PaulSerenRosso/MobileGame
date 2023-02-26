@@ -4,7 +4,8 @@ public class BehaviourTreeEnums
     {
         Rigidbody,
         Animator,
-        Transform
+        Transform,
+        MeshRenderer
     }
 
     public enum TreeExternValues
@@ -12,11 +13,6 @@ public class BehaviourTreeEnums
         PlayerTransform,
         EnvironmentGridManager,
         ITickService
-    }
-
-    public enum TreeInternValues
-    {
-        
     }
 
     public enum NodeState

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BehaviorTree.InnerNode
 {
     [CreateAssetMenu(menuName = "BehaviorTree/StructSequenceSO", fileName = "new StructSequenceSO")]
-    public class SequenceSo : InnerNodeSO
+    public class SequenceSO : CompositeSO
     {
         public override Type GetTypeNode()
         {

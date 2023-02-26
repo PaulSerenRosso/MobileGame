@@ -5,11 +5,11 @@ namespace BehaviorTree.Trees
 {
     public class NodeValuesSharer
     {
-        public Dictionary<BehaviourTreeEnums.TreeInternValues, Object> InternValues;
+        public Dictionary<int, Object> InternValues;
 
         public NodeValuesSharer()
         {
-            InternValues = new Dictionary<BehaviourTreeEnums.TreeInternValues, Object>();
+            InternValues = new Dictionary<int, Object>();
         }
     }
 }

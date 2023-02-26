@@ -1,14 +1,30 @@
-using System;
-using BehaviorTree.InnerNode;
-using UnityEngine;
+﻿using System;
+using BehaviorTree.ActionsSO;
 
-namespace BehaviorTree.Actions
+namespace BehaviorTree
 {
     public abstract class ActionNodeSO : NodeSO
     {
-        [Header("Ne pas Modifier")] 
-        public BehaviourTreeEnums.TreeExternValues[] ExternValues;
-        public BehaviourTreeEnums.TreeEnemyValues[] EnemyValues;
-        public BehaviourTreeEnums.TreeInternValues[] InternValues;
+        public ActionNodeDataSO Data;
+
+        public override Type GetTypeNode()
+        {
+            return Data.GetTypeNode();
+        }
+
+        public virtual int[] GetHashCodeKeyOfInternValue()
+        {
+            return null;
+        }
+
+        public virtual void ConvertKeyOfInternValueToHashCode()
+        {
+            
+        }
+
+        private void OnValidate()
+        {
+            ConvertKeyOfInternValueToHashCode();
+        }
     }
 }

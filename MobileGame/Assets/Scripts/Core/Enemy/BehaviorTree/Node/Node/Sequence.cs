@@ -1,6 +1,6 @@
 ﻿namespace BehaviorTree.Nodes
 {
-    public class Sequence : Node
+    public class Sequence : CompositeNode
     {
         public Sequence()
         {

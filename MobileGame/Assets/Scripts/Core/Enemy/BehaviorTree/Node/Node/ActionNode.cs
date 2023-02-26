@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using BehaviorTree.Actions;
+using BehaviorTree.ActionsSO;
 using BehaviorTree.Trees;
 using Object = System.Object;
 
@@ -9,9 +9,9 @@ namespace BehaviorTree.Nodes
     {
         public NodeValuesSharer Sharer;
         
-        public abstract ActionNodeSO GetDataSO();
+        public abstract ActionNodeDataSO GetDataSO();
         
-        public abstract void SetDataSO(ActionNodeSO so);
+        public abstract void SetDataSO(ActionNodeDataSO dataSO);
 
         public (BehaviourTreeEnums.TreeEnemyValues[] enemyValues, BehaviourTreeEnums.TreeExternValues[] externValues)
             GetDependencyValues()
@@ -23,5 +23,7 @@ namespace BehaviorTree.Nodes
         public abstract void SetDependencyValues(
             Dictionary<BehaviourTreeEnums.TreeExternValues, Object> externDependencyValues,
             Dictionary<BehaviourTreeEnums.TreeEnemyValues, Object> enemyDependencyValues);
+
+        public abstract void SetHashCodeKeyOfInternValues(int[] hashCodeKey);
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace BehaviorTree.Nodes
 {
-    public class Selector : Node
+    public class Selector : CompositeNode
     {
         public Selector()
         {

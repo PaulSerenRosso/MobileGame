@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 4503521633185965219}
   - component: {fileID: 8528676079203304712}
   - component: {fileID: 5385260654459227328}
-  - component: {fileID: 4796771559047852942}
   - component: {fileID: 3912564710569538853}
+  - component: {fileID: 4796771559047852942}
+  - component: {fileID: 3911112695321858085}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -100,19 +101,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4796771559047852942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6912617506752955889}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b299c89c10470454cbbd0e28beea2855, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _tree: {fileID: 0}
 --- !u!54 &3912564710569538853
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -129,3 +117,34 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &4796771559047852942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6912617506752955889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b299c89c10470454cbbd0e28beea2855, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tree: {fileID: 3911112695321858085}
+--- !u!114 &3911112695321858085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6912617506752955889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06c8412eb78e45bc8eb90b2610e5df80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rootSO: {fileID: 11400000, guid: 45cfb39a3fa16914593da2489aa094a7, type: 2}
+  _nodeValuesInitializer:
+    EnemyValueObjects:
+    - Type: 3
+      Obj: {fileID: 8528676079203304712}
+    ExternValueObjects: []

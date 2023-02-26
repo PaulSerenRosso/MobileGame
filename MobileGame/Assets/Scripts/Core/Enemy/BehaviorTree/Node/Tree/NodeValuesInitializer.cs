@@ -11,7 +11,7 @@ namespace BehaviorTree.Trees
         public EnemyValueObject[] EnemyValueObjects;
         public ExternValueObject[] ExternValueObjects;
 
-        public NodeValuesInitializer(Transform playerTransform, ITickeableService tickeableService,
+        public void Setup(Transform playerTransform, ITickeableService tickeableService,
             EnvironmentGridManager environmentGridManager)
         {
             for (int i = 0; i < ExternValueObjects.Length; i++)

@@ -6,8 +6,8 @@ namespace Service
 {
     public class CameraController : MonoBehaviour, IUpdatable, IRemoteConfigurable
     {
-        [Header("Camera Settings")]
-        [SerializeField] private CameraSettingsSO _cameraSettingsSO;
+        [Header("Camera Settings")] [SerializeField]
+        private CameraSettingsSO _cameraSettingsSO;
 
         private Transform _player;
         private Transform _enemy;
@@ -20,8 +20,12 @@ namespace Service
         private void UpdateCamera()
         {
             if (!_player || !_enemy) return;
-            transform.position = Vector3.Lerp(transform.position, _player.position + _player.TransformPoint(_cameraSettingsSO.Offset), _cameraSettingsSO.SpeedPosition * Time.deltaTime);
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_enemy.position - transform.position), _cameraSettingsSO.SpeedRotation * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position,
+                _player.position + _player.TransformPoint(_cameraSettingsSO.Offset),
+                _cameraSettingsSO.SpeedPosition * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation,
+                Quaternion.LookRotation(_enemy.position - transform.position),
+                _cameraSettingsSO.SpeedRotation * Time.deltaTime);
         }
 
         public void Setup(Transform player, Transform enemy)
@@ -33,10 +37,11 @@ namespace Service
             UpdateManager.Register(this);
             RemoteConfigManager.RegisterRemoteConfigurable(this);
         }
+
         public void SetRemoteConfigurableValues()
         {
             _cameraSettingsSO.SpeedPosition = RemoteConfigManager.Config.GetFloat("CameraSpeedPosition");
-           _cameraSettingsSO.SpeedRotation = RemoteConfigManager.Config.GetFloat("CameraSpeedRotation");
+            _cameraSettingsSO.SpeedRotation = RemoteConfigManager.Config.GetFloat("CameraSpeedRotation");
         }
     }
 }

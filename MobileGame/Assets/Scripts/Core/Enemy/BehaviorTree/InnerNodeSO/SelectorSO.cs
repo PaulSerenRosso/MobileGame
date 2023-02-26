@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BehaviorTree.InnerNode
 {
     [CreateAssetMenu(menuName = "BehaviorTree/StructSelectorSO", fileName = "new StructSelectorSO")]
-    public class SelectorSo : InnerNodeSO
+    public class SelectorSO : CompositeSO
     {
         public override Type GetTypeNode()
         {
