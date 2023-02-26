@@ -1,16 +1,15 @@
-﻿using System.Collections.Generic;
-
-namespace BehaviorTree.Nodes
+﻿namespace BehaviorTree.Nodes
 {
-    
     public class Selector : Node
     {
-        public Selector() { }
+        public Selector()
+        {
+            
+        }
         
-
         public override BehaviourTreeEnums.NodeState Evaluate()
         {
-            foreach (Node node in _children)
+            foreach (Node node in Children)
             {
                 switch (node.Evaluate())
                 {
@@ -31,5 +30,4 @@ namespace BehaviorTree.Nodes
             return _state;
         }
     }
-    
 }

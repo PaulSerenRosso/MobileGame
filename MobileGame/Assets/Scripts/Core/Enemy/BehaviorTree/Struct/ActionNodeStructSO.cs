@@ -1,17 +1,15 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using BehaviorTree.Data;
-using UnityEngine;
 
 namespace BehaviorTree.Struct
 {
-public class ActionNodeStructSO : StructNodeSO
-{
-    public ActionNodeDataSO data;
-    public override Type GetTypeNode()
+    public class ActionNodeStructSO : StructNodeSO
     {
-        return data.GetTypeNode();
+        public ActionNodeDataSO Data;
+
+        public override Type GetTypeNode()
+        {
+            return Data.GetTypeNode();
+        }
     }
-}
 }

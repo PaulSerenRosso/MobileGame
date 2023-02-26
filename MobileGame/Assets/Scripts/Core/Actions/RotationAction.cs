@@ -28,5 +28,5 @@ namespace Action
         }
 
         public event System.Action MakeActionEvent;
-    }   
+    }
 }

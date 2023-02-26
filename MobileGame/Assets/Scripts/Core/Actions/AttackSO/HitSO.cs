@@ -2,7 +2,7 @@
 
 namespace Action
 {
-    [CreateAssetMenu(menuName = "Attack/HitSO", fileName = "new HitSO")]
+    [CreateAssetMenu(menuName = "Actions/HitSO", fileName = "new HitSO")]
     public class HitSO : ScriptableObject
     {
         public float Damage;

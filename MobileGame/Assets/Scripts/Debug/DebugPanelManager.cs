@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using HelperPSR.Debugs;
 using HelperPSR.MonoLoopFunctions;
 using HelperPSR.RemoteConfigs;
@@ -9,46 +6,43 @@ using UnityEngine;
 
 namespace UIDebugs
 {
-public class DebugPanelManager : MonoBehaviour, IUpdatable
-{
-    [SerializeField]
-    private GameObject root;
-
-    [SerializeField] private GameObject console;
-    [SerializeField] private TextMeshProUGUI frameRateText;
-
-    private float frameRate; 
-    private void Awake()
-    { 
-        DontDestroyOnLoad(gameObject);
-        
-    }
-
-    private void Start()
+    public class DebugPanelManager : MonoBehaviour, IUpdatable
     {
-        UpdateManager.Register(this);
-    }
+        [SerializeField] private GameObject _root;
+        [SerializeField] private GameObject _console;
+        [SerializeField] private TextMeshProUGUI _frameRateText;
 
-    public void FetchRemote()
-    {
-        RemoteConfigManager.CallFetch();
-    }
+        private float _frameRate;
 
-    public void OpenOrCloseRoot()
-    {
-        root.SetActive(!root.activeSelf);
-    }
-    public void OpenOrCloseConsole()
-    {
-        console.SetActive(!console.activeSelf);
-    }
+        private void Awake()
+        {
+            DontDestroyOnLoad(gameObject);
+        }
 
+        private void Start()
+        {
+            UpdateManager.Register(this);
+        }
 
-    public void OnUpdate()
-    {
-        frameRate = DebugHelper.GetFrameRate();
-        frameRateText.text = frameRate.ToString("F2");
+        public void FetchRemote()
+        {
+            RemoteConfigManager.CallFetch();
+        }
+
+        public void OpenOrCloseRoot()
+        {
+            _root.SetActive(!_root.activeSelf);
+        }
+
+        public void OpenOrCloseConsole()
+        {
+            _console.SetActive(!_console.activeSelf);
+        }
+
+        public void OnUpdate()
+        {
+            _frameRate = DebugHelper.GetFrameRate();
+            _frameRateText.text = _frameRate.ToString("F2");
+        }
     }
-}
-    
 }

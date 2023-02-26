@@ -9,9 +9,9 @@ namespace Player.Handler
 {
     public class PlayerTauntHandler : PlayerHandler<TauntAction>, IRemoteConfigurable
     {
-
         [SerializeField] private MovementAction _movementAction;
         [SerializeField] private AttackAction _attackAction;
+
         public override void InitializeAction()
         {
             
@@ -26,11 +26,12 @@ namespace Player.Handler
         {
             return !_attackAction.IsInAction;
         }
-        
+
         bool CheckIsInMovement()
         {
             return !_movementAction.IsInAction;
         }
+
         public override void Setup(params object[] arguments)
         {
             IInputService inputService = (IInputService)arguments[0];
@@ -45,9 +46,10 @@ namespace Player.Handler
         {
             _action.CancelTaunt();
         }
+
         public void SetRemoteConfigurableValues()
         {
-            _action.so.endTime = RemoteConfigManager.Config.GetFloat("PlayerTauntEndTime");
+            _action.SO.EndTime = RemoteConfigManager.Config.GetFloat("PlayerTauntEndTime");
         }
-    }   
+    }
 }

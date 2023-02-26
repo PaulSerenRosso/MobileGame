@@ -4,31 +4,29 @@ using BehaviorTree.Struct;
 
 namespace BehaviorTree.Nodes
 {
-   
-
     public abstract class Node
     {
         public Node Parent;
+        public List<Node> Children = new();
 
         protected BehaviourTreeEnums.NodeState _state;
-        public List<Node> _children = new();
 
         private Dictionary<string, object> _dataContext = new();
 
-
         public static Node CreateNodeSO(StructNodeSO so)
         {
-          return (Node) Activator.CreateInstance(so.GetTypeNode());
+            return (Node)Activator.CreateInstance(so.GetTypeNode());
         }
+
         public Node()
         {
             Parent = null;
         }
-        
+
         public void Attach(Node node)
         {
             node.Parent = this;
-            _children.Add(node);
+            Children.Add(node);
         }
 
         public abstract BehaviourTreeEnums.NodeState Evaluate();

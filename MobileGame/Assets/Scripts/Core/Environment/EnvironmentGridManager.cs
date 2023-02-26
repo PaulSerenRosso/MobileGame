@@ -4,7 +4,7 @@ using UnityEngine;
 using static UnityEngine.AddressableAssets.Addressables;
 using Object = UnityEngine.Object;
 
-namespace Environnement.MoveGrid
+namespace Environment.MoveGrid
 {
     public class EnvironmentGridManager : MonoBehaviour
     {
@@ -39,7 +39,7 @@ namespace Environnement.MoveGrid
                 allDirections[i] = new Vector3(Mathf.Cos(currentAngle), 0, Mathf.Sin(currentAngle)).normalized;
             }
 
-            MovePoints = new MovePoint[_circleRadius.Length * _movePointsByCircle ];
+            MovePoints = new MovePoint[_circleRadius.Length * _movePointsByCircle];
             for (_i = 0; _i < _circleRadius.Length; _i++)
             {
                 for (_j = 0; _j < _movePointsByCircle; _j++)
@@ -72,12 +72,12 @@ namespace Environnement.MoveGrid
 
             for (_i = _movePointsByCircle; _i < MovePoints.Length - 1; _i++)
             {
-                MovePoints[_i].neighborTopIndex = (_i - _movePointsByCircle);
+                MovePoints[_i].NeighborTopIndex = (_i - _movePointsByCircle);
             }
 
             for (_i = 0; _i < MovePoints.Length - _movePointsByCircle; _i++)
             {
-                MovePoints[_i].neighborDownIndex = (_i + _movePointsByCircle);
+                MovePoints[_i].NeighborDownIndex = (_i + _movePointsByCircle);
             }
 
             for (_i = 0; _i < _circleRadius.Length; _i++)
@@ -86,17 +86,17 @@ namespace Environnement.MoveGrid
                 for (_j = 1; _j < _movePointsByCircle; _j++)
                 {
                     int currentIndex = currentCircleIndex + _j;
-                    MovePoints[currentIndex].neighborLeftIndex = currentIndex - 1;
+                    MovePoints[currentIndex].NeighborLeftIndex = currentIndex - 1;
                 }
 
                 for (_j = 0; _j < _movePointsByCircle - 1; _j++)
                 {
                     int currentIndex = currentCircleIndex + _j;
-                    MovePoints[currentIndex].neighborRightIndex = (currentIndex + 1);
+                    MovePoints[currentIndex].NeighborRightIndex = (currentIndex + 1);
                 }
 
-                MovePoints[currentCircleIndex].neighborLeftIndex = (currentCircleIndex + _movePointsByCircle - 1);
-                MovePoints[currentCircleIndex + _movePointsByCircle - 1].neighborRightIndex = (currentCircleIndex);
+                MovePoints[currentCircleIndex].NeighborLeftIndex = (currentCircleIndex + _movePointsByCircle - 1);
+                MovePoints[currentCircleIndex + _movePointsByCircle - 1].NeighborRightIndex = (currentCircleIndex);
             }
         }
 

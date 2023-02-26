@@ -1,7 +1,6 @@
 using System;
-using Environnement.MoveGrid;
+using Environment.MoveGrid;
 using UnityEngine;
-using Exception = System.Exception;
 using Object = UnityEngine.Object;
 
 namespace BehaviorTree.Trees
@@ -59,6 +58,5 @@ namespace BehaviorTree.Trees
 
             throw new NullReferenceException();
         }
-
     }
 }

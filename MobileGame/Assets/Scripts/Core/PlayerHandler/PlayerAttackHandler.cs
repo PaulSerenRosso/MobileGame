@@ -1,5 +1,4 @@
 using Action;
-using HelperPSR.Pool;
 using HelperPSR.RemoteConfigs;
 using HelperPSR.Tick;
 using Service.Inputs;
@@ -12,7 +11,9 @@ namespace Player.Handler
     {
         [SerializeField] private MovementAction _movementAction;
         [SerializeField] private TauntAction _tauntAction;
+
         private const string _punchName = "PlayerPunch";
+
         public override void InitializeAction()
         {
             
@@ -32,11 +33,12 @@ namespace Player.Handler
         {
             return !_tauntAction.IsInAction;
         }
+
         private bool CheckIsInMovement()
         {
             return !_movementAction.IsInAction;
         }
-        
+
         public override void Setup(params object[] arguments)
         {
             var inputService = (IInputService)arguments[0];
@@ -52,12 +54,12 @@ namespace Player.Handler
 
         public void SetRemoteConfigurableValues()
         {
-            for (int i = 0; i < _action.attackActionSo.HitsSO.Length; i++)
+            for (int i = 0; i < _action.AttackActionSo.HitsSO.Length; i++)
             {
-                SetPlayerPunchSO(_action.attackActionSo.HitsSO[i],i);
+                SetPlayerPunchSO(_action.AttackActionSo.HitsSO[i], i);
             }
-            
         }
+
         public void SetPlayerPunchSO(HitSO punchSO, int hitCount)
         {
             punchSO.Damage = RemoteConfigManager.Config.GetFloat(_punchName + hitCount + "Damage");
@@ -65,7 +67,8 @@ namespace Player.Handler
             punchSO.TimeBeforeHit = RemoteConfigManager.Config.GetFloat(_punchName + hitCount + "TimeBeforeHit");
             punchSO.RecoveryTime = RemoteConfigManager.Config.GetFloat(_punchName + hitCount + "RecoveryTime");
             punchSO.ComboTime = RemoteConfigManager.Config.GetFloat(_punchName + hitCount + "ComboTime");
-            punchSO.HitMovePointsDistance =RemoteConfigManager.Config.GetFloat(_punchName + hitCount + "HitMovePointsDistance");
+            punchSO.HitMovePointsDistance =
+                RemoteConfigManager.Config.GetFloat(_punchName + hitCount + "HitMovePointsDistance");
         }
     }
 }

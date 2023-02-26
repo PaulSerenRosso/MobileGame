@@ -1,30 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Environnement.MoveGrid
+namespace Environment.MoveGrid
 {
-[Serializable]
-public class MovePoint
-{
-    
-    public int neighborTopIndex;
-    public int neighborDownIndex;
-    public int neighborLeftIndex;
-    public int neighborRightIndex;
-    public Vector3 Position;
-    public bool IsOccupied;
-
-    public MeshRenderer MeshRenderer;
-
-    public MovePoint(MeshRenderer meshRenderer, Vector3 position)
+    [Serializable]
+    public class MovePoint
     {
-        MeshRenderer = meshRenderer;
-        Position = position;
-        neighborDownIndex = -1;
-        neighborLeftIndex = -1;
-        neighborRightIndex = -1;
-        neighborTopIndex = -1;
+        public int NeighborTopIndex;
+        public int NeighborDownIndex;
+        public int NeighborLeftIndex;
+        public int NeighborRightIndex;
+        public Vector3 Position;
+        public bool IsOccupied;
+
+        public MeshRenderer MeshRenderer;
+
+        public MovePoint(MeshRenderer meshRenderer, Vector3 position)
+        {
+            MeshRenderer = meshRenderer;
+            Position = position;
+            NeighborDownIndex = -1;
+            NeighborLeftIndex = -1;
+            NeighborRightIndex = -1;
+            NeighborTopIndex = -1;
+        }
     }
-}
 }

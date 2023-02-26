@@ -1,4 +1,3 @@
-using HelperPSR.RemoteConfigs;
 using HelperPSR.Tick;
 using TMPro;
 using UnityEngine;
@@ -7,31 +6,31 @@ namespace Action
 {
     public class TauntAction : MonoBehaviour, IAction
     {
-        public TauntActionSO so;
+        public TauntActionSO SO;
 
-        private TickTimer endTauntTimer;
         [SerializeField] private TextMeshPro _tauntText;
+
+        private TickTimer _endTauntTimer;
+        private bool _isTaunting;
 
         public bool IsInAction
         {
-            get => isTaunting;
+            get => _isTaunting;
         }
-
-        private bool isTaunting;
 
 
         public void MakeAction()
         {
             Debug.Log("je taunt whouah");
-            isTaunting = true;
+            _isTaunting = true;
             MakeActionEvent?.Invoke();
             _tauntText.text = "Taunt";
         }
 
         public void SetupAction(params object[] arguments)
         {
-            endTauntTimer = new TickTimer(so.endTime, (TickManager)arguments[0]);
-            endTauntTimer.TickEvent += TickEndTaunt;
+            _endTauntTimer = new TickTimer(SO.EndTime, (TickManager)arguments[0]);
+            _endTauntTimer.TickEvent += TickEndTaunt;
             _tauntText.text = "";
         }
 
@@ -39,19 +38,17 @@ namespace Action
 
         public void CancelTaunt()
         {
-            if (isTaunting)
+            if (_isTaunting)
             {
-                endTauntTimer.Initiate();
+                _endTauntTimer.Initiate();
                 _tauntText.text = "Cancel";
             }
         }
 
         void TickEndTaunt()
         {
-            isTaunting = false;
+            _isTaunting = false;
             _tauntText.text = "";
         }
-
-
     }
 }

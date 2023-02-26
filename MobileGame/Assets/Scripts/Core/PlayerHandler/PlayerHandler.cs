@@ -5,11 +5,9 @@ using UnityEngine;
 
 namespace Player.Handler
 {
-    
     public abstract class PlayerHandler<AC> : MonoBehaviour where AC : IAction
     {
-        [SerializeField]
-        protected AC _action;
+        [SerializeField] protected AC _action;
         protected List<Func<bool>> _conditions = new();
 
         protected void TryMakeAction()
@@ -21,6 +19,7 @@ namespace Player.Handler
                     return;
                 }
             }
+
             InitializeAction();
             _action.MakeAction();
         }

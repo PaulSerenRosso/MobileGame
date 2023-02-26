@@ -329,7 +329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsCancelTimeOn: 0
-  attackActionSo: {fileID: 11400000, guid: bf2c907eb3301924d8f9fea6a61d572d, type: 2}
+  AttackActionSo: {fileID: 11400000, guid: bf2c907eb3301924d8f9fea6a61d572d, type: 2}
   _materials:
   - {fileID: 2100000, guid: 0a9d402302ff8a440b6889473bf43b6f, type: 2}
   - {fileID: 2100000, guid: 3732cf8c7a4244b42bb507adad3d2168, type: 2}
@@ -365,7 +365,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Destination: {x: 0, y: 0, z: 0}
   _movementSO: {fileID: 11400000, guid: 5f75cc58e513a344889c01a14d27ddc4, type: 2}
-  rb: {fileID: 1299719458080842829}
+  _rb: {fileID: 1299719458080842829}
 --- !u!114 &7053842336820709435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,7 +399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55ada34d298d0314489aa1e8baaddc0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  so: {fileID: 11400000, guid: baed1acda441ca548b8968146625f66e, type: 2}
+  SO: {fileID: 11400000, guid: baed1acda441ca548b8968146625f66e, type: 2}
   _tauntText: {fileID: 3299040723846290617}
 --- !u!114 &4376894764709761957
 MonoBehaviour:
@@ -470,7 +470,7 @@ MonoBehaviour:
   _playerAttackHandler: {fileID: 8581481885147205113}
   _playerAttackMultiTapHandler: {fileID: 1821320510093834742}
   _playerTauntHandler: {fileID: 4376894764709761957}
-  isMultiTapAttack: 1
+  _isMultiTapAttack: 0
 --- !u!114 &1821320510093834742
 MonoBehaviour:
   m_ObjectHideFlags: 0

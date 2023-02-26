@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using Action;
 using HelperPSR.Tick;
-using Player.Handler;
 using Service.Inputs;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,15 +11,16 @@ namespace Player.Handler
         [SerializeField] private MovementAction _movementAction;
 
         private bool _attackIsQueued;
+
         public override void InitializeAction()
         {
+            
         }
 
         public void TryMakeAttackAction(InputAction.CallbackContext ctx)
         {
-            
-                TryMakeAction();
-            
+            TryMakeAction();
+
             // si attacking
             // je passe la bool true;
             // a la fin d'une attaque faut passer la bool false

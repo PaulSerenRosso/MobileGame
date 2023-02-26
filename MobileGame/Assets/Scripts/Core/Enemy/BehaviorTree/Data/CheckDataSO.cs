@@ -1,12 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace BehaviorTree.Data
 {
-public abstract class CheckDataSO : ActionNodeDataSO
-{
-   
-}
+    public abstract class CheckDataSO : ActionNodeDataSO
+    {
+        
+    }
 }

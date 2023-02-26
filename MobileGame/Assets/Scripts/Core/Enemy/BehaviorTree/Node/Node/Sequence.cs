@@ -1,16 +1,17 @@
-﻿using System.Collections.Generic;
-
-namespace BehaviorTree.Nodes
+﻿namespace BehaviorTree.Nodes
 {
     public class Sequence : Node
     {
-        public Sequence() { }
-        
+        public Sequence()
+        {
+            
+        }
+
         public override BehaviourTreeEnums.NodeState Evaluate()
         {
             bool anyChildIsRunning = false;
 
-            foreach (Node node in _children)
+            foreach (Node node in Children)
             {
                 switch (node.Evaluate())
                 {

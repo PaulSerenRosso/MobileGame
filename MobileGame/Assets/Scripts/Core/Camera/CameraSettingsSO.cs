@@ -1,4 +1,3 @@
-using HelperPSR.RemoteConfigs;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Camera", fileName = "new Camera")]

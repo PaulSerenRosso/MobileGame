@@ -1,6 +1,6 @@
 using Addressables;
 using Attributes;
-using Environnement.MoveGrid;
+using Environment.MoveGrid;
 using Player;
 using Service.Inputs;
 using Service.UI;
