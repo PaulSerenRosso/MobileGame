@@ -12,9 +12,12 @@
             var childEvaluate = Child.Evaluate();
             if (childEvaluate == BehaviourTreeEnums.NodeState.RUNNING)
             {
-               return BehaviourTreeEnums.NodeState.RUNNING;
+                return BehaviourTreeEnums.NodeState.RUNNING;
             }
-            return childEvaluate == BehaviourTreeEnums.NodeState.FAILURE ? BehaviourTreeEnums.NodeState.SUCCESS : BehaviourTreeEnums.NodeState.FAILURE;
+
+            return childEvaluate == BehaviourTreeEnums.NodeState.FAILURE
+                ? BehaviourTreeEnums.NodeState.SUCCESS
+                : BehaviourTreeEnums.NodeState.FAILURE;
         }
     }
 }

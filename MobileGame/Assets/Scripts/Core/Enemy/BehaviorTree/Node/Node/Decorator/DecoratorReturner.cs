@@ -1,15 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using BehaviorTree.SO.Composite;
-using BehaviorTree.Nodes;
 using BehaviorTree.SO.Decorator;
-using UnityEngine;
 
 namespace BehaviorTree.Nodes.Decorator
 {
     public class DecoratorReturner : DecoratorNode
     {
-        public DecoratorReturnerSO so;
+        public DecoratorReturnerSO SO;
+
         public DecoratorReturner()
         {
             
@@ -17,18 +13,18 @@ namespace BehaviorTree.Nodes.Decorator
 
         public override NodeSO GetNodeSO()
         {
-            return so;
+            return SO;
         }
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
-            so = (DecoratorReturnerSO)nodeSO;
+            SO = (DecoratorReturnerSO)nodeSO;
         }
 
         public override BehaviourTreeEnums.NodeState Evaluate()
         {
             Child.Evaluate();
-            return so.ReturnState;
+            return SO.ReturnState;
         }
     }
 }

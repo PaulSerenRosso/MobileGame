@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using BehaviorTree.SO.Composite;
 using HelperPSR.Randoms;
@@ -6,49 +5,56 @@ using UnityEngine;
 
 namespace BehaviorTree.Nodes.Composite
 {
-public class RandomSelector : CompositeNode
-{
-    private RandomSelectorSO so;
-    private List<int> currentChildrenProbabilities = new List<int>();
-    private int childrenEvaluatedCount;
-    private int pickedChildIndex;
-    public override NodeSO GetNodeSO()
+    public class RandomSelector : CompositeNode
     {
-        return so;
-    }
+        private RandomSelectorSO _so;
+        private List<int> _currentChildrenProbabilities = new List<int>();
+        private int _childrenEvaluatedCount;
+        private int _pickedChildIndex;
+        private List<Node> _currentChildrenToEvaluate;
 
-    public override void SetNodeSO(NodeSO nodeSO)
-    {
-        so =(RandomSelectorSO) nodeSO;
-    }
-
-    public override BehaviourTreeEnums.NodeState Evaluate()
-    {
-        childrenEvaluatedCount = 0;
-        currentChildrenProbabilities = new List<int>(so.ChildrenProbabilities);
-        pickedChildIndex = -1;
-        while (childrenEvaluatedCount < Children.Count)
+        public override NodeSO GetNodeSO()
         {
-        var pickRandomElementIndex = RandomHelper.PickRandomElementIndex(currentChildrenProbabilities.ToArray());
-            var currentElement = Children[pickRandomElementIndex];
-            switch (currentElement.Evaluate())
-            {
-                case BehaviourTreeEnums.NodeState.FAILURE:
-                {
-                    break;
-                }
-                case BehaviourTreeEnums.NodeState.SUCCESS:
-                    _state = BehaviourTreeEnums.NodeState.SUCCESS;
-                    return _state;
-                case BehaviourTreeEnums.NodeState.RUNNING:
-                    _state = BehaviourTreeEnums.NodeState.RUNNING;
-                    return _state;
-            }
-            childrenEvaluatedCount++;
-            currentChildrenProbabilities.RemoveAt(pickRandomElementIndex);
+            return _so;
         }
-        return BehaviourTreeEnums.NodeState.FAILURE;
+
+        public override void SetNodeSO(NodeSO nodeSO)
+        {
+            _so = (RandomSelectorSO)nodeSO;
+        }
+
+        public override BehaviourTreeEnums.NodeState Evaluate()
+        {
+            _currentChildrenToEvaluate = new List<Node>(Children);
+            _childrenEvaluatedCount = 0;
+            _currentChildrenProbabilities = new List<int>(_so.ChildrenProbabilities);
+            _pickedChildIndex = -1;
+            while (_childrenEvaluatedCount < Children.Count)
+            {
+                _pickedChildIndex =
+                    RandomHelper.PickRandomElementIndex(_currentChildrenProbabilities.ToArray());
+                Debug.Log($"picked: {_pickedChildIndex}");
+                Debug.Log($"count proba: {_currentChildrenProbabilities.Count}");
+                Debug.Log($"count children evaluate: {_currentChildrenToEvaluate.Count}");
+                var currentElement = _currentChildrenToEvaluate[_pickedChildIndex];
+                switch (currentElement.Evaluate())
+                {
+                    case BehaviourTreeEnums.NodeState.FAILURE:
+                        break;
+                    case BehaviourTreeEnums.NodeState.SUCCESS:
+                        _state = BehaviourTreeEnums.NodeState.SUCCESS;
+                        return _state;
+                    case BehaviourTreeEnums.NodeState.RUNNING:
+                        _state = BehaviourTreeEnums.NodeState.RUNNING;
+                        return _state;
+                }
+
+                _childrenEvaluatedCount++;
+                _currentChildrenProbabilities.RemoveAt(_pickedChildIndex);
+                _currentChildrenToEvaluate.RemoveAt(_pickedChildIndex);
+            }
+
+            return BehaviourTreeEnums.NodeState.FAILURE;
+        }
     }
-    
-}
 }

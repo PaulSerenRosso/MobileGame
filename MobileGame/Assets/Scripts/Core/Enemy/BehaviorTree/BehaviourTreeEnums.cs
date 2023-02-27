@@ -12,7 +12,7 @@ public class BehaviourTreeEnums
     {
         PlayerTransform,
         EnvironmentGridManager,
-        ITickService
+        TickManager
     }
 
     public enum NodeState

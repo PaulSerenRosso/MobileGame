@@ -1,37 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
-using BehaviorTree;
-using BehaviorTree.Nodes;
 using BehaviorTree.SO.Decorator;
-using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 namespace BehaviorTree.Nodes.Decorator
 {
     public class DecoratorUntil : DecoratorNode
     {
+        private DecoratorUntilSO _so;
+
         public DecoratorUntil()
         {
             
         }
-        private DecoratorWhileSO so;
 
         public override NodeSO GetNodeSO()
         {
-            return so;
+            return _so;
         }
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
-            so = (DecoratorWhileSO)nodeSO;
+            _so = (DecoratorUntilSO)nodeSO;
         }
 
         public override BehaviourTreeEnums.NodeState Evaluate()
         {
-            while (Child.Evaluate() != so.WhileStateCondition)
+            ChildEvaluateAsync();
+            return _so.BreakStateCondition;
+        }
+
+        private async void ChildEvaluateAsync()
+        {
+            while (Child.Evaluate() != _so.BreakStateCondition)
             {
-                
+                await UniTask.DelayFrame(0);
             }
-            return so.WhileStateCondition;
         }
     }
 }

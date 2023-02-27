@@ -28,9 +28,9 @@ namespace BehaviorTree.Trees
                         ExternValueObjects[i].Obj = environmentGridManager;
                         break;
                     }
-                    case BehaviourTreeEnums.TreeExternValues.ITickService:
+                    case BehaviourTreeEnums.TreeExternValues.TickManager:
                     {
-                        ExternValueObjects[i].Obj = tickeableService;
+                        ExternValueObjects[i].Obj = tickeableService.GetTickManager;
                         break;
                     }
                 }

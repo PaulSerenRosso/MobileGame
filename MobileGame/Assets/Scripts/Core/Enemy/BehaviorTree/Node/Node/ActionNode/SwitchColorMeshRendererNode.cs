@@ -12,22 +12,22 @@ namespace BehaviorTree.Nodes.Actions
 
         public override NodeSO GetNodeSO()
         {
-            return _so ;
+            return _so;
         }
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
-            _so =(SwitchColorMeshRendererNodeSO) nodeSO;
-            _dataSo= (SwitchColorMeshRendererNodeDataSO) _so.Data;
+            _so = (SwitchColorMeshRendererNodeSO)nodeSO;
+            _dataSo = (SwitchColorMeshRendererNodeDataSO)_so.Data;
         }
 
         public override BehaviourTreeEnums.NodeState Evaluate()
         {
             _meshRenderer.material.color = _dataSo.SwitchableColor;
+            Debug.Log($"color: {_dataSo.SwitchableColor}");
             return BehaviourTreeEnums.NodeState.RUNNING;
         }
 
-        
         public override void SetDependencyValues(
             Dictionary<BehaviourTreeEnums.TreeExternValues, object> externDependencyValues,
             Dictionary<BehaviourTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
@@ -38,11 +38,6 @@ namespace BehaviorTree.Nodes.Actions
         public override ActionNodeDataSO GetDataSO()
         {
             return _dataSo;
-        }
-
-        public override void SetHashCodeKeyOfInternValues(int[] hashCodeKey)
-        {
-            
         }
     }
 }

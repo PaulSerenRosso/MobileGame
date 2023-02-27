@@ -1,12 +1,10 @@
 ﻿using System;
-using BehaviorTree.Nodes;
 using BehaviorTree.Nodes.Actions;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace BehaviorTree.SO.Actions
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/CheckTimerDataSO", fileName = "new CheckTimerDataSO")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Data/CheckTimerDataSO", fileName = "new CheckTimerDataSO")]
     public class CheckTimerDataSO : ActionNodeDataSO
     {
         public float Time;
@@ -19,7 +17,7 @@ namespace BehaviorTree.SO.Actions
 
         protected override void SetDependencyValues()
         {
-            ExternValues = new[] { BehaviourTreeEnums.TreeExternValues.ITickService };
+            
         }
     }
 }

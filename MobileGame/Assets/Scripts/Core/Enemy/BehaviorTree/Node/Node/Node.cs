@@ -25,6 +25,7 @@ namespace BehaviorTree.Nodes
         {
             
         }
+
         public abstract BehaviourTreeEnums.NodeState Evaluate();
     }
 }

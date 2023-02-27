@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3531cbf97152c1047b56069617950d5d, type: 3}
-  m_Name: SelectorRoot
+  m_Script: {fileID: 11500000, guid: 964129c80d92c0e468359104d05aabc1, type: 3}
+  m_Name: DecoratorInverterSO
   m_EditorClassIdentifier: 
-  Childs:
-  - {fileID: 11400000, guid: a46903d59acafc249a99f2e56410785f, type: 2}
+  Child: {fileID: 11400000, guid: bead876a5a6b5bf40a92c0e1e3ecfaf7, type: 2}

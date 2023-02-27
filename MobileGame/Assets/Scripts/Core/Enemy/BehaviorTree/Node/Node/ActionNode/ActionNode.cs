@@ -8,21 +8,26 @@ namespace BehaviorTree.Nodes.Actions
     public abstract class ActionNode : Node
     {
         public NodeValuesSharer Sharer;
-        
-
 
         public (BehaviourTreeEnums.TreeEnemyValues[] enemyValues, BehaviourTreeEnums.TreeExternValues[] externValues)
             GetDependencyValues()
         {
-            var so = (ActionNodeSO) GetNodeSO();
+            var so = (ActionNodeSO)GetNodeSO();
             return (so.Data.EnemyValues, so.Data.ExternValues);
         }
 
-        public abstract void SetDependencyValues(
+        public virtual void SetDependencyValues(
             Dictionary<BehaviourTreeEnums.TreeExternValues, Object> externDependencyValues,
-            Dictionary<BehaviourTreeEnums.TreeEnemyValues, Object> enemyDependencyValues);
+            Dictionary<BehaviourTreeEnums.TreeEnemyValues, Object> enemyDependencyValues)
+        {
+            
+        }
 
         public abstract ActionNodeDataSO GetDataSO();
-        public abstract void SetHashCodeKeyOfInternValues(int[] hashCodeKey);
+
+        public virtual void SetHashCodeKeyOfInternValues(int[] hashCodeKey)
+        {
+            
+        }
     }
 }
