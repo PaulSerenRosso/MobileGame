@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using BehaviorTree.Nodes;
-using BehaviorTree.InnerNode;
+using BehaviorTree.Nodes.Decorator;
+using BehaviorTree.SO.Composite;
+using BehaviorTree.SO.Decorator;
 using Environment.MoveGrid;
 using HelperPSR.MonoLoopFunctions;
 using UnityEngine;
@@ -62,6 +64,7 @@ namespace BehaviorTree.Trees
 
         private void SetupChild(NodeSO childSO, Node child)
         {
+            child.SetNodeSO(childSO);
             if (childSO is CompositeSO compositeSO)
             {
                 if (compositeSO.Childs.Length != 0)
@@ -82,7 +85,6 @@ namespace BehaviorTree.Trees
         private void SetActionNode(Node child, ActionNodeSO actionNodeSo)
         {
             var actionChild = (ActionNode)child;
-            actionChild.SetDataSO(actionNodeSo.Data);
             var dependencyValuesType = actionChild.GetDependencyValues();
             Dictionary<BehaviourTreeEnums.TreeExternValues, Object> dependencyExternValuesObjects =
                 new Dictionary<BehaviourTreeEnums.TreeExternValues, Object>();
@@ -93,7 +95,6 @@ namespace BehaviorTree.Trees
                 dependencyEnemyValuesObjects.Add(dependencyValuesType.enemyValues[i],
                     _nodeValuesInitializer.GetEnemyValueObject(dependencyValuesType.enemyValues[i]));
             }
-
             for (int i = 0; i < dependencyValuesType.externValues.Length; i++)
             {
                 dependencyExternValuesObjects.Add(dependencyValuesType.externValues[i],

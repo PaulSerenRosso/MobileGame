@@ -2,7 +2,7 @@ using System;
 using BehaviorTree.Nodes;
 using UnityEngine;
 
-namespace BehaviorTree.InnerNode
+namespace BehaviorTree.SO.Composite
 {
     [CreateAssetMenu(menuName = "BehaviorTree/StructSelectorSO", fileName = "new StructSelectorSO")]
     public class SelectorSO : CompositeSO

@@ -6,7 +6,7 @@
         {
             
         }
-        
+
         public override BehaviourTreeEnums.NodeState Evaluate()
         {
             foreach (Node node in Children)

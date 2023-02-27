@@ -14,6 +14,6 @@ public class EnemyManager : MonoBehaviour
     public void SetUp(Transform playerTransform, ITickeableService tickeableService,
         EnvironmentGridManager environmentGridManager)
     {
-        _tree.Setup(playerTransform, tickeableService, environmentGridManager);
+      //  _tree.Setup(playerTransform, tickeableService, environmentGridManager);
     }
 }

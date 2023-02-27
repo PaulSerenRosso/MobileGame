@@ -2,7 +2,7 @@ using System;
 using BehaviorTree.Nodes;
 using UnityEngine;
 
-namespace BehaviorTree.InnerNode
+namespace BehaviorTree.SO.Composite
 {
     [CreateAssetMenu(menuName = "BehaviorTree/StructSequenceSO", fileName = "new StructSequenceSO")]
     public class SequenceSO : CompositeSO

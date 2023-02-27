@@ -5,8 +5,20 @@ namespace BehaviorTree.Nodes
 {
     public class CheckTimer : ActionNode
     {
+        private CheckTimerSO _timerSo;
         private CheckTimerDataSO _dataSO;
         private float _timer;
+
+        public override NodeSO GetNodeSO()
+        {
+            return _timerSo;
+        }
+
+        public override void SetNodeSO(NodeSO nodeSO)
+        {
+            _timerSo =(CheckTimerSO) nodeSO;
+            _dataSO =(CheckTimerDataSO) _timerSo.Data;
+        }
 
         public override BehaviourTreeEnums.NodeState Evaluate()
         {
@@ -22,12 +34,7 @@ namespace BehaviorTree.Nodes
         {
             return _dataSO;
         }
-
-        public override void SetDataSO(ActionNodeDataSO dataSO)
-        {
-            _dataSO = (CheckTimerDataSO)dataSO;
-        }
-
+        
         public override void SetDependencyValues(
             Dictionary<BehaviourTreeEnums.TreeExternValues, object> externDependencyValues,
             Dictionary<BehaviourTreeEnums.TreeEnemyValues, object> enemyDependencyValues)

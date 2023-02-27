@@ -16,6 +16,15 @@ namespace BehaviorTree.Nodes
             
         }
 
+        public virtual NodeSO GetNodeSO()
+        {
+            return null;
+        }
+
+        public virtual void SetNodeSO(NodeSO nodeSO)
+        {
+            
+        }
         public abstract BehaviourTreeEnums.NodeState Evaluate();
     }
 }

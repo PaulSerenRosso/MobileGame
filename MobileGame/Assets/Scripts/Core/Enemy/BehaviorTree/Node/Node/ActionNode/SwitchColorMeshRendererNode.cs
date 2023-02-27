@@ -6,8 +6,20 @@ namespace BehaviorTree.Nodes
 {
     public class SwitchColorMeshRendererNode : ActionNode
     {
+        private SwitchColorMeshRendererNodeSO _so;
         private SwitchColorMeshRendererNodeDataSO _dataSo;
         private MeshRenderer _meshRenderer;
+
+        public override NodeSO GetNodeSO()
+        {
+            return _so ;
+        }
+
+        public override void SetNodeSO(NodeSO nodeSO)
+        {
+            _so =(SwitchColorMeshRendererNodeSO) nodeSO;
+            _dataSo= (SwitchColorMeshRendererNodeDataSO) _so.Data;
+        }
 
         public override BehaviourTreeEnums.NodeState Evaluate()
         {
@@ -15,16 +27,7 @@ namespace BehaviorTree.Nodes
             return BehaviourTreeEnums.NodeState.RUNNING;
         }
 
-        public override ActionNodeDataSO GetDataSO()
-        {
-            return _dataSo;
-        }
-
-        public override void SetDataSO(ActionNodeDataSO dataSO)
-        {
-            _dataSo = (SwitchColorMeshRendererNodeDataSO)dataSO;
-        }
-
+        
         public override void SetDependencyValues(
             Dictionary<BehaviourTreeEnums.TreeExternValues, object> externDependencyValues,
             Dictionary<BehaviourTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
@@ -32,9 +35,14 @@ namespace BehaviorTree.Nodes
             _meshRenderer = (MeshRenderer)enemyDependencyValues[BehaviourTreeEnums.TreeEnemyValues.MeshRenderer];
         }
 
+        public override ActionNodeDataSO GetDataSO()
+        {
+            return _dataSo;
+        }
+
         public override void SetHashCodeKeyOfInternValues(int[] hashCodeKey)
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }

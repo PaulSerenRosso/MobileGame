@@ -1,4 +1,4 @@
-﻿namespace BehaviorTree.Nodes
+﻿namespace BehaviorTree.Nodes.Decorator
 {
     public abstract class DecoratorNode : Node
     {

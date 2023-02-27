@@ -9,21 +9,20 @@ namespace BehaviorTree.Nodes
     {
         public NodeValuesSharer Sharer;
         
-        public abstract ActionNodeDataSO GetDataSO();
-        
-        public abstract void SetDataSO(ActionNodeDataSO dataSO);
+
 
         public (BehaviourTreeEnums.TreeEnemyValues[] enemyValues, BehaviourTreeEnums.TreeExternValues[] externValues)
             GetDependencyValues()
         {
-            var so = GetDataSO();
-            return (so.EnemyValues, so.ExternValues);
+            var so = (ActionNodeSO) GetNodeSO();
+            return (so.Data.EnemyValues, so.Data.ExternValues);
         }
 
         public abstract void SetDependencyValues(
             Dictionary<BehaviourTreeEnums.TreeExternValues, Object> externDependencyValues,
             Dictionary<BehaviourTreeEnums.TreeEnemyValues, Object> enemyDependencyValues);
 
+        public abstract ActionNodeDataSO GetDataSO();
         public abstract void SetHashCodeKeyOfInternValues(int[] hashCodeKey);
     }
 }

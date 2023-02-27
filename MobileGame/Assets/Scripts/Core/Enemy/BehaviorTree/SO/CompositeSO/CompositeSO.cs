@@ -1,4 +1,4 @@
-﻿namespace BehaviorTree.InnerNode
+﻿namespace BehaviorTree.SO.Composite
 {
     public abstract class CompositeSO : NodeSO
     {
