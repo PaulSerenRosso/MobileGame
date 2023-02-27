@@ -1,9 +1,10 @@
 ﻿using System;
 using BehaviorTree.Nodes;
+using BehaviorTree.Nodes.Actions;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace BehaviorTree.ActionsSO
+namespace BehaviorTree.SO.Actions
 {
     [CreateAssetMenu(menuName = "BehaviorTree/CheckTimerDataSO", fileName = "new CheckTimerDataSO")]
     public class CheckTimerDataSO : ActionNodeDataSO

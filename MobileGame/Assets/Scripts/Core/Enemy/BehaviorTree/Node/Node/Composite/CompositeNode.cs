@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BehaviorTree.Nodes
+namespace BehaviorTree.Nodes.Composite
 {
     public abstract class CompositeNode : Node
     {

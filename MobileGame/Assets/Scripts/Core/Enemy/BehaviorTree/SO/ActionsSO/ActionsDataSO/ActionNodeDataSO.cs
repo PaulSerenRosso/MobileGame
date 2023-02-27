@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace BehaviorTree.ActionsSO
+namespace BehaviorTree.SO.Actions
 {
     public abstract class ActionNodeDataSO : ScriptableObject
     {

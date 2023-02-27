@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using BehaviorTree.ActionsSO;
+using BehaviorTree.SO.Actions;
 using UnityEngine;
 
-namespace BehaviorTree.Nodes
+namespace BehaviorTree.Nodes.Actions
 {
     public class SwitchColorMeshRendererNode : ActionNode
     {

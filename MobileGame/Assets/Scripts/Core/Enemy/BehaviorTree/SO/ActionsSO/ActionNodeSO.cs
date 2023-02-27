@@ -1,5 +1,5 @@
 ﻿using System;
-using BehaviorTree.ActionsSO;
+using BehaviorTree.SO.Actions;
 
 namespace BehaviorTree
 {

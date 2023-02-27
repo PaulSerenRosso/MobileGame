@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using BehaviorTree.Nodes;
+using BehaviorTree.Nodes.Actions;
+using BehaviorTree.Nodes.Composite;
 using BehaviorTree.Nodes.Decorator;
 using BehaviorTree.SO.Composite;
 using BehaviorTree.SO.Decorator;

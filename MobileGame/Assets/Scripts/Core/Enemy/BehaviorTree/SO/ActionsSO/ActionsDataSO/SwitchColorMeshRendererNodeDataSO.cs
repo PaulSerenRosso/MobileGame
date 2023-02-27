@@ -1,8 +1,9 @@
 using System;
 using BehaviorTree.Nodes;
+using BehaviorTree.Nodes.Actions;
 using UnityEngine;
 
-namespace BehaviorTree.ActionsSO
+namespace BehaviorTree.SO.Actions
 {
     [CreateAssetMenu(menuName = "BehaviorTree/SwitchColorMeshRendererNodeDataSO",
         fileName = "new SwitchColorMeshRendererNodeData")]
