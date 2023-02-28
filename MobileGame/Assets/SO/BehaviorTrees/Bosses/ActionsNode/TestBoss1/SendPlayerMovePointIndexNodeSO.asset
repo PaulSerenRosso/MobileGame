@@ -9,16 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a554480369441f643a037b92f1ced7d6, type: 3}
-  m_Name: SequenceMovementDownSO
+  m_Script: {fileID: 11500000, guid: 0653beaa0f3340c9b6a26bd73e9a6198, type: 3}
+  m_Name: SendPlayerMovePointIndexNodeSO
   m_EditorClassIdentifier: 
-  Childs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  Data: {fileID: 11400000, guid: fa7111ee36b704e46b91d7046256644b, type: 2}
+  PlayerMovePointIndexKey:
+    Key: PlayerMPIndex
+    HashCode: 1243245990

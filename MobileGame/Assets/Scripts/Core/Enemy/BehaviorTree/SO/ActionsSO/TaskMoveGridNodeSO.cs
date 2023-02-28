@@ -11,6 +11,7 @@ namespace BehaviorTree
         public override void ConvertKeyOfInternValueToHashCode()
         {
             DestinationKey.UpdateKeyHashCode();
+            DestinationIndexMovePointKey.UpdateKeyHashCode();
         }
     }
 }

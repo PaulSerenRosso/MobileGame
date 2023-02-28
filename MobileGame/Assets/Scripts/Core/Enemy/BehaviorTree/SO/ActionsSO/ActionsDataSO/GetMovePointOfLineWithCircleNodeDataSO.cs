@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace BehaviorTree.SO.Actions
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Data/GetMovePointOfLineDataSO",
-        fileName = "new GetMovePointOfLineDataSO")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Data/GetMovePointOfLineWithCircleNodeDataSO",
+        fileName = "new GetMovePointOfLineWithCircleNodeDataSO")]
     public class GetMovePointOfLineWithCircleNodeDataSO : ActionNodeDataSO
     {
         public int CircleIndex;
