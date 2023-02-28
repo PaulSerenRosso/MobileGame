@@ -1,12 +1,12 @@
 ﻿using System;
 using BehaviorTree.Nodes.Actions;
+using UnityEngine;
 
 namespace BehaviorTree.SO.Actions
 {
-    public class GetMovePointOfLineNodeDataSO : ActionNodeDataSO
+    [CreateAssetMenu(menuName = "BehaviorTree/Data/TaskGetIndexMovePointPositionNodeDataSO", fileName = "new TaskGetIndexMovePointPositionNodeDataSO")]
+    public class TaskGetIndexMovePointPositionNodeDataSO : ActionNodeDataSO
     {
-        public int indexMovedAmount;
-        
         protected override void SetDependencyValues()
         {
             ExternValues = new[] { BehaviourTreeEnums.TreeExternValues.EnvironmentGridManager };
@@ -14,7 +14,7 @@ namespace BehaviorTree.SO.Actions
 
         public override Type GetTypeNode()
         {
-            return typeof(GetMovePointOfLineNode);
+            return typeof(TaskGetIndexMovePointPositionNode);
         }
     }
 }

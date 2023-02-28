@@ -2,33 +2,32 @@
 using BehaviorTree.SO.Actions;
 using Core.Enemy.BehaviorTree.SO.ActionsSO;
 using Environment.MoveGrid;
+using UnityEngine;
 
 namespace BehaviorTree.Nodes.Actions
 {
-    public class GetMovePointOfLineNode : ActionNode
+    public class TaskGetIndexMovePointPositionNode : ActionNode
     {
-        private GetMovePointOfLineNodeSO _getMovePointOfLineNodeSo;
-        private GetMovePointOfLineNodeDataSO _getMovePointOfLineNodeDataSo;
+        private TaskGetIndexMovePointPositionNodeSO _so;
+        private TaskGetIndexMovePointPositionNodeDataSO _data;
         private EnvironmentGridManager _environmentGridManager;
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
-            _getMovePointOfLineNodeSo = (GetMovePointOfLineNodeSO)nodeSO;
-            _getMovePointOfLineNodeDataSo = (GetMovePointOfLineNodeDataSO)_getMovePointOfLineNodeSo.Data;
+            _so = (TaskGetIndexMovePointPositionNodeSO)nodeSO;
+            _data = (TaskGetIndexMovePointPositionNodeDataSO)_so.Data;
         }
 
         public override NodeSO GetNodeSO()
         {
-            return _getMovePointOfLineNodeSo;
+            return _so;
         }
 
         public override BehaviourTreeEnums.NodeState Evaluate()
         {
-            int startIndex = (int)Sharer.InternValues[_getMovePointOfLineNodeSo.StartIndexKey.HashCode];
-            Sharer.InternValues[_getMovePointOfLineNodeSo.ResultIndexKey.HashCode] =
-                _environmentGridManager.GetIndexMovePointFromStartMovePointLine(startIndex,
-                    _getMovePointOfLineNodeDataSo.indexMovedAmount);
-            
+            int index = (int)Sharer.InternValues[_so.IndexMovePointKey.HashCode];
+            Sharer.InternValues[_so.DestinationIndexMovePointKey.HashCode] =
+                _environmentGridManager.MovePoints[index].MeshRenderer.transform.position;
             return BehaviourTreeEnums.NodeState.SUCCESS;
         }
 
@@ -43,7 +42,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override ActionNodeDataSO GetDataSO()
         {
-            return _getMovePointOfLineNodeDataSo;
+            return _data;
         }
     }
 }

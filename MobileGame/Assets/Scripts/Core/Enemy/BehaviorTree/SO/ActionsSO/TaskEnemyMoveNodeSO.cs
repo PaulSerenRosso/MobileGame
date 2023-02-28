@@ -8,6 +8,7 @@ namespace BehaviorTree
     {
         public StringWithHashCode DestinationKey = new();
 
+        
         public override void ConvertKeyOfInternValueToHashCode()
         {
             DestinationKey.UpdateKeyHashCode();

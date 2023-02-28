@@ -7,9 +7,11 @@ namespace BehaviorTree.SO.Actions
     [CreateAssetMenu(menuName = "BehaviorTree/Data/TaskMoveNodeDataSO", fileName = "new TaskMoveNodeDataSO")]
     public class TaskMoveNodeDataSO : ActionNodeDataSO
     {
+        public AnimationCurve CurvePosition;
+        public float MaxTime;
         protected override void SetDependencyValues()
         {
-            ExternValues = new[] { BehaviourTreeEnums.TreeExternValues.EnvironmentGridManager };
+            EnemyValues = new[] { BehaviourTreeEnums.TreeEnemyValues.Rigidbody };
         }
 
         public override Type GetTypeNode()

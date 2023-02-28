@@ -1,12 +1,13 @@
 ﻿using System;
 using BehaviorTree.Nodes.Actions;
+using UnityEngine;
 
 namespace BehaviorTree.SO.Actions
 {
-    public class GetMovePointOfLineNodeDataSO : ActionNodeDataSO
+    [CreateAssetMenu(menuName = "BehaviorTree/Data/GetMovePointOfLineDataSO", fileName = "new GetMovePointOfLineDataSO")]
+    public class GetMovePointOfLineWithCircleNodeDataSO : ActionNodeDataSO
     {
-        public int indexMovedAmount;
-        
+        public int CircleIndex;
         protected override void SetDependencyValues()
         {
             ExternValues = new[] { BehaviourTreeEnums.TreeExternValues.EnvironmentGridManager };
@@ -14,7 +15,7 @@ namespace BehaviorTree.SO.Actions
 
         public override Type GetTypeNode()
         {
-            return typeof(GetMovePointOfLineNode);
+            return typeof(GetMovePointOfLineWithCircleNode);
         }
     }
 }

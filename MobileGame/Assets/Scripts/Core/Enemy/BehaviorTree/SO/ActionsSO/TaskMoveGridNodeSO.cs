@@ -7,6 +7,7 @@ namespace BehaviorTree
     public class TaskMoveGridNodeSO : ActionNodeSO
     {
         public StringWithHashCode DestinationKey = new();
+        public StringWithHashCode DestinationIndexMovePointKey = new();
 
         public override void ConvertKeyOfInternValueToHashCode()
         {

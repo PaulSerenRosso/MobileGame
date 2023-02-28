@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using BehaviorTree;
 
-namespace BehaviorTree
+namespace Core.Enemy.BehaviorTree.SO.ActionsSO
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/GetMovePointOfLineNodeSO", fileName = "new  GetMovePointOfLineNodeSO")]
     public class GetMovePointOfLineNodeSO : ActionNodeSO
     {
-        public StringWithHashCode StartIndexKey = new();
-        public StringWithHashCode ResultIndexKey = new();
+        public StringWithHashCode StartIndexKey;
+        public StringWithHashCode ResultIndexKey;
 
         public override void ConvertKeyOfInternValueToHashCode()
         {

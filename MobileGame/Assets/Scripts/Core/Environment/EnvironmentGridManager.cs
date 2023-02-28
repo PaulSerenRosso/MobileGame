@@ -162,10 +162,16 @@ namespace Environment.MoveGrid
             return movePointIndex % _gridSo.MovePoints;
         }
 
-        public int GetIndexMovePointFromStartMovePointLine(int startMovePointIndex, int circleReached)
+        public int GetIndexMovePointFromStartMovePointLineWithCircle(int startMovePointIndex, int circleReached)
         {
             return GetModuloIndex(startMovePointIndex) * circleReached;
         }
+
+        public int GetIndexMovePointFromStartMovePointLine(int startMovePointIndex, int indexMovedAmount)
+        {
+            return startMovePointIndex + indexMovedAmount * _gridSo.MovePoints;
+        }
+        
         public int GetModuloIndex(int movePointIndex)
         {
             return movePointIndex % _gridSo.MovePoints;

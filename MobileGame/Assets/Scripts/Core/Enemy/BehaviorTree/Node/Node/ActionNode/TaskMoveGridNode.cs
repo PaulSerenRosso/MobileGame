@@ -2,6 +2,7 @@
 using BehaviorTree.SO.Actions;
 using Environment.MoveGrid;
 using Player.Handler;
+using UnityEngine;
 
 namespace BehaviorTree.Nodes.Actions
 {
@@ -25,6 +26,9 @@ namespace BehaviorTree.Nodes.Actions
 
         public override BehaviourTreeEnums.NodeState Evaluate()
         {
+            _environmentGridManager.MoveGrid((Vector3)Sharer.InternValues[_taskMoveGridNodeSO.DestinationKey.HashCode]);
+            _playerMovementHandler.SetCurrentMovePoint((int)Sharer.InternValues[_taskMoveGridNodeSO.DestinationIndexMovePointKey.HashCode]);
+            return BehaviourTreeEnums.NodeState.SUCCESS;
         }
 
         public override void SetDependencyValues(
