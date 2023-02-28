@@ -9,7 +9,11 @@ namespace BehaviorTree.SO.Actions
     {
         protected override void SetDependencyValues()
         {
-            ExternValues = new[] { BehaviourTreeEnums.TreeExternValues.EnvironmentGridManager, BehaviourTreeEnums.TreeExternValues.PlayerHandlerMovement };
+            ExternValues = new[]
+            {
+                BehaviourTreeEnums.TreeExternValues.EnvironmentGridManager,
+                BehaviourTreeEnums.TreeExternValues.PlayerHandlerMovement
+            };
         }
 
         public override Type GetTypeNode()

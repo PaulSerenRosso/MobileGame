@@ -2,7 +2,8 @@
 
 namespace BehaviorTree
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/SwitchColorMeshRendererNodeSO", fileName = "new SwitchColorMeshRendererNode")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Actions/SwitchColorMeshRendererNodeSO",
+        fileName = "new SwitchColorMeshRendererNode")]
     public class SwitchColorMeshRendererNodeSO : ActionNodeSO
     {
         

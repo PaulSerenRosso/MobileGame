@@ -2,7 +2,8 @@
 
 namespace BehaviorTree
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/CheckCirclesAreOccupiedNodeSO", fileName = "new CheckCirclesAreOccupiedNodeSO")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Actions/CheckCirclesAreOccupiedNodeSO",
+        fileName = "new CheckCirclesAreOccupiedNodeSO")]
     public class CheckCirclesAreOccupiedNodeSO : ActionNodeSO
     {
         public StringWithHashCode DestinationKey = new();

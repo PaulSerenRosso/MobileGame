@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BehaviorTree.SO.Composite
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/RandomSequenceSO", fileName = "new RandomSequenceSO")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Struct/RandomSequenceSO", fileName = "new RandomSequenceSO")]
     public class RandomSequenceSO : CompositeSO
     {
         public int[] ChildrenProbabilities;

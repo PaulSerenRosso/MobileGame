@@ -8,12 +8,13 @@ using UnityEngine;
 
 namespace BehaviorTree.SO.Decorator
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Decorator/DecoratorInverterSO", fileName = "new DecoratorInverterSO")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Struct/Decorator/DecoratorInverterSO",
+        fileName = "new DecoratorInverterSO")]
     public class DecoratorInverterSO : DecoratorSO
-{
-    public override Type GetTypeNode()
     {
-        return typeof(DecoratorInverter);
+        public override Type GetTypeNode()
+        {
+            return typeof(DecoratorInverter);
+        }
     }
-}
 }

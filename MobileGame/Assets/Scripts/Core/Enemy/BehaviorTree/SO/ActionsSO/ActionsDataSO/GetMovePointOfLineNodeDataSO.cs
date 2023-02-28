@@ -1,8 +1,11 @@
 ﻿using System;
 using BehaviorTree.Nodes.Actions;
+using UnityEngine;
 
 namespace BehaviorTree.SO.Actions
 {
+    [CreateAssetMenu(menuName = "BehaviorTree/Data/GetMovePointOfLineNodeDataSO",
+        fileName = "new GetMovePointOfLineNodeDataSO")]
     public class GetMovePointOfLineNodeDataSO : ActionNodeDataSO
     {
         public int indexMovedAmount;

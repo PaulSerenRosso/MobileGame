@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace Core.Enemy.BehaviorTree.SO.ActionsSO
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/TaskGetIndexMovePointPositionNodeSO", fileName = "new TaskGetIndexMovePointPositionNodeSO")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Actions/TaskGetIndexMovePointPositionNodeSO",
+        fileName = "new TaskGetIndexMovePointPositionNodeSO")]
     public class TaskGetIndexMovePointPositionNodeSO : ActionNodeSO
     {
         public StringWithHashCode IndexMovePointKey;

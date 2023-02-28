@@ -2,8 +2,9 @@
 
 namespace BehaviorTree
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/CheckCirclesPlayerNodeSO", fileName = "new CheckCirclesPlayerNodeSO")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Actions/CheckCirclesPlayerNodeSO", fileName = "new CheckCirclesPlayerNodeSO")]
     public class CheckCirclesPlayerNodeSO : ActionNodeSO
     {
+        
     }
 }

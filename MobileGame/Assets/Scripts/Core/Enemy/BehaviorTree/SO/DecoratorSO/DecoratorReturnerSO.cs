@@ -7,15 +7,16 @@ using BehaviorTree.Nodes.Decorator;
 using UnityEngine;
 
 namespace BehaviorTree.SO.Decorator
-{ 
-    [CreateAssetMenu(menuName = "BehaviorTree/Decorator/DecoratorReturnerSO", fileName = "new DecoratorReturnerSO")]
-    public class DecoratorReturnerSO : DecoratorSO
 {
-    public BehaviourTreeEnums.NodeState ReturnState;
-    public override Type GetTypeNode()
+    [CreateAssetMenu(menuName = "BehaviorTree/Struct/Decorator/DecoratorReturnerSO",
+        fileName = "new DecoratorReturnerSO")]
+    public class DecoratorReturnerSO : DecoratorSO
     {
-        return typeof(DecoratorReturner);
+        public BehaviourTreeEnums.NodeState ReturnState;
+
+        public override Type GetTypeNode()
+        {
+            return typeof(DecoratorReturner);
+        }
     }
-}
-    
 }

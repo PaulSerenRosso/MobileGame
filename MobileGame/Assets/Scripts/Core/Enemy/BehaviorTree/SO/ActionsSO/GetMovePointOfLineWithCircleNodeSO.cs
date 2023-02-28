@@ -2,7 +2,8 @@
 
 namespace BehaviorTree
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/GetMovePointOfLineNodeSO", fileName = "new  GetMovePointOfLineNodeSO")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Actions/GetMovePointOfLineWithCircleNodeSO",
+        fileName = "new  GetMovePointOfLineWithCircleNodeSO")]
     public class GetMovePointOfLineWithCircleNodeSO : ActionNodeSO
     {
         public StringWithHashCode StartIndexKey = new();

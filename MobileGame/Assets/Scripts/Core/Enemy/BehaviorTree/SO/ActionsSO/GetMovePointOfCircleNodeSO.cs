@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace BehaviorTree
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/GetMovePointOfCircleNodeSO", fileName = "new  GetMovePointOfCircleNodeSO")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Actions/GetMovePointOfCircleNodeSO",
+        fileName = "new  GetMovePointOfCircleNodeSO")]
     public class GetMovePointOfCircleNodeSO : ActionNodeSO
     {
         public StringWithHashCode StartIndexKey = new();
@@ -11,8 +11,8 @@ namespace BehaviorTree
 
         public override void ConvertKeyOfInternValueToHashCode()
         {
-           StartIndexKey.UpdateKeyHashCode();
-           ResultIndexKey.UpdateKeyHashCode();
+            StartIndexKey.UpdateKeyHashCode();
+            ResultIndexKey.UpdateKeyHashCode();
         }
     }
 }

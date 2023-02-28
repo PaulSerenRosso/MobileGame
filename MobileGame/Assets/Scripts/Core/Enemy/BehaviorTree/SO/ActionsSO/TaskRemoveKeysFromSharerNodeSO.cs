@@ -3,16 +3,17 @@ using UnityEngine;
 
 namespace Core.Enemy.BehaviorTree.SO.ActionsSO
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/TaskRemoveKeysFromSharerNodeSO", fileName = "new TaskRemoveKeysFromSharerNodeSO")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Actions/TaskRemoveKeysFromSharerNodeSO",
+        fileName = "new TaskRemoveKeysFromSharerNodeSO")]
     public class TaskRemoveKeysFromSharerNodeSO : ActionNodeSO
     {
-        public StringWithHashCode[] keysToRemove;
+        public StringWithHashCode[] KeysToRemove;
 
         public override void ConvertKeyOfInternValueToHashCode()
         {
-            for (int i = 0; i < keysToRemove.Length; i++)
+            for (int i = 0; i < KeysToRemove.Length; i++)
             {
-                keysToRemove[i].UpdateKeyHashCode();
+                KeysToRemove[i].UpdateKeyHashCode();
             }
         }
     }

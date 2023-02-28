@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace BehaviorTree.SO.Actions
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Data/TaskGetIndexMovePointPositionNodeDataSO", fileName = "new TaskGetIndexMovePointPositionNodeDataSO")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Data/TaskGetIndexMovePointPositionNodeDataSO",
+        fileName = "new TaskGetIndexMovePointPositionNodeDataSO")]
     public class TaskGetIndexMovePointPositionNodeDataSO : ActionNodeDataSO
     {
         protected override void SetDependencyValues()

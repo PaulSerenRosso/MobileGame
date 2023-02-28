@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace BehaviorTree.SO.Actions
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Data/TaskRemoveKeysFromSharerNodeDataSO", fileName = "new TaskRemoveKeysFromSharerNodeDataSO")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Data/TaskRemoveKeysFromSharerNodeDataSO",
+        fileName = "new TaskRemoveKeysFromSharerNodeDataSO")]
     public class TaskRemoveKeysFromSharerNodeDataSO : ActionNodeDataSO
     {
         protected override void SetDependencyValues()

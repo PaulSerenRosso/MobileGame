@@ -2,7 +2,7 @@
 
 namespace BehaviorTree
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/RotationNodeSO", fileName = "new RotationNodeSO")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Actions/RotationNodeSO", fileName = "new RotationNodeSO")]
     public class RotationNodeSO : ActionNodeSO
     {
         

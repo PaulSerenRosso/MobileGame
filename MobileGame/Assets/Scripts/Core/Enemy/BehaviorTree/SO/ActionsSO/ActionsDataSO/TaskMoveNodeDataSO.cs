@@ -9,6 +9,7 @@ namespace BehaviorTree.SO.Actions
     {
         public AnimationCurve CurvePosition;
         public float MaxTime;
+
         protected override void SetDependencyValues()
         {
             EnemyValues = new[] { BehaviourTreeEnums.TreeEnemyValues.Rigidbody };

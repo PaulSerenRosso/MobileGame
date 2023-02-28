@@ -1,8 +1,11 @@
 ﻿using System;
 using BehaviorTree.Nodes.Actions;
+using UnityEngine;
 
 namespace BehaviorTree.SO.Actions
 {
+    [CreateAssetMenu(menuName = "BehaviorTree/Data/SendPlayerMovePointIndexNodeDataSO",
+        fileName = "new SendPlayerMovePointIndexNodeDataSO")]
     public class SendPlayerMovePointIndexNodeDataSO : ActionNodeDataSO
     {
         protected override void SetDependencyValues()

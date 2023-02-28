@@ -2,7 +2,7 @@
 
 namespace BehaviorTree
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/CheckTimerNodeSO", fileName = "new CheckTimerNodeSO")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Actions/CheckTimerNodeSO", fileName = "new CheckTimerNodeSO")]
     public class CheckTimerNodeSO : ActionNodeSO
     {
         

@@ -4,11 +4,12 @@ using UnityEngine;
 
 namespace BehaviorTree.SO.Actions
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Data/CheckCirclesAreOccupiedNodeDataSO", fileName = "new CheckCirclesAreOccupiedNodeDataSO")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Data/CheckCirclesAreOccupiedNodeDataSO",
+        fileName = "new CheckCirclesAreOccupiedNodeDataSO")]
     public class CheckCirclesAreOccupiedNodeDataSO : ActionNodeDataSO
     {
         public int[] CircleIndexes;
-        
+
         protected override void SetDependencyValues()
         {
             ExternValues = new[] { BehaviourTreeEnums.TreeExternValues.EnvironmentGridManager };
