@@ -10,44 +10,47 @@ namespace Environment.MoveGrid
     {
         public MovePoint[] MovePoints;
 
-        private float[] _circleRadius;
-        private int _movePointsByCircle;
+        private EnvironmentSO _so;
+        private GridSO _gridSo;
         private int _i;
         private int _j;
+        private Transform _rendererPointParent;
         private Action _callback;
 
-        public void SetupGrid(float[] circles, int movePointsByCircle, string rendererMovePointsAddressableName,
+        public void SetupGrid(EnvironmentSO so,
             Action callback)
         {
-            _circleRadius = circles;
-            _movePointsByCircle = movePointsByCircle;
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>(rendererMovePointsAddressableName,
-                GenerateRendererMovePoint);
+            _so = so;
+            _gridSo = _so.GridOfEnvironment;
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>(_so.RendererMovePointAdressableName,
+                GenerateRendererMovePoints);
             _callback = callback;
         }
 
-        private void GenerateRendererMovePoint(GameObject gameObject)
+        private void GenerateRendererMovePoints(GameObject gameObject)
         {
-            Vector3[] allDirections = new Vector3[_movePointsByCircle];
+            _rendererPointParent = new GameObject().transform;
+            Vector3[] allDirections = new Vector3[_gridSo.MovePoints];
 
-            float angleBetweenTwoCandidatePos = Mathf.PI * 2 / _movePointsByCircle;
+            float angleBetweenTwoCandidatePos = Mathf.PI * 2 / _gridSo.MovePoints;
 
             for (var (i, currentAngle) = (0, (float)0);
-                 i < _movePointsByCircle;
+                 i < _gridSo.MovePoints;
                  i++, currentAngle += angleBetweenTwoCandidatePos)
             {
                 allDirections[i] = new Vector3(Mathf.Cos(currentAngle), 0, Mathf.Sin(currentAngle)).normalized;
             }
 
-            MovePoints = new MovePoint[_circleRadius.Length * _movePointsByCircle];
-            for (_i = 0; _i < _circleRadius.Length; _i++)
+            MovePoints = new MovePoint[_gridSo.CircleRadius.Length * _gridSo.MovePoints];
+            for (_i = 0; _i < _gridSo.CircleRadius.Length; _i++)
             {
-                for (_j = 0; _j < _movePointsByCircle; _j++)
+                for (_j = 0; _j < _gridSo.MovePoints; _j++)
                 {
-                    var pos = allDirections[_j] * _circleRadius[_i];
+                    var pos = allDirections[_j] * _gridSo.CircleRadius[_i];
                     var rendererMovePoint = Object.Instantiate(gameObject, pos, Quaternion.identity);
-                    MovePoints[_i * _movePointsByCircle + _j] =
+                    MovePoints[_i * _gridSo.MovePoints + _j] =
                         new MovePoint(rendererMovePoint.GetComponent<MeshRenderer>(), pos);
+                    MovePoints[_i * _gridSo.MovePoints + _j].MeshRenderer.transform.parent = _rendererPointParent;
                 }
             }
 
@@ -70,39 +73,113 @@ namespace Environment.MoveGrid
             }
             */
 
-            for (_i = _movePointsByCircle; _i < MovePoints.Length - 1; _i++)
+            for (_i = _gridSo.MovePoints; _i < MovePoints.Length; _i++)
             {
-                MovePoints[_i].NeighborTopIndex = (_i - _movePointsByCircle);
+                MovePoints[_i].NeighborTopIndex = (_i - _gridSo.MovePoints);
             }
 
-            for (_i = 0; _i < MovePoints.Length - _movePointsByCircle; _i++)
+            for (_i = 0; _i < MovePoints.Length - _gridSo.MovePoints; _i++)
             {
-                MovePoints[_i].NeighborDownIndex = (_i + _movePointsByCircle);
+                MovePoints[_i].NeighborDownIndex = (_i + _gridSo.MovePoints);
             }
 
-            for (_i = 0; _i < _circleRadius.Length; _i++)
+            for (_i = 0; _i < _gridSo.CircleRadius.Length; _i++)
             {
-                int currentCircleIndex = _i * _movePointsByCircle;
-                for (_j = 1; _j < _movePointsByCircle; _j++)
+                int currentCircleIndex = _i * _gridSo.MovePoints;
+                for (_j = 1; _j < _gridSo.MovePoints; _j++)
                 {
                     int currentIndex = currentCircleIndex + _j;
                     MovePoints[currentIndex].NeighborLeftIndex = currentIndex - 1;
                 }
 
-                for (_j = 0; _j < _movePointsByCircle - 1; _j++)
+                for (_j = 0; _j < _gridSo.MovePoints - 1; _j++)
                 {
                     int currentIndex = currentCircleIndex + _j;
                     MovePoints[currentIndex].NeighborRightIndex = (currentIndex + 1);
                 }
 
-                MovePoints[currentCircleIndex].NeighborLeftIndex = (currentCircleIndex + _movePointsByCircle - 1);
-                MovePoints[currentCircleIndex + _movePointsByCircle - 1].NeighborRightIndex = (currentCircleIndex);
+                MovePoints[currentCircleIndex].NeighborLeftIndex = (currentCircleIndex + _gridSo.MovePoints - 1);
+                MovePoints[currentCircleIndex + _gridSo.MovePoints - 1].NeighborRightIndex = (currentCircleIndex);
             }
         }
 
-        public bool CheckIfMovePointInIsLastCircle(int index)
+        public void UpdateOnAllMovePointIfIsOccupied()
         {
-            return index >= _movePointsByCircle * (_circleRadius.Length - 1);
+            foreach (var movePoint in MovePoints)
+            {
+                if ((movePoint.LocalPosition + _rendererPointParent.position).sqrMagnitude >
+                    _so.CircleEnvironnementSqRadius)
+                {
+                    movePoint.IsOccupied = true;
+                }
+                else
+                {
+                    movePoint.IsOccupied = false;
+                }
+            }
+        }
+
+        public bool CheckIfOneMovePointInCirclesIsOccupied(int[] circleIndexes, Vector3 offset)
+        {
+            for (_i = 0; _i < circleIndexes.Length; _i++)
+            {
+                int currentCircleIndex = _i * _gridSo.MovePoints;
+                for (_j = 0; _j < _gridSo.MovePoints; _j++)
+                {
+                    int currentIndex = currentCircleIndex + _j;
+                    if ((MovePoints[currentIndex].LocalPosition + offset).sqrMagnitude >
+                        _so.CircleEnvironnementSqRadius)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+
+        public void MoveGrid(Vector3 pos)
+        {
+            _rendererPointParent.position = pos;
+        }
+
+        public bool CheckIfMovePointInIsCircles(int index, params int[] circlesIndexes)
+        {
+            for (int i = 0; i < circlesIndexes.Length; i++)
+            {
+                if (index >= _gridSo.MovePoints * (circlesIndexes[i]))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public int GetIndexCircleFromMovePoint(int movePointIndex)
+        {
+            return movePointIndex % _gridSo.MovePoints;
+        }
+
+        public int GetIndexMovePointFromStartMovePointLine(int startMovePointIndex, int circleReached)
+        {
+            return GetModuloIndex(startMovePointIndex) * circleReached;
+        }
+        public int GetModuloIndex(int movePointIndex)
+        {
+            return movePointIndex % _gridSo.MovePoints;
+        }
+
+        public int GetIndexMovePointFromStartMovePointCircle(int startMovePointIndex, int indexMovedAmount)
+        {
+            var neighborIndex = MovePoints[startMovePointIndex].NeighborLeftIndex;
+            indexMovedAmount--;
+            if (indexMovedAmount > 0)
+            {
+                return GetIndexMovePointFromStartMovePointCircle(neighborIndex, indexMovedAmount);
+            }
+            return neighborIndex;
         }
     }
 }

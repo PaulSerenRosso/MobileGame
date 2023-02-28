@@ -1,5 +1,6 @@
 using System;
 using Environment.MoveGrid;
+using Player.Handler;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -31,6 +32,11 @@ namespace BehaviorTree.Trees
                     case BehaviourTreeEnums.TreeExternValues.TickManager:
                     {
                         ExternValueObjects[i].Obj = tickeableService.GetTickManager;
+                        break;
+                    }
+                    case BehaviourTreeEnums.TreeExternValues.PlayerHandlerMovement:
+                    {
+                        ExternValueObjects[i].Obj = playerTransform.GetComponent<PlayerMovementHandler>();
                         break;
                     }
                 }

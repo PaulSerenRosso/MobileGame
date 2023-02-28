@@ -17,7 +17,7 @@ namespace Player.Handler
 
         private EnvironmentGridManager _environmentGridManager;
         private Swipe _currentSwipe;
-        private int _index;
+        private int _currentMovePointIndex;
         private int _maxDestinationIndex;
         private MovePoint _currentMovePoint;
         private const string _swipeName = "Swipe";
@@ -68,13 +68,27 @@ namespace Player.Handler
                 }
             }
 
-            if (_environmentGridManager.MovePoints[_maxDestinationIndex].IsOccupied) return false;
+            if (_environmentGridManager.MovePoints[_maxDestinationIndex].IsOccupied)
+            
+                return false;
+            
             return true;
+        }
+
+        public void SetCurrentMovePoint(int movePointIndex)
+        {
+            _currentMovePoint = _environmentGridManager.MovePoints[movePointIndex];
+            _currentMovePointIndex = movePointIndex;
+        }
+
+        public int GetCurrentIndexMovePoint()
+        {
+            return _currentMovePointIndex;
         }
 
         private bool CheckIsOutOfRange()
         {
-            if (_environmentGridManager.CheckIfMovePointInIsLastCircle(_index))
+            if (_environmentGridManager.CheckIfMovePointInIsCircles(_currentMovePointIndex))
             {
                 if (_currentSwipe.SwipeSO.DirectionV2 == Vector2.down)
                 {
@@ -105,23 +119,23 @@ namespace Player.Handler
             }
 
             _environmentGridManager = (EnvironmentGridManager)arguments[0];
-            _index = (int)arguments[1];
-            _currentMovePoint = _environmentGridManager.MovePoints[_index];
+            _currentMovePointIndex = (int)arguments[1];
+            _currentMovePoint = _environmentGridManager.MovePoints[_currentMovePointIndex];
             _conditions = new List<Func<bool>>();
             AddCondition(CheckIsMoving);
             AddCondition(CheckIsOutOfRange);
             AddCondition(CheckIsInTaunt);
             AddCondition(CheckIsOccupied);
             AddCondition(CheckIsInAttack);
-            _action.SetupAction(_currentMovePoint.Position);
+            _action.SetupAction(_currentMovePoint.MeshRenderer.transform.position);
             RemoteConfigManager.RegisterRemoteConfigurable(this);
         }
 
         public override void InitializeAction()
         {
             _currentMovePoint = _environmentGridManager.MovePoints[_maxDestinationIndex];
-            _action.Destination = _currentMovePoint.Position;
-            _index = _maxDestinationIndex;
+            _action.Destination = _currentMovePoint.MeshRenderer.transform.position;
+            _currentMovePointIndex = _maxDestinationIndex;
         }
 
         public void SetRemoteConfigurableValues()

@@ -105,7 +105,6 @@ namespace BehaviorTree.Trees
 
             actionChild.Sharer = _nodeValuesSharer;
             actionChild.SetDependencyValues(dependencyExternValuesObjects, dependencyEnemyValuesObjects);
-            actionChild.SetHashCodeKeyOfInternValues(actionNodeSo.GetHashCodeKeyOfInternValue());
         }
     }
 }

@@ -4,29 +4,29 @@ using UnityEngine;
 
 namespace BehaviorTree.Nodes.Actions
 {
-    public class CheckTimer : ActionNode
+    public class CheckTimerNode : ActionNode
     {
-        private CheckTimerSO _timerSo;
-        private CheckTimerDataSO _dataSO;
+        private CheckTimerNodeSO _timerNodeSO;
+        private CheckTimerNodeDataSO _nodeDataSO;
         private float _timer;
 
         private TickTimer _tickTimer;
 
         public override NodeSO GetNodeSO()
         {
-            return _timerSo;
+            return _timerNodeSO;
         }
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
-            _timerSo = (CheckTimerSO)nodeSO;
-            _dataSO = (CheckTimerDataSO)_timerSo.Data;
-            _timer = _dataSO.StartTime;
+            _timerNodeSO = (CheckTimerNodeSO)nodeSO;
+            _nodeDataSO = (CheckTimerNodeDataSO)_timerNodeSO.Data;
+            _timer = _nodeDataSO.StartTime;
         }
 
         public override BehaviourTreeEnums.NodeState Evaluate()
         {
-            if (_timer > _dataSO.Time)
+            if (_timer > _nodeDataSO.Time)
             {
                 _timer = 0;
                 Debug.Log($"Timer is over");
@@ -38,7 +38,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override ActionNodeDataSO GetDataSO()
         {
-            return _dataSO;
+            return _nodeDataSO;
         }
     }
 }

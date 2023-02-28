@@ -5,14 +5,14 @@ using UnityEngine;
 namespace BehaviorTree.SO.Actions
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Data/CheckTimerDataSO", fileName = "new CheckTimerDataSO")]
-    public class CheckTimerDataSO : ActionNodeDataSO
+    public class CheckTimerNodeDataSO : ActionNodeDataSO
     {
         public float Time;
         public float StartTime;
 
         public override Type GetTypeNode()
         {
-            return typeof(CheckTimer);
+            return typeof(CheckTimerNode);
         }
 
         protected override void SetDependencyValues()

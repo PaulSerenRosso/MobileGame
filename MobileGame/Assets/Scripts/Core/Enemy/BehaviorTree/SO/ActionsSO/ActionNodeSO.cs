@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 
 namespace BehaviorTree
@@ -10,11 +11,6 @@ namespace BehaviorTree
         public override Type GetTypeNode()
         {
             return Data.GetTypeNode();
-        }
-
-        public virtual int[] GetHashCodeKeyOfInternValue()
-        {
-            return null;
         }
 
         public virtual void ConvertKeyOfInternValueToHashCode()

@@ -24,10 +24,5 @@ namespace BehaviorTree.Nodes.Actions
         }
 
         public abstract ActionNodeDataSO GetDataSO();
-
-        public virtual void SetHashCodeKeyOfInternValues(int[] hashCodeKey)
-        {
-            
-        }
     }
 }

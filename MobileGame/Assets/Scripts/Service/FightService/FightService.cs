@@ -54,9 +54,7 @@ namespace Service.Fight
             var environment = Object.Instantiate(gameObject);
             _environmentGridManager = environment.GetComponent<EnvironmentGridManager>();
             _environmentGridManager.SetupGrid(
-                _currentEnvironmentSO.GridOfEnvironment.CircleRadius,
-                _currentEnvironmentSO.GridOfEnvironment.MovePoints,
-                _currentEnvironmentSO.RendererMovePointAdressableName,() => GenerateFighters(gameObject));
+               _currentEnvironmentSO,() => GenerateFighters(gameObject));
         }
 
         private void GenerateFighters(GameObject gameObject)

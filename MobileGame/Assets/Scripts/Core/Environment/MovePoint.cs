@@ -10,15 +10,15 @@ namespace Environment.MoveGrid
         public int NeighborDownIndex;
         public int NeighborLeftIndex;
         public int NeighborRightIndex;
-        public Vector3 Position;
+        public Vector3 LocalPosition;
         public bool IsOccupied;
-
         public MeshRenderer MeshRenderer;
 
         public MovePoint(MeshRenderer meshRenderer, Vector3 position)
         {
             MeshRenderer = meshRenderer;
-            Position = position;
+            LocalPosition = 
+            LocalPosition = position;
             NeighborDownIndex = -1;
             NeighborLeftIndex = -1;
             NeighborRightIndex = -1;

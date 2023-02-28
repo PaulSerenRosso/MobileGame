@@ -1,5 +1,8 @@
-﻿namespace BehaviorTree
+﻿using System;
+
+namespace BehaviorTree
 {
+    [Serializable]
     public class StringWithHashCode
     {
         public string Key;
