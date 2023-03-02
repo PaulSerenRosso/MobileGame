@@ -2,34 +2,37 @@
 using BehaviorTree.SO.Actions;
 using Environment.MoveGrid;
 using Player.Handler;
+using UnityEngine;
 
 namespace BehaviorTree.Nodes.Actions
 {
     public class CheckCirclesPlayerNode : ActionNode
     {
-        private CheckCirclesPlayerNodeSO _checkCirclesPlayerNodeSO;
-        private CheckCirclesPlayerNodeDataSO _checkCirclesPlayerNodeDataSO;
+        private CheckCirclesPlayerNodeSO _so;
+        private CheckCirclesPlayerNodeDataSO _data;
         private EnvironmentGridManager _environmentGridManager;
         private PlayerMovementHandler _playerMovementHandler;
 
         public override NodeSO GetNodeSO()
         {
-            return _checkCirclesPlayerNodeSO;
+            return _so;
         }
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
-            _checkCirclesPlayerNodeSO = (CheckCirclesPlayerNodeSO)nodeSO;
-            _checkCirclesPlayerNodeDataSO = (CheckCirclesPlayerNodeDataSO)_checkCirclesPlayerNodeSO.Data;
+            _so = (CheckCirclesPlayerNodeSO)nodeSO;
+            _data = (CheckCirclesPlayerNodeDataSO)_so.Data;
         }
 
         public override BehaviourTreeEnums.NodeState Evaluate()
         {
-            if (_environmentGridManager.CheckIfMovePointInIsCircles(_playerMovementHandler.GetCurrentIndexMovePoint(),
-                    _checkCirclesPlayerNodeDataSO.CirclesIndexes))
+            if (!_environmentGridManager.CheckIfMovePointInIsCircles(_playerMovementHandler.GetCurrentIndexMovePoint(),
+                    _data.CirclesIndexes))
             {
+                Debug.Log("CheckCirclesPlayer");
                 return BehaviourTreeEnums.NodeState.SUCCESS;
             }
+            Debug.Log("CheckCirclePlayerAreFalse");
             return BehaviourTreeEnums.NodeState.FAILURE;
         }
 
@@ -46,7 +49,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override ActionNodeDataSO GetDataSO()
         {
-            return _checkCirclesPlayerNodeDataSO;
+            return _data;
         }
     }
 }

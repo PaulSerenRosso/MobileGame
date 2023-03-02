@@ -7,10 +7,10 @@ namespace BehaviorTree.Nodes.Actions
 {
     public class TaskMoveNode : ActionNode, IFixedUpdate
     {
-        private TaskEnemyMoveNodeSO _taskEnemyMoveNodeSo;
-        private TaskMoveNodeDataSO _taskMoveNodeDataSO;
+        private TaskEnemyMoveNodeSO _so;
+        private TaskMoveNodeDataSO _data;
         private Rigidbody _rb;
-        private bool isInit;
+        private bool _isInit;
         private float _ratioTime;
         private float _timer;
         private Vector3 _destination;
@@ -18,31 +18,34 @@ namespace BehaviorTree.Nodes.Actions
 
         public override NodeSO GetNodeSO()
         {
-            return _taskEnemyMoveNodeSo;
+            return _so;
         }
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
-            _taskEnemyMoveNodeSo = (TaskEnemyMoveNodeSO)nodeSO;
-            _taskMoveNodeDataSO = (TaskMoveNodeDataSO)_taskEnemyMoveNodeSo.Data;
+            _so = (TaskEnemyMoveNodeSO)nodeSO;
+            _data = (TaskMoveNodeDataSO)_so.Data;
         }
 
         public override BehaviourTreeEnums.NodeState Evaluate()
         {
-            if (!isInit)
+            if (!_isInit)
             {
-                _destination = (Vector3)Sharer.InternValues[_taskEnemyMoveNodeSo.DestinationKey.HashCode];
+                _destination = (Vector3)Sharer.InternValues[_so.DestinationKey.HashCode];
                 FixedUpdateManager.Register(this);
                 _startPosition = _rb.position;
-                isInit = true;
+                _isInit = true;
             }
-            else if (_timer >= _taskMoveNodeDataSO.MaxTime)
+            else if (_timer >= _data.MaxTime)
             {
                 _rb.position = _destination;
+                _startPosition = _destination;
                 FixedUpdateManager.UnRegister(this);
-                isInit = false;
+                _timer = 0;
+                _isInit = false;
                 return BehaviourTreeEnums.NodeState.SUCCESS;
             }
+
             return BehaviourTreeEnums.NodeState.RUNNING;
         }
 
@@ -55,14 +58,14 @@ namespace BehaviorTree.Nodes.Actions
 
         public override ActionNodeDataSO GetDataSO()
         {
-            return _taskMoveNodeDataSO;
+            return _data;
         }
 
         public void OnFixedUpdate()
         {
             _timer += Time.fixedDeltaTime;
-            _ratioTime = _timer / _taskMoveNodeDataSO.MaxTime;
-            _rb.position = Vector3.Lerp(_startPosition, _destination,_taskMoveNodeDataSO.CurvePosition.Evaluate(_ratioTime));
+            _ratioTime = _timer / _data.MaxTime;
+            _rb.position = Vector3.Lerp(_startPosition, _destination, _data.CurvePosition.Evaluate(_ratioTime));
         }
     }
 }

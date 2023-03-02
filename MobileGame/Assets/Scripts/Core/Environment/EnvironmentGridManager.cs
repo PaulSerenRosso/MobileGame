@@ -130,6 +130,9 @@ namespace Environment.MoveGrid
                     if ((MovePoints[currentIndex].LocalPosition + offset).sqrMagnitude >
                         _so.CircleEnvironnementSqRadius)
                     {
+                        Debug.Log("offset: " + offset);
+                        Debug.Log("destination position" +
+                                  (MovePoints[currentIndex].LocalPosition + offset).sqrMagnitude);
                         return true;
                     }
                 }
@@ -148,7 +151,8 @@ namespace Environment.MoveGrid
         {
             for (int i = 0; i < circlesIndexes.Length; i++)
             {
-                if (index >= _gridSo.MovePoints * (circlesIndexes[i]))
+                var gridSoMovePoints = _gridSo.MovePoints * (circlesIndexes[i]);
+                if (index >= gridSoMovePoints && index <= gridSoMovePoints + _gridSo.MovePoints)
                 {
                     return true;
                 }
@@ -164,7 +168,7 @@ namespace Environment.MoveGrid
 
         public int GetIndexMovePointFromStartMovePointLineWithCircle(int startMovePointIndex, int circleReached)
         {
-            return GetModuloIndex(startMovePointIndex) * circleReached;
+            return GetModuloIndex(startMovePointIndex) * (circleReached + 1);
         }
 
         public int GetIndexMovePointFromStartMovePointLine(int startMovePointIndex, int indexMovedAmount)

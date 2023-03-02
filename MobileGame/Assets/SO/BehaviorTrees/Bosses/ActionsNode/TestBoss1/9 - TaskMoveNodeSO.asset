@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b773ced837d247ad9a6644a3c00de26e, type: 3}
-  m_Name: GetMovePointOfCircleDataSO
+  m_Script: {fileID: 11500000, guid: 02c4c95ec52f475c90b18dc677cdf026, type: 3}
+  m_Name: 9 - TaskMoveNodeSO
   m_EditorClassIdentifier: 
-  ExternValues: 01000000
-  EnemyValues: 
-  IndexMovedAmount: 0
+  Data: {fileID: 11400000, guid: 8a3d045c73f29b34e84e61aabcea71ad, type: 2}
+  DestinationKey:
+    Key: DestinationGrid
+    HashCode: 1753698518

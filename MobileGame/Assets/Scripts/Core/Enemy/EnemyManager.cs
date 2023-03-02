@@ -8,7 +8,7 @@ public class EnemyManager : MonoBehaviour
 
     private void Start()
     {
-        transform.position = new Vector3(0, 2, 0);
+        transform.position = new Vector3(0, 0, 0);
     }
 
     public void SetUp(Transform playerTransform, ITickeableService tickeableService,

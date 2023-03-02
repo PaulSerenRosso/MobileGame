@@ -61,7 +61,7 @@ namespace BehaviorTree.Trees
                 if (ExternValueObjects[i].Type == type)
                     return ExternValueObjects[i].Obj;
             }
-
+            
             throw new NullReferenceException();
         }
     }

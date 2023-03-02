@@ -7,7 +7,7 @@ namespace BehaviorTree.Nodes.Actions
     public class SwitchColorMeshRendererNode : ActionNode
     {
         private SwitchColorMeshRendererNodeSO _so;
-        private SwitchColorMeshRendererNodeDataSO _dataSo;
+        private SwitchColorMeshRendererNodeDataSO _data;
         private MeshRenderer _meshRenderer;
 
         public override NodeSO GetNodeSO()
@@ -18,13 +18,12 @@ namespace BehaviorTree.Nodes.Actions
         public override void SetNodeSO(NodeSO nodeSO)
         {
             _so = (SwitchColorMeshRendererNodeSO)nodeSO;
-            _dataSo = (SwitchColorMeshRendererNodeDataSO)_so.Data;
+            _data = (SwitchColorMeshRendererNodeDataSO)_so.Data;
         }
 
         public override BehaviourTreeEnums.NodeState Evaluate()
         {
-            _meshRenderer.material.color = _dataSo.SwitchableColor;
-            Debug.Log($"color: {_dataSo.SwitchableColor}");
+            _meshRenderer.material.color = _data.SwitchableColor;
             return BehaviourTreeEnums.NodeState.RUNNING;
         }
 
@@ -37,7 +36,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override ActionNodeDataSO GetDataSO()
         {
-            return _dataSo;
+            return _data;
         }
     }
 }

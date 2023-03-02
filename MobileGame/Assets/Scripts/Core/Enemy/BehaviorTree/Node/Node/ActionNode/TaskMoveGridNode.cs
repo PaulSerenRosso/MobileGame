@@ -8,26 +8,26 @@ namespace BehaviorTree.Nodes.Actions
 {
     public class TaskMoveGridNode : ActionNode
     {
-        private TaskMoveGridNodeSO _taskMoveGridNodeSO;
-        private TaskMoveGridNodeDataSO _taskMoveGridNodeDataSO;
+        private TaskMoveGridNodeSO _so;
+        private TaskMoveGridNodeDataSO _data;
         private EnvironmentGridManager _environmentGridManager;
         private PlayerMovementHandler _playerMovementHandler;
 
         public override NodeSO GetNodeSO()
         {
-            return _taskMoveGridNodeSO;
+            return _so;
         }
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
-            _taskMoveGridNodeSO = (TaskMoveGridNodeSO)nodeSO;
-            _taskMoveGridNodeDataSO = (TaskMoveGridNodeDataSO)_taskMoveGridNodeSO.Data;
+            _so = (TaskMoveGridNodeSO)nodeSO;
+            _data = (TaskMoveGridNodeDataSO)_so.Data;
         }
 
         public override BehaviourTreeEnums.NodeState Evaluate()
         {
-            _environmentGridManager.MoveGrid((Vector3)Sharer.InternValues[_taskMoveGridNodeSO.DestinationKey.HashCode]);
-            _playerMovementHandler.SetCurrentMovePoint((int)Sharer.InternValues[_taskMoveGridNodeSO.DestinationIndexMovePointKey.HashCode]);
+            _environmentGridManager.MoveGrid((Vector3)Sharer.InternValues[_so.DestinationKey.HashCode]);
+            _playerMovementHandler.SetCurrentMovePoint((int)Sharer.InternValues[_so.DestinationIndexMovePointKey.HashCode]);
             return BehaviourTreeEnums.NodeState.SUCCESS;
         }
 
@@ -45,7 +45,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override ActionNodeDataSO GetDataSO()
         {
-            return _taskMoveGridNodeDataSO;
+            return _data;
         }
     }
 }

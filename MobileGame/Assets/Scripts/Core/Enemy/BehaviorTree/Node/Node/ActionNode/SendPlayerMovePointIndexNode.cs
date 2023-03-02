@@ -1,34 +1,31 @@
 ﻿using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
+using HelperPSR.Collections;
 using Player.Handler;
 
 namespace BehaviorTree.Nodes.Actions
 {
     public class SendPlayerMovePointIndexNode : ActionNode
     {
-        private SendPlayerMovePointIndexNodeSO _sendPlayerMovePointIndexNodeSO;
-        private SendPlayerMovePointIndexNodeDataSO _sendPlayerMovePointIndexNodeDataSO;
+        private SendPlayerMovePointIndexNodeSO _so;
+        private SendPlayerMovePointIndexNodeDataSO _data;
         private PlayerMovementHandler _playerMovementHandler;
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
-            _sendPlayerMovePointIndexNodeSO = (SendPlayerMovePointIndexNodeSO)nodeSO;
-            _sendPlayerMovePointIndexNodeDataSO =
-                (SendPlayerMovePointIndexNodeDataSO)_sendPlayerMovePointIndexNodeSO.Data;
+            _so = (SendPlayerMovePointIndexNodeSO)nodeSO;
+            _data =
+                (SendPlayerMovePointIndexNodeDataSO)_so.Data;
         }
 
         public override NodeSO GetNodeSO()
         {
-            return _sendPlayerMovePointIndexNodeSO;
+            return _so;
         }
 
         public override BehaviourTreeEnums.NodeState Evaluate()
         {
-            if (Sharer.InternValues.TryAdd(_sendPlayerMovePointIndexNodeSO.PlayerMovePointIndexKey.HashCode,
-                    _playerMovementHandler.GetCurrentIndexMovePoint()))
-            {
-                return BehaviourTreeEnums.NodeState.SUCCESS;
-            }
+            CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.PlayerMovePointIndexKey.HashCode, _playerMovementHandler.GetCurrentIndexMovePoint());
 
             return BehaviourTreeEnums.NodeState.SUCCESS;
         }
@@ -44,7 +41,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override ActionNodeDataSO GetDataSO()
         {
-            return _sendPlayerMovePointIndexNodeDataSO;
+            return _data;
         }
     }
 }

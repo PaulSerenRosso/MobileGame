@@ -2,6 +2,7 @@
 using BehaviorTree.SO.Actions;
 using Core.Enemy.BehaviorTree.SO.ActionsSO;
 using Environment.MoveGrid;
+using HelperPSR.Collections;
 using UnityEngine;
 
 namespace BehaviorTree.Nodes.Actions
@@ -26,8 +27,8 @@ namespace BehaviorTree.Nodes.Actions
         public override BehaviourTreeEnums.NodeState Evaluate()
         {
             int index = (int)Sharer.InternValues[_so.IndexMovePointKey.HashCode];
-            Sharer.InternValues[_so.DestinationIndexMovePointKey.HashCode] =
-                _environmentGridManager.MovePoints[index].MeshRenderer.transform.position;
+            CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.DestinationIndexMovePointKey.HashCode,
+                _environmentGridManager.MovePoints[index].MeshRenderer.transform.position);
             return BehaviourTreeEnums.NodeState.SUCCESS;
         }
 

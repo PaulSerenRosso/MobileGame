@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0d36f6adb62aaa40bb6645a8b0f8643, type: 3}
-  m_Name: SelectorRandomSOAction
+  m_Script: {fileID: 11500000, guid: c7283691a9d7416f9b93b0ca5309db4c, type: 3}
+  m_Name: 6 - CheckCirclesAreOccupiedNodeSOUp
   m_EditorClassIdentifier: 
-  Childs:
-  - {fileID: 11400000, guid: 684dfe024b55a774f836085ce1b4429c, type: 2}
-  ChildrenProbabilities: 64000000
+  Data: {fileID: 11400000, guid: 62436ee900f94174e854bb60f63021ea, type: 2}
+  DestinationKey:
+    Key: DestinationGrid
+    HashCode: 1753698518

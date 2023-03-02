@@ -7,8 +7,8 @@ namespace BehaviorTree.Nodes.Actions
 {
     public class RotationNode : ActionNode
     {
-        private RotationNodeSO _rotationNodeSO;
-        private RotationNodeDataSO _rotationNodeDataSO;
+        private RotationNodeSO _so;
+        private RotationNodeDataSO _data;
         private Transform _transformBoss;
 
         private bool _initRotation;
@@ -19,8 +19,8 @@ namespace BehaviorTree.Nodes.Actions
             if (!_initRotation)
             {
                 _transformBoss.DORotate(
-                    _transformBoss.eulerAngles + Vector3.up * _rotationNodeDataSO.RotationAmount,
-                    _rotationNodeDataSO.TimeRotation).OnComplete(() => _rotationIsFinished = true);
+                    _transformBoss.eulerAngles + Vector3.up * _data.RotationAmount,
+                    _data.TimeRotation).OnComplete(() => _rotationIsFinished = true);
                 _initRotation = true;
             }
             else if (_rotationIsFinished)
@@ -35,18 +35,18 @@ namespace BehaviorTree.Nodes.Actions
 
         public override ActionNodeDataSO GetDataSO()
         {
-            return _rotationNodeDataSO;
+            return _data;
         }
 
         public override NodeSO GetNodeSO()
         {
-            return _rotationNodeSO;
+            return _so;
         }
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
-            _rotationNodeSO = (RotationNodeSO)nodeSO;
-            _rotationNodeDataSO = (RotationNodeDataSO)_rotationNodeSO.Data;
+            _so = (RotationNodeSO)nodeSO;
+            _data = (RotationNodeDataSO)_so.Data;
         }
 
         public override void SetDependencyValues(

@@ -10,13 +10,15 @@ namespace BehaviorTree.Nodes.Actions
         private CheckCirclesAreOccupiedNodeSO _so;
         private CheckCirclesAreOccupiedNodeDataSO _data;
         private EnvironmentGridManager _environmentGridManager;
+        
         public override BehaviourTreeEnums.NodeState Evaluate()
         {
-            if (_environmentGridManager.CheckIfOneMovePointInCirclesIsOccupied(_data.CircleIndexes, (Vector3)Sharer.InternValues[_so.DestinationKey.HashCode]))
+            if (!_environmentGridManager.CheckIfOneMovePointInCirclesIsOccupied(_data.CircleIndexes, (Vector3)Sharer.InternValues[_so.DestinationKey.HashCode]))
             {
+                Debug.Log("CheckCirclesAreOccupied true");
                 return BehaviourTreeEnums.NodeState.SUCCESS;
             }
-
+            Debug.Log("CheckCirclesAreOccupied false");
             return BehaviourTreeEnums.NodeState.FAILURE;
         }
 

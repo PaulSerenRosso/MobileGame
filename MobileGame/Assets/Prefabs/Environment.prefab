@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 502571683}
   - component: {fileID: 502571682}
   - component: {fileID: 502571681}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall (0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 1688439303}
   - component: {fileID: 1688439302}
   - component: {fileID: 1688439301}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 1862681587}
   - component: {fileID: 1862681586}
   - component: {fileID: 1862681585}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -303,7 +303,7 @@ GameObject:
   - component: {fileID: 2031392742}
   - component: {fileID: 2031392741}
   - component: {fileID: 2031392740}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -398,7 +398,7 @@ GameObject:
   m_Component:
   - component: {fileID: 147260059782861053}
   - component: {fileID: 856834679816547125}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Environment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -437,6 +437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad21ce442a2840044a2087815f44cc36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MovePoints: []
 --- !u!1 &7582199644077175792
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,7 +450,7 @@ GameObject:
   - component: {fileID: 2753304710135598222}
   - component: {fileID: 8076120971853360963}
   - component: {fileID: 1258920919810070005}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -1,34 +1,35 @@
 ﻿using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using Environment.MoveGrid;
+using HelperPSR.Collections;
 using UnityEngine;
 
 namespace BehaviorTree.Nodes.Actions
 {
     public class GetMovePointOfLineWithCircleNode : ActionNode
     {
-        private GetMovePointOfLineWithCircleNodeSO _getMovePointOfLineWithCircleNodeSo;
-        private GetMovePointOfLineWithCircleNodeDataSO _getMovePointOfLineWithCircleNodeDataSo;
+        private GetMovePointOfLineWithCircleNodeSO _so;
+        private GetMovePointOfLineWithCircleNodeDataSO _data;
         private EnvironmentGridManager _environmentGridManager;
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
-            _getMovePointOfLineWithCircleNodeSo = (GetMovePointOfLineWithCircleNodeSO)nodeSO;
-            _getMovePointOfLineWithCircleNodeDataSo = (GetMovePointOfLineWithCircleNodeDataSO)_getMovePointOfLineWithCircleNodeSo.Data;
+            _so = (GetMovePointOfLineWithCircleNodeSO)nodeSO;
+            _data = (GetMovePointOfLineWithCircleNodeDataSO)_so.Data;
         }
 
         public override NodeSO GetNodeSO()
         {
-            return _getMovePointOfLineWithCircleNodeSo;
+            return _so;
         }
 
         public override BehaviourTreeEnums.NodeState Evaluate()
         {
-            int startIndex = (int)Sharer.InternValues[_getMovePointOfLineWithCircleNodeSo.StartIndexKey.HashCode];
-            Sharer.InternValues[_getMovePointOfLineWithCircleNodeSo.ResultIndexKey.HashCode] =
+            int startIndex = (int)Sharer.InternValues[_so.StartIndexKey.HashCode];
+            Debug.Log($"index: {startIndex}");
+            CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.ResultIndexKey.HashCode,
                 _environmentGridManager.GetIndexMovePointFromStartMovePointLineWithCircle(startIndex,
-                    _getMovePointOfLineWithCircleNodeDataSo.CircleIndex);
-            
+                    _data.CircleIndex));
             return BehaviourTreeEnums.NodeState.SUCCESS;
         }
 
@@ -43,7 +44,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override ActionNodeDataSO GetDataSO()
         {
-            return _getMovePointOfLineWithCircleNodeDataSo;
+            return _data;
         }
     }
 }
