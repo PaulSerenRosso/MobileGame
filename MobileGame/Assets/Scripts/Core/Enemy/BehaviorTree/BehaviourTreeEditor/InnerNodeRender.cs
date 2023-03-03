@@ -19,8 +19,18 @@ namespace BehaviorTreeEditor
 
         protected override void Render()
         {
-            if (_isSelected) _selectedButtonName = "Hide Children";
-            else _selectedButtonName = "Show Children";
+            if (_isSelected)
+            {
+                GUI.backgroundColor = Color.red;
+                _selectedButtonName = "Hide Children";
+            }
+            else
+            {
+                GUI.backgroundColor = Color.green;
+                _selectedButtonName = "Show Children";
+            }
+
+          
             if (GUILayout.Button(_selectedButtonName))
             {
                 if (_isSelected)
@@ -42,13 +52,13 @@ namespace BehaviorTreeEditor
                     _behaviourTreeWindow.AddChildContainer(_so);
                 }
             }
-
+            GUI.backgroundColor = _behaviourTreeWindow.BaseColor;
             base.Render();
             EditorGUILayout.EndVertical();
         }
 
 
-        public InnerNodeRender(BehaviourTreeWindow behaviourTreeWindow, BehaviourTreeChildContainer currentContainer,
+        public InnerNodeRender(BehaviourTreeWindow behaviourTreeWindow, BehaviourTreeContainer currentContainer,
             Color backgroundColor, InnerNodeSO so) : base(behaviourTreeWindow, backgroundColor)
         {
             _so = so;

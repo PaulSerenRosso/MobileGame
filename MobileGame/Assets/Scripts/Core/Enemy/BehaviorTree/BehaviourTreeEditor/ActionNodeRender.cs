@@ -49,9 +49,11 @@ namespace BehaviorTreeEditor
 
         private void UpdateInterValuesBlock(Color color, string title, List<InternValue> internValuesBlock)
         {
-            EditorGUILayout.BeginVertical(internValueBox);
+            EditorGUILayout.BeginVertical();
             GUI.backgroundColor = color;
-            GUILayout.Label(title, _titleStyle);
+            GUILayout.BeginHorizontal( _titleStyle);
+            GUILayout.Label(title);
+            GUILayout.EndHorizontal();
             GUI.backgroundColor = _behaviourTreeWindow.BaseColor;
             foreach (var internValue in internValuesBlock)
             {
@@ -72,7 +74,9 @@ namespace BehaviorTreeEditor
         {
             EditorGUILayout.BeginVertical(internValueBox);
             GUI.backgroundColor = color;
-            GUILayout.Label(title, _titleStyle);
+            GUILayout.BeginHorizontal( _titleStyle);
+            GUILayout.Label(title);
+            GUILayout.EndHorizontal();
             GUI.backgroundColor = _behaviourTreeWindow.BaseColor;
             foreach (var internValue in internValuesBlock)
             {

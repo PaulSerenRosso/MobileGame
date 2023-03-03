@@ -16,7 +16,7 @@ namespace BehaviorTreeEditor
         private InnerNodeRender _rootRender;
         private Vector2 _testscrollPos;
         private Vector2 _scrollPos;
-        private List<BehaviourTreeChildContainer> _containersToRender = new();
+        private List<BehaviourTreeContainer> _containersToRender = new();
         private InnerNodeSO _root;
         public Color BaseColor;
 
@@ -27,19 +27,20 @@ namespace BehaviorTreeEditor
             window.Show();
         }
 
+
         private void OnEnable()
         {
             BaseColor = GUI.color;
         }
 
-        public void RemoveContainer(BehaviourTreeChildContainer container)
+        public void RemoveContainer(BehaviourTreeContainer container)
         {
             _containersToRender.Remove(container);
         }
 
         public void AddContainer(NodeSO so)
         {
-            var newContainer = new BehaviourTreeChildContainer();
+            var newContainer = new BehaviourTreeContainer();
             List<NodeRender> nodeRenders = new List<NodeRender>();
             nodeRenders.Add(CreateNodeRender(so, newContainer));
             CreateContainer(newContainer, nodeRenders);
@@ -47,7 +48,7 @@ namespace BehaviorTreeEditor
 
         public void AddChildContainer(InnerNodeSO innerNode)
         {
-            var newContainer = new BehaviourTreeChildContainer();
+            var newContainer = new BehaviourTreeContainer();
             List<NodeRender> nodeRenders = new List<NodeRender>();
             if (innerNode is CompositeSO compositeParentSo)
             {
@@ -64,7 +65,7 @@ namespace BehaviorTreeEditor
             CreateContainer(newContainer, nodeRenders);
         }
 
-        private void CreateContainer(BehaviourTreeChildContainer newContainer, List<NodeRender> nodeRenders)
+        private void CreateContainer(BehaviourTreeContainer newContainer, List<NodeRender> nodeRenders)
         {
             if (_containersToRender.Count < 2)
             {
@@ -86,7 +87,7 @@ namespace BehaviorTreeEditor
             }
         }
 
-        public NodeRender CreateNodeRender(NodeSO so, BehaviourTreeChildContainer container)
+        public NodeRender CreateNodeRender(NodeSO so, BehaviourTreeContainer container)
         {
             return so switch
             {
@@ -111,6 +112,11 @@ namespace BehaviorTreeEditor
             {
                 if (_containersToRender.Count == 0)
                 {
+                    AddContainer(_root);
+                }
+                else if (!_containersToRender[0].ContainerNode(_root))
+                {
+                    _containersToRender.Clear();
                     AddContainer(_root);
                 }
 
