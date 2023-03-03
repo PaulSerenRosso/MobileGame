@@ -21,7 +21,8 @@ namespace BehaviorTree.Nodes.Actions
 
         public override BehaviourTreeEnums.NodeState Evaluate()
         {
-            foreach (var key in _so.KeysToRemove)
+            
+            foreach (var key in _so.InternValues)
             {
                 Sharer.InternValues.Remove(key.HashCode);
             }

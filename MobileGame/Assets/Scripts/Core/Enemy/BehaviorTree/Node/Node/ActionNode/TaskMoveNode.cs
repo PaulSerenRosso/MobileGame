@@ -31,7 +31,7 @@ namespace BehaviorTree.Nodes.Actions
         {
             if (!_isInit)
             {
-                _destination = (Vector3)Sharer.InternValues[_so.DestinationKey.HashCode];
+                _destination = (Vector3)Sharer.InternValues[_so.InternValues[0].HashCode];
                 FixedUpdateManager.Register(this);
                 _startPosition = _rb.position;
                 _isInit = true;

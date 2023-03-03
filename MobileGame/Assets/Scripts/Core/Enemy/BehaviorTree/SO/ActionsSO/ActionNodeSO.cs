@@ -7,21 +7,27 @@ namespace BehaviorTree
 {
     public abstract class ActionNodeSO : NodeSO
     {
+        [SerializeField] protected byte _internValuesCount;
         public ActionNodeDataSO Data;
+        public List<InternValue> InternValues = new();
 
         public override Type GetTypeNode()
         {
             return Data.GetTypeNode();
         }
 
-        public virtual void ConvertKeyOfInternValueToHashCode()
+        public virtual void UpdateInterValues()
         {
-            
+            foreach (var internValue in InternValues)
+            {
+                internValue.UpdateKeyHashCode();
+            }
         }
 
-        private void OnValidate()
+        protected override void OnValidate()
         {
-            ConvertKeyOfInternValueToHashCode();
+            base.OnValidate();
+            UpdateInterValues();
         }
     }
 }

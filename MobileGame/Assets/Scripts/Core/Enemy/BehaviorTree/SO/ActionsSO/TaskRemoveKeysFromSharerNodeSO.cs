@@ -7,14 +7,22 @@ namespace Core.Enemy.BehaviorTree.SO.ActionsSO
         fileName = "new TaskRemoveKeysFromSharerNodeSO")]
     public class TaskRemoveKeysFromSharerNodeSO : ActionNodeSO
     {
-        public StringWithHashCode[] KeysToRemove;
+   
 
-        public override void ConvertKeyOfInternValueToHashCode()
+        public override void UpdateInterValues()
         {
-            for (int i = 0; i < KeysToRemove.Length; i++)
+            base.UpdateInterValues();
+            _internValuesCount =(byte) InternValues.Count;
+            foreach (var internValue in InternValues)
             {
-                KeysToRemove[i].UpdateKeyHashCode();
+                internValue.SetInternValueWithoutKey(BehaviourTreeEnums.InternValueType.NONE,
+                    BehaviourTreeEnums.InternValuePropertyType.REMOVE, "To Removed");
             }
+           
+        }
+
+        public override void UpdateCommentary()
+        {
         }
     }
 }

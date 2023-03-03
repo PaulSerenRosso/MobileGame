@@ -1,7 +1,9 @@
-﻿namespace BehaviorTree.SO.Composite
+﻿using System.Collections.Generic;
+
+namespace BehaviorTree.SO.Composite
 {
-    public abstract class CompositeSO : NodeSO
+    public abstract class CompositeSO : InnerNodeSO
     {
-        public NodeSO[] Childs;
+        public List<NodeSO> Childs;
     }
 }

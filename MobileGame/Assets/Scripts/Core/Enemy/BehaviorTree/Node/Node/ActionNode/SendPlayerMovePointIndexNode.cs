@@ -25,7 +25,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override BehaviourTreeEnums.NodeState Evaluate()
         {
-            CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.PlayerMovePointIndexKey.HashCode, _playerMovementHandler.GetCurrentIndexMovePoint());
+            CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[0].HashCode, _playerMovementHandler.GetCurrentIndexMovePoint());
 
             return BehaviourTreeEnums.NodeState.SUCCESS;
         }

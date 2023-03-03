@@ -26,8 +26,8 @@ namespace BehaviorTree.Nodes.Actions
 
         public override BehaviourTreeEnums.NodeState Evaluate()
         {
-            _environmentGridManager.MoveGrid((Vector3)Sharer.InternValues[_so.DestinationKey.HashCode]);
-            _playerMovementHandler.SetCurrentMovePoint((int)Sharer.InternValues[_so.DestinationIndexMovePointKey.HashCode]);
+            _environmentGridManager.MoveGrid((Vector3)Sharer.InternValues[_so.InternValues[0].HashCode]);
+            _playerMovementHandler.SetCurrentMovePoint((int)Sharer.InternValues[_so.InternValues[1].HashCode]);
             return BehaviourTreeEnums.NodeState.SUCCESS;
         }
 

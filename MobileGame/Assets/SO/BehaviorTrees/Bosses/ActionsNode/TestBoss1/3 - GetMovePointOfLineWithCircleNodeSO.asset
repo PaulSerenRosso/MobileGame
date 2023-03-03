@@ -12,10 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29c9a8ee23104e8299686f10ecf23e29, type: 3}
   m_Name: 3 - GetMovePointOfLineWithCircleNodeSO
   m_EditorClassIdentifier: 
+  _commentary: 
+  _internValuesCount: 2
   Data: {fileID: 11400000, guid: a5c74d54ea0b4374f98e61014933d94b, type: 2}
-  StartIndexKey:
-    Key: IndexPlayer
+  InternValues:
+  - Key: IndexPlayer
     HashCode: 1098768601
-  ResultIndexKey:
-    Key: IndexCircle
+    Type: 1
+    PropertyType: 0
+    Commentary: Index(int) of a MovePoint
+  - Key: IndexCircle
     HashCode: 759568254
+    Type: 1
+    PropertyType: 1
+    Commentary: Index(int) of a MovePoint where the circle index is pointed in data

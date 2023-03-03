@@ -11,5 +11,10 @@ namespace BehaviorTree.SO.Composite
         {
             return typeof(Sequence);
         }
+
+        public override void UpdateCommentary()
+        {
+            
+        }
     }
 }

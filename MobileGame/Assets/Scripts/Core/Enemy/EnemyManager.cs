@@ -16,4 +16,9 @@ public class EnemyManager : MonoBehaviour
     {
         _tree.Setup(playerTransform, tickeableService, environmentGridManager);
     }
+
+    public void RenderContainer()
+    {
+        
+    }
 }

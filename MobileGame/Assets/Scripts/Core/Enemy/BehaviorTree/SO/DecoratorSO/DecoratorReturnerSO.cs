@@ -1,8 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using BehaviorTree.SO.Composite;
-using BehaviorTree.Nodes;
 using BehaviorTree.Nodes.Decorator;
 using UnityEngine;
 
@@ -17,6 +13,11 @@ namespace BehaviorTree.SO.Decorator
         public override Type GetTypeNode()
         {
             return typeof(DecoratorReturner);
+        }
+
+        public override void UpdateCommentary()
+        {
+            
         }
     }
 }

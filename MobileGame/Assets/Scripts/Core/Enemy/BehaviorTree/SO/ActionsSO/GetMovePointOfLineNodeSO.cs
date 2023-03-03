@@ -7,13 +7,26 @@ namespace Core.Enemy.BehaviorTree.SO.ActionsSO
         fileName = "new  GetMovePointOfLineNodeSO")]
     public class GetMovePointOfLineNodeSO : ActionNodeSO
     {
-        public StringWithHashCode StartIndexKey;
-        public StringWithHashCode ResultIndexKey;
-
-        public override void ConvertKeyOfInternValueToHashCode()
+        public override void UpdateInterValues()
         {
-            StartIndexKey.UpdateKeyHashCode();
-            ResultIndexKey.UpdateKeyHashCode();
+            base.UpdateInterValues();
+            _internValuesCount = 2;
+            if (InternValues.Count > 0)
+            {
+                InternValues[0].SetInternValueWithoutKey(BehaviourTreeEnums.InternValueType.INT,
+                    BehaviourTreeEnums.InternValuePropertyType.GET, "Index(int) of a MovePoint");
+                if (InternValues.Count > 1)
+                {
+                    InternValues[1].SetInternValueWithoutKey(BehaviourTreeEnums.InternValueType.INT,
+                        BehaviourTreeEnums.InternValuePropertyType.SET,
+                        "Index(int) of a MovePoint after the movement");
+                }
+            }
+        }
+
+        public override void UpdateCommentary()
+        {
+            
         }
     }
 }

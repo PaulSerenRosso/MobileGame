@@ -25,9 +25,9 @@ namespace BehaviorTree.Nodes.Actions
 
         public override BehaviourTreeEnums.NodeState Evaluate()
         {
-            int startIndex = (int)Sharer.InternValues[_so.StartIndexKey.HashCode];
+            int startIndex = (int)Sharer.InternValues[_so.InternValues[0].HashCode];
             Debug.Log($"index: {startIndex}");
-            CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.ResultIndexKey.HashCode,
+            CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[1].HashCode,
                 _environmentGridManager.GetIndexMovePointFromStartMovePointLineWithCircle(startIndex,
                     _data.CircleIndex));
             return BehaviourTreeEnums.NodeState.SUCCESS;

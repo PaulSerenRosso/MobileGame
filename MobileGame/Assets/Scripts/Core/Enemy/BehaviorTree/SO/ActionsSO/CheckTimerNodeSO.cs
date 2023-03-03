@@ -5,6 +5,9 @@ namespace BehaviorTree
     [CreateAssetMenu(menuName = "BehaviorTree/Actions/CheckTimerNodeSO", fileName = "new CheckTimerNodeSO")]
     public class CheckTimerNodeSO : ActionNodeSO
     {
-        
+        public override void UpdateCommentary()
+        {
+            
+        }
     }
 }

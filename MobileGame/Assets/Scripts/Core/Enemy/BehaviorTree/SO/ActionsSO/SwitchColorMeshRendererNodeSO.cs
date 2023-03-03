@@ -6,6 +6,9 @@ namespace BehaviorTree
         fileName = "new SwitchColorMeshRendererNode")]
     public class SwitchColorMeshRendererNodeSO : ActionNodeSO
     {
-        
+        public override void UpdateCommentary()
+        {
+            
+        }
     }
 }

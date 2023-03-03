@@ -13,5 +13,10 @@ namespace BehaviorTree.SO.Decorator
         {
             return typeof(DecoratorUntil);
         }
+
+        public override void UpdateCommentary()
+        {
+            
+        }
     }
 }

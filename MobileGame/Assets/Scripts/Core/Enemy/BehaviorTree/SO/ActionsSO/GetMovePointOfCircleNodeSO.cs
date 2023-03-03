@@ -6,13 +6,25 @@ namespace BehaviorTree
         fileName = "new  GetMovePointOfCircleNodeSO")]
     public class GetMovePointOfCircleNodeSO : ActionNodeSO
     {
-        public StringWithHashCode StartIndexKey = new();
-        public StringWithHashCode ResultIndexKey = new();
-
-        public override void ConvertKeyOfInternValueToHashCode()
+        public override void UpdateInterValues()
         {
-            StartIndexKey.UpdateKeyHashCode();
-            ResultIndexKey.UpdateKeyHashCode();
+            base.UpdateInterValues();
+            _internValuesCount = 2;
+            if (InternValues.Count > 0)
+            {
+                InternValues[0].SetInternValueWithoutKey(BehaviourTreeEnums.InternValueType.INT,
+                    BehaviourTreeEnums.InternValuePropertyType.GET, "Index(int) of the MovePoint");
+                if (InternValues.Count > 1)
+                {
+                    InternValues[1].SetInternValueWithoutKey(BehaviourTreeEnums.InternValueType.INT,
+                        BehaviourTreeEnums.InternValuePropertyType.SET, "Index(int) of a MovePoint after the movement");
+                }
+            }
+        }
+
+        public override void UpdateCommentary()
+        {
+            
         }
     }
 }

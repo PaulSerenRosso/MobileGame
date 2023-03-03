@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7283691a9d7416f9b93b0ca5309db4c, type: 3}
   m_Name: 6 - CheckCirclesAreOccupiedNodeSOUp
   m_EditorClassIdentifier: 
+  _commentary: 
+  _internValuesCount: 1
   Data: {fileID: 11400000, guid: 62436ee900f94174e854bb60f63021ea, type: 2}
-  DestinationKey:
-    Key: DestinationGrid
+  InternValues:
+  - Key: DestinationGrid
     HashCode: 1753698518
+    Type: 0
+    PropertyType: 0
+    Commentary: Destination(Vector3) of a MovePoint

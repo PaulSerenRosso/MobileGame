@@ -13,5 +13,10 @@ namespace BehaviorTree.SO.Composite
         {
             return typeof(RandomSequence);
         }
+
+        public override void UpdateCommentary()
+        {
+            
+        }
     }
 }

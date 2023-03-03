@@ -42,7 +42,7 @@ namespace BehaviorTree.Trees
             UpdateManager.Register(this);
         }
 
-        private void LoopSetupChild(CompositeNode parent, NodeSO[] childsSO)
+        private void LoopSetupChild(CompositeNode parent, List<NodeSO> childsSO)
         {
             foreach (var childSO in childsSO)
             {
@@ -69,7 +69,7 @@ namespace BehaviorTree.Trees
             child.SetNodeSO(childSO);
             if (childSO is CompositeSO compositeSO)
             {
-                if (compositeSO.Childs.Length != 0)
+                if (compositeSO.Childs.Count!= 0)
                 {
                     LoopSetupChild((CompositeNode)child, compositeSO.Childs);
                 }

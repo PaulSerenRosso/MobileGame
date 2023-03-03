@@ -22,4 +22,14 @@ public class BehaviourTreeEnums
         SUCCESS,
         FAILURE
     }
+
+    public enum InternValueType
+    {
+        VECTOR3, INT, FLOAT, NONE ,
+    }
+
+    public enum InternValuePropertyType
+    {
+        GET, SET, REMOVE
+    }
 }

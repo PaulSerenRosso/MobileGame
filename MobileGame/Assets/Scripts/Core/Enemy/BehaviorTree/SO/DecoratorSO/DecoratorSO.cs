@@ -1,6 +1,6 @@
 ﻿namespace BehaviorTree.SO.Decorator
 {
-    public abstract class DecoratorSO : NodeSO
+    public abstract class DecoratorSO : InnerNodeSO 
     {
         public NodeSO Child;
     }
