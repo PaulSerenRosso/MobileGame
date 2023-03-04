@@ -35,26 +35,36 @@ namespace BehaviorTreeEditor
             {
                 if (_isSelected)
                 {
-                    _currentContainer.SelectedNodeRender = null;
-                    _behaviourTreeWindow.RemoveContainers(_currentContainer.Index + 1);
-                    _isSelected = false;
+                    CancelSelection();
                 }
                 else
                 {
-                    if (_currentContainer.SelectedNodeRender != null)
-                    {
-                        _currentContainer.SelectedNodeRender._isSelected = false;
-                        _behaviourTreeWindow.RemoveContainers(_currentContainer.Index + 1);
-                    }
-
-                    _currentContainer.SelectedNodeRender = this;
-                    _isSelected = true;
-                    _behaviourTreeWindow.AddChildContainer(_so);
+                    Select();
                 }
             }
             GUI.backgroundColor = _behaviourTreeWindow.BaseColor;
             base.Render();
             EditorGUILayout.EndVertical();
+        }
+
+        private void Select()
+        {
+            if (_currentContainer.SelectedNodeRender != null)
+            {
+                _currentContainer.SelectedNodeRender._isSelected = false;
+                _behaviourTreeWindow.RemoveContainers(_currentContainer.Index + 1);
+            }
+
+            _currentContainer.SelectedNodeRender = this;
+            _isSelected = true;
+            _behaviourTreeWindow.AddChildContainer(_so);
+        }
+
+        public  void CancelSelection()
+        {
+            _currentContainer.SelectedNodeRender = null;
+            _behaviourTreeWindow.RemoveContainers(_currentContainer.Index + 1);
+            _isSelected = false;
         }
 
 

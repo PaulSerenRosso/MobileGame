@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using UnityEngine.Serialization;
 
 namespace BehaviorTree.SO.Composite
 {
     public abstract class CompositeSO : InnerNodeSO
     {
-        public List<NodeSO> Childs;
+        [FormerlySerializedAs("Childs")] public List<NodeSO> Children;
     }
 }

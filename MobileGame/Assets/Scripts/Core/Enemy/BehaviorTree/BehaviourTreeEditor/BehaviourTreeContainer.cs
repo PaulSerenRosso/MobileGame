@@ -23,13 +23,14 @@ namespace BehaviorTreeEditor
             _nodeRenders = new List<NodeRender>();
         }
 
+        public int GetCurrentNodeRenderCount() => _nodeRenders.Count;
         public void Init(BehaviourTreeWindow behaviourTreeWindow, List<NodeRender> nodesRenders,
             BehaviourTreeContainer previousContainer, int index)
         {
             _behaviourTreeWindow = behaviourTreeWindow;
             _nodeRenders = nodesRenders;
             _isClose = false;
-            if (PreviousContainer != null)
+            if (previousContainer != null)
                 PreviousContainer = previousContainer;
             Index = index;
         }
@@ -42,6 +43,21 @@ namespace BehaviorTreeEditor
             }
 
             return false;
+        }
+
+        public NodeSO GetNodeSO(int index)
+        {
+            return _nodeRenders[index].GetSO();
+        }
+
+        public NodeRender GetNodeRender(int index)
+        {
+            return _nodeRenders[index];
+        }
+
+        public void SetNodeRenderer(NodeRender newNodeRender, int index)
+        {
+            _nodeRenders[index] = newNodeRender;
         }
         public void RenderContainer()
         {
@@ -66,27 +82,13 @@ namespace BehaviorTreeEditor
             EditorGUILayout.EndHorizontal();
         }
 
-        public void AddNode()
+        public void AddNode(NodeRender nodeRender)
         {
-            
+            _nodeRenders.Add(nodeRender);
         }
 
-        public void RemoveNode(NodeRender nodeRender)
-        {
-            _nodeRenders.Remove(nodeRender);
-            if (PreviousContainer != null)
-            {
-                if (PreviousContainer.SelectedNodeRender.GetSO() is CompositeSO compositeParentSo)
-                {
-                    compositeParentSo.Childs.Remove(nodeRender.GetSO());
-                }
-                else if (PreviousContainer.SelectedNodeRender.GetSO() is DecoratorSO decoratorParentSo)
-                {
-                    decoratorParentSo.Child = null;
-                }
-            }
+        public void RemoveAtNode(int index) => _nodeRenders.RemoveAt(index);
 
-            _behaviourTreeWindow.RemoveContainers(Index);
-        }
+
     }
 }

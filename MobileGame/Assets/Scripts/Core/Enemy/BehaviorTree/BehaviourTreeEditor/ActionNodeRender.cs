@@ -72,7 +72,7 @@ namespace BehaviorTreeEditor
         }
         private void UpdateInterValuesBlock(Color color, string title, List<StringWithHashCode> internValuesBlock)
         {
-            EditorGUILayout.BeginVertical(internValueBox);
+            EditorGUILayout.BeginVertical();
             GUI.backgroundColor = color;
             GUILayout.BeginHorizontal( _titleStyle);
             GUILayout.Label(title);

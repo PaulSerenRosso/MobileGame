@@ -33,7 +33,7 @@ namespace BehaviorTree.Trees
             switch (_rootSO)
             {
                 case CompositeSO compositeSO:
-                    LoopSetupChild((CompositeNode)_root, compositeSO.Childs);
+                    LoopSetupChild((CompositeNode)_root, compositeSO.Children);
                     break;
                 case DecoratorSO decoratorSO:
                     LoopSetupChild((DecoratorNode)_root, decoratorSO.Child);
@@ -69,9 +69,9 @@ namespace BehaviorTree.Trees
             child.SetNodeSO(childSO);
             if (childSO is CompositeSO compositeSO)
             {
-                if (compositeSO.Childs.Count!= 0)
+                if (compositeSO.Children.Count!= 0)
                 {
-                    LoopSetupChild((CompositeNode)child, compositeSO.Childs);
+                    LoopSetupChild((CompositeNode)child, compositeSO.Children);
                 }
             }
             else if (childSO is DecoratorSO decoratorSO)
