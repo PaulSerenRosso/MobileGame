@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using BehaviorTree;
-using BehaviorTree.SO.Composite;
-using BehaviorTree.SO.Decorator;
 using UnityEditor;
 using UnityEngine;
 
@@ -17,13 +15,14 @@ namespace BehaviorTreeEditor
         private GUIStyle nodeContainerStyle;
         private bool _isClose;
         private List<NodeRender> _nodeRenders;
-        
+
         public BehaviourTreeContainer()
         {
             _nodeRenders = new List<NodeRender>();
         }
 
         public int GetCurrentNodeRenderCount() => _nodeRenders.Count;
+
         public void Init(BehaviourTreeWindow behaviourTreeWindow, List<NodeRender> nodesRenders,
             BehaviourTreeContainer previousContainer, int index)
         {
@@ -34,6 +33,7 @@ namespace BehaviorTreeEditor
                 PreviousContainer = previousContainer;
             Index = index;
         }
+
         public bool ContainerNode(NodeSO so)
         {
             foreach (var nodeRender in _nodeRenders)
@@ -59,15 +59,12 @@ namespace BehaviorTreeEditor
         {
             _nodeRenders[index] = newNodeRender;
         }
+
         public void RenderContainer()
         {
             EditorGUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
-            _scrollView =
-                EditorGUILayout.BeginScrollView(_scrollView, true, false, GUI.skin.horizontalScrollbar, GUI.skin.verticalScrollbar,
-                    GUI.skin.box, GUILayout.Width(_behaviourTreeWindow.position.width * 0.8f),
-                    GUILayout.Height(_behaviourTreeWindow.position.height / 5));
-            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.BeginHorizontal(GUI.skin.box);
 
             for (int i = 0; i < _nodeRenders.Count; i++)
             {
@@ -77,7 +74,6 @@ namespace BehaviorTreeEditor
 
             GUILayout.FlexibleSpace();
             EditorGUILayout.EndHorizontal();
-            EditorGUILayout.EndScrollView();
             GUILayout.FlexibleSpace();
             EditorGUILayout.EndHorizontal();
         }
@@ -88,7 +84,5 @@ namespace BehaviorTreeEditor
         }
 
         public void RemoveAtNode(int index) => _nodeRenders.RemoveAt(index);
-
-
     }
 }

@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1696cee13330e83448a3510eb7a31162, type: 3}
   m_Name: DecoratorUntilSOMove
   m_EditorClassIdentifier: 
+  _commentary: "Decorator qui permet de r\xE9p\xE9ter la Node TaskMoveNode tant que
+    le statut de la Node n'est pas SUCCESS"
   Child: {fileID: 11400000, guid: 5c5712d2335966b4fa7535ff3f58512d, type: 2}
   BreakStateCondition: 1

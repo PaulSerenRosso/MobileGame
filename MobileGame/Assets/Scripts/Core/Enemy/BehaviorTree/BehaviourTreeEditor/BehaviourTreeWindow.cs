@@ -101,9 +101,8 @@ namespace BehaviorTreeEditor
         private void OnGUI()
         {
             GUI.color = BaseColor;
-            EditorGUILayout.BeginVertical();
             _root = EditorGUILayout.ObjectField("Root", _root, typeof(InnerNodeSO), false) as InnerNodeSO;
-            _scrollPos = EditorGUILayout.BeginScrollView(_scrollPos, false, true, GUIStyle.none,
+            _scrollPos = EditorGUILayout.BeginScrollView(_scrollPos, true, true, GUI.skin.horizontalScrollbar,
                 GUI.skin.verticalScrollbar,
                 GUIStyle.none);
             if (_root)
@@ -131,7 +130,6 @@ namespace BehaviorTreeEditor
             }
 
             EditorGUILayout.EndScrollView();
-            EditorGUILayout.EndVertical();
         }
 
         private void UpdateChildrenContainers()
@@ -139,7 +137,6 @@ namespace BehaviorTreeEditor
             for (int i = 0; i < _childContainers.Count; i++)
             {
                 var childContainer = _childContainers[i];
-
 
                 var selectedSOOfPreviousContainer =
                     childContainer.PreviousContainer.SelectedNodeRender.GetSO();

@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0d36f6adb62aaa40bb6645a8b0f8643, type: 3}
   m_Name: SelectorRandomSOAction
   m_EditorClassIdentifier: 
-  Childs:
+  _commentary: "Selector qui s\xE9lectionne al\xE9atoirement, d'apr\xE8s des probabilit\xE9s,
+    une Node parmi ses enfants "
+  Children:
   - {fileID: 11400000, guid: 684dfe024b55a774f836085ce1b4429c, type: 2}
   - {fileID: 11400000, guid: 4bd5c96cadbec7f47997f1c10454614f, type: 2}
   - {fileID: 11400000, guid: e0f94a214935b5e44ba3ecb424cbc2cf, type: 2}

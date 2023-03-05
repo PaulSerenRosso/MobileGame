@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace BehaviorTreeEditor
 {
- 
     public abstract class NodeRender
     {
         protected BehaviourTreeWindow _behaviourTreeWindow;
@@ -25,7 +24,6 @@ namespace BehaviorTreeEditor
             _backgroundColor = backgroundColor;
         }
 
-
         public void RenderNode()
         {
             BeginRender();
@@ -35,7 +33,7 @@ namespace BehaviorTreeEditor
         protected virtual void BeginRender()
         {
             EditorGUIUtility.labelWidth = 50;
-            EditorGUILayout.BeginVertical(GUI.skin.box, GUILayout.Width(_behaviourTreeWindow.position.width / 3));
+            EditorGUILayout.BeginVertical(GUI.skin.box, GUILayout.Width(200));
             GUI.backgroundColor = _backgroundColor;
             EditorGUILayout.BeginHorizontal(_titleStyle);
             GUILayout.FlexibleSpace();
@@ -47,7 +45,6 @@ namespace BehaviorTreeEditor
             GUI.backgroundColor = _behaviourTreeWindow.BaseColor;
         }
 
-
         protected virtual void Render()
         {
             EditorGUILayout.ObjectField("SO", GetSO(), GetSO().GetType(), false);
@@ -55,8 +52,8 @@ namespace BehaviorTreeEditor
     }
 }
 
-   /*
-     * "ToolbarButton"
+/*
+  * "ToolbarButton"
 "CN Box"
 "Button"
 "CN EntryBackEven"
@@ -166,4 +163,4 @@ namespace BehaviorTreeEditor
 "Toggle"
 "ColorField"
 "TextFieldDropDown"
-     */
+  */

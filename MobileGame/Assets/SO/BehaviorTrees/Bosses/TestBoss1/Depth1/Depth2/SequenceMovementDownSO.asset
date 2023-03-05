@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a554480369441f643a037b92f1ced7d6, type: 3}
   m_Name: SequenceMovementDownSO
   m_EditorClassIdentifier: 
-  Childs:
+  _commentary: "Sequencer qui permet de v\xE9rifier si un d\xE9placement est possible
+    et d'effectuer les actions n\xE9cessaires pour le d\xE9placement"
+  Children:
   - {fileID: 11400000, guid: bd798bcc58b449c4c8de3cb889122139, type: 2}
   - {fileID: 11400000, guid: 40c146c056c208647a4f8642f812696b, type: 2}
   - {fileID: 11400000, guid: 4c45d00e4827adc4781ed6ccd0fcdcfa, type: 2}
