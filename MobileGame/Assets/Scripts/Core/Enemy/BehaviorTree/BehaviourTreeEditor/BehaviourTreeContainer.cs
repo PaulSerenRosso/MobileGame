@@ -7,11 +7,12 @@ namespace BehaviorTreeEditor
 {
     public class BehaviourTreeContainer
     {
-        private Vector2 _scrollView;
-        private BehaviourTreeWindow _behaviourTreeWindow;
+        public int Index;
         public InnerNodeRender SelectedNodeRender;
         public BehaviourTreeContainer PreviousContainer;
-        public int Index;
+        
+        private Vector2 _scrollView;
+        private BehaviourTreeWindow _behaviourTreeWindow;
         private GUIStyle nodeContainerStyle;
         private bool _isClose;
         private List<NodeRender> _nodeRenders;

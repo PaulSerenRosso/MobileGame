@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a554480369441f643a037b92f1ced7d6, type: 3}
+  m_Name: CO_Sequence_MovementUp
+  m_EditorClassIdentifier: 
+  _commentary: "Sequencer qui permet de v\xE9rifier si un d\xE9placement est possible
+    et d'effectuer les actions n\xE9cessaires pour le d\xE9placement"
+  Children:
+  - {fileID: 11400000, guid: 887aa7955267d1547ae7a8464110581a, type: 2}
+  - {fileID: 11400000, guid: 40c146c056c208647a4f8642f812696b, type: 2}
+  - {fileID: 11400000, guid: 4c45d00e4827adc4781ed6ccd0fcdcfa, type: 2}
+  - {fileID: 11400000, guid: ac5c59526d346e8419d0d86dd9bf8226, type: 2}
+  - {fileID: 11400000, guid: 91eba93121b9c404aacabdac350ff685, type: 2}
+  - {fileID: 11400000, guid: 2560381cf2b985f499342961dfa2c893, type: 2}
+  - {fileID: 11400000, guid: cf11757bbb6fa014da640d3bb046ffd0, type: 2}
+  - {fileID: 11400000, guid: c2e3bbccedda54342947ed73ec2cfc7f, type: 2}
+  - {fileID: 11400000, guid: 01870b9fa099ff944af3168ed57727ee, type: 2}

@@ -266,6 +266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5258500676255778547}
   - component: {fileID: 1359273171462430657}
+  - component: {fileID: 1299719458080842829}
   - component: {fileID: 1800965582552254606}
   - component: {fileID: 8581481885147205113}
   - component: {fileID: 4050711209515336914}
@@ -277,7 +278,6 @@ GameObject:
   - component: {fileID: 7948611063154184754}
   - component: {fileID: 2056379011037417376}
   - component: {fileID: 1821320510093834742}
-  - component: {fileID: 1299719458080842829}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -316,6 +316,22 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!54 &1299719458080842829
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6686433966917593852}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &1800965582552254606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -485,22 +501,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _action: {fileID: 1800965582552254606}
   _movementAction: {fileID: 4050711209515336914}
---- !u!54 &1299719458080842829
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6686433966917593852}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &8674137917818090564
 GameObject:
   m_ObjectHideFlags: 0

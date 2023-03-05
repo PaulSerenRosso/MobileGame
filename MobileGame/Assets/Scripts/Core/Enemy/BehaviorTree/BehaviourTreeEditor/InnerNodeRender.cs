@@ -66,10 +66,9 @@ namespace BehaviorTreeEditor
             _behaviourTreeWindow.RemoveContainers(_currentContainer.Index + 1);
             _isSelected = false;
         }
-
-
+        
         public InnerNodeRender(BehaviourTreeWindow behaviourTreeWindow, BehaviourTreeContainer currentContainer,
-            Color backgroundColor, InnerNodeSO so) : base(behaviourTreeWindow, backgroundColor)
+            Color backgroundColor, InnerNodeSO so, string titleName) : base(behaviourTreeWindow, backgroundColor, titleName)
         {
             _so = so;
             _currentContainer = currentContainer;

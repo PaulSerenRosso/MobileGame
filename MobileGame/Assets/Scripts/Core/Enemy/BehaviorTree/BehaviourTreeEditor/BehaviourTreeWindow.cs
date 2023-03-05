@@ -13,14 +13,15 @@ namespace BehaviorTreeEditor
 {
     public class BehaviourTreeWindow : EditorWindow
     {
+        public Color BaseColor;
+        public List<BehaviourTreeContainer> _childContainers = new();
+
         private InnerNodeRender _rootRender;
         private Vector2 _testscrollPos;
         private Vector2 _scrollPos;
         private List<BehaviourTreeContainer> _containersToRender = new();
         private InnerNodeSO _root;
-        public Color BaseColor;
-
-        public List<BehaviourTreeContainer> _childContainers = new();
+        private Color _colorCheck = new(0f, 1f, 0f);
 
         [MenuItem("Window/BehaviourTree")]
         static void Init()
@@ -28,7 +29,6 @@ namespace BehaviorTreeEditor
             BehaviourTreeWindow window = (BehaviourTreeWindow)GetWindow(typeof(BehaviourTreeWindow));
             window.Show();
         }
-
 
         private void OnEnable()
         {
@@ -39,7 +39,7 @@ namespace BehaviorTreeEditor
         {
             var newContainer = new BehaviourTreeContainer();
             List<NodeRender> nodeRenders = new List<NodeRender>();
-            nodeRenders.Add(CreateNodeRender(so, newContainer));
+            nodeRenders.Add(CreateNodeRender(so, newContainer, nodeRenders.Count + 1));
             CreateContainer(newContainer, nodeRenders);
         }
 
@@ -51,12 +51,12 @@ namespace BehaviorTreeEditor
             {
                 for (int i = 0; i < compositeParentSo.Children.Count; i++)
                 {
-                    nodeRenders.Add(CreateNodeRender(compositeParentSo.Children[i], newContainer));
+                    nodeRenders.Add(CreateNodeRender(compositeParentSo.Children[i], newContainer, nodeRenders.Count + 1));
                 }
             }
             else if (innerNode is DecoratorSO decoratorParentSo)
             {
-                nodeRenders.Add(CreateNodeRender(decoratorParentSo.Child, newContainer));
+                nodeRenders.Add(CreateNodeRender(decoratorParentSo.Child, newContainer, nodeRenders.Count + 1));
             }
 
             CreateContainer(newContainer, nodeRenders);
@@ -86,14 +86,18 @@ namespace BehaviorTreeEditor
             }
         }
 
-        public NodeRender CreateNodeRender(NodeSO so, BehaviourTreeContainer container)
+        public NodeRender CreateNodeRender(NodeSO so, BehaviourTreeContainer container, int index)
         {
             return so switch
             {
-                DecoratorSO decoratorSo => new InnerNodeRender(this, container, Color.yellow, decoratorSo),
-                CompositeSO compositeSo => new InnerNodeRender(this, container, Color.blue, compositeSo),
-                ActionNodeSO actionNodeSo => new ActionNodeRender(this, Color.magenta,
-                    actionNodeSo),
+                DecoratorSO decoratorSo => new InnerNodeRender(this, container, Color.yellow, decoratorSo,
+                    index + " - " + decoratorSo.name.Split("D_")[1]),
+                CompositeSO compositeSo => new InnerNodeRender(this, container, Color.blue, compositeSo,
+                    index + " - " + compositeSo.name.Split("CO_")[1]),
+                TaskNodeSO taskNodeSo => new ActionNodeRender(this, Color.magenta,
+                    taskNodeSo, index + " - " + taskNodeSo.name.Split("T_")[1]),
+                CheckNodeSO checkNodeSo => new ActionNodeRender(this, _colorCheck,
+                    checkNodeSo, index + " - " + checkNodeSo.name.Split("CH_")[1]),
                 _ => null
             };
         }
@@ -155,7 +159,7 @@ namespace BehaviorTreeEditor
                              j < compositeSo.Children.Count;
                              j++)
                         {
-                            var newNode = CreateNodeRender(compositeSo.Children[j], childContainer);
+                            var newNode = CreateNodeRender(compositeSo.Children[j], childContainer, childContainer.GetCurrentNodeRenderCount() + 1);
                             childContainer.AddNode(newNode);
                         }
                     }
@@ -188,10 +192,11 @@ namespace BehaviorTreeEditor
                 behaviourTreeContainer.SelectedNodeRender.CancelSelection();
             }
         }
+
         private void UpdateNodeRenderer(BehaviourTreeContainer behaviourTreeContainer, int j, NodeSO newNodeSo)
         {
             CancelNodeIfEqual(behaviourTreeContainer, j);
-            behaviourTreeContainer.SetNodeRenderer(CreateNodeRender(newNodeSo, behaviourTreeContainer), j);
+            behaviourTreeContainer.SetNodeRenderer(CreateNodeRender(newNodeSo, behaviourTreeContainer, j + 1), j);
         }
     }
 }

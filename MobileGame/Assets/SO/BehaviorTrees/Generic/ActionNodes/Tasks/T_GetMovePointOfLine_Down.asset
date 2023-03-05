@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0900496a5da46b8936655477f53be0c, type: 3}
+  m_Name: T_GetMovePointOfLine_Down
+  m_EditorClassIdentifier: 
+  _commentary: 
+  _internValuesCount: 2
+  Data: {fileID: 11400000, guid: aa42bb601af7664419d3819b44794c4c, type: 2}
+  InternValues:
+  - Key: IndexPlayer
+    HashCode: 1098768601
+    Type: 1
+    PropertyType: 0
+    Commentary: Index(int) of a MovePoint
+  - Key: MoveIndexPlayer
+    HashCode: -1884463172
+    Type: 1
+    PropertyType: 1
+    Commentary: Index(int) of a MovePoint after the movement

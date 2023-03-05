@@ -1,4 +1,5 @@
 using BehaviorTree;
+using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine;
 
@@ -8,20 +9,25 @@ namespace BehaviorTreeEditor
     {
         protected BehaviourTreeWindow _behaviourTreeWindow;
         protected BehaviourTreeContainer _currentContainer;
+        
         private Color _backgroundColor;
-
+        private string _titleName;
+        
         protected GUIStyle _titleStyle = new("HelpBox")
         {
             alignment = TextAnchor.MiddleCenter,
             fontStyle = FontStyle.Bold
         };
 
+        protected GUIStyle _nodeRenderStyle = new("HelpBox");
+
         public abstract NodeSO GetSO();
 
-        public NodeRender(BehaviourTreeWindow behaviourTreeWindow, Color backgroundColor)
+        public NodeRender(BehaviourTreeWindow behaviourTreeWindow, Color backgroundColor, string titleName)
         {
             _behaviourTreeWindow = behaviourTreeWindow;
             _backgroundColor = backgroundColor;
+            _titleName = titleName;
         }
 
         public void RenderNode()
@@ -33,11 +39,11 @@ namespace BehaviorTreeEditor
         protected virtual void BeginRender()
         {
             EditorGUIUtility.labelWidth = 50;
-            EditorGUILayout.BeginVertical(GUI.skin.box, GUILayout.Width(200));
+            EditorGUILayout.BeginVertical(_nodeRenderStyle, GUILayout.Width(200));
             GUI.backgroundColor = _backgroundColor;
             EditorGUILayout.BeginHorizontal(_titleStyle);
             GUILayout.FlexibleSpace();
-            GUILayout.Label(GetSO().GetTypeNode().Name);
+            GUILayout.Label(_titleName);
             GUILayout.FlexibleSpace();
             EditorGUILayout.EndHorizontal();
             GUI.backgroundColor = _behaviourTreeWindow.BaseColor;

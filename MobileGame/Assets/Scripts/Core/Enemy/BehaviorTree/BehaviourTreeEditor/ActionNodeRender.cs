@@ -95,8 +95,8 @@ namespace BehaviorTreeEditor
             EditorGUILayout.EndVertical();
         }
 
-        public ActionNodeRender(BehaviourTreeWindow behaviourTreeWindow, Color backgroundColor, ActionNodeSO so) : base(
-            behaviourTreeWindow, backgroundColor)
+        public ActionNodeRender(BehaviourTreeWindow behaviourTreeWindow, Color backgroundColor, ActionNodeSO so, string titleName) : base(
+            behaviourTreeWindow, backgroundColor, titleName)
         {
             _so = so;
             foreach (var internValue in _so.InternValues)
