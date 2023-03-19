@@ -15,9 +15,9 @@ namespace BehaviorTree.SO.Decorator
             return typeof(DecoratorReturnerNode);
         }
 
-        public override void UpdateCommentary()
+        public override void UpdateComment()
         {
-            
+            Comment = "Retourne toujours la même valeur qui est renseigné sur le nœud";
         }
     }
 }

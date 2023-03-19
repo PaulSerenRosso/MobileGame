@@ -17,9 +17,9 @@ namespace BehaviorTree
             }
         }
 
-        public override void UpdateCommentary()
+        public override void UpdateComment()
         {
-            
+            Comment = "Nœud qui permet de de vérifier si la destination est occupée";
         }
     }
 }

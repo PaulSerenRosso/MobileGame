@@ -14,9 +14,9 @@ namespace BehaviorTree.SO.Decorator
             return typeof(DecoratorWhileNode);
         }
 
-        public override void UpdateCommentary()
+        public override void UpdateComment()
         {
-            
+            Comment = "Continue d'évaluer le nœud jusqu'à ce que le nœud retourne un statut différent que ce que demande le decorator";
         }
     }
 }

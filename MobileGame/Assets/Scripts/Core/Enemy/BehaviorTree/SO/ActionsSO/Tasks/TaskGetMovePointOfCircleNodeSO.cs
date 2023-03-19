@@ -22,9 +22,9 @@ namespace BehaviorTree
             }
         }
 
-        public override void UpdateCommentary()
+        public override void UpdateComment()
         {
-            
+            Comment = "Retourner un point selon un déplacement sur le cercle du point renseigné";
         }
     }
 }

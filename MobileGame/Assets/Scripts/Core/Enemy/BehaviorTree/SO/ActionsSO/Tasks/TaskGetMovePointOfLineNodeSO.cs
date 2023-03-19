@@ -23,9 +23,9 @@ namespace BehaviorTree
             }
         }
 
-        public override void UpdateCommentary()
+        public override void UpdateComment()
         {
-            
+            Comment = "Retourne un déplacement sur une ligne / colonne de cercle";
         }
     }
 }

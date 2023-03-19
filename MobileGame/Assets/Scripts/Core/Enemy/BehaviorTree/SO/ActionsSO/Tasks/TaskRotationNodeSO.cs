@@ -5,9 +5,9 @@ namespace BehaviorTree
     [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/RotationNodeSO", fileName = "new T_RotationNode_Spe")]
     public class TaskRotationNodeSO : TaskNodeSO
     {
-        public override void UpdateCommentary()
+        public override void UpdateComment()
         {
-            
+            Comment = "Fait tourner notre ennemi en fonction de la rotation renseignée dans le DATA";
         }
     }
 }

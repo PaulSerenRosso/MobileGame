@@ -5,15 +5,15 @@ namespace BehaviorTree
 {
     public abstract class NodeSO : ScriptableObject
     {
-        [TextArea] [SerializeField] private string _commentary;
+        [TextArea] public string Comment;
         
         public abstract Type GetTypeNode();
 
         protected virtual void OnValidate()
         {
-            UpdateCommentary();
+            UpdateComment();
         }
 
-        public abstract void UpdateCommentary();
+        public abstract void UpdateComment();
     }
 }

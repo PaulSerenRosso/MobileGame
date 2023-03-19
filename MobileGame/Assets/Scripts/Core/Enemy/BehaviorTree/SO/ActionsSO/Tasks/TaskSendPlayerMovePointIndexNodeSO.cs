@@ -17,9 +17,9 @@ namespace BehaviorTree
             }
         }
 
-        public override void UpdateCommentary()
+        public override void UpdateComment()
         {
-            
+            Comment = "Nœud qui permet d'enregistrer la position du joueur durant une partie";
         }
     }
 }

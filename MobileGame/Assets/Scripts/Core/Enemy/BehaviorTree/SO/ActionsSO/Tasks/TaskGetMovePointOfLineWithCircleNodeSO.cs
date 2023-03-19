@@ -23,9 +23,9 @@ namespace BehaviorTree
             }
         }
 
-        public override void UpdateCommentary()
+        public override void UpdateComment()
         {
-            
+            Comment = "Retourner un point selon la position du joueur et le cercle de points visé";
         }
     }
 }

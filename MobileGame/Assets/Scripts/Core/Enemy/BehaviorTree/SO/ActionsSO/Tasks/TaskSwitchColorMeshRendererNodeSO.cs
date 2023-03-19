@@ -6,9 +6,9 @@ namespace BehaviorTree
         fileName = "new T_SwitchColorMeshRenderer_Spe")]
     public class TaskSwitchColorMeshRendererNodeSO : TaskNodeSO
     {
-        public override void UpdateCommentary()
+        public override void UpdateComment()
         {
-            
+            Comment = "Nœud qui permet de modifier la couleur du joueur";
         }
     }
 }

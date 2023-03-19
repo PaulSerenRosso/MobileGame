@@ -22,9 +22,9 @@ namespace BehaviorTree
             }
         }
 
-        public override void UpdateCommentary()
+        public override void UpdateComment()
         {
-            
+            Comment = "Nœud qui recupère les valeurs de déplacement du grid et du joueur pour effectuer les déplacements";
         }
     }
 }

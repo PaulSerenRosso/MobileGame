@@ -23,9 +23,9 @@ namespace BehaviorTree
             }
         }
 
-        public override void UpdateCommentary()
+        public override void UpdateComment()
         {
-            
+            Comment = "Retourne le point de déplacement du grid";
         }
     }
 }

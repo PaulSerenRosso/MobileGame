@@ -12,9 +12,10 @@ namespace BehaviorTree.SO.Composite
             return typeof(SelectorNode);
         }
 
-        public override void UpdateCommentary()
+        public override void UpdateComment()
         {
-            
+            Comment =
+                "Sélectionne un nœud et vérifie si le nœud est un succès ou est en train de fonctionner et retourne le statut, sinon il continue de parcourir les nœuds jusqu'à un succés ou un fonctionnement";
         }
     }
 }

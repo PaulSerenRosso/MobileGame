@@ -14,9 +14,10 @@ namespace BehaviorTree.SO.Composite
             return typeof(RandomSequenceNode);
         }
 
-        public override void UpdateCommentary()
+        public override void UpdateComment()
         {
-            
+            Comment =
+                "Sélectionne un nœud aléatoirement et vérifie si le nœud est un succès ou est en train de fonctionner et retourne le statut, sinon dés qu'un nœud retourne un échec, la sequence retourne un échec";
         }
     }
 }

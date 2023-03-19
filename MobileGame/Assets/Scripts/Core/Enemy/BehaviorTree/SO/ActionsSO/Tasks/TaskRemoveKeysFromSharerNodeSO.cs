@@ -17,9 +17,9 @@ namespace BehaviorTree
             }
         }
 
-        public override void UpdateCommentary()
+        public override void UpdateComment()
         {
-            
+            Comment = "Nœud qui permet de supprimer les valeurs précédentes enregistrer sur le blackboard";
         }
     }
 }

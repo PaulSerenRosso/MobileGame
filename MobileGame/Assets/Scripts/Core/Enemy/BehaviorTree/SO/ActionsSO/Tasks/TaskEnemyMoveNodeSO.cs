@@ -16,9 +16,9 @@ namespace BehaviorTree
             }
         }
 
-        public override void UpdateCommentary()
+        public override void UpdateComment()
         {
-            
+            Comment = "Nœud qui permet de déplacer un ennemi à la position qu'il reçoit";
         }
     }
 }

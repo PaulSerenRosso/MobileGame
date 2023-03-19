@@ -13,9 +13,9 @@ namespace BehaviorTree.SO.Decorator
             return typeof(DecoratorInverterNode);
         }
 
-        public override void UpdateCommentary()
+        public override void UpdateComment()
         {
-            
+            Comment = "Retourne le statut inverse que le nœud retourne";
         }
     }
 }
