@@ -36,7 +36,7 @@ namespace Action
             _isAttacking = true;
             AttackTimer.InitiateEvent += InitiateCancelTimer;
             AttackTimer.Initiate();
-        }
+        } 
 
         public void SetupAction(params object[] arguments)
         {

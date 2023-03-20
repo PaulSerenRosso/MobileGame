@@ -1,0 +1,14 @@
+﻿using UnityEngine;
+
+namespace BehaviorTree
+{
+    [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/AnimatorPlayAnimationNodeSO",
+        fileName = "new T_AnimatorPlayAnimation_Spe")]
+    public class TaskAnimatorPlayAnimationNodeSO : ActionNodeSO
+    {
+        public override void UpdateComment()
+        {
+            Comment = "Nœud qui permet de jouer une animation dans un animator";
+        }
+    }
+}

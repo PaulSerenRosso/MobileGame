@@ -1,6 +1,7 @@
 using System;
 using Environment.MoveGrid;
 using Player.Handler;
+using Service;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -13,7 +14,7 @@ namespace BehaviorTree.Trees
         public ExternValueObject[] ExternValueObjects;
 
         public void Setup(Transform playerTransform, ITickeableService tickeableService,
-            EnvironmentGridManager environmentGridManager)
+            EnvironmentGridManager environmentGridManager, IPoolService poolService)
         {
             for (int i = 0; i < ExternValueObjects.Length; i++)
             {
@@ -37,6 +38,11 @@ namespace BehaviorTree.Trees
                     case BehaviourTreeEnums.TreeExternValues.PlayerHandlerMovement:
                     {
                         ExternValueObjects[i].Obj = playerTransform.GetComponent<PlayerMovementHandler>();
+                        break;
+                    }
+                    case BehaviourTreeEnums.TreeExternValues.PoolService:
+                    {
+                        ExternValueObjects[i].Obj = poolService;
                         break;
                     }
                 }

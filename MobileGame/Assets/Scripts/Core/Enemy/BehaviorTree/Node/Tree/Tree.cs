@@ -7,6 +7,7 @@ using BehaviorTree.SO.Composite;
 using BehaviorTree.SO.Decorator;
 using Environment.MoveGrid;
 using HelperPSR.MonoLoopFunctions;
+using Service;
 using UnityEngine;
 using Object = System.Object;
 
@@ -26,9 +27,9 @@ namespace BehaviorTree.Trees
         }
 
         public void Setup(Transform playerTransform, ITickeableService tickeableService,
-            EnvironmentGridManager environmentGridManager)
+            EnvironmentGridManager environmentGridManager, IPoolService poolService)
         {
-            _nodeValuesInitializer.Setup(playerTransform, tickeableService, environmentGridManager);
+            _nodeValuesInitializer.Setup(playerTransform, tickeableService, environmentGridManager, poolService);
             _root = Node.CreateNodeSO(_rootSO);
             switch (_rootSO)
             {

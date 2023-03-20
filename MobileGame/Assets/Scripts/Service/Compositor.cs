@@ -206,15 +206,15 @@ public class Compositor : MonoBehaviour
     }
 
     private void CreateAndWireObjects()
-    {
-        iTickeableService = new TickService();  
-        AddService<ITickeableService>((ITickeableService)iTickeableService);
+    { 
+        AddService<ITickeableService>(new TickService());
         AddService<IAudioService>(new AudioService());
         AddService<ISceneService>(new SceneService());
         AddService<IUICanvasSwitchableService>(new UICanvasService());
         AddService<IFightService>(new FightService());
         AddService<IInputService>(new InputService());
         AddService<IGameService>(new GameService());
+        AddService<IPoolService>(new PoolService());
     }
 
     private void Awake()

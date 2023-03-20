@@ -1,4 +1,5 @@
 using Environment.MoveGrid;
+using Service;
 using UnityEngine;
 using Tree = BehaviorTree.Trees;
 
@@ -11,10 +12,10 @@ public class EnemyManager : MonoBehaviour
         transform.position = new Vector3(0, 0, 0);
     }
 
-    public void SetUp(Transform playerTransform, ITickeableService tickeableService,
-        EnvironmentGridManager environmentGridManager)
+    public void Setup(Transform playerTransform, ITickeableService tickeableService,
+        EnvironmentGridManager environmentGridManager, IPoolService poolService)
     {
-        _tree.Setup(playerTransform, tickeableService, environmentGridManager);
+        _tree.Setup(playerTransform, tickeableService, environmentGridManager, poolService);
     }
 
     public void RenderContainer()

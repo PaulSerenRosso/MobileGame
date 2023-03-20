@@ -13,7 +13,8 @@ public class BehaviourTreeEnums
         PlayerTransform,
         EnvironmentGridManager,
         TickManager,
-        PlayerHandlerMovement
+        PlayerHandlerMovement,
+        PoolService
     }
 
     public enum NodeState
@@ -25,7 +26,7 @@ public class BehaviourTreeEnums
 
     public enum InternValueType
     {
-        VECTOR3, INT, FLOAT, NONE ,
+        VECTOR3, INT, FLOAT, NONE
     }
 
     public enum InternValuePropertyType

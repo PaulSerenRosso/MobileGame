@@ -19,6 +19,8 @@ namespace Service.Fight
 
         [DependsOnService] private ITickeableService _tickeableService;
 
+        [DependsOnService] private IPoolService _poolService;
+
         private CameraController _cameraController;
         private PlayerController _playerController;
         private EnemyManager _enemyManager;
@@ -66,19 +68,19 @@ namespace Service.Fight
         private void GeneratePlayer(GameObject gameObject)
         {
             var player = Object.Instantiate(gameObject);
+            Release(gameObject);
             _playerController = player.GetComponent<PlayerController>();
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Enemy", GenerateEnemy);
-            Release(gameObject);
         }
 
         private void GenerateEnemy(GameObject gameObject)
         {
+            Release(gameObject);
             var enemy = Object.Instantiate(gameObject);
             _enemyManager = enemy.GetComponent<EnemyManager>();
             _playerController.SetupPlayer(_inputService, _tickeableService, _environmentGridManager, _currentEnvironmentSO, _enemyManager);
-            _enemyManager.SetUp(_playerController.transform, _tickeableService, _environmentGridManager);
+            _enemyManager.Setup(_playerController.transform, _tickeableService, _environmentGridManager, _poolService);
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Camera", GenerateCamera);
-            Release(gameObject);
         }
 
         private void GenerateCamera(GameObject gameObject)
