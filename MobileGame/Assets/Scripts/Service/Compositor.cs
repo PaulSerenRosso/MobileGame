@@ -9,6 +9,9 @@ using UnityEngine;
 using System.Runtime.CompilerServices;
 using Cysharp.Threading.Tasks;
 using Service.AudioService;
+using Service.Fight;
+using Service.Inputs;
+using Service.UI;
 using Unity.VisualScripting;
 
 public class Compositor : MonoBehaviour
@@ -21,7 +24,7 @@ public class Compositor : MonoBehaviour
 
     protected readonly Dictionary<Type, IService> m_services = new Dictionary<Type, IService>();
     protected readonly Dictionary<Type, List<FieldEntry>> m_dependencySlots = new Dictionary<Type, List<FieldEntry>>();
-    
+    ITickeableService iTickeableService;
     private bool ResolveDependencies()
     {
         foreach (KeyValuePair<Type, List<FieldEntry>> slotsForType in m_dependencySlots)
@@ -101,13 +104,14 @@ public class Compositor : MonoBehaviour
         }
     }
 
-   
+
     protected void AddService<T>(T service) where T : IService
     {
         if (m_services.ContainsKey(typeof(T)))
         {
             throw new DuplicateServiceException(typeof(T), m_services[typeof(T)], service);
         }
+
         CollectDependencies(service);
         m_services[typeof(T)] = service;
     }
@@ -190,30 +194,32 @@ public class Compositor : MonoBehaviour
 
                 TickServiceFunction[] tickAttributes =
                     (TickServiceFunction[])Attribute.GetCustomAttributes(methodInfo, typeof(TickServiceFunction));
-                
+
                 if (tickAttributes.Length == 0)
                     continue;
                 foreach (TickServiceFunction _tickServiceFunction in tickAttributes)
                 {
-                    TickService.tickEvent += () => methodInfo.Invoke(service, null);
+                    iTickeableService.tickEvent += () => methodInfo.Invoke(service, null);
                 }
             }
         }
     }
 
     private void CreateAndWireObjects()
-    {
-        AddService<ITickeableSwitchableService>(new TickService());
-        AddService<IGameService>(new GameService());
+    { 
+        AddService<ITickeableService>(new TickService());
         AddService<IAudioService>(new AudioService());
         AddService<ISceneService>(new SceneService());
         AddService<IUICanvasSwitchableService>(new UICanvasService());
+        AddService<IFightService>(new FightService());
+        AddService<IInputService>(new InputService());
+        AddService<IGameService>(new GameService());
+        AddService<IPoolService>(new PoolService());
     }
 
     private void Awake()
     {
         InitCompositor().Forget();
-   
     }
 
     private async UniTaskVoid InitCompositor()

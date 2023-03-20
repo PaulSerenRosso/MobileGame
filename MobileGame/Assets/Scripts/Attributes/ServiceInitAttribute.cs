@@ -3,6 +3,8 @@
 namespace Attributes
 {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-    public class ServiceInitAttribute: Attribute
-    {}
+    public class ServiceInitAttribute : Attribute
+    {
+        
+    }
 }

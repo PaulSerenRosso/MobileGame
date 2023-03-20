@@ -9,10 +9,10 @@ namespace Service
 {
 public class SceneService : ISceneService
 {
-  //  [ServiceInit]
+    //  [ServiceInit]
     public void LoadScene()
     {
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("GameScene");
     }
 
     public void LoadScene(string sceneName)
