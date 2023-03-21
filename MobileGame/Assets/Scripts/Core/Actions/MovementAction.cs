@@ -15,6 +15,10 @@ namespace Action
         private bool _isMoving;
         private float _ratioTime;
 
+        public float GetMaxTimeMovement()
+        {
+            return _movementSO.MaxTime;
+        }
         public void OnFixedUpdate()
         {
             if (_timer >= _movementSO.MaxTime)

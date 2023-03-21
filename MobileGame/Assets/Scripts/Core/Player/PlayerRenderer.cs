@@ -11,11 +11,16 @@ namespace Player
         [SerializeField] private Animator _animator;
         [SerializeField] private MovementAction _movementAction;
         [SerializeField] private PlayerMovementHandler _playerMovementHandler;
-        
+        [SerializeField] private TauntAction _tauntAction; 
         public void Init()
         {
-            _playerMovementHandler.MakeActionEvent += SetDirParamater;
-            _movementAction.MakeUpdateEvent += RecoveryMovement;
+            /*
+            _playerMovementHandler.MakeActionEvent += SetDirParameter;
+            _movementAction.MakeActionEvent += ResetEndMovementAnimationParameter;
+            _tauntAction.MakeActionEvent += ActivateTauntFX;
+            _tauntAction.CancelActionEvent += DeactivateTauntFX;
+            */
+            
         }
     }
 }

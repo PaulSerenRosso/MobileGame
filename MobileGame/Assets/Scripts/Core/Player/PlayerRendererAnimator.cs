@@ -1,12 +1,21 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Player
 {
     public partial class PlayerRenderer
     {
+        [SerializeField]
         private string _dirParameterName;
-        
-        private void SetDirParamater(Vector2 dir)
+        [SerializeField] private string _endMovementParameterName;
+        private void OnValidate()
+        {
+            
+        }
+
+        private void SetDirParameter(Vector2 dir)
         {
             int dirToSend = -1;
             switch (dir)
@@ -39,15 +48,21 @@ namespace Player
             }
             AnimSetInt(_dirParameterName, dirToSend);
         }
-        
-        private void IdleMovement()
-        {
-            
+
+        private void ResetEndMovementAnimationParameter()
+        { 
+            AnimSetBool(_endMovementParameterName, false);
+            _movementAction.MakeUpdateEvent += LaunchEndMovementAnimation; 
         }
 
-        private void RecoveryMovement(float ratio)
+        private void LaunchEndMovementAnimation(float time)
         {
-            
+            if (_animator.GetNextAnimatorStateInfo(0).length <= _movementAction.GetMaxTimeMovement() - time)
+            {
+            SetDirParameter(Vector2.zero);
+            AnimSetBool(_endMovementParameterName, true);
+            _movementAction.MakeUpdateEvent -= LaunchEndMovementAnimation;
+            }
         }
 
         public void AnimSetBool(string nameParameter, bool condition)
