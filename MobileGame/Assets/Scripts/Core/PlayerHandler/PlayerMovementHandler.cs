@@ -22,9 +22,12 @@ namespace Player.Handler
         private MovePoint _currentMovePoint;
         private const string _swipeName = "Swipe";
 
+        public event Action<Vector2> MakeActionEvent;
+
         public void TryMakeMovementAction(Swipe swipe)
         {
             _currentSwipe = swipe;
+            MakeActionEvent?.Invoke(swipe.SwipeSO.DirectionV2);
             TryMakeAction();
         }
 
