@@ -36,12 +36,14 @@ namespace Action
 
         public event System.Action MakeActionEvent;
 
+        public event System.Action CancelActionEvent;
         public void CancelTaunt()
         {
             if (_isTaunting)
             {
                 _endTauntTimer.Initiate();
                 _tauntText.text = "Cancel";
+                CancelActionEvent?.Invoke();
             }
         }
 
@@ -49,6 +51,7 @@ namespace Action
         {
             _isTaunting = false;
             _tauntText.text = "";
+            
         }
     }
 }

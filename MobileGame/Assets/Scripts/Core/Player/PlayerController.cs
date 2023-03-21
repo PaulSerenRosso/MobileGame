@@ -12,6 +12,7 @@ namespace Player
         [SerializeField] private PlayerAttackHandler _playerAttackHandler;
         [SerializeField] private PlayerAttackMultiTapHandler _playerAttackMultiTapHandler;
         [SerializeField] private PlayerTauntHandler _playerTauntHandler;
+        [SerializeField] private PlayerRenderer _playerRenderer;
         [SerializeField] private bool _isMultiTapAttack;
         private IInputService _inputService;
         private ITickeableService _tickeableService;
@@ -35,6 +36,7 @@ namespace Player
             }
 
             _playerTauntHandler.Setup(_inputService, _tickeableService.GetTickManager);
+            _playerRenderer.Init();
         }
     }
 }

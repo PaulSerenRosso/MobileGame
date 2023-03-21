@@ -15,6 +15,10 @@ namespace Action
         private bool _isMoving;
         private float _ratioTime;
 
+        public float GetMaxTimeMovement()
+        {
+            return _movementSO.MaxTime;
+        }
         public void OnFixedUpdate()
         {
             if (_timer >= _movementSO.MaxTime)
@@ -27,6 +31,7 @@ namespace Action
 
             _timer += Time.fixedDeltaTime;
             _ratioTime = _timer / _movementSO.MaxTime;
+            MakeUpdateEvent?.Invoke(_ratioTime);
             _rb.position = Vector3.Lerp(_startPosition, Destination, _movementSO.CurvePosition.Evaluate(_ratioTime));
         }
 
@@ -51,6 +56,7 @@ namespace Action
         }
 
         public event System.Action MakeActionEvent;
+        public event System.Action<float> MakeUpdateEvent;
 
         public void MoveToDestination()
         {
