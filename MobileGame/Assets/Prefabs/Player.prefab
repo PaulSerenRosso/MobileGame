@@ -277,6 +277,7 @@ GameObject:
   - component: {fileID: 7948611063154184754}
   - component: {fileID: 2056379011037417376}
   - component: {fileID: 1821320510093834742}
+  - component: {fileID: 7598208263566444310}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -485,6 +486,7 @@ MonoBehaviour:
   _playerAttackHandler: {fileID: 8581481885147205113}
   _playerAttackMultiTapHandler: {fileID: 1821320510093834742}
   _playerTauntHandler: {fileID: 4376894764709761957}
+  _playerRenderer: {fileID: 7598208263566444310}
   _isMultiTapAttack: 0
 --- !u!114 &1821320510093834742
 MonoBehaviour:
@@ -500,3 +502,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _action: {fileID: 1800965582552254606}
   _movementAction: {fileID: 4050711209515336914}
+--- !u!114 &7598208263566444310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6686433966917593852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a47ab7014414234b075982fcdf529c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 0}
+  _movementAction: {fileID: 0}
+  _playerMovementHandler: {fileID: 0}
+  _tauntAction: {fileID: 0}
+  _dirParameterName: 
+  _endMovementParameterName: 
+  _particleSystem: {fileID: 0}
