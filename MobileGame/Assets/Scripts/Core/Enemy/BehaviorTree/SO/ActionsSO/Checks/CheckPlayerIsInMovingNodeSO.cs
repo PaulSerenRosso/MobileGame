@@ -1,6 +1,6 @@
 ﻿namespace BehaviorTree
 {
-    public class TaskActivationFXNodeSO : TaskNodeSO
+    public class CheckPlayerIsInMovingNodeSO : CheckNodeSO
     {
         public override void UpdateComment()
         {

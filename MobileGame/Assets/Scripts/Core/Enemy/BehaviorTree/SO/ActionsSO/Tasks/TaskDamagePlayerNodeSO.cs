@@ -1,6 +1,6 @@
 ﻿namespace BehaviorTree
 {
-    public class TaskActivationFXNodeSO : TaskNodeSO
+    public class TaskDamagePlayerNodeSO : TaskNodeSO
     {
         public override void UpdateComment()
         {

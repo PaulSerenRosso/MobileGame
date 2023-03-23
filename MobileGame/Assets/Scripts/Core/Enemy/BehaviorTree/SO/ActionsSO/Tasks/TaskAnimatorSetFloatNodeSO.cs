@@ -4,7 +4,7 @@ namespace BehaviorTree
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/AnimatorSetFloatNodeSO",
         fileName = "new T_AnimatorSetFloat_Spe")]
-    public class TaskAnimatorSetFloatNodeSO : ActionNodeSO
+    public class TaskAnimatorSetFloatNodeSO : TaskNodeSO
     {
         public override void UpdateInterValues()
         {

@@ -4,7 +4,7 @@ namespace BehaviorTree
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Actions/Checks/StateNodeSO",
         fileName = "new  CH_State_Spe")]
-    public class CheckStateNodeSO : ActionNodeSO
+    public class CheckStateNodeSO : CheckNodeSO
     {
         public override void UpdateComment()
         {

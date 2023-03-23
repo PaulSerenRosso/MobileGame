@@ -1,6 +1,6 @@
 ﻿namespace BehaviorTree
 {
-    public class TaskInstantiateFXNodeSO : TaskNodeSO
+    public class TaskLookDirectionNodeSO : TaskNodeSO
     {
         public override void UpdateInterValues()
         {
@@ -8,8 +8,8 @@
             _internValuesCount = 1;
             if (InternValues.Count > 0)
             {
-                InternValues[0].SetInternValueWithoutKey(BehaviourTreeEnums.InternValueType.INT,
-                    BehaviourTreeEnums.InternValuePropertyType.GET, "MovePoint(Int) index of position");
+                InternValues[0].SetInternValueWithoutKey(BehaviourTreeEnums.InternValueType.VECTOR3,
+                    BehaviourTreeEnums.InternValuePropertyType.GET, "Direction(Vector3) where the boss need to look");
             }
         }
 
