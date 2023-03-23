@@ -4,19 +4,21 @@ using System.Collections.Generic;
 using Actions;
 using HelperPSR.MonoLoopFunctions;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Player.Handler
 {
     public abstract class PlayerHandlerRecordable : PlayerHandler
     {
-        [SerializeField] private PlayerAction[] allActionsBlockedRecord;
-        [SerializeField] private PlayerHandlerRecorderManager _playerHandlerRecordableManager;
+     [SerializeField] private PlayerAction[] allActionsWhichRecord;
+      [SerializeField] private PlayerAction[] allActionsBlockedLaunchRecordAction;
+        [SerializeField] protected PlayerHandlerRecorderManager _playerHandlerRecordableManager;
 
         public override void Setup(params object[] arguments)
         {
-            for (int i = 0; i < allActionsBlockedRecord.Length; i++)
+            for (int i = 0; i < allActionsBlockedLaunchRecordAction.Length; i++)
             {
-                allActionsBlockedRecord[i].EndActionEvent += CheckActionsBlockedRecord;
+                allActionsBlockedLaunchRecordAction[i].EndActionEvent += CheckActionsBlockedRecord;
             }
         }
         protected override void TryMakeAction(params object[] args)
@@ -27,10 +29,12 @@ namespace Player.Handler
 
         private void RecordInput(object[] args)
         {
-            for (int i = 0; i < allActionsBlockedRecord.Length; i++)
+            for (int i = 0; i < allActionsWhichRecord.Length; i++)
             {
-                if (allActionsBlockedRecord[i].IsInAction)
+                Debug.Log(allActionsWhichRecord[i].IsInAction +"   " +allActionsWhichRecord[i]);
+                if (allActionsWhichRecord[i].IsInAction)
                 {
+                    Debug.Log("record");
                     _playerHandlerRecordableManager.argsForInputPlayerActionRecorded = args;
                     _playerHandlerRecordableManager.InputPlayerActionRecorded = TryMakeAction;
                     return;
@@ -38,21 +42,19 @@ namespace Player.Handler
             }
         }
 
-        public void CheckActionsBlockedRecord()
+        public virtual void CheckActionsBlockedRecord()
         {
+      
             if (_playerHandlerRecordableManager.InputPlayerActionRecorded != null)
             {
-                for (int i = 0; i < allActionsBlockedRecord.Length; i++)
+                for (int i = 0; i < allActionsBlockedLaunchRecordAction.Length; i++)
                 {
-                    if (allActionsBlockedRecord[i].IsInAction)
+                    if (allActionsBlockedLaunchRecordAction[i].IsInAction)
                     {
                         return;
                     }
                 }
-                Debug.Log("bonsoir");
-                _playerHandlerRecordableManager.InputPlayerActionRecorded.Invoke(_playerHandlerRecordableManager.argsForInputPlayerActionRecorded);
-                _playerHandlerRecordableManager.InputPlayerActionRecorded = null;
-
+                _playerHandlerRecordableManager.LaunchRecorderAction();
             }
         }
     }

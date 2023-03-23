@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using Actions;
 using HelperPSR.RemoteConfigs;
+using HelperPSR.Tick;
 using Service.Inputs;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Player.Handler
 {
@@ -14,10 +16,11 @@ namespace Player.Handler
         [SerializeField] private List<SwipeSO> _allMovementSwipesSO;
         [SerializeField] private AttackPlayerAction attackPlayerAction;
         [SerializeField] private TauntPlayerAction tauntPlayerAction;
-
+        [SerializeField] private TickTimer _recoveryTimer;
+        private bool _inCooldown;
         [SerializeField]
         private MovementPlayerAction movementPlayerAction;
-
+        [FormerlySerializedAs("_recoveryTime")] [FormerlySerializedAs("RecoveryTime")] [SerializeField]private  float _cooldownTimeBetweenTwoMovement;
         private EnvironmentGridManager _environmentGridManager;
         private Swipe _currentSwipe;
         private int _currentMovePointIndex;
@@ -25,8 +28,11 @@ namespace Player.Handler
         private MovePoint _currentMovePoint;
         private const string _swipeName = "Swipe";
 
+        public event Action FinishRecoveryMovementEvent;
         public event Action<Vector2> MakeActionEvent;
 
+            // ovveride le playerrecord 
+            
         public void TryMakeMovementAction(Swipe swipe)
         {
             TryMakeAction(swipe);
@@ -44,6 +50,7 @@ namespace Player.Handler
         {
             return !GetAction().IsInAction;
         }
+        
 
         private bool CheckIsOccupied()
         {
@@ -124,6 +131,9 @@ namespace Player.Handler
         public override void Setup(params object[] arguments)
         {
     
+            RemoteConfigManager.RegisterRemoteConfigurable(this);
+    
+            
             base.Setup();
             var inputService = (IInputService)arguments[2];
 
@@ -131,21 +141,42 @@ namespace Player.Handler
             {
                 inputService.AddSwipe(movementSwipeSO, TryMakeMovementAction);
             }
-
+            
             _environmentGridManager = (EnvironmentGridManager)arguments[0];
             _currentMovePointIndex = (int)arguments[1];
             _currentMovePoint = _environmentGridManager.MovePoints[_currentMovePointIndex];
             _conditions = new List<Func<bool>>();
+            AddCondition(CheckCooldownBetweenTwoMovement);
             AddCondition(CheckIsMoving);
             AddCondition(CheckIsOutOfRange);
             AddCondition(CheckIsInTaunt);
             AddCondition(CheckIsOccupied);
             AddCondition(CheckIsInAttack);
+            Debug.Log(_cooldownTimeBetweenTwoMovement);
+            _recoveryTimer = new TickTimer(_cooldownTimeBetweenTwoMovement, (TickManager)arguments[3]);
+            _recoveryTimer.TickEvent += FinishCooldown;
+            _recoveryTimer.InitiateEvent += LaunchCooldownBetweenTwoMovement;
+            movementPlayerAction.ReachDestinationEvent += _recoveryTimer.Initiate;
+            FinishRecoveryMovementEvent += _playerHandlerRecordableManager.LaunchRecorderAction;
            GetAction().SetupAction(_currentMovePoint.MeshRenderer.transform.position);
-            RemoteConfigManager.RegisterRemoteConfigurable(this);
         }
 
-        
+        private void FinishCooldown()
+        {
+            _inCooldown = false;
+            Debug.Log("end");
+            FinishRecoveryMovementEvent?.Invoke();
+        }
+        private void LaunchCooldownBetweenTwoMovement()
+        {
+            _inCooldown = true;
+            Debug.Log("launch");
+        }
+
+        private bool CheckCooldownBetweenTwoMovement()
+        {
+            return !_inCooldown;
+        }
         protected override Actions.PlayerAction GetAction()
         {
             return movementPlayerAction;
@@ -160,6 +191,7 @@ namespace Player.Handler
 
         public void SetRemoteConfigurableValues()
         {
+            
             foreach (var swipeSo in _allMovementSwipesSO)
             {
                 switch (swipeSo.DirectionV2)
@@ -187,6 +219,7 @@ namespace Player.Handler
                 }
             }
 
+            _cooldownTimeBetweenTwoMovement = RemoteConfigManager.Config.GetFloat("CooldownTimeBetweenTwoMovement");
             _movementSO.MaxTime = RemoteConfigManager.Config.GetFloat("PlayerMovementMaxTime");
         }
 
