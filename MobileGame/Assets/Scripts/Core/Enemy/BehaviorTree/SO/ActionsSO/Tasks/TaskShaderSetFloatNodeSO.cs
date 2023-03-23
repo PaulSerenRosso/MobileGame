@@ -1,6 +1,6 @@
 ﻿namespace BehaviorTree
 {
-    public class TaskShaderSetFloatNodeSO : ActionNodeSO
+    public class TaskShaderSetFloatNodeSO : TaskNodeSO
     {
         public override void UpdateComment()
         {

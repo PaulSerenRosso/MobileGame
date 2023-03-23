@@ -4,7 +4,7 @@ namespace BehaviorTree
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/AnimatorPlayAnimationNodeSO",
         fileName = "new T_AnimatorPlayAnimation_Spe")]
-    public class TaskAnimatorPlayAnimationNodeSO : ActionNodeSO
+    public class TaskAnimatorPlayAnimationNodeSO : TaskNodeSO
     {
         public override void UpdateComment()
         {

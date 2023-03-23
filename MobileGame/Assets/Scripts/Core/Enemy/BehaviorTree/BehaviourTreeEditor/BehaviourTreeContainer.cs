@@ -30,8 +30,7 @@ namespace BehaviorTreeEditor
             _behaviourTreeWindow = behaviourTreeWindow;
             _nodeRenders = nodesRenders;
             _isClose = false;
-            if (previousContainer != null)
-                PreviousContainer = previousContainer;
+            if (previousContainer != null) PreviousContainer = previousContainer;
             Index = index;
         }
 
