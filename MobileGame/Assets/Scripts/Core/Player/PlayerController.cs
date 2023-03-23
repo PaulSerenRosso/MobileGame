@@ -24,7 +24,7 @@ namespace Player
             _inputService = inputService;
             _tickeableService = tickeableService;
             _enemyManager = enemyManager;
-            _playerMovementHandler.Setup(environmentGridManager, environmentSO.Index, _inputService);
+            _playerMovementHandler.Setup(environmentGridManager, environmentSO.Index, _inputService, _tickeableService.GetTickManager);
             _playerRotationHandler.Setup(_enemyManager.transform);
             _playerAttackHandler.Setup(_inputService, _tickeableService.GetTickManager);
             _playerTauntHandler.Setup(_inputService, _tickeableService.GetTickManager);

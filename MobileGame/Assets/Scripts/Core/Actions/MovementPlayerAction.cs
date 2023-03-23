@@ -1,4 +1,6 @@
+using System;
 using HelperPSR.MonoLoopFunctions;
+using HelperPSR.Tick;
 using UnityEngine;
 
 namespace Actions
@@ -10,11 +12,13 @@ namespace Actions
         [SerializeField] private MovementSO _movementSO;
         [SerializeField] private Rigidbody _rb;
 
+      
         private Vector3 _startPosition;
         private float _timer;
         private bool _isMoving;
         private float _ratioTime;
 
+        public event Action ReachDestinationEvent;
         public float GetMaxTimeMovement()
         {
             return _movementSO.MaxTime;
@@ -26,6 +30,7 @@ namespace Actions
                 _isMoving = false;
                 transform.position = Destination;
                 FixedUpdateManager.UnRegister(this);
+                ReachDestinationEvent?.Invoke();
                 EndActionEvent?.Invoke();
                 return;
             }
@@ -35,6 +40,7 @@ namespace Actions
             _rb.position = Vector3.Lerp(_startPosition, Destination, _movementSO.CurvePosition.Evaluate(_ratioTime));
         }
 
+        
         public override bool IsInAction => _isMoving;
 
         public override  void MakeAction()
