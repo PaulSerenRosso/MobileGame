@@ -42,20 +42,27 @@ namespace Player.Handler
             }
         }
 
-        public virtual void CheckActionsBlockedRecord()
+        public  void CheckActionsBlockedRecord()
         {
       
-            if (_playerHandlerRecordableManager.InputPlayerActionRecorded != null)
+            if (_playerHandlerRecordableManager.InputPlayerActionRecorded == TryMakeAction)
             {
-                for (int i = 0; i < allActionsBlockedLaunchRecordAction.Length; i++)
-                {
-                    if (allActionsBlockedLaunchRecordAction[i].IsInAction)
-                    {
-                        return;
-                    }
-                }
+                if (CheckBlockedActionsIsRunning()) return;
                 _playerHandlerRecordableManager.LaunchRecorderAction();
             }
+        }
+
+        private bool CheckBlockedActionsIsRunning()
+        {
+            for (int i = 0; i < allActionsBlockedLaunchRecordAction.Length; i++)
+            {
+                if (allActionsBlockedLaunchRecordAction[i].IsInAction)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

@@ -7,7 +7,7 @@ using Vector2 = UnityEngine.Vector2;
 namespace Player
 {
     public partial class PlayerRenderer : MonoBehaviour
-    {
+    {   
         [SerializeField] private Animator _animator;
         [SerializeField] private MovementPlayerAction movementPlayerAction;
         [SerializeField] private PlayerMovementHandler _playerMovementHandler;
@@ -19,7 +19,9 @@ namespace Player
             _movementAction.MakeActionEvent += ResetEndMovementAnimationParameter;
             _tauntAction.MakeActionEvent += ActivateTauntFX;
             _tauntAction.CancelActionEvent += DeactivateTauntFX;
+            SetRecoverySpeedAnimation();
             */
+          
             
         }
     }

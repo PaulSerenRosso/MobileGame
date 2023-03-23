@@ -42,22 +42,23 @@ namespace Player.Handler
         public override void Setup(params object[] arguments)
         {
           
+            RemoteConfigManager.RegisterRemoteConfigurable(this);
             IInputService inputService = (IInputService)arguments[0];
             AddCondition(CheckIsInAttack);
             AddCondition(CheckIsInMovement);
             inputService.SetHold(TryMakeTauntAction, CancelTaunt);
             tauntPlayerAction.SetupAction((TickManager)arguments[1]);
-            RemoteConfigManager.RegisterRemoteConfigurable(this);
         }
 
         private void CancelTaunt(InputAction.CallbackContext obj)
         {
-            tauntPlayerAction.CancelTaunt();
+            tauntPlayerAction.TryCancelTaunt();
         }
 
         public void SetRemoteConfigurableValues()
         {
             tauntPlayerAction.SO.EndTime = RemoteConfigManager.Config.GetFloat("PlayerTauntEndTime");
+            tauntPlayerAction.SO.StartTime = RemoteConfigManager.Config.GetFloat("PlayerTauntStartTime");
         }
     }
 }

@@ -32,7 +32,8 @@ namespace Player.Handler
         public event Action<Vector2> MakeActionEvent;
 
             // ovveride le playerrecord 
-            
+
+            public float GetRecoveryMovementTime() => _cooldownTimeBetweenTwoMovement;
         public void TryMakeMovementAction(Swipe swipe)
         {
             TryMakeAction(swipe);

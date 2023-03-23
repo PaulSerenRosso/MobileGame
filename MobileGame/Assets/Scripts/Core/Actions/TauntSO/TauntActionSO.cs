@@ -6,5 +6,6 @@ namespace Actions
     public class TauntActionSO : ScriptableObject
     {
         public float EndTime;
+        public float StartTime;
     }
 }
