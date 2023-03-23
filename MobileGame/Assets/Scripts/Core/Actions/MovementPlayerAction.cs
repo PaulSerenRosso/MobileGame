@@ -1,9 +1,9 @@
 using HelperPSR.MonoLoopFunctions;
 using UnityEngine;
 
-namespace Action
+namespace Actions
 {
-    public class MovementAction : MonoBehaviour, IAction, IFixedUpdate
+    public class MovementPlayerAction : PlayerAction, IFixedUpdate
     {
         public Vector3 Destination;
 
@@ -26,21 +26,18 @@ namespace Action
                 _isMoving = false;
                 transform.position = Destination;
                 FixedUpdateManager.UnRegister(this);
+                EndActionEvent?.Invoke();
                 return;
             }
-
             _timer += Time.fixedDeltaTime;
             _ratioTime = _timer / _movementSO.MaxTime;
             MakeUpdateEvent?.Invoke(_ratioTime);
             _rb.position = Vector3.Lerp(_startPosition, Destination, _movementSO.CurvePosition.Evaluate(_ratioTime));
         }
 
-        public bool IsInAction
-        {
-            get => _isMoving;
-        }
+        public override bool IsInAction => _isMoving;
 
-        public void MakeAction()
+        public override  void MakeAction()
         {
             _startPosition = _rb.position;
             _isMoving = true;
@@ -49,7 +46,7 @@ namespace Action
             MakeActionEvent?.Invoke();
         }
 
-        public void SetupAction(params object[] arguments)
+        public override  void SetupAction(params object[] arguments)
         {
             Destination = (Vector3)arguments[0];
             MoveToDestination();

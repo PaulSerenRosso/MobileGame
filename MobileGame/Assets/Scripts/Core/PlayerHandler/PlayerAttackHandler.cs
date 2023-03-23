@@ -1,4 +1,4 @@
-using Action;
+using Actions;
 using HelperPSR.RemoteConfigs;
 using HelperPSR.Tick;
 using Service.Inputs;
@@ -7,12 +7,18 @@ using UnityEngine.InputSystem;
 
 namespace Player.Handler
 {
-    public class PlayerAttackHandler : PlayerHandler<AttackAction>, IRemoteConfigurable
+    public class PlayerAttackHandler : PlayerHandlerRecordable , IRemoteConfigurable
     {
-        [SerializeField] private MovementAction _movementAction;
-        [SerializeField] private TauntAction _tauntAction;
+        [SerializeField] private MovementPlayerAction movementPlayerAction;
+        [SerializeField] private TauntPlayerAction tauntPlayerAction;
 
+        [SerializeField] private AttackPlayerAction attackPlayerAction; 
         private const string _punchName = "PlayerPunch";
+
+        protected override Actions.PlayerAction GetAction()
+        {
+            return attackPlayerAction;
+        }
 
         public override void InitializeAction()
         {
@@ -21,42 +27,43 @@ namespace Player.Handler
 
         public void TryMakeAttackAction(InputAction.CallbackContext ctx)
         {
-            TryMakeAction();
+            TryMakeAction(ctx);
         }
 
         private bool CheckIsInAttack()
         {
-            return !_action.IsInAction;
+            return !attackPlayerAction.IsInAction;
         }
 
         private bool CheckIsInTaunt()
         {
-            return !_tauntAction.IsInAction;
+            return !tauntPlayerAction.IsInAction;
         }
 
         private bool CheckIsInMovement()
         {
-            return !_movementAction.IsInAction;
+            return !movementPlayerAction.IsInAction;
         }
 
         public override void Setup(params object[] arguments)
         {
+            base.Setup();
             var inputService = (IInputService)arguments[0];
             inputService.AddTap(TryMakeAttackAction);
             AddCondition(CheckIsInAttack);
             AddCondition(CheckIsInMovement);
             AddCondition(CheckIsInTaunt);
-            _action.SetupAction((TickManager)arguments[1]);
-            _action.InitCancelAttackEvent += () => _movementAction.MakeActionEvent += _action.AttackTimer.Cancel;
-            _action.InitBeforeHitEvent += () => _movementAction.MakeActionEvent -= _action.AttackTimer.Cancel;
+            attackPlayerAction.SetupAction((TickManager)arguments[1]);
+            attackPlayerAction.InitCancelAttackEvent += () => movementPlayerAction.MakeActionEvent += attackPlayerAction.AttackTimer.Cancel;
+            attackPlayerAction.InitBeforeHitEvent += () => movementPlayerAction.MakeActionEvent -= attackPlayerAction.AttackTimer.Cancel;
             RemoteConfigManager.RegisterRemoteConfigurable(this);
         }
 
         public void SetRemoteConfigurableValues()
         {
-            for (int i = 0; i < _action.AttackActionSo.HitsSO.Length; i++)
+            for (int i = 0; i < attackPlayerAction.AttackActionSo.HitsSO.Length; i++)
             {
-                SetPlayerPunchSO(_action.AttackActionSo.HitsSO[i], i);
+                SetPlayerPunchSO(attackPlayerAction.AttackActionSo.HitsSO[i], i);
             }
         }
 

@@ -2,9 +2,9 @@ using HelperPSR.Pool;
 using HelperPSR.Tick;
 using UnityEngine;
 
-namespace Action
+namespace Actions
 {
-    public class AttackAction : MonoBehaviour, IAction
+    public class AttackPlayerAction : PlayerAction
     {
         public TickTimer AttackTimer;
         public bool IsCancelTimeOn;
@@ -17,12 +17,12 @@ namespace Action
         private bool _isAttacking;
         private int _comboCount;
 
-        public bool IsInAction
+        public override bool IsInAction
         {
             get => _isAttacking;
         }
 
-        public void MakeAction()
+        public override void MakeAction()
         {
             Debug.Log("MakeAction Hit");
             if (_comboCount != 0)
@@ -36,9 +36,10 @@ namespace Action
             _isAttacking = true;
             AttackTimer.InitiateEvent += InitiateCancelTimer;
             AttackTimer.Initiate();
+            MakeActionEvent?.Invoke();
         } 
 
-        public void SetupAction(params object[] arguments)
+        public override void SetupAction(params object[] arguments)
         {
             AttackTimer = new TickTimer(0, (TickManager)arguments[0]);
             _hitPools = new Pool<GameObject>[AttackActionSo.HitsSO.Length];
@@ -47,8 +48,7 @@ namespace Action
                 _hitPools[i] = new Pool<GameObject>(AttackActionSo.HitsSO[i].Particle, 2);
             }
         }
-
-        public event System.Action MakeActionEvent;
+        
         public event System.Action InitCancelAttackEvent;
         public event System.Action InitBeforeHitEvent;
         public event System.Action EndRecoveryEvent;
@@ -73,6 +73,7 @@ namespace Action
             AttackTimer.Cancel();
             _comboCount = 0;
             _isAttacking = false;
+            EndActionEvent?.Invoke();
             IsCancelTimeOn = false;
         }
 
@@ -131,6 +132,7 @@ namespace Action
             _isAttacking = false;
             AttackTimer.Time = AttackActionSo.HitsSO[_comboCount].ComboTime;
             _comboCount++;
+            EndActionEvent?.Invoke();
             AttackTimer.TickEvent += BreakCombo;
             AttackTimer.Initiate();
         }

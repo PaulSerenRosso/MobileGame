@@ -52,16 +52,16 @@ namespace Player
         private void ResetEndMovementAnimationParameter()
         { 
             AnimSetBool(_endMovementParameterName, false);
-            _movementAction.MakeUpdateEvent += LaunchEndMovementAnimation; 
+            movementPlayerAction.MakeUpdateEvent += LaunchEndMovementPlayerAnimation; 
         }
 
-        private void LaunchEndMovementAnimation(float time)
+        private void LaunchEndMovementPlayerAnimation(float time)
         {
-            if (_animator.GetNextAnimatorStateInfo(0).length <= _movementAction.GetMaxTimeMovement() - time)
+            if (_animator.GetNextAnimatorStateInfo(0).length <= movementPlayerAction.GetMaxTimeMovement() - time)
             {
             SetDirParameter(Vector2.zero);
             AnimSetBool(_endMovementParameterName, true);
-            _movementAction.MakeUpdateEvent -= LaunchEndMovementAnimation;
+            movementPlayerAction.MakeUpdateEvent -= LaunchEndMovementPlayerAnimation;
             }
         }
 

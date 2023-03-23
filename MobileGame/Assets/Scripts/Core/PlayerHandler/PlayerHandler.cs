@@ -1,16 +1,15 @@
 using System;
 using System.Collections.Generic;
-using Action;
+using Actions;
 using UnityEngine;
 
 namespace Player.Handler
 {
-    public abstract class PlayerHandler<AC> : MonoBehaviour where AC : IAction
+    public abstract class PlayerHandler : MonoBehaviour
     {
-        [SerializeField] protected AC _action;
+        protected abstract Actions.PlayerAction GetAction();
         protected List<Func<bool>> _conditions = new();
-
-        protected void TryMakeAction()
+        protected virtual void TryMakeAction(params object[] args)
         {
             foreach (var condition in _conditions)
             {
@@ -21,7 +20,7 @@ namespace Player.Handler
             }
 
             InitializeAction();
-            _action.MakeAction();
+            GetAction().MakeAction();
         }
 
         public void AddCondition(Func<bool> conditionToAdd)

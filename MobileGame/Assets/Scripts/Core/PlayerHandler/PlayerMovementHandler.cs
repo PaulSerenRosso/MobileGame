@@ -1,19 +1,22 @@
 using Environment.MoveGrid;
 using System;
 using System.Collections.Generic;
-using Action;
+using Actions;
 using HelperPSR.RemoteConfigs;
 using Service.Inputs;
 using UnityEngine;
 
 namespace Player.Handler
 {
-    public class PlayerMovementHandler : PlayerHandler<MovementAction>, IRemoteConfigurable
+    public class PlayerMovementHandler : PlayerHandlerRecordable, IRemoteConfigurable
     {
         [SerializeField] private MovementSO _movementSO;
         [SerializeField] private List<SwipeSO> _allMovementSwipesSO;
-        [SerializeField] private AttackAction _attackAction;
-        [SerializeField] private TauntAction _tauntAction;
+        [SerializeField] private AttackPlayerAction attackPlayerAction;
+        [SerializeField] private TauntPlayerAction tauntPlayerAction;
+
+        [SerializeField]
+        private MovementPlayerAction movementPlayerAction;
 
         private EnvironmentGridManager _environmentGridManager;
         private Swipe _currentSwipe;
@@ -26,14 +29,20 @@ namespace Player.Handler
 
         public void TryMakeMovementAction(Swipe swipe)
         {
-            _currentSwipe = swipe;
-            MakeActionEvent?.Invoke(swipe.SwipeSO.DirectionV2);
-            TryMakeAction();
+            TryMakeAction(swipe);
+        }
+
+        protected override void TryMakeAction(params object[] args)
+        {
+            _currentSwipe =(Swipe) args[0];
+            Debug.Log(_currentSwipe.SwipeSO.DirectionV2);
+            base.TryMakeAction(args);
+            MakeActionEvent?.Invoke(_currentSwipe.SwipeSO.DirectionV2);
         }
 
         private bool CheckIsMoving()
         {
-            return !_action.IsInAction;
+            return !GetAction().IsInAction;
         }
 
         private bool CheckIsOccupied()
@@ -104,16 +113,18 @@ namespace Player.Handler
 
         private bool CheckIsInAttack()
         {
-            return !_attackAction.IsInAction || (_attackAction.IsInAction && _attackAction.IsCancelTimeOn);
+            return !attackPlayerAction.IsInAction || (attackPlayerAction.IsInAction && attackPlayerAction.IsCancelTimeOn);
         }
 
         private bool CheckIsInTaunt()
         {
-            return !_tauntAction.IsInAction;
+            return !tauntPlayerAction.IsInAction;
         }
 
         public override void Setup(params object[] arguments)
         {
+    
+            base.Setup();
             var inputService = (IInputService)arguments[2];
 
             foreach (var movementSwipeSO in _allMovementSwipesSO)
@@ -130,14 +141,20 @@ namespace Player.Handler
             AddCondition(CheckIsInTaunt);
             AddCondition(CheckIsOccupied);
             AddCondition(CheckIsInAttack);
-            _action.SetupAction(_currentMovePoint.MeshRenderer.transform.position);
+           GetAction().SetupAction(_currentMovePoint.MeshRenderer.transform.position);
             RemoteConfigManager.RegisterRemoteConfigurable(this);
+        }
+
+        
+        protected override Actions.PlayerAction GetAction()
+        {
+            return movementPlayerAction;
         }
 
         public override void InitializeAction()
         {
             _currentMovePoint = _environmentGridManager.MovePoints[_maxDestinationIndex];
-            _action.Destination = _currentMovePoint.MeshRenderer.transform.position;
+            movementPlayerAction.Destination = _currentMovePoint.MeshRenderer.transform.position;
             _currentMovePointIndex = _maxDestinationIndex;
         }
 

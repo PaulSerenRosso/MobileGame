@@ -1,10 +1,16 @@
-using Action;
+using Actions;
 using UnityEngine;
 
 namespace Player.Handler
 {
-    public class PlayerRotationHandler : PlayerHandler<RotationAction>
+    public class PlayerRotationHandler : PlayerHandler
     {
+        [SerializeField] private RotationPlayerAction rotationPlayerAction;
+        protected override Actions.PlayerAction GetAction()
+        {
+            return rotationPlayerAction;
+        }
+
         public override void InitializeAction()
         {
             
@@ -12,8 +18,8 @@ namespace Player.Handler
 
         public override void Setup(params object[] arguments)
         {
-            _action.SetupAction((Transform)arguments[0]);
-            _action.MakeAction();
+            rotationPlayerAction.SetupAction((Transform)arguments[0]);
+            rotationPlayerAction.MakeAction();
         }
     }
 }

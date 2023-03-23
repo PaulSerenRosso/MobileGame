@@ -2,9 +2,9 @@ using HelperPSR.MonoLoopFunctions;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Action
+namespace Actions
 {
-    public class RotationAction : MonoBehaviour, IAction, IUpdatable
+    public class RotationPlayerAction : PlayerAction, IUpdatable
     {
         private Transform _lookTarget;
 
@@ -15,18 +15,19 @@ namespace Action
             transform.forward = newForward.normalized;
         }
 
-        public bool IsInAction { get; }
+        public override bool IsInAction { get; }
 
-        public void MakeAction()
+        public override void MakeAction()
         {
             UpdateManager.Register(this);
         }
 
-        public void SetupAction(params object[] arguments)
+        public override void SetupAction(params object[] arguments)
         {
             _lookTarget = (Transform)arguments[0];
         }
 
-        public event System.Action MakeActionEvent;
+ 
+      
     }
 }
