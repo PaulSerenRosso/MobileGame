@@ -73,8 +73,8 @@ namespace Actions
             AttackTimer.Cancel();
             _comboCount = 0;
             _isAttacking = false;
-            EndActionEvent?.Invoke();
             IsCancelTimeOn = false;
+            EndActionEvent?.Invoke();
         }
 
         private void InitiateBeforeHitTimer()
@@ -132,9 +132,9 @@ namespace Actions
             _isAttacking = false;
             AttackTimer.Time = AttackActionSo.HitsSO[_comboCount].ComboTime;
             _comboCount++;
-            EndActionEvent?.Invoke();
             AttackTimer.TickEvent += BreakCombo;
             AttackTimer.Initiate();
+            EndActionEvent?.Invoke();
         }
     }
 }
