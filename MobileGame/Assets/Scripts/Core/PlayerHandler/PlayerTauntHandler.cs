@@ -1,4 +1,4 @@
-using Action;
+using Actions;
 using HelperPSR.RemoteConfigs;
 using HelperPSR.Tick;
 using Service.Inputs;
@@ -7,10 +7,17 @@ using UnityEngine.InputSystem;
 
 namespace Player.Handler
 {
-    public class PlayerTauntHandler : PlayerHandler<TauntAction>, IRemoteConfigurable
+    public class PlayerTauntHandler : PlayerHandler, IRemoteConfigurable
     {
-        [SerializeField] private MovementAction _movementAction;
-        [SerializeField] private AttackAction _attackAction;
+        [SerializeField] private MovementPlayerAction movementPlayerAction;
+        [SerializeField] private AttackPlayerAction attackPlayerAction;
+
+        [SerializeField] private TauntPlayerAction tauntPlayerAction;
+   
+        protected override Actions.PlayerAction GetAction()
+        {
+            return tauntPlayerAction;
+        }
 
         public override void InitializeAction()
         {
@@ -19,37 +26,38 @@ namespace Player.Handler
 
         void TryMakeTauntAction(InputAction.CallbackContext ctx)
         {
-            TryMakeAction();
+           TryMakeAction(ctx);
         }
 
         bool CheckIsInAttack()
         {
-            return !_attackAction.IsInAction;
+            return !attackPlayerAction.IsInAction;
         }
 
         bool CheckIsInMovement()
         {
-            return !_movementAction.IsInAction;
+            return !movementPlayerAction.IsInAction;
         }
 
         public override void Setup(params object[] arguments)
         {
+          
             IInputService inputService = (IInputService)arguments[0];
             AddCondition(CheckIsInAttack);
             AddCondition(CheckIsInMovement);
             inputService.SetHold(TryMakeTauntAction, CancelTaunt);
-            _action.SetupAction((TickManager)arguments[1]);
+            tauntPlayerAction.SetupAction((TickManager)arguments[1]);
             RemoteConfigManager.RegisterRemoteConfigurable(this);
         }
 
         private void CancelTaunt(InputAction.CallbackContext obj)
         {
-            _action.CancelTaunt();
+            tauntPlayerAction.CancelTaunt();
         }
 
         public void SetRemoteConfigurableValues()
         {
-            _action.SO.EndTime = RemoteConfigManager.Config.GetFloat("PlayerTauntEndTime");
+            tauntPlayerAction.SO.EndTime = RemoteConfigManager.Config.GetFloat("PlayerTauntEndTime");
         }
     }
 }

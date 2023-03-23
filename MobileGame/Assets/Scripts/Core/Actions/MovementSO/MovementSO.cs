@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Action
+namespace Actions
 {
     [CreateAssetMenu(menuName = "Actions/MovementActionSO", fileName = "new MovementAction")]
     public class MovementSO : ScriptableObject

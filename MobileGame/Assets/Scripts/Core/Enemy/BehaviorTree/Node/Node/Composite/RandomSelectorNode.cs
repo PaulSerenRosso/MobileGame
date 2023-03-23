@@ -33,9 +33,6 @@ namespace BehaviorTree.Nodes.Composite
             {
                 _pickedChildIndex =
                     RandomHelper.PickRandomElementIndex(_currentChildrenProbabilities.ToArray());
-                Debug.Log($"picked: {_pickedChildIndex}");
-                Debug.Log($"count proba: {_currentChildrenProbabilities.Count}");
-                Debug.Log($"count children evaluate: {_currentChildrenToEvaluate.Count}");
                 var currentElement = _currentChildrenToEvaluate[_pickedChildIndex];
                 switch (currentElement.Evaluate())
                 {

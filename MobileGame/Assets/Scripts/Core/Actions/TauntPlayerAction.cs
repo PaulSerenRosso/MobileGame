@@ -2,9 +2,9 @@ using HelperPSR.Tick;
 using TMPro;
 using UnityEngine;
 
-namespace Action
+namespace Actions
 {
-    public class TauntAction : MonoBehaviour, IAction
+    public class TauntPlayerAction :  PlayerAction
     {
         public TauntActionSO SO;
 
@@ -13,13 +13,13 @@ namespace Action
         private TickTimer _endTauntTimer;
         private bool _isTaunting;
 
-        public bool IsInAction
+        public override bool IsInAction
         {
             get => _isTaunting;
         }
 
 
-        public void MakeAction()
+        public override void MakeAction()
         {
             Debug.Log("je taunt whouah");
             _isTaunting = true;
@@ -27,14 +27,13 @@ namespace Action
             _tauntText.text = "Taunt";
         }
 
-        public void SetupAction(params object[] arguments)
+        public override void SetupAction(params object[] arguments)
         {
             _endTauntTimer = new TickTimer(SO.EndTime, (TickManager)arguments[0]);
             _endTauntTimer.TickEvent += TickEndTaunt;
             _tauntText.text = "";
         }
-
-        public event System.Action MakeActionEvent;
+        
 
         public event System.Action CancelActionEvent;
         public void CancelTaunt()
@@ -51,6 +50,7 @@ namespace Action
         {
             _isTaunting = false;
             _tauntText.text = "";
+            EndActionEvent?.Invoke();
             
         }
     }

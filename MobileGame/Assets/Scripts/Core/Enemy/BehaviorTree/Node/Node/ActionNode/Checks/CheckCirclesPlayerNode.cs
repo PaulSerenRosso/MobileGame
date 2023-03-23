@@ -29,10 +29,10 @@ namespace BehaviorTree.Nodes.Actions
             if (!_environmentGridManager.CheckIfMovePointInIsCircles(_playerMovementHandler.GetCurrentIndexMovePoint(),
                     _data.CirclesIndexes))
             {
-                Debug.Log("CheckCirclesPlayer");
+             
                 return BehaviourTreeEnums.NodeState.SUCCESS;
             }
-            Debug.Log("CheckCirclePlayerAreFalse");
+           
             return BehaviourTreeEnums.NodeState.FAILURE;
         }
 

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Action
+namespace Actions
 {
     [CreateAssetMenu(menuName = "Actions/AttackSO", fileName = "new AttackSO")]
     public class AttackActionSO : ScriptableObject

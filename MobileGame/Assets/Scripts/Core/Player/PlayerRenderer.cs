@@ -1,5 +1,5 @@
 ﻿using System.Numerics;
-using Action;
+using Actions;
 using Player.Handler;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
@@ -9,9 +9,9 @@ namespace Player
     public partial class PlayerRenderer : MonoBehaviour
     {
         [SerializeField] private Animator _animator;
-        [SerializeField] private MovementAction _movementAction;
+        [SerializeField] private MovementPlayerAction movementPlayerAction;
         [SerializeField] private PlayerMovementHandler _playerMovementHandler;
-        [SerializeField] private TauntAction _tauntAction; 
+        [SerializeField] private TauntPlayerAction tauntPlayerAction; 
         public void Init()
         {
             /*

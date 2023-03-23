@@ -29,7 +29,6 @@ namespace BehaviorTree.Nodes.Actions
             if (_timer > _data.Time)
             {
                 _timer = 0;
-                Debug.Log($"Timer is over");
                 return BehaviourTreeEnums.NodeState.SUCCESS;
             }
             _timer += Time.deltaTime;
