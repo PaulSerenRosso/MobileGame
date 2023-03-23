@@ -7,7 +7,7 @@ namespace BehaviorTree.Nodes.Actions
 {
     public class TaskMoveNode : ActionNode, IFixedUpdate
     {
-        private TaskEnemyMoveNodeSO _so;
+        private TaskMoveNodeSO _so;
         private TaskMoveNodeDataSO _data;
         private Rigidbody _rb;
         private bool _isInit;
@@ -23,7 +23,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
-            _so = (TaskEnemyMoveNodeSO)nodeSO;
+            _so = (TaskMoveNodeSO)nodeSO;
             _data = (TaskMoveNodeDataSO)_so.Data;
         }
 

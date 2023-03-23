@@ -162,6 +162,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tree: {fileID: 3911112695321858085}
+  _so: {fileID: 11400000, guid: 7159e724562cffc418e7a7fd49679cd4, type: 2}
+  CurrentState: 0
 --- !u!114 &3911112695321858085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,6 +185,8 @@ MonoBehaviour:
       Obj: {fileID: 3713970167393113632}
     - Type: 0
       Obj: {fileID: 3912564710569538853}
+    - Type: 4
+      Obj: {fileID: 4796771559047852942}
     ExternValueObjects:
     - Type: 0
     - Type: 1

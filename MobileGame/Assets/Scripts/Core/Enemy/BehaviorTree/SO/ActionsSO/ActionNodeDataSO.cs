@@ -8,6 +8,7 @@ namespace BehaviorTree.SO.Actions
         [Header("Ne pas modifier")] 
         public BehaviourTreeEnums.TreeExternValues[] ExternValues;
         public BehaviourTreeEnums.TreeEnemyValues[] EnemyValues;
+        
 
         protected abstract void SetDependencyValues();
 
