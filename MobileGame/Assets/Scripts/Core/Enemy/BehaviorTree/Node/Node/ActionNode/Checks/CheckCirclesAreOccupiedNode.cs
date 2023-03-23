@@ -15,10 +15,8 @@ namespace BehaviorTree.Nodes.Actions
         {
             if (!_environmentGridManager.CheckIfOneMovePointInCirclesIsOccupied(_data.CircleIndexes, (Vector3)Sharer.InternValues[_so.InternValues[0].HashCode]))
             {
-                Debug.Log("CheckCirclesAreOccupied true");
                 return BehaviourTreeEnums.NodeState.SUCCESS;
             }
-            Debug.Log("CheckCirclesAreOccupied false");
             return BehaviourTreeEnums.NodeState.FAILURE;
         }
 

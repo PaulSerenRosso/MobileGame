@@ -5,7 +5,8 @@ public class BehaviourTreeEnums
         Rigidbody,
         Animator,
         Transform,
-        MeshRenderer
+        MeshRenderer, 
+        EnemyManager
     }
 
     public enum TreeExternValues
