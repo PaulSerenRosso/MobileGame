@@ -14,7 +14,7 @@ namespace BehaviorTree.Nodes.Actions
         private bool _initRotation;
         private bool _rotationIsFinished;
 
-        public override BehaviourTreeEnums.NodeState Evaluate()
+        public override BehaviorTreeEnums.NodeState Evaluate()
         {
             if (!_initRotation)
             {
@@ -27,10 +27,10 @@ namespace BehaviorTree.Nodes.Actions
             {
                 _initRotation = false;
                 _rotationIsFinished = false;
-                return BehaviourTreeEnums.NodeState.SUCCESS;
+                return BehaviorTreeEnums.NodeState.SUCCESS;
             }
 
-            return BehaviourTreeEnums.NodeState.FAILURE;
+            return BehaviorTreeEnums.NodeState.FAILURE;
         }
 
         public override ActionNodeDataSO GetDataSO()
@@ -50,10 +50,10 @@ namespace BehaviorTree.Nodes.Actions
         }
 
         public override void SetDependencyValues(
-            Dictionary<BehaviourTreeEnums.TreeExternValues, object> externDependencyValues,
-            Dictionary<BehaviourTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
+            Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
+            Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
         {
-            _transformBoss = (Transform)enemyDependencyValues[BehaviourTreeEnums.TreeEnemyValues.Transform];
+            _transformBoss = (Transform)enemyDependencyValues[BehaviorTreeEnums.TreeEnemyValues.Transform];
         }
     }
 }

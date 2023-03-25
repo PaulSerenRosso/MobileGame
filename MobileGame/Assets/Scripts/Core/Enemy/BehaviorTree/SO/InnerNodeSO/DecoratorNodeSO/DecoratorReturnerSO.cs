@@ -8,7 +8,7 @@ namespace BehaviorTree.SO.Decorator
         fileName = "new D_Returner_Spe")]
     public class DecoratorReturnerSO : DecoratorSO
     {
-        public BehaviourTreeEnums.NodeState ReturnState;
+        public BehaviorTreeEnums.NodeState ReturnState;
 
         public override Type GetTypeNode()
         {

@@ -21,17 +21,17 @@ namespace BehaviorTree.Nodes.Actions
             _data = (TaskSwitchColorMeshRendererNodeDataSO)_so.Data;
         }
 
-        public override BehaviourTreeEnums.NodeState Evaluate()
+        public override BehaviorTreeEnums.NodeState Evaluate()
         {
             _meshRenderer.material.color = _data.SwitchableColor;
-            return BehaviourTreeEnums.NodeState.RUNNING;
+            return BehaviorTreeEnums.NodeState.RUNNING;
         }
 
         public override void SetDependencyValues(
-            Dictionary<BehaviourTreeEnums.TreeExternValues, object> externDependencyValues,
-            Dictionary<BehaviourTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
+            Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
+            Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
         {
-            _meshRenderer = (MeshRenderer)enemyDependencyValues[BehaviourTreeEnums.TreeEnemyValues.MeshRenderer];
+            _meshRenderer = (MeshRenderer)enemyDependencyValues[BehaviorTreeEnums.TreeEnemyValues.MeshRenderer];
         }
 
         public override ActionNodeDataSO GetDataSO()

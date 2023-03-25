@@ -11,8 +11,8 @@ namespace BehaviorTree.SO.Actions
         {
             ExternValues = new[]
             {
-                BehaviourTreeEnums.TreeExternValues.EnvironmentGridManager,
-                BehaviourTreeEnums.TreeExternValues.PlayerHandlerMovement
+                BehaviorTreeEnums.TreeExternValues.EnvironmentGridManager,
+                BehaviorTreeEnums.TreeExternValues.PlayerHandlerMovement
             };
         }
 

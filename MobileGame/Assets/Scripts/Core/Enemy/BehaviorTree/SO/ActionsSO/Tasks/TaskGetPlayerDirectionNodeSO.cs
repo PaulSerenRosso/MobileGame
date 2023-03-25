@@ -6,17 +6,22 @@
         {
             base.UpdateInterValues();
             base.UpdateInterValues();
-            _internValuesCount = 1;
+            _internValuesCount = 2;
             if (InternValues.Count > 0)
             {
-                InternValues[0].SetInternValueWithoutKey(BehaviourTreeEnums.InternValueType.VECTOR3,
-                    BehaviourTreeEnums.InternValuePropertyType.SET, "Direction(Vector3) where the boss need to look");
+                InternValues[0].SetInternValueWithoutKey(BehaviorTreeEnums.InternValueType.INT,
+                    BehaviorTreeEnums.InternValuePropertyType.GET, "Index(int) where the player is");
+                if (InternValues.Count > 1)
+                {
+                    InternValues[1].SetInternValueWithoutKey(BehaviorTreeEnums.InternValueType.VECTOR3,
+                        BehaviorTreeEnums.InternValuePropertyType.SET, "Direction(Vector3) where the boss need to look");
+                }
             }
         }
 
         public override void UpdateComment()
         {
-            Comment = "";
+            Comment = "Nœud qui permet de récupérer la direction vers le joueur";
         }
     }
 }

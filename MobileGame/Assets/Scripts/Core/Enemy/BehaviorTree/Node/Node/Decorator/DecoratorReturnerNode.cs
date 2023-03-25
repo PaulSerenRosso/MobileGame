@@ -16,7 +16,7 @@ namespace BehaviorTree.Nodes.Decorator
             SO = (DecoratorReturnerSO)nodeSO;
         }
 
-        public override BehaviourTreeEnums.NodeState Evaluate()
+        public override BehaviorTreeEnums.NodeState Evaluate()
         {
             Child.Evaluate();
             return SO.ReturnState;

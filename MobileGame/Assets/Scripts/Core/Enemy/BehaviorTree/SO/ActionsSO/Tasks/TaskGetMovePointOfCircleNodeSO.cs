@@ -12,12 +12,12 @@ namespace BehaviorTree
             _internValuesCount = 2;
             if (InternValues.Count > 0)
             {
-                InternValues[0].SetInternValueWithoutKey(BehaviourTreeEnums.InternValueType.INT,
-                    BehaviourTreeEnums.InternValuePropertyType.GET, "Index(int) of the MovePoint");
+                InternValues[0].SetInternValueWithoutKey(BehaviorTreeEnums.InternValueType.INT,
+                    BehaviorTreeEnums.InternValuePropertyType.GET, "Index(int) of the MovePoint");
                 if (InternValues.Count > 1)
                 {
-                    InternValues[1].SetInternValueWithoutKey(BehaviourTreeEnums.InternValueType.INT,
-                        BehaviourTreeEnums.InternValuePropertyType.SET, "Index(int) of a MovePoint after the movement");
+                    InternValues[1].SetInternValueWithoutKey(BehaviorTreeEnums.InternValueType.INT,
+                        BehaviorTreeEnums.InternValuePropertyType.SET, "Index(int) of a MovePoint after the movement");
                 }
             }
         }

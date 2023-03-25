@@ -23,7 +23,7 @@ namespace BehaviorTree.Nodes.Composite
             _so = (RandomSelectorSO)nodeSO;
         }
 
-        public override BehaviourTreeEnums.NodeState Evaluate()
+        public override BehaviorTreeEnums.NodeState Evaluate()
         {
             _currentChildrenToEvaluate = new List<Node>(Children);
             _childrenEvaluatedCount = 0;
@@ -36,13 +36,13 @@ namespace BehaviorTree.Nodes.Composite
                 var currentElement = _currentChildrenToEvaluate[_pickedChildIndex];
                 switch (currentElement.Evaluate())
                 {
-                    case BehaviourTreeEnums.NodeState.FAILURE:
+                    case BehaviorTreeEnums.NodeState.FAILURE:
                         break;
-                    case BehaviourTreeEnums.NodeState.SUCCESS:
-                        _state = BehaviourTreeEnums.NodeState.SUCCESS;
+                    case BehaviorTreeEnums.NodeState.SUCCESS:
+                        _state = BehaviorTreeEnums.NodeState.SUCCESS;
                         return _state;
-                    case BehaviourTreeEnums.NodeState.RUNNING:
-                        _state = BehaviourTreeEnums.NodeState.RUNNING;
+                    case BehaviorTreeEnums.NodeState.RUNNING:
+                        _state = BehaviorTreeEnums.NodeState.RUNNING;
                         return _state;
                 }
 
@@ -51,7 +51,7 @@ namespace BehaviorTree.Nodes.Composite
                 _currentChildrenToEvaluate.RemoveAt(_pickedChildIndex);
             }
 
-            return BehaviourTreeEnums.NodeState.FAILURE;
+            return BehaviorTreeEnums.NodeState.FAILURE;
         }
     }
 }

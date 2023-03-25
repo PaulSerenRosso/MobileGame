@@ -11,12 +11,12 @@ namespace BehaviorTree
             _internValuesCount = 2;
             if (InternValues.Count > 0)
             {
-                InternValues[0].SetInternValueWithoutKey(BehaviourTreeEnums.InternValueType.VECTOR3,
-                    BehaviourTreeEnums.InternValuePropertyType.GET, "Destination(Vector3) where the grid need to move");
+                InternValues[0].SetInternValueWithoutKey(BehaviorTreeEnums.InternValueType.VECTOR3,
+                    BehaviorTreeEnums.InternValuePropertyType.GET, "Destination(Vector3) where the grid need to move");
                 if (InternValues.Count > 1)
                 {
-                    InternValues[1].SetInternValueWithoutKey(BehaviourTreeEnums.InternValueType.INT,
-                        BehaviourTreeEnums.InternValuePropertyType.GET,
+                    InternValues[1].SetInternValueWithoutKey(BehaviorTreeEnums.InternValueType.INT,
+                        BehaviorTreeEnums.InternValuePropertyType.GET,
                         "Index(int) the index of the movepoint where the player need to move");
                 }
             }

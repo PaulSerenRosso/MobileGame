@@ -7,7 +7,7 @@ namespace BehaviorTree.SO.Decorator
     [CreateAssetMenu(menuName = "BehaviorTree/Decorator/UntilSO", fileName = "new D_Until_Spe")]
     public class DecoratorUntilSO : DecoratorSO
     {
-        public BehaviourTreeEnums.NodeState BreakStateCondition;
+        public BehaviorTreeEnums.NodeState BreakStateCondition;
 
         public override Type GetTypeNode()
         {

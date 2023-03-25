@@ -12,8 +12,8 @@ namespace BehaviorTree
             _internValuesCount = (byte)InternValues.Count;
             foreach (var internValue in InternValues)
             {
-                internValue.SetInternValueWithoutKey(BehaviourTreeEnums.InternValueType.NONE,
-                    BehaviourTreeEnums.InternValuePropertyType.REMOVE, "To Removed");
+                internValue.SetInternValueWithoutKey(BehaviorTreeEnums.InternValueType.NONE,
+                    BehaviorTreeEnums.InternValuePropertyType.REMOVE, "To Removed");
             }
         }
 

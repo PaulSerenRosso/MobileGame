@@ -7,12 +7,12 @@ namespace BehaviorTree
     [Serializable]
     public class InternValue : StringWithHashCode
     {
-        public BehaviourTreeEnums.InternValueType Type;
-        public BehaviourTreeEnums.InternValuePropertyType PropertyType;
+        public BehaviorTreeEnums.InternValueType Type;
+        public BehaviorTreeEnums.InternValuePropertyType PropertyType;
         [TextArea] public string Comment;
 
-        public void SetInternValueWithoutKey(BehaviourTreeEnums.InternValueType type,
-            BehaviourTreeEnums.InternValuePropertyType propertyType, string commentary)
+        public void SetInternValueWithoutKey(BehaviorTreeEnums.InternValueType type,
+            BehaviorTreeEnums.InternValuePropertyType propertyType, string commentary)
         {
             Type = type;
             PropertyType = propertyType;

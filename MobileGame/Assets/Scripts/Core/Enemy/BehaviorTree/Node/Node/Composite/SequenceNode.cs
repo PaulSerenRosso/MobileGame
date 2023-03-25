@@ -2,7 +2,7 @@
 {
     public class SequenceNode : CompositeNode
     {
-        public override BehaviourTreeEnums.NodeState Evaluate()
+        public override BehaviorTreeEnums.NodeState Evaluate()
         {
             bool anyChildIsRunning = false;
 
@@ -10,21 +10,21 @@
             {
                 switch (node.Evaluate())
                 {
-                    case BehaviourTreeEnums.NodeState.FAILURE:
-                        _state = BehaviourTreeEnums.NodeState.FAILURE;
+                    case BehaviorTreeEnums.NodeState.FAILURE:
+                        _state = BehaviorTreeEnums.NodeState.FAILURE;
                         return _state;
-                    case BehaviourTreeEnums.NodeState.SUCCESS:
+                    case BehaviorTreeEnums.NodeState.SUCCESS:
                         continue;
-                    case BehaviourTreeEnums.NodeState.RUNNING:
+                    case BehaviorTreeEnums.NodeState.RUNNING:
                         anyChildIsRunning = true;
                         continue;
                     default:
-                        _state = BehaviourTreeEnums.NodeState.SUCCESS;
+                        _state = BehaviorTreeEnums.NodeState.SUCCESS;
                         return _state;
                 }
             }
 
-            _state = anyChildIsRunning ? BehaviourTreeEnums.NodeState.RUNNING : BehaviourTreeEnums.NodeState.SUCCESS;
+            _state = anyChildIsRunning ? BehaviorTreeEnums.NodeState.RUNNING : BehaviorTreeEnums.NodeState.SUCCESS;
             return _state;
         }
     }

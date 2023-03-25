@@ -12,8 +12,8 @@ namespace BehaviorTree
             _internValuesCount = 1;
             if (InternValues.Count > 0)
             {
-                InternValues[0].SetInternValueWithoutKey(BehaviourTreeEnums.InternValueType.FLOAT,
-                    BehaviourTreeEnums.InternValuePropertyType.GET, "Value(float) of a parameter");
+                InternValues[0].SetInternValueWithoutKey(BehaviorTreeEnums.InternValueType.FLOAT,
+                    BehaviorTreeEnums.InternValuePropertyType.GET, "Value(float) of a parameter");
             }
         }
 

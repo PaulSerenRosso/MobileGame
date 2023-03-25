@@ -18,9 +18,11 @@ namespace Player.Handler
         [SerializeField] private TauntPlayerAction tauntPlayerAction;
         [SerializeField] private TickTimer _recoveryTimer;
         private bool _inCooldown;
-        [SerializeField]
-        private MovementPlayerAction movementPlayerAction;
-        [FormerlySerializedAs("_recoveryTime")] [FormerlySerializedAs("RecoveryTime")] [SerializeField]private  float _cooldownTimeBetweenTwoMovement;
+        [SerializeField] private MovementPlayerAction movementPlayerAction;
+
+        [FormerlySerializedAs("_recoveryTime")] [FormerlySerializedAs("RecoveryTime")] [SerializeField]
+        private float _cooldownTimeBetweenTwoMovement;
+
         private EnvironmentGridManager _environmentGridManager;
         private Swipe _currentSwipe;
         private int _currentMovePointIndex;
@@ -31,9 +33,10 @@ namespace Player.Handler
         public event Action FinishRecoveryMovementEvent;
         public event Action<Vector2> MakeActionEvent;
 
-            // ovveride le playerrecord 
+        // override le PlayerRecord 
 
-            public float GetRecoveryMovementTime() => _cooldownTimeBetweenTwoMovement;
+        public float GetRecoveryMovementTime() => _cooldownTimeBetweenTwoMovement;
+
         public void TryMakeMovementAction(Swipe swipe)
         {
             TryMakeAction(swipe);
@@ -41,17 +44,16 @@ namespace Player.Handler
 
         protected override void TryMakeAction(params object[] args)
         {
-            _currentSwipe =(Swipe) args[0];
+            _currentSwipe = (Swipe)args[0];
             Debug.Log(_currentSwipe.SwipeSO.DirectionV2);
             base.TryMakeAction(args);
             MakeActionEvent?.Invoke(_currentSwipe.SwipeSO.DirectionV2);
         }
 
-        private bool CheckIsMoving()
+        public bool CheckIsMoving()
         {
             return !GetAction().IsInAction;
         }
-        
 
         private bool CheckIsOccupied()
         {
@@ -88,10 +90,8 @@ namespace Player.Handler
                 }
             }
 
-            if (_environmentGridManager.MovePoints[_maxDestinationIndex].IsOccupied)
-            
-                return false;
-            
+            if (_environmentGridManager.MovePoints[_maxDestinationIndex].IsOccupied) return false;
+
             return true;
         }
 
@@ -121,7 +121,8 @@ namespace Player.Handler
 
         private bool CheckIsInAttack()
         {
-            return !attackPlayerAction.IsInAction || (attackPlayerAction.IsInAction && attackPlayerAction.IsCancelTimeOn);
+            return !attackPlayerAction.IsInAction ||
+                   (attackPlayerAction.IsInAction && attackPlayerAction.IsCancelTimeOn);
         }
 
         private bool CheckIsInTaunt()
@@ -131,10 +132,8 @@ namespace Player.Handler
 
         public override void Setup(params object[] arguments)
         {
-    
             RemoteConfigManager.RegisterRemoteConfigurable(this);
-    
-            
+
             base.Setup();
             var inputService = (IInputService)arguments[2];
 
@@ -142,7 +141,7 @@ namespace Player.Handler
             {
                 inputService.AddSwipe(movementSwipeSO, TryMakeMovementAction);
             }
-            
+
             _environmentGridManager = (EnvironmentGridManager)arguments[0];
             _currentMovePointIndex = (int)arguments[1];
             _currentMovePoint = _environmentGridManager.MovePoints[_currentMovePointIndex];
@@ -159,7 +158,7 @@ namespace Player.Handler
             _recoveryTimer.InitiateEvent += LaunchCooldownBetweenTwoMovement;
             movementPlayerAction.ReachDestinationEvent += _recoveryTimer.Initiate;
             FinishRecoveryMovementEvent += _playerHandlerRecordableManager.LaunchRecorderAction;
-           GetAction().SetupAction(_currentMovePoint.MeshRenderer.transform.position);
+            GetAction().SetupAction(_currentMovePoint.MeshRenderer.transform.position);
         }
 
         private void FinishCooldown()
@@ -168,6 +167,7 @@ namespace Player.Handler
             Debug.Log("end");
             FinishRecoveryMovementEvent?.Invoke();
         }
+
         private void LaunchCooldownBetweenTwoMovement()
         {
             _inCooldown = true;
@@ -178,6 +178,7 @@ namespace Player.Handler
         {
             return !_inCooldown;
         }
+
         protected override Actions.PlayerAction GetAction()
         {
             return movementPlayerAction;
@@ -192,7 +193,6 @@ namespace Player.Handler
 
         public void SetRemoteConfigurableValues()
         {
-            
             foreach (var swipeSo in _allMovementSwipesSO)
             {
                 switch (swipeSo.DirectionV2)

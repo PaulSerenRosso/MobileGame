@@ -4,7 +4,7 @@
     {
         public override void UpdateComment()
         {
-            Comment = "";
+            Comment = "Nœud qui permet de jouer un son";
         }
     }
 }

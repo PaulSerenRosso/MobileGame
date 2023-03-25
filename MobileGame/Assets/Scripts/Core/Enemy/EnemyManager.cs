@@ -14,8 +14,9 @@ public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, I
     [SerializeField] private Tree.Tree _tree;
     [SerializeField] private EnemySO _so;
     private float _health;
-    public EnemyEnums.EnemyState CurrentState;
-    [SerializeField] private List<EnemyStunTrigger> _currentStunTriggers;
+    public EnemyEnums.EnemyMobilityState CurrentMobilityState;
+    public EnemyEnums.EnemyBlockingState CurrentBlockingState;
+    private List<EnemyStunTrigger> _currentStunTriggers;
 
     public event Action<float> OnDamageReceived;
 
@@ -23,7 +24,8 @@ public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, I
     {
         transform.position = new Vector3(0, 0, 0);
         _health = _so.Health;
-        CurrentState = EnemyEnums.EnemyState.Vulnerable;
+        CurrentMobilityState = EnemyEnums.EnemyMobilityState.VULNERABLE;
+        CurrentBlockingState = EnemyEnums.EnemyBlockingState.VULNERABLE;
         OnDamageReceived += TakeStun;
         UpdateManager.Register(this);
         _currentStunTriggers = new List<EnemyStunTrigger>();
@@ -36,7 +38,7 @@ public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, I
 
     public void OnUpdate()
     {
-        if (_currentStunTriggers.Count < 1 || CurrentState != EnemyEnums.EnemyState.Vulnerable) return;
+        if (_currentStunTriggers.Count < 1 || CurrentMobilityState != EnemyEnums.EnemyMobilityState.VULNERABLE) return;
         _currentStunTriggers.RemoveAll(enemyStunTrigger => enemyStunTrigger.Time > _so.TimeStunAvailable);
         foreach (var enemyStunTrigger in _currentStunTriggers.Where(enemyStunTrigger => enemyStunTrigger.Time < _so.TimeStunAvailable))
         {
@@ -45,7 +47,7 @@ public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, I
 
         if (_currentStunTriggers.Any(enemyStunTrigger => (enemyStunTrigger.DamageAmount / _so.Health) >= _so.PercentageHealth))
         {
-            CurrentState = EnemyEnums.EnemyState.Stagger;
+            CurrentMobilityState = EnemyEnums.EnemyMobilityState.STAGGER;
             _currentStunTriggers.Clear();
         }
     }
@@ -99,7 +101,7 @@ public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, I
 
     private void TakeStun(float amount)
     {
-        if (CurrentState != EnemyEnums.EnemyState.Vulnerable) return;
+        if (CurrentMobilityState != EnemyEnums.EnemyMobilityState.VULNERABLE) return;
         _currentStunTriggers.Add(new EnemyStunTrigger(0, amount));
         foreach (var enemyStunTrigger in _currentStunTriggers.Where(enemyStunTrigger => enemyStunTrigger.Time < _so.TimeStunAvailable))
         {

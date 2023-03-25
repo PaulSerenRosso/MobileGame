@@ -1,4 +1,5 @@
-﻿using BehaviorTree.SO.Actions;
+﻿using System.Collections.Generic;
+using BehaviorTree.SO.Actions;
 
 namespace BehaviorTree.Nodes.Actions
 {
@@ -6,7 +7,10 @@ namespace BehaviorTree.Nodes.Actions
     {
         private TaskDamagePlayerNodeSO _so;
         private TaskDamagePlayerNodeDataSO _data;
-        
+
+        // TODO: solve cyclic error between enemy assembly and player assembly
+        // private PlayerHealth _playerHealth;
+
         public override NodeSO GetNodeSO()
         {
             return _so;
@@ -17,10 +21,18 @@ namespace BehaviorTree.Nodes.Actions
             _so = (TaskDamagePlayerNodeSO)nodeSO;
             _data = (TaskDamagePlayerNodeDataSO)_so.Data;
         }
-        
-        public override BehaviourTreeEnums.NodeState Evaluate()
+
+        public override BehaviorTreeEnums.NodeState Evaluate()
         {
-            throw new System.NotImplementedException();
+            return BehaviorTreeEnums.NodeState.SUCCESS;
+        }
+
+        public override void SetDependencyValues(
+            Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
+            Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
+        {
+            // _playerHealth =
+            //     (PlayerHealth)externDependencyValues[BehaviourTreeEnums.TreeExternValues.PlayerHealth];
         }
 
         public override ActionNodeDataSO GetDataSO()

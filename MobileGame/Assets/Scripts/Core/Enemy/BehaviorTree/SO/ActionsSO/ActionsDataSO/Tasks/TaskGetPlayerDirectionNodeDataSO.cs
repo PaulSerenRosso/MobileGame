@@ -7,7 +7,8 @@ namespace BehaviorTree.SO.Actions
     {
         protected override void SetDependencyValues()
         {
-            
+            ExternValues = new[] { BehaviorTreeEnums.TreeExternValues.EnvironmentGridManager };
+            EnemyValues = new[] { BehaviorTreeEnums.TreeEnemyValues.Transform };
         }
 
         public override Type GetTypeNode()

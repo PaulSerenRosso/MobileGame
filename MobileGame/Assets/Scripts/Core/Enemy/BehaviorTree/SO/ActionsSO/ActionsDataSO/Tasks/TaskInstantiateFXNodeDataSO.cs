@@ -11,7 +11,7 @@ namespace BehaviorTree.SO.Actions
         
         protected override void SetDependencyValues()
         {
-            ExternValues = new[] { BehaviourTreeEnums.TreeExternValues.PoolService };
+            ExternValues = new[] { BehaviorTreeEnums.TreeExternValues.PoolService };
         }
 
         public override Type GetTypeNode()

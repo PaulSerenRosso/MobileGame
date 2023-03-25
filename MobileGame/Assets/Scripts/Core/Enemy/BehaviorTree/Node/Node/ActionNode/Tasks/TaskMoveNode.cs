@@ -27,7 +27,7 @@ namespace BehaviorTree.Nodes.Actions
             _data = (TaskMoveNodeDataSO)_so.Data;
         }
 
-        public override BehaviourTreeEnums.NodeState Evaluate()
+        public override BehaviorTreeEnums.NodeState Evaluate()
         {
             if (!_isInit)
             {
@@ -43,17 +43,17 @@ namespace BehaviorTree.Nodes.Actions
                 FixedUpdateManager.UnRegister(this);
                 _timer = 0;
                 _isInit = false;
-                return BehaviourTreeEnums.NodeState.SUCCESS;
+                return BehaviorTreeEnums.NodeState.SUCCESS;
             }
 
-            return BehaviourTreeEnums.NodeState.RUNNING;
+            return BehaviorTreeEnums.NodeState.RUNNING;
         }
 
         public override void SetDependencyValues(
-            Dictionary<BehaviourTreeEnums.TreeExternValues, object> externDependencyValues,
-            Dictionary<BehaviourTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
+            Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
+            Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
         {
-            _rb = (Rigidbody)enemyDependencyValues[BehaviourTreeEnums.TreeEnemyValues.Rigidbody];
+            _rb = (Rigidbody)enemyDependencyValues[BehaviorTreeEnums.TreeEnemyValues.Rigidbody];
         }
 
         public override ActionNodeDataSO GetDataSO()

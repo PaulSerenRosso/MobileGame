@@ -24,15 +24,15 @@ namespace BehaviorTree.Nodes.Actions
             _timer = _data.StartTime;
         }
 
-        public override BehaviourTreeEnums.NodeState Evaluate()
+        public override BehaviorTreeEnums.NodeState Evaluate()
         {
             if (_timer > _data.Time)
             {
                 _timer = 0;
-                return BehaviourTreeEnums.NodeState.SUCCESS;
+                return BehaviorTreeEnums.NodeState.SUCCESS;
             }
             _timer += Time.deltaTime;
-            return BehaviourTreeEnums.NodeState.FAILURE;
+            return BehaviorTreeEnums.NodeState.FAILURE;
         }
 
         public override ActionNodeDataSO GetDataSO()

@@ -20,36 +20,41 @@ namespace BehaviorTree.Trees
             {
                 switch (ExternValueObjects[i].Type)
                 {
-                    case BehaviourTreeEnums.TreeExternValues.PlayerTransform:
+                    case BehaviorTreeEnums.TreeExternValues.PlayerTransform:
                     {
                         ExternValueObjects[i].Obj = playerTransform;
                         break;
                     }
-                    case BehaviourTreeEnums.TreeExternValues.EnvironmentGridManager:
+                    case BehaviorTreeEnums.TreeExternValues.EnvironmentGridManager:
                     {
                         ExternValueObjects[i].Obj = environmentGridManager;
                         break;
                     }
-                    case BehaviourTreeEnums.TreeExternValues.TickManager:
+                    case BehaviorTreeEnums.TreeExternValues.TickManager:
                     {
                         ExternValueObjects[i].Obj = tickeableService.GetTickManager;
                         break;
                     }
-                    case BehaviourTreeEnums.TreeExternValues.PlayerHandlerMovement:
+                    case BehaviorTreeEnums.TreeExternValues.PlayerHandlerMovement:
                     {
                         ExternValueObjects[i].Obj = playerTransform.GetComponent<PlayerMovementHandler>();
                         break;
                     }
-                    case BehaviourTreeEnums.TreeExternValues.PoolService:
+                    case BehaviorTreeEnums.TreeExternValues.PoolService:
                     {
                         ExternValueObjects[i].Obj = poolService;
+                        break;
+                    }
+                    case BehaviorTreeEnums.TreeExternValues.PlayerHealth:
+                    {
+                        // ExternValueObjects[i].Obj = playerTransform.GetComponent<PlayerHealth>();
                         break;
                     }
                 }
             }
         }
 
-        public Object GetEnemyValueObject(BehaviourTreeEnums.TreeEnemyValues type)
+        public Object GetEnemyValueObject(BehaviorTreeEnums.TreeEnemyValues type)
         {
             for (int i = 0; i < EnemyValueObjects.Length; i++)
             {
@@ -60,7 +65,7 @@ namespace BehaviorTree.Trees
             throw new NullReferenceException();
         }
 
-        public System.Object GetExternValueObject(BehaviourTreeEnums.TreeExternValues type)
+        public System.Object GetExternValueObject(BehaviorTreeEnums.TreeExternValues type)
         {
             for (int i = 0; i < ExternValueObjects.Length; i++)
             {

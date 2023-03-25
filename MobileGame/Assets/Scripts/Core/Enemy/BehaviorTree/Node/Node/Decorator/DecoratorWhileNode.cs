@@ -6,7 +6,7 @@ namespace BehaviorTree.Nodes.Decorator
     public class DecoratorWhileNode : DecoratorNode
     {
         private DecoratorWhileSO _so;
-        private BehaviourTreeEnums.NodeState _childEvaluate;
+        private BehaviorTreeEnums.NodeState _childEvaluate;
 
         public override NodeSO GetNodeSO()
         {
@@ -18,7 +18,7 @@ namespace BehaviorTree.Nodes.Decorator
             _so = (DecoratorWhileSO)nodeSO;
         }
 
-        public override BehaviourTreeEnums.NodeState Evaluate()
+        public override BehaviorTreeEnums.NodeState Evaluate()
         {
             ChildEvaluateAsync();
             return _childEvaluate;

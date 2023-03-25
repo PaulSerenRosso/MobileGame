@@ -11,14 +11,14 @@ namespace BehaviorTree.Nodes.Actions
         private CheckCirclesAreOccupiedNodeDataSO _data;
         private EnvironmentGridManager _environmentGridManager;
         
-        public override BehaviourTreeEnums.NodeState Evaluate()
+        public override BehaviorTreeEnums.NodeState Evaluate()
         {
             if (!_environmentGridManager.CheckIfOneMovePointInCirclesIsOccupied(_data.CircleIndexes, (Vector3)Sharer.InternValues[_so.InternValues[0].HashCode]))
             {
              
-                return BehaviourTreeEnums.NodeState.SUCCESS;
+                return BehaviorTreeEnums.NodeState.SUCCESS;
             }
-            return BehaviourTreeEnums.NodeState.FAILURE;
+            return BehaviorTreeEnums.NodeState.FAILURE;
         }
 
         public override void SetNodeSO(NodeSO nodeSO)
@@ -27,10 +27,10 @@ namespace BehaviorTree.Nodes.Actions
             _data = (CheckCirclesAreOccupiedNodeDataSO)_so.Data;
         }
 
-        public override void SetDependencyValues(Dictionary<BehaviourTreeEnums.TreeExternValues, object> externDependencyValues, Dictionary<BehaviourTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
+        public override void SetDependencyValues(Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues, Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
         {
             _environmentGridManager =(EnvironmentGridManager)
-                externDependencyValues[BehaviourTreeEnums.TreeExternValues.EnvironmentGridManager];
+                externDependencyValues[BehaviorTreeEnums.TreeExternValues.EnvironmentGridManager];
         }
 
         public override NodeSO GetNodeSO()

@@ -7,7 +7,7 @@ namespace BehaviorTree.SO.Actions
     {
         protected override void SetDependencyValues()
         {
-            
+            ExternValues = new[] { BehaviorTreeEnums.TreeExternValues.PlayerHealth };
         }
 
         public override Type GetTypeNode()

@@ -4,7 +4,7 @@
     {
         public override void UpdateComment()
         {
-            Comment = "";
+            Comment = "Nœud qui s'occupe d'effectuer les dégats au joueur";
         }
     }
 }

@@ -22,18 +22,18 @@ namespace BehaviorTree.Nodes.Actions
             return _so;
         }
 
-        public override BehaviourTreeEnums.NodeState Evaluate()
+        public override BehaviorTreeEnums.NodeState Evaluate()
         {
             GameObject gameObject = _poolService.GetFromPool(_data.ParticleGO);
             gameObject.transform.position = (Vector3)Sharer.InternValues[_so.InternValues[0].HashCode];
-            return BehaviourTreeEnums.NodeState.SUCCESS;
+            return BehaviorTreeEnums.NodeState.SUCCESS;
         }
 
         public override void SetDependencyValues(
-            Dictionary<BehaviourTreeEnums.TreeExternValues, object> externDependencyValues,
-            Dictionary<BehaviourTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
+            Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
+            Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
         {
-            _poolService = (IPoolService)externDependencyValues[BehaviourTreeEnums.TreeExternValues.PoolService];
+            _poolService = (IPoolService)externDependencyValues[BehaviorTreeEnums.TreeExternValues.PoolService];
             _poolService.CreatePool(_data.ParticleGO, _data.Count);
         }
 

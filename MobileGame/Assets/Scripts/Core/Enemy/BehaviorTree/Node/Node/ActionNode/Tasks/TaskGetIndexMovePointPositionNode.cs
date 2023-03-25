@@ -22,21 +22,21 @@ namespace BehaviorTree.Nodes.Actions
             return _so;
         }
 
-        public override BehaviourTreeEnums.NodeState Evaluate()
+        public override BehaviorTreeEnums.NodeState Evaluate()
         {
             int index = (int)Sharer.InternValues[_so.InternValues[0].HashCode];
             CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[1].HashCode,
                 _environmentGridManager.MovePoints[index].MeshRenderer.transform.position);
-            return BehaviourTreeEnums.NodeState.SUCCESS;
+            return BehaviorTreeEnums.NodeState.SUCCESS;
         }
 
         public override void SetDependencyValues(
-            Dictionary<BehaviourTreeEnums.TreeExternValues, object> externDependencyValues,
-            Dictionary<BehaviourTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
+            Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
+            Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
         {
             _environmentGridManager =
                 (EnvironmentGridManager)externDependencyValues[
-                    BehaviourTreeEnums.TreeExternValues.EnvironmentGridManager];
+                    BehaviorTreeEnums.TreeExternValues.EnvironmentGridManager];
         }
 
         public override ActionNodeDataSO GetDataSO()

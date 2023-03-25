@@ -18,9 +18,9 @@ namespace BehaviorTree.Nodes.Actions
             return _so;
         }
         
-        public override BehaviourTreeEnums.NodeState Evaluate()
+        public override BehaviorTreeEnums.NodeState Evaluate()
         {
-            return BehaviourTreeEnums.NodeState.SUCCESS;
+            return BehaviorTreeEnums.NodeState.SUCCESS;
         }
 
         public override ActionNodeDataSO GetDataSO()
