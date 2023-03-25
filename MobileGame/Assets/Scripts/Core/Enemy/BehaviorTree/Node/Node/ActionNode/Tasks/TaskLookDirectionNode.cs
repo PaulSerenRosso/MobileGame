@@ -1,4 +1,7 @@
-﻿using BehaviorTree.SO.Actions;
+﻿using System.Collections.Generic;
+using BehaviorTree.SO.Actions;
+using DG.Tweening;
+using UnityEngine;
 
 namespace BehaviorTree.Nodes.Actions
 {
@@ -6,7 +9,11 @@ namespace BehaviorTree.Nodes.Actions
     {
         private TaskLookDirectionNodeSO _so;
         private TaskLookDirectionNodeDataSO _data;
-        
+
+        private Transform _transform;
+        private bool _initRotation;
+        private bool _rotationIsFinished;
+
         public override NodeSO GetNodeSO()
         {
             return _so;
@@ -17,10 +24,31 @@ namespace BehaviorTree.Nodes.Actions
             _so = (TaskLookDirectionNodeSO)nodeSO;
             _data = (TaskLookDirectionNodeDataSO)_so.Data;
         }
-        
-        public override BehaviourTreeEnums.NodeState Evaluate()
+
+        public override BehaviorTreeEnums.NodeState Evaluate()
         {
-            throw new System.NotImplementedException();
+            if (!_initRotation)
+            {
+                _transform.DORotate(
+                    (Vector3)Sharer.InternValues[_so.InternValues[0].HashCode],
+                    _data.TimeRotation).OnComplete(() => _rotationIsFinished = true);
+                _initRotation = true;
+            }
+            else if (_rotationIsFinished)
+            {
+                _initRotation = false;
+                _rotationIsFinished = false;
+                return BehaviorTreeEnums.NodeState.SUCCESS;
+            }
+
+            return BehaviorTreeEnums.NodeState.FAILURE;
+        }
+
+        public override void SetDependencyValues(
+            Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
+            Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
+        {
+            _transform = (Transform)enemyDependencyValues[BehaviorTreeEnums.TreeEnemyValues.Transform];
         }
 
         public override ActionNodeDataSO GetDataSO()

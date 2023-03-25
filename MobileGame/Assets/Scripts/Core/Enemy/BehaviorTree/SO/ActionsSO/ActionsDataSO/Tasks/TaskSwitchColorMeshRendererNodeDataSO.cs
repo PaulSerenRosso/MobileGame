@@ -17,7 +17,7 @@ namespace BehaviorTree.SO.Actions
 
         protected override void SetDependencyValues()
         {
-            EnemyValues = new[] { BehaviourTreeEnums.TreeEnemyValues.MeshRenderer };
+            EnemyValues = new[] { BehaviorTreeEnums.TreeEnemyValues.MeshRenderer };
         }
     }
 }

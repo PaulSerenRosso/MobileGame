@@ -1,9 +1,15 @@
 public class EnemyEnums
 {
-    public enum EnemyState
+    public enum EnemyMobilityState
     {
-        Vulnerable,
-        Stagger,
-        Invunerable
+        VULNERABLE,
+        STAGGER,
+        INVUNERABLE
+    }
+
+    public enum EnemyBlockingState
+    {
+        VULNERABLE,
+        BLOCKING
     }
 }

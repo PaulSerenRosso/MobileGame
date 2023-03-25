@@ -1,4 +1,4 @@
-public class BehaviourTreeEnums
+public class BehaviorTreeEnums
 {
     public enum TreeEnemyValues
     {
@@ -15,7 +15,8 @@ public class BehaviourTreeEnums
         EnvironmentGridManager,
         TickManager,
         PlayerHandlerMovement,
-        PoolService
+        PoolService,
+        PlayerHealth
     }
 
     public enum NodeState

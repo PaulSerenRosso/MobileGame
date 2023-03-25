@@ -24,23 +24,23 @@ namespace BehaviorTree.Nodes.Actions
             _data = (TaskMoveGridNodeDataSO)_so.Data;
         }
 
-        public override BehaviourTreeEnums.NodeState Evaluate()
+        public override BehaviorTreeEnums.NodeState Evaluate()
         {
             _environmentGridManager.MoveGrid((Vector3)Sharer.InternValues[_so.InternValues[0].HashCode]);
             _playerMovementHandler.SetCurrentMovePoint((int)Sharer.InternValues[_so.InternValues[1].HashCode]);
-            return BehaviourTreeEnums.NodeState.SUCCESS;
+            return BehaviorTreeEnums.NodeState.SUCCESS;
         }
 
         public override void SetDependencyValues(
-            Dictionary<BehaviourTreeEnums.TreeExternValues, object> externDependencyValues,
-            Dictionary<BehaviourTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
+            Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
+            Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
         {
             _environmentGridManager =
                 (EnvironmentGridManager)externDependencyValues[
-                    BehaviourTreeEnums.TreeExternValues.EnvironmentGridManager];
+                    BehaviorTreeEnums.TreeExternValues.EnvironmentGridManager];
             _playerMovementHandler =
                 (PlayerMovementHandler)externDependencyValues[
-                    BehaviourTreeEnums.TreeExternValues.PlayerHandlerMovement];
+                    BehaviorTreeEnums.TreeExternValues.PlayerHandlerMovement];
         }
 
         public override ActionNodeDataSO GetDataSO()

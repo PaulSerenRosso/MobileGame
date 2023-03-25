@@ -21,18 +21,18 @@ namespace BehaviorTree.Nodes.Actions
             _data = (TaskSetStateNodeDataSO)_so.Data;
         }
 
-        public override BehaviourTreeEnums.NodeState Evaluate()
+        public override BehaviorTreeEnums.NodeState Evaluate()
         {
             Debug.Log("SetState");
-            _enemyManager.CurrentState = _data.EnemyState;
-            return BehaviourTreeEnums.NodeState.SUCCESS;
+            _enemyManager.CurrentMobilityState = _data.EnemyMobilityState;
+            return BehaviorTreeEnums.NodeState.SUCCESS;
         }
 
         public override void SetDependencyValues(
-            Dictionary<BehaviourTreeEnums.TreeExternValues, object> externDependencyValues,
-            Dictionary<BehaviourTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
+            Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
+            Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
         {
-            _enemyManager = (EnemyManager)enemyDependencyValues[BehaviourTreeEnums.TreeEnemyValues.EnemyManager];
+            _enemyManager = (EnemyManager)enemyDependencyValues[BehaviorTreeEnums.TreeEnemyValues.EnemyManager];
         }
 
         public override ActionNodeDataSO GetDataSO()

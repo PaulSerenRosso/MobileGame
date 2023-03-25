@@ -102,17 +102,17 @@ namespace BehaviorTreeEditor
             {
                 switch (internValue.PropertyType)
                 {
-                    case BehaviourTreeEnums.InternValuePropertyType.GET:
+                    case BehaviorTreeEnums.InternValuePropertyType.GET:
                     {
                         _getValues.Add(internValue);
                         break;
                     }
-                    case BehaviourTreeEnums.InternValuePropertyType.SET:
+                    case BehaviorTreeEnums.InternValuePropertyType.SET:
                     {
                         _setValues.Add(internValue);
                         break;
                     }
-                    case BehaviourTreeEnums.InternValuePropertyType.REMOVE:
+                    case BehaviorTreeEnums.InternValuePropertyType.REMOVE:
                     {
                         _removedValues.Add(internValue);
                         break;

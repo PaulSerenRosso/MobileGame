@@ -4,7 +4,7 @@
     {
         public override void UpdateComment()
         {
-            Comment = "";
+            Comment = "Nœud qui modifie la valeur float d'un Shader avec un LERP";
         }
     }
 }

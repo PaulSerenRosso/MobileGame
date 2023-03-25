@@ -2,26 +2,26 @@
 {
     public class SelectorNode : CompositeNode
     {
-        public override BehaviourTreeEnums.NodeState Evaluate()
+        public override BehaviorTreeEnums.NodeState Evaluate()
         {
             foreach (Node node in Children)
             {
                 switch (node.Evaluate())
                 {
-                    case BehaviourTreeEnums.NodeState.FAILURE:
+                    case BehaviorTreeEnums.NodeState.FAILURE:
                         continue;
-                    case BehaviourTreeEnums.NodeState.SUCCESS:
-                        _state = BehaviourTreeEnums.NodeState.SUCCESS;
+                    case BehaviorTreeEnums.NodeState.SUCCESS:
+                        _state = BehaviorTreeEnums.NodeState.SUCCESS;
                         return _state;
-                    case BehaviourTreeEnums.NodeState.RUNNING:
-                        _state = BehaviourTreeEnums.NodeState.RUNNING;
+                    case BehaviorTreeEnums.NodeState.RUNNING:
+                        _state = BehaviorTreeEnums.NodeState.RUNNING;
                         return _state;
                     default:
                         continue;
                 }
             }
 
-            _state = BehaviourTreeEnums.NodeState.FAILURE;
+            _state = BehaviorTreeEnums.NodeState.FAILURE;
             return _state;
         }
     }

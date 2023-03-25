@@ -24,27 +24,27 @@ namespace BehaviorTree.Nodes.Actions
             _data = (CheckCirclesPlayerNodeDataSO)_so.Data;
         }
 
-        public override BehaviourTreeEnums.NodeState Evaluate()
+        public override BehaviorTreeEnums.NodeState Evaluate()
         {
             if (!_environmentGridManager.CheckIfMovePointInIsCircles(_playerMovementHandler.GetCurrentIndexMovePoint(),
                     _data.CirclesIndexes))
             {
              
-                return BehaviourTreeEnums.NodeState.SUCCESS;
+                return BehaviorTreeEnums.NodeState.SUCCESS;
             }
            
-            return BehaviourTreeEnums.NodeState.FAILURE;
+            return BehaviorTreeEnums.NodeState.FAILURE;
         }
 
         public override void SetDependencyValues(
-            Dictionary<BehaviourTreeEnums.TreeExternValues, object> externDependencyValues,
-            Dictionary<BehaviourTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
+            Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
+            Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
         {
             _environmentGridManager = (EnvironmentGridManager)
-                externDependencyValues[BehaviourTreeEnums.TreeExternValues.EnvironmentGridManager];
+                externDependencyValues[BehaviorTreeEnums.TreeExternValues.EnvironmentGridManager];
             _playerMovementHandler =
                 (PlayerMovementHandler)externDependencyValues[
-                    BehaviourTreeEnums.TreeExternValues.PlayerHandlerMovement];
+                    BehaviorTreeEnums.TreeExternValues.PlayerHandlerMovement];
         }
 
         public override ActionNodeDataSO GetDataSO()

@@ -7,7 +7,7 @@ namespace BehaviorTree.SO.Decorator
     [CreateAssetMenu(menuName = "BehaviorTree/Decorator/WhileSO", fileName = "new D_While_Spe")]
     public class DecoratorWhileSO : DecoratorSO
     {
-        public BehaviourTreeEnums.NodeState WhileStateCondition;
+        public BehaviorTreeEnums.NodeState WhileStateCondition;
 
         public override Type GetTypeNode()
         {

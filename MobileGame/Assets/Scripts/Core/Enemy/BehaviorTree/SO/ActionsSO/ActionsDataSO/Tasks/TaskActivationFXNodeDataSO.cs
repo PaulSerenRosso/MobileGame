@@ -5,7 +5,7 @@ namespace BehaviorTree.SO.Actions
 {
     public class TaskActivationFXNodeDataSO : ActionNodeDataSO
     {
-        public BehaviourTreeEnums.TreeEnemyValues[] FXEnumValues;
+        public BehaviorTreeEnums.TreeEnemyValues[] FXEnumValues;
         
         protected override void SetDependencyValues()
         {

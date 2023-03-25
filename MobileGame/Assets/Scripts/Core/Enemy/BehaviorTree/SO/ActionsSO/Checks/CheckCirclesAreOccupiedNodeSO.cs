@@ -12,8 +12,8 @@ namespace BehaviorTree
             _internValuesCount = 1;
             if (InternValues.Count > 0)
             {
-                InternValues[0].SetInternValueWithoutKey(BehaviourTreeEnums.InternValueType.VECTOR3,
-                    BehaviourTreeEnums.InternValuePropertyType.GET, "Destination(Vector3) of a MovePoint");
+                InternValues[0].SetInternValueWithoutKey(BehaviorTreeEnums.InternValueType.VECTOR3,
+                    BehaviorTreeEnums.InternValuePropertyType.GET, "Destination(Vector3) of a MovePoint");
             }
         }
 

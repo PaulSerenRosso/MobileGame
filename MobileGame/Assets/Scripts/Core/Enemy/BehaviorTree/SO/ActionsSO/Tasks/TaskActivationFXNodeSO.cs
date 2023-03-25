@@ -4,7 +4,7 @@
     {
         public override void UpdateComment()
         {
-            Comment = "";
+            Comment = "Nœud qui s'occupe d'activer des FX sur le boss";
         }
     }
 }

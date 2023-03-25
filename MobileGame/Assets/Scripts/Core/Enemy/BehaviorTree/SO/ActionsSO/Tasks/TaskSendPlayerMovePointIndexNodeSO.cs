@@ -12,8 +12,8 @@ namespace BehaviorTree
             _internValuesCount = 1;
             if (InternValues.Count > 0)
             {
-                InternValues[0].SetInternValueWithoutKey(BehaviourTreeEnums.InternValueType.INT,
-                    BehaviourTreeEnums.InternValuePropertyType.SET, "Index(int) of the movepoint where the player is");
+                InternValues[0].SetInternValueWithoutKey(BehaviorTreeEnums.InternValueType.INT,
+                    BehaviorTreeEnums.InternValuePropertyType.SET, "Index(int) of the movepoint where the player is");
             }
         }
 

@@ -21,7 +21,7 @@ namespace BehaviorTree.Nodes.Composite
             _so = (RandomSequenceSO)nodeSO;
         }
 
-        public override BehaviourTreeEnums.NodeState Evaluate()
+        public override BehaviorTreeEnums.NodeState Evaluate()
         {
             bool anyChildIsRunning = false;
             _childrenEvaluatedCount = 0;
@@ -34,12 +34,12 @@ namespace BehaviorTree.Nodes.Composite
                 var currentElement = Children[pickRandomElementIndex];
                 switch (currentElement.Evaluate())
                 {
-                    case BehaviourTreeEnums.NodeState.FAILURE:
-                        _state = BehaviourTreeEnums.NodeState.FAILURE;
+                    case BehaviorTreeEnums.NodeState.FAILURE:
+                        _state = BehaviorTreeEnums.NodeState.FAILURE;
                         return _state;
-                    case BehaviourTreeEnums.NodeState.SUCCESS:
+                    case BehaviorTreeEnums.NodeState.SUCCESS:
                         break;
-                    case BehaviourTreeEnums.NodeState.RUNNING:
+                    case BehaviorTreeEnums.NodeState.RUNNING:
                         anyChildIsRunning = true;
                         break;
                 }
@@ -47,7 +47,7 @@ namespace BehaviorTree.Nodes.Composite
                 _currentChildrenProbabilities.RemoveAt(pickRandomElementIndex);
             }
 
-            _state = anyChildIsRunning ? BehaviourTreeEnums.NodeState.RUNNING : BehaviourTreeEnums.NodeState.SUCCESS;
+            _state = anyChildIsRunning ? BehaviorTreeEnums.NodeState.RUNNING : BehaviorTreeEnums.NodeState.SUCCESS;
             return _state;
         }
     }

@@ -9,7 +9,7 @@ namespace BehaviorTree.Nodes.Actions
     {
         public NodeValuesSharer Sharer;
 
-        public (BehaviourTreeEnums.TreeEnemyValues[] enemyValues, BehaviourTreeEnums.TreeExternValues[] externValues)
+        public (BehaviorTreeEnums.TreeEnemyValues[] enemyValues, BehaviorTreeEnums.TreeExternValues[] externValues)
             GetDependencyValues()
         {
             var so = (ActionNodeSO)GetNodeSO();
@@ -17,8 +17,8 @@ namespace BehaviorTree.Nodes.Actions
         }
 
         public virtual void SetDependencyValues(
-            Dictionary<BehaviourTreeEnums.TreeExternValues, Object> externDependencyValues,
-            Dictionary<BehaviourTreeEnums.TreeEnemyValues, Object> enemyDependencyValues)
+            Dictionary<BehaviorTreeEnums.TreeExternValues, Object> externDependencyValues,
+            Dictionary<BehaviorTreeEnums.TreeEnemyValues, Object> enemyDependencyValues)
         {
             
         }

@@ -8,7 +8,7 @@ namespace BehaviorTree
     {
         public override void UpdateComment()
         {
-            Comment = "Modifier la state actuelle par la state renseignée";
+            Comment = "Nœud qui modifie la state actuelle par la state renseignée";
         }
     }
 }

@@ -8,8 +8,10 @@ namespace Actions
         {
             get;
         }
+        
         public abstract void MakeAction();
         public abstract void SetupAction(params object[] arguments);
+        
         public  System.Action MakeActionEvent;
         public  System.Action EndActionEvent;
     }

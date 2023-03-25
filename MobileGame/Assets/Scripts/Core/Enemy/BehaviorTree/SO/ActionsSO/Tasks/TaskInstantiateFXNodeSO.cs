@@ -8,14 +8,14 @@
             _internValuesCount = 1;
             if (InternValues.Count > 0)
             {
-                InternValues[0].SetInternValueWithoutKey(BehaviourTreeEnums.InternValueType.INT,
-                    BehaviourTreeEnums.InternValuePropertyType.GET, "MovePoint(Int) index of position");
+                InternValues[0].SetInternValueWithoutKey(BehaviorTreeEnums.InternValueType.INT,
+                    BehaviorTreeEnums.InternValuePropertyType.GET, "MovePoint(Int) index of position");
             }
         }
 
         public override void UpdateComment()
         {
-            Comment = "";
+            Comment = "Nœud qui permet d'instancier un FX";
         }
     }
 }

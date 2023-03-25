@@ -7,7 +7,7 @@ namespace BehaviorTree.Trees
     [Serializable]
     public class ExternValueObject
     {
-        public BehaviourTreeEnums.TreeExternValues Type;
+        public BehaviorTreeEnums.TreeExternValues Type;
         [HideInInspector] public Object Obj;
     }
 }

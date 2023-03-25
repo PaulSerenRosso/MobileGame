@@ -1,4 +1,8 @@
-﻿using BehaviorTree.SO.Actions;
+﻿using System.Collections.Generic;
+using BehaviorTree.SO.Actions;
+using Environment.MoveGrid;
+using HelperPSR.Collections;
+using UnityEngine;
 
 namespace BehaviorTree.Nodes.Actions
 {
@@ -6,6 +10,8 @@ namespace BehaviorTree.Nodes.Actions
     {
         private TaskGetPlayerDirectionNodeSO _so;
         private TaskGetPlayerDirectionNodeDataSO _data;
+        private EnvironmentGridManager _environmentGridManager;
+        private Transform _transform;
 
         public override NodeSO GetNodeSO()
         {
@@ -18,9 +24,25 @@ namespace BehaviorTree.Nodes.Actions
             _data = (TaskGetPlayerDirectionNodeDataSO)_so.Data;
         }
 
-        public override BehaviourTreeEnums.NodeState Evaluate()
+        public override BehaviorTreeEnums.NodeState Evaluate()
         {
-            throw new System.NotImplementedException();
+            int playerMovePointIndex = (int)Sharer.InternValues[_so.InternValues[0].HashCode];
+            Vector3 direction = _transform.position -
+                                _environmentGridManager.MovePoints[playerMovePointIndex].LocalPosition;
+
+            CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[1].HashCode, direction.normalized);
+
+            return BehaviorTreeEnums.NodeState.SUCCESS;
+        }
+
+        public override void SetDependencyValues(
+            Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
+            Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
+        {
+            _environmentGridManager =
+                (EnvironmentGridManager)externDependencyValues[
+                    BehaviorTreeEnums.TreeExternValues.EnvironmentGridManager];
+            _transform = (Transform)enemyDependencyValues[BehaviorTreeEnums.TreeEnemyValues.Transform];
         }
 
         public override ActionNodeDataSO GetDataSO()

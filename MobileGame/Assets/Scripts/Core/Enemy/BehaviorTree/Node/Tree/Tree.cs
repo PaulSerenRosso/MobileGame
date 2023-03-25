@@ -89,10 +89,10 @@ namespace BehaviorTree.Trees
         {
             var actionChild = (ActionNode)child;
             var dependencyValuesType = actionChild.GetDependencyValues();
-            Dictionary<BehaviourTreeEnums.TreeExternValues, Object> dependencyExternValuesObjects =
-                new Dictionary<BehaviourTreeEnums.TreeExternValues, Object>();
-            Dictionary<BehaviourTreeEnums.TreeEnemyValues, Object> dependencyEnemyValuesObjects =
-                new Dictionary<BehaviourTreeEnums.TreeEnemyValues, Object>();
+            Dictionary<BehaviorTreeEnums.TreeExternValues, Object> dependencyExternValuesObjects =
+                new Dictionary<BehaviorTreeEnums.TreeExternValues, Object>();
+            Dictionary<BehaviorTreeEnums.TreeEnemyValues, Object> dependencyEnemyValuesObjects =
+                new Dictionary<BehaviorTreeEnums.TreeEnemyValues, Object>();
             for (int i = 0; i < dependencyValuesType.enemyValues.Length; i++)
             {
                 dependencyEnemyValuesObjects.Add(dependencyValuesType.enemyValues[i],

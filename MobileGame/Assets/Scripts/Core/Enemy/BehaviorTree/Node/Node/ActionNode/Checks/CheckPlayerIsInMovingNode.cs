@@ -21,14 +21,20 @@ namespace BehaviorTree.Nodes.Actions
             _data = (CheckPlayerIsInMovingNodeDataSO)_so.Data;
         }
 
-        public override BehaviourTreeEnums.NodeState Evaluate()
+        public override BehaviorTreeEnums.NodeState Evaluate()
         {
-            return BehaviourTreeEnums.NodeState.SUCCESS;
+            return _playerMovementHandler.CheckIsMoving()
+                ? BehaviorTreeEnums.NodeState.FAILURE
+                : BehaviorTreeEnums.NodeState.SUCCESS;
         }
 
-        public override void SetDependencyValues(Dictionary<BehaviourTreeEnums.TreeExternValues, object> externDependencyValues, Dictionary<BehaviourTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
+        public override void SetDependencyValues(
+            Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
+            Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
         {
-            _playerMovementHandler = (PlayerMovementHandler)externDependencyValues[BehaviourTreeEnums.TreeExternValues.PlayerHandlerMovement];
+            _playerMovementHandler =
+                (PlayerMovementHandler)externDependencyValues[
+                    BehaviorTreeEnums.TreeExternValues.PlayerHandlerMovement];
         }
 
         public override ActionNodeDataSO GetDataSO()
