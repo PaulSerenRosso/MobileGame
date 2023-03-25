@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
+using Player;
 
 namespace BehaviorTree.Nodes.Actions
 {
@@ -9,7 +10,7 @@ namespace BehaviorTree.Nodes.Actions
         private TaskDamagePlayerNodeDataSO _data;
 
         // TODO: solve cyclic error between enemy assembly and player assembly
-        // private PlayerHealth _playerHealth;
+        private PlayerHealth _playerHealth;
 
         public override NodeSO GetNodeSO()
         {
@@ -24,6 +25,8 @@ namespace BehaviorTree.Nodes.Actions
 
         public override BehaviorTreeEnums.NodeState Evaluate()
         {
+            // TODO: think about combo attack of boss
+            _playerHealth.TakeDamage(_data.Damage);
             return BehaviorTreeEnums.NodeState.SUCCESS;
         }
 
@@ -31,8 +34,8 @@ namespace BehaviorTree.Nodes.Actions
             Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
             Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
         {
-            // _playerHealth =
-            //     (PlayerHealth)externDependencyValues[BehaviourTreeEnums.TreeExternValues.PlayerHealth];
+            _playerHealth =
+                 (PlayerHealth)externDependencyValues[BehaviorTreeEnums.TreeExternValues.PlayerHealth];
         }
 
         public override ActionNodeDataSO GetDataSO()
