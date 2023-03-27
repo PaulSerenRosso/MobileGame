@@ -5,6 +5,8 @@ namespace BehaviorTree.SO.Actions
 {
     public class TaskDamagePlayerNodeDataSO : ActionNodeDataSO
     {
+        public float Damage;
+        
         protected override void SetDependencyValues()
         {
             ExternValues = new[] { BehaviorTreeEnums.TreeExternValues.PlayerHealth };
