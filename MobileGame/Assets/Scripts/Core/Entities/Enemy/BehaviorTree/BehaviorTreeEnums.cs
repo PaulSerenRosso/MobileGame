@@ -24,7 +24,8 @@ public class BehaviorTreeEnums
     {
         RUNNING,
         SUCCESS,
-        FAILURE
+        FAILURE,
+        LOOP
     }
 
     public enum InternValueType
