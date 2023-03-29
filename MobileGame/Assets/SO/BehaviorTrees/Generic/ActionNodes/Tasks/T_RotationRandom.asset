@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64e4d777b7d057043a08abb33b479b7a, type: 3}
-  m_Name: T_Rotation_Data
+  m_Script: {fileID: 11500000, guid: 092a237659e2487c8fdfc94716a2b90e, type: 3}
+  m_Name: T_RotationRandom
   m_EditorClassIdentifier: 
-  ExternValues: 
-  EnemyValues: 02000000
-  TimeRotation: 3
-  RotationAmount: 90
+  _commentary: "Action de rotation de notre entit\xE9"
+  _internValuesCount: 0
+  Data: {fileID: 11400000, guid: e134c33b96200044e9bf0bbd55623621, type: 2}
+  InternValues: []

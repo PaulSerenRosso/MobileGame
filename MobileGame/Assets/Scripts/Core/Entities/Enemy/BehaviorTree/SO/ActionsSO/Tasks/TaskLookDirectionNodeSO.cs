@@ -1,5 +1,8 @@
-﻿namespace BehaviorTree
+﻿using UnityEngine;
+
+namespace BehaviorTree
 {
+    [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/LookDirectionNodeSO", fileName = "new T_LookDirection_Spe")]
     public class TaskLookDirectionNodeSO : TaskNodeSO
     {
         public override void UpdateInterValues()

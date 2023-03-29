@@ -1,5 +1,8 @@
-﻿namespace BehaviorTree
+﻿using UnityEngine;
+
+namespace BehaviorTree
 {
+    [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/GetPlayerDirectionNodeSO", fileName = "new T_GetPlayerDirection_Spe")]
     public class TaskGetPlayerDirectionNodeSO : TaskNodeSO
     {
         public override void UpdateInterValues()
