@@ -14,6 +14,7 @@ namespace Player.Handler
 
         [SerializeField] private TauntPlayerAction tauntPlayerAction;
    
+        
         protected override Actions.PlayerAction GetAction()
         {
             return tauntPlayerAction;
@@ -47,7 +48,7 @@ namespace Player.Handler
             AddCondition(CheckIsInAttack);
             AddCondition(CheckIsInMovement);
             inputService.SetHold(TryMakeTauntAction, CancelTaunt);
-            tauntPlayerAction.SetupAction((TickManager)arguments[1]);
+            tauntPlayerAction.SetupAction(arguments[1], arguments[2]);
         }
 
         private void CancelTaunt(InputAction.CallbackContext obj)

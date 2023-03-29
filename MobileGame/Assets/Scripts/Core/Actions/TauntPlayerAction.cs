@@ -1,4 +1,5 @@
 using HelperPSR.Tick;
+using Service.Hype;
 using TMPro;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ namespace Actions
         private bool _isTaunting;
         private bool _isStartTaunting;
 
+        private IHypeService _hypeService;
         public override bool IsInAction
         {
             get => _isTaunting;
@@ -45,6 +47,7 @@ namespace Actions
             _endTauntTimer.TickEvent += TickEndTaunt;
             _tauntText.text = "";
             _startTauntTimer.TickEvent += Taunt;
+            _hypeService =(IHypeService) arguments[1];
         }
         
 
