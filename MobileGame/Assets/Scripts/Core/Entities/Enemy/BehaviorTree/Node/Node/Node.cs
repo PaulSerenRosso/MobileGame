@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace BehaviorTree.Nodes
 {
@@ -26,6 +28,6 @@ namespace BehaviorTree.Nodes
             
         }
 
-        public abstract BehaviorTreeEnums.NodeState Evaluate();
+        public abstract IEnumerator<BehaviorTreeEnums.NodeState> Evaluate();
     }
 }

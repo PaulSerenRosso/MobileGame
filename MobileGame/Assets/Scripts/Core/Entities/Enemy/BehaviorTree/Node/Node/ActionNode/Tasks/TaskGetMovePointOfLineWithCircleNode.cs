@@ -23,13 +23,13 @@ namespace BehaviorTree.Nodes.Actions
             return _so;
         }
 
-        public override BehaviorTreeEnums.NodeState Evaluate()
+        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
         {
             int startIndex = (int)Sharer.InternValues[_so.InternValues[0].HashCode];
             CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[1].HashCode,
                 _environmentGridManager.GetIndexMovePointFromStartMovePointLineWithCircle(startIndex,
                     _data.CircleIndex));
-            return BehaviorTreeEnums.NodeState.SUCCESS;
+            yield return BehaviorTreeEnums.NodeState.SUCCESS;
         }
 
         public override void SetDependencyValues(

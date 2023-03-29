@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using BehaviorTree.SO.Decorator;
 
 namespace BehaviorTree.Nodes.Decorator
@@ -16,10 +17,10 @@ namespace BehaviorTree.Nodes.Decorator
             SO = (DecoratorReturnerSO)nodeSO;
         }
 
-        public override BehaviorTreeEnums.NodeState Evaluate()
+        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
         {
-            var childEvaluate = Child.Evaluate();
-            return childEvaluate == BehaviorTreeEnums.NodeState.LOOP ? BehaviorTreeEnums.NodeState.LOOP : SO.ReturnState;
+            Child.Evaluate();
+            yield return SO.ReturnState;
         }
     }
 }

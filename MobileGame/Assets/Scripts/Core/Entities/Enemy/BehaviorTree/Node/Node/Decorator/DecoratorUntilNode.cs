@@ -1,4 +1,8 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using BehaviorTree.SO.Decorator;
+using UnityEngine;
 
 namespace BehaviorTree.Nodes.Decorator
 {
@@ -15,10 +19,13 @@ namespace BehaviorTree.Nodes.Decorator
         {
             _so = (DecoratorUntilSO)nodeSO;
         }
-
-        public override BehaviorTreeEnums.NodeState Evaluate()
+        
+        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
         {
-            return Child.Evaluate() == _so.BreakStateCondition ? _so.BreakStateCondition : BehaviorTreeEnums.NodeState.LOOP;
+            var childEvaluate = Child.Evaluate();
+            childEvaluate.MoveNext();
+            Func<bool> condition = () => childEvaluate.Current == _so.BreakStateCondition;
+            yield return _so.BreakStateCondition;
         }
     }
 }

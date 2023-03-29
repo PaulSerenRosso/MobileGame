@@ -22,11 +22,10 @@ namespace BehaviorTree.Nodes.Actions
             _data = (CheckPlayerDirectionNodeDataSO)_so.Data;
         }
 
-        public override BehaviorTreeEnums.NodeState Evaluate()
+        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
         {
             float angle = Vector3.Angle(_transform.forward, (Vector3) Sharer.InternValues[_so.InternValues[0].HashCode]);
-            if (angle < 10) return BehaviorTreeEnums.NodeState.SUCCESS;
-            return BehaviorTreeEnums.NodeState.FAILURE;
+            yield return angle < 10 ? BehaviorTreeEnums.NodeState.SUCCESS : BehaviorTreeEnums.NodeState.FAILURE;
         }
 
         public override void SetDependencyValues(

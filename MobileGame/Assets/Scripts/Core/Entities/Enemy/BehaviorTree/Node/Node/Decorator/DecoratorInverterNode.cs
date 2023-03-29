@@ -1,21 +1,20 @@
-﻿namespace BehaviorTree.Nodes.Decorator
+﻿using System.Collections.Generic;
+using UnityEngine;
+
+namespace BehaviorTree.Nodes.Decorator
 {
     public class DecoratorInverterNode : DecoratorNode
     {
-        public override BehaviorTreeEnums.NodeState Evaluate()
+        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
         {
             var childEvaluate = Child.Evaluate();
-            if (childEvaluate == BehaviorTreeEnums.NodeState.RUNNING)
+            childEvaluate.MoveNext();
+            if (childEvaluate.Current == BehaviorTreeEnums.NodeState.RUNNING)
             {
-                return BehaviorTreeEnums.NodeState.RUNNING;
+                yield return BehaviorTreeEnums.NodeState.RUNNING;
             }
 
-            if (childEvaluate == BehaviorTreeEnums.NodeState.LOOP)
-            {
-                return BehaviorTreeEnums.NodeState.LOOP;
-            }
-
-            return childEvaluate == BehaviorTreeEnums.NodeState.FAILURE
+            yield return childEvaluate.Current == BehaviorTreeEnums.NodeState.FAILURE
                 ? BehaviorTreeEnums.NodeState.SUCCESS
                 : BehaviorTreeEnums.NodeState.FAILURE;
         }

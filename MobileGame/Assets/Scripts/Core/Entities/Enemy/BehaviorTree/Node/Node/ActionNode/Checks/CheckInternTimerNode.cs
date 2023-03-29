@@ -1,4 +1,5 @@
-﻿using BehaviorTree.SO.Actions;
+﻿using System.Collections.Generic;
+using BehaviorTree.SO.Actions;
 using UnityEngine;
 
 namespace BehaviorTree.Nodes.Actions
@@ -20,15 +21,15 @@ namespace BehaviorTree.Nodes.Actions
             _data = (CheckInternTimerNodeDataSO)_so.Data;
         }
 
-        public override BehaviorTreeEnums.NodeState Evaluate()
+        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
         {
             if (_timer > (float)Sharer.InternValues[_so.InternValues[0].HashCode])
             {
                 _timer = 0;
-                return BehaviorTreeEnums.NodeState.SUCCESS;
+                yield return BehaviorTreeEnums.NodeState.SUCCESS;
             }
             _timer += Time.deltaTime;
-            return BehaviorTreeEnums.NodeState.FAILURE;
+            yield return BehaviorTreeEnums.NodeState.FAILURE;
         }
 
         public override ActionNodeDataSO GetDataSO()

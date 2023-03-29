@@ -21,9 +21,11 @@ namespace BehaviorTree.Nodes.Actions
             _data = (CheckStateNodeDataSO)_so.Data;
         }
 
-        public override BehaviorTreeEnums.NodeState Evaluate()
+        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
         {
-            return _enemyManager.CurrentMobilityState == _data.enemyMobilityState ? BehaviorTreeEnums.NodeState.SUCCESS : BehaviorTreeEnums.NodeState.FAILURE;
+            yield return _enemyManager.CurrentMobilityState == _data.enemyMobilityState
+                ? BehaviorTreeEnums.NodeState.SUCCESS
+                : BehaviorTreeEnums.NodeState.FAILURE;
         }
 
         public override void SetDependencyValues(

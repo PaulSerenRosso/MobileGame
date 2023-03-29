@@ -1,35 +1,37 @@
-﻿namespace BehaviorTree.Nodes.Composite
+﻿using System.Collections.Generic;
+
+namespace BehaviorTree.Nodes.Composite
 {
     public class SequenceNode : CompositeNode
     {
-        public override BehaviorTreeEnums.NodeState Evaluate()
+        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
         {
             bool anyChildIsRunning = false;
 
-            for (var index = 0; index < Children.Count; index++)
+            foreach (var node in Children)
             {
-                var node = Children[index];
-                switch (node.Evaluate())
+                IEnumerator<BehaviorTreeEnums.NodeState> state = node.Evaluate();
+                state.MoveNext();
+                switch (state.Current)
                 {
                     case BehaviorTreeEnums.NodeState.FAILURE:
                         _state = BehaviorTreeEnums.NodeState.FAILURE;
-                        return _state;
+                        yield return _state;
+                        yield break;
                     case BehaviorTreeEnums.NodeState.SUCCESS:
                         continue;
                     case BehaviorTreeEnums.NodeState.RUNNING:
                         anyChildIsRunning = true;
                         continue;
-                    case BehaviorTreeEnums.NodeState.LOOP:
-                        index--;
-                        break;
                     default:
                         _state = BehaviorTreeEnums.NodeState.SUCCESS;
-                        return _state;
+                        yield return _state;
+                        yield break;
                 }
             }
 
             _state = anyChildIsRunning ? BehaviorTreeEnums.NodeState.RUNNING : BehaviorTreeEnums.NodeState.SUCCESS;
-            return _state;
+            yield return _state;
         }
     }
 }

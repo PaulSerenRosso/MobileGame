@@ -1,32 +1,34 @@
-﻿namespace BehaviorTree.Nodes.Composite
+﻿using System.Collections.Generic;
+
+namespace BehaviorTree.Nodes.Composite
 {
     public class SelectorNode : CompositeNode
     {
-        public override BehaviorTreeEnums.NodeState Evaluate()
+        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
         {
-            for (var index = 0; index < Children.Count; index++)
+            foreach (var node in Children)
             {
-                var node = Children[index];
-                switch (node.Evaluate())
+                IEnumerator<BehaviorTreeEnums.NodeState> state = node.Evaluate();
+                state.MoveNext();
+                switch (state.Current)
                 {
                     case BehaviorTreeEnums.NodeState.FAILURE:
                         continue;
                     case BehaviorTreeEnums.NodeState.SUCCESS:
                         _state = BehaviorTreeEnums.NodeState.SUCCESS;
-                        return _state;
+                        yield return _state;
+                        yield break;
                     case BehaviorTreeEnums.NodeState.RUNNING:
-                        _state = BehaviorTreeEnums.NodeState.RUNNING;
-                        return _state;
-                    case BehaviorTreeEnums.NodeState.LOOP:
-                        index--;
-                        break;
+                        _state = BehaviorTreeEnums.NodeState.RUNNING; 
+                        yield return _state;
+                        yield break;
                     default:
                         continue;
                 }
             }
 
             _state = BehaviorTreeEnums.NodeState.FAILURE;
-            return _state;
+            yield return _state;
         }
     }
 }

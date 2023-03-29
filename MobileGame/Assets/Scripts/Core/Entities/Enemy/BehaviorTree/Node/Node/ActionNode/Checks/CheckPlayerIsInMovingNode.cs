@@ -21,9 +21,9 @@ namespace BehaviorTree.Nodes.Actions
             _data = (CheckPlayerIsInMovingNodeDataSO)_so.Data;
         }
 
-        public override BehaviorTreeEnums.NodeState Evaluate()
+        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
         {
-            return _playerMovementHandler.CheckIsMoving()
+            yield return _playerMovementHandler.CheckIsMoving()
                 ? BehaviorTreeEnums.NodeState.FAILURE
                 : BehaviorTreeEnums.NodeState.SUCCESS;
         }

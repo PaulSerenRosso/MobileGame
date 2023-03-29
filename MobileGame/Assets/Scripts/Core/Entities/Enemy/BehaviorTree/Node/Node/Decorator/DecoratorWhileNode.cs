@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using BehaviorTree.SO.Decorator;
 
 namespace BehaviorTree.Nodes.Decorator
@@ -5,7 +7,6 @@ namespace BehaviorTree.Nodes.Decorator
     public class DecoratorWhileNode : DecoratorNode
     {
         private DecoratorWhileSO _so;
-        private BehaviorTreeEnums.NodeState _childEvaluate;
 
         public override NodeSO GetNodeSO()
         {
@@ -17,10 +18,12 @@ namespace BehaviorTree.Nodes.Decorator
             _so = (DecoratorWhileSO)nodeSO;
         }
 
-        public override BehaviorTreeEnums.NodeState Evaluate()
+        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
         {
-            _childEvaluate = Child.Evaluate();
-            return _childEvaluate == _so.WhileStateCondition ? BehaviorTreeEnums.NodeState.LOOP : _childEvaluate;
+            var childEvaluate = Child.Evaluate();
+            childEvaluate.MoveNext();
+            Func<bool> condition = () => childEvaluate.Current != _so.WhileStateCondition;
+            yield return _so.WhileStateCondition;
         }
     }
 }

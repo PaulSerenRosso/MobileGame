@@ -8,7 +8,7 @@ namespace BehaviorTree.Nodes.Composite
     public class RandomSelectorNode : CompositeNode
     {
         private RandomSelectorSO _so;
-        private List<int> _currentChildrenProbabilities = new List<int>();
+        private List<int> _currentChildrenProbabilities = new();
         private int _childrenEvaluatedCount;
         private int _pickedChildIndex;
         private List<Node> _currentChildrenToEvaluate;
@@ -23,32 +23,31 @@ namespace BehaviorTree.Nodes.Composite
             _so = (RandomSelectorSO)nodeSO;
         }
 
-        public override BehaviorTreeEnums.NodeState Evaluate()
+        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
         {
-            bool isLooping = false;
             _currentChildrenToEvaluate = new List<Node>(Children);
             _childrenEvaluatedCount = 0;
             _currentChildrenProbabilities = new List<int>(_so.ChildrenProbabilities);
             _pickedChildIndex = -1;
             while (_childrenEvaluatedCount < Children.Count)
             {
-                if (!isLooping) _pickedChildIndex =
+                _pickedChildIndex =
                     RandomHelper.PickRandomElementIndex(_currentChildrenProbabilities.ToArray());
                 var currentElement = _currentChildrenToEvaluate[_pickedChildIndex];
-                switch (currentElement.Evaluate())
+                IEnumerator<BehaviorTreeEnums.NodeState> state = currentElement.Evaluate();
+                state.MoveNext();
+                switch (state.Current)
                 {
                     case BehaviorTreeEnums.NodeState.FAILURE:
-                        isLooping = false;
                         break;
                     case BehaviorTreeEnums.NodeState.SUCCESS:
                         _state = BehaviorTreeEnums.NodeState.SUCCESS;
-                        return _state;
+                        yield return _state;
+                        yield break;
                     case BehaviorTreeEnums.NodeState.RUNNING:
                         _state = BehaviorTreeEnums.NodeState.RUNNING;
-                        return _state;
-                    case BehaviorTreeEnums.NodeState.LOOP:
-                        isLooping = true;
-                        continue;
+                        yield return _state;
+                        yield break;
                 }
 
                 _childrenEvaluatedCount++;
@@ -56,7 +55,7 @@ namespace BehaviorTree.Nodes.Composite
                 _currentChildrenToEvaluate.RemoveAt(_pickedChildIndex);
             }
 
-            return BehaviorTreeEnums.NodeState.FAILURE;
+            yield return BehaviorTreeEnums.NodeState.FAILURE;
         }
     }
 }

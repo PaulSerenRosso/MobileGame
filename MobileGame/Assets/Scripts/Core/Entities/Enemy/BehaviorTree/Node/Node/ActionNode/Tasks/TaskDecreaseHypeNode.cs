@@ -14,11 +14,12 @@ public class TaskDecreaseHypeNode : ActionNode
     private TaskDecreaseHypeNodeSO _so;
     private TaskDecreaseHypeNodeDataSO _data;
     private event Func<float> _calculateDecreaseAmountEvent;
-    private IHypeService _hypeService; 
-    public override BehaviorTreeEnums.NodeState Evaluate()
+    private IHypeService _hypeService;
+    
+    public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
     {
         _hypeService.DecreaseHype(_calculateDecreaseAmountEvent.Invoke());
-        return BehaviorTreeEnums.NodeState.RUNNING;
+        yield return BehaviorTreeEnums.NodeState.RUNNING;
     }
 
     public override void SetDependencyValues(Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues, Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)

@@ -27,7 +27,7 @@ namespace BehaviorTree.Nodes.Actions
             _data = (TaskMoveNodeDataSO)_so.Data;
         }
 
-        public override BehaviorTreeEnums.NodeState Evaluate()
+        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
         {
             if (!_isInit)
             {
@@ -43,10 +43,10 @@ namespace BehaviorTree.Nodes.Actions
                 FixedUpdateManager.UnRegister(this);
                 _timer = 0;
                 _isInit = false;
-                return BehaviorTreeEnums.NodeState.SUCCESS;
+                yield return BehaviorTreeEnums.NodeState.SUCCESS;
             }
 
-            return BehaviorTreeEnums.NodeState.RUNNING;
+            yield return BehaviorTreeEnums.NodeState.RUNNING;
         }
 
         public override void SetDependencyValues(

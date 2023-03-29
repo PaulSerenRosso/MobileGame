@@ -21,10 +21,10 @@ namespace BehaviorTree.Nodes.Actions
             return _so;
         }
         
-        public override BehaviorTreeEnums.NodeState Evaluate()
+        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
         {
             _animator.SetBool(_data.NameParameter, _data.ValueToPass);
-            return BehaviorTreeEnums.NodeState.SUCCESS;
+            yield return BehaviorTreeEnums.NodeState.SUCCESS;
         }
         
         public override void SetDependencyValues(

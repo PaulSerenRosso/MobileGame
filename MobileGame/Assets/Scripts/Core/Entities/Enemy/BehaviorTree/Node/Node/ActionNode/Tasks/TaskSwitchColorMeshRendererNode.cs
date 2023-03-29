@@ -21,10 +21,10 @@ namespace BehaviorTree.Nodes.Actions
             _data = (TaskSwitchColorMeshRendererNodeDataSO)_so.Data;
         }
 
-        public override BehaviorTreeEnums.NodeState Evaluate()
+        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
         {
             _meshRenderer.material.color = _data.SwitchableColor;
-            return BehaviorTreeEnums.NodeState.RUNNING;
+            yield return BehaviorTreeEnums.NodeState.RUNNING;
         }
 
         public override void SetDependencyValues(

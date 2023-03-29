@@ -23,12 +23,12 @@ namespace BehaviorTree.Nodes.Actions
             _data = (TaskDamagePlayerNodeDataSO)_so.Data;
         }
 
-        public override BehaviorTreeEnums.NodeState Evaluate()
+        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
         {
             // TODO: think about combo attack of boss
             Debug.Log("Boss Attack");
             _playerHealth.TakeDamage(_data.Damage);
-            return BehaviorTreeEnums.NodeState.SUCCESS;
+            yield return BehaviorTreeEnums.NodeState.SUCCESS;
         }
 
         public override void SetDependencyValues(

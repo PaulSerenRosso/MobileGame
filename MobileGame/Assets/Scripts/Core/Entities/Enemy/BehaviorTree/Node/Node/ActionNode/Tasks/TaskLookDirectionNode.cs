@@ -25,7 +25,7 @@ namespace BehaviorTree.Nodes.Actions
             _data = (TaskLookDirectionNodeDataSO)_so.Data;
         }
 
-        public override BehaviorTreeEnums.NodeState Evaluate()
+        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
         {
             if (!_initRotation)
             {
@@ -39,10 +39,10 @@ namespace BehaviorTree.Nodes.Actions
                 Debug.Log("Rotate enemy finish");
                 _initRotation = false;
                 _rotationIsFinished = false;
-                return BehaviorTreeEnums.NodeState.SUCCESS;
+                yield return BehaviorTreeEnums.NodeState.SUCCESS;
             }
 
-            return BehaviorTreeEnums.NodeState.FAILURE;
+            yield return BehaviorTreeEnums.NodeState.FAILURE;
         }
 
         public override void SetDependencyValues(
