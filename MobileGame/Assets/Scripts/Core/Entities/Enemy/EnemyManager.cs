@@ -86,8 +86,16 @@ public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, I
         else
         {
             Debug.Log("Enemy took : " + amount );
+            Debug.Log("Enemy have : " + _health);
             _health -= amount;
         }
+    }
+
+    public event Action ChangeHealth;
+
+    public float GetHealth()
+    {
+        return _health;
     }
 
     public void GainHealth(float amount)

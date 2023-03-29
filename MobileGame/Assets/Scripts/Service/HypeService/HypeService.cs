@@ -11,102 +11,111 @@ public class HypeService : IHypeService, IRemoteConfigurable
 
     public void IncreaseHype(float amount)
     {
-        if (!CheckMaximumHypeIsReached(_currentHype))
-        {
-            if (CheckMaximumHypeIsReached(_currentHype + amount))
-            {
-                _currentHype = _hypeServiceSo.MaxHype;
-                ReachMaximumHypeEvent?.Invoke(amount);
-            }
-            else
-            {
-                _currentHype += amount;
-            }
-            IncreaseHypeEvent?.Invoke(amount);
-        }
-    }
+        private HypeServiceSO _hypeServiceSo;
+        private float _currentHype;
 
-    public void DecreaseHype(float amount)
-    {
-        if (!CheckMinimumHypeIsReached(_currentHype))
+        public void IncreaseHype(float amount)
         {
-            if (CheckMinimumHypeIsReached(_currentHype - amount))
+            if (!CheckMaximumHypeIsReached(_currentHype))
+            {
+                if (CheckMaximumHypeIsReached(_currentHype + amount))
+                {
+                    _currentHype = _hypeServiceSo.MaxHype;
+                    ReachMaximumHypeEvent?.Invoke(amount);
+                }
+                else
+                {
+                    _currentHype += amount;
+                }
+
+                IncreaseHypeEvent?.Invoke(amount);
+            }
+        }
+
+        public void DecreaseHype(float amount)
+        {
+            if (!CheckMinimumHypeIsReached(_currentHype))
+            {
+                if (CheckMinimumHypeIsReached(_currentHype - amount))
+                {
+                    _currentHype = _hypeServiceSo.MinHype;
+                    ReachMinimumHypeEvent?.Invoke(amount);
+                }
+                else
+                {
+                    _currentHype -= amount;
+                }
+
+                IncreaseHypeEvent?.Invoke(amount);
+            }
+        }
+
+        public void SetHype(float value)
+        {
+            if (CheckHypeIsClamped(value))
             {
                 _currentHype = _hypeServiceSo.MinHype;
                 ReachMinimumHypeEvent?.Invoke(amount);
+         
             }
-            else
+        }
+
+        public float GetCurrentHype()
+        {
+            return _currentHype;
+        }
+
+        public float GetMaximumHype()
+        {
+            return _hypeServiceSo.MaxHype;
+        }
+
+        public float GetMinimumHype()
+        {
+            return _hypeServiceSo.MinHype;
+        }
+
+        private bool CheckHypeIsClamped(float value)
+        {
+            if (value <= _hypeServiceSo.MaxHype && value >= _hypeServiceSo.MinHype)
+                return true;
+            return false;
+        }
+
+        private bool CheckMaximumHypeIsReached(float currentHype)
+        {
+            if (currentHype >= _hypeServiceSo.MaxHype)
             {
-                _currentHype -= amount;
+                return true;
             }
-            IncreaseHypeEvent?.Invoke(amount);
-        }
-    }
 
-    public void SetHype(float value)
-    {
-        if (CheckHypeIsClamped(value))
+            return false;
+        }
+
+        private bool CheckMinimumHypeIsReached(float currentHype)
         {
-            _currentHype = value;
-            SetHypeEvent?.Invoke();
+            if (currentHype <= _hypeServiceSo.MinHype)
+            {
+                return true;
+            }
+
+            return false;
         }
-    }
 
-    public float GetCurrentHype()
-    {
-        return _currentHype;
-    }
+        public event Action<float> IncreaseHypeEvent;
+        public event Action<float> DecreaseHypeEvent;
+        public event Action<float> ReachMaximumHypeEvent;
+        public event Action<float> ReachMinimumHypeEvent;
+        public event Action SetHypeEvent;
 
-    public float GetMaximumHype()
-    {
-        return _hypeServiceSo.MaxHype;
-    }
-
-    public float GetMinimumHype()
-    {
-        return _hypeServiceSo.MinHype;
-    }
-
-    private bool CheckHypeIsClamped(float value)
-    {
-        if (value <= _hypeServiceSo.MaxHype && value >= _hypeServiceSo.MinHype)
-            return true;
-        return false;
-    }
-
-    private bool CheckMaximumHypeIsReached(float currentHype)
-    {
-        if (currentHype >= _hypeServiceSo.MaxHype)
+        public void EnabledService()
         {
-            return true;
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<HypeServiceSO>("HypeSO", SetHypeSO);
         }
-        return false;
-    }
-    
-    private bool CheckMinimumHypeIsReached(float currentHype)
-    {
-        if (currentHype <= _hypeServiceSo.MinHype)
-        {
-            return true;
-        }
-        return false;
-    }
-
-    public event Action<float> IncreaseHypeEvent;
-    public event Action<float> DecreaseHypeEvent;
-    public event Action<float> ReachMaximumHypeEvent;
-    public event Action<float> ReachMinimumHypeEvent;
-    public event Action SetHypeEvent;
-
-    public void EnabledService()
-    {
-        AddressableHelper.LoadAssetAsyncWithCompletionHandler<HypeServiceSO>("HypeSO", SetHypeSO);
-    }
 
     private void SetHypeSO(HypeServiceSO hypeServiceSo)
     {
         _hypeServiceSo = hypeServiceSo;
-        RemoteConfigManager.RegisterRemoteConfigurable(this);
         SetHype(_hypeServiceSo.BaseValueHype);
     }
 
@@ -117,16 +126,7 @@ public class HypeService : IHypeService, IRemoteConfigurable
         IncreaseHypeEvent = null;
         ReachMaximumHypeEvent = null;
         ReachMinimumHypeEvent = null;
-        RemoteConfigManager.UnRegisterRemoteConfigurable(this);
     }
 
     public bool GetIsActiveService { get; }
-    public void SetRemoteConfigurableValues()
-    {
-       _hypeServiceSo.MinHype = RemoteConfigManager.Config.GetFloat("MinHype");
-        _hypeServiceSo.MaxHype = RemoteConfigManager.Config.GetFloat("MaxHype");
-        _hypeServiceSo.BaseValueHype = RemoteConfigManager.Config.GetFloat("BaseValueHype");
-    }
-}
-    
 }
