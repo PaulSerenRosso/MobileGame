@@ -163,7 +163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tree: {fileID: 3911112695321858085}
   _so: {fileID: 11400000, guid: 7159e724562cffc418e7a7fd49679cd4, type: 2}
-  CurrentState: 0
+  CurrentMobilityState: 0
 --- !u!114 &3911112695321858085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,12 +179,12 @@ MonoBehaviour:
   _rootSO: {fileID: 11400000, guid: 45cfb39a3fa16914593da2489aa094a7, type: 2}
   _nodeValuesInitializer:
     EnemyValueObjects:
-    - Type: 3
-      Obj: {fileID: 3468216822340678009}
-    - Type: 2
-      Obj: {fileID: 3713970167393113632}
     - Type: 0
       Obj: {fileID: 3912564710569538853}
+    - Type: 2
+      Obj: {fileID: 3713970167393113632}
+    - Type: 3
+      Obj: {fileID: 3468216822340678009}
     - Type: 4
       Obj: {fileID: 4796771559047852942}
     ExternValueObjects:
@@ -192,3 +192,5 @@ MonoBehaviour:
     - Type: 1
     - Type: 2
     - Type: 3
+    - Type: 4
+    - Type: 5

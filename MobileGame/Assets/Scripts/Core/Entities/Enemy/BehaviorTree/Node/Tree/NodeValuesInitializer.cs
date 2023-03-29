@@ -1,5 +1,6 @@
 using System;
 using Environment.MoveGrid;
+using Player;
 using Player.Handler;
 using Service;
 using UnityEngine;
@@ -47,7 +48,7 @@ namespace BehaviorTree.Trees
                     }
                     case BehaviorTreeEnums.TreeExternValues.PlayerHealth:
                     {
-                        // ExternValueObjects[i].Obj = playerTransform.GetComponent<PlayerHealth>();
+                        ExternValueObjects[i].Obj = playerTransform.GetComponent<PlayerHealth>();
                         break;
                     }
                 }

@@ -1,5 +1,9 @@
-﻿namespace BehaviorTree
+﻿using UnityEngine;
+
+namespace BehaviorTree
 {
+    [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/ShaderSetFloatNodeSO",
+        fileName = "new T_ShaderSetFloat_Spe")]
     public class TaskShaderSetFloatNodeSO : TaskNodeSO
     {
         public override void UpdateComment()

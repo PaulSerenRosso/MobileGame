@@ -26,7 +26,11 @@ namespace Player
                 _health = 0;
                 Die();
             }
-            else _health -= amount;
+            else
+            {
+                Debug.Log("Player took : " + amount );
+                _health -= amount;
+            }
         }
 
         public void GainHealth(float amount)

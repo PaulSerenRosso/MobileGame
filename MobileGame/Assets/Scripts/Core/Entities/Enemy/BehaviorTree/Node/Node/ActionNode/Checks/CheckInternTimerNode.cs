@@ -1,16 +1,13 @@
 ﻿using BehaviorTree.SO.Actions;
-using HelperPSR.Tick;
 using UnityEngine;
 
 namespace BehaviorTree.Nodes.Actions
 {
-    public class CheckTimerNode : ActionNode
+    public class CheckInternTimerNode : ActionNode
     {
-        private CheckTimerNodeSO _so;
-        private CheckTimerNodeDataSO _data;
+        private CheckInternTimerNodeSO _so;
+        private CheckInternTimerNodeDataSO _data;
         private float _timer;
-
-        private TickTimer _tickTimer;
 
         public override NodeSO GetNodeSO()
         {
@@ -19,14 +16,13 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
-            _so = (CheckTimerNodeSO)nodeSO;
-            _data = (CheckTimerNodeDataSO)_so.Data;
-            _timer = _data.StartTime;
+            _so = (CheckInternTimerNodeSO)nodeSO;
+            _data = (CheckInternTimerNodeDataSO)_so.Data;
         }
 
         public override BehaviorTreeEnums.NodeState Evaluate()
         {
-            if (_timer > _data.Time)
+            if (_timer > (float)Sharer.InternValues[_so.InternValues[0].HashCode])
             {
                 _timer = 0;
                 return BehaviorTreeEnums.NodeState.SUCCESS;

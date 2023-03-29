@@ -19,21 +19,15 @@ namespace BehaviorTree.Nodes.Actions
         }
 
         public override void SetNodeSO(NodeSO nodeSO)
-        {
+        {       
             _so = (CheckCirclesPlayerNodeSO)nodeSO;
             _data = (CheckCirclesPlayerNodeDataSO)_so.Data;
         }
 
         public override BehaviorTreeEnums.NodeState Evaluate()
         {
-            if (!_environmentGridManager.CheckIfMovePointInIsCircles(_playerMovementHandler.GetCurrentIndexMovePoint(),
-                    _data.CirclesIndexes))
-            {
-             
-                return BehaviorTreeEnums.NodeState.SUCCESS;
-            }
-           
-            return BehaviorTreeEnums.NodeState.FAILURE;
+            return !_environmentGridManager.CheckIfMovePointInIsCircles(_playerMovementHandler.GetCurrentIndexMovePoint(),
+                _data.CirclesIndexes) ? BehaviorTreeEnums.NodeState.SUCCESS : BehaviorTreeEnums.NodeState.FAILURE;
         }
 
         public override void SetDependencyValues(
