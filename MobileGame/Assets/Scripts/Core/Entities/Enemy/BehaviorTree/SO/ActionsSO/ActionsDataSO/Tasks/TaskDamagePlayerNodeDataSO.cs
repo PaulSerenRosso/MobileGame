@@ -1,8 +1,11 @@
 ﻿using System;
 using BehaviorTree.Nodes.Actions;
+using UnityEngine;
 
 namespace BehaviorTree.SO.Actions
 {
+    [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/DamagePlayerNodeDataSO",
+        fileName = "new T_DamagePlayer_Spe_Data")]
     public class TaskDamagePlayerNodeDataSO : ActionNodeDataSO
     {
         public float Damage;

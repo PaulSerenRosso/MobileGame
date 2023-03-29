@@ -16,7 +16,6 @@ public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, I
     [SerializeField] private EnemySO _so;
     private float _health;
     public EnemyEnums.EnemyMobilityState CurrentMobilityState;
-    public EnemyEnums.EnemyBlockingState CurrentBlockingState;
     private List<EnemyStunTrigger> _currentStunTriggers;
 
     public event Action<float> OnDamageReceived;
@@ -26,7 +25,6 @@ public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, I
         transform.position = new Vector3(0, 0, 0);
         _health = _so.Health;
         CurrentMobilityState = EnemyEnums.EnemyMobilityState.VULNERABLE;
-        CurrentBlockingState = EnemyEnums.EnemyBlockingState.VULNERABLE;
         OnDamageReceived += TakeStun;
         UpdateManager.Register(this);
         _currentStunTriggers = new List<EnemyStunTrigger>();
@@ -60,11 +58,6 @@ public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, I
         // TODO: Add the right EnemySO in setup
     }
 
-    public void RenderContainer()
-    {
-        
-    }
-
     public void Die()
     {
         Debug.Log("BOSS IS KO, CONGRATS!");
@@ -90,7 +83,11 @@ public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, I
             _health = 0;
             Die();
         }
-        else _health -= amount;
+        else
+        {
+            Debug.Log("Enemy took : " + amount );
+            _health -= amount;
+        }
     }
 
     public void GainHealth(float amount)

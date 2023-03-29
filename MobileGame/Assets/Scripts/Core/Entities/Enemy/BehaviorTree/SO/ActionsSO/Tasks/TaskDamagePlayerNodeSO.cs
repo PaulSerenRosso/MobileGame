@@ -1,5 +1,8 @@
-﻿namespace BehaviorTree
+﻿using UnityEngine;
+
+namespace BehaviorTree
 {
+    [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/DamagePlayerNodeSO", fileName = "new T_DamagePlayer_Spe")]
     public class TaskDamagePlayerNodeSO : TaskNodeSO
     {
         public override void UpdateComment()

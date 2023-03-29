@@ -1,14 +1,16 @@
 ﻿using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
+using HelperPSR.Collections;
+using UnityEngine;
 
 namespace BehaviorTree.Nodes.Actions
 {
-    public class TaskSetBlockNode : ActionNode
+    public class TaskGetTimeAnimationNode : ActionNode
     {
-        private TaskSetBlockNodeSO _so;
-        private TaskSetBlockNodeDataSO _data;
+        private TaskGetTimeAnimationNodeSO _so;
+        private TaskGetTimeAnimationNodeDataSO _data;
 
-        private EnemyManager _enemyManager;
+        private Animator _animator;
 
         public override NodeSO GetNodeSO()
         {
@@ -17,13 +19,13 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
-            _so = (TaskSetBlockNodeSO)nodeSO;
-            _data = (TaskSetBlockNodeDataSO)_so.Data;
+            _so = (TaskGetTimeAnimationNodeSO)nodeSO;
+            _data = (TaskGetTimeAnimationNodeDataSO)_so.Data;
         }
 
         public override BehaviorTreeEnums.NodeState Evaluate()
         {
-            _enemyManager.CurrentBlockingState = _data.EnemyBlockingState;
+            CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[0].HashCode, _animator.GetCurrentAnimatorStateInfo(0).length);
             return BehaviorTreeEnums.NodeState.SUCCESS;
         }
 
@@ -31,7 +33,7 @@ namespace BehaviorTree.Nodes.Actions
             Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
             Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
         {
-            _enemyManager = (EnemyManager)enemyDependencyValues[BehaviorTreeEnums.TreeEnemyValues.EnemyManager];
+            _animator = (Animator)enemyDependencyValues[BehaviorTreeEnums.TreeEnemyValues.Animator];
         }
 
         public override ActionNodeDataSO GetDataSO()

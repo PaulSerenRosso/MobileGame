@@ -1,5 +1,9 @@
-﻿namespace BehaviorTree
+﻿using UnityEngine;
+
+namespace BehaviorTree
 {
+    [CreateAssetMenu(menuName = "BehaviorTree/Actions/Checks/PlayerIfInNodeSO",
+        fileName = "new  CH_PlayerIfIn_Spe")]
     public class CheckPlayerIfInNodeSO : CheckNodeSO
     {
         public override void UpdateInterValues()
@@ -15,7 +19,7 @@
 
         public override void UpdateComment()
         {
-            Comment = "";
+            Comment = "Nœud qui retourne si le joueur est dans les points reçus";
         }
     }
 }

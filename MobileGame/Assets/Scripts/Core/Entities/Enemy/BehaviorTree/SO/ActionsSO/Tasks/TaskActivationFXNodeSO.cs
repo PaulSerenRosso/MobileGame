@@ -1,5 +1,8 @@
-﻿namespace BehaviorTree
+﻿using UnityEngine;
+
+namespace BehaviorTree
 {
+    [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/ActivationFXNodeSO", fileName = "new T_ActivationFX_Spe")]
     public class TaskActivationFXNodeSO : TaskNodeSO
     {
         public override void UpdateComment()
