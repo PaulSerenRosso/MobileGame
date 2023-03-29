@@ -47,7 +47,7 @@ namespace Player.Handler
             _currentSwipe = (Swipe)args[0];
             Debug.Log(_currentSwipe.SwipeSO.DirectionV2);
             base.TryMakeAction(args);
-            MakeActionEvent?.Invoke(_currentSwipe.SwipeSO.DirectionV2);
+           
         }
 
         public bool CheckIsMoving()
@@ -189,6 +189,7 @@ namespace Player.Handler
             _currentMovePoint = _environmentGridManager.MovePoints[_maxDestinationIndex];
             movementPlayerAction.Destination = _currentMovePoint.MeshRenderer.transform.position;
             _currentMovePointIndex = _maxDestinationIndex;
+            MakeActionEvent?.Invoke(_currentSwipe.SwipeSO.DirectionV2);
         }
 
         public void SetRemoteConfigurableValues()
@@ -250,7 +251,7 @@ namespace Player.Handler
                     break;
                 }
             }
-
+            
             so.Time = RemoteConfigManager.Config.GetFloat(_swipeName + dirString + "Time");
             so.MinDistancePercentage =
                 RemoteConfigManager.Config.GetFloat(_swipeName + dirString + "MinDistancePercentage");
