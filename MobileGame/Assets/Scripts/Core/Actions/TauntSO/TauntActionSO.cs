@@ -7,5 +7,6 @@ namespace Actions
     {
         public float EndTime;
         public float StartTime;
+        public float HypeAmount; 
     }
 }

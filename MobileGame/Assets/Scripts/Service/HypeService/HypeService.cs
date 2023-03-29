@@ -1,12 +1,10 @@
-
-
 using System;
 using Addressables;
-using UnityEngine;
+using HelperPSR.RemoteConfigs;
 
 namespace Service.Hype
 {
-public class HypeService : IHypeService
+public class HypeService : IHypeService, IRemoteConfigurable
 {
     private HypeServiceSO _hypeServiceSo;
     private float _currentHype;
@@ -36,7 +34,6 @@ public class HypeService : IHypeService
             {
                 _currentHype = _hypeServiceSo.MinHype;
                 ReachMinimumHypeEvent?.Invoke(amount);
-         
             }
             else
             {
@@ -109,6 +106,7 @@ public class HypeService : IHypeService
     private void SetHypeSO(HypeServiceSO hypeServiceSo)
     {
         _hypeServiceSo = hypeServiceSo;
+        RemoteConfigManager.RegisterRemoteConfigurable(this);
         SetHype(_hypeServiceSo.BaseValueHype);
     }
 
@@ -119,9 +117,16 @@ public class HypeService : IHypeService
         IncreaseHypeEvent = null;
         ReachMaximumHypeEvent = null;
         ReachMinimumHypeEvent = null;
+        RemoteConfigManager.UnRegisterRemoteConfigurable(this);
     }
 
     public bool GetIsActiveService { get; }
+    public void SetRemoteConfigurableValues()
+    {
+       _hypeServiceSo.MinHype = RemoteConfigManager.Config.GetFloat("MinHype");
+        _hypeServiceSo.MaxHype = RemoteConfigManager.Config.GetFloat("MaxHype");
+        _hypeServiceSo.BaseValueHype = RemoteConfigManager.Config.GetFloat("BaseValueHype");
+    }
 }
     
 }
