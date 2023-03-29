@@ -11,9 +11,7 @@ namespace Player.Handler
     {
         [SerializeField] private MovementPlayerAction movementPlayerAction;
         [SerializeField] private AttackPlayerAction attackPlayerAction;
-
         [SerializeField] private TauntPlayerAction tauntPlayerAction;
-   
         
         protected override Actions.PlayerAction GetAction()
         {
@@ -60,6 +58,7 @@ namespace Player.Handler
         {
             tauntPlayerAction.SO.EndTime = RemoteConfigManager.Config.GetFloat("PlayerTauntEndTime");
             tauntPlayerAction.SO.StartTime = RemoteConfigManager.Config.GetFloat("PlayerTauntStartTime");
+            tauntPlayerAction.SO.HypeAmount = RemoteConfigManager.Config.GetFloat("PlayerTauntHypeAmount");
         }
     }
 }
