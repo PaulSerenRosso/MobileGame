@@ -1,6 +1,7 @@
 ﻿using Addressables;
 using Attributes;
 using Service.Fight;
+using Service.Hype;
 using UnityEngine;
 using static UnityEngine.AddressableAssets.Addressables;
 
@@ -16,6 +17,7 @@ namespace Service.UI
 
         [DependsOnService] private ISceneService _sceneService;
 
+        [DependsOnService] private IHypeService _hypeService;
         public void LoadMainMenu()
         {
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("MainMenu", GenerateMainMenu);
@@ -45,7 +47,7 @@ namespace Service.UI
         {
             var inGameMenu = Object.Instantiate(gameObject);
             // Release(inGameMenu);
-            inGameMenu.GetComponent<InGameMenuManager>().SetupMenu(_sceneService);
+            inGameMenu.GetComponent<InGameMenuManager>().SetupMenu(_sceneService, _hypeService);
         }
     }
 }

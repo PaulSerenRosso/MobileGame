@@ -2,6 +2,7 @@ using Addressables;
 using Attributes;
 using Environment.MoveGrid;
 using Player;
+using Service.Hype;
 using Service.Inputs;
 using Service.UI;
 using UnityEngine;
@@ -20,7 +21,8 @@ namespace Service.Fight
         [DependsOnService] private ITickeableService _tickeableService;
 
         [DependsOnService] private IPoolService _poolService;
-
+        
+        [DependsOnService] private IHypeService _hypeService;
         private CameraController _cameraController;
         private PlayerController _playerController;
         private EnemyManager _enemyManager;
@@ -40,8 +42,10 @@ namespace Service.Fight
         public void StartFight(string environmentAddressableName)
         {
             _sceneService.LoadScene("GameScene");
+            _hypeService.EnabledService();
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<EnvironmentSO>(environmentAddressableName,
                 LoadEnvironmentSO);
+            
         }
 
         private void LoadEnvironmentSO(EnvironmentSO so)
@@ -78,8 +82,8 @@ namespace Service.Fight
             Release(gameObject);
             var enemy = Object.Instantiate(gameObject);
             _enemyManager = enemy.GetComponent<EnemyManager>();
-            _playerController.SetupPlayer(_inputService, _tickeableService, _environmentGridManager, _currentEnvironmentSO, _enemyManager);
-            _enemyManager.Setup(_playerController.transform, _tickeableService, _environmentGridManager, _poolService);
+            _playerController.SetupPlayer(_inputService, _tickeableService, _environmentGridManager, _currentEnvironmentSO, _enemyManager, _hypeService);
+            _enemyManager.Setup(_playerController.transform, _tickeableService, _environmentGridManager, _poolService, _hypeService);
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Camera", GenerateCamera);
         }
 

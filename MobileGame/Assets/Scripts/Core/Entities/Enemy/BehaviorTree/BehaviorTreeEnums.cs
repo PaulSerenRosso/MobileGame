@@ -16,7 +16,8 @@ public class BehaviorTreeEnums
         TickManager,
         PlayerHandlerMovement,
         PoolService,
-        PlayerHealth
+        PlayerHealth, 
+        HypeService
     }
 
     public enum NodeState

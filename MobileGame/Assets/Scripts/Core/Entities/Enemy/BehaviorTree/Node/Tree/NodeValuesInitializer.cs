@@ -2,6 +2,7 @@ using System;
 using Environment.MoveGrid;
 using Player.Handler;
 using Service;
+using Service.Hype;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -14,7 +15,7 @@ namespace BehaviorTree.Trees
         public ExternValueObject[] ExternValueObjects;
 
         public void Setup(Transform playerTransform, ITickeableService tickeableService,
-            EnvironmentGridManager environmentGridManager, IPoolService poolService)
+            EnvironmentGridManager environmentGridManager, IPoolService poolService, IHypeService hypeService)
         {
             for (int i = 0; i < ExternValueObjects.Length; i++)
             {
@@ -48,6 +49,11 @@ namespace BehaviorTree.Trees
                     case BehaviorTreeEnums.TreeExternValues.PlayerHealth:
                     {
                         // ExternValueObjects[i].Obj = playerTransform.GetComponent<PlayerHealth>();
+                        break;
+                    }
+                    case BehaviorTreeEnums.TreeExternValues.HypeService:
+                    {
+                        ExternValueObjects[i].Obj = hypeService;
                         break;
                     }
                 }

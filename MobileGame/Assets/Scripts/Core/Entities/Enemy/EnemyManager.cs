@@ -6,6 +6,7 @@ using Environment.MoveGrid;
 using HelperPSR.MonoLoopFunctions;
 using Interfaces;
 using Service;
+using Service.Hype;
 using UnityEngine;
 using Tree = BehaviorTree.Trees;
 
@@ -53,9 +54,9 @@ public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, I
     }
 
     public void Setup(Transform playerTransform, ITickeableService tickeableService,
-        EnvironmentGridManager environmentGridManager, IPoolService poolService)
+        EnvironmentGridManager environmentGridManager, IPoolService poolService, IHypeService hypeService)
     {
-        _tree.Setup(playerTransform, tickeableService, environmentGridManager, poolService);
+        _tree.Setup(playerTransform, tickeableService, environmentGridManager, poolService, hypeService);
         // TODO: Add the right EnemySO in setup
     }
 

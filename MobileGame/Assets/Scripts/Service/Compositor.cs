@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 using Cysharp.Threading.Tasks;
 using Service.AudioService;
 using Service.Fight;
+using Service.Hype;
 using Service.Inputs;
 using Service.UI;
 using Unity.VisualScripting;
@@ -215,6 +216,7 @@ public class Compositor : MonoBehaviour
         AddService<IInputService>(new InputService());
         AddService<IGameService>(new GameService());
         AddService<IPoolService>(new PoolService());
+        AddService<IHypeService>(new HypeService());
     }
 
     private void Awake()
