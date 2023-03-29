@@ -25,18 +25,20 @@ namespace BehaviorTree.Nodes.Composite
 
         public override BehaviorTreeEnums.NodeState Evaluate()
         {
+            bool isLooping = false;
             _currentChildrenToEvaluate = new List<Node>(Children);
             _childrenEvaluatedCount = 0;
             _currentChildrenProbabilities = new List<int>(_so.ChildrenProbabilities);
             _pickedChildIndex = -1;
             while (_childrenEvaluatedCount < Children.Count)
             {
-                _pickedChildIndex =
+                if (!isLooping) _pickedChildIndex =
                     RandomHelper.PickRandomElementIndex(_currentChildrenProbabilities.ToArray());
                 var currentElement = _currentChildrenToEvaluate[_pickedChildIndex];
                 switch (currentElement.Evaluate())
                 {
                     case BehaviorTreeEnums.NodeState.FAILURE:
+                        isLooping = false;
                         break;
                     case BehaviorTreeEnums.NodeState.SUCCESS:
                         _state = BehaviorTreeEnums.NodeState.SUCCESS;
@@ -44,6 +46,9 @@ namespace BehaviorTree.Nodes.Composite
                     case BehaviorTreeEnums.NodeState.RUNNING:
                         _state = BehaviorTreeEnums.NodeState.RUNNING;
                         return _state;
+                    case BehaviorTreeEnums.NodeState.LOOP:
+                        isLooping = true;
+                        continue;
                 }
 
                 _childrenEvaluatedCount++;

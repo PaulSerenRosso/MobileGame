@@ -4,8 +4,9 @@
     {
         public override BehaviorTreeEnums.NodeState Evaluate()
         {
-            foreach (Node node in Children)
+            for (var index = 0; index < Children.Count; index++)
             {
+                var node = Children[index];
                 switch (node.Evaluate())
                 {
                     case BehaviorTreeEnums.NodeState.FAILURE:
@@ -16,6 +17,9 @@
                     case BehaviorTreeEnums.NodeState.RUNNING:
                         _state = BehaviorTreeEnums.NodeState.RUNNING;
                         return _state;
+                    case BehaviorTreeEnums.NodeState.LOOP:
+                        index--;
+                        break;
                     default:
                         continue;
                 }

@@ -4,12 +4,7 @@ using HelperPSR.RemoteConfigs;
 
 namespace Service.Hype
 {
-public class HypeService : IHypeService, IRemoteConfigurable
-{
-    private HypeServiceSO _hypeServiceSo;
-    private float _currentHype;
-
-    public void IncreaseHype(float amount)
+    public class HypeService : IHypeService, IRemoteConfigurable
     {
         private HypeServiceSO _hypeServiceSo;
         private float _currentHype;
@@ -54,9 +49,8 @@ public class HypeService : IHypeService, IRemoteConfigurable
         {
             if (CheckHypeIsClamped(value))
             {
-                _currentHype = _hypeServiceSo.MinHype;
-                ReachMinimumHypeEvent?.Invoke(amount);
-         
+                _currentHype = value;
+                SetHypeEvent?.Invoke();
             }
         }
 
@@ -113,20 +107,30 @@ public class HypeService : IHypeService, IRemoteConfigurable
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<HypeServiceSO>("HypeSO", SetHypeSO);
         }
 
-    private void SetHypeSO(HypeServiceSO hypeServiceSo)
-    {
-        _hypeServiceSo = hypeServiceSo;
-        SetHype(_hypeServiceSo.BaseValueHype);
-    }
+        private void SetHypeSO(HypeServiceSO hypeServiceSo)
+        {
+            _hypeServiceSo = hypeServiceSo;
+            RemoteConfigManager.RegisterRemoteConfigurable(this);
+            SetHype(_hypeServiceSo.BaseValueHype);
+        }
 
-    public void DisabledService()
-    { 
-        UnityEngine.AddressableAssets.Addressables.Release(_hypeServiceSo);
-        DecreaseHypeEvent = null;
-        IncreaseHypeEvent = null;
-        ReachMaximumHypeEvent = null;
-        ReachMinimumHypeEvent = null;
-    }
+        public void DisabledService()
+        {
+            UnityEngine.AddressableAssets.Addressables.Release(_hypeServiceSo);
+            DecreaseHypeEvent = null;
+            IncreaseHypeEvent = null;
+            ReachMaximumHypeEvent = null;
+            ReachMinimumHypeEvent = null;
+            RemoteConfigManager.UnRegisterRemoteConfigurable(this);
+        }
 
-    public bool GetIsActiveService { get; }
+        public bool GetIsActiveService { get; }
+
+        public void SetRemoteConfigurableValues()
+        {
+            _hypeServiceSo.MinHype = RemoteConfigManager.Config.GetFloat("MinHype");
+            _hypeServiceSo.MaxHype = RemoteConfigManager.Config.GetFloat("MaxHype");
+            _hypeServiceSo.BaseValueHype = RemoteConfigManager.Config.GetFloat("BaseValueHype");
+        }
+    }
 }

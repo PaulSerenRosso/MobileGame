@@ -18,8 +18,8 @@ namespace BehaviorTree.Nodes.Decorator
 
         public override BehaviorTreeEnums.NodeState Evaluate()
         {
-            Child.Evaluate();
-            return SO.ReturnState;
+            var childEvaluate = Child.Evaluate();
+            return childEvaluate == BehaviorTreeEnums.NodeState.LOOP ? BehaviorTreeEnums.NodeState.LOOP : SO.ReturnState;
         }
     }
 }

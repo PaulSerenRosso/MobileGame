@@ -10,6 +10,11 @@
                 return BehaviorTreeEnums.NodeState.RUNNING;
             }
 
+            if (childEvaluate == BehaviorTreeEnums.NodeState.LOOP)
+            {
+                return BehaviorTreeEnums.NodeState.LOOP;
+            }
+
             return childEvaluate == BehaviorTreeEnums.NodeState.FAILURE
                 ? BehaviorTreeEnums.NodeState.SUCCESS
                 : BehaviorTreeEnums.NodeState.FAILURE;

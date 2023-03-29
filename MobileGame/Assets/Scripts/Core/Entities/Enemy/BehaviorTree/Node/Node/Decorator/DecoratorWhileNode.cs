@@ -1,5 +1,4 @@
 using BehaviorTree.SO.Decorator;
-using Cysharp.Threading.Tasks;
 
 namespace BehaviorTree.Nodes.Decorator
 {
@@ -20,18 +19,8 @@ namespace BehaviorTree.Nodes.Decorator
 
         public override BehaviorTreeEnums.NodeState Evaluate()
         {
-            ChildEvaluateAsync();
-            return _childEvaluate;
-        }
-
-        private async void ChildEvaluateAsync()
-        {
             _childEvaluate = Child.Evaluate();
-            while (_childEvaluate == _so.WhileStateCondition)
-            {
-                _childEvaluate = Child.Evaluate();
-                await UniTask.DelayFrame(0);
-            }
+            return _childEvaluate == _so.WhileStateCondition ? BehaviorTreeEnums.NodeState.LOOP : _childEvaluate;
         }
     }
 }
