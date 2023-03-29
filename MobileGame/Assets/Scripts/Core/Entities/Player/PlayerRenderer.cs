@@ -14,15 +14,15 @@ namespace Player
         [SerializeField] private TauntPlayerAction tauntPlayerAction; 
         public void Init()
         {
-            /*
-            _playerMovementHandler.MakeActionEvent += SetDirParameter;
-            _movementAction.MakeActionEvent += ResetEndMovementAnimationParameter;
-            _tauntAction.MakeActionEvent += ActivateTauntFX;
-            _tauntAction.CancelActionEvent += DeactivateTauntFX;
-            SetRecoverySpeedAnimation();
-            */
-          
             
+            _playerMovementHandler.MakeActionEvent += SetDirParameter;
+         movementPlayerAction.MakeActionEvent += ResetEndMovementAnimationParameter;
+         SetEndAnimationMovementSpeedAnimation();
+         //  SetRecoverySpeedAnimation();
+         /*
+         _tauntAction.MakeActionEvent += ActivateTauntFX;
+         _tauntAction.CancelActionEvent += DeactivateTauntFX;
+         */
         }
     }
 }

@@ -8,21 +8,39 @@ namespace Player
     public partial class PlayerRenderer
     {
         [SerializeField] private AnimationClip movementRecoveryAnimationClip;
-        [SerializeField]
-        private string _dirParameterName;
+        [SerializeField] private string _dirParameterName;
         [SerializeField] private string _endMovementParameterName;
-        private void OnValidate()
+
+        [SerializeField] private FloatAnimationParameter[] _endMovementTimeParameters;
+        private const string EndMovementParameterBaseName = "EndMovementSpeed";
+        int dirToSend = -1;
+        private string currentDirName;
+        [Serializable]
+        struct FloatAnimationParameter
         {
-            
+            public AnimationClip animationClip;
+            private float _time;
+            public float GetTime => _time;
+            public void SetTime(float value) => _time = value;
+        }
+
+        private void SetEndAnimationMovementSpeedAnimation()
+        {
+            for (int i = 0; i < _endMovementTimeParameters.Length; i++)
+            { 
+                _endMovementTimeParameters[i].SetTime(_animator.GetFloat(EndMovementParameterBaseName + i)*_endMovementTimeParameters[i].animationClip.length);
+            }
         }
 
         private void SetRecoverySpeedAnimation()
         {
-            _animator.SetFloat("RecoveryAnimationSpeed", _playerMovementHandler.GetRecoveryMovementTime()/movementRecoveryAnimationClip.length );
+            _animator.SetFloat("RecoveryAnimationSpeed",
+                _playerMovementHandler.GetRecoveryMovementTime() / movementRecoveryAnimationClip.length);
         }
+
         private void SetDirParameter(Vector2 dir)
         {
-            int dirToSend = -1;
+       
             switch (dir)
             {
                 case var v when v == Vector2.left:
@@ -51,22 +69,23 @@ namespace Player
                     break;
                 }
             }
+
             AnimSetInt(_dirParameterName, dirToSend);
         }
 
         private void ResetEndMovementAnimationParameter()
-        { 
+        {
             AnimSetBool(_endMovementParameterName, false);
-            movementPlayerAction.MakeUpdateEvent += LaunchEndMovementPlayerAnimation; 
+            movementPlayerAction.MakeUpdateEvent += LaunchEndMovementPlayerAnimation;
         }
 
         private void LaunchEndMovementPlayerAnimation(float time)
         {
-            if (_animator.GetNextAnimatorStateInfo(0).length <= movementPlayerAction.GetMaxTimeMovement() - time)
+            if (movementPlayerAction.GetMaxTimeMovement()-_endMovementTimeParameters[dirToSend].GetTime >= movementPlayerAction.GetMaxTimeMovement() - time)
             {
-            SetDirParameter(Vector2.zero);
-            AnimSetBool(_endMovementParameterName, true);
-            movementPlayerAction.MakeUpdateEvent -= LaunchEndMovementPlayerAnimation;
+                SetDirParameter(Vector2.zero);
+                AnimSetBool(_endMovementParameterName, true);
+                movementPlayerAction.MakeUpdateEvent -= LaunchEndMovementPlayerAnimation;
             }
         }
 
