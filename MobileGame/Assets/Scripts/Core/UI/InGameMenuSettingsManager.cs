@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
 using Service;
 using UnityEngine;
@@ -7,19 +5,21 @@ using UnityEngine.UI;
 
 public class InGameMenuSettingsManager : MonoBehaviour
 {
-    [Header("Settings UI")]
+    [Header("Settings UI")] 
     [SerializeField] private Button _openSettingsButton;
     [SerializeField] private Image _settingsMenu;
     [SerializeField] private Button _closeSettingsButton;
     [SerializeField] private Button _reportButton;
     [SerializeField] private Button _leaveGame;
+    
     private ISceneService _sceneService;
+
     private void Awake()
     {
         _settingsMenu.transform.DOScale(0f, 0f).SetEase(Ease.OutBack);
     }
 
-    public void Init(ISceneService sceneService )
+    public void Init(ISceneService sceneService)
     {
         _sceneService = sceneService;
         _openSettingsButton.onClick.AddListener(OpenSettings);
@@ -27,7 +27,7 @@ public class InGameMenuSettingsManager : MonoBehaviour
         // _reportButton.onClick.AddListener();
         _leaveGame.onClick.AddListener(() => _sceneService.LoadScene("MenuScene"));
     }
-    
+
     private void OpenSettings()
     {
         _openSettingsButton.transform.DOKill();

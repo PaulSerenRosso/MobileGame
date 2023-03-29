@@ -436,7 +436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b60235b3475bb1a4a9eac3ca01ecd70f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 0
+  _maxHealth: 100
 --- !u!114 &2056379011037417376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,17 +474,13 @@ MonoBehaviour:
   _dirParameterName: Direction
   _endMovementParameterName: IsEndMovement
   _endMovementTimeParameters:
-  - SpeedFactor: 1
-    animationClip: {fileID: 837255572769927147, guid: 06cd78c7dcabad242964e249c7278f5e,
+  - animationClip: {fileID: 837255572769927147, guid: 06cd78c7dcabad242964e249c7278f5e,
       type: 3}
-  - SpeedFactor: 1
-    animationClip: {fileID: 5336171071401514536, guid: 06cd78c7dcabad242964e249c7278f5e,
+  - animationClip: {fileID: 5336171071401514536, guid: 06cd78c7dcabad242964e249c7278f5e,
       type: 3}
-  - SpeedFactor: 1
-    animationClip: {fileID: -3545652582204683642, guid: 06cd78c7dcabad242964e249c7278f5e,
+  - animationClip: {fileID: -3545652582204683642, guid: 06cd78c7dcabad242964e249c7278f5e,
       type: 3}
-  - SpeedFactor: 1
-    animationClip: {fileID: -4807389317913785953, guid: 06cd78c7dcabad242964e249c7278f5e,
+  - animationClip: {fileID: -4807389317913785953, guid: 06cd78c7dcabad242964e249c7278f5e,
       type: 3}
   _particleSystem: {fileID: 0}
 --- !u!114 &6848145212107949030

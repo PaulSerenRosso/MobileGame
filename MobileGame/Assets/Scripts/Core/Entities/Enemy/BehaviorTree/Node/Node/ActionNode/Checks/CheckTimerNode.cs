@@ -25,6 +25,7 @@ namespace BehaviorTree.Nodes.Actions
         {
             if (_timer > _data.Time)
             {
+                Debug.Log("Timer is finish");
                 _timer = 0;
                 return BehaviorTreeEnums.NodeState.SUCCESS;
             }
