@@ -29,13 +29,14 @@ namespace BehaviorTree.Nodes.Actions
         {
             if (!_initRotation)
             {
-                _transform.DORotate(
+                _transform.DOLookAt(
                     (Vector3)Sharer.InternValues[_so.InternValues[0].HashCode],
                     _data.TimeRotation).OnComplete(() => _rotationIsFinished = true);
                 _initRotation = true;
             }
             else if (_rotationIsFinished)
             {
+                Debug.Log("Rotate enemy finish");
                 _initRotation = false;
                 _rotationIsFinished = false;
                 return BehaviorTreeEnums.NodeState.SUCCESS;

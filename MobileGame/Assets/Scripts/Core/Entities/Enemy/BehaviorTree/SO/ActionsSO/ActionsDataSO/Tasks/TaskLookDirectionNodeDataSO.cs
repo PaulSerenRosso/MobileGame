@@ -1,8 +1,10 @@
 ﻿using System;
 using BehaviorTree.Nodes.Actions;
+using UnityEngine;
 
 namespace BehaviorTree.SO.Actions
 {
+    [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/LookDirectionNodeDataSO", fileName = "new T_LookDirection_Spe_Data")]
     public class TaskLookDirectionNodeDataSO : ActionNodeDataSO
     {
         public float TimeRotation;
