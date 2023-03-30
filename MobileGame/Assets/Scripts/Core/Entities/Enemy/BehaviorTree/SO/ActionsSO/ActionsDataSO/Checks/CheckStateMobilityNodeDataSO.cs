@@ -1,14 +1,13 @@
 using System;
 using BehaviorTree.Nodes.Actions;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace BehaviorTree.SO.Actions
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Data/Checks/StateDataSO", fileName = "new CH_State_Spe_Data")]
-    public class CheckStateNodeDataSO : ActionNodeDataSO
+    [CreateAssetMenu(menuName = "BehaviorTree/Data/Checks/StateMobilityDataSO", fileName = "new CH_StateMobility_Spe_Data")]
+    public class CheckStateMobilityNodeDataSO : ActionNodeDataSO
     {
-        [FormerlySerializedAs("EnemyState")] public EnemyEnums.EnemyMobilityState enemyMobilityState;
+        public EnemyEnums.EnemyMobilityState enemyMobilityState;
         
         protected override void SetDependencyValues()
         {
@@ -17,7 +16,7 @@ namespace BehaviorTree.SO.Actions
 
         public override Type GetTypeNode()
         {
-            return typeof(CheckStateNode);
+            return typeof(CheckStateMobilityNode);
         }
     }
 }

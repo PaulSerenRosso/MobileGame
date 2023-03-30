@@ -16,6 +16,7 @@ public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, I
     [SerializeField] private EnemySO _so;
     private float _health;
     public EnemyEnums.EnemyMobilityState CurrentMobilityState;
+    public EnemyEnums.EnemyBlockingState CurrentBlockingState;
     private List<EnemyStunTrigger> _currentStunTriggers;
 
     public event Action<float> OnDamageReceived;
@@ -25,6 +26,7 @@ public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, I
         transform.position = new Vector3(0, 0, 0);
         _health = _so.Health;
         CurrentMobilityState = EnemyEnums.EnemyMobilityState.VULNERABLE;
+        CurrentBlockingState = EnemyEnums.EnemyBlockingState.VULNERABLE;
         OnDamageReceived += TakeStun;
         UpdateManager.Register(this);
         _currentStunTriggers = new List<EnemyStunTrigger>();
@@ -39,12 +41,14 @@ public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, I
     {
         if (_currentStunTriggers.Count < 1 || CurrentMobilityState != EnemyEnums.EnemyMobilityState.VULNERABLE) return;
         _currentStunTriggers.RemoveAll(enemyStunTrigger => enemyStunTrigger.Time > _so.TimeStunAvailable);
-        foreach (var enemyStunTrigger in _currentStunTriggers.Where(enemyStunTrigger => enemyStunTrigger.Time < _so.TimeStunAvailable))
+        foreach (var enemyStunTrigger in _currentStunTriggers.Where(enemyStunTrigger =>
+                     enemyStunTrigger.Time < _so.TimeStunAvailable))
         {
             enemyStunTrigger.Time += Time.deltaTime;
         }
 
-        if (_currentStunTriggers.Any(enemyStunTrigger => (enemyStunTrigger.DamageAmount / _so.Health) >= _so.PercentageHealth))
+        if (_currentStunTriggers.Any(enemyStunTrigger =>
+                (enemyStunTrigger.DamageAmount / _so.Health) >= _so.PercentageHealth))
         {
             CurrentMobilityState = EnemyEnums.EnemyMobilityState.STAGGER;
             _currentStunTriggers.Clear();
@@ -74,9 +78,10 @@ public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, I
         }
         else _health -= 5;
     }
-    
+
     public void TakeDamage(float amount)
     {
+        if (CurrentBlockingState == EnemyEnums.EnemyBlockingState.BLOCKING) return;
         OnDamageReceived.Invoke(amount);
         if (_health - amount <= 0)
         {
@@ -85,9 +90,9 @@ public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, I
         }
         else
         {
-            Debug.Log("Enemy took : " + amount );
-            Debug.Log("Enemy have : " + _health);
+            Debug.Log("Enemy took : " + amount);
             _health -= amount;
+            Debug.Log("Enemy have : " + _health);
         }
     }
 
@@ -109,7 +114,8 @@ public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, I
     {
         if (CurrentMobilityState != EnemyEnums.EnemyMobilityState.VULNERABLE) return;
         _currentStunTriggers.Add(new EnemyStunTrigger(0, amount));
-        foreach (var enemyStunTrigger in _currentStunTriggers.Where(enemyStunTrigger => enemyStunTrigger.Time < _so.TimeStunAvailable))
+        foreach (var enemyStunTrigger in _currentStunTriggers.Where(enemyStunTrigger =>
+                     enemyStunTrigger.Time < _so.TimeStunAvailable))
         {
             enemyStunTrigger.DamageAmount += amount;
         }

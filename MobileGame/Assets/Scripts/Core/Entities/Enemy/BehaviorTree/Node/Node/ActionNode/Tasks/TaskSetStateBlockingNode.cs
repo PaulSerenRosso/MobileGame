@@ -1,12 +1,12 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 
 namespace BehaviorTree.Nodes.Actions
 {
-    public class CheckStateNode : ActionNode
+    public class TaskSetStateBlockingNode : ActionNode
     {
-        private CheckStateNodeSO _so;
-        private CheckStateNodeDataSO _data;
+        private TaskSetStateBlockingNodeSO _so;
+        private TaskSetStateBlockingNodeDataSO _data;
         private EnemyManager _enemyManager;
 
         public override NodeSO GetNodeSO()
@@ -16,15 +16,14 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
-            _so = (CheckStateNodeSO)nodeSO;
-            _data = (CheckStateNodeDataSO)_so.Data;
+            _so = (TaskSetStateBlockingNodeSO)nodeSO;
+            _data = (TaskSetStateBlockingNodeDataSO)_so.Data;
         }
 
         public override void Evaluate()
         {
-            State = _enemyManager.CurrentMobilityState == _data.enemyMobilityState
-                ? BehaviorTreeEnums.NodeState.SUCCESS
-                : BehaviorTreeEnums.NodeState.FAILURE;
+            _enemyManager.CurrentBlockingState = _data.EnemyBlockingState;
+            State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();
         }
 
