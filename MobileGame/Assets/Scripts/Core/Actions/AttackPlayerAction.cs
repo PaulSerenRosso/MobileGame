@@ -1,5 +1,6 @@
 using HelperPSR.Pool;
 using HelperPSR.Tick;
+using Interfaces;
 using UnityEngine;
 
 namespace Actions
@@ -11,8 +12,10 @@ namespace Actions
         public AttackActionSO AttackActionSo;
 
         [SerializeField] private Material[] _materials;
-        [SerializeField] private MeshRenderer _meshRenderer;
+        [SerializeField] private Renderer _meshRenderer;
 
+        private IDamageable _damageable; 
+        
         private Pool<GameObject>[] _hitPools;
         private bool _isAttacking;
         private int _comboCount;
@@ -43,6 +46,7 @@ namespace Actions
         {
             AttackTimer = new TickTimer(0, (TickManager)arguments[0]);
             _hitPools = new Pool<GameObject>[AttackActionSo.HitsSO.Length];
+            _damageable =(IDamageable) arguments[1];
             for (int i = 0; i < _hitPools.Length; i++)
             {
                 _hitPools[i] = new Pool<GameObject>(AttackActionSo.HitsSO[i].Particle, 2);
@@ -122,6 +126,7 @@ namespace Actions
             hit.transform.position = transform.position;
             hit.transform.forward = transform.forward;
             _hitPools[_comboCount].AddToPoolLatter(hit, hit.GetComponent<ParticleSystem>().main.duration);
+            _damageable.TakeDamage( AttackActionSo.HitsSO[_comboCount].Damage);
         }
 
         private void InitiateComboTimer()
