@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
+using UnityEngine;
 
 namespace BehaviorTree.Nodes.Actions
 {
@@ -22,6 +23,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void Evaluate()
         {
+            Debug.Log("StateMobility");
             _enemyManager.CurrentMobilityState = _data.EnemyMobilityState;
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();

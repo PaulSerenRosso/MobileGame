@@ -27,6 +27,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void Evaluate()
         {
+            Debug.Log("initRotation");
             if (!_initRotation)
             {
                 _transform.DOLookAt(

@@ -127,7 +127,6 @@ namespace Environment.MoveGrid
                 for (_j = 0; _j < _gridSo.MovePoints; _j++)
                 {
                     int currentIndex = currentCircleIndex + _j;
-                    Debug.Log((MovePoints[currentIndex].LocalPosition + offset).sqrMagnitude);
                     if ((MovePoints[currentIndex].LocalPosition + offset).sqrMagnitude >
                         _so.CircleEnvironnementSqRadius)
                     {

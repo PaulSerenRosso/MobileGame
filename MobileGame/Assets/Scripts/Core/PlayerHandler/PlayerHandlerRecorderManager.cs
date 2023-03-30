@@ -12,9 +12,7 @@ public class PlayerHandlerRecorderManager : MonoBehaviour
 
     public void LaunchRecorderAction()
     {
-        Debug.Log("trylaunchrecorderaction");
         if(InputPlayerActionRecorded == null) return;
-        Debug.Log("launchrecorderaction");
        InputPlayerActionRecorded.Invoke(argsForInputPlayerActionRecorded);
         InputPlayerActionRecorded = null;
         argsForInputPlayerActionRecorded = null;
