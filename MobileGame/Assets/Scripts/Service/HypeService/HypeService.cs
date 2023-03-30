@@ -11,47 +11,41 @@ namespace Service.Hype
 
         public void IncreaseHype(float amount)
         {
-            if (!CheckMaximumHypeIsReached(_currentHype))
+            if (CheckMaximumHypeIsReached(_currentHype)) return;
+            if (CheckMaximumHypeIsReached(_currentHype + amount))
             {
-                if (CheckMaximumHypeIsReached(_currentHype + amount))
-                {
-                    _currentHype = _hypeServiceSo.MaxHype;
-                    ReachMaximumHypeEvent?.Invoke(amount);
-                }
-                else
-                {
-                    _currentHype += amount;
-                }
-
-                IncreaseHypeEvent?.Invoke(amount);
+                _currentHype = _hypeServiceSo.MaxHype;
+                ReachMaximumHypeEvent?.Invoke(amount);
             }
+            else
+            {
+                _currentHype += amount;
+            }
+
+            IncreaseHypeEvent?.Invoke(amount);
         }
 
         public void DecreaseHype(float amount)
         {
-            if (!CheckMinimumHypeIsReached(_currentHype))
+            if (CheckMinimumHypeIsReached(_currentHype)) return;
+            if (CheckMinimumHypeIsReached(_currentHype - amount))
             {
-                if (CheckMinimumHypeIsReached(_currentHype - amount))
-                {
-                    _currentHype = _hypeServiceSo.MinHype;
-                    ReachMinimumHypeEvent?.Invoke(amount);
-                }
-                else
-                {
-                    _currentHype -= amount;
-                }
-
-                IncreaseHypeEvent?.Invoke(amount);
+                _currentHype = _hypeServiceSo.MinHype;
+                ReachMinimumHypeEvent?.Invoke(amount);
             }
+            else
+            {
+                _currentHype -= amount;
+            }
+
+            IncreaseHypeEvent?.Invoke(amount);
         }
 
         public void SetHype(float value)
         {
-            if (CheckHypeIsClamped(value))
-            {
-                _currentHype = value;
-                SetHypeEvent?.Invoke();
-            }
+            if (!CheckHypeIsClamped(value)) return;
+            _currentHype = value;
+            SetHypeEvent?.Invoke();
         }
 
         public float GetCurrentHype()
@@ -71,29 +65,17 @@ namespace Service.Hype
 
         private bool CheckHypeIsClamped(float value)
         {
-            if (value <= _hypeServiceSo.MaxHype && value >= _hypeServiceSo.MinHype)
-                return true;
-            return false;
+            return value <= _hypeServiceSo.MaxHype && value >= _hypeServiceSo.MinHype;
         }
 
         private bool CheckMaximumHypeIsReached(float currentHype)
         {
-            if (currentHype >= _hypeServiceSo.MaxHype)
-            {
-                return true;
-            }
-
-            return false;
+            return currentHype >= _hypeServiceSo.MaxHype;
         }
 
         private bool CheckMinimumHypeIsReached(float currentHype)
         {
-            if (currentHype <= _hypeServiceSo.MinHype)
-            {
-                return true;
-            }
-
-            return false;
+            return currentHype <= _hypeServiceSo.MinHype;
         }
 
         public event Action<float> IncreaseHypeEvent;
