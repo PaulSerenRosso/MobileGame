@@ -22,10 +22,8 @@ public class BehaviorTreeEnums
 
     public enum NodeState
     {
-        RUNNING,
         SUCCESS,
-        FAILURE,
-        LOOP
+        FAILURE
     }
 
     public enum InternValueType

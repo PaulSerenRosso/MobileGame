@@ -20,15 +20,18 @@ namespace BehaviorTree.Nodes.Actions
             _data = (CheckInternTimerNodeDataSO)_so.Data;
         }
 
-        public override BehaviorTreeEnums.NodeState Evaluate()
+        public override void Evaluate()
         {
             if (_timer > (float)Sharer.InternValues[_so.InternValues[0].HashCode])
             {
                 _timer = 0;
-                return BehaviorTreeEnums.NodeState.SUCCESS;
+                State = BehaviorTreeEnums.NodeState.SUCCESS;
+                ReturnedEvent?.Invoke();
+                return;
             }
             _timer += Time.deltaTime;
-            return BehaviorTreeEnums.NodeState.FAILURE;
+            State = BehaviorTreeEnums.NodeState.FAILURE;
+            ReturnedEvent?.Invoke();
         }
 
         public override ActionNodeDataSO GetDataSO()

@@ -10,26 +10,32 @@ namespace BehaviorTree.Nodes.Actions
         private CheckCirclesAreOccupiedNodeSO _so;
         private CheckCirclesAreOccupiedNodeDataSO _data;
         private EnvironmentGridManager _environmentGridManager;
-        
-        public override BehaviorTreeEnums.NodeState Evaluate()
+
+        public override void Evaluate()
         {
-            if (!_environmentGridManager.CheckIfOneMovePointInCirclesIsOccupied(_data.CircleIndexes, (Vector3)Sharer.InternValues[_so.InternValues[0].HashCode]))
+            if (!_environmentGridManager.CheckIfOneMovePointInCirclesIsOccupied(_data.CircleIndexes,
+                    (Vector3)Sharer.InternValues[_so.InternValues[0].HashCode]))
             {
-             
-                return BehaviorTreeEnums.NodeState.SUCCESS;
+                State = BehaviorTreeEnums.NodeState.SUCCESS;
+                ReturnedEvent?.Invoke();
+                return;
             }
-            return BehaviorTreeEnums.NodeState.FAILURE;
+
+            State = BehaviorTreeEnums.NodeState.FAILURE;
+            ReturnedEvent?.Invoke();
         }
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
-            _so =(CheckCirclesAreOccupiedNodeSO) nodeSO;
+            _so = (CheckCirclesAreOccupiedNodeSO)nodeSO;
             _data = (CheckCirclesAreOccupiedNodeDataSO)_so.Data;
         }
 
-        public override void SetDependencyValues(Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues, Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
+        public override void SetDependencyValues(
+            Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
+            Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
         {
-            _environmentGridManager =(EnvironmentGridManager)
+            _environmentGridManager = (EnvironmentGridManager)
                 externDependencyValues[BehaviorTreeEnums.TreeExternValues.EnvironmentGridManager];
         }
 

@@ -21,16 +21,19 @@ namespace BehaviorTree.Nodes.Actions
             _timer = _data.StartTime;
         }
 
-        public override BehaviorTreeEnums.NodeState Evaluate()
+        public override void Evaluate()
         {
             if (_timer > _data.Time)
             {
-                Debug.Log("Timer is finish");
+                Debug.Log("Timer");
                 _timer = 0;
-                return BehaviorTreeEnums.NodeState.SUCCESS;
+                State = BehaviorTreeEnums.NodeState.SUCCESS;
+                ReturnedEvent?.Invoke();
+                return;
             }
             _timer += Time.deltaTime;
-            return BehaviorTreeEnums.NodeState.FAILURE;
+            State = BehaviorTreeEnums.NodeState.FAILURE;
+            ReturnedEvent?.Invoke();
         }
 
         public override ActionNodeDataSO GetDataSO()

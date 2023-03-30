@@ -23,10 +23,12 @@ namespace BehaviorTree.Nodes.Actions
             _data = (TaskGetTimeAnimationNodeDataSO)_so.Data;
         }
 
-        public override BehaviorTreeEnums.NodeState Evaluate()
+        public override void Evaluate()
         {
-            CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[0].HashCode, _animator.GetCurrentAnimatorStateInfo(0).length);
-            return BehaviorTreeEnums.NodeState.SUCCESS;
+            CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[0].HashCode,
+                _animator.GetCurrentAnimatorStateInfo(0).length);
+            State = BehaviorTreeEnums.NodeState.SUCCESS;
+            ReturnedEvent?.Invoke();
         }
 
         public override void SetDependencyValues(

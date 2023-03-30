@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using Player;
 using UnityEngine;
@@ -23,12 +24,11 @@ namespace BehaviorTree.Nodes.Actions
             _data = (TaskDamagePlayerNodeDataSO)_so.Data;
         }
 
-        public override BehaviorTreeEnums.NodeState Evaluate()
+        public override void Evaluate()
         {
-            // TODO: think about combo attack of boss
-            Debug.Log("Boss Attack");
             _playerHealth.TakeDamage(_data.Damage);
-            return BehaviorTreeEnums.NodeState.SUCCESS;
+            State = BehaviorTreeEnums.NodeState.SUCCESS;
+            ReturnedEvent?.Invoke();
         }
 
         public override void SetDependencyValues(
@@ -36,7 +36,7 @@ namespace BehaviorTree.Nodes.Actions
             Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
         {
             _playerHealth =
-                 (PlayerHealth)externDependencyValues[BehaviorTreeEnums.TreeExternValues.PlayerHealth];
+                (PlayerHealth)externDependencyValues[BehaviorTreeEnums.TreeExternValues.PlayerHealth];
         }
 
         public override ActionNodeDataSO GetDataSO()

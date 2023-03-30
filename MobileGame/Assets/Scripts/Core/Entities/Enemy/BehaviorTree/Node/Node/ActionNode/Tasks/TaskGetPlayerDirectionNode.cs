@@ -24,7 +24,7 @@ namespace BehaviorTree.Nodes.Actions
             _data = (TaskGetPlayerDirectionNodeDataSO)_so.Data;
         }
 
-        public override BehaviorTreeEnums.NodeState Evaluate()
+        public override void Evaluate()
         {
             int playerMovePointIndex = (int)Sharer.InternValues[_so.InternValues[0].HashCode];
             Vector3 direction = _environmentGridManager.MovePoints[playerMovePointIndex].LocalPosition -
@@ -32,7 +32,8 @@ namespace BehaviorTree.Nodes.Actions
 
             CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[1].HashCode, direction.normalized);
 
-            return BehaviorTreeEnums.NodeState.SUCCESS;
+            State = BehaviorTreeEnums.NodeState.SUCCESS;
+            ReturnedEvent?.Invoke();
         }
 
         public override void SetDependencyValues(

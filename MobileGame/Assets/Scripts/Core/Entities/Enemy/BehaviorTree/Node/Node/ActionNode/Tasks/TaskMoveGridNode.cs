@@ -24,11 +24,12 @@ namespace BehaviorTree.Nodes.Actions
             _data = (TaskMoveGridNodeDataSO)_so.Data;
         }
 
-        public override BehaviorTreeEnums.NodeState Evaluate()
+        public override void Evaluate()
         {
             _environmentGridManager.MoveGrid((Vector3)Sharer.InternValues[_so.InternValues[0].HashCode]);
             _playerMovementHandler.SetCurrentMovePoint((int)Sharer.InternValues[_so.InternValues[1].HashCode]);
-            return BehaviorTreeEnums.NodeState.SUCCESS;
+            State = BehaviorTreeEnums.NodeState.SUCCESS;
+            ReturnedEvent?.Invoke();
         }
 
         public override void SetDependencyValues(

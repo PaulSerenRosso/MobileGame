@@ -22,11 +22,12 @@ namespace BehaviorTree.Nodes.Actions
             return _so;
         }
 
-        public override BehaviorTreeEnums.NodeState Evaluate()
+        public override void Evaluate()
         {
             GameObject gameObject = _poolService.GetFromPool(_data.ParticleGO);
             gameObject.transform.position = (Vector3)Sharer.InternValues[_so.InternValues[0].HashCode];
-            return BehaviorTreeEnums.NodeState.SUCCESS;
+            State = BehaviorTreeEnums.NodeState.SUCCESS;
+            ReturnedEvent?.Invoke();
         }
 
         public override void SetDependencyValues(

@@ -18,14 +18,15 @@ namespace BehaviorTree.Nodes.Actions
             return _so;
         }
 
-        public override BehaviorTreeEnums.NodeState Evaluate()
+        public override void Evaluate()
         {
-            
             foreach (var key in _so.InternValues)
             {
                 Sharer.InternValues.Remove(key.HashCode);
             }
-            return BehaviorTreeEnums.NodeState.SUCCESS;
+
+            State = BehaviorTreeEnums.NodeState.SUCCESS;
+            ReturnedEvent?.Invoke();
         }
 
         public override ActionNodeDataSO GetDataSO()

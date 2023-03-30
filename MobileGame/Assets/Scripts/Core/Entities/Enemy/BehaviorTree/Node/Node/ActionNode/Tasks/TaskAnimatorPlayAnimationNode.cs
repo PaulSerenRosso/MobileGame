@@ -9,7 +9,7 @@ namespace BehaviorTree.Nodes.Actions
         private TaskAnimatorPlayAnimationNodeSO _so;
         private TaskAnimatorPlayAnimationNodeDataSO _data;
         private Animator _animator;
-        
+
         public override void SetNodeSO(NodeSO nodeSO)
         {
             _so = (TaskAnimatorPlayAnimationNodeSO)nodeSO;
@@ -20,13 +20,14 @@ namespace BehaviorTree.Nodes.Actions
         {
             return _so;
         }
-        
-        public override BehaviorTreeEnums.NodeState Evaluate()
+
+        public override void Evaluate()
         {
             _animator.Play(_data.NameParameter);
-            return BehaviorTreeEnums.NodeState.SUCCESS;
+            State = BehaviorTreeEnums.NodeState.SUCCESS;
+            ReturnedEvent?.Invoke();
         }
-        
+
         public override void SetDependencyValues(
             Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
             Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)

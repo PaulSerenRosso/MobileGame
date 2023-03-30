@@ -4,7 +4,8 @@ namespace BehaviorTree.Nodes
 {
     public abstract class Node
     {
-        protected BehaviorTreeEnums.NodeState _state;
+        public BehaviorTreeEnums.NodeState State;
+        public Action ReturnedEvent;
 
         public static Node CreateNodeSO(NodeSO so)
         {
@@ -23,9 +24,8 @@ namespace BehaviorTree.Nodes
 
         public virtual void SetNodeSO(NodeSO nodeSO)
         {
-            
         }
 
-        public abstract BehaviorTreeEnums.NodeState Evaluate();
+        public abstract void Evaluate();
     }
 }

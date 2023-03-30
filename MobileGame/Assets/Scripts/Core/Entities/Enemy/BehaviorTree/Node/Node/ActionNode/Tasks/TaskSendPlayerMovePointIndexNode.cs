@@ -23,11 +23,13 @@ namespace BehaviorTree.Nodes.Actions
             return _so;
         }
 
-        public override BehaviorTreeEnums.NodeState Evaluate()
+        public override void Evaluate()
         {
-            CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[0].HashCode, _playerMovementHandler.GetCurrentIndexMovePoint());
+            CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[0].HashCode,
+                _playerMovementHandler.GetCurrentIndexMovePoint());
 
-            return BehaviorTreeEnums.NodeState.SUCCESS;
+            State = BehaviorTreeEnums.NodeState.SUCCESS;
+            ReturnedEvent?.Invoke();
         }
 
         public override void SetDependencyValues(

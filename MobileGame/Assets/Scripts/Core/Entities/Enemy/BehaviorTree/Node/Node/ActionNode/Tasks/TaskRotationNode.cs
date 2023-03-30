@@ -14,7 +14,7 @@ namespace BehaviorTree.Nodes.Actions
         private bool _initRotation;
         private bool _rotationIsFinished;
 
-        public override BehaviorTreeEnums.NodeState Evaluate()
+        public override void Evaluate()
         {
             if (!_initRotation)
             {
@@ -27,10 +27,13 @@ namespace BehaviorTree.Nodes.Actions
             {
                 _initRotation = false;
                 _rotationIsFinished = false;
-                return BehaviorTreeEnums.NodeState.SUCCESS;
+                State = BehaviorTreeEnums.NodeState.SUCCESS;
+                ReturnedEvent?.Invoke();
+                return;
             }
 
-            return BehaviorTreeEnums.NodeState.FAILURE;
+            State = BehaviorTreeEnums.NodeState.FAILURE;
+            ReturnedEvent?.Invoke();
         }
 
         public override ActionNodeDataSO GetDataSO()

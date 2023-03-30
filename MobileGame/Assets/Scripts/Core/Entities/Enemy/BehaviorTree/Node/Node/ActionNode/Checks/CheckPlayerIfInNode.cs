@@ -22,12 +22,13 @@ namespace BehaviorTree.Nodes.Actions
             _data = (CheckPlayerIfInNodeDataSO)_so.Data;
         }
 
-        public override BehaviorTreeEnums.NodeState Evaluate()
+        public override void Evaluate()
         {
             int attackIndex = (int)Sharer.InternValues[_so.InternValues[0].HashCode];
-            return _playerMovementHandler.GetCurrentIndexMovePoint() == attackIndex
+            State = _playerMovementHandler.GetCurrentIndexMovePoint() == attackIndex
                 ? BehaviorTreeEnums.NodeState.SUCCESS
                 : BehaviorTreeEnums.NodeState.FAILURE;
+            ReturnedEvent?.Invoke();
         }
 
         public override void SetDependencyValues(

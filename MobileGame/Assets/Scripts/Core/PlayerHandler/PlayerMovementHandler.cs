@@ -45,9 +45,7 @@ namespace Player.Handler
         protected override void TryMakeAction(params object[] args)
         {
             _currentSwipe = (Swipe)args[0];
-            Debug.Log(_currentSwipe.SwipeSO.DirectionV2);
             base.TryMakeAction(args);
-           
         }
 
         public bool CheckIsMoving()
@@ -152,7 +150,6 @@ namespace Player.Handler
             AddCondition(CheckIsInTaunt);
             AddCondition(CheckIsOccupied);
             AddCondition(CheckIsInAttack);
-            Debug.Log(_cooldownTimeBetweenTwoMovement);
             _recoveryTimer = new TickTimer(_cooldownTimeBetweenTwoMovement, (TickManager)arguments[3]);
             _recoveryTimer.TickEvent += FinishCooldown;
             _recoveryTimer.InitiateEvent += LaunchCooldownBetweenTwoMovement;
@@ -164,14 +161,12 @@ namespace Player.Handler
         private void FinishCooldown()
         {
             _inCooldown = false;
-            Debug.Log("end");
             FinishRecoveryMovementEvent?.Invoke();
         }
 
         private void LaunchCooldownBetweenTwoMovement()
         {
             _inCooldown = true;
-            Debug.Log("launch");
         }
 
         private bool CheckCooldownBetweenTwoMovement()
