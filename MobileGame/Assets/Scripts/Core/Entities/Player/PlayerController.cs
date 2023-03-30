@@ -30,7 +30,7 @@ namespace Player
             _hypeService = hypeService;
             _playerMovementHandler.Setup(environmentGridManager, environmentSO.Index, _inputService, _tickeableService.GetTickManager);
             _playerRotationHandler.Setup(_enemyManager.transform);
-            _playerAttackHandler.Setup(_inputService, _tickeableService.GetTickManager, enemyManager);
+            _playerAttackHandler.Setup(_inputService, _tickeableService.GetTickManager, enemyManager, environmentGridManager);
             _playerTauntHandler.Setup(_inputService, _tickeableService.GetTickManager, hypeService);
             _playerRenderer.Init();
         }

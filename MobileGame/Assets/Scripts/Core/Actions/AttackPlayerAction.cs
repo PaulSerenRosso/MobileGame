@@ -1,3 +1,4 @@
+using System;
 using HelperPSR.Pool;
 using HelperPSR.Tick;
 using Interfaces;
@@ -14,11 +15,12 @@ namespace Actions
         [SerializeField] private Material[] _materials;
         [SerializeField] private Renderer _meshRenderer;
 
-        private IDamageable _damageable; 
-        
+        private IDamageable _damageable;
+
         private Pool<GameObject>[] _hitPools;
         private bool _isAttacking;
         private int _comboCount;
+        public event Func<HitSO, bool> CheckCanDamageEvent;
 
         public override bool IsInAction
         {
@@ -40,19 +42,19 @@ namespace Actions
             AttackTimer.InitiateEvent += InitiateCancelTimer;
             AttackTimer.Initiate();
             MakeActionEvent?.Invoke();
-        } 
+        }
 
         public override void SetupAction(params object[] arguments)
         {
             AttackTimer = new TickTimer(0, (TickManager)arguments[0]);
             _hitPools = new Pool<GameObject>[AttackActionSo.HitsSO.Length];
-            _damageable =(IDamageable) arguments[1];
+            _damageable = (IDamageable)arguments[1];
             for (int i = 0; i < _hitPools.Length; i++)
             {
                 _hitPools[i] = new Pool<GameObject>(AttackActionSo.HitsSO[i].Particle, 2);
             }
         }
-        
+
         public event System.Action InitCancelAttackEvent;
         public event System.Action InitBeforeHitEvent;
         public event System.Action EndRecoveryEvent;
@@ -121,12 +123,12 @@ namespace Actions
 
         private void Hit()
         {
-            Debug.Log("Hit");
-            var hit = _hitPools[_comboCount].GetFromPool();
-            hit.transform.position = transform.position;
-            hit.transform.forward = transform.forward;
-            _hitPools[_comboCount].AddToPoolLatter(hit, hit.GetComponent<ParticleSystem>().main.duration);
-            _damageable.TakeDamage( AttackActionSo.HitsSO[_comboCount].Damage);
+            if (CheckCanDamageEvent.Invoke(AttackActionSo.HitsSO[_comboCount]))
+            {
+                var hit = _hitPools[_comboCount].GetFromPool();
+                _hitPools[_comboCount].AddToPoolLatter(hit, hit.GetComponent<ParticleSystem>().main.duration);
+                _damageable.TakeDamage(AttackActionSo.HitsSO[_comboCount].Damage);
+            }
         }
 
         private void InitiateComboTimer()

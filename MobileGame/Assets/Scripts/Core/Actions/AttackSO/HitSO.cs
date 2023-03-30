@@ -10,7 +10,7 @@ namespace Actions
         public float TimeBeforeHit;
         public float RecoveryTime;
         public float ComboTime;
-        public float HitMovePointsDistance;
+        public int HitMovePointsDistance;
         public GameObject Particle;
     }
 }
