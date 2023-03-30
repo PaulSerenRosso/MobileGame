@@ -3,10 +3,10 @@ using BehaviorTree.SO.Actions;
 
 namespace BehaviorTree.Nodes.Actions
 {
-    public class TaskSetStateNode : ActionNode
+    public class CheckStateMobilityNode : ActionNode
     {
-        private TaskSetStateNodeSO _so;
-        private TaskSetStateNodeDataSO _data;
+        private CheckStateMobilityNodeSO _so;
+        private CheckStateMobilityNodeDataSO _data;
         private EnemyManager _enemyManager;
 
         public override NodeSO GetNodeSO()
@@ -16,14 +16,15 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
-            _so = (TaskSetStateNodeSO)nodeSO;
-            _data = (TaskSetStateNodeDataSO)_so.Data;
+            _so = (CheckStateMobilityNodeSO)nodeSO;
+            _data = (CheckStateMobilityNodeDataSO)_so.Data;
         }
 
         public override void Evaluate()
         {
-            _enemyManager.CurrentMobilityState = _data.EnemyMobilityState;
-            State = BehaviorTreeEnums.NodeState.SUCCESS;
+            State = _enemyManager.CurrentMobilityState == _data.enemyMobilityState
+                ? BehaviorTreeEnums.NodeState.SUCCESS
+                : BehaviorTreeEnums.NodeState.FAILURE;
             ReturnedEvent?.Invoke();
         }
 
