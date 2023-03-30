@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using DG.Tweening;
 using UnityEngine;
@@ -15,7 +14,7 @@ namespace BehaviorTree.Nodes.Actions
         private bool _initRotation;
         private bool _rotationIsFinished;
 
-        public override IEnumerator Evaluate()
+        public override void Evaluate()
         {
             if (!_initRotation)
             {
@@ -28,10 +27,13 @@ namespace BehaviorTree.Nodes.Actions
             {
                 _initRotation = false;
                 _rotationIsFinished = false;
-                yield return BehaviorTreeEnums.NodeState.SUCCESS;
+                State = BehaviorTreeEnums.NodeState.SUCCESS;
+                ReturnedEvent?.Invoke();
+                return;
             }
 
-            yield return BehaviorTreeEnums.NodeState.FAILURE;
+            State = BehaviorTreeEnums.NodeState.FAILURE;
+            ReturnedEvent?.Invoke();
         }
 
         public override ActionNodeDataSO GetDataSO()

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using Player.Handler;
@@ -22,12 +21,12 @@ namespace BehaviorTree.Nodes.Actions
             _data = (CheckPlayerIsInMovingNodeDataSO)_so.Data;
         }
 
-        public override IEnumerator Evaluate()
+        public override void Evaluate()
         {
             State = _playerMovementHandler.CheckIsMoving()
                 ? BehaviorTreeEnums.NodeState.FAILURE
                 : BehaviorTreeEnums.NodeState.SUCCESS;
-            yield break;
+            ReturnedEvent?.Invoke();
         }
 
         public override void SetDependencyValues(

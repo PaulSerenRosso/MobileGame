@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using UnityEngine;
 
@@ -10,7 +9,7 @@ namespace BehaviorTree.Nodes.Actions
         private TaskActivationFXNodeSO _so;
         private TaskActivationFXNodeDataSO _data;
         private ParticleSystem[] _particleSystems;
-        
+
         public override void SetNodeSO(NodeSO nodeSO)
         {
             _so = (TaskActivationFXNodeSO)nodeSO;
@@ -22,10 +21,10 @@ namespace BehaviorTree.Nodes.Actions
             return _so;
         }
 
-        public override IEnumerator Evaluate()
+        public override void Evaluate()
         {
-          State = BehaviorTreeEnums.NodeState.SUCCESS;
-          yield break;
+            State = BehaviorTreeEnums.NodeState.SUCCESS;
+            ReturnedEvent?.Invoke();
         }
 
         public override void SetDependencyValues(

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using UnityEngine;
 
@@ -10,7 +9,7 @@ namespace BehaviorTree.Nodes.Actions
         private TaskAnimatorSetBoolNodeSO _so;
         private TaskAnimatorSetBoolNodeDataSO _data;
         private Animator _animator;
-        
+
         public override void SetNodeSO(NodeSO nodeSO)
         {
             _so = (TaskAnimatorSetBoolNodeSO)nodeSO;
@@ -21,14 +20,14 @@ namespace BehaviorTree.Nodes.Actions
         {
             return _so;
         }
-        
-        public override IEnumerator Evaluate()
+
+        public override void Evaluate()
         {
             _animator.SetBool(_data.NameParameter, _data.ValueToPass);
-            State =BehaviorTreeEnums.NodeState.SUCCESS;
-            yield break;
+            State = BehaviorTreeEnums.NodeState.SUCCESS;
+            ReturnedEvent?.Invoke();
         }
-        
+
         public override void SetDependencyValues(
             Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
             Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)

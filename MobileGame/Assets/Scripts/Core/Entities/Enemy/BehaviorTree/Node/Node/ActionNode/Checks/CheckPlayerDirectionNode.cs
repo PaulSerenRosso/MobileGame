@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using UnityEngine;
 
@@ -23,11 +22,11 @@ namespace BehaviorTree.Nodes.Actions
             _data = (CheckPlayerDirectionNodeDataSO)_so.Data;
         }
 
-        public override IEnumerator Evaluate()
+        public override void Evaluate()
         {
-            float angle = Vector3.Angle(_transform.forward, (Vector3) Sharer.InternValues[_so.InternValues[0].HashCode]);
+            float angle = Vector3.Angle(_transform.forward, (Vector3)Sharer.InternValues[_so.InternValues[0].HashCode]);
             State = angle < 10 ? BehaviorTreeEnums.NodeState.SUCCESS : BehaviorTreeEnums.NodeState.FAILURE;
-                yield break;
+            ReturnedEvent?.Invoke();
         }
 
         public override void SetDependencyValues(

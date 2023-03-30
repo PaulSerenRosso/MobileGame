@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using BehaviorTree.SO.Actions;
+﻿using BehaviorTree.SO.Actions;
 
 namespace BehaviorTree.Nodes.Actions
 {
@@ -20,15 +18,15 @@ namespace BehaviorTree.Nodes.Actions
             return _so;
         }
 
-        public override IEnumerator Evaluate()
+        public override void Evaluate()
         {
-            
             foreach (var key in _so.InternValues)
             {
                 Sharer.InternValues.Remove(key.HashCode);
             }
-       State = BehaviorTreeEnums.NodeState.SUCCESS;
-       yield break;
+
+            State = BehaviorTreeEnums.NodeState.SUCCESS;
+            ReturnedEvent?.Invoke();
         }
 
         public override ActionNodeDataSO GetDataSO()

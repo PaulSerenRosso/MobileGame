@@ -1,19 +1,15 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace BehaviorTree.Nodes
 {
     public abstract class Node
     {
         public BehaviorTreeEnums.NodeState State;
-        public MonoBehaviour CoroutineLauncher;
+        public Action ReturnedEvent;
+
         public static Node CreateNodeSO(NodeSO so)
         {
-            
             return (Node)Activator.CreateInstance(so.GetTypeNode());
-            
         }
 
         public Node()
@@ -28,9 +24,8 @@ namespace BehaviorTree.Nodes
 
         public virtual void SetNodeSO(NodeSO nodeSO)
         {
-            
         }
 
-        public abstract IEnumerator Evaluate();
+        public abstract void Evaluate();
     }
 }

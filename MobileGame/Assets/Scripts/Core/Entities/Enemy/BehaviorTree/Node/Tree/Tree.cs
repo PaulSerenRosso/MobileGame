@@ -5,8 +5,8 @@ using BehaviorTree.Nodes.Composite;
 using BehaviorTree.Nodes.Decorator;
 using BehaviorTree.SO.Composite;
 using BehaviorTree.SO.Decorator;
+using Cysharp.Threading.Tasks;
 using Environment.MoveGrid;
-using HelperPSR.MonoLoopFunctions;
 using Service;
 using Service.Hype;
 using UnityEngine;
@@ -14,23 +14,18 @@ using Object = System.Object;
 
 namespace BehaviorTree.Trees
 {
-    public class Tree : MonoBehaviour, IUpdatable
+    public class Tree : MonoBehaviour
     {
         [SerializeField] private NodeSO _rootSO;
         [SerializeField] private NodeValuesInitializer _nodeValuesInitializer;
         private Node _root;
         private NodeValuesSharer _nodeValuesSharer = new();
-        public void OnUpdate()
-        { 
-            StartCoroutine(_root.Evaluate());
-        }
-
+        
         public void Setup(Transform playerTransform, ITickeableService tickeableService,
             EnvironmentGridManager environmentGridManager, IPoolService poolService, IHypeService hypeService)
         {
             _nodeValuesInitializer.Setup(playerTransform, tickeableService, environmentGridManager, poolService, hypeService);
             _root = Node.CreateNodeSO(_rootSO);
-            _root.CoroutineLauncher = this;
             switch (_rootSO)
             {
                 case CompositeSO compositeSO:
@@ -40,7 +35,9 @@ namespace BehaviorTree.Trees
                     LoopSetupChild((DecoratorNode)_root, decoratorSO.Child);
                     break;
             }
-            UpdateManager.Register(this);
+
+            _root.ReturnedEvent = WaitForNextFrame;
+            _root.Evaluate();
         }
 
         private void LoopSetupChild(CompositeNode parent, List<NodeSO> childsSO)
@@ -63,7 +60,6 @@ namespace BehaviorTree.Trees
         private Node CreateChild(NodeSO childSO)
         {
            var node =  Node.CreateNodeSO(childSO);
-           node.CoroutineLauncher = this;
            return node;
         }
 
@@ -108,6 +104,12 @@ namespace BehaviorTree.Trees
 
             actionChild.Sharer = _nodeValuesSharer;
             actionChild.SetDependencyValues(dependencyExternValuesObjects, dependencyEnemyValuesObjects);
+        }
+
+        private async void WaitForNextFrame()
+        {
+            await UniTask.DelayFrame(0);
+            _root.Evaluate();
         }
     }
 }

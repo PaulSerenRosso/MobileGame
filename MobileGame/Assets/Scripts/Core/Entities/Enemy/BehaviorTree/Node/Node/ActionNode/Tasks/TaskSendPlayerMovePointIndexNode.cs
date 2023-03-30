@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using HelperPSR.Collections;
 using Player.Handler;
@@ -24,12 +23,13 @@ namespace BehaviorTree.Nodes.Actions
             return _so;
         }
 
-        public override IEnumerator Evaluate()
+        public override void Evaluate()
         {
-            CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[0].HashCode, _playerMovementHandler.GetCurrentIndexMovePoint());
+            CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[0].HashCode,
+                _playerMovementHandler.GetCurrentIndexMovePoint());
 
-         State= BehaviorTreeEnums.NodeState.SUCCESS;
-         yield break;
+            State = BehaviorTreeEnums.NodeState.SUCCESS;
+            ReturnedEvent?.Invoke();
         }
 
         public override void SetDependencyValues(

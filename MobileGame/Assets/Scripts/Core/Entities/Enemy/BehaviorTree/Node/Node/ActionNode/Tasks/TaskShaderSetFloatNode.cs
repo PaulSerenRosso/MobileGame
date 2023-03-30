@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 
 namespace BehaviorTree.Nodes.Actions
@@ -8,7 +7,7 @@ namespace BehaviorTree.Nodes.Actions
     {
         private TaskShaderSetFloatNodeSO _so;
         private TaskShaderSetFloatNodeDataSO _data;
-        
+
         public override void SetNodeSO(NodeSO nodeSO)
         {
             _so = (TaskShaderSetFloatNodeSO)nodeSO;
@@ -19,11 +18,11 @@ namespace BehaviorTree.Nodes.Actions
         {
             return _so;
         }
-        
-        public override IEnumerator Evaluate()
+
+        public override void Evaluate()
         {
-           State = BehaviorTreeEnums.NodeState.SUCCESS;
-            yield break;
+            State = BehaviorTreeEnums.NodeState.SUCCESS;
+            ReturnedEvent?.Invoke();
         }
 
         public override ActionNodeDataSO GetDataSO()

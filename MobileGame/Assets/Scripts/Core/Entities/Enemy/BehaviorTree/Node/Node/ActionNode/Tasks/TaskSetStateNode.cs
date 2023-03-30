@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
-using UnityEngine;
 
 namespace BehaviorTree.Nodes.Actions
 {
@@ -22,12 +20,11 @@ namespace BehaviorTree.Nodes.Actions
             _data = (TaskSetStateNodeDataSO)_so.Data;
         }
 
-        public override IEnumerator Evaluate()
+        public override void Evaluate()
         {
-            Debug.Log("SetState");
             _enemyManager.CurrentMobilityState = _data.EnemyMobilityState;
-            State =BehaviorTreeEnums.NodeState.SUCCESS;
-            yield break;
+            State = BehaviorTreeEnums.NodeState.SUCCESS;
+            ReturnedEvent?.Invoke();
         }
 
         public override void SetDependencyValues(

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using Environment.MoveGrid;
 using Player.Handler;
@@ -25,13 +24,12 @@ namespace BehaviorTree.Nodes.Actions
             _data = (TaskMoveGridNodeDataSO)_so.Data;
         }
 
-        public override IEnumerator Evaluate()
+        public override void Evaluate()
         {
-            Debug.Log("testaa ");
             _environmentGridManager.MoveGrid((Vector3)Sharer.InternValues[_so.InternValues[0].HashCode]);
             _playerMovementHandler.SetCurrentMovePoint((int)Sharer.InternValues[_so.InternValues[1].HashCode]);
             State = BehaviorTreeEnums.NodeState.SUCCESS;
-            yield break;
+            ReturnedEvent?.Invoke();
         }
 
         public override void SetDependencyValues(

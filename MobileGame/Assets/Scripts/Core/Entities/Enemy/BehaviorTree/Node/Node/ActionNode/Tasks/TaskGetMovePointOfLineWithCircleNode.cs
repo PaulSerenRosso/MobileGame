@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using Environment.MoveGrid;
 using HelperPSR.Collections;
-using UnityEngine;
 
 namespace BehaviorTree.Nodes.Actions
 {
@@ -24,14 +22,14 @@ namespace BehaviorTree.Nodes.Actions
             return _so;
         }
 
-        public override IEnumerator Evaluate()
+        public override void Evaluate()
         {
             int startIndex = (int)Sharer.InternValues[_so.InternValues[0].HashCode];
             CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[1].HashCode,
                 _environmentGridManager.GetIndexMovePointFromStartMovePointLineWithCircle(startIndex,
                     _data.CircleIndex));
-           State =BehaviorTreeEnums.NodeState.SUCCESS;
-           yield break;
+            State = BehaviorTreeEnums.NodeState.SUCCESS;
+            ReturnedEvent?.Invoke();
         }
 
         public override void SetDependencyValues(

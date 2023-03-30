@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using BehaviorTree.SO.Decorator;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 namespace BehaviorTree.Nodes.Decorator
 {
@@ -21,20 +17,28 @@ namespace BehaviorTree.Nodes.Decorator
             _so = (DecoratorUntilSO)nodeSO;
         }
 
-        public override IEnumerator Evaluate()
+        public override void EvaluateChild()
         {
-            CoroutineLauncher.StartCoroutine(Child.Evaluate());
             if (Child.State == _so.BreakStateCondition)
             {
-                Child.State = _so.BreakStateCondition;
+                State = Child.State;
+                ReturnedEvent?.Invoke();
             }
             else
             {
-                State = BehaviorTreeEnums.NodeState.BLOCKED;
+                WaitEndOfFrame();
             }
-            yield break;
-    }
-    // premier chose là le problème 
-}
+        }
 
+        public override void Evaluate()
+        {
+            Child.Evaluate();
+        }
+
+        private async void WaitEndOfFrame()
+        {
+            await UniTask.DelayFrame(0);
+            Child.Evaluate();
+        }
+    }
 }

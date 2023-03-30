@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using HelperPSR.MonoLoopFunctions;
 using UnityEngine;
@@ -28,7 +27,7 @@ namespace BehaviorTree.Nodes.Actions
             _data = (TaskMoveNodeDataSO)_so.Data;
         }
 
-        public override IEnumerator Evaluate()
+        public override void Evaluate()
         {
             if (!_isInit)
             {
@@ -44,10 +43,13 @@ namespace BehaviorTree.Nodes.Actions
                 FixedUpdateManager.UnRegister(this);
                 _timer = 0;
                 _isInit = false;
-               State =BehaviorTreeEnums.NodeState.SUCCESS;
-               yield break;
+                State = BehaviorTreeEnums.NodeState.SUCCESS;
+                ReturnedEvent?.Invoke();
+                return;
             }
-            State = BehaviorTreeEnums.NodeState.RUNNING;
+
+            State = BehaviorTreeEnums.NodeState.FAILURE;
+            ReturnedEvent?.Invoke();
         }
 
         public override void SetDependencyValues(

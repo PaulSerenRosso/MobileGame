@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using Environment.MoveGrid;
 using Player.Handler;
-using UnityEngine;
 
 namespace BehaviorTree.Nodes.Actions
 {
@@ -20,16 +18,19 @@ namespace BehaviorTree.Nodes.Actions
         }
 
         public override void SetNodeSO(NodeSO nodeSO)
-        {       
+        {
             _so = (CheckCirclesPlayerNodeSO)nodeSO;
             _data = (CheckCirclesPlayerNodeDataSO)_so.Data;
         }
 
-        public override IEnumerator Evaluate()
+        public override void Evaluate()
         {
-         State = !_environmentGridManager.CheckIfMovePointInIsCircles(_playerMovementHandler.GetCurrentIndexMovePoint(),
-                _data.CirclesIndexes) ? BehaviorTreeEnums.NodeState.SUCCESS : BehaviorTreeEnums.NodeState.FAILURE;
-         yield break;
+            State = !_environmentGridManager.CheckIfMovePointInIsCircles(
+                _playerMovementHandler.GetCurrentIndexMovePoint(),
+                _data.CirclesIndexes)
+                ? BehaviorTreeEnums.NodeState.SUCCESS
+                : BehaviorTreeEnums.NodeState.FAILURE;
+            ReturnedEvent?.Invoke();
         }
 
         public override void SetDependencyValues(

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using HelperPSR.Collections;
 using UnityEngine;
@@ -24,11 +23,12 @@ namespace BehaviorTree.Nodes.Actions
             _data = (TaskGetTimeAnimationNodeDataSO)_so.Data;
         }
 
-        public override IEnumerator Evaluate()
+        public override void Evaluate()
         {
-            CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[0].HashCode, _animator.GetCurrentAnimatorStateInfo(0).length);  
+            CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[0].HashCode,
+                _animator.GetCurrentAnimatorStateInfo(0).length);
             State = BehaviorTreeEnums.NodeState.SUCCESS;
-            yield break;
+            ReturnedEvent?.Invoke();
         }
 
         public override void SetDependencyValues(

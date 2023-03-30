@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using Environment.MoveGrid;
 using HelperPSR.Collections;
@@ -23,13 +22,13 @@ namespace BehaviorTree.Nodes.Actions
             return _so;
         }
 
-        public override IEnumerator Evaluate()
+        public override void Evaluate()
         {
             int index = (int)Sharer.InternValues[_so.InternValues[0].HashCode];
             CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[1].HashCode,
                 _environmentGridManager.MovePoints[index].MeshRenderer.transform.position);
             State = BehaviorTreeEnums.NodeState.SUCCESS;
-            yield break;
+            ReturnedEvent?.Invoke();
         }
 
         public override void SetDependencyValues(

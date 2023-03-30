@@ -31,7 +31,6 @@ namespace Player.Handler
         {
             for (int i = 0; i < allActionsWhichRecord.Length; i++)
             {
-                Debug.Log(allActionsWhichRecord[i].IsInAction +"   " +allActionsWhichRecord[i]);
                 if (allActionsWhichRecord[i].IsInAction)
                 {
                     Debug.Log("record");
