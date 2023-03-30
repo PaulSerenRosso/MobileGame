@@ -54,7 +54,6 @@ namespace BehaviorTree.Nodes.Actions
 
         private float CalculateDecreaseAmountWithDeltatime() => _data.HypeAmount * Time.deltaTime;
 
-
         private float CalculateDecreaseAmount() => _data.HypeAmount;
     }
 }
