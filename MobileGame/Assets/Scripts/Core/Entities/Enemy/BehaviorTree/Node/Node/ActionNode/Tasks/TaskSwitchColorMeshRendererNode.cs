@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using UnityEngine;
@@ -21,10 +22,11 @@ namespace BehaviorTree.Nodes.Actions
             _data = (TaskSwitchColorMeshRendererNodeDataSO)_so.Data;
         }
 
-        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
+        public override IEnumerator Evaluate()
         {
             _meshRenderer.material.color = _data.SwitchableColor;
-            yield return BehaviorTreeEnums.NodeState.RUNNING;
+          State = BehaviorTreeEnums.NodeState.RUNNING;
+          yield break;
         }
 
         public override void SetDependencyValues(

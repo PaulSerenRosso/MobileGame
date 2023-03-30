@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using Environment.MoveGrid;
@@ -11,13 +12,15 @@ namespace BehaviorTree.Nodes.Actions
         private CheckCirclesAreOccupiedNodeDataSO _data;
         private EnvironmentGridManager _environmentGridManager;
         
-        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
+        public override IEnumerator Evaluate()
         {
             if (!_environmentGridManager.CheckIfOneMovePointInCirclesIsOccupied(_data.CircleIndexes, (Vector3)Sharer.InternValues[_so.InternValues[0].HashCode]))
             {
-                yield return BehaviorTreeEnums.NodeState.SUCCESS;
+                State = BehaviorTreeEnums.NodeState.SUCCESS;
+                yield break;
             }
-            yield return BehaviorTreeEnums.NodeState.FAILURE;
+            State =BehaviorTreeEnums.NodeState.FAILURE;
+            yield break;
         }
 
         public override void SetNodeSO(NodeSO nodeSO)

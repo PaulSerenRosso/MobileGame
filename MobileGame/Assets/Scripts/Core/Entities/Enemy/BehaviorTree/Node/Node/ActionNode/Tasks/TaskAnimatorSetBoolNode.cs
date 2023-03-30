@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using UnityEngine;
 
@@ -21,10 +22,11 @@ namespace BehaviorTree.Nodes.Actions
             return _so;
         }
         
-        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
+        public override IEnumerator Evaluate()
         {
             _animator.SetBool(_data.NameParameter, _data.ValueToPass);
-            yield return BehaviorTreeEnums.NodeState.SUCCESS;
+            State =BehaviorTreeEnums.NodeState.SUCCESS;
+            yield break;
         }
         
         public override void SetDependencyValues(

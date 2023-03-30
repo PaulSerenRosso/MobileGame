@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using Player.Handler;
 
@@ -22,12 +23,13 @@ namespace BehaviorTree.Nodes.Actions
             _data = (CheckPlayerIfInNodeDataSO)_so.Data;
         }
 
-        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
+        public override IEnumerator Evaluate()
         {
             int attackIndex = (int)Sharer.InternValues[_so.InternValues[0].HashCode];
-            yield return _playerMovementHandler.GetCurrentIndexMovePoint() == attackIndex
+      State = _playerMovementHandler.GetCurrentIndexMovePoint() == attackIndex
                 ? BehaviorTreeEnums.NodeState.SUCCESS
                 : BehaviorTreeEnums.NodeState.FAILURE;
+      yield break;
         }
 
         public override void SetDependencyValues(

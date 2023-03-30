@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using BehaviorTree.SO.Decorator;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace BehaviorTree.Nodes.Decorator
@@ -19,13 +20,21 @@ namespace BehaviorTree.Nodes.Decorator
         {
             _so = (DecoratorUntilSO)nodeSO;
         }
-        
-        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
+
+        public override IEnumerator Evaluate()
         {
-            var childEvaluate = Child.Evaluate();
-            childEvaluate.MoveNext();
-            Func<bool> condition = () => childEvaluate.Current == _so.BreakStateCondition;
-            yield return _so.BreakStateCondition;
-        }
+            CoroutineLauncher.StartCoroutine(Child.Evaluate());
+            if (Child.State == _so.BreakStateCondition)
+            {
+                Child.State = _so.BreakStateCondition;
+            }
+            else
+            {
+                State = BehaviorTreeEnums.NodeState.BLOCKED;
+            }
+            yield break;
     }
+    // premier chose là le problème 
+}
+
 }

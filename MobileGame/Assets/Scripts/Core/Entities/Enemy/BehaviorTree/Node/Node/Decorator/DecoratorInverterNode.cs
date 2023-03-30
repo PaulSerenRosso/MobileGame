@@ -1,20 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace BehaviorTree.Nodes.Decorator
 {
     public class DecoratorInverterNode : DecoratorNode
     {
-        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
+        public override IEnumerator Evaluate()
         {
-            var childEvaluate = Child.Evaluate();
-            childEvaluate.MoveNext();
-            if (childEvaluate.Current == BehaviorTreeEnums.NodeState.RUNNING)
+          CoroutineLauncher.StartCoroutine(Child.Evaluate());
+          
+            if (Child.State == BehaviorTreeEnums.NodeState.RUNNING)
             {
-                yield return BehaviorTreeEnums.NodeState.RUNNING;
+                State = BehaviorTreeEnums.NodeState.RUNNING;
+                yield break;
             }
-
-            yield return childEvaluate.Current == BehaviorTreeEnums.NodeState.FAILURE
+            if (Child.State == BehaviorTreeEnums.NodeState.BLOCKED)
+            {
+                State = BehaviorTreeEnums.NodeState.BLOCKED;
+                yield break;
+            }
+            State = Child.State == BehaviorTreeEnums.NodeState.FAILURE
                 ? BehaviorTreeEnums.NodeState.SUCCESS
                 : BehaviorTreeEnums.NodeState.FAILURE;
         }

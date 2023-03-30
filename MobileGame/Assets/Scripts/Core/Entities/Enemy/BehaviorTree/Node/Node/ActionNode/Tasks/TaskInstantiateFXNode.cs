@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using Service;
 using UnityEngine;
@@ -22,11 +23,12 @@ namespace BehaviorTree.Nodes.Actions
             return _so;
         }
 
-        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
+        public override IEnumerator Evaluate()
         {
             GameObject gameObject = _poolService.GetFromPool(_data.ParticleGO);
             gameObject.transform.position = (Vector3)Sharer.InternValues[_so.InternValues[0].HashCode];
-            yield return BehaviorTreeEnums.NodeState.SUCCESS;
+            State =BehaviorTreeEnums.NodeState.SUCCESS;
+            yield break;
         }
 
         public override void SetDependencyValues(

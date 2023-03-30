@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using BehaviorTree.SO.Decorator;
 
@@ -17,10 +18,15 @@ namespace BehaviorTree.Nodes.Decorator
             SO = (DecoratorReturnerSO)nodeSO;
         }
 
-        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
+        public override IEnumerator Evaluate()
         {
-            Child.Evaluate();
-            yield return SO.ReturnState;
+           CoroutineLauncher.StartCoroutine(Child.Evaluate());
+            if (Child.State == BehaviorTreeEnums.NodeState.BLOCKED)
+            {
+                State = BehaviorTreeEnums.NodeState.BLOCKED; 
+                yield break;
+            }
+            State =  SO.ReturnState;
         }
     }
 }

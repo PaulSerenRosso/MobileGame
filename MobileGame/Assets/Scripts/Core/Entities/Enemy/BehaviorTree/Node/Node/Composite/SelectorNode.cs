@@ -1,34 +1,45 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEditorInternal;
+using UnityEngine;
 
 namespace BehaviorTree.Nodes.Composite
 {
     public class SelectorNode : CompositeNode
     {
-        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
+        public override IEnumerator Evaluate()
         {
-            foreach (var node in Children)
+            for (var index = 0; index < Children.Count; index++)
             {
-                IEnumerator<BehaviorTreeEnums.NodeState> state = node.Evaluate();
-                state.MoveNext();
-                switch (state.Current)
+                var node = Children[index];
+                Debug.Log(CoroutineLauncher);
+                Debug.Log(node);
+                CoroutineLauncher.StartCoroutine(node.Evaluate());
+                switch (node.State)
                 {
                     case BehaviorTreeEnums.NodeState.FAILURE:
                         continue;
                     case BehaviorTreeEnums.NodeState.SUCCESS:
-                        _state = BehaviorTreeEnums.NodeState.SUCCESS;
-                        yield return _state;
+                    {
+                        State = BehaviorTreeEnums.NodeState.SUCCESS;
                         yield break;
+                    }
                     case BehaviorTreeEnums.NodeState.RUNNING:
-                        _state = BehaviorTreeEnums.NodeState.RUNNING; 
-                        yield return _state;
+                    {
+                        State = BehaviorTreeEnums.NodeState.RUNNING;
                         yield break;
-                    default:
-                        continue;
+                    }
+                    case BehaviorTreeEnums.NodeState.BLOCKED:
+                    {
+                        index--;
+                        yield return 0;
+                        break;
+                    }
                 }
             }
 
-            _state = BehaviorTreeEnums.NodeState.FAILURE;
-            yield return _state;
+            State = BehaviorTreeEnums.NodeState.FAILURE;
+            yield break;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using DG.Tweening;
 using UnityEngine;
@@ -25,8 +26,9 @@ namespace BehaviorTree.Nodes.Actions
             _data = (TaskLookDirectionNodeDataSO)_so.Data;
         }
 
-        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
+        public override IEnumerator Evaluate()
         {
+            Debug.Log("rotation");
             if (!_initRotation)
             {
                 _transform.DOLookAt(
@@ -39,10 +41,11 @@ namespace BehaviorTree.Nodes.Actions
                 Debug.Log("Rotate enemy finish");
                 _initRotation = false;
                 _rotationIsFinished = false;
-                yield return BehaviorTreeEnums.NodeState.SUCCESS;
+                State =BehaviorTreeEnums.NodeState.SUCCESS;
+                yield break;
             }
 
-            yield return BehaviorTreeEnums.NodeState.FAILURE;
+            State = BehaviorTreeEnums.NodeState.FAILURE;
         }
 
         public override void SetDependencyValues(

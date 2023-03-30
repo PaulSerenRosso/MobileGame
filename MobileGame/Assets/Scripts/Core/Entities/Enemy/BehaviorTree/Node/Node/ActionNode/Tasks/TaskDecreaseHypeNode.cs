@@ -1,5 +1,6 @@
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using BehaviorTree.SO;
 using BehaviorTree.SO.Actions;
@@ -16,10 +17,11 @@ public class TaskDecreaseHypeNode : ActionNode
     private event Func<float> _calculateDecreaseAmountEvent;
     private IHypeService _hypeService;
     
-    public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
+    public override IEnumerator Evaluate()
     {
         _hypeService.DecreaseHype(_calculateDecreaseAmountEvent.Invoke());
-        yield return BehaviorTreeEnums.NodeState.RUNNING;
+      State =  BehaviorTreeEnums.NodeState.RUNNING;
+      yield break;
     }
 
     public override void SetDependencyValues(Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues, Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)

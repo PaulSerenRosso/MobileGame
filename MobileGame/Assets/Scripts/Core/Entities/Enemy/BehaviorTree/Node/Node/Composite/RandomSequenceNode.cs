@@ -1,6 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
 using BehaviorTree.SO.Composite;
 using HelperPSR.Randoms;
+using UnityEngine;
 
 namespace BehaviorTree.Nodes.Composite
 {
@@ -21,7 +23,7 @@ namespace BehaviorTree.Nodes.Composite
             _so = (RandomSequenceSO)nodeSO;
         }
 
-        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
+        public override IEnumerator Evaluate()
         {
             bool anyChildIsRunning = false;
             int pickRandomElementIndex = 0;
@@ -33,27 +35,31 @@ namespace BehaviorTree.Nodes.Composite
                 pickRandomElementIndex =
                         RandomHelper.PickRandomElementIndex(_currentChildrenProbabilities.ToArray());
                 var currentElement = Children[pickRandomElementIndex];
-                IEnumerator<BehaviorTreeEnums.NodeState> state = currentElement.Evaluate();
-                state.MoveNext();
-                switch (state.Current)
+                bool isBlocked = false;
+                do
                 {
-                    case BehaviorTreeEnums.NodeState.FAILURE:
-                        _state = BehaviorTreeEnums.NodeState.FAILURE;
-                        yield return _state;
-                        yield break;
-                    case BehaviorTreeEnums.NodeState.SUCCESS:
-                        break;
-                    case BehaviorTreeEnums.NodeState.RUNNING:
-                        anyChildIsRunning = true;
-                        break;
-                }
-
+                    CoroutineLauncher.StartCoroutine(currentElement.Evaluate());
+                    switch (currentElement.State)
+                    {
+                        case BehaviorTreeEnums.NodeState.FAILURE:
+                            State = BehaviorTreeEnums.NodeState.FAILURE;
+                            yield break;
+                        case BehaviorTreeEnums.NodeState.SUCCESS:
+                            break;
+                        case BehaviorTreeEnums.NodeState.RUNNING:
+                            anyChildIsRunning = true;
+                            break;
+                        case BehaviorTreeEnums.NodeState.BLOCKED :
+                            isBlocked = true;
+                            yield return 0;
+                            break;
+                            
+                    }
+                } while (isBlocked);
                 _childrenEvaluatedCount++;
                 _currentChildrenProbabilities.RemoveAt(pickRandomElementIndex);
             }
-
-            _state = anyChildIsRunning ? BehaviorTreeEnums.NodeState.RUNNING : BehaviorTreeEnums.NodeState.SUCCESS;
-            yield return _state;
+            State = anyChildIsRunning ? BehaviorTreeEnums.NodeState.RUNNING : BehaviorTreeEnums.NodeState.SUCCESS;
         }
     }
 }

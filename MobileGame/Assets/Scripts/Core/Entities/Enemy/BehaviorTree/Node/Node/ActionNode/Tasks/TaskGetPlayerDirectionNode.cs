@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using Environment.MoveGrid;
 using HelperPSR.Collections;
@@ -24,7 +25,7 @@ namespace BehaviorTree.Nodes.Actions
             _data = (TaskGetPlayerDirectionNodeDataSO)_so.Data;
         }
 
-        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
+        public override IEnumerator Evaluate()
         {
             int playerMovePointIndex = (int)Sharer.InternValues[_so.InternValues[0].HashCode];
             Vector3 direction = _environmentGridManager.MovePoints[playerMovePointIndex].LocalPosition -
@@ -32,7 +33,8 @@ namespace BehaviorTree.Nodes.Actions
 
             CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[1].HashCode, direction.normalized);
 
-            yield return BehaviorTreeEnums.NodeState.SUCCESS;
+            State = BehaviorTreeEnums.NodeState.SUCCESS;
+            yield break;
         }
 
         public override void SetDependencyValues(

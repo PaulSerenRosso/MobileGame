@@ -18,13 +18,11 @@ namespace BehaviorTree.Trees
     {
         [SerializeField] private NodeSO _rootSO;
         [SerializeField] private NodeValuesInitializer _nodeValuesInitializer;
-
         private Node _root;
         private NodeValuesSharer _nodeValuesSharer = new();
-
         public void OnUpdate()
-        {
-            _root.Evaluate();
+        { 
+            StartCoroutine(_root.Evaluate());
         }
 
         public void Setup(Transform playerTransform, ITickeableService tickeableService,
@@ -32,6 +30,7 @@ namespace BehaviorTree.Trees
         {
             _nodeValuesInitializer.Setup(playerTransform, tickeableService, environmentGridManager, poolService, hypeService);
             _root = Node.CreateNodeSO(_rootSO);
+            _root.CoroutineLauncher = this;
             switch (_rootSO)
             {
                 case CompositeSO compositeSO:
@@ -63,7 +62,9 @@ namespace BehaviorTree.Trees
 
         private Node CreateChild(NodeSO childSO)
         {
-            return Node.CreateNodeSO(childSO);
+           var node =  Node.CreateNodeSO(childSO);
+           node.CoroutineLauncher = this;
+           return node;
         }
 
         private void SetupChild(NodeSO childSO, Node child)

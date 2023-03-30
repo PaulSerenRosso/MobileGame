@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using UnityEngine;
 
@@ -22,16 +23,17 @@ namespace BehaviorTree.Nodes.Actions
             _timer = _data.StartTime;
         }
 
-        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
+        public override IEnumerator Evaluate()
         {
             if (_timer > _data.Time)
             {
                 Debug.Log("Timer is finish");
                 _timer = 0;
-                yield return BehaviorTreeEnums.NodeState.SUCCESS;
+                State = BehaviorTreeEnums.NodeState.SUCCESS;
+                yield break;
             }
             _timer += Time.deltaTime;
-            yield return BehaviorTreeEnums.NodeState.FAILURE;
+            State = BehaviorTreeEnums.NodeState.FAILURE;
         }
 
         public override ActionNodeDataSO GetDataSO()

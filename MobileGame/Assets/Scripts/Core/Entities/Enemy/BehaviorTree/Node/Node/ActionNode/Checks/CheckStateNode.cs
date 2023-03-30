@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using UnityEngine;
@@ -21,11 +22,12 @@ namespace BehaviorTree.Nodes.Actions
             _data = (CheckStateNodeDataSO)_so.Data;
         }
 
-        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
+        public override IEnumerator Evaluate()
         {
-            yield return _enemyManager.CurrentMobilityState == _data.enemyMobilityState
+       State = _enemyManager.CurrentMobilityState == _data.enemyMobilityState
                 ? BehaviorTreeEnums.NodeState.SUCCESS
                 : BehaviorTreeEnums.NodeState.FAILURE;
+       yield break;
         }
 
         public override void SetDependencyValues(

@@ -1,37 +1,43 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 
 namespace BehaviorTree.Nodes.Composite
 {
     public class SequenceNode : CompositeNode
     {
-        public override IEnumerator<BehaviorTreeEnums.NodeState> Evaluate()
+        public override IEnumerator Evaluate()
         {
             bool anyChildIsRunning = false;
 
-            foreach (var node in Children)
+            for (var index = 0; index < Children.Count; index++)
             {
-                IEnumerator<BehaviorTreeEnums.NodeState> state = node.Evaluate();
-                state.MoveNext();
-                switch (state.Current)
+                var node = Children[index];
+                CoroutineLauncher.StartCoroutine(node.Evaluate());
+
+                switch (node.State)
                 {
                     case BehaviorTreeEnums.NodeState.FAILURE:
-                        _state = BehaviorTreeEnums.NodeState.FAILURE;
-                        yield return _state;
+                        State = BehaviorTreeEnums.NodeState.FAILURE;
                         yield break;
                     case BehaviorTreeEnums.NodeState.SUCCESS:
                         continue;
                     case BehaviorTreeEnums.NodeState.RUNNING:
                         anyChildIsRunning = true;
                         continue;
+                    case BehaviorTreeEnums.NodeState.BLOCKED:
+                    {
+                        index--;
+                        yield return 0;
+                        break;
+                    }
                     default:
-                        _state = BehaviorTreeEnums.NodeState.SUCCESS;
-                        yield return _state;
+                        State = BehaviorTreeEnums.NodeState.SUCCESS;
                         yield break;
                 }
             }
 
-            _state = anyChildIsRunning ? BehaviorTreeEnums.NodeState.RUNNING : BehaviorTreeEnums.NodeState.SUCCESS;
-            yield return _state;
+            State = anyChildIsRunning ? BehaviorTreeEnums.NodeState.RUNNING : BehaviorTreeEnums.NodeState.SUCCESS;
+            yield return State;
         }
     }
 }
