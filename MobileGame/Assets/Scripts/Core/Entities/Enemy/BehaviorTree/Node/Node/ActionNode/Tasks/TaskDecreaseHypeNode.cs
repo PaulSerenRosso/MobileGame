@@ -16,7 +16,6 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void Evaluate()
         {
-            Debug.Log("decreaseHype");
             _hypeService.DecreaseHype(_calculateDecreaseAmountEvent.Invoke());
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Service
 {
-    public class CameraController : MonoBehaviour, IFixedUpdate, IRemoteConfigurable
+    public class CameraController : MonoBehaviour, IUpdatable, IRemoteConfigurable
     {
         [Header("Camera Settings")] [SerializeField]
         private CameraSettingsSO _cameraSettingsSO;
@@ -12,7 +12,7 @@ namespace Service
         private Transform _player;
         private Transform _enemy;
 
-        public void OnFixedUpdate()
+        public void OnUpdate()
         {
             UpdateCamera();
         }
@@ -22,10 +22,10 @@ namespace Service
             if (!_player || !_enemy) return;
             transform.position = Vector3.Lerp(transform.position, 
                 _player.TransformPoint(_cameraSettingsSO.Offset),
-                _cameraSettingsSO.SpeedPosition * Time.fixedDeltaTime);
+                _cameraSettingsSO.SpeedPosition);
             transform.rotation = Quaternion.Lerp(transform.rotation,
                 Quaternion.LookRotation((_enemy.position - transform.position).normalized),
-                _cameraSettingsSO.SpeedRotation * Time.fixedDeltaTime);
+                _cameraSettingsSO.SpeedRotation );
         }
 
         public void Setup(Transform player, Transform enemy)
@@ -34,7 +34,7 @@ namespace Service
             _enemy = enemy;
             transform.position = _player.position + _player.TransformPoint(_cameraSettingsSO.Offset);
             transform.LookAt(_enemy);
-            FixedUpdateManager.Register(this);
+            UpdateManager.Register(this);
             RemoteConfigManager.RegisterRemoteConfigurable(this);
         }
 
