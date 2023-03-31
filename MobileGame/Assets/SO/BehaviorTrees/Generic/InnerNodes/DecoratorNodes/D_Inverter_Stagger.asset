@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76eac7996b8251749b7df2d6f366dc46, type: 3}
-  m_Name: D_Returner_Stagger
+  m_Script: {fileID: 11500000, guid: 964129c80d92c0e468359104d05aabc1, type: 3}
+  m_Name: D_Inverter_Stagger
   m_EditorClassIdentifier: 
-  Comment: "Retourne toujours la m\xEAme valeur qui est renseign\xE9 sur le n\u0153ud"
-  Child: {fileID: 11400000, guid: 9910d84d18c07344eb6806b10524cf59, type: 2}
-  ReturnState: 1
+  Comment: "Retourne le statut inverse que le n\u0153ud retourne"
+  Child: {fileID: 11400000, guid: 3bbe78f49b9b69d48abcbdba70edad32, type: 2}
