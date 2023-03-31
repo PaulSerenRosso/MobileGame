@@ -78,13 +78,14 @@ namespace Actions
         {
             _endTauntTimer.Initiate();
             _tauntText.text = "Cancel";
+            UpdateManager.UnRegister(this);
             CancelActionEvent?.Invoke();
         }
 
         void TickEndTaunt()
         {
             _isTaunting = false;
-            UpdateManager.UnRegister(this);
+        
             _tauntText.text = "";
             EndActionEvent?.Invoke();
         }
