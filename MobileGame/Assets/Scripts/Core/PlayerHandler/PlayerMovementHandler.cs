@@ -101,6 +101,8 @@ namespace Player.Handler
 
         public int GetCurrentIndexMovePoint()
         {
+            Debug.Log(_currentMovePointIndex);
+            Debug.Log(_maxDestinationIndex);
             return _currentMovePointIndex;
         }
 

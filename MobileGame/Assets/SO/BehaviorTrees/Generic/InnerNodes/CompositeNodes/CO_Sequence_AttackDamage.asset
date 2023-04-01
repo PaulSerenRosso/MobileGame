@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a554480369441f643a037b92f1ced7d6, type: 3}
-  m_Name: CO_Sequence_Rotate&MovementUp
+  m_Name: CO_Sequence_AttackDamage
   m_EditorClassIdentifier: 
   Comment: "S\xE9lectionne un n\u0153ud et v\xE9rifie si le n\u0153ud est un succ\xE8s
     ou est en train de fonctionner et retourne le statut, sinon d\xE9s qu'un n\u0153ud
     retourne un \xE9chec, la sequence retourne un \xE9chec"
   Children:
-  - {fileID: 11400000, guid: 4f931360475f1444bafd4ac9bf355efa, type: 2}
-  - {fileID: 11400000, guid: 4bd5c96cadbec7f47997f1c10454614f, type: 2}
+  - {fileID: 11400000, guid: 7721bdb38e9c7704ab706cbb3e9eb093, type: 2}
+  - {fileID: 11400000, guid: 706e545353cb02e44ad48c8ab3c4ce47, type: 2}

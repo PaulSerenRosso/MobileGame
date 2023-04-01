@@ -29,6 +29,7 @@ namespace Actions
             Debug.Log("je taunt whouah");
             _isTaunting = true;
             _tauntText.text = "Start Taunt";
+            _startTauntTimer.TickEvent += Taunt;
             _startTauntTimer.Initiate();
             _isStartTaunting = true;
         }
@@ -47,7 +48,7 @@ namespace Actions
             _endTauntTimer = new TickTimer(SO.EndTime, (TickManager)arguments[0]);
             _endTauntTimer.TickEvent += TickEndTaunt;
             _tauntText.text = "";
-            _startTauntTimer.TickEvent += Taunt;
+          
             _hypeService =(IHypeService) arguments[1];
         }
         
@@ -59,6 +60,7 @@ namespace Actions
             {
                 if (_isStartTaunting)
                 {
+                    _startTauntTimer.TickEvent -= Taunt;
                     _startTauntTimer.TickEvent += TickCancelTaunt;
                 }
                 else

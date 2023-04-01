@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Comment: "N\u0153ud qui permet de supprimer les valeurs pr\xE9c\xE9dentes enregistrer
     sur le blackboard"
-  _internValuesCount: 2
+  _internValuesCount: 3
   Data: {fileID: 11400000, guid: 456ac68cdea77d943a14b4a10f85b1f7, type: 2}
   InternValues:
   - Key: IndexPlayer
@@ -24,6 +24,11 @@ MonoBehaviour:
     Comment: To Removed
   - Key: SetDirection
     HashCode: -1268253393
+    Type: 3
+    PropertyType: 2
+    Comment: To Removed
+  - Key: PlayerIndexMovePointPosition
+    HashCode: 479747565
     Type: 3
     PropertyType: 2
     Comment: To Removed

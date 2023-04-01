@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using DG.Tweening;
+using HelperPSR.MonoLoopFunctions;
 using UnityEngine;
 
 namespace BehaviorTree.Nodes.Actions
@@ -18,9 +19,10 @@ namespace BehaviorTree.Nodes.Actions
         {
             if (!_initRotation)
             {
+                Vector3 direction = _transformBoss.eulerAngles + Vector3.up * _data.RotationAmount;
                 _transformBoss.DORotate(
-                    _transformBoss.eulerAngles + Vector3.up * _data.RotationAmount,
-                    _data.TimeRotation).OnComplete(() => _rotationIsFinished = true);
+                    direction,
+                    _data.TimeRotation*(Vector3.Angle(_transformBoss.forward, direction)/180)).OnComplete(() => _rotationIsFinished = true);
                 _initRotation = true;
             }
             else if (_rotationIsFinished)
@@ -31,7 +33,6 @@ namespace BehaviorTree.Nodes.Actions
                 ReturnedEvent?.Invoke();
                 return;
             }
-
             State = BehaviorTreeEnums.NodeState.FAILURE;
             ReturnedEvent?.Invoke();
         }
@@ -58,5 +59,6 @@ namespace BehaviorTree.Nodes.Actions
         {
             _transformBoss = (Transform)enemyDependencyValues[BehaviorTreeEnums.TreeEnemyValues.Transform];
         }
+        
     }
 }

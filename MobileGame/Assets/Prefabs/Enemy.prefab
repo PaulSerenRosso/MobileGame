@@ -161,10 +161,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b299c89c10470454cbbd0e28beea2855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tree: {fileID: 3911112695321858085}
-  _so: {fileID: 11400000, guid: 7159e724562cffc418e7a7fd49679cd4, type: 2}
   CurrentMobilityState: 0
   CurrentBlockingState: 0
+  _tree: {fileID: 3911112695321858085}
+  _so: {fileID: 11400000, guid: 7159e724562cffc418e7a7fd49679cd4, type: 2}
+  _remoteConfigHealthName: Arno_Health
+  _remoteConfigTimeStunName: Arno_TimeStun
+  _remoteConfigTimeStunInvulnerableName: Arno_TimeStunInvulnerable
+  _remoteConfigStunPercentageHealthName: Arno_PercentageHealthStun
 --- !u!114 &3911112695321858085
 MonoBehaviour:
   m_ObjectHideFlags: 0
