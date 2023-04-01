@@ -29,7 +29,6 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void Evaluate()
         {
-            Debug.Log("initMove");
             if (!_isInit)
             {
                 _destination = (Vector3)Sharer.InternValues[_so.InternValues[0].HashCode];

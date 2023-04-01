@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using Player;
-using UnityEngine;
 
 namespace BehaviorTree.Nodes.Actions
 {
@@ -26,7 +24,6 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void Evaluate()
         {
-            Debug.Log("damagePlayer");
             _playerHealth.TakeDamage(_data.Damage);
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();

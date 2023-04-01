@@ -6,7 +6,6 @@ using HelperPSR.RemoteConfigs;
 using HelperPSR.Tick;
 using Service.Inputs;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Player.Handler
 {
@@ -17,12 +16,10 @@ namespace Player.Handler
         [SerializeField] private AttackPlayerAction attackPlayerAction;
         [SerializeField] private TauntPlayerAction tauntPlayerAction;
         [SerializeField] private TickTimer _recoveryTimer;
-        private bool _inCooldown;
         [SerializeField] private MovementPlayerAction movementPlayerAction;
+        [SerializeField] private float _cooldownTimeBetweenTwoMovement;
 
-        [FormerlySerializedAs("_recoveryTime")] [FormerlySerializedAs("RecoveryTime")] [SerializeField]
-        private float _cooldownTimeBetweenTwoMovement;
-
+        private bool _inCooldown;
         private EnvironmentGridManager _environmentGridManager;
         private Swipe _currentSwipe;
         private int _currentMovePointIndex;
@@ -101,8 +98,6 @@ namespace Player.Handler
 
         public int GetCurrentIndexMovePoint()
         {
-            Debug.Log(_currentMovePointIndex);
-            Debug.Log(_maxDestinationIndex);
             return _currentMovePointIndex;
         }
 
@@ -248,7 +243,7 @@ namespace Player.Handler
                     break;
                 }
             }
-            
+
             so.Time = RemoteConfigManager.Config.GetFloat(_swipeName + dirString + "Time");
             so.MinDistancePercentage =
                 RemoteConfigManager.Config.GetFloat(_swipeName + dirString + "MinDistancePercentage");

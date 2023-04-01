@@ -29,7 +29,6 @@ namespace BehaviorTree.Nodes.Actions
             CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[0].HashCode,
                 _playerMovementHandler.GetCurrentIndexMovePoint());
 
-            Debug.Log(_so.InternValues[0].HashCode);
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();
         }
