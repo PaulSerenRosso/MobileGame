@@ -29,10 +29,8 @@ namespace Actions
 
         public override void MakeAction()
         {
-            Debug.Log("MakeAction Hit");
             if (_comboCount != 0)
             {
-                Debug.Log("MakeAction !=0");
                 AttackTimer.Cancel();
                 AttackTimer.ResetEvents();
             }
@@ -61,7 +59,6 @@ namespace Actions
 
         private void InitiateCancelTimer()
         {
-            Debug.Log("CancelTime");
             _meshRenderer.material = _materials[0];
             AttackTimer.ResetEvents();
             AttackTimer.Time = AttackActionSo.HitsSO[_comboCount].CancelTime;
@@ -73,7 +70,6 @@ namespace Actions
 
         private void BreakCombo()
         {
-            Debug.Log("BreakCombo");
             _meshRenderer.material = _materials[3];
             AttackTimer.ResetEvents();
             AttackTimer.Cancel();
@@ -85,7 +81,6 @@ namespace Actions
 
         private void InitiateBeforeHitTimer()
         {
-            Debug.Log("BeforeHit");
             _meshRenderer.material = _materials[1];
             AttackTimer.ResetEvents();
             IsCancelTimeOn = false;
@@ -94,11 +89,9 @@ namespace Actions
             AttackTimer.TickEvent += InitiateRecoveryTimer;
             AttackTimer.Initiate();
         }
-
-
+        
         private void InitiateRecoveryTimer()
         {
-            Debug.Log("RecoveryTime");
             AttackTimer.ResetEvents();
             Hit();
             AttackTimer.Time = AttackActionSo.HitsSO[_comboCount].RecoveryTime;
@@ -127,13 +120,12 @@ namespace Actions
             {
                 var hit = _hitPools[_comboCount].GetFromPool();
                 _hitPools[_comboCount].AddToPoolLatter(hit, hit.GetComponent<ParticleSystem>().main.duration);
-                _damageable.TakeDamage(AttackActionSo.HitsSO[_comboCount].Damage);
+                _damageable.TakeDamage(AttackActionSo.HitsSO[_comboCount].Damage, transform.position);
             }
         }
 
         private void InitiateComboTimer()
         {
-            Debug.Log("ComboTime");
             _meshRenderer.material = _materials[2];
             AttackTimer.ResetEvents();
             _isAttacking = false;

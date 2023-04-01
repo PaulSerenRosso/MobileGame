@@ -15,17 +15,17 @@ public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, I
 {
     public EnemyEnums.EnemyMobilityState CurrentMobilityState;
     public EnemyEnums.EnemyBlockingState CurrentBlockingState;
-    
+
     [SerializeField] private Tree.Tree _tree;
     [SerializeField] private EnemySO _so;
-    [SerializeField] private string _remoteConfigHealthName; 
+    [SerializeField] private string _remoteConfigHealthName;
     [SerializeField] private string _remoteConfigTimeStunName;
     [SerializeField] private string _remoteConfigTimeStunInvulnerableName;
     [SerializeField] private string _remoteConfigStunPercentageHealthName;
     private float _health;
     private List<EnemyStunTrigger> _currentStunTriggers;
     private float _timerInvulnerable;
-    
+
     public event Action<float> OnDamageReceived;
 
     private void Start()
@@ -101,9 +101,25 @@ public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, I
         else _health -= 5;
     }
 
-    public void TakeDamage(float amount)
+    public void TakeDamage(float amount, Vector3 posToCheck = new())
     {
-        if (CurrentBlockingState == EnemyEnums.EnemyBlockingState.BLOCKING) return;
+        if (CurrentBlockingState == EnemyEnums.EnemyBlockingState.BLOCKING)
+        {
+            float angle = Vector3.Angle(transform.forward, posToCheck);
+            if (angle < 10) return;
+            OnDamageReceived.Invoke(amount);
+            if (_health - (1 - _so.PercentageDamageReduction) * amount <= 0)
+            {
+                _health = 0;
+                Die();
+            }
+            else
+            {
+                _health -= (1 - _so.PercentageDamageReduction) * amount;
+            }
+            return;
+        }
+
         OnDamageReceived.Invoke(amount);
         if (_health - amount <= 0)
         {
@@ -112,9 +128,7 @@ public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, I
         }
         else
         {
-            Debug.Log("Enemy took : " + amount);
             _health -= amount;
-            Debug.Log("Enemy have : " + _health);
         }
     }
 
@@ -145,9 +159,9 @@ public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, I
 
     public void SetRemoteConfigurableValues()
     {
-    _so.Health = RemoteConfigManager.Config.GetFloat(_remoteConfigHealthName);
-    _so.PercentageHealth = RemoteConfigManager.Config.GetFloat(_remoteConfigStunPercentageHealthName);
-     _so.TimeStunAvailable = RemoteConfigManager.Config.GetFloat(_remoteConfigTimeStunName);
-    _so.TimeInvulnerable = RemoteConfigManager.Config.GetFloat(_remoteConfigTimeStunInvulnerableName);
+        _so.Health = RemoteConfigManager.Config.GetFloat(_remoteConfigHealthName);
+        _so.PercentageHealth = RemoteConfigManager.Config.GetFloat(_remoteConfigStunPercentageHealthName);
+        _so.TimeStunAvailable = RemoteConfigManager.Config.GetFloat(_remoteConfigTimeStunName);
+        _so.TimeInvulnerable = RemoteConfigManager.Config.GetFloat(_remoteConfigTimeStunInvulnerableName);
     }
 }

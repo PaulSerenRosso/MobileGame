@@ -27,11 +27,9 @@ namespace BehaviorTree.Nodes.Actions
         public override void Evaluate()
         {
             int playerMovePointIndex = (int)Sharer.InternValues[_so.InternValues[0].HashCode];
-            Debug.Log(playerMovePointIndex);
             Vector3 direction = _environmentGridManager.MovePoints[playerMovePointIndex].MeshRenderer.transform.position -
                                 _transform.position;
 
-            Debug.Log(direction);
             CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[1].HashCode, direction.normalized);
 
             State = BehaviorTreeEnums.NodeState.SUCCESS;

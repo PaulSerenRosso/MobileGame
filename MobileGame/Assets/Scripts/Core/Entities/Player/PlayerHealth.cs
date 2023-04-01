@@ -20,7 +20,7 @@ namespace Player
             Debug.Log("PLAYER IS KO! LOSER!");
         }
 
-        public void TakeDamage(float amount)
+        public void TakeDamage(float amount, Vector3 posToCheck = new())
         {
             if (_health - amount <= 0)
             {
@@ -30,8 +30,6 @@ namespace Player
             }
             else
             {
-                Debug.Log("Player took : " + amount);
-                Debug.Log("Player have : " + _health);
                 _health -= amount;
                 ChangeHealth?.Invoke();
             }

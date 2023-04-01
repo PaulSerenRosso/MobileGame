@@ -23,7 +23,6 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void Evaluate()
         {
-            Debug.Log("StateMobility");
             _enemyManager.CurrentMobilityState = _data.EnemyMobilityState;
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();

@@ -26,7 +26,6 @@ namespace BehaviorTree.Nodes.Composite
         public override void EvaluateChild()
         {
             var node = Children[_currentChildrenToEvaluate[_pickedChildIndex]];
-            Debug.Log(_currentChildrenToEvaluate[_pickedChildIndex]);
             switch (node.State)
             {
                 case BehaviorTreeEnums.NodeState.FAILURE:
