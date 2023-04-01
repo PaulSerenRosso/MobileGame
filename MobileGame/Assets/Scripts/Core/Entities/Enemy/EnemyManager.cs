@@ -12,13 +12,16 @@ using Tree = BehaviorTree.Trees;
 
 public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, IUpdatable
 {
-    [SerializeField] private Tree.Tree _tree;
-    [SerializeField] private EnemySO _so;
-    private float _health;
     public EnemyEnums.EnemyMobilityState CurrentMobilityState;
     public EnemyEnums.EnemyBlockingState CurrentBlockingState;
+    
+    [SerializeField] private Tree.Tree _tree;
+    [SerializeField] private EnemySO _so;
+    
+    private float _health;
     private List<EnemyStunTrigger> _currentStunTriggers;
-
+    private float _timerInvulnerable;
+    
     public event Action<float> OnDamageReceived;
 
     private void Start()
@@ -39,6 +42,7 @@ public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, I
 
     public void OnUpdate()
     {
+        if (EnemyEnums.EnemyMobilityState.INVULNERABLE == CurrentMobilityState) TimerInvulnerable();
         if (_currentStunTriggers.Count < 1 || CurrentMobilityState != EnemyEnums.EnemyMobilityState.VULNERABLE) return;
         _currentStunTriggers.RemoveAll(enemyStunTrigger => enemyStunTrigger.Time > _so.TimeStunAvailable);
         foreach (var enemyStunTrigger in _currentStunTriggers.Where(enemyStunTrigger =>
@@ -59,7 +63,19 @@ public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, I
         EnvironmentGridManager environmentGridManager, IPoolService poolService, IHypeService hypeService)
     {
         _tree.Setup(playerTransform, tickeableService, environmentGridManager, poolService, hypeService);
+        _timerInvulnerable = 0;
         // TODO: Add the right EnemySO in setup
+    }
+
+    private void TimerInvulnerable()
+    {
+        _timerInvulnerable += Time.deltaTime;
+        if (_timerInvulnerable >= _so.TimeInvulnerable)
+        {
+            _currentStunTriggers.Clear();
+            CurrentMobilityState = EnemyEnums.EnemyMobilityState.VULNERABLE;
+            _timerInvulnerable = 0;
+        }
     }
 
     public void Die()

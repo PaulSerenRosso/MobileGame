@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Enemy
 {
@@ -9,5 +10,6 @@ namespace Enemy
         public float Health;
         public float PercentageHealth;
         public float TimeStunAvailable;
+        [FormerlySerializedAs("TimeInvunelrable")] [FormerlySerializedAs("TimeInvunerable")] public float TimeInvulnerable;
     }
 }

@@ -4,7 +4,7 @@ public class EnemyEnums
     {
         VULNERABLE,
         STAGGER,
-        INVUNERABLE
+        INVULNERABLE
     }
 
     public enum EnemyBlockingState
