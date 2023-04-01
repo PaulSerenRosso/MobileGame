@@ -10,6 +10,6 @@ namespace Enemy
         public float Health;
         public float PercentageHealth;
         public float TimeStunAvailable;
-        [FormerlySerializedAs("TimeInvunelrable")] [FormerlySerializedAs("TimeInvunerable")] public float TimeInvulnerable;
+        public float TimeInvulnerable;
     }
 }
