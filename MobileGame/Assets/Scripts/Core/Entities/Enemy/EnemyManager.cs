@@ -22,6 +22,8 @@ public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, I
     [SerializeField] private string _remoteConfigTimeStunName;
     [SerializeField] private string _remoteConfigTimeStunInvulnerableName;
     [SerializeField] private string _remoteConfigStunPercentageHealthName;
+    [SerializeField] private string _remoteConfigBlockPercentageDamageReduction;
+
     private float _health;
     private List<EnemyStunTrigger> _currentStunTriggers;
     private float _timerInvulnerable;
@@ -117,6 +119,7 @@ public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, I
             {
                 _health -= (1 - _so.PercentageDamageReduction) * amount;
             }
+
             return;
         }
 
@@ -163,5 +166,7 @@ public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, I
         _so.PercentageHealth = RemoteConfigManager.Config.GetFloat(_remoteConfigStunPercentageHealthName);
         _so.TimeStunAvailable = RemoteConfigManager.Config.GetFloat(_remoteConfigTimeStunName);
         _so.TimeInvulnerable = RemoteConfigManager.Config.GetFloat(_remoteConfigTimeStunInvulnerableName);
+        _so.PercentageDamageReduction =
+            RemoteConfigManager.Config.GetFloat(_remoteConfigBlockPercentageDamageReduction);
     }
 }
