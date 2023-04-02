@@ -9,16 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78fa92ff14b94bcc9d4b988940d5ee8a, type: 3}
-  m_Name: CH_PlayerDirection_Rotation
+  m_Script: {fileID: 11500000, guid: 0ebb8a2a624c45afa31bb87cbb4344a0, type: 3}
+  m_Name: T_RemoveKeysFromSharer_AttackRotation
   m_EditorClassIdentifier: 
-  Comment: "N\u0153ud qui permet de v\xE9rifier si le boss regarde bien dans la direction
-    du joueur"
+  Comment: "N\u0153ud qui permet de supprimer les valeurs pr\xE9c\xE9dentes enregistrer
+    sur le blackboard"
   _internValuesCount: 1
-  Data: {fileID: 11400000, guid: 795be8eec1c7bd7489a754819c2a70b3, type: 2}
+  Data: {fileID: 11400000, guid: 456ac68cdea77d943a14b4a10f85b1f7, type: 2}
   InternValues:
   - Key: PlayerIndexMovePointPosition
     HashCode: 479747565
-    Type: 0
-    PropertyType: 0
-    Comment: Direction(Vector3) where the boss need to look
+    Type: 3
+    PropertyType: 2
+    Comment: To Removed

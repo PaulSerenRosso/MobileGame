@@ -142,6 +142,7 @@ namespace Environment.MoveGrid
         public void MoveGrid(Vector3 pos)
         {
             _rendererPointParent.position = pos;
+            UpdateOnAllMovePointIfIsOccupied();
         }
 
         public bool CheckIfMovePointInIsCircles(int index, params int[] circlesIndexes)
