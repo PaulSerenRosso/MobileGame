@@ -1,4 +1,5 @@
 using System;
+using HelperPSR.RemoteConfigs;
 using Interfaces;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ namespace Player
     public class PlayerHealth : MonoBehaviour, IDeathable, IDamageable, ILifeable
     {
         [SerializeField] private float _maxHealth;
+        [SerializeField] private string _remoteConfigHealthName;
 
         private float _health;
 
@@ -55,6 +57,11 @@ namespace Player
                 _health += amount;
                 ChangeHealth?.Invoke();
             }
+        }
+        
+        public void SetRemoteConfigurableValues()
+        {
+            _maxHealth = RemoteConfigManager.Config.GetFloat(_remoteConfigHealthName);
         }
     }
 }
