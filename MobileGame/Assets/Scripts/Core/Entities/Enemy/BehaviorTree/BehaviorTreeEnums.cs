@@ -28,7 +28,7 @@ public class BehaviorTreeEnums
 
     public enum InternValueType
     {
-        VECTOR3, INT, FLOAT, NONE
+        VECTOR3, INT, FLOAT, NONE, CALLBACK
     }
 
     public enum InternValuePropertyType

@@ -9,16 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9430ee2b95904fd3bda52a157b2040c4, type: 3}
-  m_Name: CH_Timer_Taunt
+  m_Script: {fileID: 11500000, guid: 0dc1dd71b42944918c92693a1e14dda0, type: 3}
+  m_Name: T_InvokeCallback_ResetTimerStagger
   m_EditorClassIdentifier: 
-  Comment: "N\u0153ud qui permet de retourner un succ\xE8s selon un timer"
+  Comment: "Permet de d\xE9clencher un callback pr\xE9ablement SET"
   _internValuesCount: 1
-  Data: {fileID: 11400000, guid: 25da1bbe13064a642b86acebd2a3e3e6, type: 2}
+  Data: {fileID: 11400000, guid: 5594ab3724536b24abe1cc046f397cc5, type: 2}
   InternValues:
   - Key: ResetTimerEvent
     HashCode: -1017431786
     Type: 4
-    PropertyType: 1
-    Comment: set the function to reset timer manually, removed automatically when
-      timer is ended
+    PropertyType: 0
+    Comment: Get the function to invoke

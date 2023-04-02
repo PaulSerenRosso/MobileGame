@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using Environment.MoveGrid;
 using HelperPSR.Collections;

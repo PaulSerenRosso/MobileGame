@@ -25,6 +25,7 @@ namespace BehaviorTree.Nodes.Actions
         {
             _meshRenderer.material.color = _data.SwitchableColor;
             State = BehaviorTreeEnums.NodeState.SUCCESS;
+            Debug.Log(_data.SwitchableColor);
             ReturnedEvent?.Invoke();
         }
 
