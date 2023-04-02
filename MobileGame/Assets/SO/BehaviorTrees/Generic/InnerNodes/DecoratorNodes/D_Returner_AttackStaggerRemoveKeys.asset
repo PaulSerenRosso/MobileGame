@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76eac7996b8251749b7df2d6f366dc46, type: 3}
   m_Name: D_Returner_AttackStaggerRemoveKeys
   m_EditorClassIdentifier: 
-  Comment: 
-  Child: {fileID: 0}
-  ReturnState: 0
+  Comment: "Retourne toujours la m\xEAme valeur qui est renseign\xE9 sur le n\u0153ud"
+  Child: {fileID: 11400000, guid: 353037dcaac4b2143b6576d038bb1ac6, type: 2}
+  ReturnState: 1
