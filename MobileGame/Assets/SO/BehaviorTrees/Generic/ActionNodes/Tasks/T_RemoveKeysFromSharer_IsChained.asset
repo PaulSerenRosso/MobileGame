@@ -10,20 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ebb8a2a624c45afa31bb87cbb4344a0, type: 3}
-  m_Name: T_RemoveKeysFromSharer_Rotation
+  m_Name: T_RemoveKeysFromSharer_IsChained
   m_EditorClassIdentifier: 
   Comment: "N\u0153ud qui permet de supprimer les valeurs pr\xE9c\xE9dentes enregistrer
     sur le blackboard"
-  _internValuesCount: 2
-  Data: {fileID: 11400000, guid: 456ac68cdea77d943a14b4a10f85b1f7, type: 2}
+  _internValuesCount: 1
+  Data: {fileID: 11400000, guid: 68acc74ddd277cd4cb2fb91a4a68c8b6, type: 2}
   InternValues:
-  - Key: IndexPlayer
-    HashCode: 1098768601
-    Type: 3
-    PropertyType: 2
-    Comment: To Removed
-  - Key: PlayerIndexMovePointPosition
-    HashCode: 479747565
+  - Key: IsChained
+    HashCode: -1822441730
     Type: 3
     PropertyType: 2
     Comment: To Removed

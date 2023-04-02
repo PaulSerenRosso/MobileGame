@@ -9,5 +9,10 @@ namespace BehaviorTree
         {
             Comment = "Nœud qui s'occupe d'effectuer les dégats au joueur";
         }
+
+        public override void UpdateInterValues()
+        {
+            base.UpdateInterValues();
+        }
     }
 }

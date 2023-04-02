@@ -5,7 +5,7 @@ public class BehaviorTreeEnums
         Rigidbody,
         Animator,
         Transform,
-        MeshRenderer, 
+        MeshRenderer,
         EnemyManager
     }
 
@@ -16,7 +16,7 @@ public class BehaviorTreeEnums
         TickManager,
         PlayerHandlerMovement,
         PoolService,
-        PlayerHealth, 
+        PlayerHealth,
         HypeService
     }
 
@@ -28,11 +28,18 @@ public class BehaviorTreeEnums
 
     public enum InternValueType
     {
-        VECTOR3, INT, FLOAT, NONE, CALLBACK
+        VECTOR3,
+        INT,
+        FLOAT,
+        NONE,
+        CALLBACK,
+        BOOL
     }
 
     public enum InternValuePropertyType
     {
-        GET, SET, REMOVE
+        GET,
+        SET,
+        REMOVE
     }
 }
