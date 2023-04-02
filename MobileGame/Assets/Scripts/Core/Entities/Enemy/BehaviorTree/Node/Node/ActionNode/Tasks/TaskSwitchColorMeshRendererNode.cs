@@ -23,9 +23,8 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void Evaluate()
         {
-            _meshRenderer.material.color = _data.SwitchableColor;
+            if (_meshRenderer) _meshRenderer.material.color = _data.SwitchableColor;
             State = BehaviorTreeEnums.NodeState.SUCCESS;
-            Debug.Log(_data.SwitchableColor);
             ReturnedEvent?.Invoke();
         }
 
