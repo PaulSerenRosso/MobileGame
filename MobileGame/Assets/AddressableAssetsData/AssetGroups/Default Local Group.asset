@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: a93449fd62df2d34e8d4ada4bd67255f
+  m_SerializeEntries:
+  - m_GUID: 4e0f9e51f1ccdf24286bce090f19ab5b
+    m_Address: MainMenu
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4e3fc80352f5f8d43bbcd961ccf7d90b
+    m_Address: Environment
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7ce14cea2cbe67e4a86d95d1ece6c304
+    m_Address: Player
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 75116045a48d06747a8443db59557b76
+    m_Address: Camera
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 241ebed0774b86e4f8b4ef2150ead01a
+    m_Address: Enemy
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4466a156560245a4e9f5f73b22729323
+    m_Address: FirstEnvironment
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0d904d8bcbb70ec41b8bb352adb94f85
+    m_Address: FirstGrid
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7487d1f4a51500f418e962189c26761e
+    m_Address: GlobalSettingsGame
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 427fe9ac0c70c274d97006ea3eebeeb4
+    m_Address: MovePoints
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e4dae63f3ca113047afc5c8ec9db316f
+    m_Address: InGameMenu
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ce107b9ecab2b0f4887c688c7fed9763
+    m_Address: HypeSO
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 79383e30942154b4c8d8506d25ffc694, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 3ab282a20b569334ba315e70428ccbea, type: 2}
+    - {fileID: 11400000, guid: ee155cbac36f780439dd8fc3afc3baf1, type: 2}

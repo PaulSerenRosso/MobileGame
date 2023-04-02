@@ -1,0 +1,125 @@
+{
+    "name": "PlayerInputs",
+    "maps": [
+        {
+            "name": "GenericInputs",
+            "id": "0fe16c24-7996-4c08-b9d0-bae906b2f32b",
+            "actions": [
+                {
+                    "name": "PressTouch",
+                    "type": "PassThrough",
+                    "id": "e7a7c6a9-a037-4db7-b958-330bb06db31c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "ReleaseTouch",
+                    "type": "Button",
+                    "id": "349fd740-5ffa-4315-9d5c-1b25377274ac",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "MoveTouch",
+                    "type": "PassThrough",
+                    "id": "289fc2e3-2369-481f-bb0f-b626a3e5e58b",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TapTouch",
+                    "type": "Button",
+                    "id": "f11ef29d-41b1-4e0a-96d8-ae938c6ad71c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "HoldTouch",
+                    "type": "Button",
+                    "id": "77b1a83e-7f29-45aa-9068-220ac04aaf60",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d6c56e85-bfd8-45f2-b06a-cc50592873b7",
+                    "path": "<Touchscreen>/primaryTouch/press",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "Mobile",
+                    "action": "ReleaseTouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2c54f2fb-e9b0-4b5f-8e4e-33bb4aab49cf",
+                    "path": "<Touchscreen>/primaryTouch/press",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Mobile",
+                    "action": "PressTouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3e81c5ae-bf3a-401f-85ea-a27af60e96f4",
+                    "path": "<Touchscreen>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mobile",
+                    "action": "MoveTouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "396e65ac-eae0-4e62-809a-6e8b3791623d",
+                    "path": "<Touchscreen>/primaryTouch/tap",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TapTouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b7de83fb-a4a6-4de3-b46e-b04d2d6f44e9",
+                    "path": "<Touchscreen>/primaryTouch/press",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HoldTouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Mobile",
+            "bindingGroup": "Mobile",
+            "devices": []
+        },
+        {
+            "name": "PC",
+            "bindingGroup": "PC",
+            "devices": []
+        }
+    ]
+}
