@@ -37,7 +37,6 @@ namespace Service.Fight
         {
             _sceneService.LoadScene("GameScene");
             _hypeService.EnabledService();
-            _hypeService.SetTickService(_tickeableService);
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<EnvironmentSO>(environmentAddressableName,
                 LoadEnvironmentSO);
         }

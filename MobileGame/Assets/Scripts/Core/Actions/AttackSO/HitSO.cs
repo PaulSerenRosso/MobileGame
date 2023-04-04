@@ -11,6 +11,8 @@ namespace Actions
         public float RecoveryTime;
         public float ComboTime;
         public int HitMovePointsDistance;
+        [Tooltip("Number of hype that increases for a hit")] 
+        public float HypeAmount;
         public GameObject Particle;
     }
 }
