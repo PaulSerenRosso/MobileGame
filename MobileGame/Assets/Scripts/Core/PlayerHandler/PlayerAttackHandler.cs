@@ -56,7 +56,7 @@ namespace Player.Handler
             AddCondition(CheckIsInAttack);
             AddCondition(CheckIsInMovement);
             AddCondition(CheckIsInTaunt);
-            attackPlayerAction.SetupAction((TickManager)arguments[1], arguments[2]);
+            attackPlayerAction.SetupAction((TickManager)arguments[1], arguments[2], arguments[4]);
             _environmentGridManager = (EnvironmentGridManager)arguments[3];
             attackPlayerAction.InitCancelAttackEvent += () => movementPlayerAction.MakeActionEvent += attackPlayerAction.AttackTimer.Cancel;
             attackPlayerAction.InitBeforeHitEvent += () => movementPlayerAction.MakeActionEvent -= attackPlayerAction.AttackTimer.Cancel;

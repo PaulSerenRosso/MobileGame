@@ -24,31 +24,22 @@ namespace Service.Fight
         [DependsOnService] private IPoolService _poolService;
         
         [DependsOnService] private IHypeService _hypeService;
+        
         private CameraController _cameraController;
         private PlayerController _playerController;
         private ILifeable _interfaceLifeable;
         private IDamageable _interfaceDamageable;
         private EnemyManager _enemyManager;
         private EnvironmentGridManager _environmentGridManager;
-
         private EnvironmentSO _currentEnvironmentSO;
-
-        // todo: launch fight(string soEnvironmentAddressable)
-        // todo: get so environment
-        // todo: get so grid generator
-        // todo: generate grid
-        // todo: generate environment
-        // todo: generate player
-        // todo: link player grid to input
-        // todo: generate enemy
 
         public void StartFight(string environmentAddressableName)
         {
             _sceneService.LoadScene("GameScene");
             _hypeService.EnabledService();
+            _hypeService.SetTickService(_tickeableService);
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<EnvironmentSO>(environmentAddressableName,
                 LoadEnvironmentSO);
-            
         }
 
         private void LoadEnvironmentSO(EnvironmentSO so)
@@ -84,8 +75,8 @@ namespace Service.Fight
 
         private void GenerateEnemy(GameObject gameObject)
         {
-            Release(gameObject);
             var enemy = Object.Instantiate(gameObject);
+            Release(gameObject);
             _enemyManager = enemy.GetComponent<EnemyManager>();
             _playerController.SetupPlayer(_inputService, _tickeableService, _environmentGridManager, _currentEnvironmentSO, _enemyManager, _hypeService);
             _enemyManager.Setup(_playerController.transform, _tickeableService, _environmentGridManager, _poolService, _hypeService);
