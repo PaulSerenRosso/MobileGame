@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Actions
 {
-    public class TauntPlayerAction :  PlayerAction, IUpdatable
+    public class TauntPlayerAction : PlayerAction, IUpdatable
     {
         public TauntActionSO SO;
 
@@ -16,13 +16,12 @@ namespace Actions
         private TickTimer _startTauntTimer;
         private bool _isTaunting;
         private bool _isStartTaunting;
-
         private IHypeService _hypeService;
+
         public override bool IsInAction
         {
             get => _isTaunting;
         }
-
 
         public override void MakeAction()
         {
@@ -48,12 +47,12 @@ namespace Actions
             _endTauntTimer = new TickTimer(SO.EndTime, (TickManager)arguments[0]);
             _endTauntTimer.TickEvent += TickEndTaunt;
             _tauntText.text = "";
-          
-            _hypeService =(IHypeService) arguments[1];
+
+            _hypeService = (IHypeService)arguments[1];
         }
-        
 
         public event System.Action CancelActionEvent;
+
         public void TryCancelTaunt()
         {
             if (_isTaunting)
@@ -87,14 +86,14 @@ namespace Actions
         void TickEndTaunt()
         {
             _isTaunting = false;
-        
+
             _tauntText.text = "";
             EndActionEvent?.Invoke();
         }
 
         public void OnUpdate()
         {
-            _hypeService.IncreaseHype(SO.HypeAmount*Time.deltaTime);
+            _hypeService.IncreaseHype(SO.HypeAmount * Time.deltaTime);
         }
     }
 }

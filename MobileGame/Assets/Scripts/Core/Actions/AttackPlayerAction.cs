@@ -2,6 +2,7 @@ using System;
 using HelperPSR.Pool;
 using HelperPSR.Tick;
 using Interfaces;
+using Service.Hype;
 using UnityEngine;
 
 namespace Actions
@@ -16,10 +17,11 @@ namespace Actions
         [SerializeField] private Renderer _meshRenderer;
 
         private IDamageable _damageable;
-
         private Pool<GameObject>[] _hitPools;
         private bool _isAttacking;
         private int _comboCount;
+        private IHypeService _hypeService;
+        
         public event Func<HitSO, bool> CheckCanDamageEvent;
 
         public override bool IsInAction
@@ -51,6 +53,7 @@ namespace Actions
             {
                 _hitPools[i] = new Pool<GameObject>(AttackActionSo.HitsSO[i].Particle, 2);
             }
+            _hypeService = (IHypeService)arguments[2];
         }
 
         public event System.Action InitCancelAttackEvent;
@@ -121,6 +124,7 @@ namespace Actions
                 var hit = _hitPools[_comboCount].GetFromPool();
                 _hitPools[_comboCount].AddToPoolLatter(hit, hit.GetComponent<ParticleSystem>().main.duration);
                 _damageable.TakeDamage(AttackActionSo.HitsSO[_comboCount].Damage, transform.position);
+                _hypeService.IncreaseHype(AttackActionSo.HypeAmount);
             }
         }
 
