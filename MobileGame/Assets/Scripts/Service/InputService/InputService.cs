@@ -68,7 +68,7 @@ namespace Service.Inputs
         public void RemoveSwipe(Swipe swipeToRemoved)
         {
             _allSwipes.Remove(swipeToRemoved);
-            PlayerInputs.GenericInputs.PressTouch.started -= swipeToRemoved.StartSwipe;
+            PlayerInputs.GenericInputs.PressTouch.performed-= swipeToRemoved.StartSwipe;
             // remove hold cancel
             PlayerInputs.GenericInputs.PressTouch.canceled -= swipeToRemoved.EndSwipe;
         }

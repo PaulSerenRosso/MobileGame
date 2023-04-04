@@ -8,7 +8,6 @@ namespace Service.Hype
         public float MinHype;
         public float MaxHype;
         public float BaseValueHype;
-        public float TimeBetweenDecrease;
         public float AmountHypeDecreaseTime;
     }
 }

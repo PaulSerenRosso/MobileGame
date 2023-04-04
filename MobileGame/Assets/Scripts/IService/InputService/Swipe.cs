@@ -55,6 +55,8 @@ namespace Service.Inputs
             if (_isSuccess)
             {
                 _currentPos = Input.GetTouch(0).position;
+                Debug.Log((_currentPos - _startPos).sqrMagnitude);
+               
                 if ((_currentPos - _startPos).sqrMagnitude >=
                     _minScreenDistanceSq)
                 {
@@ -66,6 +68,7 @@ namespace Service.Inputs
                     }
                     else CancelSwipe();
                 }
+                else CancelSwipe();
                 if (_isSuccess)
                 {
                     _successEvent?.Invoke(this);

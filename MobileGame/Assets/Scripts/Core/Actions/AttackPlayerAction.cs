@@ -124,7 +124,7 @@ namespace Actions
                 var hit = _hitPools[_comboCount].GetFromPool();
                 _hitPools[_comboCount].AddToPoolLatter(hit, hit.GetComponent<ParticleSystem>().main.duration);
                 _damageable.TakeDamage(AttackActionSo.HitsSO[_comboCount].Damage, transform.position);
-                _hypeService.IncreaseHype(AttackActionSo.HypeAmount);
+                _hypeService.IncreaseHype(AttackActionSo.HitsSO[_comboCount].HypeAmount);
             }
         }
 

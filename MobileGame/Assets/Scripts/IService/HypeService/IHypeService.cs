@@ -16,6 +16,6 @@ namespace Service.Hype
         event Action<float> ReachMaximumHypeEvent;
         event Action<float> ReachMinimumHypeEvent;
         event Action SetHypeEvent;
-        void SetTickService(ITickeableService tickeableService);
+    
     }
 }

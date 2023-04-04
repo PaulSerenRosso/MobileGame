@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d9ebd8b24e7eee478752e5d2785113c, type: 3}
   m_Name: HypeSO
   m_EditorClassIdentifier: 
-  MinHype: 20
-  MaxHype: 50
+  MinHype: 10
+  MaxHype: 40
   BaseValueHype: 30
-  TimeBetweenDecrease: 3
-  AmountHypeDecreaseTime: 5
+  AmountHypeDecreaseTime: 0.1

@@ -90,6 +90,8 @@ namespace Player.Handler
             punchSO.ComboTime = RemoteConfigManager.Config.GetFloat(_punchName + hitCount + "ComboTime");
             punchSO.HitMovePointsDistance =
                 RemoteConfigManager.Config.GetInt(_punchName + hitCount + "HitMovePointsDistance");
+            punchSO.HypeAmount =    RemoteConfigManager.Config.GetInt(_punchName + hitCount + "HypeAmount");
+            
         }
     }
 }
