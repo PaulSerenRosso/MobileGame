@@ -7,7 +7,7 @@
             "actions": [
                 {
                     "name": "PressTouch",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "e7a7c6a9-a037-4db7-b958-330bb06db31c",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -22,15 +22,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "MoveTouch",
-                    "type": "PassThrough",
-                    "id": "289fc2e3-2369-481f-bb0f-b626a3e5e58b",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 },
                 {
                     "name": "TapTouch",
@@ -71,17 +62,6 @@
                     "processors": "",
                     "groups": "Mobile",
                     "action": "PressTouch",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "3e81c5ae-bf3a-401f-85ea-a27af60e96f4",
-                    "path": "<Touchscreen>/position",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Mobile",
-                    "action": "MoveTouch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
