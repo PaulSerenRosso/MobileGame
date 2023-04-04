@@ -15,6 +15,7 @@ namespace Player
         [SerializeField] private PlayerAttackHandler _playerAttackHandler;
         [SerializeField] private PlayerTauntHandler _playerTauntHandler;
         [SerializeField] private PlayerRenderer _playerRenderer;
+        [SerializeField] private PlayerHandlerUltimate _playerHandlerUltimate;
         private IInputService _inputService;
         private ITickeableService _tickeableService;
         private EnemyManager _enemyManager;
@@ -32,6 +33,7 @@ namespace Player
             _playerRotationHandler.Setup(_enemyManager.transform);
             _playerAttackHandler.Setup(_inputService, _tickeableService.GetTickManager, _enemyManager, environmentGridManager, _hypeService);
             _playerTauntHandler.Setup(_inputService, _tickeableService.GetTickManager, _hypeService);
+           // _playerHandlerUltimate.Setup(hypeService, tickeableService);
             _playerRenderer.Init();
         }
     }

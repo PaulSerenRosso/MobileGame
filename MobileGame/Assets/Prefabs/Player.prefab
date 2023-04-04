@@ -227,6 +227,8 @@ GameObject:
   - component: {fileID: 2056379011037417376}
   - component: {fileID: 7598208263566444310}
   - component: {fileID: 6848145212107949030}
+  - component: {fileID: 2065991719800211403}
+  - component: {fileID: 7989795260116397858}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -495,6 +497,43 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96273acca4edfe443a73915ae5a36389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2065991719800211403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6686433966917593852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6a75c8a5d2397f4aac022b334ce7c70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allActionsWhichRecord:
+  - {fileID: 1800965582552254606}
+  - {fileID: 4050711209515336914}
+  - {fileID: 241883989640212697}
+  allActionsBlockedLaunchRecordAction:
+  - {fileID: 241883989640212697}
+  - {fileID: 4050711209515336914}
+  - {fileID: 1800965582552254606}
+  _playerHandlerRecordableManager: {fileID: 6848145212107949030}
+  _ultimatePlayerAction: {fileID: 7989795260116397858}
+  _tauntPlayerAction: {fileID: 241883989640212697}
+  _attackPlayerAction: {fileID: 1800965582552254606}
+  _movementPlayerAction: {fileID: 4050711209515336914}
+--- !u!114 &7989795260116397858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6686433966917593852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0030305bdae927b4c98d3be6f5743853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &5676581033960314030
