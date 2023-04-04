@@ -35260,10 +35260,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5385260654459227328, guid: 241ebed0774b86e4f8b4ef2150ead01a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6912617506752955889, guid: 241ebed0774b86e4f8b4ef2150ead01a,
         type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6912617506752955889, guid: 241ebed0774b86e4f8b4ef2150ead01a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 241ebed0774b86e4f8b4ef2150ead01a, type: 3}
@@ -35440,11 +35450,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2244088706068364028, guid: 8806f97fe46cb6f4ebe8839ee7b5d39f,
-        type: 3}
-      propertyPath: CustomDataModule.vector0_2.scalar
-      value: 0.09
       objectReference: {fileID: 0}
     - target: {fileID: 2334653881842326200, guid: 8806f97fe46cb6f4ebe8839ee7b5d39f,
         type: 3}
@@ -35910,6 +35915,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
+  _remoteConfigHealthName: 
 --- !u!1 &8794947491457001012
 GameObject:
   m_ObjectHideFlags: 0
