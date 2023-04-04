@@ -20,50 +20,60 @@ namespace Service.Inputs
 
         public void StartSwipe(InputAction.CallbackContext ctx)
         {
-            _startPos = _playerInput.GenericInputs.MoveTouch.ReadValue<Vector2>();
-            _playerInput.GenericInputs.MoveTouch.performed += UpdateSwipe;
+            _startPos = Input.GetTouch(0).position;
+            _isSuccess = true;
             _swipeTimer.Initiate();
         }
-        // add event à move touch accumule la distance et tu dis si tu dépasse min c'est un swipe si il est vrai alors il passe une bool en true si non
-        // swipe il est cancel par le temps 
 
         void CancelSwipe()
         {
             _isSuccess = false;
-            _playerInput.GenericInputs.MoveTouch.performed -= UpdateSwipe;
         }
 
         public void UpdateSwipe(InputAction.CallbackContext ctx)
         {
-            // si true
-            _currentPos = ctx.ReadValue<Vector2>();
-            
-            if ((_currentPos - _startPos).sqrMagnitude >=
-                _minScreenDistanceSq)
-            {
-                if (Vector2.Dot(SwipeSO.DirectionV2,
-                        (_currentPos - _startPos).normalized) >
-                    SwipeSO.DirectionTolerance)
-                {
-                    _isSuccess = true;
-                    ReachMinDistanceSwipeEvent?.Invoke();
-                    return;
-                }
-                CancelSwipe();
-            }
+            // _currentPos = ctx.ReadValue<Vector2>();
+            //
+            // if ((_currentPos - _startPos).sqrMagnitude >=
+            //     _minScreenDistanceSq)
+            // {
+            //     if (Vector2.Dot(SwipeSO.DirectionV2,
+            //             (_currentPos - _startPos).normalized) >
+            //         SwipeSO.DirectionTolerance)
+            //     {
+            //         _isSuccess = true;
+            //         ReachMinDistanceSwipeEvent?.Invoke();
+            //         return;
+            //     }
+            //
+            //     CancelSwipe();
+            // }
         }
-
 
         public void EndSwipe(InputAction.CallbackContext ctx)
         {
             if (_isSuccess)
             {
-                _successEvent?.Invoke(this);
+                _currentPos = Input.GetTouch(0).position;
+                if ((_currentPos - _startPos).sqrMagnitude >=
+                    _minScreenDistanceSq)
+                {
+                    if (Vector2.Dot(SwipeSO.DirectionV2,
+                            (_currentPos - _startPos).normalized) >
+                        SwipeSO.DirectionTolerance)
+                    {
+                        ReachMinDistanceSwipeEvent?.Invoke();
+                    }
+                    else CancelSwipe();
+                }
+                if (_isSuccess)
+                {
+                    _successEvent?.Invoke(this);
+                }
+
+                CancelSwipe();
             }
-
-            CancelSwipe();
         }
-
 
         public Swipe(SwipeSO swipeSo, Action<Swipe> successEvent, PlayerInputs playerInput, TickManager tickManager)
         {
@@ -79,8 +89,7 @@ namespace Service.Inputs
 
         public void CancelSwipe(InputAction.CallbackContext obj)
         {
-            if(!_isSuccess)
-            CancelSwipe();
+             CancelSwipe();
         }
     }
 }

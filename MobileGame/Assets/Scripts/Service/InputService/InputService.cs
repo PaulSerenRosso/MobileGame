@@ -58,8 +58,7 @@ namespace Service.Inputs
         {
             Swipe swipe = new Swipe(swipeSo, successEvent, PlayerInputs, _tickeableService.GetTickManager);
             _allSwipes.Add(swipe);
-            PlayerInputs.GenericInputs.PressTouch.started += swipe.StartSwipe;
-            // add hold cancel
+            PlayerInputs.GenericInputs.PressTouch.performed += swipe.StartSwipe;
             PlayerInputs.GenericInputs.PressTouch.canceled += swipe.EndSwipe;
             swipe.ReachMinDistanceSwipeEvent += DeactivateTryHold;
             PlayerInputs.GenericInputs.HoldTouch.performed += swipe.CancelSwipe;

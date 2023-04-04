@@ -29,7 +29,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""PressTouch"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Button"",
                     ""id"": ""e7a7c6a9-a037-4db7-b958-330bb06db31c"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
@@ -44,15 +44,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""MoveTouch"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""289fc2e3-2369-481f-bb0f-b626a3e5e58b"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 },
                 {
                     ""name"": ""TapTouch"",
@@ -98,17 +89,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""3e81c5ae-bf3a-401f-85ea-a27af60e96f4"",
-                    ""path"": ""<Touchscreen>/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mobile"",
-                    ""action"": ""MoveTouch"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""396e65ac-eae0-4e62-809a-6e8b3791623d"",
                     ""path"": ""<Touchscreen>/primaryTouch/tap"",
                     ""interactions"": ""Tap"",
@@ -149,7 +129,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         m_GenericInputs = asset.FindActionMap("GenericInputs", throwIfNotFound: true);
         m_GenericInputs_PressTouch = m_GenericInputs.FindAction("PressTouch", throwIfNotFound: true);
         m_GenericInputs_ReleaseTouch = m_GenericInputs.FindAction("ReleaseTouch", throwIfNotFound: true);
-        m_GenericInputs_MoveTouch = m_GenericInputs.FindAction("MoveTouch", throwIfNotFound: true);
         m_GenericInputs_TapTouch = m_GenericInputs.FindAction("TapTouch", throwIfNotFound: true);
         m_GenericInputs_HoldTouch = m_GenericInputs.FindAction("HoldTouch", throwIfNotFound: true);
     }
@@ -213,7 +192,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
     private IGenericInputsActions m_GenericInputsActionsCallbackInterface;
     private readonly InputAction m_GenericInputs_PressTouch;
     private readonly InputAction m_GenericInputs_ReleaseTouch;
-    private readonly InputAction m_GenericInputs_MoveTouch;
     private readonly InputAction m_GenericInputs_TapTouch;
     private readonly InputAction m_GenericInputs_HoldTouch;
     public struct GenericInputsActions
@@ -222,7 +200,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         public GenericInputsActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @PressTouch => m_Wrapper.m_GenericInputs_PressTouch;
         public InputAction @ReleaseTouch => m_Wrapper.m_GenericInputs_ReleaseTouch;
-        public InputAction @MoveTouch => m_Wrapper.m_GenericInputs_MoveTouch;
         public InputAction @TapTouch => m_Wrapper.m_GenericInputs_TapTouch;
         public InputAction @HoldTouch => m_Wrapper.m_GenericInputs_HoldTouch;
         public InputActionMap Get() { return m_Wrapper.m_GenericInputs; }
@@ -240,9 +217,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @ReleaseTouch.started -= m_Wrapper.m_GenericInputsActionsCallbackInterface.OnReleaseTouch;
                 @ReleaseTouch.performed -= m_Wrapper.m_GenericInputsActionsCallbackInterface.OnReleaseTouch;
                 @ReleaseTouch.canceled -= m_Wrapper.m_GenericInputsActionsCallbackInterface.OnReleaseTouch;
-                @MoveTouch.started -= m_Wrapper.m_GenericInputsActionsCallbackInterface.OnMoveTouch;
-                @MoveTouch.performed -= m_Wrapper.m_GenericInputsActionsCallbackInterface.OnMoveTouch;
-                @MoveTouch.canceled -= m_Wrapper.m_GenericInputsActionsCallbackInterface.OnMoveTouch;
                 @TapTouch.started -= m_Wrapper.m_GenericInputsActionsCallbackInterface.OnTapTouch;
                 @TapTouch.performed -= m_Wrapper.m_GenericInputsActionsCallbackInterface.OnTapTouch;
                 @TapTouch.canceled -= m_Wrapper.m_GenericInputsActionsCallbackInterface.OnTapTouch;
@@ -259,9 +233,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @ReleaseTouch.started += instance.OnReleaseTouch;
                 @ReleaseTouch.performed += instance.OnReleaseTouch;
                 @ReleaseTouch.canceled += instance.OnReleaseTouch;
-                @MoveTouch.started += instance.OnMoveTouch;
-                @MoveTouch.performed += instance.OnMoveTouch;
-                @MoveTouch.canceled += instance.OnMoveTouch;
                 @TapTouch.started += instance.OnTapTouch;
                 @TapTouch.performed += instance.OnTapTouch;
                 @TapTouch.canceled += instance.OnTapTouch;
@@ -294,7 +265,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
     {
         void OnPressTouch(InputAction.CallbackContext context);
         void OnReleaseTouch(InputAction.CallbackContext context);
-        void OnMoveTouch(InputAction.CallbackContext context);
         void OnTapTouch(InputAction.CallbackContext context);
         void OnHoldTouch(InputAction.CallbackContext context);
     }
