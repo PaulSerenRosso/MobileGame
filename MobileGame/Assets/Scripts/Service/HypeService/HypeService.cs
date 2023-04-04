@@ -1,13 +1,18 @@
 using System;
 using Addressables;
 using HelperPSR.RemoteConfigs;
+using HelperPSR.Tick;
+using UnityEngine;
 
 namespace Service.Hype
 {
     public class HypeService : IHypeService, IRemoteConfigurable
     {
+        private ITickeableService _tickeableService;
         private HypeServiceSO _hypeServiceSo;
         private float _currentHype;
+        private TickTimer _decreaseHypeTimer;
+        private bool _inCooldown;
 
         public void IncreaseHype(float amount)
         {
@@ -46,6 +51,11 @@ namespace Service.Hype
             if (!CheckHypeIsClamped(value)) return;
             _currentHype = value;
             SetHypeEvent?.Invoke();
+        }
+
+        public void SetTickService(ITickeableService tickeableService)
+        {
+            _tickeableService = tickeableService;
         }
 
         public float GetCurrentHype()
@@ -88,12 +98,21 @@ namespace Service.Hype
         {
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<HypeServiceSO>("HypeSO", SetHypeSO);
         }
+        
+        private void DecreaseHypeOnTick()
+        {
+            DecreaseHype(_hypeServiceSo.AmountHypeDecreaseTime);
+            _decreaseHypeTimer.Initiate();
+        }
 
         private void SetHypeSO(HypeServiceSO hypeServiceSo)
         {
             _hypeServiceSo = hypeServiceSo;
             RemoteConfigManager.RegisterRemoteConfigurable(this);
             SetHype(_hypeServiceSo.BaseValueHype);
+            _decreaseHypeTimer = new TickTimer(_hypeServiceSo.TimeBetweenDecrease, _tickeableService.GetTickManager);
+            _decreaseHypeTimer.TickEvent += DecreaseHypeOnTick;
+            _decreaseHypeTimer.Initiate();
         }
 
         public void DisabledService()
@@ -103,6 +122,8 @@ namespace Service.Hype
             IncreaseHypeEvent = null;
             ReachMaximumHypeEvent = null;
             ReachMinimumHypeEvent = null;
+            _decreaseHypeTimer.ResetEvents();
+            _decreaseHypeTimer = null;
             RemoteConfigManager.UnRegisterRemoteConfigurable(this);
         }
 

@@ -1,15 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Service.Hype
 {
-    
-[CreateAssetMenu(fileName = "new HypeServiceSO", menuName = "Hype/HypeServiceSO", order = 0)]
-public class HypeServiceSO : ScriptableObject
-{
-    public float MinHype;
-    public float MaxHype;
-    public float BaseValueHype;
-}
+    [CreateAssetMenu(fileName = "new HypeServiceSO", menuName = "Hype/HypeServiceSO", order = 0)]
+    public class HypeServiceSO : ScriptableObject
+    {
+        public float MinHype;
+        public float MaxHype;
+        public float BaseValueHype;
+        public float TimeBetweenDecrease;
+        public float AmountHypeDecreaseTime;
+    }
 }
