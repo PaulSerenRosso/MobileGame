@@ -33,8 +33,8 @@ namespace Player
             _playerRotationHandler.Setup(_enemyManager.transform);
             _playerAttackHandler.Setup(_inputService, _tickeableService.GetTickManager, _enemyManager, environmentGridManager, _hypeService);
             _playerTauntHandler.Setup(_inputService, _tickeableService.GetTickManager, _hypeService);
-           // _playerHandlerUltimate.Setup(hypeService, tickeableService);
-            _playerRenderer.Init();
+           _playerHandlerUltimate.Setup(hypeService);
+           _playerRenderer.Init();
         }
     }
 }

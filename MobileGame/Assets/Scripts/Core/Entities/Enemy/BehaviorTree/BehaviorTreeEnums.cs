@@ -19,6 +19,16 @@ public class BehaviorTreeEnums
         HypeService
     }
 
+    public enum HypeFunctionMode
+    {
+        DecreasePlayer, 
+        DecreaseEnemy, 
+        IncreaseEnemy, 
+        IncreasePlayer, 
+        SetPlayer, 
+        SetEnemy,
+    }
+
     public enum NodeState
     {
         SUCCESS,

@@ -93,7 +93,7 @@ namespace Actions
 
         public void OnUpdate()
         {
-            _hypeService.IncreaseHype(SO.HypeAmount * Time.deltaTime);
+            _hypeService.IncreaseHypePlayer(SO.HypeAmount * Time.deltaTime);
         }
     }
 }

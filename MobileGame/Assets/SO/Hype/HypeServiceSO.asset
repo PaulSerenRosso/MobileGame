@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d9ebd8b24e7eee478752e5d2785113c, type: 3}
+  m_Name: HypeServiceSO
+  m_EditorClassIdentifier: 
+  MaxHype: 40
+  AmountPlayerHypeDecrease: 0.1
+  TimeBeforePlayerHypeDecrease: 5
+  PlayerHypeSO: {fileID: 11400000, guid: 6b79a288879f5ad468b4799c33486da6, type: 2}
+  EnemyHypeSO: {fileID: 11400000, guid: 102d91634800ff9439b517fe63d3ad78, type: 2}
