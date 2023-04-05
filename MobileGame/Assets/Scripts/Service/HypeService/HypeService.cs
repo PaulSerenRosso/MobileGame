@@ -2,7 +2,6 @@ using System;
 using Addressables;
 using HelperPSR.MonoLoopFunctions;
 using HelperPSR.RemoteConfigs;
-using HelperPSR.Tick;
 using UnityEngine;
 
 namespace Service.Hype
@@ -10,54 +9,94 @@ namespace Service.Hype
     public class HypeService : IHypeService, IRemoteConfigurable, IUpdatable
     {
         private HypeServiceSO _hypeServiceSo;
-        private float _currentHype;
-    
+        private HypeSO _playerHypeSO;
+        private HypeSO _enemyHypeSO;
+        private Hype _hypePlayer;
+        private Hype _hypeEnemy;
+
         private bool _inCooldown;
 
-        public void IncreaseHype(float amount)
+        public void IncreaseHypePlayer(float amount)
         {
-            if (CheckMaximumHypeIsReached(_currentHype)) return;
-            if (CheckMaximumHypeIsReached(_currentHype + amount))
+            IncreaseHype(amount, _hypePlayer, IncreaseHypePlayer, _hypeEnemy);
+        }
+
+        public void IncreaseHypeEnemy(float amount)
+        {
+            IncreaseHype(amount, _hypeEnemy, IncreaseHypeEnemy, _hypePlayer);
+        }
+
+        public void IncreaseHype(float amount, Hype hype, Action<float> callback, Hype otherHype)
+        {
+            if (CheckMaximumHypeIsReached(hype.CurrentValue)) return;
+            if (CheckMaximumHypeIsReached(hype.CurrentValue + amount))
             {
-                _currentHype = _hypeServiceSo.MaxHype;
+                hype.CurrentValue = _hypeServiceSo.MaxHype;
                 ReachMaximumHypeEvent?.Invoke(amount);
             }
             else
             {
-                _currentHype += amount;
+                if (CheckHypeReachOtherHype(hype, amount, otherHype))
+                {
+                    hype.CurrentValue = _hypeServiceSo.MaxHype - otherHype.CurrentValue;
+                }
+                else
+                {
+                    hype.CurrentValue += amount;
+                }
             }
 
-            IncreaseHypeEvent?.Invoke(amount);
+            callback?.Invoke(amount);
         }
 
-        public void DecreaseHype(float amount)
+        public void DecreaseHypePlayer(float amount)
         {
-            if (CheckMinimumHypeIsReached(_currentHype)) return;
-            if (CheckMinimumHypeIsReached(_currentHype - amount))
+            DecreaseHype(amount, _hypePlayer, DecreaseHypePlayer);
+        }
+
+        public void DecreaseHypeEnemy(float amount)
+        {
+            DecreaseHype(amount, _hypeEnemy, DecreaseHypeEnemy);
+        }
+
+        public void DecreaseHype(float amount, Hype hype, Action<float> callback)
+        {
+            if (CheckMinimumHypeIsReached(hype.CurrentValue)) return;
+            if (CheckMinimumHypeIsReached(hype.CurrentValue - amount))
             {
-                _currentHype = _hypeServiceSo.MinHype;
+                hype.CurrentValue = 0;
                 ReachMinimumHypeEvent?.Invoke(amount);
             }
             else
             {
-                _currentHype -= amount;
+                hype.CurrentValue -= amount;
             }
 
-            IncreaseHypeEvent?.Invoke(amount);
+            callback?.Invoke(amount);
         }
 
-        public void SetHype(float value)
+        public void SetHypePlayer(float value)
         {
             if (!CheckHypeIsClamped(value)) return;
-            _currentHype = value;
-            SetHypeEvent?.Invoke();
+            _hypePlayer.CurrentValue = value;
+            SetHypePlayerEvent?.Invoke();
         }
 
-    
-
-        public float GetCurrentHype()
+        public void SetHypeEnemy(float value)
         {
-            return _currentHype;
+            if (!CheckHypeIsClamped(value)) return;
+            _hypeEnemy.CurrentValue = value;
+            SetHypeEnemyEvent?.Invoke();
+        }
+
+        public float GetCurrentHypePlayer()
+        {
+            return _hypePlayer.CurrentValue;
+        }
+
+        public float GetCurrentHypeEnemy()
+        {
+            return _hypeEnemy.CurrentValue;
         }
 
         public float GetMaximumHype()
@@ -67,12 +106,17 @@ namespace Service.Hype
 
         public float GetMinimumHype()
         {
-            return _hypeServiceSo.MinHype;
+            return 0;
         }
 
         private bool CheckHypeIsClamped(float value)
         {
-            return value <= _hypeServiceSo.MaxHype && value >= _hypeServiceSo.MinHype;
+            return value <= _hypeServiceSo.MaxHype && value >= 0;
+        }
+
+        private bool CheckHypeReachOtherHype(Hype hype, float amount, Hype otherHype)
+        {
+            return !(hype.CurrentValue + amount + otherHype.CurrentValue >= _hypeServiceSo.MaxHype);
         }
 
         private bool CheckMaximumHypeIsReached(float currentHype)
@@ -82,39 +126,44 @@ namespace Service.Hype
 
         private bool CheckMinimumHypeIsReached(float currentHype)
         {
-            return currentHype <= _hypeServiceSo.MinHype;
+            return currentHype <= 0;
         }
 
-        public event Action<float> IncreaseHypeEvent;
-        public event Action<float> DecreaseHypeEvent;
+        public event Action<float> IncreaseHypePlayerEvent;
+        public event Action<float> IncreaseHypeEnemyEvent;
+        public event Action<float> DecreaseHypePlayerEvent;
+        public event Action<float> DecreaseHypeEnemyEvent;
         public event Action<float> ReachMaximumHypeEvent;
         public event Action<float> ReachMinimumHypeEvent;
-        public event Action SetHypeEvent;
-   
-
+        public event Action SetHypePlayerEvent;
+        public event Action SetHypeEnemyEvent;
+        
         public void EnabledService()
         {
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<HypeServiceSO>("HypeSO", SetHypeSO);
         }
-        
+
         private void DecreaseHypeInUpdate()
         {
-            DecreaseHype(_hypeServiceSo.AmountHypeDecreaseTime*Time.deltaTime);
+            DecreaseHype(_hypeServiceSo.AmountHypeDecreaseTime * Time.deltaTime, _hypePlayer, DecreaseHypePlayer);
         }
 
         private void SetHypeSO(HypeServiceSO hypeServiceSo)
         {
             _hypeServiceSo = hypeServiceSo;
             RemoteConfigManager.RegisterRemoteConfigurable(this);
-            SetHype(_hypeServiceSo.BaseValueHype);
+            SetHypePlayer(_hypeServiceSo.PlayerHypeSO.StartValue);
+            SetHypeEnemy(_hypeServiceSo.EnemyHypeSO.StartValue);
             UpdateManager.Register(this);
         }
 
         public void DisabledService()
         {
             UnityEngine.AddressableAssets.Addressables.Release(_hypeServiceSo);
-            DecreaseHypeEvent = null;
-            IncreaseHypeEvent = null;
+            DecreaseHypePlayerEvent = null;
+            DecreaseHypeEnemyEvent = null;
+            IncreaseHypePlayerEvent = null;
+            IncreaseHypeEnemyEvent = null;
             ReachMaximumHypeEvent = null;
             ReachMinimumHypeEvent = null;
             UpdateManager.UnRegister(this);
@@ -125,9 +174,7 @@ namespace Service.Hype
 
         public void SetRemoteConfigurableValues()
         {
-            _hypeServiceSo.MinHype = RemoteConfigManager.Config.GetFloat("MinHype");
             _hypeServiceSo.MaxHype = RemoteConfigManager.Config.GetFloat("MaxHype");
-            _hypeServiceSo.BaseValueHype = RemoteConfigManager.Config.GetFloat("BaseValueHype");
             _hypeServiceSo.AmountHypeDecreaseTime = RemoteConfigManager.Config.GetFloat("AmountHypeDecreaseTime");
         }
 
