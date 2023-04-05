@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f626d053891cd44dbbcd31933686f50, type: 3}
   m_Name: PlayerMovementSO
   m_EditorClassIdentifier: 
-  RecoveryTime: 3
-  MaxTime: 0.5
   CurvePosition:
     serializedVersion: 2
     m_Curve:
@@ -27,14 +25,33 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 1.0208435
-      value: 0.9976425
-      inSlope: 0.03773929
-      outSlope: 0.03773929
+      time: 0.24016659
+      value: 0.022884049
+      inSlope: 0.34735277
+      outSlope: 0.34735277
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.18750805
+      inWeight: 0.33333334
+      outWeight: 0.22696419
+    - serializedVersion: 3
+      time: 0.8354018
+      value: 0.94356817
+      inSlope: 0.4704883
+      outSlope: 0.4704883
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.5176997
+    - serializedVersion: 3
+      time: 1.041687
+      value: 0.97416687
+      inSlope: -0.2096231
+      outSlope: -0.2096231
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.17551823
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  MaxTime: 0.4
