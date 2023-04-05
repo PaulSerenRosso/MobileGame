@@ -21,6 +21,7 @@ namespace Actions
         private IHypeService _hypeService;
         
         public event Func<HitSO, bool> CheckCanDamageEvent;
+        public event Action HitEvent;
 
         public override bool IsInAction
         {
@@ -120,7 +121,8 @@ namespace Actions
             {
                 var hit = _hitPools[_comboCount].GetFromPool();
                 _hitPools[_comboCount].AddToPoolLatter(hit, hit.GetComponent<ParticleSystem>().main.duration);
-                _hypeService.IncreaseHype(AttackActionSo.HitsSO[_comboCount].HypeAmount);
+                _hypeService.DecreaseHypeEnemy(AttackActionSo.HitsSO[_comboCount].HypeAmount);
+                HitEvent?.Invoke();
             }
         }
 

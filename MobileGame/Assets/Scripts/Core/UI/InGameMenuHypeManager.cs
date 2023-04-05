@@ -4,28 +4,33 @@ using UnityEngine.UI;
 
 public class InGameMenuHypeManager : MonoBehaviour
 {
-    [SerializeField] private Slider _hypeSlider;
-
+    [SerializeField] private Slider _hypePlayerSlider;
+    [SerializeField] private Slider _hypeEnemySlider;
     private IHypeService _hypeService;
 
     public void Init(IHypeService hypeService)
     {
         _hypeService = hypeService;
-        hypeService.DecreaseHypeEvent += SetSliderValue;
-        hypeService.IncreaseHypeEvent += SetSliderValue;
-        hypeService.SetHypeEvent += SetSliderValue;
-        _hypeSlider.minValue = hypeService.GetMinimumHype();
-        _hypeSlider.maxValue = hypeService.GetMaximumHype();
-        _hypeSlider.value = hypeService.GetCurrentHype();
+        hypeService.GetEnemyDecreaseHypeEvent += SetEnemySliderValue;
+        hypeService.GetEnemyIncreaseHypeEvent += SetEnemySliderValue;
+        hypeService.GetEnemySetHypeEvent += SetEnemySliderValue;
+        hypeService.GetPlayerDecreaseHypeEvent += SetPlayerSliderValue;
+        hypeService.GetPlayerIncreaseHypeEvent += SetPlayerSliderValue;
+        hypeService.GetPlayerSetHypeEvent += SetPlayerSliderValue;
+        _hypePlayerSlider.maxValue = hypeService.GetMaximumHype();
+        _hypeEnemySlider.maxValue = hypeService.GetMaximumHype();
+        _hypeEnemySlider.value = hypeService.GetCurrentHypeEnemy();
+        _hypePlayerSlider.value = hypeService.GetCurrentHypePlayer();
     }
+    
 
-    private void SetSliderValue()
+    private void SetEnemySliderValue(float amount)
     {
-        _hypeSlider.value = _hypeService.GetCurrentHype();
+      _hypeEnemySlider.value = _hypeService.GetCurrentHypeEnemy();
     }
-
-    private void SetSliderValue(float amount)
+    
+    private void SetPlayerSliderValue(float amount)
     {
-        SetSliderValue();
+        _hypePlayerSlider.value = _hypeService.GetCurrentHypePlayer();
     }
 }

@@ -11,18 +11,34 @@ namespace Player
         [SerializeField] private Animator _animator;
         [SerializeField] private MovementPlayerAction movementPlayerAction;
         [SerializeField] private PlayerMovementHandler _playerMovementHandler;
-        [SerializeField] private TauntPlayerAction tauntPlayerAction; 
+        [SerializeField] private TauntPlayerAction tauntPlayerAction;
+        [SerializeField] private PlayerHandlerUltimate _playerHandlerUltimate;
+        [SerializeField] private ParticleSystem ultimateParticle;
+ 
         public void Init()
         {
             
             _playerMovementHandler.MakeActionEvent += SetDirParameter;
          movementPlayerAction.MakeActionEvent += ResetEndMovementAnimationParameter;
-         SetEndAnimationMovementSpeedAnimation();
+         _playerHandlerUltimate.ActivateUltimateEvent += ActivateUltimateFX;
+         _playerHandlerUltimate.DeactivateUltimateEvent += DeactivateUltimateFX;
+             SetEndAnimationMovementSpeedAnimation();
          //  SetRecoverySpeedAnimation();
          /*
          _tauntAction.MakeActionEvent += ActivateTauntFX;
          _tauntAction.CancelActionEvent += DeactivateTauntFX;
          */
+        }
+
+        void ActivateUltimateFX()
+        {
+            Debug.Log("test");
+           ultimateParticle.gameObject.SetActive(true);
+        }
+
+        void DeactivateUltimateFX()
+        {
+            ultimateParticle.gameObject.SetActive(false);
         }
     }
 }

@@ -6,7 +6,8 @@ namespace Service.Hype
     public class HypeServiceSO : ScriptableObject
     {
         public float MaxHype;
-        public float AmountHypeDecreaseTime;
+        public float AmountPlayerHypeDecrease;
+        public float TimeBeforePlayerHypeDecrease;
         public HypeSO PlayerHypeSO;
         public HypeSO EnemyHypeSO;
     }

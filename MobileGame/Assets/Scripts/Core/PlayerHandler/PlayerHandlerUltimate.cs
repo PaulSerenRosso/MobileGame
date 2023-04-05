@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Actions;
@@ -7,22 +8,19 @@ using Player.Handler;
 using Service.Hype;
 using UnityEngine;
 
-public class PlayerHandlerUltimate : PlayerHandlerRecordable, IRemoteConfigurable
+public class PlayerHandlerUltimate : PlayerHandler
 {
     [SerializeField]
     private UltimatePlayerAction _ultimatePlayerAction;
 
+    public event Action ActivateUltimateEvent;
+    public event Action DeactivateUltimateEvent;
     private float _timeBeforeDeactivateInputUltimate;
     private IHypeService _hypeService;
-    private TickManager _tickManager;
-    private TickTimer _timerBeforeDeactivateInputUltimate;
-
-    [SerializeField]
-    private TauntPlayerAction _tauntPlayerAction; 
+    
     [SerializeField]
     private AttackPlayerAction _attackPlayerAction; 
-    [SerializeField]
-    private MovementPlayerAction _movementPlayerAction; 
+ 
    
     private bool canUltimate;
     protected override PlayerAction GetAction()
@@ -34,59 +32,36 @@ public class PlayerHandlerUltimate : PlayerHandlerRecordable, IRemoteConfigurabl
     {
        
     }
-
-    private bool CheckCanUltimate()
-    {
-        return canUltimate;
-    }
-
-    private bool CheckIsAttaking()
-    {
-        return _attackPlayerAction.IsInAction;
-    }
-
-    private bool CheckIsMoving()
-    {
-        return _movementPlayerAction.IsInAction;
-    }
     
-    private bool CheckIsTaunting()
-    {
-        return _tauntPlayerAction.IsInAction;
-    }
     
     public override void Setup(params object[] arguments)
     {
-       base.Setup(arguments);
-       RemoteConfigManager.RegisterRemoteConfigurable(this);
-       _hypeService =(IHypeService) arguments[0];
-       _hypeService.ReachMaximumHypeEvent += ActivateInputUltimate;
-       _tickManager = (TickManager)arguments[1];
-       _timerBeforeDeactivateInputUltimate = new TickTimer(_timeBeforeDeactivateInputUltimate, _tickManager);
-       _timerBeforeDeactivateInputUltimate.TickEvent += DeactivateInputUltimate;
+        _hypeService =(IHypeService) arguments[0];
+       _hypeService.GetPlayerGainUltimateEvent += ActivateInputUltimate;
+       _hypeService.GetPlayerLoseUltimateEvent += DeactivateInputUltimate;
        _ultimatePlayerAction.EndActionEvent += DeactivateInputUltimate;
-       AddCondition(CheckCanUltimate);
-       AddCondition(CheckIsMoving);
-       AddCondition(CheckIsAttaking);
-       AddCondition(CheckIsTaunting);
-    }
-
-    private void ActivateInputUltimate(float amount)
-    {
-        canUltimate = true; 
-        _timerBeforeDeactivateInputUltimate.Initiate();
     }
 
     private void DeactivateInputUltimate()
     {
-        canUltimate = false; 
-        _timerBeforeDeactivateInputUltimate.Cancel();
+        canUltimate = false;
+        _attackPlayerAction.HitEvent -= _ultimatePlayerAction.MakeAction;
+        DeactivateUltimateEvent?.Invoke();
     }
 
-
-    public void SetRemoteConfigurableValues()
+    private void ActivateInputUltimate(float amount)
     {
-        _timeBeforeDeactivateInputUltimate = RemoteConfigManager.Config.GetFloat("TimeBeforeDeactivateInputUltimate");
+        canUltimate = true;
+        _attackPlayerAction.HitEvent += _ultimatePlayerAction.MakeAction;
+        Debug.Log("testfdqsfqd");
+        ActivateUltimateEvent?.Invoke();
     }
+
+    private void DeactivateInputUltimate(float amount)
+    {
+       DeactivateInputUltimate();
+    }
+
+    
 }
 
