@@ -1,6 +1,5 @@
 using System;
 using Environment.MoveGrid;
-using Player;
 using Player.Handler;
 using Service;
 using Service.Hype;
@@ -45,11 +44,6 @@ namespace BehaviorTree.Trees
                     case BehaviorTreeEnums.TreeExternValues.PoolService:
                     {
                         ExternValueObjects[i].Obj = poolService;
-                        break;
-                    }
-                    case BehaviorTreeEnums.TreeExternValues.PlayerHealth:
-                    {
-                        ExternValueObjects[i].Obj = playerTransform.GetComponent<PlayerHealth>();
                         break;
                     }
                     case BehaviorTreeEnums.TreeExternValues.HypeService:

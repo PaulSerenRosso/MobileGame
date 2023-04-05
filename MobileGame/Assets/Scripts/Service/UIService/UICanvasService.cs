@@ -1,7 +1,5 @@
 ﻿using Addressables;
 using Attributes;
-using Interfaces;
-using Player;
 using Service.Fight;
 using Service.Hype;
 using UnityEngine;
@@ -20,18 +18,14 @@ namespace Service.UI
         [DependsOnService] private IHypeService _hypeService;
         
         private GameObject _mainMenu;
-        private ILifeable _interfaceLifeable;
-        private IDamageable _interfaceDamageable;
 
         public void LoadMainMenu()
         {
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("MainMenu", GenerateMainMenu);
         }
 
-        public void LoadInGameMenu(ILifeable interfaceLifeable, IDamageable interfaceDamageable)
+        public void LoadInGameMenu()
         {
-            _interfaceLifeable = interfaceLifeable;
-            _interfaceDamageable = interfaceDamageable;
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("InGameMenu", GenerateInGameMenu);
         }
 
@@ -53,7 +47,7 @@ namespace Service.UI
         private void GenerateInGameMenu(GameObject gameObject)
         {
             var inGameMenu = Object.Instantiate(gameObject);
-            inGameMenu.GetComponent<InGameMenuManager>().SetupMenu(_sceneService, _hypeService, _interfaceLifeable, _interfaceDamageable);
+            inGameMenu.GetComponent<InGameMenuManager>().SetupMenu(_sceneService, _hypeService);
             Release(gameObject);
         }
     }

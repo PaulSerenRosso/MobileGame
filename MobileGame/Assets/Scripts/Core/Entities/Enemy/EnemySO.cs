@@ -9,7 +9,6 @@ namespace Enemy
         public string Name;
         
         [Header("Stats")]
-        public float Health;
         public float PercentageHealthStun;
         public float PercentageDamageReduction;
         public float TimeStunAvailable;
