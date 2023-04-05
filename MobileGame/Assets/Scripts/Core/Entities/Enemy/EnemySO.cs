@@ -7,10 +7,13 @@ namespace Enemy
     public class EnemySO : ScriptableObject
     {
         public string Name;
+        
+        [Header("Stats")]
         public float Health;
-        public float PercentageHealth;
+        public float PercentageHealthStun;
         public float PercentageDamageReduction;
         public float TimeStunAvailable;
         public float TimeInvulnerable;
+        public float AngleBlock;
     }
 }

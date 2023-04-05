@@ -60,7 +60,7 @@ public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, I
         }
 
         if (_currentStunTriggers.Any(enemyStunTrigger =>
-                (enemyStunTrigger.DamageAmount / _so.Health) >= _so.PercentageHealth))
+                (enemyStunTrigger.DamageAmount / _so.Health) >= _so.PercentageHealthStun))
         {
             CurrentMobilityState = EnemyEnums.EnemyMobilityState.STAGGER;
             _currentStunTriggers.Clear();
@@ -72,7 +72,6 @@ public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, I
     {
         _tree.Setup(playerTransform, tickeableService, environmentGridManager, poolService, hypeService);
         _timerInvulnerable = 0;
-        // TODO: Add the right EnemySO in setup
     }
 
     private void TimerInvulnerable()
@@ -91,24 +90,12 @@ public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, I
         Debug.Log("BOSS IS KO, CONGRATS!");
     }
 
-    [ContextMenu("TakeDamage")]
-    public void TakeDamageTest()
-    {
-        OnDamageReceived.Invoke(5);
-        if (_health - 5 <= 0)
-        {
-            _health = 0;
-            Die();
-        }
-        else _health -= 5;
-    }
-
     public void TakeDamage(float amount, Vector3 posToCheck = new())
     {
         if (CurrentBlockingState == EnemyEnums.EnemyBlockingState.BLOCKING)
         {
             float angle = Vector3.Angle(transform.forward, posToCheck);
-            if (angle < 10) return;
+            if (angle > _so.AngleBlock / 2) return;
             OnDamageReceived.Invoke(amount);
             if (_health - (1 - _so.PercentageDamageReduction) * amount <= 0)
             {
@@ -163,7 +150,7 @@ public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, I
     public void SetRemoteConfigurableValues()
     {
         _so.Health = RemoteConfigManager.Config.GetFloat(_remoteConfigHealthName);
-        _so.PercentageHealth = RemoteConfigManager.Config.GetFloat(_remoteConfigStunPercentageHealthName);
+        _so.PercentageHealthStun = RemoteConfigManager.Config.GetFloat(_remoteConfigStunPercentageHealthName);
         _so.TimeStunAvailable = RemoteConfigManager.Config.GetFloat(_remoteConfigTimeStunName);
         _so.TimeInvulnerable = RemoteConfigManager.Config.GetFloat(_remoteConfigTimeStunInvulnerableName);
         _so.PercentageDamageReduction =
