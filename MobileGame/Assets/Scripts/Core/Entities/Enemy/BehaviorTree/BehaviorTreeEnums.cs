@@ -16,7 +16,6 @@ public class BehaviorTreeEnums
         TickManager,
         PlayerHandlerMovement,
         PoolService,
-        PlayerHealth,
         HypeService
     }
 

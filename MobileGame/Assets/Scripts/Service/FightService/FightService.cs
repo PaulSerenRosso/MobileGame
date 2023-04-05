@@ -1,7 +1,6 @@
 using Addressables;
 using Attributes;
 using Environment.MoveGrid;
-using Interfaces;
 using Player;
 using Service.Hype;
 using Service.Inputs;
@@ -27,8 +26,6 @@ namespace Service.Fight
         
         private CameraController _cameraController;
         private PlayerController _playerController;
-        private ILifeable _interfaceLifeable;
-        private IDamageable _interfaceDamageable;
         private EnemyManager _enemyManager;
         private EnvironmentGridManager _environmentGridManager;
         private EnvironmentSO _currentEnvironmentSO;
@@ -67,8 +64,6 @@ namespace Service.Fight
             var player = Object.Instantiate(gameObject);
             Release(gameObject);
             _playerController = player.GetComponent<PlayerController>();
-            _interfaceLifeable = player.GetComponent<ILifeable>();
-            _interfaceDamageable = player.GetComponent<IDamageable>();
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Enemy", GenerateEnemy);
         }
 
@@ -88,7 +83,7 @@ namespace Service.Fight
             Release(gameObject);
             _cameraController = camera.GetComponent<CameraController>();
             _cameraController.Setup(_playerController.transform, _enemyManager.transform);
-            _canvasService.LoadInGameMenu(_interfaceLifeable, _interfaceDamageable);
+            _canvasService.LoadInGameMenu();
         }
     }
 }
