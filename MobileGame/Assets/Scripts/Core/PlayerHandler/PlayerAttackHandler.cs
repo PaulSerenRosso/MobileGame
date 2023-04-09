@@ -12,13 +12,13 @@ namespace Player.Handler
     {
         [SerializeField] private MovementPlayerAction movementPlayerAction;
         [SerializeField] private TauntPlayerAction tauntPlayerAction;
-
         [SerializeField] private PlayerMovementHandler _playerMovementHandler;
         [SerializeField] private AttackPlayerAction attackPlayerAction; 
+        
         private const string _punchName = "PlayerPunch";
-
         private EnvironmentGridManager _environmentGridManager;
-        protected override Actions.PlayerAction GetAction()
+        
+        protected override PlayerAction GetAction()
         {
             return attackPlayerAction;
         }
@@ -73,6 +73,7 @@ namespace Player.Handler
             }
             return false;
         }
+        
         public void SetRemoteConfigurableValues()
         {
             for (int i = 0; i < attackPlayerAction.AttackActionSo.HitsSO.Length; i++)

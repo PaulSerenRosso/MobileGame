@@ -25,7 +25,6 @@ namespace Actions
 
         public override void MakeAction()
         {
-            Debug.Log("je taunt whouah");
             _isTaunting = true;
             _tauntText.text = "Start Taunt";
             _startTauntTimer.TickEvent += Taunt;

@@ -30,8 +30,6 @@ namespace Player.Handler
         public event Action FinishRecoveryMovementEvent;
         public event Action<Vector2> MakeActionEvent;
 
-        // override le PlayerRecord 
-
         public float GetRecoveryMovementTime() => _cooldownTimeBetweenTwoMovement;
 
         public void TryMakeMovementAction(Swipe swipe)
@@ -85,9 +83,7 @@ namespace Player.Handler
                 }
             }
 
-            if (_environmentGridManager.MovePoints[_maxDestinationIndex].IsOccupied) return false;
-
-            return true;
+            return !_environmentGridManager.MovePoints[_maxDestinationIndex].IsOccupied;
         }
 
         public void SetCurrentMovePoint(int movePointIndex)
@@ -155,6 +151,12 @@ namespace Player.Handler
             GetAction().SetupAction(_currentMovePoint.MeshRenderer.transform.position);
         }
 
+        public void ResetMovePoint(int indexMovePoint)
+        {
+            _currentMovePoint = _environmentGridManager.MovePoints[indexMovePoint];
+            GetAction().SetupAction(_currentMovePoint.MeshRenderer.transform.position);
+        }
+
         private void FinishCooldown()
         {
             _inCooldown = false;
@@ -171,7 +173,7 @@ namespace Player.Handler
             return !_inCooldown;
         }
 
-        protected override Actions.PlayerAction GetAction()
+        protected override PlayerAction GetAction()
         {
             return movementPlayerAction;
         }

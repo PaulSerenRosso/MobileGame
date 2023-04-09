@@ -1,22 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Player
 {
     public partial class PlayerRenderer
     {
-        [SerializeField] private AnimationClip movementRecoveryAnimationClip;
+        [SerializeField] private AnimationClip _movementRecoveryAnimationClip;
+        [SerializeField] private FloatAnimationParameter[] _endMovementTimeParameters;
         [SerializeField] private string _dirParameterName;
         [SerializeField] private string _endMovementParameterName;
 
-        [SerializeField] private FloatAnimationParameter[] _endMovementTimeParameters;
         private const string EndMovementParameterBaseName = "EndMovementSpeed";
-        int dirToSend = -1;
-        private string currentDirName;
+        private int _dirToSend = -1;
+        private string _currentDirName;
+        
         [Serializable]
-        struct FloatAnimationParameter
+        private struct FloatAnimationParameter
         {
             public AnimationClip animationClip;
             private float _time;
@@ -35,7 +34,7 @@ namespace Player
         private void SetRecoverySpeedAnimation()
         {
             _animator.SetFloat("RecoveryAnimationSpeed",
-                _playerMovementHandler.GetRecoveryMovementTime() / movementRecoveryAnimationClip.length);
+                _playerMovementHandler.GetRecoveryMovementTime() / _movementRecoveryAnimationClip.length);
         }
 
         private void SetDirParameter(Vector2 dir)
@@ -45,47 +44,47 @@ namespace Player
             {
                 case var v when v == Vector2.left:
                 {
-                    dirToSend = 2;
+                    _dirToSend = 2;
                     break;
                 }
                 case var v when v == Vector2.right:
                 {
-                    dirToSend = 3;
+                    _dirToSend = 3;
                     break;
                 }
                 case var v when v == Vector2.up:
                 {
-                    dirToSend = 0;
+                    _dirToSend = 0;
                     break;
                 }
                 case var v when v == Vector2.down:
                 {
-                    dirToSend = 1;
+                    _dirToSend = 1;
                     break;
                 }
                 case var v when v == Vector2.zero:
                 {
-                    dirToSend = -1;
+                    _dirToSend = -1;
                     break;
                 }
             }
 
-            AnimSetInt(_dirParameterName, dirToSend);
+            AnimSetInt(_dirParameterName, _dirToSend);
         }
 
         private void ResetEndMovementAnimationParameter()
         {
             AnimSetBool(_endMovementParameterName, false);
-            movementPlayerAction.MakeUpdateEvent += LaunchEndMovementPlayerAnimation;
+            _movementPlayerAction.MakeUpdateEvent += LaunchEndMovementPlayerAnimation;
         }
 
         private void LaunchEndMovementPlayerAnimation(float time)
         {
-            if (movementPlayerAction.GetMaxTimeMovement()-_endMovementTimeParameters[dirToSend].GetTime >= movementPlayerAction.GetMaxTimeMovement() - time)
+            if (_movementPlayerAction.GetMaxTimeMovement()-_endMovementTimeParameters[_dirToSend].GetTime >= _movementPlayerAction.GetMaxTimeMovement() - time)
             {
                 SetDirParameter(Vector2.zero);
                 AnimSetBool(_endMovementParameterName, true);
-                movementPlayerAction.MakeUpdateEvent -= LaunchEndMovementPlayerAnimation;
+                _movementPlayerAction.MakeUpdateEvent -= LaunchEndMovementPlayerAnimation;
             }
         }
 

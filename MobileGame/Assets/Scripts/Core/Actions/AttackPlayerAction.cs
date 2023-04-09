@@ -8,20 +8,23 @@ namespace Actions
 {
     public class AttackPlayerAction : PlayerAction
     {
-        public TickTimer AttackTimer;
-        public bool IsCancelTimeOn;
         public AttackActionSO AttackActionSo;
+        public bool IsCancelTimeOn;
+        public TickTimer AttackTimer;
 
         [SerializeField] private Material[] _materials;
         [SerializeField] private Renderer _meshRenderer;
 
-        private Pool<GameObject>[] _hitPools;
         private bool _isAttacking;
         private int _comboCount;
         private IHypeService _hypeService;
-        
-        public event Func<HitSO, bool> CheckCanDamageEvent;
+        private Pool<GameObject>[] _hitPools;
+
         public event Action HitEvent;
+        public event Action InitCancelAttackEvent;
+        public event Action InitBeforeHitEvent;
+        public event Action EndRecoveryEvent;
+        public event Func<HitSO, bool> CheckCanDamageEvent;
 
         public override bool IsInAction
         {
@@ -51,12 +54,9 @@ namespace Actions
             {
                 _hitPools[i] = new Pool<GameObject>(AttackActionSo.HitsSO[i].Particle, 2);
             }
+
             _hypeService = (IHypeService)arguments[2];
         }
-
-        public event System.Action InitCancelAttackEvent;
-        public event System.Action InitBeforeHitEvent;
-        public event System.Action EndRecoveryEvent;
 
         private void InitiateCancelTimer()
         {
@@ -90,7 +90,7 @@ namespace Actions
             AttackTimer.TickEvent += InitiateRecoveryTimer;
             AttackTimer.Initiate();
         }
-        
+
         private void InitiateRecoveryTimer()
         {
             AttackTimer.ResetEvents();
