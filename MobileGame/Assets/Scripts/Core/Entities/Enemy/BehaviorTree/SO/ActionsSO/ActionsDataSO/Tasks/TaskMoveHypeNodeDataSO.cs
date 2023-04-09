@@ -12,6 +12,7 @@ namespace BehaviorTree.SO
         public float HypeAmount;
         public BehaviorTreeEnums.HypeFunctionMode HypeFunctionMode;
         public bool IsUpdated;
+
         protected override void SetDependencyValues()
         {
             ExternValues = new[] { BehaviorTreeEnums.TreeExternValues.HypeService };

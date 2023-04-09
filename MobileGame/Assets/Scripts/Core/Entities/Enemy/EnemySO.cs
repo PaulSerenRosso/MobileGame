@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Enemy
 {
@@ -14,5 +13,6 @@ namespace Enemy
         public float TimeStunAvailable;
         public float TimeInvulnerable;
         public float AngleBlock;
+        public int Rounds;
     }
 }

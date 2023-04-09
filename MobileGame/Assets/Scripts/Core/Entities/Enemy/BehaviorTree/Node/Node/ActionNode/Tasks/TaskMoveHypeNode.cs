@@ -11,12 +11,13 @@ namespace BehaviorTree.Nodes.Actions
     {
         private TaskMoveHypeNodeSO _so;
         private TaskMoveHypeNodeDataSO _data;
-        private event Func<float> _calculateMoveHypeAmountEvent;
         private event Action<float> _moveHypeFunction;
+        private event Func<float> _calculateMoveHypeAmountEvent;
         private IHypeService _hypeService;
+
         public override void Evaluate()
         {
-           _moveHypeFunction?.Invoke(_calculateMoveHypeAmountEvent.Invoke());
+            _moveHypeFunction?.Invoke(_calculateMoveHypeAmountEvent.Invoke());
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();
         }
@@ -75,7 +76,7 @@ namespace BehaviorTree.Nodes.Actions
         {
             _so = (TaskMoveHypeNodeSO)nodeSO;
             _data = (TaskMoveHypeNodeDataSO)_so.Data;
-          
+
             if (_data.IsUpdated)
             {
                 _calculateMoveHypeAmountEvent += CalculateDecreaseAmountWithDeltatime;

@@ -1,6 +1,5 @@
 using HelperPSR.MonoLoopFunctions;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Actions
 {
@@ -26,8 +25,5 @@ namespace Actions
         {
             _lookTarget = (Transform)arguments[0];
         }
-
- 
-      
     }
 }

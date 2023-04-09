@@ -8,14 +8,13 @@ namespace Service.Hype
 {
     public class HypeService : IHypeService, IRemoteConfigurable, IUpdatable
     {
-        private HypeServiceSO _hypeServiceSo;
-        private HypeSO _playerHypeSO;
-        private HypeSO _enemyHypeSO;
         private Hype _hypePlayer;
         private Hype _hypeEnemy;
-        private bool isDecreasePlayerHype;
-        private float decreasePlayerHypeTimer;
-
+        private HypeSO _playerHypeSO;
+        private HypeSO _enemyHypeSO;
+        private HypeServiceSO _hypeServiceSo;
+        private bool _isDecreasePlayerHype;
+        private float _decreasePlayerHypeTimer;
         private bool _inCooldown;
 
         public void IncreaseHypePlayer(float amount)
@@ -54,7 +53,7 @@ namespace Service.Hype
             hype.IncreaseHypeEvent?.Invoke(amount);
         }
 
-        void TryGainUltimateValue(Hype hype, float amount)
+        private void TryGainUltimateValue(Hype hype, float amount)
         {
             if (!hype.isInUltimateArea)
             {
@@ -66,7 +65,7 @@ namespace Service.Hype
             }
         }
 
-        void TryLoseUltimateValue(Hype hype, float amount)
+        private void TryLoseUltimateValue(Hype hype, float amount)
         {
             if (hype.isInUltimateArea)
             {
@@ -249,14 +248,14 @@ namespace Service.Hype
             _hypePlayer.HypeSo = _hypeServiceSo.PlayerHypeSO;
             SetHypeEnemy(_hypeServiceSo.EnemyHypeSO.StartValue);
             _hypeEnemy.HypeSo = _hypeServiceSo.EnemyHypeSO;
-            isDecreasePlayerHype = false;
-            decreasePlayerHypeTimer = 0;
+            _isDecreasePlayerHype = false;
+            _decreasePlayerHypeTimer = 0;
             UpdateManager.Register(this);
             _hypePlayer.IncreaseHypeEvent += ResetDecreasePlayerHype;
             _hypeEnemy.DecreaseHypeEvent += ResetDecreasePlayerHype;
         }
 
-        void ResetDecreasePlayerHype(float amount) => isDecreasePlayerHype = false;
+        private void ResetDecreasePlayerHype(float amount) => _isDecreasePlayerHype = false;
 
         public void DisabledService()
         {
@@ -293,18 +292,18 @@ namespace Service.Hype
 
         public void OnUpdate()
         {
-            if (isDecreasePlayerHype)
+            if (_isDecreasePlayerHype)
             {
                 DecreaseHypeInUpdate();
                 
             }
             else
             {
-                decreasePlayerHypeTimer += Time.deltaTime;
-                if (decreasePlayerHypeTimer > _hypeServiceSo.TimeBeforePlayerHypeDecrease)
+                _decreasePlayerHypeTimer += Time.deltaTime;
+                if (_decreasePlayerHypeTimer > _hypeServiceSo.TimeBeforePlayerHypeDecrease)
                 {
-                    decreasePlayerHypeTimer = 0;
-                    isDecreasePlayerHype = true;
+                    _decreasePlayerHypeTimer = 0;
+                    _isDecreasePlayerHype = true;
                 }
 
             }
