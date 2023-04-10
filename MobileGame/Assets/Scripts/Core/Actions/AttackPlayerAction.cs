@@ -18,6 +18,7 @@ namespace Actions
         private bool _isAttacking;
         private int _comboCount;
         private IHypeService _hypeService;
+        private IHypeable _hypeable;
         private Pool<GameObject>[] _hitPools;
 
         public event Action HitEvent;
@@ -55,6 +56,7 @@ namespace Actions
                 _hitPools[i] = new Pool<GameObject>(AttackActionSo.HitsSO[i].Particle, 2);
             }
 
+            _hypeable = (IHypeable)arguments[1];
             _hypeService = (IHypeService)arguments[2];
         }
 
@@ -121,7 +123,7 @@ namespace Actions
             {
                 var hit = _hitPools[_comboCount].GetFromPool();
                 _hitPools[_comboCount].AddToPoolLatter(hit, hit.GetComponent<ParticleSystem>().main.duration);
-                _hypeService.DecreaseHypeEnemy(AttackActionSo.HitsSO[_comboCount].HypeAmount);
+                _hypeable.DecreaseHypeEnemy(AttackActionSo.HitsSO[_comboCount].HypeAmount);
                 HitEvent?.Invoke();
             }
         }

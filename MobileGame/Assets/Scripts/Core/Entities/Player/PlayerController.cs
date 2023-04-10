@@ -37,7 +37,7 @@ namespace Player
             _playerRotationHandler.AddCondition(CheckIsLockedController);
             _playerRotationHandler.Setup(_enemyManager.transform);
             _playerAttackHandler.AddCondition(CheckIsLockedController);
-            _playerAttackHandler.Setup(_inputService, _tickeableService.GetTickManager, _enemyManager,
+            _playerAttackHandler.Setup(_inputService, _tickeableService.GetTickManager, _enemyManager.GetComponent<IHypeable>(),
                 environmentGridManager, _hypeService);
             _playerTauntHandler.AddCondition(CheckIsLockedController);
             _playerTauntHandler.Setup(_inputService, _tickeableService.GetTickManager, _hypeService);

@@ -8,6 +8,7 @@ namespace Service.Hype
 {
     public class HypeService : IHypeService, IRemoteConfigurable, IUpdatable
     {
+        private EnemyManager _enemyManager;
         private Hype _hypePlayer;
         private Hype _hypeEnemy;
         private HypeSO _playerHypeSO;
