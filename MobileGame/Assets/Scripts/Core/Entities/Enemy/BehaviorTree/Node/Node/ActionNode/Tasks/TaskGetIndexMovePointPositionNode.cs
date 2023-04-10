@@ -24,6 +24,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void Evaluate()
         {
+            base.Evaluate();
             int index = (int)Sharer.InternValues[_so.InternValues[0].HashCode];
             CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[1].HashCode,
                 _environmentGridManager.MovePoints[index].MeshRenderer.transform.position);

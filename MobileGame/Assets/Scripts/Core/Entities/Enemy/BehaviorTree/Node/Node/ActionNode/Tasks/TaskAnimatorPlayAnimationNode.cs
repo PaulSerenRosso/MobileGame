@@ -23,6 +23,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void Evaluate()
         {
+            base.Evaluate();
             _animator.Play(_data.NameParameter);
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();

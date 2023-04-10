@@ -13,6 +13,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void Evaluate()
         {
+            base.Evaluate();
             if (!_environmentGridManager.CheckIfOneMovePointInCirclesIsOccupied(_data.CircleIndexes,
                     (Vector3)Sharer.InternValues[_so.InternValues[0].HashCode]))
             {

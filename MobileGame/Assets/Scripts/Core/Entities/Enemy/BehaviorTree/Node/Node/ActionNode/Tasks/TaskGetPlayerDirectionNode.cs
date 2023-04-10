@@ -26,6 +26,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void Evaluate()
         {
+            base.Evaluate();
             int playerMovePointIndex = (int)Sharer.InternValues[_so.InternValues[0].HashCode];
             Vector3 direction = _environmentGridManager.MovePoints[playerMovePointIndex].MeshRenderer.transform.position -
                                 _transform.position;

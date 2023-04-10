@@ -24,6 +24,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void Evaluate()
         {
+            base.Evaluate();
             GameObject gameObject = _poolService.GetFromPool(_data.ParticleGO);
             gameObject.transform.position = (Vector3)Sharer.InternValues[_so.InternValues[0].HashCode];
             State = BehaviorTreeEnums.NodeState.SUCCESS;

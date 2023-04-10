@@ -1,38 +1,63 @@
+using System;
 using Addressables;
 using Attributes;
 using Environment.MoveGrid;
+using HelperPSR.Tick;
 using Player;
 using Service.Hype;
 using Service.Inputs;
 using Service.UI;
 using UnityEngine;
 using static UnityEngine.AddressableAssets.Addressables;
+using Object = UnityEngine.Object;
 
 namespace Service.Fight
 {
     public class FightService : IFightService
     {
+        public event Action<int> InitiateRoundEvent;
+        public event Action EndInitiateRoundEvent;
+        public event Action ActivatePauseEvent;
+        public event Action DeactivatePauseEvent;
+
         [DependsOnService] private ISceneService _sceneService;
         [DependsOnService] private IUICanvasSwitchableService _canvasService;
         [DependsOnService] private IInputService _inputService;
         [DependsOnService] private ITickeableService _tickeableService;
         [DependsOnService] private IPoolService _poolService;
         [DependsOnService] private IHypeService _hypeService;
-        
+
         private CameraController _cameraController;
         private EnemyManager _enemyManager;
         private EnvironmentGridManager _environmentGridManager;
         private EnvironmentSO _currentEnvironmentSO;
         private PlayerController _playerController;
-        private int _rounds;
+        private int _roundCount;
+        private TickTimer _tickTimerInitRound;
+        private const float _roundInitTimer = 3f;
 
+        private void ActivatePause()
+        {
+            _hypeService.DeactivateDecreaseUpdateHypePlayer();
+            _playerController.LockController();
+            ActivatePauseEvent?.Invoke();
+        }
+
+        private void DeactivatePause()
+        {
+            _hypeService.ActivateDecreaseUpdateHypePlayer();
+            _playerController.UnlockController();
+            DeactivatePauseEvent?.Invoke();
+        }
+        
         public void StartFight(string environmentAddressableName)
         {
             _sceneService.LoadScene("GameScene");
             _hypeService.EnabledService();
-            _rounds = 0;
+            _roundCount = 0;
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<EnvironmentSO>(environmentAddressableName,
                 LoadEnvironmentSO);
+            _canvasService.InitCanvasEvent += InitTimerRound;
         }
 
         private void LoadEnvironmentSO(EnvironmentSO so)
@@ -84,17 +109,40 @@ namespace Service.Fight
             _canvasService.LoadInGameMenu();
         }
 
+        private void InitTimerRound()
+        {
+            _tickTimerInitRound = new TickTimer(_roundInitTimer, _tickeableService.GetTickManager);
+            _tickTimerInitRound.TickEvent += EndInitRound;
+            _tickTimerInitRound.InitiateEvent += StartInitRound;
+            _tickTimerInitRound.Initiate();
+        }
+
         private void ResetRound()
         {
-            if (_rounds + 1 > _enemyManager.EnemySO.Rounds)
+            if (_roundCount + 1 > _enemyManager.EnemySO.Rounds)
             {
                 // TODO : Return in the menu
             }
 
-            _rounds++;
-            // TODO : Get the hype by default of the player and the enemy
-            _playerController.ResetPlayer(30);
-            _enemyManager.ResetEnemy(30);
+            _roundCount++;
+            _environmentGridManager.MoveGrid(new Vector3(0, 0, 0));
+            _playerController.ResetPlayer();
+            _enemyManager.ResetEnemy();
+            _tickTimerInitRound.Initiate();
+        }
+
+        private void StartInitRound()
+        {
+            ActivatePause();
+            _enemyManager.StopTree();
+            InitiateRoundEvent?.Invoke(_roundCount);
+        }
+
+        private void EndInitRound()
+        {
+            DeactivatePause();
+            _enemyManager.ResetTree();
+            EndInitiateRoundEvent?.Invoke();
         }
     }
 }

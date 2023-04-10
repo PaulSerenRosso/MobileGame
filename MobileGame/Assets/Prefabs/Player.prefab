@@ -5107,8 +5107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9db1cd9ba7b5b8e48a3016c6f10042f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsCancelTimeOn: 0
   AttackActionSo: {fileID: 11400000, guid: bf2c907eb3301924d8f9fea6a61d572d, type: 2}
+  IsCancelTimeOn: 0
   _materials:
   - {fileID: 2100000, guid: 0a9d402302ff8a440b6889473bf43b6f, type: 2}
   - {fileID: 2100000, guid: 3732cf8c7a4244b42bb507adad3d2168, type: 2}
@@ -5127,14 +5127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3426c2f37c59cc4b93d4343fc78e25d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allActionsWhichRecord:
-  - {fileID: 1800965582552254606}
-  - {fileID: 4050711209515336914}
-  - {fileID: 241883989640212697}
-  allActionsBlockedLaunchRecordAction:
-  - {fileID: 1800965582552254606}
-  - {fileID: 4050711209515336914}
-  - {fileID: 241883989640212697}
+  _allActionsWhichRecord: []
+  _allActionsBlockedLaunchRecordAction: []
   _playerHandlerRecordableManager: {fileID: 6848145212107949030}
   movementPlayerAction: {fileID: 4050711209515336914}
   tauntPlayerAction: {fileID: 241883989640212697}
@@ -5167,13 +5161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db8a5fc1ea032b04fbb2d95a82a75b91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allActionsWhichRecord:
-  - {fileID: 241883989640212697}
-  - {fileID: 4050711209515336914}
-  - {fileID: 1800965582552254606}
-  allActionsBlockedLaunchRecordAction:
-  - {fileID: 1800965582552254606}
-  - {fileID: 241883989640212697}
+  _allActionsWhichRecord: []
+  _allActionsBlockedLaunchRecordAction: []
   _playerHandlerRecordableManager: {fileID: 6848145212107949030}
   _movementSO: {fileID: 11400000, guid: 5f75cc58e513a344889c01a14d27ddc4, type: 2}
   _allMovementSwipesSO:
@@ -5252,7 +5241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerAttackHandler: {fileID: 8581481885147205113}
-  _playerHandlerUltimate: {fileID: 4151950253264653231}
+  playerUltimateHandler: {fileID: 4151950253264653231}
   _playerMovementHandler: {fileID: 7053842336820709435}
   _playerRenderer: {fileID: 7598208263566444310}
   _playerRotationHandler: {fileID: 1740439073084344159}
@@ -5272,7 +5261,7 @@ MonoBehaviour:
   _animator: {fileID: 3030853259838460037}
   _movementPlayerAction: {fileID: 4050711209515336914}
   _ultimateParticle: {fileID: 6489559777517869122}
-  _playerHandlerUltimate: {fileID: 4151950253264653231}
+  playerUltimateHandler: {fileID: 4151950253264653231}
   _playerMovementHandler: {fileID: 7053842336820709435}
   _tauntPlayerAction: {fileID: 241883989640212697}
   _movementRecoveryAnimationClip: {fileID: 7400000, guid: c91389c39d842cc4190ea8be0836798a,
@@ -5325,8 +5314,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6a75c8a5d2397f4aac022b334ce7c70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ultimatePlayerAction: {fileID: 7989795260116397858}
   _attackPlayerAction: {fileID: 1800965582552254606}
+  _ultimatePlayerAction: {fileID: 7989795260116397858}
 --- !u!1001 &5676581033960314030
 PrefabInstance:
   m_ObjectHideFlags: 0

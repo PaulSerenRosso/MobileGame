@@ -20,6 +20,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
+            Tree.ResetNodeList.Add(this);
             _so = (CheckTimerNodeSO)nodeSO;
             _data = (CheckTimerNodeDataSO)_so.Data;
             _timer = _data.StartTime;
@@ -33,6 +34,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void Evaluate()
         {
+            base.Evaluate();
             if (_timer > _data.Time)
             {
                 ResetTimer();
@@ -48,23 +50,26 @@ namespace BehaviorTree.Nodes.Actions
             ReturnedEvent?.Invoke();
         }
 
+        public override void Reset()
+        {
+            base.Reset();
+            ResetTimer();
+        }
+
         private void RemoveResetTimerEvent()
         {
-      
             Sharer.InternValues[0] = null;
             IncreaseTimerEvent = AddResetTimerFunction;
         }
 
         private void AddResetTimerFunction()
         {
-           
             Sharer.InternValues[0] = _ResetActionEvent;
             IncreaseTimerEvent = null;
         }
 
         private void ResetTimer()
         {
-         
             _timer = 0;
         }
 

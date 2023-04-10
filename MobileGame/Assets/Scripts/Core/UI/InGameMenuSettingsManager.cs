@@ -11,7 +11,7 @@ public class InGameMenuSettingsManager : MonoBehaviour
     [SerializeField] private Button _closeSettingsButton;
     [SerializeField] private Button _reportButton;
     [SerializeField] private Button _leaveGame;
-    
+
     private ISceneService _sceneService;
 
     private void Awake()

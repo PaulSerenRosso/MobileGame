@@ -4,7 +4,7 @@ using Player.Handler;
 using Service.Hype;
 using UnityEngine;
 
-public class PlayerHandlerUltimate : PlayerHandler
+public class PlayerUltimateHandler : PlayerHandler
 {
     public event Action ActivateUltimateEvent;
     public event Action DeactivateUltimateEvent;

@@ -6,6 +6,7 @@ public class InGameMenuHypeManager : MonoBehaviour
 {
     [SerializeField] private Slider _hypePlayerSlider;
     [SerializeField] private Slider _hypeEnemySlider;
+
     private IHypeService _hypeService;
 
     public void Init(IHypeService hypeService)
@@ -23,12 +24,11 @@ public class InGameMenuHypeManager : MonoBehaviour
         _hypePlayerSlider.value = hypeService.GetCurrentHypePlayer();
     }
     
-
     private void SetEnemySliderValue(float amount)
     {
-      _hypeEnemySlider.value = _hypeService.GetCurrentHypeEnemy();
+        _hypeEnemySlider.value = _hypeService.GetCurrentHypeEnemy();
     }
-    
+
     private void SetPlayerSliderValue(float amount)
     {
         _hypePlayerSlider.value = _hypeService.GetCurrentHypePlayer();

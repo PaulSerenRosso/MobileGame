@@ -16,16 +16,21 @@ namespace BehaviorTree.Trees
 {
     public class Tree : MonoBehaviour
     {
+        public ActionNode CurrentNode;
+        public List<Node> ResetNodeList = new();
+
         [SerializeField] private NodeSO _rootSO;
         [SerializeField] private NodeValuesInitializer _nodeValuesInitializer;
+        
         private Node _root;
         private NodeValuesSharer _nodeValuesSharer = new();
-        
+
         public void Setup(Transform playerTransform, ITickeableService tickeableService,
             EnvironmentGridManager environmentGridManager, IPoolService poolService, IHypeService hypeService)
         {
             _nodeValuesInitializer.Setup(playerTransform, tickeableService, environmentGridManager, poolService, hypeService);
             _root = Node.CreateNodeSO(_rootSO);
+            _root.Tree = this;
             switch (_rootSO)
             {
                 case CompositeSO compositeSO:
@@ -60,6 +65,7 @@ namespace BehaviorTree.Trees
         private Node CreateChild(NodeSO childSO)
         {
            var node =  Node.CreateNodeSO(childSO);
+           node.Tree = this;
            return node;
         }
 
@@ -109,6 +115,23 @@ namespace BehaviorTree.Trees
         private async void WaitForNextFrame()
         {
             await UniTask.DelayFrame(0);
+            _root.Evaluate();
+        }
+
+        public void StopTree()
+        {
+            CurrentNode.Stop();
+        }
+
+        public void ResetTree()
+        {
+            CurrentNode.Reset();
+            foreach (var node in ResetNodeList)
+            {
+                node.Stop();
+                node.Reset();
+            }
+            _nodeValuesSharer.InternValues.Clear();
             _root.Evaluate();
         }
     }

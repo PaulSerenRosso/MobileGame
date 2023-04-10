@@ -23,10 +23,7 @@ namespace Player.Handler
             return attackPlayerAction;
         }
 
-        public override void InitializeAction()
-        {
-            
-        }
+        public override void InitializeAction() { }
 
         public void TryMakeAttackAction(InputAction.CallbackContext ctx)
         {

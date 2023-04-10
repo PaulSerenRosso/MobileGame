@@ -21,13 +21,14 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
+            Tree.ResetNodeList.Add(this);
             _so = (TaskLookDirectionNodeSO)nodeSO;
             _data = (TaskLookDirectionNodeDataSO)_so.Data;
         }
 
         public override void Evaluate()
         {
-         
+            base.Evaluate();
             if (!_initRotation)
             {
               
@@ -48,6 +49,14 @@ namespace BehaviorTree.Nodes.Actions
 
             State = BehaviorTreeEnums.NodeState.FAILURE;
             ReturnedEvent?.Invoke();
+        }
+        
+        public override void Reset()
+        {
+            base.Reset();
+            _transform.DOKill();
+            _initRotation = false;
+            _rotationIsFinished = false;
         }
 
         public override void SetDependencyValues(

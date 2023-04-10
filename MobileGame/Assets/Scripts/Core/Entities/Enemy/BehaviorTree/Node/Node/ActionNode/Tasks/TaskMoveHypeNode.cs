@@ -17,6 +17,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void Evaluate()
         {
+            base.Evaluate();
             _moveHypeFunction?.Invoke(_calculateMoveHypeAmountEvent.Invoke());
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();
