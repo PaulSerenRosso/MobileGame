@@ -120,7 +120,7 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
         _tree.ResetTree();
     }
 
-    public void DecreaseHypeEnemy(float amount, Vector3 posToCheck = new())
+    public void DecreaseHypeEnemy(float amount, Vector3 posToCheck)
     {
         if (CurrentBlockingState == EnemyEnums.EnemyBlockingState.BLOCKING)
         {

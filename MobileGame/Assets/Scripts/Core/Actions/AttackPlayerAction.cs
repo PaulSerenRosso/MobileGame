@@ -123,7 +123,7 @@ namespace Actions
             {
                 var hit = _hitPools[_comboCount].GetFromPool();
                 _hitPools[_comboCount].AddToPoolLatter(hit, hit.GetComponent<ParticleSystem>().main.duration);
-                _hypeable.DecreaseHypeEnemy(AttackActionSo.HitsSO[_comboCount].HypeAmount);
+                _hypeable.DecreaseHypeEnemy(AttackActionSo.HitsSO[_comboCount].HypeAmount, transform.position);
                 HitEvent?.Invoke();
             }
         }
