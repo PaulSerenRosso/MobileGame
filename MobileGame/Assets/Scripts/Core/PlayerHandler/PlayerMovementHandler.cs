@@ -110,6 +110,21 @@ namespace Player.Handler
             return true;
         }
 
+        protected override bool TryRecordInput(object[] args)
+        {
+            if(!base.TryRecordInput(args))
+            {
+            if (!CheckCooldownBetweenTwoMovement())
+            {
+                Debug.Log("tesfdft");
+                SendRecordAction(args);
+                return true;
+            }
+            }
+
+            return false;
+        }
+
         private bool CheckIsInAttack()
         {
             return !attackPlayerAction.IsInAction ||
@@ -146,7 +161,7 @@ namespace Player.Handler
             _recoveryTimer.TickEvent += FinishCooldown;
             _recoveryTimer.InitiateEvent += LaunchCooldownBetweenTwoMovement;
             movementPlayerAction.ReachDestinationEvent += _recoveryTimer.Initiate;
-            FinishRecoveryMovementEvent += _playerHandlerRecordableManager.LaunchRecorderAction;
+            FinishRecoveryMovementEvent += CheckActionsBlockedRecord;
             GetAction().SetupAction(_currentMovePoint.MeshRenderer.transform.position);
         }
 
@@ -167,7 +182,7 @@ namespace Player.Handler
             _inCooldown = true;
         }
 
-        private bool CheckCooldownBetweenTwoMovement()
+        public bool CheckCooldownBetweenTwoMovement()
         {
             return !_inCooldown;
         }
@@ -216,6 +231,11 @@ namespace Player.Handler
 
             _cooldownTimeBetweenTwoMovement = RemoteConfigManager.Config.GetFloat("CooldownTimeBetweenTwoMovement");
             _movementSO.MaxTime = RemoteConfigManager.Config.GetFloat("PlayerMovementMaxTime");
+        }
+
+        protected override bool CheckActionsBlockedCustomCondition()
+        {
+            return CheckCooldownBetweenTwoMovement();
         }
 
         public void SetSwipeSO(SwipeSO so, Enums.Direction direction)

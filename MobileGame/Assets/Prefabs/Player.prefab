@@ -5127,8 +5127,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3426c2f37c59cc4b93d4343fc78e25d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _allActionsWhichRecord: []
-  _allActionsBlockedLaunchRecordAction: []
+  _allActionsWhichRecord:
+  - {fileID: 1800965582552254606}
+  - {fileID: 4050711209515336914}
+  - {fileID: 241883989640212697}
+  _allActionsBlockedLaunchRecordAction:
+  - {fileID: 4050711209515336914}
+  - {fileID: 241883989640212697}
+  - {fileID: 1800965582552254606}
   _playerHandlerRecordableManager: {fileID: 6848145212107949030}
   movementPlayerAction: {fileID: 4050711209515336914}
   tauntPlayerAction: {fileID: 241883989640212697}
@@ -5161,8 +5167,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db8a5fc1ea032b04fbb2d95a82a75b91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _allActionsWhichRecord: []
-  _allActionsBlockedLaunchRecordAction: []
+  _allActionsWhichRecord:
+  - {fileID: 1800965582552254606}
+  - {fileID: 4050711209515336914}
+  - {fileID: 241883989640212697}
+  _allActionsBlockedLaunchRecordAction:
+  - {fileID: 4050711209515336914}
+  - {fileID: 241883989640212697}
+  - {fileID: 1800965582552254606}
   _playerHandlerRecordableManager: {fileID: 6848145212107949030}
   _movementSO: {fileID: 11400000, guid: 5f75cc58e513a344889c01a14d27ddc4, type: 2}
   _allMovementSwipesSO:

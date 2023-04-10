@@ -19,21 +19,29 @@ namespace Player.Handler
 
         protected override void TryMakeAction(params object[] args)
         {
-            RecordInput(args);
+            TryRecordInput(args);
             base.TryMakeAction(args);
         }
 
-        private void RecordInput(object[] args)
+        protected virtual bool TryRecordInput(object[] args)
         {
             for (int i = 0; i < _allActionsWhichRecord.Length; i++)
             {
                 if (_allActionsWhichRecord[i].IsInAction)
                 {
-                    _playerHandlerRecordableManager.argsForInputPlayerActionRecorded = args;
-                    _playerHandlerRecordableManager.InputPlayerActionRecorded = TryMakeAction;
-                    return;
+                   
+                    SendRecordAction(args);
+                    return true;
                 }
             }
+
+            return false;
+        }
+
+        protected void SendRecordAction(object[] args)
+        {
+            _playerHandlerRecordableManager.argsForInputPlayerActionRecorded = args;
+            _playerHandlerRecordableManager.InputPlayerActionRecorded = TryMakeAction;
         }
 
         public void CheckActionsBlockedRecord()
@@ -41,8 +49,14 @@ namespace Player.Handler
             if (_playerHandlerRecordableManager.InputPlayerActionRecorded == TryMakeAction)
             {
                 if (CheckBlockedActionsIsRunning()) return;
-                _playerHandlerRecordableManager.LaunchRecorderAction();
+                if(CheckActionsBlockedCustomCondition())
+                    _playerHandlerRecordableManager.LaunchRecorderAction();
             }
+        }
+
+        protected virtual bool CheckActionsBlockedCustomCondition()
+        {
+            return true;
         }
 
         private bool CheckBlockedActionsIsRunning()
