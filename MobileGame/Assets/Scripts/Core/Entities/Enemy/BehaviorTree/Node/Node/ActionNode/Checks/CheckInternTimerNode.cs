@@ -16,12 +16,14 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
+            Tree.ResetNodeList.Add(this);
             _so = (CheckInternTimerNodeSO)nodeSO;
             _data = (CheckInternTimerNodeDataSO)_so.Data;
         }
 
         public override void Evaluate()
         {
+            base.Evaluate();
             if (_timer > (float)Sharer.InternValues[_so.InternValues[0].HashCode])
             {
                 _timer = 0;
@@ -32,6 +34,12 @@ namespace BehaviorTree.Nodes.Actions
             _timer += Time.deltaTime;
             State = BehaviorTreeEnums.NodeState.FAILURE;
             ReturnedEvent?.Invoke();
+        }
+
+        public override void Reset()
+        {
+            base.Reset();
+            _timer = 0;
         }
 
         public override ActionNodeDataSO GetDataSO()

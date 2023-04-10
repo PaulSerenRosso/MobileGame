@@ -1,6 +1,7 @@
 ﻿using Actions;
 using Player.Handler;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Player
 {
@@ -9,7 +10,7 @@ namespace Player
         [SerializeField] private Animator _animator;
         [SerializeField] private MovementPlayerAction _movementPlayerAction;
         [SerializeField] private ParticleSystem _ultimateParticle;
-        [SerializeField] private PlayerHandlerUltimate _playerHandlerUltimate;
+        [FormerlySerializedAs("_playerHandlerUltimate")] [SerializeField] private PlayerUltimateHandler playerUltimateHandler;
         [SerializeField] private PlayerMovementHandler _playerMovementHandler;
         [SerializeField] private TauntPlayerAction _tauntPlayerAction;
 
@@ -17,20 +18,20 @@ namespace Player
         {
             _playerMovementHandler.MakeActionEvent += SetDirParameter;
             _movementPlayerAction.MakeActionEvent += ResetEndMovementAnimationParameter;
-            _playerHandlerUltimate.ActivateUltimateEvent += ActivateUltimateFX;
-            _playerHandlerUltimate.DeactivateUltimateEvent += DeactivateUltimateFX;
+            playerUltimateHandler.ActivateUltimateEvent += ActivateFX;
+            playerUltimateHandler.DeactivateUltimateEvent += DeactivateFX;
             SetEndAnimationMovementSpeedAnimation();
             //  SetRecoverySpeedAnimation();
             // _tauntAction.MakeActionEvent += ActivateTauntFX;
             // _tauntAction.CancelActionEvent += DeactivateTauntFX;
         }
 
-        void ActivateUltimateFX()
+        void ActivateFX()
         {
             _ultimateParticle.gameObject.SetActive(true);
         }
 
-        void DeactivateUltimateFX()
+        void DeactivateFX()
         {
             _ultimateParticle.gameObject.SetActive(false);
         }

@@ -106,13 +106,37 @@ namespace Service.Hype
 
         public void SetHypePlayer(float value)
         {
-            
             SetHype(value, _hypePlayer);
         }
 
         public void SetHypeEnemy(float value)
         {
             SetHype(value, _hypeEnemy);
+        }
+
+        public void ResetHypePlayer()
+        {
+            SetHypePlayer(_hypeServiceSo.PlayerHypeSO.StartValue);
+            _hypePlayer.isInUltimateArea = false;
+            _hypePlayer.LoseUltimateEvent?.Invoke(_hypeServiceSo.PlayerHypeSO.StartValue);
+            
+        }
+
+        public void ResetHypeEnemy()
+        {
+            SetHypeEnemy(_hypeServiceSo.EnemyHypeSO.StartValue);
+            _hypeEnemy.isInUltimateArea = false;
+            _hypeEnemy.LoseUltimateEvent?.Invoke(_hypeServiceSo.EnemyHypeSO.StartValue);
+        }
+
+        public void ActivateDecreaseUpdateHypePlayer()
+        {
+            UpdateManager.Register(this);
+        }
+
+        public void DeactivateDecreaseUpdateHypePlayer()
+        {
+            UpdateManager.UnRegister(this);
         }
 
         private void SetHype(float value, Hype hype)
@@ -197,8 +221,7 @@ namespace Service.Hype
             get => _hypeEnemy.LoseUltimateEvent;
             set => _hypeEnemy.LoseUltimateEvent = value;
         }
-
-
+        
         public float GetMinimumHype()
         {
             return 0;
@@ -235,7 +258,7 @@ namespace Service.Hype
 
         private void DecreaseHypeInUpdate()
         {
-            DecreaseHype(_hypeServiceSo.AmountPlayerHypeDecrease* Time.deltaTime, _hypePlayer);
+            DecreaseHype(_hypeServiceSo.AmountPlayerHypeDecrease * Time.deltaTime, _hypePlayer);
         }
 
         private void SetHypeSO(HypeServiceSO hypeServiceSo)
@@ -244,13 +267,12 @@ namespace Service.Hype
             _hypeEnemy = new Hype();
             _hypePlayer = new Hype();
             RemoteConfigManager.RegisterRemoteConfigurable(this);
-            SetHypePlayer(_hypeServiceSo.PlayerHypeSO.StartValue);
+            ResetHypePlayer();
             _hypePlayer.HypeSo = _hypeServiceSo.PlayerHypeSO;
-            SetHypeEnemy(_hypeServiceSo.EnemyHypeSO.StartValue);
+            ResetHypeEnemy();
             _hypeEnemy.HypeSo = _hypeServiceSo.EnemyHypeSO;
             _isDecreasePlayerHype = false;
             _decreasePlayerHypeTimer = 0;
-            UpdateManager.Register(this);
             _hypePlayer.IncreaseHypeEvent += ResetDecreasePlayerHype;
             _hypeEnemy.DecreaseHypeEvent += ResetDecreasePlayerHype;
         }
@@ -295,7 +317,6 @@ namespace Service.Hype
             if (_isDecreasePlayerHype)
             {
                 DecreaseHypeInUpdate();
-                
             }
             else
             {

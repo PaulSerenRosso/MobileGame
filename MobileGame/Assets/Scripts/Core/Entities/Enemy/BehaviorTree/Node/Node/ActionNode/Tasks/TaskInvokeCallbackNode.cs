@@ -17,6 +17,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
+            base.Evaluate();
             _so =(TaskInvokeCallbackNodeSO) nodeSO;
             _dataSo =(TaskInvokeCallbackNodeDataSO) _so.Data;
         }

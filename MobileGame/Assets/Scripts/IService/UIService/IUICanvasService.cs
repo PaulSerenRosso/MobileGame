@@ -1,3 +1,5 @@
+using System;
+
 namespace Service.UI
 {
     public interface IUICanvasService : IService
@@ -5,5 +7,7 @@ namespace Service.UI
         void LoadMainMenu();
         void LoadInGameMenu();
         void LoadPopUpCanvas();
+
+        public event Action InitCanvasEvent;
     }
 }

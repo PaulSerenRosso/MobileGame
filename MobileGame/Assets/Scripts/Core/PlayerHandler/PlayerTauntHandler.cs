@@ -1,6 +1,5 @@
 using Actions;
 using HelperPSR.RemoteConfigs;
-using HelperPSR.Tick;
 using Service.Inputs;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -18,10 +17,7 @@ namespace Player.Handler
             return tauntPlayerAction;
         }
 
-        public override void InitializeAction()
-        {
-            
-        }
+        public override void InitializeAction() { }
 
         void TryMakeTauntAction(InputAction.CallbackContext ctx)
         {
@@ -40,7 +36,6 @@ namespace Player.Handler
 
         public override void Setup(params object[] arguments)
         {
-          
             RemoteConfigManager.RegisterRemoteConfigurable(this);
             IInputService inputService = (IInputService)arguments[0];
             AddCondition(CheckIsInAttack);

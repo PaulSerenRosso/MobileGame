@@ -23,6 +23,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void Evaluate()
         {
+            base.Evaluate();
             _animator.SetFloat(_data.NameParameter, (float)Sharer.InternValues[_so.InternValues[0].HashCode]);
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();

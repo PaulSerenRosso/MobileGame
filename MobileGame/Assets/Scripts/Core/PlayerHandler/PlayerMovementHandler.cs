@@ -136,7 +136,6 @@ namespace Player.Handler
             _environmentGridManager = (EnvironmentGridManager)arguments[0];
             _currentMovePointIndex = (int)arguments[1];
             _currentMovePoint = _environmentGridManager.MovePoints[_currentMovePointIndex];
-            _conditions = new List<Func<bool>>();
             AddCondition(CheckCooldownBetweenTwoMovement);
             AddCondition(CheckIsMoving);
             AddCondition(CheckIsOutOfRange);

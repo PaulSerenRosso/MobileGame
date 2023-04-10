@@ -17,6 +17,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void Evaluate()
         {
+            base.Evaluate();
             if (!_initRotation)
             {
                 Vector3 direction = _transformBoss.eulerAngles + Vector3.up * _data.RotationAmount;
@@ -37,6 +38,14 @@ namespace BehaviorTree.Nodes.Actions
             ReturnedEvent?.Invoke();
         }
 
+        public override void Reset()
+        {
+            base.Reset();
+            _transformBoss.DOKill();
+            _initRotation = false;
+            _rotationIsFinished = false;
+        }
+
         public override ActionNodeDataSO GetDataSO()
         {
             return _data;
@@ -49,6 +58,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
+            Tree.ResetNodeList.Add(this);
             _so = (TaskRotationNodeSO)nodeSO;
             _data = (TaskRotationNodeDataSO)_so.Data;
         }

@@ -23,6 +23,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void Evaluate()
         {
+            base.Evaluate();
             State = _playerMovementHandler.CheckIsMoving()
                 ? BehaviorTreeEnums.NodeState.FAILURE
                 : BehaviorTreeEnums.NodeState.SUCCESS;

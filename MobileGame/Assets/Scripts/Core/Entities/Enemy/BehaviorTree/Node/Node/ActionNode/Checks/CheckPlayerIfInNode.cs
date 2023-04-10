@@ -24,6 +24,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void Evaluate()
         {
+            base.Evaluate();
             int attackIndex = (int)Sharer.InternValues[_so.InternValues[0].HashCode];
             State = _playerMovementHandler.GetCurrentIndexMovePoint() == attackIndex
                 ? BehaviorTreeEnums.NodeState.SUCCESS

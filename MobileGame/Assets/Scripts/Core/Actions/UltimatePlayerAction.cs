@@ -8,7 +8,6 @@ public class UltimatePlayerAction : PlayerAction
 
     public override void MakeAction()
     {
-        Debug.Log("Launch Ultimate");
         // TODO : Add cutscenes and call the event at the end
         StartCoroutine(GenerateCutscene());
         MakeActionEvent?.Invoke();

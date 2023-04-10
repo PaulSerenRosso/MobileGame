@@ -24,6 +24,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void Evaluate()
         {
+            base.Evaluate();
             float angle = Vector3.Angle(_transform.forward, (Vector3)Sharer.InternValues[_so.InternValues[0].HashCode]);
             State = angle < 10 ? BehaviorTreeEnums.NodeState.SUCCESS : BehaviorTreeEnums.NodeState.FAILURE;
             ReturnedEvent?.Invoke();

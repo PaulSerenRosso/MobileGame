@@ -25,6 +25,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void Evaluate()
         {
+            base.Evaluate();
             State = !_environmentGridManager.CheckIfMovePointInIsCircles(
                 _playerMovementHandler.GetCurrentIndexMovePoint(),
                 _data.CirclesIndexes)

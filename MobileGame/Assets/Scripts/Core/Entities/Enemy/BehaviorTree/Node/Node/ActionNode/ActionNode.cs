@@ -23,6 +23,11 @@ namespace BehaviorTree.Nodes.Actions
             
         }
 
+        public override void Evaluate()
+        {
+            Tree.CurrentNode = this;
+        }
+
         public abstract ActionNodeDataSO GetDataSO();
     }
 }

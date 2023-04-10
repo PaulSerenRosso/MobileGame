@@ -10,6 +10,10 @@ namespace Service.Hype
         void DecreaseHypeEnemy(float amount);
         void SetHypePlayer(float value);
         void SetHypeEnemy(float value);
+        void ResetHypePlayer();
+        void ResetHypeEnemy();
+        void ActivateDecreaseUpdateHypePlayer();
+        void DeactivateDecreaseUpdateHypePlayer();
 
         float GetCurrentHypePlayer();
         float GetCurrentHypeEnemy();

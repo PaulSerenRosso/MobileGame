@@ -25,6 +25,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void Evaluate()
         {
+            base.Evaluate();
             CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[0].HashCode,
                 _animator.GetCurrentAnimatorStateInfo(0).length);
             State = BehaviorTreeEnums.NodeState.SUCCESS;

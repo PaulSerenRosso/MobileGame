@@ -6,7 +6,6 @@ using HelperPSR.RemoteConfigs;
 using Service;
 using Service.Hype;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Tree = BehaviorTree.Trees;
 
 public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable
@@ -103,11 +102,21 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable
         EnemySO.Rounds = RemoteConfigManager.Config.GetInt(_remoteConfigRounds);
     }
     
-    public void ResetEnemy(float amountHype)
+    public void ResetEnemy()
     {
         transform.position = new Vector3(0, 0, 0);
         CurrentMobilityState = EnemyEnums.EnemyMobilityState.VULNERABLE;
         CurrentBlockingState = EnemyEnums.EnemyBlockingState.VULNERABLE;
-        _hypeService.SetHypeEnemy(amountHype);
+        _hypeService.ResetHypeEnemy();
+    }
+
+    public void StopTree()
+    {
+        _tree.StopTree();
+    }
+
+    public void ResetTree()
+    {
+        _tree.ResetTree();
     }
 }
