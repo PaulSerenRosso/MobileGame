@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8334573544675780496}
   - component: {fileID: 4395593022653252493}
   - component: {fileID: 3468216822340678009}
+  - component: {fileID: 8152168790444815023}
   m_Layer: 7
   m_Name: Renderer
   m_TagString: Untagged
@@ -83,6 +84,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &8152168790444815023
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4207645267208063666}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e329a79cc2873c74782575fa4a54cd9c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &6912617506752955889
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,6 +192,7 @@ MonoBehaviour:
   _remoteConfigBlockPercentageDamageReduction: Arno_PercentageDamageReductionBlock
   _remoteConfigAngleBlock: Arno_AngleBlock
   _remoteConfigRounds: Arno_Rounds
+  Animator: {fileID: 8152168790444815023}
 --- !u!114 &3911112695321858085
 MonoBehaviour:
   m_ObjectHideFlags: 0

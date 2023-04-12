@@ -35,11 +35,13 @@ namespace Service.Fight
         private int _roundCount;
         private TickTimer _tickTimerInitRound;
         private const float _roundInitTimer = 3f;
+        private CinematicFightManager _cinematicFightManager;
 
         private void ActivatePause()
         {
             _hypeService.DeactivateDecreaseUpdateHypePlayer();
             _playerController.LockController();
+            _enemyManager.StopTree();
             ActivatePauseEvent?.Invoke();
         }
 
@@ -57,7 +59,25 @@ namespace Service.Fight
             _roundCount = 0;
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<EnvironmentSO>(environmentAddressableName,
                 LoadEnvironmentSO);
-            _canvasService.InitCanvasEvent += InitTimerRound;
+            _canvasService.InitCanvasEvent += LaunchEntryCinematic;
+        }
+
+        private void LaunchEntryCinematic()
+        {
+            ActivatePause();
+            _cinematicFightManager.LaunchFightEntryCinematic(InitTimerRound);
+        }
+
+        private void LaunchUltimateEnemyCinematic()
+        {
+            ActivatePause();
+            _cinematicFightManager.LaunchEnemyUltimateCinematic(ResetRound);
+        }
+
+        private void LaunchUltimatePlayerCinematic()
+        {
+            ActivatePause();
+            _cinematicFightManager.LaunchPlayerUltimateCinematic(ResetRound);
         }
 
         private void LoadEnvironmentSO(EnvironmentSO so)
@@ -86,7 +106,7 @@ namespace Service.Fight
             var player = Object.Instantiate(gameObject);
             Release(gameObject);
             _playerController = player.GetComponent<PlayerController>();
-            player.GetComponent<UltimatePlayerAction>().MakeActionEvent += ResetRound;
+            player.GetComponent<UltimatePlayerAction>().MakeActionEvent += LaunchUltimatePlayerCinematic;
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Enemy", GenerateEnemy);
         }
 
@@ -107,8 +127,16 @@ namespace Service.Fight
             _cameraController = camera.GetComponent<CameraController>();
             _cameraController.Setup(_playerController.transform, _enemyManager.transform);
             _canvasService.LoadInGameMenu();
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("CinematicFightManager", GenerateCinematicFightManager);
         }
 
+        private void GenerateCinematicFightManager(GameObject gameObject)
+        {
+            var cinematicManager = Object.Instantiate(gameObject);
+            Release(gameObject);
+            _cinematicFightManager = cinematicManager.GetComponent<CinematicFightManager>();
+            _cinematicFightManager.Init(_playerController.GetComponent<PlayerRenderer>().Animator, _enemyManager.Animator);
+        }
         private void InitTimerRound()
         {
             _tickTimerInitRound = new TickTimer(_roundInitTimer, _tickeableService.GetTickManager);
@@ -123,7 +151,6 @@ namespace Service.Fight
             {
                 // TODO : Return in the menu
             }
-
             _roundCount++;
             _environmentGridManager.MoveGrid(new Vector3(0, 0, 0));
             _playerController.ResetPlayer();
@@ -133,8 +160,6 @@ namespace Service.Fight
 
         private void StartInitRound()
         {
-            ActivatePause();
-            _enemyManager.StopTree();
             InitiateRoundEvent?.Invoke(_roundCount);
         }
 

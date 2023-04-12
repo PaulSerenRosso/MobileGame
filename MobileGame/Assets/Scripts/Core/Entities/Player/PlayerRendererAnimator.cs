@@ -27,13 +27,13 @@ namespace Player
         {
             for (int i = 0; i < _endMovementTimeParameters.Length; i++)
             { 
-                _endMovementTimeParameters[i].SetTime(_animator.GetFloat(EndMovementParameterBaseName + i)*_endMovementTimeParameters[i].animationClip.length);
+                _endMovementTimeParameters[i].SetTime(Animator.GetFloat(EndMovementParameterBaseName + i)*_endMovementTimeParameters[i].animationClip.length);
             }
         }
 
         private void SetRecoverySpeedAnimation()
         {
-            _animator.SetFloat("RecoveryAnimationSpeed",
+            Animator.SetFloat("RecoveryAnimationSpeed",
                 _playerMovementHandler.GetRecoveryMovementTime() / _movementRecoveryAnimationClip.length);
         }
 
@@ -90,22 +90,22 @@ namespace Player
 
         public void AnimSetBool(string nameParameter, bool condition)
         {
-            _animator.SetBool(nameParameter, condition);
+            Animator.SetBool(nameParameter, condition);
         }
 
         public void AnimSetFloat(string nameParameter, float count)
         {
-            _animator.SetFloat(nameParameter, count);
+            Animator.SetFloat(nameParameter, count);
         }
 
         public void AnimSetInt(string nameParameter, int count)
         {
-            _animator.SetInteger(nameParameter, count);
+            Animator.SetInteger(nameParameter, count);
         }
 
         public void AnimPlay(string nameParameter)
         {
-            _animator.Play(nameParameter);
+            Animator.Play(nameParameter);
         }
     }
 }
