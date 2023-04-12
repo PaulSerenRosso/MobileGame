@@ -7,7 +7,7 @@ namespace Player
 {
     public partial class PlayerRenderer : MonoBehaviour
     {
-        [SerializeField] private Animator _animator;
+        [FormerlySerializedAs("_animator")] public Animator Animator;
         [SerializeField] private MovementPlayerAction _movementPlayerAction;
         [SerializeField] private ParticleSystem _ultimateParticle;
         [FormerlySerializedAs("_playerHandlerUltimate")] [SerializeField] private PlayerUltimateHandler playerUltimateHandler;

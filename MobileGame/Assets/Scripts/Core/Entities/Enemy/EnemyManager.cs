@@ -23,6 +23,7 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     [SerializeField] private string _remoteConfigAngleBlock;
     [SerializeField] private string _remoteConfigRounds;
 
+    public Animator Animator;
     private List<EnemyStunTrigger> _currentStunTriggers;
     private float _timerInvulnerable;
     private IHypeService _hypeService;
