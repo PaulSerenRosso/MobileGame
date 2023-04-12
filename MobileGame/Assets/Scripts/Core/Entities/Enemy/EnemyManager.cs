@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Enemy;
@@ -14,6 +15,8 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     public EnemyEnums.EnemyMobilityState CurrentMobilityState;
     public EnemyEnums.EnemyBlockingState CurrentBlockingState;
     public EnemySO EnemySO;
+
+    public Action CanUltimateEvent;
 
     [SerializeField] private Tree.Tree _tree;
     [SerializeField] private string _remoteConfigTimeStunName;

@@ -56,11 +56,11 @@ namespace Service.Hype
 
         private void TryGainUltimateValue(Hype hype, float amount)
         {
-            if (!hype.isInUltimateArea)
+            if (!hype.IsInUltimateArea)
             {
                 if (hype.CurrentValue + amount >= hype.HypeSo.UltimateValue)
                 {
-                    hype.isInUltimateArea = true;
+                    hype.IsInUltimateArea = true;
                     hype.GainUltimateEvent?.Invoke(amount);
                 }
             }
@@ -68,14 +68,24 @@ namespace Service.Hype
 
         private void TryLoseUltimateValue(Hype hype, float amount)
         {
-            if (hype.isInUltimateArea)
+            if (hype.IsInUltimateArea)
             {
                 if (hype.CurrentValue - amount < hype.HypeSo.UltimateValue)
                 {
-                    hype.isInUltimateArea = false;
+                    hype.IsInUltimateArea = false;
                     hype.LoseUltimateEvent?.Invoke(amount);
                 }
             }
+        }
+
+        public bool GetUltimateAreaPlayer()
+        {
+            return _hypePlayer.IsInUltimateArea;
+        }
+
+        public bool GetUltimateAreaEnemy()
+        {
+            return _hypeEnemy.IsInUltimateArea;
         }
 
         public void DecreaseHypePlayer(float amount)
@@ -118,7 +128,7 @@ namespace Service.Hype
         public void ResetHypePlayer()
         {
             SetHypePlayer(_hypeServiceSo.PlayerHypeSO.StartValue);
-            _hypePlayer.isInUltimateArea = false;
+            _hypePlayer.IsInUltimateArea = false;
             _hypePlayer.LoseUltimateEvent?.Invoke(_hypeServiceSo.PlayerHypeSO.StartValue);
             
         }
@@ -126,7 +136,7 @@ namespace Service.Hype
         public void ResetHypeEnemy()
         {
             SetHypeEnemy(_hypeServiceSo.EnemyHypeSO.StartValue);
-            _hypeEnemy.isInUltimateArea = false;
+            _hypeEnemy.IsInUltimateArea = false;
             _hypeEnemy.LoseUltimateEvent?.Invoke(_hypeServiceSo.EnemyHypeSO.StartValue);
         }
 

@@ -18,6 +18,8 @@ namespace Service.Hype
         float GetCurrentHypePlayer();
         float GetCurrentHypeEnemy();
         float GetMaximumHype();
+        bool GetUltimateAreaPlayer();
+        bool GetUltimateAreaEnemy();
 
         Action<float> GetPlayerIncreaseHypeEvent{ set; get; }
         Action<float> GetPlayerDecreaseHypeEvent{ set;get; }

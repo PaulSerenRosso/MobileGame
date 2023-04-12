@@ -115,6 +115,7 @@ namespace Service.Fight
             var enemy = Object.Instantiate(gameObject);
             Release(gameObject);
             _enemyManager = enemy.GetComponent<EnemyManager>();
+            _enemyManager.CanUltimateEvent += LaunchUltimateEnemyCinematic;
             _playerController.SetupPlayer(_inputService, _tickeableService, _environmentGridManager, _currentEnvironmentSO, _enemyManager, _hypeService);
             _enemyManager.Setup(_playerController.transform, _tickeableService, _environmentGridManager, _poolService, _hypeService);
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Camera", GenerateCamera);

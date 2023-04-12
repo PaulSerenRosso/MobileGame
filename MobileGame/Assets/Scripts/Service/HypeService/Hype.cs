@@ -6,7 +6,7 @@ namespace Service.Hype
     {
         public HypeSO HypeSo;
         public float CurrentValue;
-        public bool isInUltimateArea;
+        public bool IsInUltimateArea;
         public Action<float> IncreaseHypeEvent;
         public Action<float> DecreaseHypeEvent;
         public Action<float> GainUltimateEvent;
