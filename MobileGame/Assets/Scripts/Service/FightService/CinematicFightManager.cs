@@ -45,6 +45,7 @@ public class CinematicFightManager : MonoBehaviour
 
     private IEnumerator PlayCinematic(TimelineAsset timelineAsset, Action endCinematicCallback)
     {
+        _volume.profile = null;
          _camera.enabled = false;
         _playableDirector.playableAsset = timelineAsset;
         _playableDirector.Play();

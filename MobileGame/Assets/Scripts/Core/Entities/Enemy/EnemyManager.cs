@@ -103,7 +103,6 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
         EnemySO.PercentageDamageReduction =
             RemoteConfigManager.Config.GetFloat(_remoteConfigBlockPercentageDamageReduction);
         EnemySO.AngleBlock = RemoteConfigManager.Config.GetFloat(_remoteConfigAngleBlock);
-        EnemySO.Rounds = RemoteConfigManager.Config.GetInt(_remoteConfigRounds);
     }
 
     public void ResetEnemy()

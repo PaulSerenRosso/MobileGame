@@ -20,7 +20,11 @@ namespace Service.UI
         public void SetupMenu(IFightService fightService, string nextEnvironmentName)
         {
             _settingsMenu.transform.DOScale(0f, 0f).SetEase(Ease.OutBack);
-            if (_sceneToLoad != null) _playButton.onClick.AddListener(() => fightService.StartFight(nextEnvironmentName));
+            if (_sceneToLoad != null)
+            {
+                _playButton.onClick.AddListener(() => fightService.StartFight(nextEnvironmentName));
+              
+            }
             _openSettingsButton.onClick.AddListener(OpenSettings);
             _closeSettingsButton.onClick.AddListener(CloseSettings);
             // _reportButton.onClick.AddListener();

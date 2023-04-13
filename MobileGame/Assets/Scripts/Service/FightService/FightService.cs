@@ -15,10 +15,13 @@ namespace Service.Fight
 {
     public class FightService : IFightService
     {
+   
+
         public event Action<int> InitiateRoundEvent;
         public event Action EndInitiateRoundEvent;
         public event Action ActivatePauseEvent;
         public event Action DeactivatePauseEvent;
+        public event Action<bool> EndFightEvent;
 
         [DependsOnService] private ISceneService _sceneService;
         [DependsOnService] private IUICanvasSwitchableService _canvasService;
@@ -32,11 +35,13 @@ namespace Service.Fight
         private EnvironmentGridManager _environmentGridManager;
         private EnvironmentSO _currentEnvironmentSO;
         private PlayerController _playerController;
-        private int _roundCount;
+        private int _enemyRoundCount;
+        private int _playerRoundCount; 
         private TickTimer _tickTimerInitRound;
         private const float _roundInitTimer = 3f;
         private CinematicFightManager _cinematicFightManager;
-
+        private bool isPlayerWon;
+        
         private void ActivatePause()
         {
             _hypeService.DeactivateDecreaseUpdateHypePlayer();
@@ -56,7 +61,10 @@ namespace Service.Fight
         {
             _sceneService.LoadScene("GameScene");
             _hypeService.EnabledService();
-            _roundCount = 0;
+                _playerRoundCount= 0;
+                _enemyRoundCount = 0;
+                isPlayerWon = false; 
+            
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<EnvironmentSO>(environmentAddressableName,
                 LoadEnvironmentSO);
             _canvasService.InitCanvasEvent += LaunchEntryCinematic;
@@ -65,19 +73,42 @@ namespace Service.Fight
         private void LaunchEntryCinematic()
         {
             ActivatePause();
-            _cinematicFightManager.LaunchFightEntryCinematic(InitTimerRound);
+                _cinematicFightManager.LaunchFightEntryCinematic(InitTimerRound);
+        
         }
 
         private void LaunchUltimateEnemyCinematic()
         {
             ActivatePause();
-            _cinematicFightManager.LaunchEnemyUltimateCinematic(ResetRound);
+            _enemyRoundCount++;
+            if (_enemyRoundCount == 2)
+            {
+                _cinematicFightManager.LaunchEnemyUltimateCinematic(EndFight);
+            }
+            else
+            {
+                _cinematicFightManager.LaunchEnemyUltimateCinematic(ResetRound);
+            }
         }
 
         private void LaunchUltimatePlayerCinematic()
         {
             ActivatePause();
-            _cinematicFightManager.LaunchPlayerUltimateCinematic(ResetRound);
+            _playerRoundCount++;
+            if (_playerRoundCount == 2)
+            {
+                isPlayerWon = true;
+                _cinematicFightManager.LaunchPlayerUltimateCinematic(EndFight);
+            }
+            else
+            {
+                _cinematicFightManager.LaunchPlayerUltimateCinematic(ResetRound);
+            }
+        }
+
+        private void EndFight()
+        {
+            EndFightEvent?.Invoke(isPlayerWon);
         }
 
         private void LoadEnvironmentSO(EnvironmentSO so)
@@ -148,11 +179,6 @@ namespace Service.Fight
 
         private void ResetRound()
         {
-            if (_roundCount + 1 > _enemyManager.EnemySO.Rounds)
-            {
-                // TODO : Return in the menu
-            }
-            _roundCount++;
             _environmentGridManager.MoveGrid(new Vector3(0, 0, 0));
             _playerController.ResetPlayer();
             _enemyManager.ResetEnemy();
@@ -161,7 +187,7 @@ namespace Service.Fight
 
         private void StartInitRound()
         {
-            InitiateRoundEvent?.Invoke(_roundCount);
+            InitiateRoundEvent?.Invoke(_enemyRoundCount+_playerRoundCount);
         }
 
         private void EndInitRound()
@@ -169,6 +195,10 @@ namespace Service.Fight
             DeactivatePause();
             _enemyManager.ResetTree();
             EndInitiateRoundEvent?.Invoke();
+        }
+        public void QuitFight()
+        {
+            _sceneService.LoadScene("MenuScene");
         }
     }
 }
