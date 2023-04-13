@@ -1,3 +1,4 @@
+using System;
 using HelperPSR.MonoLoopFunctions;
 using UnityEngine;
 
@@ -19,6 +20,17 @@ namespace Actions
         public override void MakeAction()
         {
             UpdateManager.Register(this);
+        }
+
+        private void OnDisable()
+        {
+            UpdateManager.UnRegister(this);
+            Debug.Log("disable");
+        }
+
+        private void OnDestroy()
+        {
+         
         }
 
         public override void SetupAction(params object[] arguments)

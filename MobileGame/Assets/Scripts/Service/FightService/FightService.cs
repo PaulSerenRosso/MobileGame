@@ -198,7 +198,8 @@ namespace Service.Fight
         }
         public void QuitFight()
         {
-            _sceneService.LoadScene("MenuScene");
+            _canvasService.LoadMainMenu();
+        
         }
     }
 }

@@ -5390,6 +5390,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7717572612300196405, guid: 06cd78c7dcabad242964e249c7278f5e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.79999125
+      objectReference: {fileID: 0}
+    - target: {fileID: -7717572612300196405, guid: 06cd78c7dcabad242964e249c7278f5e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.58454585
+      objectReference: {fileID: 0}
+    - target: {fileID: -7717572612300196405, guid: 06cd78c7dcabad242964e249c7278f5e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.11152625
+      objectReference: {fileID: 0}
+    - target: {fileID: -7717572612300196405, guid: 06cd78c7dcabad242964e249c7278f5e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.07669525
+      objectReference: {fileID: 0}
     - target: {fileID: -5986529093749424341, guid: 06cd78c7dcabad242964e249c7278f5e,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -5402,6 +5422,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06cd78c7dcabad242964e249c7278f5e, type: 3}
+--- !u!1 &68321179425141268 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5635689371516135098, guid: 06cd78c7dcabad242964e249c7278f5e,
+    type: 3}
+  m_PrefabInstance: {fileID: 5676581033960314030}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4757540144404343295 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 06cd78c7dcabad242964e249c7278f5e,
@@ -5428,6 +5454,26 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!320 &4118456110149265794
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4757540144404343295}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 01f8dd5a7a171b7489a17bb4e5cbb2d4, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: -926687278309087954, guid: 01f8dd5a7a171b7489a17bb4e5cbb2d4, type: 2}
+    value: {fileID: 3030853259838460037}
+  m_ExposedReferences:
+    m_References:
+    - ed23ea5ca9b3c794780ae5f086e1982a: {fileID: 68321179425141268}
 --- !u!4 &5282156263085568837 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 06cd78c7dcabad242964e249c7278f5e,
