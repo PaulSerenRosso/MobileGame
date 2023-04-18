@@ -1,4 +1,7 @@
+using System.Collections.Generic;
+using System.Linq;
 using Environment.MoveGrid;
+using HelperPSR.MonoLoopFunctions;
 using Player.Handler;
 using Service.Hype;
 using Service.Inputs;
@@ -6,7 +9,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IUpdatable
     {
         [SerializeField] private PlayerAttackHandler _playerAttackHandler;
         [SerializeField] private PlayerUltimateHandler playerUltimateHandler;
@@ -15,12 +18,68 @@ namespace Player
         [SerializeField] private PlayerRotationHandler _playerRotationHandler;
         [SerializeField] private PlayerTauntHandler _playerTauntHandler;
 
+        [SerializeField] private float _timeStunAvailable;
+        [SerializeField] private float _timerStun;
+        [SerializeField] private float _percentageHealthStun;
+
+        private float _timer;
+        private bool _isStun;
+        
         private IInputService _inputService;
         private ITickeableService _tickeableService;
         private EnemyManager _enemyManager;
         private EnvironmentSO _environmentSO;
         private IHypeService _hypeService;
         private bool _isLocked;
+        private List<EntityStunTrigger> _currentStunTriggers;
+
+        private void OnEnable()
+        {
+            _currentStunTriggers = new List<EntityStunTrigger>();
+            UpdateManager.Register(this);
+        }
+
+        private void OnDisable()
+        {
+            UpdateManager.UnRegister(this);
+        }
+        
+        // TODO : Add feedback on stun
+        
+        public void OnUpdate()
+        {
+            TimerStun();
+            if (_currentStunTriggers.Count < 1 || _isStun) return;
+            _currentStunTriggers.RemoveAll(entityStunTrigger => entityStunTrigger.Time > _timeStunAvailable);
+            foreach (var entityStunTrigger in _currentStunTriggers.Where(entityStunTrigger =>
+                         entityStunTrigger.Time < _timeStunAvailable))
+            {
+                entityStunTrigger.Time += Time.deltaTime;
+            }
+            
+            if (!_currentStunTriggers.Any(entityStunTrigger =>
+                    (entityStunTrigger.DamageAmount / _hypeService.GetMaximumHype()) >=
+                    _percentageHealthStun)) return;
+            Debug.Log("Player is stun");
+            LockController();
+            _isStun = true;
+            _currentStunTriggers.Clear();
+        }
+        
+        private void TimerStun()
+        {
+            if (!_isStun) return;
+            _timer += Time.deltaTime;
+            if (_timer >= _timerStun)
+            {
+                Debug.Log("Player is free");
+                UnlockController();
+                _timer = 0;
+                _isStun = false;
+                _currentStunTriggers.Clear();
+            }
+        }
+
 
         public void SetupPlayer(IInputService inputService, ITickeableService tickeableService,
             EnvironmentGridManager environmentGridManager, EnvironmentSO environmentSO, EnemyManager enemyManager,
@@ -30,6 +89,7 @@ namespace Player
             _tickeableService = tickeableService;
             _enemyManager = enemyManager;
             _hypeService = hypeService;
+            _hypeService.DecreaseHypePlayerEvent += TakeStun;
             _environmentSO = environmentSO;
             _playerMovementHandler.AddCondition(CheckIsLockedController);
             _playerMovementHandler.Setup(environmentGridManager, environmentSO.Index, _inputService,
@@ -76,6 +136,16 @@ namespace Player
         public void UnlockController()
         {
             _isLocked = false;
+        }
+        
+        private void TakeStun(float amount)
+        {
+            _currentStunTriggers.Add(new EntityStunTrigger(0, amount));
+            foreach (var entityStunTrigger in _currentStunTriggers.Where(entityStunTrigger =>
+                         entityStunTrigger.Time < _timeStunAvailable))
+            {
+                entityStunTrigger.DamageAmount += amount;
+            }
         }
     }
 }

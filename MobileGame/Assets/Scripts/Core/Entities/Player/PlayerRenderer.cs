@@ -26,12 +26,11 @@ namespace Player
             // _tauntAction.CancelActionEvent += DeactivateTauntFX;
         }
 
-        void ActivateFX()
+        private void ActivateFX()
         {
             _ultimateParticle.gameObject.SetActive(true);
         }
-
-        void DeactivateFX()
+        private void DeactivateFX()
         {
             _ultimateParticle.gameObject.SetActive(false);
         }
