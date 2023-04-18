@@ -16,7 +16,7 @@ namespace BehaviorTree.Trees
 {
     public class Tree : MonoBehaviour
     {
-        public ActionNode CurrentNode;
+       
         public List<Node> ResetNodeList = new();
 
         [SerializeField] private NodeSO _rootSO;
@@ -43,7 +43,6 @@ namespace BehaviorTree.Trees
 
             _root.ReturnedEvent = WaitForNextFrame;
             _root.Evaluate();
-            Debug.Log("setu p tree read");
         }
 
         private void LoopSetupChild(CompositeNode parent, List<NodeSO> childsSO)
@@ -121,16 +120,18 @@ namespace BehaviorTree.Trees
 
         public void StopTree()
         {
-            CurrentNode.Stop();
+            Debug.Log("tree stop " + ResetNodeList.Count);
+            foreach (var node in ResetNodeList)
+            {
+                node.Stop();
+            }
         }
 
         public void ResetTree()
         {
-        
-            CurrentNode.Reset();
+           // Debug.Log("reset");
             foreach (var node in ResetNodeList)
             {
-                node.Stop();
                 node.Reset();
             }
             _nodeValuesSharer.InternValues.Clear();

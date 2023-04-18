@@ -76,6 +76,7 @@ namespace Service.Fight
         private void LaunchUltimateEnemyCinematic()
         {
             ActivatePause();
+            ResetEntities();
             _enemyRoundCount++;
             if (_enemyRoundCount == _victoryRoundCount)
             {
@@ -87,9 +88,16 @@ namespace Service.Fight
             }
         }
 
+        private void ResetEntities()
+        {
+        _environmentGridManager.MoveGrid(new Vector3(0, 0, 0));
+        _playerController.ResetPlayer();
+        _enemyManager.ResetEnemy();
+        }
         private void LaunchUltimatePlayerCinematic()
         {
             ActivatePause();
+            ResetEntities();
             _playerRoundCount++;
             if (_playerRoundCount == _victoryRoundCount)
             {
@@ -181,9 +189,6 @@ namespace Service.Fight
 
         private void ResetRound()
         {
-            _environmentGridManager.MoveGrid(new Vector3(0, 0, 0));
-            _playerController.ResetPlayer();
-            _enemyManager.ResetEnemy();
             _tickTimerInitRound.Initiate();
         }
 
@@ -194,6 +199,7 @@ namespace Service.Fight
 
         private void EndInitRound()
         {
+            Debug.Log("reset end init round");
             DeactivatePause();
             _enemyManager.ResetTree();
             EndInitiateRoundEvent?.Invoke();
@@ -206,6 +212,7 @@ namespace Service.Fight
             _isPlayerWon = false;
             _cameraController.Unlink();
             InitiateRoundEvent = null;
+            _canvasService.InitCanvasEvent -= LaunchEntryCinematic;
             EndInitiateRoundEvent = null;
             ActivatePauseEvent = null;
             DeactivatePauseEvent = null;

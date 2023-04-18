@@ -1,5 +1,6 @@
 using System;
-using BehaviorTree.Trees;
+using UnityEngine;
+using Tree = BehaviorTree.Trees.Tree;
 
 namespace BehaviorTree.Nodes
 {
@@ -9,7 +10,7 @@ namespace BehaviorTree.Nodes
         public Action ReturnedEvent;
         public Tree Tree;
 
-        private event Action TempReturnedEvent;
+        protected  Action TempReturnedEvent;
 
         public static Node CreateNodeSO(NodeSO so)
         {
@@ -35,6 +36,7 @@ namespace BehaviorTree.Nodes
 
         public virtual void Reset()
         {
+         //   Debug.Log("reset" + TempReturnedEvent);
             ReturnedEvent = TempReturnedEvent;
         }
     }

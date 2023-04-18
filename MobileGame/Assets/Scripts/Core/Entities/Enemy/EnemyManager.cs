@@ -34,6 +34,7 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     private void Start()
     {
         transform.position = new Vector3(0, 0, 0);
+        transform.rotation = Quaternion.identity;
         CurrentMobilityState = EnemyEnums.EnemyMobilityState.VULNERABLE;
         CurrentBlockingState = EnemyEnums.EnemyBlockingState.VULNERABLE;
         _currentStunTriggers = new List<EnemyStunTrigger>();
@@ -112,6 +113,7 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     public void ResetEnemy()
     {
         transform.position = new Vector3(0, 0, 0);
+        transform.rotation = Quaternion.identity;
         CurrentMobilityState = EnemyEnums.EnemyMobilityState.VULNERABLE;
         CurrentBlockingState = EnemyEnums.EnemyBlockingState.VULNERABLE;
         _hypeService.ResetHypeEnemy();
