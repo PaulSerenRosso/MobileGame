@@ -1,5 +1,6 @@
 ﻿using System;
 using BehaviorTree.SO.Actions;
+using Service.Fight;
 using UnityEngine;
 
 namespace BehaviorTree.Nodes.Actions
@@ -39,7 +40,7 @@ namespace BehaviorTree.Nodes.Actions
             {
                 ResetTimer();
                 EndTimerEvent?.Invoke();
-         //       Debug.Log("timer succes "+GetNodeSO().name);
+          //      Debug.Log("timer succes " + GetNodeSO().name);
                 State = BehaviorTreeEnums.NodeState.SUCCESS;
                 ReturnedEvent?.Invoke();
                 return;
@@ -47,9 +48,13 @@ namespace BehaviorTree.Nodes.Actions
 
             IncreaseTimerEvent?.Invoke();
             _timer += Time.deltaTime;
-        //    Debug.Log("timer failure "+GetNodeSO().name + _timer + "  " + _data.Time);
+        //    Debug.Log("timer failure " + GetNodeSO().name + _timer + "  " + _data.Time);
             State = BehaviorTreeEnums.NodeState.FAILURE;
             ReturnedEvent?.Invoke();
+        /*    if (ReturnedEvent == null)
+                Debug.Log("returnevent null" + (TempReturnedEvent == null));
+            else Debug.Log("return event is not null");*/
+            
         }
 
         public override void Reset()

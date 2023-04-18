@@ -64,6 +64,7 @@ namespace Player
         public void ResetPlayer()
         {
             _playerMovementHandler.ResetMovePoint(_environmentSO.Index);
+            transform.rotation = Quaternion.identity;
             _hypeService.ResetHypePlayer();
         }
 
