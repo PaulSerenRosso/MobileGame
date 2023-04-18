@@ -1,7 +1,9 @@
 ﻿using Addressables;
 using Attributes;
+using Service.Fight;
 using Service.Inputs;
 using Service.UI;
+using UnityEngine;
 
 namespace Service
 {
@@ -10,6 +12,10 @@ namespace Service
         [DependsOnService] private IUICanvasSwitchableService _canvasService;
 
         [DependsOnService] private IInputService _inputService;
+
+        [DependsOnService] private ISceneService _sceneService;
+
+        [DependsOnService] private IFightService _fightService;
         
         public GlobalSettingsGameSO GlobalSettingsSO
         {
@@ -28,10 +34,18 @@ namespace Service
                 LoadGlobalSettingsSO);
         }
 
+        public void LoadGameScene(string environementName)
+        {
+            _sceneService.LoadScene((asyncOperation)=>_fightService.StartFight(environementName));
+        }
+        public void LoadMainMenuScene()
+        {
+            _sceneService.LoadScene("MenuScene",(asyncOperation)=>_canvasService.LoadMainMenu());
+        }
         private void LoadGlobalSettingsSO(GlobalSettingsGameSO so)
         {
             _globalSettingsSO = so;
-            _canvasService.LoadMainMenu();
+            LoadMainMenuScene();
         }
     }
 }

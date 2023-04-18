@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Attributes;
@@ -10,14 +11,15 @@ namespace Service
 public class SceneService : ISceneService
 {
     //  [ServiceInit]
-    public void LoadScene()
+    public void LoadScene(Action<AsyncOperation> callback)
     {
-        SceneManager.LoadScene("GameScene");
+
+        SceneManager.LoadSceneAsync("GameScene", LoadSceneMode.Single).completed += callback;
     }
 
-    public void LoadScene(string sceneName)
+    public void LoadScene(string sceneName, Action<AsyncOperation> callback)
     {
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single).completed += callback;
     }
 }
 }

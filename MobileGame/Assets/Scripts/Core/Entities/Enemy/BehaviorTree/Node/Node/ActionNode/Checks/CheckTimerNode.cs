@@ -39,6 +39,7 @@ namespace BehaviorTree.Nodes.Actions
             {
                 ResetTimer();
                 EndTimerEvent?.Invoke();
+         //       Debug.Log("timer succes "+GetNodeSO().name);
                 State = BehaviorTreeEnums.NodeState.SUCCESS;
                 ReturnedEvent?.Invoke();
                 return;
@@ -46,6 +47,7 @@ namespace BehaviorTree.Nodes.Actions
 
             IncreaseTimerEvent?.Invoke();
             _timer += Time.deltaTime;
+        //    Debug.Log("timer failure "+GetNodeSO().name + _timer + "  " + _data.Time);
             State = BehaviorTreeEnums.NodeState.FAILURE;
             ReturnedEvent?.Invoke();
         }
@@ -71,6 +73,7 @@ namespace BehaviorTree.Nodes.Actions
         private void ResetTimer()
         {
             _timer = 0;
+//            Debug.Log("reset timer");
         }
 
         public override ActionNodeDataSO GetDataSO()

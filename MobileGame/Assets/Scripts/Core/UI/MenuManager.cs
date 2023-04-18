@@ -16,18 +16,23 @@ namespace Service.UI
         [SerializeField] private Button _closeSettingsButton;
         [SerializeField] private Button _reportButton;
         [SerializeField] private string _sceneToLoad;
-
-        public void SetupMenu(IFightService fightService, string nextEnvironmentName)
+        private IGameService _gameService;
+        private string _nextEnvironmentName;
+        public void SetupMenu(IGameService gameService, string nextEnvironmentName)
         {
             _settingsMenu.transform.DOScale(0f, 0f).SetEase(Ease.OutBack);
-            if (_sceneToLoad != null)
-            {
-                _playButton.onClick.AddListener(() => fightService.StartFight(nextEnvironmentName));
-              
-            }
+            _nextEnvironmentName = nextEnvironmentName;
+            _gameService = gameService;
             _openSettingsButton.onClick.AddListener(OpenSettings);
             _closeSettingsButton.onClick.AddListener(CloseSettings);
             // _reportButton.onClick.AddListener();
+        }
+
+        public void StartFight()
+        {
+            Debug.Log("test");
+            _playButton.interactable = false;
+           _gameService.LoadGameScene(_nextEnvironmentName);
         }
 
         private void OpenSettings()

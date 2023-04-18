@@ -13,11 +13,10 @@ namespace Service.UI
     {
         [DependsOnService] private IGameService _gameService;
         [DependsOnService] private IFightService _fightService;
-        [DependsOnService] private ISceneService _sceneService;
         [DependsOnService] private IHypeService _hypeService;
         
         private GameObject _mainMenu;
-
+        
         public void LoadMainMenu()
         {
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("MainMenu", GenerateMainMenu);
@@ -40,14 +39,14 @@ namespace Service.UI
         private void GenerateMainMenu(GameObject gameObject)
         {
             _mainMenu = Object.Instantiate(gameObject);
-            _mainMenu.GetComponent<MenuManager>().SetupMenu(_fightService, _gameService.GlobalSettingsSO.AllEnvironmentsAdressableName[0]);
+            _mainMenu.GetComponent<MenuManager>().SetupMenu(_gameService, _gameService.GlobalSettingsSO.AllEnvironmentsAdressableName[0]);
             Release(gameObject);
         }
 
         private void GenerateInGameMenu(GameObject gameObject)
         {
             var inGameMenu = Object.Instantiate(gameObject);
-            inGameMenu.GetComponent<InGameMenuManager>().SetupMenu(_fightService, _sceneService, _hypeService);
+            inGameMenu.GetComponent<InGameMenuManager>().SetupMenu(_fightService, _hypeService);
             InitCanvasEvent?.Invoke();
             Release(gameObject);
         }

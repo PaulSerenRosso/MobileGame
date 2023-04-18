@@ -37,5 +37,7 @@ namespace Player.Handler
         public abstract void InitializeAction();
 
         public abstract void Setup(params object[] arguments);
+
+        public abstract void Unlink();
     }
 }

@@ -11,7 +11,7 @@ namespace Player.Handler
         [SerializeField] private MovementPlayerAction movementPlayerAction;
         [SerializeField] private AttackPlayerAction attackPlayerAction;
         [SerializeField] private TauntPlayerAction tauntPlayerAction;
-        
+        private IInputService _inputService;
         protected override Actions.PlayerAction GetAction()
         {
             return tauntPlayerAction;
@@ -37,11 +37,17 @@ namespace Player.Handler
         public override void Setup(params object[] arguments)
         {
             RemoteConfigManager.RegisterRemoteConfigurable(this);
-            IInputService inputService = (IInputService)arguments[0];
+            _inputService = (IInputService)arguments[0];
             AddCondition(CheckIsInAttack);
             AddCondition(CheckIsInMovement);
-            inputService.SetHold(TryMakeTauntAction, CancelTaunt);
+            _inputService.SetHold(TryMakeTauntAction, CancelTaunt);
             tauntPlayerAction.SetupAction(arguments[1], arguments[2]);
+        }
+
+        public override void Unlink()
+        {
+            _inputService.ClearHold();
+            RemoteConfigManager.UnRegisterRemoteConfigurable(this);
         }
 
         private void CancelTaunt(InputAction.CallbackContext obj)

@@ -8,10 +8,10 @@ namespace Service.Inputs
         void AddTap(Action<InputAction.CallbackContext> successEvent);
         void RemoveTap(Action<InputAction.CallbackContext> successEvent);
         void AddSwipe(SwipeSO swipeSo, Action<Swipe> successEvent);
-        void RemoveSwipe(Swipe swipe);
+        void RemoveSwipe(SwipeSO swipeSo);
 
         void SetHold(Action<InputAction.CallbackContext> successHoldEvent, Action<InputAction.CallbackContext> successCancelHoldEvent);
-        
-        
+
+        void ClearHold();
     }
 }

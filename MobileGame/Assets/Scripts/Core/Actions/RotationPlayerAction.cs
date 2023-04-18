@@ -25,12 +25,7 @@ namespace Actions
         private void OnDisable()
         {
             UpdateManager.UnRegister(this);
-            Debug.Log("disable");
-        }
-
-        private void OnDestroy()
-        {
-         
+  
         }
 
         public override void SetupAction(params object[] arguments)

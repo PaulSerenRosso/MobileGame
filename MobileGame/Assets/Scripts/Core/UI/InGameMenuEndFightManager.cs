@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Service.Fight;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Service.UI
 {
@@ -13,6 +14,7 @@ namespace Service.UI
         [SerializeField] private TextMeshProUGUI endFightTitle;
         [SerializeField] private string endFightTitlePlayerVictoryName;
         [SerializeField] private string endFightTitlePlayerLoseName;
+        [SerializeField] private Button backToMainMenuButton;
         public void Init(IFightService fightService)
         {
             _fightService = fightService; 
@@ -29,6 +31,7 @@ namespace Service.UI
 
         public void BackToMainMenu()
         {
+            backToMainMenuButton.interactable = false;
             _fightService.QuitFight();
             
         }

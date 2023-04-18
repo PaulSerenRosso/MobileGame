@@ -21,5 +21,10 @@ namespace Player.Handler
             rotationPlayerAction.SetupAction((Transform)arguments[0]);
             rotationPlayerAction.MakeAction();
         }
+
+        public override void Unlink()
+        {
+            
+        }
     }
 }

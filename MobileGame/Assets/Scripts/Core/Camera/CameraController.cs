@@ -1,3 +1,4 @@
+using System;
 using HelperPSR.MonoLoopFunctions;
 using HelperPSR.RemoteConfigs;
 using UnityEngine;
@@ -37,6 +38,13 @@ namespace Service
             UpdateManager.Register(this);
             RemoteConfigManager.RegisterRemoteConfigurable(this);
         }
+        
+        public void Unlink()
+        {
+            UpdateManager.UnRegister(this);
+            RemoteConfigManager.UnRegisterRemoteConfigurable(this);
+        }
+        
 
         public void SetRemoteConfigurableValues()
         {

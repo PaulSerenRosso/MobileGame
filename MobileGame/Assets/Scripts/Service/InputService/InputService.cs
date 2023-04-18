@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Attributes;
 using UnityEngine.InputSystem;
 
@@ -65,12 +66,13 @@ namespace Service.Inputs
         }
 
 
-        public void RemoveSwipe(Swipe swipeToRemoved)
+        public void RemoveSwipe(SwipeSO swipeSo)
         {
-            _allSwipes.Remove(swipeToRemoved);
+          var swipeToRemoved =_allSwipes.Where((swipe => swipeSo == swipe.SwipeSO)).First();
+                _allSwipes.Remove(swipeToRemoved);
             PlayerInputs.GenericInputs.PressTouch.performed-= swipeToRemoved.StartSwipe;
-            // remove hold cancel
             PlayerInputs.GenericInputs.PressTouch.canceled -= swipeToRemoved.EndSwipe;
+            PlayerInputs.GenericInputs.HoldTouch.performed -= swipeToRemoved.CancelSwipe;
         }
 
         public void SetHold(Action<InputAction.CallbackContext> successHoldEvent,
@@ -78,6 +80,12 @@ namespace Service.Inputs
         {
             successEventHold = successHoldEvent;
             successEventReleaseHold = successCancelHoldEvent;
+        }
+
+        public void ClearHold()
+        {
+            successEventHold = null;
+            successEventReleaseHold = null;
         }
 
         private void TryHold(InputAction.CallbackContext obj)
