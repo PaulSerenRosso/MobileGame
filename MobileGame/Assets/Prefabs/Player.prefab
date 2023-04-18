@@ -5258,6 +5258,9 @@ MonoBehaviour:
   _playerRenderer: {fileID: 7598208263566444310}
   _playerRotationHandler: {fileID: 1740439073084344159}
   _playerTauntHandler: {fileID: 4376894764709761957}
+  _timeStunAvailable: 10
+  _timerStun: 5
+  _percentageHealthStun: 0.001
 --- !u!114 &7598208263566444310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5270,7 +5273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a47ab7014414234b075982fcdf529c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 3030853259838460037}
+  Animator: {fileID: 3030853259838460037}
   _movementPlayerAction: {fileID: 4050711209515336914}
   _ultimateParticle: {fileID: 6489559777517869122}
   playerUltimateHandler: {fileID: 4151950253264653231}
@@ -5434,26 +5437,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5676581033960314030}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &3030853259838460037
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4757540144404343295}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f4130ee98e1d7e44ba701d86e439ce49, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
 --- !u!320 &4118456110149265794
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -5474,6 +5457,26 @@ PlayableDirector:
   m_ExposedReferences:
     m_References:
     - ed23ea5ca9b3c794780ae5f086e1982a: {fileID: 68321179425141268}
+--- !u!95 &3030853259838460037
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4757540144404343295}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f4130ee98e1d7e44ba701d86e439ce49, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!4 &5282156263085568837 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 06cd78c7dcabad242964e249c7278f5e,

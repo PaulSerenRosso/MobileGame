@@ -25,9 +25,10 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     [SerializeField] private string _remoteConfigBlockPercentageDamageReduction;
     [SerializeField] private string _remoteConfigAngleBlock;
     [SerializeField] private string _remoteConfigRounds;
+    [SerializeField] private ParticleSystem _ultimateParticle;
 
     public Animator Animator;
-    private List<EnemyStunTrigger> _currentStunTriggers;
+    private List<EntityStunTrigger> _currentStunTriggers;
     private float _timerInvulnerable;
     private IHypeService _hypeService;
 
@@ -37,7 +38,7 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
         transform.rotation = Quaternion.identity;
         CurrentMobilityState = EnemyEnums.EnemyMobilityState.VULNERABLE;
         CurrentBlockingState = EnemyEnums.EnemyBlockingState.VULNERABLE;
-        _currentStunTriggers = new List<EnemyStunTrigger>();
+        _currentStunTriggers = new List<EntityStunTrigger>();
     }
 
     private void OnEnable()
@@ -76,6 +77,18 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
         _hypeService = hypeService;
         _tree.Setup(playerTransform, tickeableService, environmentGridManager, poolService, hypeService);
         _timerInvulnerable = 0;
+        _hypeService.GetEnemyGainUltimateEvent += ActivateFXUltimate;
+        _hypeService.GetEnemyLoseUltimateEvent += DeactivateFXUltimate;
+    }
+
+    private void ActivateFXUltimate(float obj)
+    {
+        _ultimateParticle.gameObject.SetActive(true);
+    }
+
+    private void DeactivateFXUltimate(float obj)
+    {
+        _ultimateParticle.gameObject.SetActive(false);
     }
 
     private void TimerInvulnerable()
@@ -86,17 +99,6 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
             _currentStunTriggers.Clear();
             CurrentMobilityState = EnemyEnums.EnemyMobilityState.VULNERABLE;
             _timerInvulnerable = 0;
-        }
-    }
-
-    private void TakeStun(float amount)
-    {
-        if (CurrentMobilityState != EnemyEnums.EnemyMobilityState.VULNERABLE) return;
-        _currentStunTriggers.Add(new EnemyStunTrigger(0, amount));
-        foreach (var enemyStunTrigger in _currentStunTriggers.Where(enemyStunTrigger =>
-                     enemyStunTrigger.Time < EnemySO.TimeStunAvailable))
-        {
-            enemyStunTrigger.DamageAmount += amount;
         }
     }
 
@@ -133,22 +135,32 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     {
         if (CurrentBlockingState == EnemyEnums.EnemyBlockingState.BLOCKING)
         {
-            float damage = (1 - EnemySO.PercentageDamageReduction) * amount;
-            float angle = Mathf.Abs(Vector3.Angle(transform.forward, posToCheck));
-            if (angle > EnemySO.AngleBlock / 2)
+            Vector3 normalizedPos = (posToCheck - transform.position).normalized;
+            float dot = Vector3.Dot(normalizedPos, transform.forward);
+            float angle = Mathf.Acos(dot);
+            if(angle < EnemySO.AngleBlock)
             {
-                _hypeService.DecreaseHypeEnemy(damage);
+                float damage = (1 - EnemySO.PercentageDamageReduction) * amount;
                 if (CurrentMobilityState != EnemyEnums.EnemyMobilityState.INVULNERABLE) TakeStun(damage);
-                Debug.Log("takehype");
+                _hypeService.DecreaseHypeEnemy(damage);
                 return true;
             }
-            Debug.Log("not take hype");
             return false;
         }
 
         if (CurrentMobilityState != EnemyEnums.EnemyMobilityState.INVULNERABLE) TakeStun(amount);
         _hypeService.DecreaseHypeEnemy(amount);
-        Debug.Log("take hype but is not blocked");
         return true;
+    }
+
+    private void TakeStun(float amount)
+    {
+        if (CurrentMobilityState != EnemyEnums.EnemyMobilityState.VULNERABLE) return;
+        _currentStunTriggers.Add(new EntityStunTrigger(0, amount));
+        foreach (var enemyStunTrigger in _currentStunTriggers.Where(enemyStunTrigger =>
+                     enemyStunTrigger.Time < EnemySO.TimeStunAvailable))
+        {
+            enemyStunTrigger.DamageAmount += amount;
+        }
     }
 }
