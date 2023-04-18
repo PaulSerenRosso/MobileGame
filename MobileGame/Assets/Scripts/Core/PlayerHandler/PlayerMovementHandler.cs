@@ -18,7 +18,7 @@ namespace Player.Handler
         [SerializeField] private TickTimer _recoveryTimer;
         [SerializeField] private MovementPlayerAction movementPlayerAction;
         [SerializeField] private float _cooldownTimeBetweenTwoMovement;
-
+        private IInputService _inputService;
         private bool _inCooldown;
         private EnvironmentGridManager _environmentGridManager;
         private Swipe _currentSwipe;
@@ -141,11 +141,11 @@ namespace Player.Handler
             RemoteConfigManager.RegisterRemoteConfigurable(this);
 
             base.Setup();
-            var inputService = (IInputService)arguments[2];
+            _inputService = (IInputService)arguments[2];
 
             foreach (var movementSwipeSO in _allMovementSwipesSO)
             {
-                inputService.AddSwipe(movementSwipeSO, TryMakeMovementAction);
+                _inputService.AddSwipe(movementSwipeSO, TryMakeMovementAction);
             }
 
             _environmentGridManager = (EnvironmentGridManager)arguments[0];
@@ -163,6 +163,15 @@ namespace Player.Handler
             movementPlayerAction.ReachDestinationEvent += _recoveryTimer.Initiate;
             FinishRecoveryMovementEvent += CheckActionsBlockedRecord;
             GetAction().SetupAction(_currentMovePoint.MeshRenderer.transform.position);
+        }
+
+        public override void Unlink()
+        {
+            foreach (var movementSwipeSO in _allMovementSwipesSO)
+            {
+                _inputService.RemoveSwipe(movementSwipeSO);
+            }
+            RemoteConfigManager.UnRegisterRemoteConfigurable(this);
         }
 
         public void ResetMovePoint(int indexMovePoint)

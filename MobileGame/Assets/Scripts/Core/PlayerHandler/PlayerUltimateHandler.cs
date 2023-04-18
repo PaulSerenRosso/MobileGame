@@ -34,17 +34,22 @@ public class PlayerUltimateHandler : PlayerHandler
         _ultimatePlayerAction.EndActionEvent += DeactivateInputUltimate;
     }
 
+    public override void Unlink()
+    {
+        
+    }
+
     private void DeactivateInputUltimate()
     {
         canUltimate = false;
-        _attackPlayerAction.HitEvent -= _ultimatePlayerAction.MakeAction;
+        _attackPlayerAction.HitDamagedEvent -= _ultimatePlayerAction.MakeAction;
         DeactivateUltimateEvent?.Invoke();
     }
 
     private void ActivateInputUltimate(float amount)
     {
         canUltimate = true;
-        _attackPlayerAction.HitEvent += _ultimatePlayerAction.MakeAction;
+        _attackPlayerAction.HitDamagedEvent += _ultimatePlayerAction.MakeAction;
         ActivateUltimateEvent?.Invoke();
     }
 

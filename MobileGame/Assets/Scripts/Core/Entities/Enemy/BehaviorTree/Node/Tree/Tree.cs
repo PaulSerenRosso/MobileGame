@@ -43,6 +43,7 @@ namespace BehaviorTree.Trees
 
             _root.ReturnedEvent = WaitForNextFrame;
             _root.Evaluate();
+            Debug.Log("setu p tree read");
         }
 
         private void LoopSetupChild(CompositeNode parent, List<NodeSO> childsSO)
@@ -125,6 +126,7 @@ namespace BehaviorTree.Trees
 
         public void ResetTree()
         {
+            CurrentNode.Stop();
             CurrentNode.Reset();
             foreach (var node in ResetNodeList)
             {

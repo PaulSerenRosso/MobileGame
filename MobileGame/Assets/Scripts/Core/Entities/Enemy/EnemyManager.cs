@@ -36,9 +36,13 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
         transform.position = new Vector3(0, 0, 0);
         CurrentMobilityState = EnemyEnums.EnemyMobilityState.VULNERABLE;
         CurrentBlockingState = EnemyEnums.EnemyBlockingState.VULNERABLE;
+        _currentStunTriggers = new List<EnemyStunTrigger>();
+    }
+
+    private void OnEnable()
+    {
         UpdateManager.Register(this);
         RemoteConfigManager.RegisterRemoteConfigurable(this);
-        _currentStunTriggers = new List<EnemyStunTrigger>();
     }
 
     private void OnDisable()
@@ -123,7 +127,7 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
         _tree.ResetTree();
     }
 
-    public void DecreaseHypeEnemy(float amount, Vector3 posToCheck)
+    public bool TryDecreaseHypeEnemy(float amount, Vector3 posToCheck)
     {
         if (CurrentBlockingState == EnemyEnums.EnemyBlockingState.BLOCKING)
         {
@@ -133,11 +137,16 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
             {
                 _hypeService.DecreaseHypeEnemy(damage);
                 if (CurrentMobilityState != EnemyEnums.EnemyMobilityState.INVULNERABLE) TakeStun(damage);
+                Debug.Log("takehype");
+                return true;
             }
-            return;
+            Debug.Log("not take hype");
+            return false;
         }
 
         if (CurrentMobilityState != EnemyEnums.EnemyMobilityState.INVULNERABLE) TakeStun(amount);
         _hypeService.DecreaseHypeEnemy(amount);
+        Debug.Log("take hype but is not blocked");
+        return true;
     }
 }

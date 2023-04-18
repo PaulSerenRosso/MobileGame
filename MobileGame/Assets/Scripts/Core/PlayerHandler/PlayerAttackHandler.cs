@@ -13,8 +13,8 @@ namespace Player.Handler
         [SerializeField] private MovementPlayerAction movementPlayerAction;
         [SerializeField] private TauntPlayerAction tauntPlayerAction;
         [SerializeField] private PlayerMovementHandler _playerMovementHandler;
-        [SerializeField] private AttackPlayerAction attackPlayerAction; 
-        
+        [SerializeField] private AttackPlayerAction attackPlayerAction;
+        private IInputService _inputService;
         private const string _punchName = "PlayerPunch";
         private EnvironmentGridManager _environmentGridManager;
         
@@ -48,8 +48,8 @@ namespace Player.Handler
         public override void Setup(params object[] arguments)
         {
             base.Setup();
-            var inputService = (IInputService)arguments[0];
-            inputService.AddTap(TryMakeAttackAction);
+            _inputService = (IInputService)arguments[0];
+            _inputService.AddTap(TryMakeAttackAction);
             AddCondition(CheckIsInAttack);
             AddCondition(CheckIsInMovement);
             AddCondition(CheckIsInTaunt);
@@ -59,6 +59,12 @@ namespace Player.Handler
             attackPlayerAction.InitBeforeHitEvent += () => movementPlayerAction.MakeActionEvent -= attackPlayerAction.AttackTimer.Cancel;
             attackPlayerAction.CheckCanDamageEvent += CheckCanDamage;
             RemoteConfigManager.RegisterRemoteConfigurable(this);
+        }
+
+        public override void Unlink()
+        {
+            _inputService.RemoveTap(TryMakeAttackAction);
+            RemoteConfigManager.UnRegisterRemoteConfigurable(this);
         }
 
         private bool CheckCanDamage(HitSO hitSo)
