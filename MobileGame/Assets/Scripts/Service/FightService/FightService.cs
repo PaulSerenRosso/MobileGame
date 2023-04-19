@@ -29,7 +29,7 @@ namespace Service.Fight
         [DependsOnService] private IHypeService _hypeService;
         [DependsOnService] private IGameService _gameService;
 
-        private const int _victoryRoundCount = 1;
+        private const int _victoryRoundCount = 2;
         private CameraController _cameraController;
         private EnemyManager _enemyManager;
         private GridManager _gridManager;
@@ -202,7 +202,7 @@ namespace Service.Fight
 
         private void EndInitRound()
         {
-            Debug.Log("reset end init round");
+           
             DeactivatePause();
             _enemyManager.ResetTree();
             EndInitiateRoundEvent?.Invoke();
