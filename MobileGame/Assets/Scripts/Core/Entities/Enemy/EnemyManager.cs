@@ -25,7 +25,6 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     [SerializeField] private string _remoteConfigStunPercentageHealthName;
     [SerializeField] private string _remoteConfigBlockPercentageDamageReduction;
     [SerializeField] private string _remoteConfigAngleBlock;
-    [SerializeField] private string _remoteConfigRounds;
     [SerializeField] private ParticleSystem _ultimateParticle;
 
     public Animator Animator;
