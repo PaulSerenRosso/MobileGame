@@ -5,6 +5,6 @@ using UnityEngine.Serialization;
 public class GlobalSettingsGameSO : ScriptableObject
 {
     public EnvironmentSO[] AllEnvironmentsSO;
-    [FormerlySerializedAs("allEnemyMacroSO")] public EnemyMacroSO[] AllEnemyMacroSO;
+    public EnemyGlobalSO[] AllEnemyGlobalSO;
 
 }

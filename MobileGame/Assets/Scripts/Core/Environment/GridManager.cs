@@ -18,6 +18,7 @@ namespace Environment.MoveGrid
         public void SetupGrid(GridSO so,
             Action callback)
         {
+            _gridSo = so;
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>(_gridSo.RendererMovePointAdressableName,
                 GenerateRendererMovePoints);
             _callback = callback;

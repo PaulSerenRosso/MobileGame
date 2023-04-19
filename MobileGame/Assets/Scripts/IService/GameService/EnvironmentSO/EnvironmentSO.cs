@@ -7,4 +7,5 @@ public class EnvironmentSO : ScriptableObject
 {
     [Tooltip("Name in Addressable for Environment")] public string EnvironmentAddressableName;
     public Sprite EnvironmentSprite;
+    public string Name;
 }

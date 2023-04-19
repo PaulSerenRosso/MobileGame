@@ -33,7 +33,7 @@ namespace Service.Fight
         private CameraController _cameraController;
         private EnemyManager _enemyManager;
         private GridManager _gridManager;
-        private EnvironmentSO _currentEnvironmentSO;
+    
         private PlayerController _playerController;
         private int _enemyRoundCount;
         private int _playerRoundCount;
@@ -42,7 +42,7 @@ namespace Service.Fight
         private CinematicFightManager _cinematicFightManager;
         private bool _isPlayerWon;
         private GridSO _gridSo;
-
+        
         private string _enemyAddressableName;
 
         private void ActivatePause()
@@ -64,8 +64,9 @@ namespace Service.Fight
         {
             _hypeService.EnabledService();
             _enemyAddressableName = enemyAdressableName;
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<EnvironmentSO>(environmentAddressableName,
-                LoadEnvironmentSO);
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>(
+                environmentAddressableName,
+                GenerateEnvironment);
             _canvasService.InitCanvasEvent += LaunchEntryCinematic;
         }
 
@@ -117,32 +118,26 @@ namespace Service.Fight
         {
             EndFightEvent?.Invoke(_isPlayerWon);
         }
-
-        private void LoadEnvironmentSO(EnvironmentSO so)
-        {
-            _currentEnvironmentSO = so;
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>(
-                _currentEnvironmentSO.EnvironmentAddressableName,
-                GenerateEnvironment);
-        }
+        
 
         private void GenerateEnvironment(GameObject gameObject)
         {
             var environment = Object.Instantiate(gameObject);
             _gridManager = environment.GetComponent<GridManager>();
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GridSO>("GridSO", LoadGridSO);
+            Release(gameObject);
         }
 
         private void LoadGridSO(GridSO gridSo)
         {
             _gridSo = gridSo;
             _gridManager.SetupGrid(
-                gridSo, () => GenerateFighters(_gridManager.gameObject));
+                gridSo, GenerateFighters);
         }
-        private void GenerateFighters(GameObject gameObject)
+        private void GenerateFighters()
         {
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Player", GeneratePlayer);
-            Release(gameObject);
+       
         }
 
         private void GeneratePlayer(GameObject gameObject)
