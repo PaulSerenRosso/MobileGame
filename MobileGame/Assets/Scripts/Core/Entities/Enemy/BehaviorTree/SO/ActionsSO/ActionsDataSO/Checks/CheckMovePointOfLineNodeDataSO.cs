@@ -4,24 +4,20 @@ using UnityEngine;
 
 namespace BehaviorTree.SO.Actions
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Data/Checks/CirclesPlayerNodeDataSO",
-        fileName = "new CH_CirclesPlayer_Spe_Data")]
-    public class CheckCirclesPlayerNodeDataSO : ActionNodeDataSO
+    [CreateAssetMenu(menuName = "BehaviorTree/Data/Checks/MovePointOfLineDataSO", fileName = "new CH_MovePointOfLine_Spe_Data")]
+    public class CheckMovePointOfLineNodeDataSO : ActionNodeDataSO
     {
-        public int[] CirclesIndexes;
-
         protected override void SetDependencyValues()
         {
             ExternValues = new[]
             {
-                BehaviorTreeEnums.TreeExternValues.PlayerHandlerMovement,
                 BehaviorTreeEnums.TreeExternValues.GridManager
             };
         }
 
         public override Type GetTypeNode()
         {
-            return typeof(CheckCirclesPlayerNode);
+            return typeof(CheckMovePointOfLineNode);
         }
     }
 }

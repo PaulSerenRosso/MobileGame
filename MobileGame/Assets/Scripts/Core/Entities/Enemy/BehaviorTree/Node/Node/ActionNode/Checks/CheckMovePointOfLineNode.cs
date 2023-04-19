@@ -1,16 +1,14 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using Environment.MoveGrid;
-using Player.Handler;
 
 namespace BehaviorTree.Nodes.Actions
 {
-    public class CheckCirclesPlayerNode : ActionNode
+    public class CheckMovePointOfLineNode : ActionNode
     {
-        private CheckCirclesPlayerNodeSO _so;
-        private CheckCirclesPlayerNodeDataSO _data;
+        private CheckMovePointOfLineNodeSO _so;
+        private CheckMovePointOfLineNodeDataSO _data;
         private GridManager _gridManager;
-        private PlayerMovementHandler _playerMovementHandler;
 
         public override NodeSO GetNodeSO()
         {
@@ -19,16 +17,15 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
-            _so = (CheckCirclesPlayerNodeSO)nodeSO;
-            _data = (CheckCirclesPlayerNodeDataSO)_so.Data;
+            _so = (CheckMovePointOfLineNodeSO)nodeSO;
+            _data = (CheckMovePointOfLineNodeDataSO)_so.Data;
         }
 
         public override void Evaluate()
         {
             base.Evaluate();
-            State = !_gridManager.CheckIfMovePointInIsCircles(
-                _playerMovementHandler.GetCurrentIndexMovePoint(),
-                _data.CirclesIndexes)
+            State = _gridManager.CompareIndexMovePoints((int)Sharer.InternValues[_so.InternValues[0].HashCode],
+                (int)Sharer.InternValues[_so.InternValues[1].HashCode])
                 ? BehaviorTreeEnums.NodeState.SUCCESS
                 : BehaviorTreeEnums.NodeState.FAILURE;
             ReturnedEvent?.Invoke();
@@ -38,11 +35,9 @@ namespace BehaviorTree.Nodes.Actions
             Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
             Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
         {
-            _gridManager = (GridManager)
-                externDependencyValues[BehaviorTreeEnums.TreeExternValues.GridManager];
-            _playerMovementHandler =
-                (PlayerMovementHandler)externDependencyValues[
-                    BehaviorTreeEnums.TreeExternValues.PlayerHandlerMovement];
+            _gridManager =
+                (GridManager)externDependencyValues[
+                    BehaviorTreeEnums.TreeExternValues.GridManager];
         }
 
         public override ActionNodeDataSO GetDataSO()
