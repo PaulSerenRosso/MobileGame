@@ -6,23 +6,19 @@ using Object = UnityEngine.Object;
 
 namespace Environment.MoveGrid
 {
-    public class EnvironmentGridManager : MonoBehaviour
+    public class GridManager : MonoBehaviour
     {
         public MovePoint[] MovePoints;
-
-        private EnvironmentSO _so;
         private GridSO _gridSo;
         private int _i;
         private int _j;
         private Transform _rendererPointParent;
         private Action _callback;
 
-        public void SetupGrid(EnvironmentSO so,
+        public void SetupGrid(GridSO so,
             Action callback)
         {
-            _so = so;
-            _gridSo = _so.GridOfEnvironment;
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>(_so.RendererMovePointAdressableName,
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>(_gridSo.RendererMovePointAdressableName,
                 GenerateRendererMovePoints);
             _callback = callback;
         }
@@ -108,7 +104,7 @@ namespace Environment.MoveGrid
             foreach (var movePoint in MovePoints)
             {
                 if ((movePoint.LocalPosition + _rendererPointParent.position).sqrMagnitude >
-                    _so.CircleEnvironnementSqRadius)
+                    _gridSo.CircleEnvironnementSqRadius)
                 {
                     movePoint.IsOccupied = true;
                 }
@@ -128,7 +124,7 @@ namespace Environment.MoveGrid
                 {
                     int currentIndex = currentCircleIndex + _j;
                     if ((MovePoints[currentIndex].LocalPosition + offset).sqrMagnitude >
-                        _so.CircleEnvironnementSqRadius)
+                        _gridSo.CircleEnvironnementSqRadius)
                     {
                         return true;
                     }

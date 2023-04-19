@@ -26,9 +26,9 @@ namespace BehaviorTree.Trees
         private NodeValuesSharer _nodeValuesSharer = new();
 
         public void Setup(Transform playerTransform, ITickeableService tickeableService,
-            EnvironmentGridManager environmentGridManager, IPoolService poolService, IHypeService hypeService)
+            GridManager gridManager, IPoolService poolService, IHypeService hypeService)
         {
-            _nodeValuesInitializer.Setup(playerTransform, tickeableService, environmentGridManager, poolService, hypeService);
+            _nodeValuesInitializer.Setup(playerTransform, tickeableService, gridManager, poolService, hypeService);
             _root = Node.CreateNodeSO(_rootSO);
             _root.Tree = this;
             switch (_rootSO)

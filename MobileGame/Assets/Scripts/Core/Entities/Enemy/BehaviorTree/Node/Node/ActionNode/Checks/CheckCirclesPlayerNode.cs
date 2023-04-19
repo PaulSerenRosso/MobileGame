@@ -9,7 +9,7 @@ namespace BehaviorTree.Nodes.Actions
     {
         private CheckCirclesPlayerNodeSO _so;
         private CheckCirclesPlayerNodeDataSO _data;
-        private EnvironmentGridManager _environmentGridManager;
+        private GridManager _gridManager;
         private PlayerMovementHandler _playerMovementHandler;
 
         public override NodeSO GetNodeSO()
@@ -26,7 +26,7 @@ namespace BehaviorTree.Nodes.Actions
         public override void Evaluate()
         {
             base.Evaluate();
-            State = !_environmentGridManager.CheckIfMovePointInIsCircles(
+            State = !_gridManager.CheckIfMovePointInIsCircles(
                 _playerMovementHandler.GetCurrentIndexMovePoint(),
                 _data.CirclesIndexes)
                 ? BehaviorTreeEnums.NodeState.SUCCESS
@@ -38,7 +38,7 @@ namespace BehaviorTree.Nodes.Actions
             Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
             Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
         {
-            _environmentGridManager = (EnvironmentGridManager)
+            _gridManager = (GridManager)
                 externDependencyValues[BehaviorTreeEnums.TreeExternValues.EnvironmentGridManager];
             _playerMovementHandler =
                 (PlayerMovementHandler)externDependencyValues[

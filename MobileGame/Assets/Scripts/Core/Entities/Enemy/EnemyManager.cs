@@ -8,13 +8,14 @@ using HelperPSR.RemoteConfigs;
 using Service;
 using Service.Hype;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Tree = BehaviorTree.Trees;
 
 public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHypeable
 {
     public EnemyEnums.EnemyMobilityState CurrentMobilityState;
     public EnemyEnums.EnemyBlockingState CurrentBlockingState;
-    public EnemySO EnemySO;
+    [FormerlySerializedAs("EnemySO")] public EnemyInGameSO enemyInGameSo;
 
     public Action CanUltimateEvent;
 
@@ -57,25 +58,25 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     {
         if (EnemyEnums.EnemyMobilityState.INVULNERABLE == CurrentMobilityState) TimerInvulnerable();
         if (_currentStunTriggers.Count < 1 || CurrentMobilityState != EnemyEnums.EnemyMobilityState.VULNERABLE) return;
-        _currentStunTriggers.RemoveAll(enemyStunTrigger => enemyStunTrigger.Time > EnemySO.TimeStunAvailable);
+        _currentStunTriggers.RemoveAll(enemyStunTrigger => enemyStunTrigger.Time > enemyInGameSo.TimeStunAvailable);
         foreach (var enemyStunTrigger in _currentStunTriggers.Where(enemyStunTrigger =>
-                     enemyStunTrigger.Time < EnemySO.TimeStunAvailable))
+                     enemyStunTrigger.Time < enemyInGameSo.TimeStunAvailable))
         {
             enemyStunTrigger.Time += Time.deltaTime;
         }
 
         if (!_currentStunTriggers.Any(enemyStunTrigger =>
                 (enemyStunTrigger.DamageAmount / _hypeService.GetMaximumHype()) >=
-                EnemySO.PercentageHealthStun)) return;
+                enemyInGameSo.PercentageHealthStun)) return;
         CurrentMobilityState = EnemyEnums.EnemyMobilityState.STAGGER;
         _currentStunTriggers.Clear();
     }
 
     public void Setup(Transform playerTransform, ITickeableService tickeableService,
-        EnvironmentGridManager environmentGridManager, IPoolService poolService, IHypeService hypeService)
+        GridManager gridManager, IPoolService poolService, IHypeService hypeService)
     {
         _hypeService = hypeService;
-        _tree.Setup(playerTransform, tickeableService, environmentGridManager, poolService, hypeService);
+        _tree.Setup(playerTransform, tickeableService, gridManager, poolService, hypeService);
         _timerInvulnerable = 0;
         _hypeService.GetEnemyGainUltimateEvent += ActivateFXUltimate;
         _hypeService.GetEnemyLoseUltimateEvent += DeactivateFXUltimate;
@@ -94,7 +95,7 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     private void TimerInvulnerable()
     {
         _timerInvulnerable += Time.deltaTime;
-        if (_timerInvulnerable >= EnemySO.TimeInvulnerable)
+        if (_timerInvulnerable >= enemyInGameSo.TimeInvulnerable)
         {
             _currentStunTriggers.Clear();
             CurrentMobilityState = EnemyEnums.EnemyMobilityState.VULNERABLE;
@@ -104,12 +105,12 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
 
     public void SetRemoteConfigurableValues()
     {
-        EnemySO.PercentageHealthStun = RemoteConfigManager.Config.GetFloat(_remoteConfigStunPercentageHealthName);
-        EnemySO.TimeStunAvailable = RemoteConfigManager.Config.GetFloat(_remoteConfigTimeStunName);
-        EnemySO.TimeInvulnerable = RemoteConfigManager.Config.GetFloat(_remoteConfigTimeStunInvulnerableName);
-        EnemySO.PercentageDamageReduction =
+        enemyInGameSo.PercentageHealthStun = RemoteConfigManager.Config.GetFloat(_remoteConfigStunPercentageHealthName);
+        enemyInGameSo.TimeStunAvailable = RemoteConfigManager.Config.GetFloat(_remoteConfigTimeStunName);
+        enemyInGameSo.TimeInvulnerable = RemoteConfigManager.Config.GetFloat(_remoteConfigTimeStunInvulnerableName);
+        enemyInGameSo.PercentageDamageReduction =
             RemoteConfigManager.Config.GetFloat(_remoteConfigBlockPercentageDamageReduction);
-        EnemySO.AngleBlock = RemoteConfigManager.Config.GetFloat(_remoteConfigAngleBlock);
+        enemyInGameSo.AngleBlock = RemoteConfigManager.Config.GetFloat(_remoteConfigAngleBlock);
     }
 
     public void ResetEnemy()
@@ -138,9 +139,9 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
             Vector3 normalizedPos = (posToCheck - transform.position).normalized;
             float dot = Vector3.Dot(normalizedPos, transform.forward);
             float angle = Mathf.Acos(dot);
-            if(angle < EnemySO.AngleBlock)
+            if(angle < enemyInGameSo.AngleBlock)
             {
-                float damage = (1 - EnemySO.PercentageDamageReduction) * amount;
+                float damage = (1 - enemyInGameSo.PercentageDamageReduction) * amount;
                 if (CurrentMobilityState != EnemyEnums.EnemyMobilityState.INVULNERABLE) TakeStun(damage);
                 _hypeService.DecreaseHypeEnemy(damage);
                 return true;
@@ -158,7 +159,7 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
         if (CurrentMobilityState != EnemyEnums.EnemyMobilityState.VULNERABLE) return;
         _currentStunTriggers.Add(new EntityStunTrigger(0, amount));
         foreach (var enemyStunTrigger in _currentStunTriggers.Where(enemyStunTrigger =>
-                     enemyStunTrigger.Time < EnemySO.TimeStunAvailable))
+                     enemyStunTrigger.Time < enemyInGameSo.TimeStunAvailable))
         {
             enemyStunTrigger.DamageAmount += amount;
         }

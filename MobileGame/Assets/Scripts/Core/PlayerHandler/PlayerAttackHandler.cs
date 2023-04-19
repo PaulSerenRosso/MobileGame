@@ -16,7 +16,7 @@ namespace Player.Handler
         [SerializeField] private AttackPlayerAction attackPlayerAction;
         private IInputService _inputService;
         private const string _punchName = "PlayerPunch";
-        private EnvironmentGridManager _environmentGridManager;
+        private GridManager _gridManager;
         
         protected override PlayerAction GetAction()
         {
@@ -54,7 +54,7 @@ namespace Player.Handler
             AddCondition(CheckIsInMovement);
             AddCondition(CheckIsInTaunt);
             attackPlayerAction.SetupAction((TickManager)arguments[1], arguments[2], arguments[4]);
-            _environmentGridManager = (EnvironmentGridManager)arguments[3];
+            _gridManager = (GridManager)arguments[3];
             attackPlayerAction.InitCancelAttackEvent += () => movementPlayerAction.MakeActionEvent += attackPlayerAction.AttackTimer.Cancel;
             attackPlayerAction.InitBeforeHitEvent += () => movementPlayerAction.MakeActionEvent -= attackPlayerAction.AttackTimer.Cancel;
             attackPlayerAction.CheckCanDamageEvent += CheckCanDamage;
@@ -69,7 +69,7 @@ namespace Player.Handler
 
         private bool CheckCanDamage(HitSO hitSo)
         {
-            if (_environmentGridManager.CheckIfMovePointInIsCircles(_playerMovementHandler.GetCurrentIndexMovePoint(),
+            if (_gridManager.CheckIfMovePointInIsCircles(_playerMovementHandler.GetCurrentIndexMovePoint(),
                     hitSo.HitMovePointsDistance - 1))
             {
                 return true;

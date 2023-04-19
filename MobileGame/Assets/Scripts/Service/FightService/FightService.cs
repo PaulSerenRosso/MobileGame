@@ -32,7 +32,7 @@ namespace Service.Fight
         private const int _victoryRoundCount = 1;
         private CameraController _cameraController;
         private EnemyManager _enemyManager;
-        private EnvironmentGridManager _environmentGridManager;
+        private GridManager _gridManager;
         private EnvironmentSO _currentEnvironmentSO;
         private PlayerController _playerController;
         private int _enemyRoundCount;
@@ -41,7 +41,9 @@ namespace Service.Fight
         private const float _roundInitTimer = 3f;
         private CinematicFightManager _cinematicFightManager;
         private bool _isPlayerWon;
+        private GridSO _gridSo;
 
+        private string _enemyAddressableName;
 
         private void ActivatePause()
         {
@@ -58,9 +60,10 @@ namespace Service.Fight
             DeactivatePauseEvent?.Invoke();
         }
 
-        public void StartFight(string environmentAddressableName)
+        public void StartFight(string environmentAddressableName, string enemyAdressableName)
         {
             _hypeService.EnabledService();
+            _enemyAddressableName = enemyAdressableName;
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<EnvironmentSO>(environmentAddressableName,
                 LoadEnvironmentSO);
             _canvasService.InitCanvasEvent += LaunchEntryCinematic;
@@ -90,7 +93,7 @@ namespace Service.Fight
 
         private void ResetEntities()
         {
-        _environmentGridManager.MoveGrid(new Vector3(0, 0, 0));
+        _gridManager.MoveGrid(new Vector3(0, 0, 0));
         _playerController.ResetPlayer();
         _enemyManager.ResetEnemy();
         }
@@ -126,11 +129,16 @@ namespace Service.Fight
         private void GenerateEnvironment(GameObject gameObject)
         {
             var environment = Object.Instantiate(gameObject);
-            _environmentGridManager = environment.GetComponent<EnvironmentGridManager>();
-            _environmentGridManager.SetupGrid(
-                _currentEnvironmentSO, () => GenerateFighters(gameObject));
+            _gridManager = environment.GetComponent<GridManager>();
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GridSO>("GridSO", LoadGridSO);
         }
 
+        private void LoadGridSO(GridSO gridSo)
+        {
+            _gridSo = gridSo;
+            _gridManager.SetupGrid(
+                gridSo, () => GenerateFighters(_gridManager.gameObject));
+        }
         private void GenerateFighters(GameObject gameObject)
         {
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Player", GeneratePlayer);
@@ -143,7 +151,7 @@ namespace Service.Fight
             Release(gameObject);
             _playerController = player.GetComponent<PlayerController>();
             player.GetComponent<UltimatePlayerAction>().MakeActionEvent += LaunchUltimatePlayerCinematic;
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Enemy", GenerateEnemy);
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>(_enemyAddressableName, GenerateEnemy);
         }
 
         private void GenerateEnemy(GameObject gameObject)
@@ -152,9 +160,9 @@ namespace Service.Fight
             Release(gameObject);
             _enemyManager = enemy.GetComponent<EnemyManager>();
             _enemyManager.CanUltimateEvent += LaunchUltimateEnemyCinematic;
-            _playerController.SetupPlayer(_inputService, _tickeableService, _environmentGridManager,
-                _currentEnvironmentSO, _enemyManager, _hypeService);
-            _enemyManager.Setup(_playerController.transform, _tickeableService, _environmentGridManager, _poolService,
+            _playerController.SetupPlayer(_inputService, _tickeableService, _gridManager,
+                _gridSo, _enemyManager, _hypeService);
+            _enemyManager.Setup(_playerController.transform, _tickeableService, _gridManager, _poolService,
                 _hypeService);
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Camera", GenerateCamera);
         }

@@ -20,7 +20,7 @@ namespace Player.Handler
         [SerializeField] private float _cooldownTimeBetweenTwoMovement;
         private IInputService _inputService;
         private bool _inCooldown;
-        private EnvironmentGridManager _environmentGridManager;
+        private GridManager _gridManager;
         private Swipe _currentSwipe;
         private int _currentMovePointIndex;
         private int _maxDestinationIndex;
@@ -83,12 +83,12 @@ namespace Player.Handler
                 }
             }
 
-            return !_environmentGridManager.MovePoints[_maxDestinationIndex].IsOccupied;
+            return !_gridManager.MovePoints[_maxDestinationIndex].IsOccupied;
         }
 
         public void SetCurrentMovePoint(int movePointIndex)
         {
-            _currentMovePoint = _environmentGridManager.MovePoints[movePointIndex];
+            _currentMovePoint = _gridManager.MovePoints[movePointIndex];
             _currentMovePointIndex = movePointIndex;
         }
 
@@ -99,7 +99,7 @@ namespace Player.Handler
 
         private bool CheckIsOutOfRange()
         {
-            if (_environmentGridManager.CheckIfMovePointInIsCircles(_currentMovePointIndex))
+            if (_gridManager.CheckIfMovePointInIsCircles(_currentMovePointIndex))
             {
                 if (_currentSwipe.SwipeSO.DirectionV2 == Vector2.down)
                 {
@@ -148,9 +148,9 @@ namespace Player.Handler
                 _inputService.AddSwipe(movementSwipeSO, TryMakeMovementAction);
             }
 
-            _environmentGridManager = (EnvironmentGridManager)arguments[0];
+            _gridManager = (GridManager)arguments[0];
             _currentMovePointIndex = (int)arguments[1];
-            _currentMovePoint = _environmentGridManager.MovePoints[_currentMovePointIndex];
+            _currentMovePoint = _gridManager.MovePoints[_currentMovePointIndex];
             AddCondition(CheckCooldownBetweenTwoMovement);
             AddCondition(CheckIsMoving);
             AddCondition(CheckIsOutOfRange);
@@ -176,7 +176,7 @@ namespace Player.Handler
 
         public void ResetMovePoint(int indexMovePoint)
         {
-            _currentMovePoint = _environmentGridManager.MovePoints[indexMovePoint];
+            _currentMovePoint = _gridManager.MovePoints[indexMovePoint];
             GetAction().SetupAction(_currentMovePoint.MeshRenderer.transform.position);
         }
 
@@ -203,7 +203,7 @@ namespace Player.Handler
 
         public override void InitializeAction()
         {
-            _currentMovePoint = _environmentGridManager.MovePoints[_maxDestinationIndex];
+            _currentMovePoint = _gridManager.MovePoints[_maxDestinationIndex];
             movementPlayerAction.Destination = _currentMovePoint.MeshRenderer.transform.position;
             _currentMovePointIndex = _maxDestinationIndex;
             MakeActionEvent?.Invoke(_currentSwipe.SwipeSO.DirectionV2);

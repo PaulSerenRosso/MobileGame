@@ -9,7 +9,7 @@ namespace BehaviorTree.Nodes.Actions
     {
         private TaskGetMovePointOfCircleNodeSO _so;
         private TaskGetMovePointOfCircleNodeDataSO _data;
-        private EnvironmentGridManager _environmentGridManager;
+        private GridManager _gridManager;
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
@@ -27,7 +27,7 @@ namespace BehaviorTree.Nodes.Actions
             base.Evaluate();
             int startIndex = (int)Sharer.InternValues[_so.InternValues[0].HashCode];
             CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[1].HashCode,
-                _environmentGridManager.GetIndexMovePointFromStartMovePointCircle(startIndex, _data.IndexMovedAmount));
+                _gridManager.GetIndexMovePointFromStartMovePointCircle(startIndex, _data.IndexMovedAmount));
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();
         }
@@ -36,8 +36,8 @@ namespace BehaviorTree.Nodes.Actions
             Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
             Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
         {
-            _environmentGridManager =
-                (EnvironmentGridManager)externDependencyValues[
+            _gridManager =
+                (GridManager)externDependencyValues[
                     BehaviorTreeEnums.TreeExternValues.EnvironmentGridManager];
         }
 
