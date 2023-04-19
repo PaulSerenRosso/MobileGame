@@ -1,3 +1,4 @@
+using System;
 using HelperPSR.MonoLoopFunctions;
 using HelperPSR.Tick;
 using Service.Hype;
@@ -25,11 +26,14 @@ namespace Actions
 
         public override void MakeAction()
         {
-            _isTaunting = true;
+            if (!_isTaunting)
+            {
+                _isTaunting = true;
             _tauntText.text = "Start Taunt";
             _startTauntTimer.TickEvent += Taunt;
             _startTauntTimer.Initiate();
             _isStartTaunting = true;
+            }
         }
 
         private void Taunt()
@@ -59,10 +63,13 @@ namespace Actions
                 if (_isStartTaunting)
                 {
                     _startTauntTimer.TickEvent -= Taunt;
+           
                     _startTauntTimer.TickEvent += TickCancelTaunt;
                 }
                 else
                 {
+                  
+                    _startTauntTimer.TickEvent -= Taunt;
                     CancelTaunt();
                 }
             }
@@ -93,6 +100,12 @@ namespace Actions
         public void OnUpdate()
         {
             _hypeService.IncreaseHypePlayer(SO.HypeAmount * Time.deltaTime);
+        }
+
+        private void OnDisable()
+        {
+            UpdateManager.UnRegister(this);
+            
         }
     }
 }
