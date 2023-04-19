@@ -10,11 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d211d13dd08a531498eb8f2ba4f93267, type: 3}
-  m_Name: FirstEnvironment
+  m_Name: Coliseum
   m_EditorClassIdentifier: 
-  Index: 1
-  EnvironmentAddressableName: Environment
-  GridOfEnvironment: {fileID: 11400000, guid: 0d904d8bcbb70ec41b8bb352adb94f85, type: 2}
-  RendererMovePointAdressableName: MovePoints
-  _circleEnvironnementRadius: 8
-  CircleEnvironnementSqRadius: 64
+  EnvironmentAddressableName: Coliseum
+  EnvironmentSprite: {fileID: 0}
+  Name: Coliseum

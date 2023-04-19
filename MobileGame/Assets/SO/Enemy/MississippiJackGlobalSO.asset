@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25429505f96751940b373a030b0d44bd, type: 3}
-  m_Name: FirstGrid
+  m_Script: {fileID: 11500000, guid: 2baf0af7048afa34abe8f3587a958224, type: 3}
+  m_Name: MississippiJackGlobalSO
   m_EditorClassIdentifier: 
-  CircleRadius:
-  - 2
-  - 4
-  - 6
-  MovePoints: 6
+  Name: Mississippi Jack
+  Sprite: {fileID: 0}
+  enemyAdressableName: MississippiJackPrefab

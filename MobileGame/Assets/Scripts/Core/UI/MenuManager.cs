@@ -1,6 +1,8 @@
 using UnityEngine;
 using DG.Tweening;
 using Service.Fight;
+using TMPro;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Service.UI
@@ -17,22 +19,42 @@ namespace Service.UI
         [SerializeField] private Button _reportButton;
         [SerializeField] private string _sceneToLoad;
         private IGameService _gameService;
-        private string _nextEnvironmentName;
-        public void SetupMenu(IGameService gameService, string nextEnvironmentName)
+        private string _nextEnvironmentAddressableName;
+        private string _nextEnemyAddressableName;
+        [SerializeField] private GridLayoutGroup _enemySelectionGrid;
+        [SerializeField] private GridLayoutGroup _environnementSelectionGrid;
+        [FormerlySerializedAs("environnementButton")] [SerializeField] private Button _environnementButton;
+        [FormerlySerializedAs("enemyButton")] [SerializeField] private Button _enemyButton;
+        public void SetupMenu(IGameService gameService)
         {
             _settingsMenu.transform.DOScale(0f, 0f).SetEase(Ease.OutBack);
-            _nextEnvironmentName = nextEnvironmentName;
             _gameService = gameService;
             _openSettingsButton.onClick.AddListener(OpenSettings);
             _closeSettingsButton.onClick.AddListener(CloseSettings);
-            // _reportButton.onClick.AddListener();
+            foreach (var enemyGlobalSo in gameService.GlobalSettingsSO.AllEnemyGlobalSO)
+            {
+                var button = Instantiate(_enemyButton, _enemySelectionGrid.transform);
+                button.onClick.AddListener(()=>SetEnemyAddressableName(enemyGlobalSo.enemyAdressableName));
+                button.image.sprite = enemyGlobalSo.Sprite;
+                button.GetComponentInChildren<TextMeshProUGUI>().text = enemyGlobalSo.Name;
+            }
+            foreach (var environmentSo in gameService.GlobalSettingsSO.AllEnvironmentsSO)
+            {
+                var button = Instantiate(_environnementButton, _environnementSelectionGrid.transform);
+                button.onClick.AddListener(()=>SetEnvironmentAddressableName(environmentSo.EnvironmentAddressableName));
+                button.image.sprite = environmentSo.EnvironmentSprite;
+                button.GetComponentInChildren<TextMeshProUGUI>().text = environmentSo.Name;
+            }
         }
+
+        public void SetEnvironmentAddressableName(string value) => _nextEnvironmentAddressableName = value;
+        public void SetEnemyAddressableName(string value) => _nextEnemyAddressableName = value;
 
         public void StartFight()
         {
             Debug.Log("test");
             _playButton.interactable = false;
-           _gameService.LoadGameScene(_nextEnvironmentName);
+           _gameService.LoadGameScene(_nextEnvironmentAddressableName, _nextEnemyAddressableName);
         }
 
         private void OpenSettings()

@@ -34,9 +34,9 @@ namespace Service
                 LoadGlobalSettingsSO);
         }
 
-        public void LoadGameScene(string environementName)
+        public void LoadGameScene(string environementName, string enemyAdressableName)
         {
-            _sceneService.LoadScene((asyncOperation)=>_fightService.StartFight(environementName));
+            _sceneService.LoadScene((asyncOperation)=>_fightService.StartFight(environementName, enemyAdressableName));
         }
         public void LoadMainMenuScene()
         {

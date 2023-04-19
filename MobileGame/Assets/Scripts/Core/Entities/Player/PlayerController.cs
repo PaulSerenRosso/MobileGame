@@ -28,7 +28,7 @@ namespace Player
         private IInputService _inputService;
         private ITickeableService _tickeableService;
         private EnemyManager _enemyManager;
-        private EnvironmentSO _environmentSO;
+        private GridSO _gridSO;
         private IHypeService _hypeService;
         private bool _isLocked;
         private List<EntityStunTrigger> _currentStunTriggers;
@@ -82,7 +82,7 @@ namespace Player
 
 
         public void SetupPlayer(IInputService inputService, ITickeableService tickeableService,
-            EnvironmentGridManager environmentGridManager, EnvironmentSO environmentSO, EnemyManager enemyManager,
+            GridManager gridManager, GridSO gridSO, EnemyManager enemyManager,
             IHypeService hypeService)
         {
             _inputService = inputService;
@@ -90,16 +90,16 @@ namespace Player
             _enemyManager = enemyManager;
             _hypeService = hypeService;
             _hypeService.DecreaseHypePlayerEvent += TakeStun;
-            _environmentSO = environmentSO;
+            _gridSO = gridSO;
             _playerMovementHandler.AddCondition(CheckIsLockedController);
-            _playerMovementHandler.Setup(environmentGridManager, environmentSO.Index, _inputService,
+            _playerMovementHandler.Setup(gridManager, gridSO.Index, _inputService,
                 _tickeableService.GetTickManager);
             _playerRotationHandler.AddCondition(CheckIsLockedController);
             _playerRotationHandler.Setup(_enemyManager.transform);
             _playerAttackHandler.AddCondition(CheckIsLockedController);
             _playerAttackHandler.Setup(_inputService, _tickeableService.GetTickManager,
                 _enemyManager.GetComponent<IHypeable>(),
-                environmentGridManager, _hypeService);
+                gridManager, _hypeService);
             _playerTauntHandler.AddCondition(CheckIsLockedController);
             _playerTauntHandler.Setup(_inputService, _tickeableService.GetTickManager, _hypeService);
             playerUltimateHandler.AddCondition(CheckIsLockedController);
@@ -123,7 +123,7 @@ namespace Player
 
         public void ResetPlayer()
         {
-            _playerMovementHandler.ResetMovePoint(_environmentSO.Index);
+            _playerMovementHandler.ResetMovePoint(_gridSO.Index);
             transform.rotation = Quaternion.identity;
             _hypeService.ResetHypePlayer();
         }

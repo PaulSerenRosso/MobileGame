@@ -32,8 +32,8 @@ namespace Service.Fight
         private const int _victoryRoundCount = 1;
         private CameraController _cameraController;
         private EnemyManager _enemyManager;
-        private EnvironmentGridManager _environmentGridManager;
-        private EnvironmentSO _currentEnvironmentSO;
+        private GridManager _gridManager;
+    
         private PlayerController _playerController;
         private int _enemyRoundCount;
         private int _playerRoundCount;
@@ -41,7 +41,9 @@ namespace Service.Fight
         private const float _roundInitTimer = 3f;
         private CinematicFightManager _cinematicFightManager;
         private bool _isPlayerWon;
-
+        private GridSO _gridSo;
+        
+        private string _enemyAddressableName;
 
         private void ActivatePause()
         {
@@ -58,11 +60,13 @@ namespace Service.Fight
             DeactivatePauseEvent?.Invoke();
         }
 
-        public void StartFight(string environmentAddressableName)
+        public void StartFight(string environmentAddressableName, string enemyAdressableName)
         {
             _hypeService.EnabledService();
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<EnvironmentSO>(environmentAddressableName,
-                LoadEnvironmentSO);
+            _enemyAddressableName = enemyAdressableName;
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>(
+                environmentAddressableName,
+                GenerateEnvironment);
             _canvasService.InitCanvasEvent += LaunchEntryCinematic;
         }
 
@@ -90,7 +94,7 @@ namespace Service.Fight
 
         private void ResetEntities()
         {
-        _environmentGridManager.MoveGrid(new Vector3(0, 0, 0));
+        _gridManager.MoveGrid(new Vector3(0, 0, 0));
         _playerController.ResetPlayer();
         _enemyManager.ResetEnemy();
         }
@@ -114,27 +118,26 @@ namespace Service.Fight
         {
             EndFightEvent?.Invoke(_isPlayerWon);
         }
-
-        private void LoadEnvironmentSO(EnvironmentSO so)
-        {
-            _currentEnvironmentSO = so;
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>(
-                _currentEnvironmentSO.EnvironmentAddressableName,
-                GenerateEnvironment);
-        }
+        
 
         private void GenerateEnvironment(GameObject gameObject)
         {
             var environment = Object.Instantiate(gameObject);
-            _environmentGridManager = environment.GetComponent<EnvironmentGridManager>();
-            _environmentGridManager.SetupGrid(
-                _currentEnvironmentSO, () => GenerateFighters(gameObject));
+            _gridManager = environment.GetComponent<GridManager>();
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GridSO>("GridSO", LoadGridSO);
+            Release(gameObject);
         }
 
-        private void GenerateFighters(GameObject gameObject)
+        private void LoadGridSO(GridSO gridSo)
+        {
+            _gridSo = gridSo;
+            _gridManager.SetupGrid(
+                gridSo, GenerateFighters);
+        }
+        private void GenerateFighters()
         {
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Player", GeneratePlayer);
-            Release(gameObject);
+       
         }
 
         private void GeneratePlayer(GameObject gameObject)
@@ -143,7 +146,7 @@ namespace Service.Fight
             Release(gameObject);
             _playerController = player.GetComponent<PlayerController>();
             player.GetComponent<UltimatePlayerAction>().MakeActionEvent += LaunchUltimatePlayerCinematic;
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Enemy", GenerateEnemy);
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>(_enemyAddressableName, GenerateEnemy);
         }
 
         private void GenerateEnemy(GameObject gameObject)
@@ -152,9 +155,9 @@ namespace Service.Fight
             Release(gameObject);
             _enemyManager = enemy.GetComponent<EnemyManager>();
             _enemyManager.CanUltimateEvent += LaunchUltimateEnemyCinematic;
-            _playerController.SetupPlayer(_inputService, _tickeableService, _environmentGridManager,
-                _currentEnvironmentSO, _enemyManager, _hypeService);
-            _enemyManager.Setup(_playerController.transform, _tickeableService, _environmentGridManager, _poolService,
+            _playerController.SetupPlayer(_inputService, _tickeableService, _gridManager,
+                _gridSo, _enemyManager, _hypeService);
+            _enemyManager.Setup(_playerController.transform, _tickeableService, _gridManager, _poolService,
                 _hypeService);
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Camera", GenerateCamera);
         }
