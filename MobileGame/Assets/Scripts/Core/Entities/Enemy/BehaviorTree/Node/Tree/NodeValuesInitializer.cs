@@ -26,7 +26,7 @@ namespace BehaviorTree.Trees
                         ExternValueObjects[i].Obj = playerTransform;
                         break;
                     }
-                    case BehaviorTreeEnums.TreeExternValues.EnvironmentGridManager:
+                    case BehaviorTreeEnums.TreeExternValues.GridManager:
                     {
                         ExternValueObjects[i].Obj = gridManager;
                         break;

@@ -37,7 +37,7 @@ namespace BehaviorTree.Nodes.Actions
             Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
         {
             _gridManager = (GridManager)
-                externDependencyValues[BehaviorTreeEnums.TreeExternValues.EnvironmentGridManager];
+                externDependencyValues[BehaviorTreeEnums.TreeExternValues.GridManager];
         }
 
         public override NodeSO GetNodeSO()

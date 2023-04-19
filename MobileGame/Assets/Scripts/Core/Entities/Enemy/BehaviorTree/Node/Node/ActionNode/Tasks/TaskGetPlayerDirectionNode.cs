@@ -43,7 +43,7 @@ namespace BehaviorTree.Nodes.Actions
         {
             _gridManager =
                 (GridManager)externDependencyValues[
-                    BehaviorTreeEnums.TreeExternValues.EnvironmentGridManager];
+                    BehaviorTreeEnums.TreeExternValues.GridManager];
             _transform = (Transform)enemyDependencyValues[BehaviorTreeEnums.TreeEnemyValues.Transform];
         }
 

@@ -161,6 +161,11 @@ namespace Environment.MoveGrid
             return movePointIndex % _gridSo.MovePoints;
         }
 
+        public bool CompareIndexMovePoints(int firstMovePointIndex, int secondMovePointIndex)
+        {
+            return GetModuloIndex(firstMovePointIndex) == GetModuloIndex(secondMovePointIndex);
+        }
+
         public int GetIndexMovePointFromStartMovePointLineWithCircle(int startMovePointIndex, int circleReached)
         {
             return GetModuloIndex(startMovePointIndex) * (circleReached + 1);

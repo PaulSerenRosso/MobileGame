@@ -12,7 +12,7 @@ public class BehaviorTreeEnums
     public enum TreeExternValues
     {
         PlayerTransform,
-        EnvironmentGridManager,
+        GridManager,
         TickManager,
         PlayerHandlerMovement,
         PoolService,
