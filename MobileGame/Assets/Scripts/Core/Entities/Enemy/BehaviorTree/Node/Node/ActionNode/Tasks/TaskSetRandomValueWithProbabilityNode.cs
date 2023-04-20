@@ -69,7 +69,6 @@ namespace BehaviorTree.Nodes.Actions
                 var probabilityValue = _data.StartProbabilitiesValues[index];
                 CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[index].HashCode, probabilityValue);
             }
-
             ResetRandomSelection();
             _resetRandomSelectionEvent = ResetRandomSelection;
             CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[^1].HashCode,

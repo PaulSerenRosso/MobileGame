@@ -1,5 +1,9 @@
-﻿namespace BehaviorTree
+﻿using UnityEngine;
+
+namespace BehaviorTree
 {
+    [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/SetIntInternValueNodeSO",
+        fileName = "new T_SetIntInternValue_Spe")]
     public class TaskSetIntInternValueNodeSO : TaskNodeSO
     {
         public override void UpdateInterValues()
