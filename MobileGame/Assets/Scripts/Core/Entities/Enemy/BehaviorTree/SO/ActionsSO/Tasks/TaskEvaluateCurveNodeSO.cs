@@ -16,9 +16,9 @@ namespace BehaviorTree
                     BehaviorTreeEnums.InternValuePropertyType.GET, "Float(float) get value float in intern values");
                 if (InternValues.Count > 1)
                 {
-                    InternValues[1].SetInternValueWithoutKey(BehaviorTreeEnums.InternValueType.INT,
+                    InternValues[1].SetInternValueWithoutKey(BehaviorTreeEnums.InternValueType.FLOAT,
                         BehaviorTreeEnums.InternValuePropertyType.SET,
-                        "Int(int) set value of int into intern values");
+                        "float(float) set value of float into intern values");
                 }
             }
         }
