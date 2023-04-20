@@ -49,6 +49,14 @@ public class BehaviorTreeEnums
     {
         GET,
         SET,
+        GETANDSET,
         REMOVE
+    }
+
+    public enum InternValueIntCalculate
+    {
+        ADD,
+        SUBTRACT,
+        SET
     }
 }

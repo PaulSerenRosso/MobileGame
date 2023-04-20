@@ -3,7 +3,7 @@ using BehaviorTree.Nodes.Actions;
 using BehaviorTree.SO.Actions;
 using UnityEngine;
 
-namespace BehaviorTree.SO
+namespace BehaviorTree.SO.Actions
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/MoveHypeNodeDataSO",
         fileName = "new T_DecreasePlayerHype_Spe_Data")]

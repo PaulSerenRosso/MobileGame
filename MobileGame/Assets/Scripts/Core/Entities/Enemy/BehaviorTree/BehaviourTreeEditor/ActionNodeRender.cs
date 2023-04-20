@@ -112,6 +112,12 @@ namespace BehaviorTreeEditor
                         _setValues.Add(internValue);
                         break;
                     }
+                    case BehaviorTreeEnums.InternValuePropertyType.GETANDSET:
+                    {
+                        _setValues.Add(internValue);
+                        _getValues.Add(internValue);
+                        break;
+                    }
                     case BehaviorTreeEnums.InternValuePropertyType.REMOVE:
                     {
                         _removedValues.Add(internValue);
