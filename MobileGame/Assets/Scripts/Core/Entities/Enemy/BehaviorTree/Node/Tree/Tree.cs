@@ -16,12 +16,11 @@ namespace BehaviorTree.Trees
 {
     public class Tree : MonoBehaviour
     {
-       
         public List<Node> ResetNodeList = new();
 
         [SerializeField] private NodeSO _rootSO;
         [SerializeField] private NodeValuesInitializer _nodeValuesInitializer;
-        
+
         private Node _root;
         private NodeValuesSharer _nodeValuesSharer = new();
 
@@ -64,9 +63,9 @@ namespace BehaviorTree.Trees
 
         private Node CreateChild(NodeSO childSO)
         {
-           var node =  Node.CreateNodeSO(childSO);
-           node.Tree = this;
-           return node;
+            var node = Node.CreateNodeSO(childSO);
+            node.Tree = this;
+            return node;
         }
 
         private void SetupChild(NodeSO childSO, Node child)
@@ -74,7 +73,7 @@ namespace BehaviorTree.Trees
             child.SetNodeSO(childSO);
             if (childSO is CompositeSO compositeSO)
             {
-                if (compositeSO.Children.Count!= 0)
+                if (compositeSO.Children.Count != 0)
                 {
                     LoopSetupChild((CompositeNode)child, compositeSO.Children);
                 }
@@ -102,6 +101,7 @@ namespace BehaviorTree.Trees
                 dependencyEnemyValuesObjects.Add(dependencyValuesType.enemyValues[i],
                     _nodeValuesInitializer.GetEnemyValueObject(dependencyValuesType.enemyValues[i]));
             }
+
             for (int i = 0; i < dependencyValuesType.externValues.Length; i++)
             {
                 dependencyExternValuesObjects.Add(dependencyValuesType.externValues[i],
@@ -129,12 +129,12 @@ namespace BehaviorTree.Trees
 
         public void ResetTree()
         {
-           // Debug.Log("reset");
+            // Debug.Log("reset");
+            _nodeValuesSharer.InternValues.Clear();
             foreach (var node in ResetNodeList)
             {
                 node.Reset();
             }
-            _nodeValuesSharer.InternValues.Clear();
             _root.Evaluate();
         }
     }

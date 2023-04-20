@@ -49,6 +49,7 @@ public class BehaviorTreeEnums
     {
         GET,
         SET,
+        GETANDSET,
         REMOVE
     }
 }
