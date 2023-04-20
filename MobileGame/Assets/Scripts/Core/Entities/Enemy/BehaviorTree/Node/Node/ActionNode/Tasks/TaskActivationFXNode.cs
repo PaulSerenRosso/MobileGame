@@ -8,7 +8,7 @@ namespace BehaviorTree.Nodes.Actions
     {
         private TaskActivationFXNodeSO _so;
         private TaskActivationFXNodeDataSO _data;
-        private ParticleSystem[] _particleSystems;
+        private GameObject[] _gameObjects;
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
@@ -24,6 +24,10 @@ namespace BehaviorTree.Nodes.Actions
         public override void Evaluate()
         {
             base.Evaluate();
+            foreach (var variableGameObject in _gameObjects)
+            {
+                variableGameObject.gameObject.SetActive(!variableGameObject.gameObject.activeSelf);
+            }
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();
         }
@@ -32,11 +36,11 @@ namespace BehaviorTree.Nodes.Actions
             Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
             Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
         {
-            _particleSystems = new ParticleSystem[enemyDependencyValues.Count];
+            _gameObjects = new GameObject[enemyDependencyValues.Count];
             int count = 0;
             foreach (var enemyDependencyValue in enemyDependencyValues)
             {
-                _particleSystems[count] = (ParticleSystem)enemyDependencyValue.Value;
+                _gameObjects[count] = (GameObject)enemyDependencyValue.Value;
                 count++;
             }
         }

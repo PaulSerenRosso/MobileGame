@@ -25,8 +25,12 @@ namespace BehaviorTree.Nodes.Actions
         public override void Evaluate()
         {
             base.Evaluate();
+            Debug.Log("InstantiateVFX");
             GameObject gameObject = _poolService.GetFromPool(_data.ParticleGO);
+            Debug.Log($"GameObject: {gameObject}");
             gameObject.transform.position = (Vector3)Sharer.InternValues[_so.InternValues[0].HashCode];
+            gameObject.SetActive(true);
+            _poolService.AddToPoolLater(gameObject, 5f);
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();
         }
