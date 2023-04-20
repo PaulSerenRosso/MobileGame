@@ -6,7 +6,8 @@ public class BehaviorTreeEnums
         Animator,
         Transform,
         MeshRenderer,
-        EnemyManager
+        EnemyManager,
+        TauntFX
     }
 
     public enum TreeExternValues
