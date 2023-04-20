@@ -1,8 +1,7 @@
-﻿using BehaviorTree;
-using Core.Entities.Enemy.BehaviorTree.SO.ActionsSO.ActionsDataSO.Tasks;
+﻿using BehaviorTree.SO.Actions;
 using UnityEngine;
 
-namespace Core.Entities.Enemy.BehaviorTree.SO.ActionsSO.Tasks
+namespace BehaviorTree
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/SetRandomValueWithProbabilityNodeSO",
         fileName = "new T_SetRandomValueWithProbability_Spe")]

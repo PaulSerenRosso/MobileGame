@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
-using Core.Entities.Enemy.BehaviorTree.SO.ActionsSO.ActionsDataSO.Tasks;
-using Core.Entities.Enemy.BehaviorTree.SO.ActionsSO.Tasks;
 using HelperPSR.Collections;
 using HelperPSR.Randoms;
 

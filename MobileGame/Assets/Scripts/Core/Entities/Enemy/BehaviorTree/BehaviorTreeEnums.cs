@@ -52,4 +52,11 @@ public class BehaviorTreeEnums
         GETANDSET,
         REMOVE
     }
+
+    public enum InternValueIntCalculate
+    {
+        ADD,
+        SUBTRACT,
+        SET
+    }
 }

@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace BehaviorTree.SO.Actions
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Data/Checks/UltimateHypeNodeDataSO",
-        fileName = "new CH_UltimateHype_Spe_Data")]
-    public class CheckUltimateHypeNodeDataSO: ActionNodeDataSO
+    [CreateAssetMenu(menuName = "BehaviorTree/Data/Checks/RatioHypeDataSO",
+        fileName = "new CH_RatioHype_Spe_Data")]
+    public class CheckRatioHypeNodeDataSO : ActionNodeDataSO
     {
         protected override void SetDependencyValues()
         {
@@ -18,7 +18,7 @@ namespace BehaviorTree.SO.Actions
 
         public override Type GetTypeNode()
         {
-            return typeof(CheckUltimateHypeNode);
+            return typeof(CheckRatioHypeNode);
         }
     }
 }

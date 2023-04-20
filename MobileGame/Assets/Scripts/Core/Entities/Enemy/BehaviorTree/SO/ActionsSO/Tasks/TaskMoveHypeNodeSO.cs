@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace BehaviorTree.SO
+namespace BehaviorTree
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/DecreaseHypeNodeSO", fileName = "new T_DecreaseHype_Spe")]
     public class TaskMoveHypeNodeSO : TaskNodeSO

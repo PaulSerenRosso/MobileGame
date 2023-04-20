@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
+using HelperPSR.Collections;
 using Service.Hype;
 
 namespace BehaviorTree.Nodes.Actions
 {
-    public class CheckUltimateHypeNode : ActionNode
+    public class CheckRatioHypeNode : ActionNode
     {
-        private CheckUltimateHypeNodeSO _so;
-        private CheckUltimateHypeNodeDataSO _data;
+        private CheckRatioHypeNodeSO _so;
+        private CheckRatioHypeNodeDataSO _data;
         private IHypeService _hypeService;
 
         public override NodeSO GetNodeSO()
@@ -17,14 +18,17 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
-            _so = (CheckUltimateHypeNodeSO)nodeSO;
-            _data = (CheckUltimateHypeNodeDataSO)_so.Data;
+            _so = (CheckRatioHypeNodeSO)nodeSO;
+            _data = (CheckRatioHypeNodeDataSO)_so.Data;
         }
 
         public override void Evaluate()
         {
             base.Evaluate();
-            State = _hypeService.GetUltimateAreaEnemy() ? BehaviorTreeEnums.NodeState.SUCCESS : BehaviorTreeEnums.NodeState.FAILURE;
+            var ratio = (_hypeService.GetCurrentHypeEnemy() - _hypeService.GetCurrentHypePlayer()) /
+                        _hypeService.GetMaximumHype();
+            CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[0].HashCode, ratio);
+            State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();
         }
 
