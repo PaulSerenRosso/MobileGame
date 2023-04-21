@@ -10,6 +10,7 @@ namespace BehaviorTree.SO.Actions
     {
         public BehaviorTreeEnums.InternValueIntCalculate InternValueIntCalculate;
         public int Value;
+        public bool IsValueInternValue;
 
         protected override void SetDependencyValues()
         {

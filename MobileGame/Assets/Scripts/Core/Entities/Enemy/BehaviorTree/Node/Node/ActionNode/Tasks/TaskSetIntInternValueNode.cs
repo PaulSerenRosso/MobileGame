@@ -23,22 +23,31 @@ namespace BehaviorTree.Nodes.Actions
         public override void Evaluate()
         {
             base.Evaluate();
-            int value = (int)Sharer.InternValues[_so.InternValues[0].HashCode];
+            float value;
+            if (_data.IsValueInternValue)
+            {
+                value = (float)Sharer.InternValues[_so.InternValues[2].HashCode];
+            }
+            else
+            {
+                value = _data.Value;
+            }
+            int probability = (int)Sharer.InternValues[_so.InternValues[0].HashCode];
             switch (_data.InternValueIntCalculate)
             {
                 case BehaviorTreeEnums.InternValueIntCalculate.ADD:
-                    value += _data.Value;
+                    probability += (int)value;
                     break;
                 case BehaviorTreeEnums.InternValueIntCalculate.SUBTRACT:
-                    value -= _data.Value;
+                    probability -= (int)value;
                     break;
                 case BehaviorTreeEnums.InternValueIntCalculate.SET:
-                    value = _data.Value;
+                    probability = (int)value;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[1].HashCode, value);
+            CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[1].HashCode, probability);
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();
         }

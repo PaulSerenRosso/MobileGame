@@ -8,7 +8,6 @@ namespace BehaviorTree.SO.Actions
         fileName = "new T_GapBetweenHype_Spe_Data")]
     public class TaskGapBetweenHypeNodeDataSO : ActionNodeDataSO
     {
-        
         protected override void SetDependencyValues()
         {
             ExternValues = new[]

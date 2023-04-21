@@ -9,15 +9,20 @@ namespace BehaviorTree
         public override void UpdateInterValues()
         {
             base.UpdateInterValues();
-            _internValuesCount = 2;
+            _internValuesCount = 3;
             if (InternValues.Count > 0)
             {
                 InternValues[0].SetInternValueWithoutKey(BehaviorTreeEnums.InternValueType.INT,
-                    BehaviorTreeEnums.InternValuePropertyType.GET, "Int(int) value to get in intern value");
+                    BehaviorTreeEnums.InternValuePropertyType.GET, "Int(int) value to get from intern value");
                 if (InternValues.Count > 1)
                 {
                     InternValues[1].SetInternValueWithoutKey(BehaviorTreeEnums.InternValueType.INT,
                         BehaviorTreeEnums.InternValuePropertyType.SET, "Int(int) value to set in intern value");
+                    if (InternValues.Count > 2)
+                    {
+                        InternValues[2].SetInternValueWithoutKey(BehaviorTreeEnums.InternValueType.FLOAT,
+                            BehaviorTreeEnums.InternValuePropertyType.GET, "Float(float) value to get from intern value");
+                    }
                 }
             }
         }
