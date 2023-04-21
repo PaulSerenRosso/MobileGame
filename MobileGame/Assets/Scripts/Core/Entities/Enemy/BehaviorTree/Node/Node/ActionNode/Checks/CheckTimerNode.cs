@@ -37,7 +37,7 @@ namespace BehaviorTree.Nodes.Actions
             base.Evaluate();
             if (_data.IsInternTimer)
             {
-                if (_timer > (float)Sharer.InternValues[1])
+                if (_timer > (float)Sharer.InternValues[_so.InternValues[1].HashCode])
                 {
                     ResetTimer();
                     // Debug.Log("timer success " + GetNodeSO().name);

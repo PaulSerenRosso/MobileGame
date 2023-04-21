@@ -25,7 +25,7 @@ namespace BehaviorTree.Nodes.Actions
         {
             base.Evaluate();
             Vector3 playerPosition = (Vector3)Sharer.InternValues[_so.InternValues[0].HashCode];
-            _transform.rotation = Quaternion.LookRotation(_transform.forward, playerPosition);
+            _transform.rotation = Quaternion.LookRotation(playerPosition, _transform.up);
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();
         }

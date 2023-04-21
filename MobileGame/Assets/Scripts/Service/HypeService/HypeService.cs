@@ -91,7 +91,6 @@ namespace Service.Hype
         public void DecreaseHypePlayer(float amount)
         {
             DecreaseHype(amount, _hypePlayer);
-            DecreaseHypePlayerEvent?.Invoke(amount);
         }
 
         public void DecreaseHypeEnemy(float amount)
@@ -233,8 +232,6 @@ namespace Service.Hype
             get => _hypeEnemy.LoseUltimateEvent;
             set => _hypeEnemy.LoseUltimateEvent = value;
         }
-
-        public event Action<float> DecreaseHypePlayerEvent;
 
         public float GetMinimumHype()
         {
