@@ -21,7 +21,6 @@ namespace Service.Fight
         public event Action DeactivatePauseEvent;
         public event Action<bool> EndFightEvent;
 
-
         [DependsOnService] private IUICanvasSwitchableService _canvasService;
         [DependsOnService] private IInputService _inputService;
         [DependsOnService] private ITickeableService _tickeableService;
@@ -33,7 +32,7 @@ namespace Service.Fight
         private CameraController _cameraController;
         private EnemyManager _enemyManager;
         private GridManager _gridManager;
-    
+
         private PlayerController _playerController;
         private int _enemyRoundCount;
         private int _playerRoundCount;
@@ -42,7 +41,7 @@ namespace Service.Fight
         private CinematicFightManager _cinematicFightManager;
         private bool _isPlayerWon;
         private GridSO _gridSo;
-        
+
         private string _enemyAddressableName;
 
         private void ActivatePause()
@@ -94,10 +93,11 @@ namespace Service.Fight
 
         private void ResetEntities()
         {
-        _gridManager.MoveGrid(new Vector3(0, 0, 0));
-        _playerController.ResetPlayer();
-        _enemyManager.ResetEnemy();
+            _gridManager.MoveGrid(new Vector3(0, 0, 0));
+            _playerController.ResetPlayer();
+            _enemyManager.ResetEnemy();
         }
+
         private void LaunchUltimatePlayerCinematic()
         {
             ActivatePause();
@@ -118,7 +118,7 @@ namespace Service.Fight
         {
             EndFightEvent?.Invoke(_isPlayerWon);
         }
-        
+
 
         private void GenerateEnvironment(GameObject gameObject)
         {
@@ -134,10 +134,10 @@ namespace Service.Fight
             _gridManager.SetupGrid(
                 gridSo, GenerateFighters);
         }
+
         private void GenerateFighters()
         {
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Player", GeneratePlayer);
-       
         }
 
         private void GeneratePlayer(GameObject gameObject)
@@ -202,7 +202,6 @@ namespace Service.Fight
 
         private void EndInitRound()
         {
-           
             DeactivatePause();
             _enemyManager.ResetTree();
             EndInitiateRoundEvent?.Invoke();
@@ -222,7 +221,7 @@ namespace Service.Fight
             EndFightEvent = null;
             _hypeService.DisabledService();
             _playerController.UnlinkPlayerController();
-                _gameService.LoadMainMenuScene();
+            _gameService.LoadMainMenuScene();
         }
     }
 }

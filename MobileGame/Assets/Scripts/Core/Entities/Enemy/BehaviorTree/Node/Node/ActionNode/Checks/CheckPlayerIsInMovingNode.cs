@@ -25,8 +25,8 @@ namespace BehaviorTree.Nodes.Actions
         {
             base.Evaluate();
             State = _playerMovementHandler.CheckIsMoving()
-                ? BehaviorTreeEnums.NodeState.FAILURE
-                : BehaviorTreeEnums.NodeState.SUCCESS;
+                ? BehaviorTreeEnums.NodeState.SUCCESS
+                : BehaviorTreeEnums.NodeState.FAILURE;
             ReturnedEvent?.Invoke();
         }
 

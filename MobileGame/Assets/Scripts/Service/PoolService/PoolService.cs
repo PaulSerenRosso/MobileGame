@@ -28,9 +28,9 @@ namespace Service
             _pools[gameObject].AddToPool(gameObject);
         }
 
-        public void AddToPoolLater(GameObject gameObject, float lifeTime)
+        public void AddToPoolLater(GameObject gameObjectReference, GameObject gameObjectItem, float lifeTime)
         {
-            _pools[gameObject].AddToPoolLatter(gameObject, lifeTime);
+            _pools[gameObjectReference].AddToPoolLatter(gameObjectItem, lifeTime);
         }
     }
 }

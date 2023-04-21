@@ -17,7 +17,6 @@ namespace Environment.MoveGrid
         public MovePoint(MeshRenderer meshRenderer, Vector3 position)
         {
             MeshRenderer = meshRenderer;
-            LocalPosition = 
             LocalPosition = position;
             NeighborDownIndex = -1;
             NeighborLeftIndex = -1;

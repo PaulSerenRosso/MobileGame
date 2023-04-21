@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using Service.Hype;
-using UnityEngine;
 
 namespace BehaviorTree.Nodes.Actions
 {
@@ -26,7 +25,6 @@ namespace BehaviorTree.Nodes.Actions
         {
             base.Evaluate();
             State = _hypeService.GetUltimateAreaEnemy() ? BehaviorTreeEnums.NodeState.SUCCESS : BehaviorTreeEnums.NodeState.FAILURE;
-            Debug.Log("CheckUltimate" + State);
             ReturnedEvent?.Invoke();
         }
 

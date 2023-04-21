@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
+using Environment.MoveGrid;
 using Service;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ namespace BehaviorTree.Nodes.Actions
         private TaskInstantiateFXNodeSO _so;
         private TaskInstantiateFXNodeDataSO _data;
         private IPoolService _poolService;
+        private GridManager _gridManager;
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
@@ -25,12 +27,9 @@ namespace BehaviorTree.Nodes.Actions
         public override void Evaluate()
         {
             base.Evaluate();
-            Debug.Log("InstantiateVFX");
             GameObject gameObject = _poolService.GetFromPool(_data.ParticleGO);
-            Debug.Log($"GameObject: {gameObject}");
-            gameObject.transform.position = (Vector3)Sharer.InternValues[_so.InternValues[0].HashCode];
-            gameObject.SetActive(true);
-            _poolService.AddToPoolLater(gameObject, 5f);
+            gameObject.transform.position = _gridManager.MovePoints[(int)Sharer.InternValues[_so.InternValues[0].HashCode]].LocalPosition;
+            _poolService.AddToPoolLater(_data.ParticleGO, gameObject, 5f);
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();
         }
@@ -39,6 +38,7 @@ namespace BehaviorTree.Nodes.Actions
             Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
             Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
         {
+            _gridManager = (GridManager)externDependencyValues[BehaviorTreeEnums.TreeExternValues.GridManager];
             _poolService = (IPoolService)externDependencyValues[BehaviorTreeEnums.TreeExternValues.PoolService];
             _poolService.CreatePool(_data.ParticleGO, _data.Count);
         }
