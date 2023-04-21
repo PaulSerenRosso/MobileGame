@@ -8,6 +8,6 @@ namespace Service
         public void RemovePool(GameObject gameObject);
         public GameObject GetFromPool(GameObject gameObject);
         public void AddToPool(GameObject gameObject);
-        public void AddToPoolLater(GameObject gameObject, float lifeTime);
+        public void AddToPoolLater(GameObject gameObjectReference, GameObject gameObjectItem, float lifeTime);
     }
 }
