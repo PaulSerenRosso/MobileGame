@@ -29,7 +29,7 @@ namespace BehaviorTree.Nodes.Actions
             base.Evaluate();
             GameObject gameObject = _poolService.GetFromPool(_data.ParticleGO);
             var index = (int)Sharer.InternValues[_so.InternValues[0].HashCode];
-            gameObject.transform.position = _gridManager.MovePoints[index].LocalPosition;
+            gameObject.transform.position = _gridManager.MovePoints[index].MeshRenderer.transform.position;
             _poolService.AddToPoolLater(_data.ParticleGO, gameObject, 5f);
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();

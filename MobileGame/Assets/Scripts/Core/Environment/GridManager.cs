@@ -147,7 +147,7 @@ namespace Environment.MoveGrid
             for (int i = 0; i < circlesIndexes.Length; i++)
             {
                 var gridSoMovePoints = _gridSo.MovePoints * (circlesIndexes[i]);
-                if (index >= gridSoMovePoints && index <= gridSoMovePoints + _gridSo.MovePoints)
+                if (index >= gridSoMovePoints && index < gridSoMovePoints + _gridSo.MovePoints)
                 {
                     return true;
                 }
