@@ -1,16 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using HelperPSR.Collections;
 using Service.Hype;
+using UnityEngine;
 
 namespace BehaviorTree.Nodes.Actions
 {
-    public class TaskGapBetweenHypeNode : ActionNode
+    public class TaskLerpHypeNode : ActionNode
     {
-        private TaskGapBetweenHypeNodeSO _so;
-        private TaskGapBetweenHypeNodeDataSO _data;
+        private TaskLerpHypeNodeSO _so;
+        private TaskLerpHypeNodeDataSO _data;
         private IHypeService _hypeService;
 
+        private event Func<float> _getHypeValueEvent;
         public override NodeSO GetNodeSO()
         {
             return _so;
@@ -18,25 +21,31 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
-            _so = (TaskGapBetweenHypeNodeSO)nodeSO;
-            _data = (TaskGapBetweenHypeNodeDataSO)_so.Data;
+            _so = (TaskLerpHypeNodeSO)nodeSO;
+            _data = (TaskLerpHypeNodeDataSO)_so.Data;
         }
 
         public override void Evaluate()
         {
             base.Evaluate();
-            var gap = (_hypeService.GetCurrentHypeEnemy() + _hypeService.GetCurrentHypePlayer()) /
-                        _hypeService.GetMaximumHype();
-            CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[0].HashCode, gap);
+            var lerpHype = Mathf.Lerp(0, _hypeService.GetMaximumHype(), _getHypeValueEvent.Invoke());
+            CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[0].HashCode, lerpHype);
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();
         }
 
+        
         public override void SetDependencyValues(
             Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
             Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
         {
             _hypeService = (IHypeService)externDependencyValues[BehaviorTreeEnums.TreeExternValues.HypeService];
+            if (_data.isPlayerHype)
+                _getHypeValueEvent = _hypeService.GetCurrentHypePlayer;
+            else
+            {
+                _getHypeValueEvent = _hypeService.GetCurrentHypeEnemy;
+            }
         }
 
         public override ActionNodeDataSO GetDataSO()
