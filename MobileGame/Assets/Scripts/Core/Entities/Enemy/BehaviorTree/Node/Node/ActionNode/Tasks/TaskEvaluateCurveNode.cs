@@ -10,15 +10,15 @@ namespace BehaviorTree.Nodes.Actions
         private TaskEvaluateCurveNodeDataSO _data;
         private EnemyManager _enemyManager;
 
+        public override NodeSO GetNodeSO()
+        {
+            return _so;
+        }
+
         public override void SetNodeSO(NodeSO nodeSO)
         {
             _so = (TaskEvaluateCurveNodeSO)nodeSO;
             _data = (TaskEvaluateCurveNodeDataSO)_so.Data;
-        }
-
-        public override NodeSO GetNodeSO()
-        {
-            return _so;
         }
 
         public override void Evaluate()

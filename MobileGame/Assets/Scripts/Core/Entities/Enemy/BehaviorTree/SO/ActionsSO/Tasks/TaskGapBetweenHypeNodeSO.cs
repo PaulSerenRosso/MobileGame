@@ -16,7 +16,7 @@ namespace BehaviorTree
                     BehaviorTreeEnums.InternValuePropertyType.SET, "Float(float) set gap into intern values");
             }
         }
-        
+
         public override void UpdateComment()
         {
             Comment = "Nœud qui retourne le ratio de hype actuel";

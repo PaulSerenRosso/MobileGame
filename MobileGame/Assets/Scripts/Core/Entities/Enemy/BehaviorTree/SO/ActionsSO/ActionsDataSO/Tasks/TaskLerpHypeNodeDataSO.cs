@@ -1,8 +1,11 @@
 ﻿using System;
 using BehaviorTree.Nodes.Actions;
+using UnityEngine;
 
 namespace BehaviorTree.SO.Actions
 {
+    [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/LerpHypeNodeDataSO",
+        fileName = "new T_LerpHype_Spe_Data")]
     public class TaskLerpHypeNodeDataSO : ActionNodeDataSO
     {
         public bool isPlayerHype;
@@ -16,7 +19,7 @@ namespace BehaviorTree.SO.Actions
 
         public override Type GetTypeNode()
         {
-            return typeof(TaskGapBetweenHypeNode);
+            return typeof(TaskLerpHypeNode);
         }
     }
 }

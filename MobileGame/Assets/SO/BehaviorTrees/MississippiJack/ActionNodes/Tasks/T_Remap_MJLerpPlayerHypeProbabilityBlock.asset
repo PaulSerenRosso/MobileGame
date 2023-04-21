@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eec390d3f284892b879c798a260b247, type: 3}
+  m_Name: T_Remap_MJLerpPlayerHypeProbabilityBlock
+  m_EditorClassIdentifier: 
+  Comment: "N\u0153ud qui permet de remap une valeur entre des valeurs renseign\xE9es"
+  _internValuesCount: 2
+  Data: {fileID: 11400000, guid: a563f161ecde94447be33340f1a771f4, type: 2}
+  InternValues:
+  - Key: RatioBlock
+    HashCode: 1689158426
+    Type: 2
+    PropertyType: 0
+    Comment: Float(float) get float in intern values to remap
+  - Key: BlockAddition
+    HashCode: -937968371
+    Type: 2
+    PropertyType: 1
+    Comment: FLOAT(float) set int in intern values to remap

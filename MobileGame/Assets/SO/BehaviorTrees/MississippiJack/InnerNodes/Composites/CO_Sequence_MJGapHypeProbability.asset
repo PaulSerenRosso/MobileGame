@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a554480369441f643a037b92f1ced7d6, type: 3}
+  m_Name: CO_Sequence_MJGapHypeProbability
+  m_EditorClassIdentifier: 
+  Comment: "S\xE9lectionne un n\u0153ud et v\xE9rifie si le n\u0153ud est un succ\xE8s
+    ou est en train de fonctionner et retourne le statut, sinon d\xE9s qu'un n\u0153ud
+    retourne un \xE9chec, la sequence retourne un \xE9chec"
+  Children:
+  - {fileID: 11400000, guid: 34f2f6f992c38024da335c3065692966, type: 2}
+  - {fileID: 11400000, guid: de52f5fa3ac8e0940b80715973cd9d96, type: 2}
+  - {fileID: 11400000, guid: 0d444d29885eb39479e06937b08111e1, type: 2}
+  - {fileID: 11400000, guid: 58634d7f93e3ec443b3c4594c2cfede7, type: 2}
+  - {fileID: 11400000, guid: 2e331bdeab2e2ec4788d0750286393bc, type: 2}
+  - {fileID: 11400000, guid: 983d38434ed42174ebe82c030f0b027e, type: 2}
+  - {fileID: 11400000, guid: 06f07ff1a6d5fe0429ad626119a9ef91, type: 2}
+  - {fileID: 11400000, guid: c4730b59d65f58b478c6ee17790ae514, type: 2}
+  - {fileID: 11400000, guid: 0701c17b8d315c44a97c5cf5f4c1158a, type: 2}
+  - {fileID: 11400000, guid: a9f3cc6d9c2feff4f9b6610d9fbb54b9, type: 2}
+  - {fileID: 11400000, guid: 58460f5751fa95148977f496e8bbe2b6, type: 2}
+  - {fileID: 11400000, guid: 4713ac6ebc667e1498355da9cf411ca4, type: 2}
+  - {fileID: 11400000, guid: d81e2b463093ca54487acbddacee9926, type: 2}
