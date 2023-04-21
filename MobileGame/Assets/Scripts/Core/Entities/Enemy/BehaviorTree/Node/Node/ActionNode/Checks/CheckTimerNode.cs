@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using BehaviorTree.SO.Actions;
 using UnityEngine;
 
@@ -40,7 +40,6 @@ namespace BehaviorTree.Nodes.Actions
                 if (_timer > (float)Sharer.InternValues[1])
                 {
                     ResetTimer();
-                    EndTimerEvent?.Invoke();
                     // Debug.Log("timer success " + GetNodeSO().name);
                     State = BehaviorTreeEnums.NodeState.SUCCESS;
                     ReturnedEvent?.Invoke();
@@ -52,7 +51,6 @@ namespace BehaviorTree.Nodes.Actions
                 if (_timer > _data.Time)
                 {
                     ResetTimer();
-                    EndTimerEvent?.Invoke();
                     // Debug.Log("timer success " + GetNodeSO().name);
                     State = BehaviorTreeEnums.NodeState.SUCCESS;
                     ReturnedEvent?.Invoke();
@@ -60,6 +58,7 @@ namespace BehaviorTree.Nodes.Actions
                 }   
             }
 
+          
             IncreaseTimerEvent?.Invoke();
             _timer += Time.deltaTime;
             // Debug.Log("timer failure " + GetNodeSO().name + _timer + "  " + _data.Time);
@@ -74,24 +73,32 @@ namespace BehaviorTree.Nodes.Actions
         {
             base.Reset();
             ResetTimer();
+            _timer = _data.StartTime;
+            if (_data.IsSendResetTimerFunction)
+            {
+                _ResetActionEvent = ResetTimer;
+                IncreaseTimerEvent = AddResetTimerFunction;
+                EndTimerEvent = RemoveResetTimerEvent;
+            }
         }
 
         private void RemoveResetTimerEvent()
         {
-            Sharer.InternValues[0] = null;
+            Sharer.InternValues[_so.InternValues[0].HashCode] = null;
             IncreaseTimerEvent = AddResetTimerFunction;
         }
 
         private void AddResetTimerFunction()
         {
-            Sharer.InternValues[0] = _ResetActionEvent;
+            Sharer.InternValues[_so.InternValues[0].HashCode] = _ResetActionEvent;
             IncreaseTimerEvent = null;
         }
 
         private void ResetTimer()
         {
             _timer = 0;
-            // Debug.Log("reset timer");
+            EndTimerEvent?.Invoke();
+//            Debug.Log("reset timer");
         }
 
         public override ActionNodeDataSO GetDataSO()

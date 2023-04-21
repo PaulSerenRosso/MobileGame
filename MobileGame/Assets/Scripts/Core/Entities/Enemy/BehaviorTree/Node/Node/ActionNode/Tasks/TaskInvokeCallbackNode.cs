@@ -1,5 +1,6 @@
 ﻿using System;
 using BehaviorTree.SO.Actions;
+using UnityEngine;
 
 namespace BehaviorTree.Nodes.Actions
 {
@@ -10,6 +11,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void Evaluate()
         {
+            Debug.Log(_so.Data.name);
             var eventToInvoke = (Action)Sharer.InternValues[_so.InternValues[0].HashCode];
             eventToInvoke?.Invoke();
             State = BehaviorTreeEnums.NodeState.SUCCESS;
