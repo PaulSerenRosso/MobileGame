@@ -28,7 +28,8 @@ namespace BehaviorTree.Nodes.Actions
         {
             base.Evaluate();
             GameObject gameObject = _poolService.GetFromPool(_data.ParticleGO);
-            gameObject.transform.position = _gridManager.MovePoints[(int)Sharer.InternValues[_so.InternValues[0].HashCode]].LocalPosition;
+            var index = (int)Sharer.InternValues[_so.InternValues[0].HashCode];
+            gameObject.transform.position = _gridManager.MovePoints[index].LocalPosition;
             _poolService.AddToPoolLater(_data.ParticleGO, gameObject, 5f);
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();

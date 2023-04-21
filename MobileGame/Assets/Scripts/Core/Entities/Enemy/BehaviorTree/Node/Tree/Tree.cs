@@ -120,7 +120,6 @@ namespace BehaviorTree.Trees
 
         public void StopTree()
         {
-            Debug.Log("tree stop " + ResetNodeList.Count);
             foreach (var node in ResetNodeList)
             {
                 node.Stop();
@@ -129,7 +128,6 @@ namespace BehaviorTree.Trees
 
         public void ResetTree()
         {
-            // Debug.Log("reset");
             _nodeValuesSharer.InternValues.Clear();
             foreach (var node in ResetNodeList)
             {

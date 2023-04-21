@@ -27,6 +27,7 @@ namespace BehaviorTree.Nodes.Actions
             var value = math.remap(_data.OldMinValue, _data.OldMaxValue, _data.NewMinValue, _data.NewMaxValue,
                 (float)Sharer.InternValues[_so.InternValues[0].HashCode]);
             CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[1].HashCode, (int)value);
+            Debug.Log($"{_so.InternValues[0].Key} / {value}");
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();
         }

@@ -112,14 +112,13 @@ namespace Player.Handler
 
         protected override bool TryRecordInput(object[] args)
         {
-            if(!base.TryRecordInput(args))
+            if (!base.TryRecordInput(args))
             {
-            if (!CheckCooldownBetweenTwoMovement())
-            {
-                Debug.Log("tesfdft");
-                SendRecordAction(args);
-                return true;
-            }
+                if (!CheckCooldownBetweenTwoMovement())
+                {
+                    SendRecordAction(args);
+                    return true;
+                }
             }
 
             return false;
@@ -171,6 +170,7 @@ namespace Player.Handler
             {
                 _inputService.RemoveSwipe(movementSwipeSO);
             }
+
             RemoteConfigManager.UnRegisterRemoteConfigurable(this);
         }
 
