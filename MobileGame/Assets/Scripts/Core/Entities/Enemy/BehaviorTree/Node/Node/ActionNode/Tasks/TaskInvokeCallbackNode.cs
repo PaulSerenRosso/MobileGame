@@ -10,7 +10,7 @@ namespace BehaviorTree.Nodes.Actions
         private TaskInvokeCallbackNodeDataSO _dataSo;
 
         public override void Evaluate()
-        {Z
+        {
             var eventToInvoke = (Action)Sharer.InternValues[_so.InternValues[0].HashCode];
             eventToInvoke?.Invoke();
             State = BehaviorTreeEnums.NodeState.SUCCESS;

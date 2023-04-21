@@ -9,12 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 018b5c692416418aafe66f724e7051ed, type: 3}
-  m_Name: CH_Timer_Actions_Data
+  m_Script: {fileID: 11500000, guid: 8b3de147dd064c5db3a768906e5fb0aa, type: 3}
+  m_Name: T_SendDebugLog_AttackSpeMJ_Data
   m_EditorClassIdentifier: 
   ExternValues: 
   EnemyValues: 
-  Time: 0.75
-  StartTime: 0.75
-  IsSendResetTimerFunction: 0
-  IsInternTimer: 0
+  MessageDebug: "Je suis dans l'attaque sp\xE9"

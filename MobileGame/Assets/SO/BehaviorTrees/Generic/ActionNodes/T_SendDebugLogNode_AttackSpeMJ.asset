@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 018b5c692416418aafe66f724e7051ed, type: 3}
-  m_Name: CH_Timer_Actions_Data
+  m_Script: {fileID: 11500000, guid: cc57d94867b945e0b928e15e4f1dc0e9, type: 3}
+  m_Name: T_SendDebugLogNode_AttackSpeMJ
   m_EditorClassIdentifier: 
-  ExternValues: 
-  EnemyValues: 
-  Time: 0.75
-  StartTime: 0.75
-  IsSendResetTimerFunction: 0
-  IsInternTimer: 0
+  Comment: Envoyer un debug
+  _internValuesCount: 0
+  Data: {fileID: 11400000, guid: f3a72cc9f2d66424bb9d75d262cc653c, type: 2}
+  InternValues: []

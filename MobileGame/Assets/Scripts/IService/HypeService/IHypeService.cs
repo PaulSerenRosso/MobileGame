@@ -33,7 +33,6 @@ namespace Service.Hype
         Action<float> GetEnemyGainUltimateEvent{ set;get; }
         Action<float> GetEnemyLoseUltimateEvent{ set; get;}
 
-        event Action<float> DecreaseHypePlayerEvent;
         event Action<float> ReachMaximumHypeEvent;
         event Action<float> ReachMinimumHypeEvent;
     }

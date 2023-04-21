@@ -89,7 +89,7 @@ namespace Player
             _tickeableService = tickeableService;
             _enemyManager = enemyManager;
             _hypeService = hypeService;
-            _hypeService.DecreaseHypePlayerEvent += TakeStun;
+            _hypeService.GetPlayerDecreaseHypeEvent += TakeStun;
             _gridSO = gridSO;
             _playerMovementHandler.AddCondition(CheckIsLockedController);
             _playerMovementHandler.Setup(gridManager, gridSO.Index, _inputService,
