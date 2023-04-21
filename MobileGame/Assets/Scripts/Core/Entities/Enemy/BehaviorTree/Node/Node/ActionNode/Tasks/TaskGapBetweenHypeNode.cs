@@ -5,10 +5,10 @@ using Service.Hype;
 
 namespace BehaviorTree.Nodes.Actions
 {
-    public class CheckRatioHypeNode : ActionNode
+    public class TaskGapBetweenHypeNode : ActionNode
     {
-        private CheckRatioHypeNodeSO _so;
-        private CheckRatioHypeNodeDataSO _data;
+        private TaskGapBetweenHypeNodeSO _so;
+        private TaskGapBetweenHypeNodeDataSO _data;
         private IHypeService _hypeService;
 
         public override NodeSO GetNodeSO()
@@ -18,8 +18,8 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
-            _so = (CheckRatioHypeNodeSO)nodeSO;
-            _data = (CheckRatioHypeNodeDataSO)_so.Data;
+            _so = (TaskGapBetweenHypeNodeSO)nodeSO;
+            _data = (TaskGapBetweenHypeNodeDataSO)_so.Data;
         }
 
         public override void Evaluate()

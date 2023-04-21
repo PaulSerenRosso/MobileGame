@@ -2,9 +2,9 @@
 
 namespace BehaviorTree
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Actions/Checks/RatioHypeNodeSO",
-        fileName = "new  CH_RatioHype_Spe")]
-    public class CheckRatioHypeNodeSO : CheckNodeSO
+    [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/GapBetweenHypeNodeSO",
+        fileName = "new  T_RatioHype_Spe")]
+    public class TaskGapBetweenHypeNodeSO : TaskNodeSO
     {
         public override void UpdateInterValues()
         {
