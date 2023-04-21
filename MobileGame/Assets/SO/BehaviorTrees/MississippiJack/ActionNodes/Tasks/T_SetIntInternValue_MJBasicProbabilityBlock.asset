@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 767c44011fda4a978c16a812f1edcf00, type: 3}
+  m_Name: T_SetIntInternValue_MJBasicProbabilityBlock
+  m_EditorClassIdentifier: 
+  Comment: "N\u0153ud qui permet de SET une valeur integer dans les interns values"
+  _internValuesCount: 3
+  Data: {fileID: 11400000, guid: 958b8a1d7ac5fe44e98c18b83a4e5677, type: 2}
+  InternValues:
+  - Key: BlockAction
+    HashCode: 885675895
+    Type: 1
+    PropertyType: 0
+    Comment: Int(int) value to get from intern value
+  - Key: BlockAction
+    HashCode: 885675895
+    Type: 1
+    PropertyType: 1
+    Comment: Int(int) value to set in intern value
