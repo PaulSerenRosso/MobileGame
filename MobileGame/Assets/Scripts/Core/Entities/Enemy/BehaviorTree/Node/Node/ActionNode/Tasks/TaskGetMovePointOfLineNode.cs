@@ -2,6 +2,7 @@
 using BehaviorTree.SO.Actions;
 using Environment.MoveGrid;
 using HelperPSR.Collections;
+using UnityEngine;
 
 namespace BehaviorTree.Nodes.Actions
 {
@@ -26,6 +27,8 @@ namespace BehaviorTree.Nodes.Actions
         {
             base.Evaluate();
             int startIndex = (int)Sharer.InternValues[_so.InternValues[0].HashCode];
+            Debug.Log("start Index"+startIndex + "result" + _gridManager.GetIndexMovePointFromStartMovePointLine(startIndex,
+                _data.indexMovedAmount));
             CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[1].HashCode,
                 _gridManager.GetIndexMovePointFromStartMovePointLine(startIndex,
                     _data.indexMovedAmount));
