@@ -10,6 +10,8 @@ namespace BehaviorTree.SO.Actions
         public float Time;
         public float StartTime;
         public bool IsSendResetTimerFunction;
+        public bool IsInternTimer;
+        
         public override Type GetTypeNode()
         {
             return typeof(CheckTimerNode);

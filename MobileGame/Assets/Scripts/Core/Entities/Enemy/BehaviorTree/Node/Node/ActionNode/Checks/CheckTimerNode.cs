@@ -1,6 +1,5 @@
 ﻿using System;
 using BehaviorTree.SO.Actions;
-using Service.Fight;
 using UnityEngine;
 
 namespace BehaviorTree.Nodes.Actions
@@ -36,24 +35,39 @@ namespace BehaviorTree.Nodes.Actions
         public override void Evaluate()
         {
             base.Evaluate();
-            if (_timer > _data.Time)
+            if (_data.IsInternTimer)
             {
-                ResetTimer();
-                EndTimerEvent?.Invoke();
-                //      Debug.Log("timer succes " + GetNodeSO().name);
-                State = BehaviorTreeEnums.NodeState.SUCCESS;
-                ReturnedEvent?.Invoke();
-                return;
+                if (_timer > (float)Sharer.InternValues[1])
+                {
+                    ResetTimer();
+                    EndTimerEvent?.Invoke();
+                    // Debug.Log("timer success " + GetNodeSO().name);
+                    State = BehaviorTreeEnums.NodeState.SUCCESS;
+                    ReturnedEvent?.Invoke();
+                    return;
+                }   
+            }
+            else
+            {
+                if (_timer > _data.Time)
+                {
+                    ResetTimer();
+                    EndTimerEvent?.Invoke();
+                    // Debug.Log("timer success " + GetNodeSO().name);
+                    State = BehaviorTreeEnums.NodeState.SUCCESS;
+                    ReturnedEvent?.Invoke();
+                    return;
+                }   
             }
 
             IncreaseTimerEvent?.Invoke();
             _timer += Time.deltaTime;
-            //    Debug.Log("timer failure " + GetNodeSO().name + _timer + "  " + _data.Time);
+            // Debug.Log("timer failure " + GetNodeSO().name + _timer + "  " + _data.Time);
             State = BehaviorTreeEnums.NodeState.FAILURE;
             ReturnedEvent?.Invoke();
-            /*    if (ReturnedEvent == null)
-                    Debug.Log("returnevent null" + (TempReturnedEvent == null));
-                else Debug.Log("return event is not null");*/
+            // if (ReturnedEvent == null)
+            //     Debug.Log("returnevent null" + (TempReturnedEvent == null));
+            // else Debug.Log("return event is not null");
         }
 
         public override void Reset()
@@ -77,7 +91,7 @@ namespace BehaviorTree.Nodes.Actions
         private void ResetTimer()
         {
             _timer = 0;
-//            Debug.Log("reset timer");
+            // Debug.Log("reset timer");
         }
 
         public override ActionNodeDataSO GetDataSO()
