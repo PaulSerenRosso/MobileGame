@@ -13,16 +13,21 @@ MonoBehaviour:
   m_Name: T_SetIntInternValue_ArnoldiosUltimateProbabilityAttack
   m_EditorClassIdentifier: 
   Comment: "N\u0153ud qui permet de SET une valeur integer dans les interns values"
-  _internValuesCount: 2
+  _internValuesCount: 3
   Data: {fileID: 11400000, guid: af64c891bc6cba84fa8f97d05e72fb80, type: 2}
   InternValues:
   - Key: AttackAction
     HashCode: 545973316
     Type: 1
     PropertyType: 0
-    Comment: Int(int) value to get in intern value
+    Comment: Int(int) value to get from intern value
   - Key: AttackAction
     HashCode: 545973316
     Type: 1
     PropertyType: 1
     Comment: Int(int) value to set in intern value
+  - Key: Nothing
+    HashCode: 836912589
+    Type: 2
+    PropertyType: 0
+    Comment: Float(float) value to get from intern value
