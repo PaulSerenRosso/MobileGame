@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BehaviorTree.SO.Actions
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Data/Checks/CirclesAreOccupiedNodeDataSO",
-        fileName = "new CH_CirclesAreOccupied_Spe_Data")]
+        fileName = "new Tree_CH_CirclesAreOccupied_Spe_Data")]
     public class CheckCirclesAreOccupiedNodeDataSO : ActionNodeDataSO
     {
         public int[] CircleIndexes;

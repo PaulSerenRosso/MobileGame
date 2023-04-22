@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BehaviorTree.SO.Composite
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Composite/SelectorSO", fileName = "new CO_Selector_Spe")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Composite/SelectorSO", fileName = "new Tree_CO_Selector_Spe")]
     public class SelectorSO : CompositeSO
     {
         public override Type GetTypeNode()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BehaviorTree.SO.Decorator
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Decorator/UntilSO", fileName = "new D_Until_Spe")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Decorator/UntilSO", fileName = "new Tree_D_Until_Spe")]
     public class DecoratorUntilSO : DecoratorSO
     {
         public BehaviorTreeEnums.NodeState BreakStateCondition;

@@ -3,7 +3,7 @@
 namespace BehaviorTree
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/SetIntInternValueNodeSO",
-        fileName = "new T_SetIntInternValue_Spe")]
+        fileName = "new Tree_T_SetIntInternValue_Spe")]
     public class TaskSetIntInternValueNodeSO : TaskNodeSO
     {
         public override void UpdateInterValues()

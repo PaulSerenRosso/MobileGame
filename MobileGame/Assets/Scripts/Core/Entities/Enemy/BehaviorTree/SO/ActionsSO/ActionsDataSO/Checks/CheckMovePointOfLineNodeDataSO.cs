@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BehaviorTree.SO.Actions
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Data/Checks/MovePointOfLineDataSO", fileName = "new CH_MovePointOfLine_Spe_Data")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Data/Checks/MovePointOfLineDataSO", fileName = "new Tree_CH_MovePointOfLine_Spe_Data")]
     public class CheckMovePointOfLineNodeDataSO : ActionNodeDataSO
     {
         protected override void SetDependencyValues()

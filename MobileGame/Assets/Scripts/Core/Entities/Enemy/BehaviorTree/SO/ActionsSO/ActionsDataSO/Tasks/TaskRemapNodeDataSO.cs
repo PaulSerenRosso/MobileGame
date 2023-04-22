@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BehaviorTree.SO.Actions
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/RemapNodeDataSO",
-        fileName = "new T_Remap_Spe_Data")]
+        fileName = "new Tree_T_Remap_Spe_Data")]
     public class TaskRemapNodeDataSO : ActionNodeDataSO
     {
         public float OldMinValue;

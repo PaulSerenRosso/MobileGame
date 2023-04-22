@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BehaviorTree.SO.Actions
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/InstantiateFXNodeDataSO",
-        fileName = "new T_InstantiateFX_Spe_Data")]
+        fileName = "new Tree_T_InstantiateFX_Spe_Data")]
     public class TaskInstantiateFXNodeDataSO : ActionNodeDataSO
     {
         public GameObject ParticleGO;

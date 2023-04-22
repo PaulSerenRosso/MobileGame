@@ -3,7 +3,7 @@
 namespace BehaviorTree
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/CallUltimateHypeNodeSO",
-        fileName = "new T_CallUltimateHype_Spe")]
+        fileName = "new Tree_T_CallUltimateHype_Spe")]
     public class TaskCallUltimateHypeNodeSO : TaskNodeSO
     {
         public override void UpdateComment()

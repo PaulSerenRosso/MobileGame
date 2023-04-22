@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BehaviorTree.SO.Actions
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/GapBetweenHypeDataSO",
-        fileName = "new T_GapBetweenHype_Spe_Data")]
+        fileName = "new Tree_T_GapBetweenHype_Spe_Data")]
     public class TaskGapBetweenHypeNodeDataSO : ActionNodeDataSO
     {
         protected override void SetDependencyValues()

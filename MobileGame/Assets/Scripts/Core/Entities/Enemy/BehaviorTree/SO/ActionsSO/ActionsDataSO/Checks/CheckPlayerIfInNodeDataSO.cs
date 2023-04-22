@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BehaviorTree.SO.Actions
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Data/Checks/PlayerIfInDataSO", fileName = "new CH_PlayerIfIn_Spe_Data")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Data/Checks/PlayerIfInDataSO", fileName = "new Tree_CH_PlayerIfIn_Spe_Data")]
     public class CheckPlayerIfInNodeDataSO : ActionNodeDataSO
     {
         protected override void SetDependencyValues()

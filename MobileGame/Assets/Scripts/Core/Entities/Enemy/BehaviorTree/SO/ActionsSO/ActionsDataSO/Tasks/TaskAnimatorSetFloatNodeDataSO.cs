@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BehaviorTree.SO.Actions
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/AnimatorSetFloatNodeDataSO",
-        fileName = "new T_AnimatorSetFloat_Spe_Data")]
+        fileName = "new Tree_T_AnimatorSetFloat_Spe_Data")]
     public class TaskAnimatorSetFloatNodeDataSO : ActionNodeDataSO
     {
         public string NameParameter;

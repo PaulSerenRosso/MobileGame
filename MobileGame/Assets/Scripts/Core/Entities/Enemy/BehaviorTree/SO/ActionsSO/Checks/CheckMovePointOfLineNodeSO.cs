@@ -2,7 +2,7 @@
 
 namespace BehaviorTree
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Actions/Checks/MovePointOfLineNodeSO", fileName = "new  CH_MovePointOfLine_Spe")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Actions/Checks/MovePointOfLineNodeSO", fileName = "new  Tree_CH_MovePointOfLine_Spe")]
     public class CheckMovePointOfLineNodeSO : CheckNodeSO
     {
         public override void UpdateInterValues()

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BehaviorTree.SO.Decorator
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Decorator/ReturnerSO",
-        fileName = "new D_Returner_Spe")]
+        fileName = "new Tree_D_Returner_Spe")]
     public class DecoratorReturnerSO : DecoratorSO
     {
         public BehaviorTreeEnums.NodeState ReturnState;

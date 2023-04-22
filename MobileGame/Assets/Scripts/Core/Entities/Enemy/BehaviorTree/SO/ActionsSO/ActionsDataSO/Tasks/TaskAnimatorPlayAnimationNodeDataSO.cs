@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BehaviorTree.SO.Actions
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/AnimatorPlayAnimationNodeDataSO",
-        fileName = "new T_AnimatorPlayAnimation_Spe_Data")]
+        fileName = "new Tree_T_AnimatorPlayAnimation_Spe_Data")]
     public class TaskAnimatorPlayAnimationNodeDataSO : ActionNodeDataSO
     {
         public string NameParameter;

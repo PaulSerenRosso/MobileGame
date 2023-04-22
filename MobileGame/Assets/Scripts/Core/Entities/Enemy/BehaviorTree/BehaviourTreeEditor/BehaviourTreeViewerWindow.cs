@@ -88,16 +88,17 @@ namespace BehaviorTreeEditor
 
         public NodeRender CreateNodeRender(NodeSO so, BehaviourTreeContainer container, int index)
         {
+           var treePrefix = so.name.Split("_")[0]+"_";
             return so switch
             {
                 DecoratorSO decoratorSo => new InnerNodeRender(this, container, Color.yellow, decoratorSo,
-                    index + " - " + decoratorSo.name.Split("D_")[1]),
+                    index + " - " +treePrefix+ decoratorSo.name.Split("D_")[1]),
                 CompositeSO compositeSo => new InnerNodeRender(this, container, Color.blue, compositeSo,
-                    index + " - " + compositeSo.name.Split("CO_")[1]),
+                    index + " - " + treePrefix+compositeSo.name.Split("CO_")[1]),
                 TaskNodeSO taskNodeSo => new ActionNodeRender(this, Color.magenta,
-                    taskNodeSo, index + " - " + taskNodeSo.name.Split("T_")[1]),
+                    taskNodeSo, index + " - " +treePrefix+ taskNodeSo.name.Split("T_")[1]),
                 CheckNodeSO checkNodeSo => new ActionNodeRender(this, _colorCheck,
-                    checkNodeSo, index + " - " + checkNodeSo.name.Split("CH_")[1]),
+                    checkNodeSo, index + " - " +treePrefix+ checkNodeSo.name.Split("CH_")[1]),
                 _ => null
             };
         }

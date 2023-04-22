@@ -2,7 +2,7 @@
 
 namespace BehaviorTree
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/LookDirectionDirectNodeSO", fileName = "new T_LookDirectionDirect_Spe")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/LookDirectionDirectNodeSO", fileName = "new Tree_T_LookDirectionDirect_Spe")]
     public class TaskLookDirectionDirectNodeSO : TaskNodeSO
     {
         public override void UpdateInterValues()

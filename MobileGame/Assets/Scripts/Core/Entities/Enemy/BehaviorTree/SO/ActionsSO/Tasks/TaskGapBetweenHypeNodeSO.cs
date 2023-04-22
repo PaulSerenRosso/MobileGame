@@ -3,7 +3,7 @@
 namespace BehaviorTree
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/GapBetweenHypeNodeSO",
-        fileName = "new  T_GapBetweenHype_Spe")]
+        fileName = "new  Tree_T_GapBetweenHype_Spe")]
     public class TaskGapBetweenHypeNodeSO : TaskNodeSO
     {
         public override void UpdateInterValues()

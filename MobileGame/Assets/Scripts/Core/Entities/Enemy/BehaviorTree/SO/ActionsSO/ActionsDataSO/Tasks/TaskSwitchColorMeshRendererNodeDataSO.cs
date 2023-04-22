@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BehaviorTree.SO.Actions
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/SwitchColorMeshRendererNodeDataSO",
-        fileName = "new T_SwitchColorMeshRenderer_Spe_Data")]
+        fileName = "new Tree_T_SwitchColorMeshRenderer_Spe_Data")]
     public class TaskSwitchColorMeshRendererNodeDataSO : ActionNodeDataSO
     {
         public Color SwitchableColor;

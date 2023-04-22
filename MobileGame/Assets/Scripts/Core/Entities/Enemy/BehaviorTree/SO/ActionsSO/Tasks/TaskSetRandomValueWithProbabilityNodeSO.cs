@@ -4,7 +4,7 @@ using UnityEngine;
 namespace BehaviorTree
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/SetRandomValueWithProbabilityNodeSO",
-        fileName = "new T_SetRandomValueWithProbability_Spe")]
+        fileName = "new Tree_T_SetRandomValueWithProbability_Spe")]
     public class TaskSetRandomValueWithProbabilityNodeSO : TaskNodeSO
     {
         public override void UpdateInterValues()

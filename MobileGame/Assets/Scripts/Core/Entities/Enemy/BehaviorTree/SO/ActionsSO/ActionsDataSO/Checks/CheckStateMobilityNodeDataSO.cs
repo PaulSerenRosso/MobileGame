@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BehaviorTree.SO.Actions
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Data/Checks/StateMobilityDataSO", fileName = "new CH_StateMobility_Spe_Data")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Data/Checks/StateMobilityDataSO", fileName = "new Tree_CH_StateMobility_Spe_Data")]
     public class CheckStateMobilityNodeDataSO : ActionNodeDataSO
     {
         public EnemyEnums.EnemyMobilityState enemyMobilityState;

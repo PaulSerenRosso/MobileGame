@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BehaviorTree.SO.Actions
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Data/Checks/IntInternValueDataSO",
-        fileName = "new CH_IntInternValue_Spe_Data")]
+        fileName = "new Tree_CH_IntInternValue_Spe_Data")]
     public class CheckIntInternValueNodeDataSO : ActionNodeDataSO
     {
         public int ValueToCheck;

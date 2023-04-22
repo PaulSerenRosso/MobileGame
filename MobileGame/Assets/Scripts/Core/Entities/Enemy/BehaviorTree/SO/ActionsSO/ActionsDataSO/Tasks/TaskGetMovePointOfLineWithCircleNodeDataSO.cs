@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BehaviorTree.SO.Actions
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/GetMovePointOfLineWithCircleNodeDataSO",
-        fileName = "new T_GetMovePointOfLineWithCircle_Spe_Data")]
+        fileName = "new Tree_T_GetMovePointOfLineWithCircle_Spe_Data")]
     public class TaskGetMovePointOfLineWithCircleNodeDataSO : ActionNodeDataSO
     {
         public int CircleIndex;
