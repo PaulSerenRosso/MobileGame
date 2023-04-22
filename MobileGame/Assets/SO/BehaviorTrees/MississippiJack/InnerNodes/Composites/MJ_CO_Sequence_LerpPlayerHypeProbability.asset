@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a554480369441f643a037b92f1ced7d6, type: 3}
+  m_Name: MJ_CO_Sequence_LerpPlayerHypeProbability
+  m_EditorClassIdentifier: 
+  Comment: "S\xE9lectionne un n\u0153ud et v\xE9rifie si le n\u0153ud est un succ\xE8s
+    ou est en train de fonctionner et retourne le statut, sinon d\xE9s qu'un n\u0153ud
+    retourne un \xE9chec, la sequence retourne un \xE9chec"
+  Children:
+  - {fileID: 11400000, guid: 5fc125ec694bd4d46af5d5f3eae2ae00, type: 2}
+  - {fileID: 11400000, guid: f9e4929f336c77f49afa3726ef346762, type: 2}
+  - {fileID: 11400000, guid: ace02c6515336ab4eac6974c27fb4056, type: 2}
+  - {fileID: 11400000, guid: a0b2b38f2c442864eb64a5197d558088, type: 2}
+  - {fileID: 11400000, guid: a3edcb6ab496f1a4e8ffaea8c4fa1bae, type: 2}
+  - {fileID: 11400000, guid: b08836a1f4ee0ac4489fbf18f6825509, type: 2}
+  - {fileID: 11400000, guid: 224e9e129db36a5408393e14c8ce8879, type: 2}
+  - {fileID: 11400000, guid: b8709ba10079d394aadd1af33adc46ce, type: 2}
+  - {fileID: 11400000, guid: 76be3cd51e295d948b0543deab51aaf3, type: 2}
+  - {fileID: 11400000, guid: a9f3cc6d9c2feff4f9b6610d9fbb54b9, type: 2}
+  - {fileID: 11400000, guid: 58460f5751fa95148977f496e8bbe2b6, type: 2}
+  - {fileID: 11400000, guid: 4713ac6ebc667e1498355da9cf411ca4, type: 2}
+  - {fileID: 11400000, guid: d81e2b463093ca54487acbddacee9926, type: 2}
