@@ -42,7 +42,7 @@ namespace BehaviorTreeEditor
                     Select();
                 }
             }
-            GUI.backgroundColor = _behaviourTreeWindow.BaseColor;
+            GUI.backgroundColor = BehaviourTreeViewerWindow.BaseColor;
             base.Render();
             EditorGUILayout.EndVertical();
         }
@@ -52,23 +52,23 @@ namespace BehaviorTreeEditor
             if (_currentContainer.SelectedNodeRender != null)
             {
                 _currentContainer.SelectedNodeRender._isSelected = false;
-                _behaviourTreeWindow.RemoveContainers(_currentContainer.Index + 1);
+                BehaviourTreeViewerWindow.RemoveContainers(_currentContainer.Index + 1);
             }
 
             _currentContainer.SelectedNodeRender = this;
             _isSelected = true;
-            _behaviourTreeWindow.AddChildContainer(_so);
+            BehaviourTreeViewerWindow.AddChildContainer(_so);
         }
 
         public  void CancelSelection()
         {
             _currentContainer.SelectedNodeRender = null;
-            _behaviourTreeWindow.RemoveContainers(_currentContainer.Index + 1);
+            BehaviourTreeViewerWindow.RemoveContainers(_currentContainer.Index + 1);
             _isSelected = false;
         }
         
-        public InnerNodeRender(BehaviourTreeWindow behaviourTreeWindow, BehaviourTreeContainer currentContainer,
-            Color backgroundColor, InnerNodeSO so, string titleName) : base(behaviourTreeWindow, backgroundColor, titleName)
+        public InnerNodeRender(BehaviourTreeViewerWindow behaviourTreeViewerWindow, BehaviourTreeContainer currentContainer,
+            Color backgroundColor, InnerNodeSO so, string titleName) : base(behaviourTreeViewerWindow, backgroundColor, titleName)
         {
             _so = so;
             _currentContainer = currentContainer;

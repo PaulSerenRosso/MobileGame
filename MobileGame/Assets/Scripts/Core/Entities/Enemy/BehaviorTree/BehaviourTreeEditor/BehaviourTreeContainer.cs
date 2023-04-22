@@ -12,7 +12,7 @@ namespace BehaviorTreeEditor
         public BehaviourTreeContainer PreviousContainer;
         
         private Vector2 _scrollView;
-        private BehaviourTreeWindow _behaviourTreeWindow;
+        private BehaviourTreeViewerWindow _behaviourTreeViewerWindow;
         private GUIStyle nodeContainerStyle;
         private bool _isClose;
         private List<NodeRender> _nodeRenders;
@@ -24,10 +24,10 @@ namespace BehaviorTreeEditor
 
         public int GetCurrentNodeRenderCount() => _nodeRenders.Count;
 
-        public void Init(BehaviourTreeWindow behaviourTreeWindow, List<NodeRender> nodesRenders,
+        public void Init(BehaviourTreeViewerWindow behaviourTreeViewerWindow, List<NodeRender> nodesRenders,
             BehaviourTreeContainer previousContainer, int index)
         {
-            _behaviourTreeWindow = behaviourTreeWindow;
+            _behaviourTreeViewerWindow = behaviourTreeViewerWindow;
             _nodeRenders = nodesRenders;
             _isClose = false;
             if (previousContainer != null) PreviousContainer = previousContainer;

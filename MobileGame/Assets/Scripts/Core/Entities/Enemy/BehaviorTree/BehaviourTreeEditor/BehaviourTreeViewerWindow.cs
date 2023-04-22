@@ -11,7 +11,7 @@ using InnerNodeSO = BehaviorTree.SO.InnerNodeSO;
 #if UNITY_EDITOR
 namespace BehaviorTreeEditor
 {
-    public class BehaviourTreeWindow : EditorWindow
+    public class BehaviourTreeViewerWindow : EditorWindow
     {
         public Color BaseColor;
         public List<BehaviourTreeContainer> _childContainers = new();
@@ -23,11 +23,11 @@ namespace BehaviorTreeEditor
         private InnerNodeSO _root;
         private Color _colorCheck = new(0f, 1f, 0f);
 
-        [MenuItem("Window/BehaviourTree")]
+        [MenuItem("Window/BehaviourTree/Viewer")]
         static void Init()
         {
-            BehaviourTreeWindow window = (BehaviourTreeWindow)GetWindow(typeof(BehaviourTreeWindow));
-            window.Show();
+            BehaviourTreeViewerWindow viewerWindow = (BehaviourTreeViewerWindow)GetWindow(typeof(BehaviourTreeViewerWindow));
+            viewerWindow.Show();
         }
 
         private void OnEnable()

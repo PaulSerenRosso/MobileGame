@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace BehaviorTree
 {
-    public abstract class NodeSO : ScriptableObject
+    public abstract class NodeSO : BehaviourTreeSO
     {
         [TextArea] public string Comment;
-        
+       
         public abstract Type GetTypeNode();
 
         protected virtual void OnValidate()
