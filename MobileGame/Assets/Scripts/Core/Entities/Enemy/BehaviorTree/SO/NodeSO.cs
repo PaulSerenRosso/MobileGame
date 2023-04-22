@@ -6,7 +6,7 @@ namespace BehaviorTree
     public abstract class NodeSO : ScriptableObject
     {
         [TextArea] public string Comment;
-        
+        public bool isNeededToDuplicate;
         public abstract Type GetTypeNode();
 
         protected virtual void OnValidate()

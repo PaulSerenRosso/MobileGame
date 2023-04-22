@@ -50,7 +50,7 @@ namespace BehaviorTreeEditor
             GUILayout.BeginHorizontal(_titleStyle);
             GUILayout.Label(title);
             GUILayout.EndHorizontal();
-            GUI.backgroundColor = _behaviourTreeWindow.BaseColor;
+            GUI.backgroundColor = BehaviourTreeViewerWindow.BaseColor;
             foreach (var internValue in internValuesBlock)
             {
                 if (internValue.Key == "")
@@ -75,7 +75,7 @@ namespace BehaviorTreeEditor
             GUILayout.BeginHorizontal(_titleStyle);
             GUILayout.Label(title);
             GUILayout.EndHorizontal();
-            GUI.backgroundColor = _behaviourTreeWindow.BaseColor;
+            GUI.backgroundColor = BehaviourTreeViewerWindow.BaseColor;
             foreach (var internValue in internValuesBlock)
             {
                 if (internValue.Key == "")
@@ -93,9 +93,9 @@ namespace BehaviorTreeEditor
             EditorGUILayout.EndVertical();
         }
 
-        public ActionNodeRender(BehaviourTreeWindow behaviourTreeWindow, Color backgroundColor, ActionNodeSO so,
+        public ActionNodeRender(BehaviourTreeViewerWindow behaviourTreeViewerWindow, Color backgroundColor, ActionNodeSO so,
             string titleName) : base(
-            behaviourTreeWindow, backgroundColor, titleName)
+            behaviourTreeViewerWindow, backgroundColor, titleName)
         {
             _so = so;
             foreach (var internValue in _so.InternValues)
