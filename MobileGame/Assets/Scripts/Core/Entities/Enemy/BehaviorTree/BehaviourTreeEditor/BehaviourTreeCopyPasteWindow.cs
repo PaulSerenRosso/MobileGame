@@ -26,9 +26,10 @@ namespace BehaviorTreeEditor
         private const string _checkNodeDirectoryName = "Checks";
         private const string _actionNodeDataDirectoryName = "ActionNodesData";
         private const string _innerNodeDirectoryName = "InnerNodes";
-        private const string _compositeNodeFolderDirectoryame = "Composites";
+        private const string _compositeNodeFolderDirectoryName = "Composites";
         private const string _decoratorNodeDirectoryName = "Decorators";
         private const string separatorDirectory = "/";
+        private const string assetExtension = ".asset";
         [MenuItem("Window/BehaviourTree/CopyPaste")]
         static void Init()
         {
@@ -60,7 +61,7 @@ namespace BehaviorTreeEditor
             TryCreateFolder(_actionNodeDirectoryName, _taskNodeDirectoryName);
             TryCreateFolder(_actionNodeDataDirectoryName, _taskNodeDirectoryName);
             TryCreateFolder(_actionNodeDataDirectoryName, _checkNodeDirectoryName);
-            TryCreateFolder(_innerNodeDirectoryName, _compositeNodeFolderDirectoryame);
+            TryCreateFolder(_innerNodeDirectoryName, _compositeNodeFolderDirectoryName);
             TryCreateFolder(_innerNodeDirectoryName, _decoratorNodeDirectoryName);
             CreateNodeSOAssetWithTypeNode(_nodeToDuplicate);
             AssetDatabase.Refresh();
@@ -89,7 +90,7 @@ namespace BehaviorTreeEditor
             {
                 case CompositeSO composite:
                 {
-                        CreateNodeSOAsset(nodeSo, _pathOfRoot+separatorDirectory+_innerNodeDirectoryName+separatorDirectory+_compositeNodeFolderDirectoryame);
+                        CreateNodeSOAsset(nodeSo, _pathOfRoot+separatorDirectory+_innerNodeDirectoryName+separatorDirectory+_compositeNodeFolderDirectoryName);
                    // for (int i = 0; i < composite.Children.Count; i++)
                     //{
                      //   CreateNodeSOAssetWithTypeNode(composite.Children[i]);
@@ -114,9 +115,17 @@ namespace BehaviorTreeEditor
             }
         }
 
-        private void CreateNodeSOAsset(NodeSO nodeSo, string path)
+        // change le spé 
+        // change le nom pour le perso
+        private NodeSO CreateNodeSOAsset(NodeSO nodeSo, string path)
         {
-            AssetDatabase.CreateAsset(nodeSo, _pathOfRoot);
+            if (nodeSo.isNeededToDuplicate)
+            {
+                var newPath = path + separatorDirectory + nodeSo.name + assetExtension;
+                AssetDatabase.CopyAsset(AssetDatabase.GetAssetPath(nodeSo), newPath);
+                return (NodeSO)AssetDatabase.LoadAssetAtPath(path, nodeSo.GetType());
+            }
+            return null;
         }
   
     }
