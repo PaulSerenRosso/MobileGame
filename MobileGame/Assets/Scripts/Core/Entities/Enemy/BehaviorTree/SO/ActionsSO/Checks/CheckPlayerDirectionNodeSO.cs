@@ -3,7 +3,7 @@
 namespace BehaviorTree
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Actions/Checks/PlayerDirectionNodeSO",
-        fileName = "new  CH_PlayerDirection_Spe")]
+        fileName = "new  Tree_CH_PlayerDirection_Spe")]
     public class CheckPlayerDirectionNodeSO : CheckNodeSO
     {
         public override void UpdateInterValues()

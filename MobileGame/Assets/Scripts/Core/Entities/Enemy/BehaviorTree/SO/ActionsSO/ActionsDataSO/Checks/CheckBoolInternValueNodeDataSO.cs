@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BehaviorTree.SO.Actions
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Data/Checks/BoolInternValueNodeDataSO",
-        fileName = "new CH_BoolInternValue_Spe_Data")]
+        fileName = "new Tree_CH_BoolInternValue_Spe_Data")]
     public class CheckBoolInternValueNodeDataSO : ActionNodeDataSO
     {
         protected override void SetDependencyValues()

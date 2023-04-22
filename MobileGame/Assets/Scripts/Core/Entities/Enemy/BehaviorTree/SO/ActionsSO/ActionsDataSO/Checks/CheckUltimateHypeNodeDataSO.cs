@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BehaviorTree.SO.Actions
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Data/Checks/UltimateHypeNodeDataSO",
-        fileName = "new CH_UltimateHype_Spe_Data")]
+        fileName = "new Tree_CH_UltimateHype_Spe_Data")]
     public class CheckUltimateHypeNodeDataSO: ActionNodeDataSO
     {
         protected override void SetDependencyValues()

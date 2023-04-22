@@ -6,7 +6,7 @@ using UnityEngine;
 namespace BehaviorTree.SO.Actions
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/MoveHypeNodeDataSO",
-        fileName = "new T_DecreasePlayerHype_Spe_Data")]
+        fileName = "new Tree_T_DecreasePlayerHype_Spe_Data")]
     public class TaskMoveHypeNodeDataSO : ActionNodeDataSO
     {
         public float HypeAmount;

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BehaviorTree.SO.Actions
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/RandomRangeNodeDataSO",
-        fileName = "new T_RandomRange_Spe_Data")]
+        fileName = "new Tree_T_RandomRange_Spe_Data")]
     public class TaskRandomRangeNodeDataSO : ActionNodeDataSO
     {
         public float MinValue;

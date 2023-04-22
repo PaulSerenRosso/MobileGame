@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BehaviorTree.SO.Actions
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/SendDebugLogNodeDataSO", fileName = "new T_SendDebugLog_Spe_Data")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/SendDebugLogNodeDataSO", fileName = "new Tree_T_SendDebugLog_Spe_Data")]
     public class TaskSendDebugLogNodeDataSO : ActionNodeDataSO
     {
         public string MessageDebug;

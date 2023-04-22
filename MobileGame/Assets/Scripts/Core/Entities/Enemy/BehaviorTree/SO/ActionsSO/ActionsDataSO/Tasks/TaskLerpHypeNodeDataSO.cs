@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BehaviorTree.SO.Actions
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/LerpHypeNodeDataSO",
-        fileName = "new T_LerpHype_Spe_Data")]
+        fileName = "new Tree_T_LerpHype_Spe_Data")]
     public class TaskLerpHypeNodeDataSO : ActionNodeDataSO
     {
         public bool isPlayerHype;

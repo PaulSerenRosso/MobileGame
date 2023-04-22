@@ -3,7 +3,7 @@
 namespace BehaviorTree
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/GetMovePointOfCircleNodeSO",
-        fileName = "new  T_GetMovePointOfCircle_Spe")]
+        fileName = "new  Tree_T_GetMovePointOfCircle_Spe")]
     public class TaskGetMovePointOfCircleNodeSO : TaskNodeSO
     {
         public override void UpdateInterValues()

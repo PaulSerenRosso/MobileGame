@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 964c460d6367453a85e043677d1a67c6, type: 3}
+  m_Name: MJ_T_LookDirectionDirect_RotationAttackSpeMJ
+  m_EditorClassIdentifier: 
+  Comment: "N\u0153ud qui permet de tourner le boss vers une direction directement"
+  _internValuesCount: 1
+  Data: {fileID: 11400000, guid: 5b5f78654aa8c5f4d9be3cd0f2fc4ac8, type: 2}
+  InternValues:
+  - Key: PlayerIndexMovePointPosition
+    HashCode: 479747565
+    Type: 0
+    PropertyType: 0
+    Comment: Direction(Vector3) where the boss need to look

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BehaviorTree.SO.Actions
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/EvaluateCurveNodeDataSO",
-        fileName = "new T_EvaluateCurve_Spe_Data")]
+        fileName = "new Tree_T_EvaluateCurve_Spe_Data")]
     public class TaskEvaluateCurveNodeDataSO : ActionNodeDataSO
     {
         public AnimationCurve Curve;

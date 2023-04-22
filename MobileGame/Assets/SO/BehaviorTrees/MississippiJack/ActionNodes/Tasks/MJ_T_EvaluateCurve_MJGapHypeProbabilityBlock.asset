@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02f27a9c4df452ba82797f8c062c485, type: 3}
+  m_Name: MJ_T_EvaluateCurve_MJGapHypeProbabilityBlock
+  m_EditorClassIdentifier: 
+  Comment: "N\u0153ud qui permet de d\xE9terminer une probabilit\xE9 selon un ratio
+    obtenu"
+  _internValuesCount: 2
+  Data: {fileID: 11400000, guid: 702a87c6f56877e409ed9d5335dce363, type: 2}
+  InternValues:
+  - Key: RatioHype
+    HashCode: 191104473
+    Type: 2
+    PropertyType: 0
+    Comment: Float(float) get value float in intern values
+  - Key: RatioBlock
+    HashCode: 1689158426
+    Type: 2
+    PropertyType: 1
+    Comment: float(float) set value of float into intern values

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BehaviorTree.SO.Actions
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/LookDirectionDirectNodeDataSO",
-        fileName = "new T_LookDirectionDirect_Spe_Data")]
+        fileName = "new Tree_T_LookDirectionDirect_Spe_Data")]
     public class TaskLookDirectionDirectNodeDataSO : ActionNodeDataSO
     {
         protected override void SetDependencyValues()

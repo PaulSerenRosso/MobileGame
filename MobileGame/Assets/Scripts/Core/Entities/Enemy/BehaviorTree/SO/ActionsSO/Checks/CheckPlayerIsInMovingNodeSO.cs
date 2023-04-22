@@ -3,7 +3,7 @@
 namespace BehaviorTree
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Actions/Checks/PlayerIsInMovingNodeSO",
-        fileName = "new  CH_PlayerIsInMoving_Spe")]
+        fileName = "new  Tree_CH_PlayerIsInMoving_Spe")]
     public class CheckPlayerIsInMovingNodeSO : CheckNodeSO
     {
         public override void UpdateComment()

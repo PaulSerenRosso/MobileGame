@@ -16,6 +16,8 @@ namespace BehaviorTreeEditor
     {
         private NodeSO _nodeToDuplicate;
         private string _pathOfRoot;
+        private string _prefixOfNodeToDuplicate;
+        
         private const string _actionNodeDirectoryName = "ActionNodes";
         private const string _taskNodeDirectoryName = "Tasks";
         private const string _checkNodeDirectoryName = "Checks";
@@ -49,7 +51,9 @@ namespace BehaviorTreeEditor
                 EditorGUILayout.ObjectField("Node To Duplicate", _nodeToDuplicate, typeof(NodeSO), false) as NodeSO;
             _pathOfRoot =
                 EditorGUILayout.TextField("Path To Create Duplicate Node", _pathOfRoot);
-            GUI.enabled = _pathOfRoot != "" && _nodeToDuplicate != null;
+            _prefixOfNodeToDuplicate =
+                EditorGUILayout.TextField("Prefix used To Create Duplicate Node", _prefixOfNodeToDuplicate);
+            GUI.enabled = _pathOfRoot != "" && _nodeToDuplicate != null  && _prefixOfNodeToDuplicate != "";
             if (GUILayout.Button("Duplicate Node"))
             {
                 TryCreateFoldersNeeded();
@@ -188,12 +192,12 @@ namespace BehaviorTreeEditor
         private BehaviourTreeSO TryCreateNodeSOAsset(BehaviourTreeSO nodeSo, string path,
             Action<BehaviourTreeSO> successEvent)
         {
-            var dupplicationNode = CreateNodeSOAsset(nodeSo,
+            var duplicationNode = CreateNodeSOAsset(nodeSo,
                 path);
-            if (dupplicationNode != null)
+            if (duplicationNode != null)
             {
-                successEvent?.Invoke(dupplicationNode);
-                return dupplicationNode;
+                successEvent?.Invoke(duplicationNode);
+                return duplicationNode;
             }
 
             return null;
@@ -206,11 +210,16 @@ namespace BehaviorTreeEditor
         {
             if (nodeSo.IsDuplicable)
             {
-                var newPath = path + separatorDirectory + nodeSo.name + assetExtension;
+                string newPath = "";
+                newPath = path + separatorDirectory + _prefixOfNodeToDuplicate +"_"+ nodeSo.name.Split("_", 2)[1] + assetExtension;
+                var currentAssetAtPath = AssetDatabase.LoadAssetAtPath(newPath, nodeSo.GetType());
+                if (currentAssetAtPath)
+                {
+                    return (BehaviourTreeSO)currentAssetAtPath;
+                }
                 AssetDatabase.CopyAsset(AssetDatabase.GetAssetPath(nodeSo), newPath);
                 return (BehaviourTreeSO)AssetDatabase.LoadAssetAtPath(newPath, nodeSo.GetType());
             }
-
             return null;
         }
     }

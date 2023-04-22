@@ -3,7 +3,7 @@
 namespace BehaviorTree
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/ShaderSetFloatNodeSO",
-        fileName = "new T_ShaderSetFloat_Spe")]
+        fileName = "new Tree_T_ShaderSetFloat_Spe")]
     public class TaskShaderSetFloatNodeSO : TaskNodeSO
     {
         public override void UpdateComment()

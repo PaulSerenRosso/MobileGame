@@ -2,7 +2,7 @@
 
 namespace BehaviorTree
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/RemapNodeSO", fileName = "new T_Remap_Spe")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/RemapNodeSO", fileName = "new Tree_T_Remap_Spe")]
     public class TaskRemapNodeSO : TaskNodeSO
     {
         public override void UpdateInterValues()

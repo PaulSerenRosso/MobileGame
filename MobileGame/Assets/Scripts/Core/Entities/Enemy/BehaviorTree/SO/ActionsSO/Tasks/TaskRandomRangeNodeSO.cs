@@ -2,7 +2,7 @@
 
 namespace BehaviorTree
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/RandomRangeNodeSO", fileName = "new T_RandomRange_Spe")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/RandomRangeNodeSO", fileName = "new Tree_T_RandomRange_Spe")]
     public class TaskRandomRangeNodeSO : TaskNodeSO
     {
         public override void UpdateInterValues()

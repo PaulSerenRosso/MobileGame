@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BehaviorTree.SO.Actions
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/LookDirectionNodeDataSO",
-        fileName = "new T_LookDirection_Spe_Data")]
+        fileName = "new Tree_T_LookDirection_Spe_Data")]
     public class TaskLookDirectionNodeDataSO : ActionNodeDataSO
     {
         public float TimeRotation;

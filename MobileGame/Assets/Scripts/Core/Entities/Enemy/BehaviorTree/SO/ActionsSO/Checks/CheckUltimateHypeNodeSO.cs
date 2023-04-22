@@ -2,7 +2,7 @@
 
 namespace BehaviorTree
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Actions/Checks/UltimateHypeNodeSO", fileName = "new CH_UltimateHype_Spe")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Actions/Checks/UltimateHypeNodeSO", fileName = "new Tree_CH_UltimateHype_Spe")]
     public class CheckUltimateHypeNodeSO: CheckNodeSO
     {
         public override void UpdateComment()

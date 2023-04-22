@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BehaviorTree.SO.Actions
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/SetBoolInternValueNodeDataSO",
-        fileName = "new T_SetBoolInternValue_Spe_Data")]
+        fileName = "new Tree_T_SetBoolInternValue_Spe_Data")]
     public class TaskSetBoolInternValueNodeDataSO : ActionNodeDataSO
     {
         public bool BooleanValue;

@@ -3,7 +3,7 @@
 namespace BehaviorTree
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/EvaluateCurveNodeSO",
-        fileName = "new T_EvaluateCurve_Spe")]
+        fileName = "new Tree_T_EvaluateCurve_Spe")]
     public class TaskEvaluateCurveNodeSO : TaskNodeSO
     {
         public override void UpdateInterValues()

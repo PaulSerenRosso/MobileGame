@@ -3,7 +3,7 @@
 namespace BehaviorTree
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/SetStateBlockingNodeSO",
-        fileName = "new  T_SetStateBlocking_Spe")]
+        fileName = "new  Tree_T_SetStateBlocking_Spe")]
     public class TaskSetStateBlockingNodeSO : TaskNodeSO
     {
         public override void UpdateComment()

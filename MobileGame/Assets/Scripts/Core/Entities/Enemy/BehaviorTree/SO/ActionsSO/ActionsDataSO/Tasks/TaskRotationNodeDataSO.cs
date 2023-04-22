@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BehaviorTree.SO.Actions
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/RotationNodeDataSO", fileName = "new T_Rotation_Spe_Data")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/RotationNodeDataSO", fileName = "new Tree_T_Rotation_Spe_Data")]
     public class TaskRotationNodeDataSO : ActionNodeDataSO
     {
         public float TimeRotation;

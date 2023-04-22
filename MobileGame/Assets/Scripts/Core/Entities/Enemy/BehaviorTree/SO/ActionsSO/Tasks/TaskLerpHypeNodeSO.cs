@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BehaviorTree
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/LerpHypeNodeSO",
-        fileName = "new  T_LerpHype_Spe")]
+        fileName = "new  Tree_T_LerpHype_Spe")]
     public class TaskLerpHypeNodeSO : TaskNodeSO
     {
         public override void UpdateInterValues()

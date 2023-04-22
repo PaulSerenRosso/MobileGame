@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BehaviorTree.SO.Actions
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/GetMovePointOfLineNodeDataSO",
-        fileName = "new T_GetMovePointOfLine_Spe_Data")]
+        fileName = "new Tree_T_GetMovePointOfLine_Spe_Data")]
     public class TaskGetMovePointOfLineNodeDataSO : ActionNodeDataSO
     {
         public int indexMovedAmount;

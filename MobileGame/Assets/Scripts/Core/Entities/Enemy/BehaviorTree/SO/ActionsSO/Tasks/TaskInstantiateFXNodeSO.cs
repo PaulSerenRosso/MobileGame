@@ -2,7 +2,7 @@
 
 namespace BehaviorTree
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/InstantiateFXNodeSO", fileName = "new T_InstantiateFX_Spe")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/InstantiateFXNodeSO", fileName = "new Tree_T_InstantiateFX_Spe")]
     public class TaskInstantiateFXNodeSO : TaskNodeSO
     {
         public override void UpdateInterValues()
