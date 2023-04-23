@@ -120,11 +120,11 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
         _hypeService.ResetHypeEnemy();
     }
 
-    public void StopTree()
+    public void StopTree(Action callback)
     {
         ResetAnimatorParameters();
         _tree.StopTree();
-        _tree.ResetTree();
+        _tree.ResetTree(callback);
     }
 
     public void ReplayTree()
