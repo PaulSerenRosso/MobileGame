@@ -120,12 +120,12 @@ namespace Actions
 
         private void Hit()
         {
+            HitAnimationEvent?.Invoke(AttackActionSo.HitsSO[_comboCount].NameAnimationTrigger);
             if (CheckCanDamageEvent.Invoke(AttackActionSo.HitsSO[_comboCount]))
             {
                 var hit = _hitPools[_comboCount].GetFromPool();
-                HitAnimationEvent?.Invoke(AttackActionSo.HitsSO[_comboCount].NameAnimationTrigger);
                 _hitPools[_comboCount].AddToPoolLatter(hit, hit.GetComponent<ParticleSystem>().main.duration);
-                if (_hypeable.TryDecreaseHypeEnemy(AttackActionSo.HitsSO[_comboCount].HypeAmount, transform.position))
+                if (_hypeable.TryDecreaseHypeEnemy(AttackActionSo.HitsSO[_comboCount].HypeAmount, transform.position, hit.transform))
                 {
                     HitDamagedEvent?.Invoke();
                 }
