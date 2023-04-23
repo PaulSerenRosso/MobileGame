@@ -26,7 +26,8 @@ namespace BehaviorTreeEditor
         [MenuItem("Window/BehaviourTree/Viewer")]
         static void Init()
         {
-            BehaviourTreeViewerWindow viewerWindow = (BehaviourTreeViewerWindow)GetWindow(typeof(BehaviourTreeViewerWindow));
+            BehaviourTreeViewerWindow viewerWindow =
+                (BehaviourTreeViewerWindow)GetWindow(typeof(BehaviourTreeViewerWindow));
             viewerWindow.Show();
         }
 
@@ -51,7 +52,8 @@ namespace BehaviorTreeEditor
             {
                 for (int i = 0; i < compositeParentSo.Children.Count; i++)
                 {
-                    nodeRenders.Add(CreateNodeRender(compositeParentSo.Children[i], newContainer, nodeRenders.Count + 1));
+                    nodeRenders.Add(
+                        CreateNodeRender(compositeParentSo.Children[i], newContainer, nodeRenders.Count + 1));
                 }
             }
             else if (innerNode is DecoratorSO decoratorParentSo)
@@ -88,17 +90,17 @@ namespace BehaviorTreeEditor
 
         public NodeRender CreateNodeRender(NodeSO so, BehaviourTreeContainer container, int index)
         {
-           var treePrefix = so.name.Split("_")[0]+"_";
+            var treePrefix = so.name.Split("_")[0] + "_";
             return so switch
             {
                 DecoratorSO decoratorSo => new InnerNodeRender(this, container, Color.yellow, decoratorSo,
-                    index + " - " +treePrefix+ decoratorSo.name.Split("D_")[1]),
+                    index + " - " + treePrefix + decoratorSo.name.Split("D_")[1]),
                 CompositeSO compositeSo => new InnerNodeRender(this, container, Color.blue, compositeSo,
-                    index + " - " + treePrefix+compositeSo.name.Split("CO_")[1]),
+                    index + " - " + treePrefix + compositeSo.name.Split("CO_")[1]),
                 TaskNodeSO taskNodeSo => new ActionNodeRender(this, Color.magenta,
-                    taskNodeSo, index + " - " +treePrefix+ taskNodeSo.name.Split("T_")[1]),
+                    taskNodeSo, index + " - " + treePrefix + taskNodeSo.name.Split("T_")[1]),
                 CheckNodeSO checkNodeSo => new ActionNodeRender(this, _colorCheck,
-                    checkNodeSo, index + " - " +treePrefix+ checkNodeSo.name.Split("CH_")[1]),
+                    checkNodeSo, index + " - " + treePrefix + checkNodeSo.name.Split("CH_")[1]),
                 _ => null
             };
         }
@@ -160,7 +162,8 @@ namespace BehaviorTreeEditor
                              j < compositeSo.Children.Count;
                              j++)
                         {
-                            var newNode = CreateNodeRender(compositeSo.Children[j], childContainer, childContainer.GetCurrentNodeRenderCount() + 1);
+                            var newNode = CreateNodeRender(compositeSo.Children[j], childContainer,
+                                childContainer.GetCurrentNodeRenderCount() + 1);
                             childContainer.AddNode(newNode);
                         }
                     }
