@@ -141,7 +141,7 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
         Animator.SetBool("IsBlocking", false);
     }
 
-    public bool TryDecreaseHypeEnemy(float amount, Vector3 posToCheck)
+    public bool TryDecreaseHypeEnemy(float amount, Vector3 posToCheck, Transform particleTransform)
     {
         if (CurrentBlockingState == EnemyEnums.EnemyBlockingState.BLOCKING)
         {
@@ -149,16 +149,18 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
             Vector3 normalizedPos = (posToCheck - transform.position).normalized;
             float dot = Vector3.Dot(normalizedPos, transform.forward);
             float angle = Mathf.Acos(dot);
-            if(angle < EnemyInGameSo.AngleBlock)
+            if (angle > EnemyInGameSo.AngleBlock)
             {
                 float damage = (1 - EnemyInGameSo.PercentageDamageReduction) * amount;
                 if (CurrentMobilityState != EnemyEnums.EnemyMobilityState.INVULNERABLE) TakeStun(damage);
                 _hypeService.DecreaseHypeEnemy(damage);
                 return true;
             }
+
             return false;
         }
 
+        particleTransform.position = transform.position + new Vector3(0, 1, 0);
         if (CurrentMobilityState != EnemyEnums.EnemyMobilityState.INVULNERABLE) TakeStun(amount);
         _hypeService.DecreaseHypeEnemy(amount);
         return true;
