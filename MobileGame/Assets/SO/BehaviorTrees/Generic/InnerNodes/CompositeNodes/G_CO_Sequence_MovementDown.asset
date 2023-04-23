@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a554480369441f643a037b92f1ced7d6, type: 3}
   m_Name: G_CO_Sequence_MovementDown
   m_EditorClassIdentifier: 
+  IsDuplicable: 1
   Comment: "S\xE9lectionne un n\u0153ud et v\xE9rifie si le n\u0153ud est un succ\xE8s
     ou est en train de fonctionner et retourne le statut, sinon d\xE9s qu'un n\u0153ud
     retourne un \xE9chec, la sequence retourne un \xE9chec"
@@ -24,5 +25,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dafc58bf58e8e1f4183367df24a11ee9, type: 2}
   - {fileID: 11400000, guid: 98a8ce1f4892dc34899f3113126cae78, type: 2}
   - {fileID: 11400000, guid: cf11757bbb6fa014da640d3bb046ffd0, type: 2}
+  - {fileID: 11400000, guid: 70947e4de4a5a1241ae7beb6ddef04d2, type: 2}
   - {fileID: 11400000, guid: c2e3bbccedda54342947ed73ec2cfc7f, type: 2}
+  - {fileID: 11400000, guid: 65efaf84929208e4596a50d2bdf0716f, type: 2}
   - {fileID: 11400000, guid: 01870b9fa099ff944af3168ed57727ee, type: 2}

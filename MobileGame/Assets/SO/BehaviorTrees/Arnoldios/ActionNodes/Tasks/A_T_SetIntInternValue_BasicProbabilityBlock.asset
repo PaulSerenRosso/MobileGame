@@ -12,17 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 767c44011fda4a978c16a812f1edcf00, type: 3}
   m_Name: A_T_SetIntInternValue_BasicProbabilityBlock
   m_EditorClassIdentifier: 
+  IsDuplicable: 1
   Comment: "N\u0153ud qui permet de SET une valeur integer dans les interns values"
   _internValuesCount: 3
   Data: {fileID: 11400000, guid: 626fb6cc740abb74e88afb692a56e62a, type: 2}
   InternValues:
-  - Key: AttackAction
-    HashCode: 545973316
+  - Key: BlockAction
+    HashCode: 885675895
     Type: 1
     PropertyType: 0
     Comment: Int(int) value to get from intern value
-  - Key: AttackAction
-    HashCode: 545973316
+  - Key: BlockAction
+    HashCode: 885675895
     Type: 1
     PropertyType: 1
     Comment: Int(int) value to set in intern value

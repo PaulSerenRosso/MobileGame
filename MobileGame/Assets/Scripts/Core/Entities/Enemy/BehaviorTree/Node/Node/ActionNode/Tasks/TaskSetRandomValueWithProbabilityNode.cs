@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using HelperPSR.Collections;
 using HelperPSR.Randoms;
+using UnityEngine;
 
 namespace BehaviorTree.Nodes.Actions
 {
@@ -36,6 +37,11 @@ namespace BehaviorTree.Nodes.Actions
             }
             else
             {
+                for (var index = 0; index < _currentProbabilities.Count; index++)
+                {
+                    var currentProbability = _currentProbabilities[index];
+                }
+
                 var randomPick = RandomHelper.PickRandomElementIndex(_currentProbabilities.ToArray());
                 CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[^2].HashCode,
                     _randomProbilityIndexes[randomPick]);

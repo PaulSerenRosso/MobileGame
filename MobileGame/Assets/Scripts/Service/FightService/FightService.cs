@@ -59,10 +59,10 @@ namespace Service.Fight
             DeactivatePauseEvent?.Invoke();
         }
 
-        public void StartFight(string environmentAddressableName, string enemyAdressableName)
+        public void StartFight(string environmentAddressableName, string enemyAddressableName)
         {
             _hypeService.EnabledService();
-            _enemyAddressableName = enemyAdressableName;
+            _enemyAddressableName = enemyAddressableName;
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>(
                 environmentAddressableName,
                 GenerateEnvironment);
@@ -179,7 +179,7 @@ namespace Service.Fight
             Release(gameObject);
             _cinematicFightManager = cinematicManager.GetComponent<CinematicFightManager>();
             _cinematicFightManager.Init(_playerController.GetComponent<PlayerRenderer>().Animator,
-                _enemyManager.Animator);
+                _enemyManager.GetComponent<EnemyManager>().Animator);
         }
 
         private void InitTimerRound()
@@ -203,7 +203,7 @@ namespace Service.Fight
         private void EndInitRound()
         {
             DeactivatePause();
-            _enemyManager.ResetTree();
+            _enemyManager.ReplayTree();
             EndInitiateRoundEvent?.Invoke();
         }
 

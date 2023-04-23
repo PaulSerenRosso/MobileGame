@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a554480369441f643a037b92f1ced7d6, type: 3}
   m_Name: G_CO_Sequence_MovementUp
   m_EditorClassIdentifier: 
-  _commentary: "Sequencer qui permet de v\xE9rifier si un d\xE9placement est possible
-    et d'effectuer les actions n\xE9cessaires pour le d\xE9placement"
+  IsDuplicable: 1
+  Comment: "S\xE9lectionne un n\u0153ud et v\xE9rifie si le n\u0153ud est un succ\xE8s
+    ou est en train de fonctionner et retourne le statut, sinon d\xE9s qu'un n\u0153ud
+    retourne un \xE9chec, la sequence retourne un \xE9chec"
   Children:
   - {fileID: 11400000, guid: 887aa7955267d1547ae7a8464110581a, type: 2}
   - {fileID: 11400000, guid: 40c146c056c208647a4f8642f812696b, type: 2}
@@ -22,5 +24,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 91eba93121b9c404aacabdac350ff685, type: 2}
   - {fileID: 11400000, guid: 2560381cf2b985f499342961dfa2c893, type: 2}
   - {fileID: 11400000, guid: cf11757bbb6fa014da640d3bb046ffd0, type: 2}
+  - {fileID: 11400000, guid: 2a4272761e3a6e949a463117c21b7032, type: 2}
   - {fileID: 11400000, guid: c2e3bbccedda54342947ed73ec2cfc7f, type: 2}
+  - {fileID: 11400000, guid: 65efaf84929208e4596a50d2bdf0716f, type: 2}
   - {fileID: 11400000, guid: 01870b9fa099ff944af3168ed57727ee, type: 2}

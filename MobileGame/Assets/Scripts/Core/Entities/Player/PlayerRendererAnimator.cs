@@ -9,6 +9,7 @@ namespace Player
         [SerializeField] private FloatAnimationParameter[] _endMovementTimeParameters;
         [SerializeField] private string _dirParameterName;
         [SerializeField] private string _endMovementParameterName;
+        [SerializeField] private string _tauntParameterName;
 
         private const string EndMovementParameterBaseName = "EndMovementSpeed";
         private int _dirToSend = -1;
@@ -88,6 +89,16 @@ namespace Player
             }
         }
 
+        private void LaunchTauntPlayerAnimation()
+        {
+            AnimSetBool(_tauntParameterName, true);
+        }
+
+        private void LaunchEndTauntPlayerAnimation()
+        {
+            AnimSetBool(_tauntParameterName, false);
+        }
+
         public void AnimSetBool(string nameParameter, bool condition)
         {
             Animator.SetBool(nameParameter, condition);
@@ -106,6 +117,11 @@ namespace Player
         public void AnimPlay(string nameParameter)
         {
             Animator.Play(nameParameter);
+        }
+
+        public void AnimSetTrigger(string nameParameter)
+        {
+            Animator.SetTrigger(nameParameter);
         }
     }
 }

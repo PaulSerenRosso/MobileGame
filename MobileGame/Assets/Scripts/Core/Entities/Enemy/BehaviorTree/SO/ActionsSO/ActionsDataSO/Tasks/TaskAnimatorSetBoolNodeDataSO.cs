@@ -9,7 +9,8 @@ namespace BehaviorTree.SO.Actions
     public class TaskAnimatorSetBoolNodeDataSO : ActionNodeDataSO
     {
         public bool ValueToPass;
-        public string NameParameter; 
+        public string NameParameter;
+        public bool IsValueIntern;
             
         protected override void SetDependencyValues()
         {

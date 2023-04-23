@@ -122,12 +122,23 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
 
     public void StopTree()
     {
+        ResetAnimatorParameters();
         _tree.StopTree();
+        _tree.ResetTree();
     }
 
-    public void ResetTree()
+    public void ReplayTree()
     {
-        _tree.ResetTree();
+        ResetAnimatorParameters();
+        _tree.ReplayTree();
+    }
+
+    private void ResetAnimatorParameters()
+    {
+        Animator.SetInteger("Direction", -1);
+        Animator.SetInteger("Attack", -1);
+        Animator.SetBool("IsTaunting", false);
+        Animator.SetBool("IsBlocking", false);
     }
 
     public bool TryDecreaseHypeEnemy(float amount, Vector3 posToCheck)
