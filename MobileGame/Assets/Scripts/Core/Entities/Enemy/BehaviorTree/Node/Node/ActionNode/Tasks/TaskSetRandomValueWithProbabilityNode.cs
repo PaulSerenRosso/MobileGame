@@ -37,14 +37,10 @@ namespace BehaviorTree.Nodes.Actions
             }
             else
             {
-                for (var index = 0; index < _currentProbabilities.Count; index++)
-                {
-                    var currentProbability = _currentProbabilities[index];
-                }
-
                 var randomPick = RandomHelper.PickRandomElementIndex(_currentProbabilities.ToArray());
                 CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[^2].HashCode,
                     _randomProbilityIndexes[randomPick]);
+                Debug.Log($"Pick: {randomPick}");
                 _randomProbilityIndexes.RemoveAt(randomPick);
                 _currentProbabilities.RemoveAt(randomPick);
                 State = BehaviorTreeEnums.NodeState.SUCCESS;
