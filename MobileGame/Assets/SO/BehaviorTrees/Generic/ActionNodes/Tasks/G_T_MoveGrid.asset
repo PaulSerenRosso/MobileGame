@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dafc8f8aac34d2687b23b7688a1b541, type: 3}
   m_Name: G_T_MoveGrid
   m_EditorClassIdentifier: 
-  _commentary: 
+  IsDuplicable: 0
+  Comment: "N\u0153ud qui recup\xE8re les valeurs de d\xE9placement du grid et du
+    joueur pour effectuer les d\xE9placements"
   _internValuesCount: 2
   Data: {fileID: 11400000, guid: 1adb599f5cc38a9499ffdd13a076f899, type: 2}
   InternValues:
@@ -20,9 +22,9 @@ MonoBehaviour:
     HashCode: 1753698518
     Type: 0
     PropertyType: 0
-    Commentary: Destination(Vector3) where the grid need to move
+    Comment: Destination(Vector3) where the grid need to move
   - Key: MoveIndexPlayer
     HashCode: -1884463172
     Type: 1
     PropertyType: 0
-    Commentary: Index(int) the index of the movepoint where the player need to move
+    Comment: Index(int) the index of the movepoint where the player need to move

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7283691a9d7416f9b93b0ca5309db4c, type: 3}
   m_Name: G_CH_CirclesAreOccupied_Up
   m_EditorClassIdentifier: 
-  _commentary: 
+  IsDuplicable: 0
+  Comment: "N\u0153ud qui permet de de v\xE9rifier si la destination est occup\xE9e"
   _internValuesCount: 1
   Data: {fileID: 11400000, guid: 62436ee900f94174e854bb60f63021ea, type: 2}
   InternValues:
@@ -20,4 +21,4 @@ MonoBehaviour:
     HashCode: 1753698518
     Type: 0
     PropertyType: 0
-    Commentary: Destination(Vector3) of a MovePoint
+    Comment: Destination(Vector3) of a MovePoint

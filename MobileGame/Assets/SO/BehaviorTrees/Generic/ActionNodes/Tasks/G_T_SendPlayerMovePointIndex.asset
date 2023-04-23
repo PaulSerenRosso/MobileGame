@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0653beaa0f3340c9b6a26bd73e9a6198, type: 3}
   m_Name: G_T_SendPlayerMovePointIndex
   m_EditorClassIdentifier: 
-  _commentary: 
+  IsDuplicable: 0
+  Comment: "N\u0153ud qui permet d'enregistrer la position du joueur durant une partie"
   _internValuesCount: 1
   Data: {fileID: 11400000, guid: fa7111ee36b704e46b91d7046256644b, type: 2}
   InternValues:
@@ -20,4 +21,4 @@ MonoBehaviour:
     HashCode: 1098768601
     Type: 1
     PropertyType: 1
-    Commentary: Index(int) of the movepoint where the player is
+    Comment: Index(int) of the movepoint where the player is
