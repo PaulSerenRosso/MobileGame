@@ -4,7 +4,7 @@ namespace Service.Fight
 {
     public interface IFightService : IService
     {
-        public void StartFight(string environmentAddressableName, string ennemyAdressableName);
+        public void StartFight(string environmentAddressableName, string enemyAddressableName);
         public void QuitFight();
         public event Action<int> InitiateRoundEvent;
         public event Action EndInitiateRoundEvent;

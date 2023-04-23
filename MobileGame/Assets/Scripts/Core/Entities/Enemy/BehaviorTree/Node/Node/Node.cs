@@ -36,7 +36,11 @@ namespace BehaviorTree.Nodes
 
         public virtual void Reset()
         {
-         //   Debug.Log("reset" + TempReturnedEvent);
+            
+        }
+
+        public void Replay()
+        {
             ReturnedEvent = TempReturnedEvent;
         }
     }

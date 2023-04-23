@@ -6,6 +6,5 @@ namespace Actions
     public class AttackActionSO : ScriptableObject
     {
         public HitSO[] HitsSO;
-  
     }
 }

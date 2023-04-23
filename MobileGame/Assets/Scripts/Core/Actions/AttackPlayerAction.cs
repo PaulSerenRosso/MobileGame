@@ -22,6 +22,7 @@ namespace Actions
         private Pool<GameObject>[] _hitPools;
 
         public event Action HitDamagedEvent;
+        public event Action<string> HitAnimationEvent;
         public event Action InitCancelAttackEvent;
         public event Action InitBeforeHitEvent;
         public event Action EndRecoveryEvent;
@@ -122,6 +123,7 @@ namespace Actions
             if (CheckCanDamageEvent.Invoke(AttackActionSo.HitsSO[_comboCount]))
             {
                 var hit = _hitPools[_comboCount].GetFromPool();
+                HitAnimationEvent?.Invoke(AttackActionSo.HitsSO[_comboCount].NameAnimationTrigger);
                 _hitPools[_comboCount].AddToPoolLatter(hit, hit.GetComponent<ParticleSystem>().main.duration);
                 if (_hypeable.TryDecreaseHypeEnemy(AttackActionSo.HitsSO[_comboCount].HypeAmount, transform.position))
                 {

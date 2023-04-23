@@ -126,12 +126,21 @@ namespace BehaviorTree.Trees
             }
         }
 
-        public void ResetTree()
+        public async void ResetTree()
         {
+            await UniTask.DelayFrame(0);
             _nodeValuesSharer.InternValues.Clear();
             foreach (var node in ResetNodeList)
             {
                 node.Reset();
+            }
+        }
+
+        public void ReplayTree()
+        {
+            foreach (var node in ResetNodeList)
+            {
+                node.Replay();
             }
             _root.Evaluate();
         }

@@ -1,22 +1,26 @@
 ﻿using Actions;
 using Player.Handler;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Player
 {
     public partial class PlayerRenderer : MonoBehaviour
     {
-        [FormerlySerializedAs("_animator")] public Animator Animator;
+        public Animator Animator;
+        
+        [SerializeField] private AttackPlayerAction _attackPlayerAction;
         [SerializeField] private MovementPlayerAction _movementPlayerAction;
         [SerializeField] private ParticleSystem _ultimateParticle;
-        [FormerlySerializedAs("_playerHandlerUltimate")] [SerializeField] private PlayerUltimateHandler playerUltimateHandler;
         [SerializeField] private PlayerMovementHandler _playerMovementHandler;
+        [SerializeField] private PlayerUltimateHandler playerUltimateHandler;
         [SerializeField] private TauntPlayerAction _tauntPlayerAction;
 
         public void Init()
         {
             _playerMovementHandler.MakeActionEvent += SetDirParameter;
+            _attackPlayerAction.HitAnimationEvent += AnimPlay;
+            _tauntPlayerAction.MakeActionEvent += LaunchTauntPlayerAnimation;
+            _tauntPlayerAction.EndActionEvent += LaunchEndTauntPlayerAnimation;
             _movementPlayerAction.MakeActionEvent += ResetEndMovementAnimationParameter;
             playerUltimateHandler.ActivateUltimateEvent += ActivateFX;
             playerUltimateHandler.DeactivateUltimateEvent += DeactivateFX;
