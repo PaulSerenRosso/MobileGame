@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using BehaviorTree.Nodes;
 using BehaviorTree.Nodes.Actions;
 using BehaviorTree.Nodes.Composite;
@@ -41,7 +42,6 @@ namespace BehaviorTree.Trees
             }
 
             _root.ReturnedEvent = WaitForNextFrame;
-            _root.Evaluate();
         }
 
         private void LoopSetupChild(CompositeNode parent, List<NodeSO> childsSO)
@@ -126,7 +126,7 @@ namespace BehaviorTree.Trees
             }
         }
 
-        public async void ResetTree()
+        public async void ResetTree(Action callback)
         {
             await UniTask.DelayFrame(0);
             _nodeValuesSharer.InternValues.Clear();
@@ -134,6 +134,7 @@ namespace BehaviorTree.Trees
             {
                 node.Reset();
             }
+            callback?.Invoke();
         }
 
         public void ReplayTree()

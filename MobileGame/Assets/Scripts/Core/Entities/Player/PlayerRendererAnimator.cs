@@ -28,7 +28,7 @@ namespace Player
         {
             for (int i = 0; i < _endMovementTimeParameters.Length; i++)
             { 
-                _endMovementTimeParameters[i].SetTime(Animator.GetFloat(EndMovementParameterBaseName + i)*_endMovementTimeParameters[i].animationClip.length);
+                _endMovementTimeParameters[i].SetTime((_endMovementTimeParameters[i].animationClip.length/Animator.GetFloat(EndMovementParameterBaseName + i))-_playerMovementHandler.GetRecoveryMovementTime());
             }
         }
 
@@ -40,7 +40,8 @@ namespace Player
 
         private void SetDirParameter(Vector2 dir)
         {
-       
+            AnimSetBool(_endMovementParameterName, false);
+            _movementPlayerAction.MakeUpdateEvent -= LaunchEndMovementPlayerAnimation;
             switch (dir)
             {
                 case var v when v == Vector2.left:

@@ -44,11 +44,11 @@ namespace Service.Fight
 
         private string _enemyAddressableName;
 
-        private void ActivatePause()
+        private void ActivatePause(Action callback)
         {
             _hypeService.DeactivateDecreaseUpdateHypePlayer();
             _playerController.LockController();
-            _enemyManager.StopTree();
+            _enemyManager.StopTree(callback);
             ActivatePauseEvent?.Invoke();
         }
 
@@ -72,23 +72,24 @@ namespace Service.Fight
 
         private void LaunchEntryCinematic()
         {
-            ActivatePause();
-            _cinematicFightManager.LaunchFightEntryCinematic(InitTimerRound);
+            ActivatePause(() => _cinematicFightManager.LaunchFightEntryCinematic(InitTimerRound));
         }
 
         private void LaunchUltimateEnemyCinematic()
         {
-            ActivatePause();
-            ResetEntities();
-            _enemyRoundCount++;
-            if (_enemyRoundCount == _victoryRoundCount)
+            ActivatePause(() =>
             {
-                _cinematicFightManager.LaunchEnemyUltimateCinematic(EndFight);
-            }
-            else
-            {
-                _cinematicFightManager.LaunchEnemyUltimateCinematic(ResetRound);
-            }
+                ResetEntities();
+                _enemyRoundCount++;
+                if (_enemyRoundCount == _victoryRoundCount)
+                {
+                    _cinematicFightManager.LaunchEnemyUltimateCinematic(EndFight);
+                }
+                else
+                {
+                    _cinematicFightManager.LaunchEnemyUltimateCinematic(ResetRound);
+                }
+            });
         }
 
         private void ResetEntities()
@@ -100,18 +101,20 @@ namespace Service.Fight
 
         private void LaunchUltimatePlayerCinematic()
         {
-            ActivatePause();
-            ResetEntities();
-            _playerRoundCount++;
-            if (_playerRoundCount == _victoryRoundCount)
+            ActivatePause(() =>
             {
-                _isPlayerWon = true;
-                _cinematicFightManager.LaunchPlayerUltimateCinematic(EndFight);
-            }
-            else
-            {
-                _cinematicFightManager.LaunchPlayerUltimateCinematic(ResetRound);
-            }
+                ResetEntities();
+                _playerRoundCount++;
+                if (_playerRoundCount == _victoryRoundCount)
+                {
+                    _isPlayerWon = true;
+                    _cinematicFightManager.LaunchPlayerUltimateCinematic(EndFight);
+                }
+                else
+                {
+                    _cinematicFightManager.LaunchPlayerUltimateCinematic(ResetRound);
+                }
+            });
         }
 
         private void EndFight()
