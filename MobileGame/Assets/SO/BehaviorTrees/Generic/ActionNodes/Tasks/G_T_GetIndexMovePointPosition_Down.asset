@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c37ae15910f3480b89c14d40b085a619, type: 3}
   m_Name: G_T_GetIndexMovePointPosition_Down
   m_EditorClassIdentifier: 
-  _commentary: 
+  IsDuplicable: 0
+  Comment: "Retourne le point de d\xE9placement du grid"
   _internValuesCount: 2
   Data: {fileID: 11400000, guid: c674167ed9770434e84a277a8b5df273, type: 2}
   InternValues:
@@ -20,9 +21,9 @@ MonoBehaviour:
     HashCode: 510007407
     Type: 1
     PropertyType: 0
-    Commentary: Index(int) of a MovePoint
+    Comment: Index(int) of a MovePoint
   - Key: DestinationGrid
     HashCode: 1753698518
     Type: 0
     PropertyType: 1
-    Commentary: Destination(Vector3) of a MovePoint
+    Comment: Destination(Vector3) of a MovePoint

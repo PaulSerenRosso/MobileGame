@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f5ed7b2ca8330e47bd72debfaddf289, type: 3}
   m_Name: G_T_IncreaseHype_Taunt
   m_EditorClassIdentifier: 
-  Comment: "Fait baisser la hype en fonction de la valeur renseign\xE9e dans le DATA.
-    Vous pouvez cocher le param\xE8tre isUpdated en fonction de si votre node sera
-    lancer \xE0 chaque frame ou non"
+  IsDuplicable: 0
+  Comment: "Fait bouger la hype en fonction de la fonction choisie ainsi que de la
+    valeur renseign\xE9e dans le DATA. Vous pouvez cocher le param\xE8tre isUpdated
+    en fonction de si votre node sera lancer \xE0 chaque frame ou non"
   _internValuesCount: 0
   Data: {fileID: 11400000, guid: efc8329663286654e9f1a13240f6276d, type: 2}
   InternValues: []

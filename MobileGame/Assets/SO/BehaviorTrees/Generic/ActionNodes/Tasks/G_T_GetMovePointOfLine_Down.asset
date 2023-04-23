@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0900496a5da46b8936655477f53be0c, type: 3}
   m_Name: G_T_GetMovePointOfLine_Down
   m_EditorClassIdentifier: 
-  _commentary: 
+  IsDuplicable: 0
+  Comment: "Retourne un d\xE9placement sur une ligne / colonne de cercle"
   _internValuesCount: 2
   Data: {fileID: 11400000, guid: aa42bb601af7664419d3819b44794c4c, type: 2}
   InternValues:
@@ -20,9 +21,9 @@ MonoBehaviour:
     HashCode: 1098768601
     Type: 1
     PropertyType: 0
-    Commentary: Index(int) of a MovePoint
+    Comment: Index(int) of a MovePoint
   - Key: MoveIndexPlayer
     HashCode: -1884463172
     Type: 1
     PropertyType: 1
-    Commentary: Index(int) of a MovePoint after the movement
+    Comment: Index(int) of a MovePoint after the movement
