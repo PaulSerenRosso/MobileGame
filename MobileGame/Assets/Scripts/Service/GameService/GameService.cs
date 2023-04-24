@@ -30,17 +30,21 @@ namespace Service
         [ServiceInit]
         private void Initialize()
         {
+            Application.targetFrameRate = 60;
+            QualitySettings.vSyncCount = 0;
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GlobalSettingsGameSO>("GlobalSettingsGame",
                 LoadGlobalSettingsSO);
         }
 
         public void LoadGameScene(string environementName, string enemyAdressableName)
         {
-            _sceneService.LoadScene((asyncOperation)=>_fightService.StartFight(environementName, enemyAdressableName));
+            _sceneService.LoadScene();
+            _fightService.StartFight(environementName, enemyAdressableName);
         }
         public void LoadMainMenuScene()
         {
-            _sceneService.LoadScene("MenuScene",(asyncOperation)=>_canvasService.LoadMainMenu());
+            _sceneService.LoadScene("MenuScene");
+            _canvasService.LoadMainMenu();
         }
         private void LoadGlobalSettingsSO(GlobalSettingsGameSO so)
         {

@@ -47,10 +47,12 @@ public class CinematicFightManager : MonoBehaviour
     {
         _volume.profile = null;
          _camera.enabled = false;
+         Debug.Log("camera disabled");
         _playableDirector.playableAsset = timelineAsset;
         _playableDirector.Play();
         yield return new WaitForSeconds((float)_playableDirector.duration);
         endCinematicCallback?.Invoke();
         _camera.enabled = true;
+        Debug.Log("camera enabled");
     }
 }

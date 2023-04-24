@@ -6,7 +6,7 @@ namespace Service
 {
     public interface ISceneService : IService
     {
-        public void LoadScene(Action<AsyncOperation> callback);
-        public void LoadScene(string sceneName, Action<AsyncOperation> callback);
+        public void LoadScene();
+        public void LoadScene(string sceneName);
     }
 }

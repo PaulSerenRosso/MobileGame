@@ -11,15 +11,15 @@ namespace Service
 public class SceneService : ISceneService
 {
     //  [ServiceInit]
-    public void LoadScene(Action<AsyncOperation> callback)
+    public void LoadScene()
     {
 
-        SceneManager.LoadSceneAsync("GameScene", LoadSceneMode.Single).completed += callback;
+        SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
     }
 
-    public void LoadScene(string sceneName, Action<AsyncOperation> callback)
+    public void LoadScene(string sceneName)
     {
-        SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single).completed += callback;
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 }
 }
