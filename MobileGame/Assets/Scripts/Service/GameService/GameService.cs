@@ -29,8 +29,6 @@ namespace Service
         {
             Application.targetFrameRate = 60;
             QualitySettings.vSyncCount = 0;
-            Screen.SetResolution(1080, 540, true);
-            Camera.main.aspect = 2f / 1f;
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GlobalSettingsGameSO>("GlobalSettingsGame",
                 LoadGlobalSettingsSO);
         }
