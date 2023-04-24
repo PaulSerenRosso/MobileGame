@@ -19,7 +19,7 @@ namespace BehaviorTree
 
         public override void UpdateComment()
         {
-            Comment = "Nœud qui permet d'enregistrer la position du joueur durant une partie";
+            Comment = "Nœud qui permet d'enregistrer la node du joueur durant une partie";
         }
     }
 }
