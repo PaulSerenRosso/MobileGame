@@ -20394,6 +20394,9 @@ MonoBehaviour:
   _playerRenderer: {fileID: 9135841944125132826}
   _playerRotationHandler: {fileID: 1124789318838554707}
   _playerTauntHandler: {fileID: 3100340670857692329}
+  _timeStunAvailable: 0
+  _timerStun: 0
+  _percentageHealthStun: 0
 --- !u!1 &818642854975530356
 GameObject:
   m_ObjectHideFlags: 0
@@ -21213,6 +21216,75 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1001 &1778341186858433725
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1778341187313522069, guid: 9141777e3ae06f640806d0215195f095,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778341187313522069, guid: 9141777e3ae06f640806d0215195f095,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.359
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778341187313522069, guid: 9141777e3ae06f640806d0215195f095,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.491
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778341187313522069, guid: 9141777e3ae06f640806d0215195f095,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.088
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778341187313522069, guid: 9141777e3ae06f640806d0215195f095,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778341187313522069, guid: 9141777e3ae06f640806d0215195f095,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778341187313522069, guid: 9141777e3ae06f640806d0215195f095,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778341187313522069, guid: 9141777e3ae06f640806d0215195f095,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778341187313522069, guid: 9141777e3ae06f640806d0215195f095,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778341187313522069, guid: 9141777e3ae06f640806d0215195f095,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778341187313522069, guid: 9141777e3ae06f640806d0215195f095,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778341187313522072, guid: 9141777e3ae06f640806d0215195f095,
+        type: 3}
+      propertyPath: m_Name
+      value: PS_Stun
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9141777e3ae06f640806d0215195f095, type: 3}
 --- !u!23 &1793358953508116829
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -34008,6 +34080,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -5986529093749424341, guid: 06cd78c7dcabad242964e249c7278f5e,
         type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -2622710537744489421, guid: a7b6e9aee529cba41a39580f1f194688,
+        type: 3}
+    - target: {fileID: -5986529093749424341, guid: 06cd78c7dcabad242964e249c7278f5e,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a357e11f268a20b4e8b37bed09d6bb66, type: 2}
@@ -36213,10 +36291,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 4446325018638419849}
+  _attackPlayerAction: {fileID: 0}
   _movementPlayerAction: {fileID: 0}
   _ultimateParticle: {fileID: 0}
-  playerUltimateHandler: {fileID: 0}
   _playerMovementHandler: {fileID: 8529551385718349623}
+  playerUltimateHandler: {fileID: 0}
   _tauntPlayerAction: {fileID: 0}
   _movementRecoveryAnimationClip: {fileID: 0}
   _endMovementTimeParameters:
@@ -36230,6 +36309,7 @@ MonoBehaviour:
       type: 3}
   _dirParameterName: Direction
   _endMovementParameterName: IsEndMovement
+  _tauntParameterName: 
   _particleSystem: {fileID: 0}
 --- !u!33 &9151351406028015301
 MeshFilter:
