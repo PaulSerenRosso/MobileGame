@@ -16,7 +16,7 @@ namespace Service
         [DependsOnService] private ISceneService _sceneService;
 
         [DependsOnService] private IFightService _fightService;
-        
+
         public GlobalSettingsGameSO GlobalSettingsSO
         {
             get => _globalSettingsSO;
@@ -24,14 +24,13 @@ namespace Service
 
         private GlobalSettingsGameSO _globalSettingsSO;
 
-        // todo: get so with all environment string addressable
-        // todo: launch fight
-
         [ServiceInit]
         private void Initialize()
         {
             Application.targetFrameRate = 60;
             QualitySettings.vSyncCount = 0;
+            Screen.SetResolution(1080, 540, true);
+            Camera.main.aspect = 2f / 1f;
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GlobalSettingsGameSO>("GlobalSettingsGame",
                 LoadGlobalSettingsSO);
         }
@@ -41,11 +40,13 @@ namespace Service
             _sceneService.LoadScene();
             _fightService.StartFight(environementName, enemyAdressableName);
         }
+
         public void LoadMainMenuScene()
         {
             _sceneService.LoadScene("MenuScene");
             _canvasService.LoadMainMenu();
         }
+
         private void LoadGlobalSettingsSO(GlobalSettingsGameSO so)
         {
             _globalSettingsSO = so;

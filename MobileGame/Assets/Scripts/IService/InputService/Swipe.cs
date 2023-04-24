@@ -54,7 +54,10 @@ namespace Service.Inputs
         {
             if (_isSuccess)
             {
-                _currentPos = Input.GetTouch(0).position;
+                if (Input.touchCount > 0)
+                {
+                    _currentPos = Input.GetTouch(0).position;
+                }
 
                 if ((_currentPos - _startPos).sqrMagnitude >=
                     _minScreenDistanceSq)
