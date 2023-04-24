@@ -9,13 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 018b5c692416418aafe66f724e7051ed, type: 3}
-  m_Name: G_CH_Timer_Actions_Data
+  m_Script: {fileID: 11500000, guid: 1696cee13330e83448a3510eb7a31162, type: 3}
+  m_Name: CH_D_Until_WaitForDrinkPotion
   m_EditorClassIdentifier: 
   IsDuplicable: 1
-  ExternValues: 
-  EnemyValues: 
-  Time: 2
-  StartTime: 0
-  IsSendResetTimerFunction: 0
-  IsInternTimer: 0
+  Comment: "Continue d'\xE9valuer le n\u0153ud jusqu'\xE0 recevoir le statut demand\xE9"
+  Child: {fileID: 11400000, guid: 36f653a3dba2fa94c91cdac6127d7011, type: 2}
+  BreakStateCondition: 0
