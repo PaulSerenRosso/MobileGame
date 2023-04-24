@@ -9,16 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 964c460d6367453a85e043677d1a67c6, type: 3}
-  m_Name: MJ_T_LookDirectionDirect_RotationAttackSpe
+  m_Script: {fileID: 11500000, guid: fb6f2046932849e0ba78c48692fef797, type: 3}
+  m_Name: G_T_SendPlayerPosition_Global
   m_EditorClassIdentifier: 
-  IsDuplicable: 1
-  Comment: "N\u0153ud qui permet de tourner le boss vers une direction directement"
+  IsDuplicable: 0
+  Comment: "N\u0153ud qui permet d'enregistrer la position du joueur durant une partie"
   _internValuesCount: 1
-  Data: {fileID: 11400000, guid: 5b5f78654aa8c5f4d9be3cd0f2fc4ac8, type: 2}
+  Data: {fileID: 11400000, guid: 926c63cee5cc7714d8d2acc6b8dd8aa9, type: 2}
   InternValues:
   - Key: PlayerPosition
     HashCode: -1384510856
     Type: 0
-    PropertyType: 0
-    Comment: Direction(Vector3) where the boss need to look
+    PropertyType: 1
+    Comment: Position of the player is
