@@ -177,6 +177,7 @@ namespace Player.Handler
         public void ResetMovePoint(int indexMovePoint)
         {
             _currentMovePoint = _gridManager.MovePoints[indexMovePoint];
+            _currentMovePointIndex = indexMovePoint;
             GetAction().SetupAction(_currentMovePoint.MeshRenderer.transform.position);
         }
 

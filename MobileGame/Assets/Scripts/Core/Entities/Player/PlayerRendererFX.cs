@@ -4,16 +4,27 @@ namespace Player
 {
     public partial class PlayerRenderer
     {
-        [SerializeField] private ParticleSystem _particleSystem;
+        [SerializeField] private GameObject _tauntParticle;
+        [SerializeField] private GameObject _stunParticle;
 
-        private void ActivateTauntFX()
+        public void ActivateTauntFX()
         {
-            _particleSystem.gameObject.SetActive(true);
+            _tauntParticle.gameObject.SetActive(true);
         }
 
-        private void DeactivateTauntFX()
+        public void DeactivateTauntFX()
         {
-            _particleSystem.gameObject.SetActive(false);
+            _tauntParticle.gameObject.SetActive(false);
+        }
+
+        public void ActivateStunFX()
+        {
+            _stunParticle.SetActive(true);
+        }
+        
+        public void DeactivateStunFX()
+        {
+            _stunParticle.SetActive(false);
         }
     }
 }

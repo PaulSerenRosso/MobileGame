@@ -8,6 +8,7 @@ using HelperPSR.RemoteConfigs;
 using Service;
 using Service.Hype;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Tree = BehaviorTree.Trees;
 
 public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHypeable
@@ -19,7 +20,8 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     public EnemyInGameSO EnemyInGameSo;
 
     [SerializeField] private Tree.Tree _tree;
-    [SerializeField] private string _remoteConfigTimeStunName;
+
+    [FormerlySerializedAs("_remoteConfigTimeStunName")] [SerializeField] private string _remoteConfigTimeStunAvailableName;
     [SerializeField] private string _remoteConfigTimeStunInvulnerableName;
     [SerializeField] private string _remoteConfigStunPercentageHealthName;
     [SerializeField] private string _remoteConfigBlockPercentageDamageReduction;
@@ -104,7 +106,7 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     public void SetRemoteConfigurableValues()
     {
         EnemyInGameSo.PercentageHealthStun = RemoteConfigManager.Config.GetFloat(_remoteConfigStunPercentageHealthName);
-        EnemyInGameSo.TimeStunAvailable = RemoteConfigManager.Config.GetFloat(_remoteConfigTimeStunName);
+        EnemyInGameSo.TimeStunAvailable = RemoteConfigManager.Config.GetFloat(_remoteConfigTimeStunAvailableName);
         EnemyInGameSo.TimeInvulnerable = RemoteConfigManager.Config.GetFloat(_remoteConfigTimeStunInvulnerableName);
         EnemyInGameSo.PercentageDamageReduction =
             RemoteConfigManager.Config.GetFloat(_remoteConfigBlockPercentageDamageReduction);
@@ -145,6 +147,8 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     {
         if (CurrentBlockingState == EnemyEnums.EnemyBlockingState.BLOCKING)
         {
+            _blockParticle.gameObject.transform.position =
+                (1 * Vector3.Normalize(posToCheck - transform.position) + transform.position) + new Vector3(0, 1, 0);
             _blockParticle.gameObject.SetActive(true);
             Vector3 normalizedPos = (posToCheck - transform.position).normalized;
             float dot = Vector3.Dot(normalizedPos, transform.forward);
@@ -160,7 +164,8 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
             return false;
         }
 
-        particleTransform.position = transform.position + new Vector3(0, 1, 0);
+        particleTransform.position = (1 * Vector3.Normalize(posToCheck - transform.position) + transform.position) +
+                                     new Vector3(0, 1, 0);
         if (CurrentMobilityState != EnemyEnums.EnemyMobilityState.INVULNERABLE) TakeStun(amount);
         _hypeService.DecreaseHypeEnemy(amount);
         return true;

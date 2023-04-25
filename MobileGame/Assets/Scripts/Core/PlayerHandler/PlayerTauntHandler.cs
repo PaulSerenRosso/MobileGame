@@ -1,3 +1,4 @@
+using System;
 using Actions;
 using HelperPSR.RemoteConfigs;
 using Service.Inputs;
@@ -8,20 +9,28 @@ namespace Player.Handler
 {
     public class PlayerTauntHandler : PlayerHandler, IRemoteConfigurable
     {
+        public event Action MakeActionEvent;
+        public event Action MakeFinishActionEvent;
+        
         [SerializeField] private MovementPlayerAction movementPlayerAction;
         [SerializeField] private AttackPlayerAction attackPlayerAction;
         [SerializeField] private TauntPlayerAction tauntPlayerAction;
+        
         private IInputService _inputService;
-        protected override Actions.PlayerAction GetAction()
+
+        protected override PlayerAction GetAction()
         {
             return tauntPlayerAction;
         }
 
-        public override void InitializeAction() { }
+        public override void InitializeAction()
+        {
+            MakeActionEvent?.Invoke();
+        }
 
         void TryMakeTauntAction(InputAction.CallbackContext ctx)
         {
-           TryMakeAction(ctx);
+            TryMakeAction(ctx);
         }
 
         bool CheckIsInAttack()
@@ -50,9 +59,16 @@ namespace Player.Handler
             RemoteConfigManager.UnRegisterRemoteConfigurable(this);
         }
 
+        public void TryCancelTaunt()
+        {
+            tauntPlayerAction.TryCancelTaunt();
+            MakeFinishActionEvent?.Invoke();
+        }
+
         private void CancelTaunt(InputAction.CallbackContext obj)
         {
             tauntPlayerAction.TryCancelTaunt();
+            MakeFinishActionEvent?.Invoke();
         }
 
         public void SetRemoteConfigurableValues()

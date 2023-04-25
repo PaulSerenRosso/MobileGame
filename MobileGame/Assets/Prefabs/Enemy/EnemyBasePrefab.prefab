@@ -4995,18 +4995,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b299c89c10470454cbbd0e28beea2855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Animator: {fileID: 8152168790444815023}
   CurrentMobilityState: 0
   CurrentBlockingState: 0
-  EnemySO: {fileID: 11400000, guid: 7159e724562cffc418e7a7fd49679cd4, type: 2}
+  EnemyInGameSo: {fileID: 0}
   _tree: {fileID: 3911112695321858085}
   _remoteConfigTimeStunName: Arno_TimeStun
   _remoteConfigTimeStunInvulnerableName: Arno_TimeStunInvulnerable
   _remoteConfigStunPercentageHealthName: Arno_PercentageHealthStun
   _remoteConfigBlockPercentageDamageReduction: Arno_PercentageDamageReductionBlock
   _remoteConfigAngleBlock: Arno_AngleBlock
-  _remoteConfigRounds: Arno_Rounds
   _ultimateParticle: {fileID: 7708333390443993999}
-  Animator: {fileID: 8152168790444815023}
+  _blockParticle: {fileID: 0}
 --- !u!114 &3911112695321858085
 MonoBehaviour:
   m_ObjectHideFlags: 0
