@@ -105,6 +105,7 @@ namespace Actions
 
         private void InitiateRecoveryTimer()
         {
+            _meshRenderer.material = _materials[4];
             AttackTimer.ResetEvents();
             Hit();
             AttackTimer.Time = AttackActionSo.HitsSO[_comboCount].RecoveryTime;
