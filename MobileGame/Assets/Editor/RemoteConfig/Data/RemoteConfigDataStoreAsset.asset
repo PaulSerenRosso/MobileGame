@@ -12,360 +12,344 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
   m_Name: RemoteConfigDataStoreAsset
   m_EditorClassIdentifier: 
-  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"48b9b40a-5779-4247-8028-7b5fd9664ac7\"\r\n   
+  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"be44776f-cf7f-47a0-8ce0-8187ee74fe5d\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"CameraSpeedPosition\",\r\n      \"type\":
     \"float\",\r\n      \"value\": 31.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"64b7390d-46ea-4993-9a03-37cf818292c7\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"a49df145-8f2c-4fb7-97eb-1f287c2523f9\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"CameraSpeedRotation\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 41.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"8f247592-d646-4b73-b0e2-830a83eaae4c\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"d6b7d977-d5ee-47fb-b2d2-34d3371cad22\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"PlayerMovementMaxTime\",\r\n      \"type\": \"float\",\r\n      \"value\":
-    0.4\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"9230a250-f7e7-4253-9b8f-5ab923da2025\"\r\n   
+    0.4\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"a650fee4-c3cd-4fe1-8d1a-654aaa86ebd1\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"PlayerTauntEndTime\",\r\n      \"type\":
     \"float\",\r\n      \"value\": 0.9\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"07e24eb1-8559-40d4-b7c6-12b1a5364b89\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"d2ecdf12-bd2c-401d-bbf6-34ade7b3f58f\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"SwipeDownTime\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 2.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"0dfe4545-9db7-4f88-97d4-e18fd8e97e5c\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"bc024f63-f17f-4314-b227-b8ac1d1f315e\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"SwipeDownMinDistancePercentage\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 0.1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"dd1d6732-c9c4-4cc8-9ade-d1a513d43c31\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"1bc7f105-6184-4deb-94a1-0cbb07345de0\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"SwipeDownDirectionTolerance\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 0.8\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"17609345-6725-4553-870e-17d91663cba2\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"6a0d8ece-f71a-4431-a668-d7e68321cda0\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"SwipeUpTime\",\r\n      \"type\": \"float\",\r\n      \"value\": 2.0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"bf98897e-fce7-4aa2-99a6-dd68e3d3e947\"\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"54039cda-73af-4425-83a5-83dce9c520ad\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"SwipeUpMinDistancePercentage\",\r\n     
     \"type\": \"float\",\r\n      \"value\": 0.1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"63b9d7f6-595e-4b83-a29c-cc5477857089\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"3d6e8b3e-7d61-460e-8d77-d6cb5bd1df8c\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"SwipeUpDirectionTolerance\",\r\n      \"type\":
     \"float\",\r\n      \"value\": 0.8\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"2229423b-e7eb-45cc-9f82-e1a4ca489cb6\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"afb37a60-150a-4cf0-bb1e-afca71bf399d\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"SwipeLeftTime\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 2.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"6f39ef3a-2909-4a55-8fdd-3be6c156af06\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"1ed4d793-7208-4943-a8df-05553b46dde9\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"SwipeLeftMinDistancePercentage\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 0.25\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"011f0805-4fb8-4bad-b7c7-678b178fcd6f\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"51ce3df0-7ded-46a4-ae50-ecf3be0cb0db\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"SwipeLeftDirectionTolerance\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 0.8\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"1c0b32c4-5a29-47ac-911e-2ccb126b5357\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"4b29acc2-48a9-41b1-b7d6-d99f3a38a6ec\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"SwipeRightTime\",\r\n      \"type\": \"float\",\r\n      \"value\":
-    2.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"f3e08b1a-8cfb-4412-888a-da45909c2c29\"\r\n   
+    2.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"af2857c7-93f4-4c75-a31a-52103cacdf43\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"SwipeRightMinDistancePercentage\",\r\n     
     \"type\": \"float\",\r\n      \"value\": 0.2\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"2a1c1bad-7e4d-4970-a890-1c05d7c74ff6\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"ed9315a0-02d6-4813-b8ab-691f2e96ead2\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"SwipeRightDirectionTolerance\",\r\n      \"type\":
     \"float\",\r\n      \"value\": 0.8\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"e305083d-c2ea-4f08-8799-7fdfdd8347d9\"\r\n    },\r\n   
-    \"rs\": {\r\n      \"key\": \"PlayerPunch1Damage\",\r\n      \"type\": \"float\",\r\n     
-    \"value\": 10.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"c6446bcb-efc8-46a6-ad2b-abce5f2f8bce\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"PlayerPunch1CancelTime\",\r\n      \"type\": \"float\",\r\n      \"value\":
-    0.25\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"282fbd73-afaf-42cc-b9b6-66e2641c43ec\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"PlayerPunch1TimeBeforeHit\",\r\n     
-    \"type\": \"float\",\r\n      \"value\": 0.05\r\n    }\r\n  },\r\n  {\r\n   
-    \"metadata\": {\r\n      \"entityId\": \"8989d6e6-bfcd-47c4-a62d-b40fb96690fb\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"PlayerPunch1RecoveryTime\",\r\n     
-    \"type\": \"float\",\r\n      \"value\": 0.2\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"a55e362c-37bd-41b3-9729-79360b67e487\"\r\n    },\r\n   
-    \"rs\": {\r\n      \"key\": \"PlayerPunch1ComboTime\",\r\n      \"type\": \"float\",\r\n     
-    \"value\": 0.5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"b8e8474e-a021-4090-ad3a-5223612e8645\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"PlayerPunch1HitMovePointsDistance\",\r\n      \"type\": \"int\",\r\n     
-    \"value\": 1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"5e4fc21c-20c2-47d5-9894-33af8c650250\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"PlayerPunch2Damage\",\r\n      \"type\": \"float\",\r\n      \"value\":
-    20.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"e70aa88e-fb93-4456-bcbd-d2e394b93db3\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"PlayerPunch2CancelTime\",\r\n      \"type\":
-    \"float\",\r\n      \"value\": 0.4\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"9a509d7c-cfd0-4ec2-ba09-f67241e071ec\"\r\n    },\r\n   
-    \"rs\": {\r\n      \"key\": \"PlayerPunch2TimeBeforeHit\",\r\n      \"type\":
-    \"float\",\r\n      \"value\": 0.2\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"befab46b-1d5a-4649-a165-c07a1e40fd7f\"\r\n    },\r\n   
-    \"rs\": {\r\n      \"key\": \"PlayerPunch2RecoveryTime\",\r\n      \"type\":
-    \"float\",\r\n      \"value\": 0.4\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"06b1fb3f-72ee-4336-86e2-e210bea055f9\"\r\n    },\r\n   
-    \"rs\": {\r\n      \"key\": \"PlayerPunch2ComboTime\",\r\n      \"type\": \"float\",\r\n     
-    \"value\": 0.5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"7c5420d9-faf8-4b93-9673-814c6182c565\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"PlayerPunch2HitMovePointsDistance\",\r\n      \"type\": \"int\",\r\n     
-    \"value\": 1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"869b4d6d-3e09-4000-ab13-5cc4fe2eb4e3\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"PlayerPunch0Damage\",\r\n      \"type\": \"float\",\r\n      \"value\":
-    10.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"6d47b5fd-f929-4eb7-8212-6ec31df01f20\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"PlayerPunch0CancelTime\",\r\n      \"type\":
-    \"float\",\r\n      \"value\": 0.3\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"494411cd-ea7f-42df-a328-227e841b8026\"\r\n    },\r\n   
-    \"rs\": {\r\n      \"key\": \"PlayerPunch0TimeBeforeHit\",\r\n      \"type\":
-    \"float\",\r\n      \"value\": 0.1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"33b1cbbc-7e54-4c03-8d8f-67e1502b1cd1\"\r\n    },\r\n   
-    \"rs\": {\r\n      \"key\": \"PlayerPunch0RecoveryTime\",\r\n      \"type\":
-    \"float\",\r\n      \"value\": 0.2\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"0eab3167-7901-46ea-9a3c-ecb579965a50\"\r\n    },\r\n   
-    \"rs\": {\r\n      \"key\": \"PlayerPunch0ComboTime\",\r\n      \"type\": \"float\",\r\n     
-    \"value\": 0.5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"9203894f-adde-4211-b8ca-1fc5079b32fe\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"PlayerPunch0HitMovePointsDistance\",\r\n      \"type\": \"int\",\r\n     
-    \"value\": 1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"c95b836c-9d76-4270-a652-a2b1c0fff58b\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"CooldownTimeBetweenTwoMovement\",\r\n      \"type\": \"float\",\r\n     
+    {\r\n      \"entityId\": \"2712e792-6302-438d-8dab-10819226aa66\"\r\n    },\r\n   
+    \"rs\": {\r\n      \"key\": \"PlayerPunch1CancelTime\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 0.25\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"3278ca92-1286-4d4c-889f-57002a831394\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"PlayerTauntStartTime\",\r\n      \"type\": \"float\",\r\n      \"value\":
-    0.5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"683e629e-b749-42e2-877b-b54f1325c4bd\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"MinHype\",\r\n      \"type\": \"float\",\r\n     
-    \"value\": 0.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"e6657a52-5718-4ad8-be56-adb57b4babed\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"MaxHype\",\r\n      \"type\": \"float\",\r\n      \"value\": 50.0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"39564ea0-afcb-44cf-9408-0d7f528f9362\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"BaseValueHype\",\r\n      \"type\": \"float\",\r\n     
-    \"value\": 0.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"606d9e16-693f-4354-8d39-7b09d0b548a5\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"PlayerTauntHypeAmount\",\r\n      \"type\": \"float\",\r\n      \"value\":
-    7.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"0f009dbd-6f8d-4903-b976-01b930a26234\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"Arno_PercentageHealthStun\",\r\n     
-    \"type\": \"float\",\r\n      \"value\": 0.05\r\n    }\r\n  },\r\n  {\r\n   
-    \"metadata\": {\r\n      \"entityId\": \"9a75ab7b-5bec-4c02-864b-3cfee2431980\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"Arno_TimeStun\",\r\n      \"type\": \"float\",\r\n     
+    \"b59c4981-24ba-4cca-a014-b54e0516dec7\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"PlayerPunch1TimeBeforeHit\",\r\n      \"type\": \"float\",\r\n     
+    \"value\": 0.05\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"b2ee9e49-a912-4664-9553-f1c372e2ae77\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"PlayerPunch1RecoveryTime\",\r\n      \"type\": \"float\",\r\n     
+    \"value\": 0.2\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"93889587-f722-4c18-b637-92ab2dada732\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"PlayerPunch1ComboTime\",\r\n      \"type\": \"float\",\r\n      \"value\":
+    0.5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"c9567db3-289f-450d-aa0e-1bd490b53d49\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"PlayerPunch1HitMovePointsDistance\",\r\n     
+    \"type\": \"int\",\r\n      \"value\": 1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
+    {\r\n      \"entityId\": \"fa34fa65-5dda-4116-b9eb-1aca32b65e39\"\r\n    },\r\n   
+    \"rs\": {\r\n      \"key\": \"PlayerPunch2CancelTime\",\r\n      \"type\": \"float\",\r\n     
+    \"value\": 0.4\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"4d2cdc7a-1b34-491a-8e73-f07909f1c4d9\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"PlayerPunch2TimeBeforeHit\",\r\n      \"type\": \"float\",\r\n     
+    \"value\": 0.2\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"2313bbb5-9f6a-415d-a272-6005bd0bcf64\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"PlayerPunch2RecoveryTime\",\r\n      \"type\": \"float\",\r\n     
+    \"value\": 0.4\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"92fb1007-876f-4f1e-a949-516402a6ddaa\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"PlayerPunch2ComboTime\",\r\n      \"type\": \"float\",\r\n      \"value\":
+    0.5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"2d5ad57d-a28d-4659-a1bd-3a48e6743eb1\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"PlayerPunch2HitMovePointsDistance\",\r\n     
+    \"type\": \"int\",\r\n      \"value\": 1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
+    {\r\n      \"entityId\": \"bf0f4e47-edad-4c28-96f9-7e510e2ed035\"\r\n    },\r\n   
+    \"rs\": {\r\n      \"key\": \"PlayerPunch0CancelTime\",\r\n      \"type\": \"float\",\r\n     
+    \"value\": 0.3\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"23baf9a6-bd58-4d0c-9311-5ff9750dce4b\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"PlayerPunch0TimeBeforeHit\",\r\n      \"type\": \"float\",\r\n     
+    \"value\": 0.1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"cf6f2130-16c4-43b5-92d6-4c531dc57ea0\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"PlayerPunch0RecoveryTime\",\r\n      \"type\": \"float\",\r\n     
+    \"value\": 0.2\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"730fa0ee-5380-40ed-88b3-5782a3393c1d\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"PlayerPunch0ComboTime\",\r\n      \"type\": \"float\",\r\n      \"value\":
+    0.5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"72c8d43f-4daa-48b9-ae48-3b51a8fb3a67\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"PlayerPunch0HitMovePointsDistance\",\r\n     
+    \"type\": \"int\",\r\n      \"value\": 1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
+    {\r\n      \"entityId\": \"7c147a08-f6dc-41fb-afcf-f5909c6b790b\"\r\n    },\r\n   
+    \"rs\": {\r\n      \"key\": \"CooldownTimeBetweenTwoMovement\",\r\n      \"type\":
+    \"float\",\r\n      \"value\": 0.25\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
+    {\r\n      \"entityId\": \"438e2815-4475-4428-9642-a6c6720cf036\"\r\n    },\r\n   
+    \"rs\": {\r\n      \"key\": \"PlayerTauntStartTime\",\r\n      \"type\": \"float\",\r\n     
+    \"value\": 0.5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"f8f07943-1432-412c-a38c-a3840668aa63\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"MinHype\",\r\n      \"type\": \"float\",\r\n      \"value\": 0.0\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"e08216dc-d4fd-43ad-91e5-054cb0b140da\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"MaxHype\",\r\n      \"type\": \"float\",\r\n     
+    \"value\": 50.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"77057c15-64a8-486a-8eac-ffe7bf28f68c\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"BaseValueHype\",\r\n      \"type\": \"float\",\r\n      \"value\":
+    0.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"43527c1b-8fec-41bc-a212-e342c6abd1ed\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"PlayerTauntHypeAmount\",\r\n      \"type\":
+    \"float\",\r\n      \"value\": 7.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
+    {\r\n      \"entityId\": \"b0cbea13-7684-4d7f-98e8-b6144cc59727\"\r\n    },\r\n   
+    \"rs\": {\r\n      \"key\": \"Arno_PercentageHealthStun\",\r\n      \"type\":
+    \"float\",\r\n      \"value\": 0.05\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
+    {\r\n      \"entityId\": \"9bbdc75d-d88f-4870-8751-79252a092500\"\r\n    },\r\n   
+    \"rs\": {\r\n      \"key\": \"Arno_TimeStun\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 10.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"ff829278-67d3-449d-8f6a-accd26973a55\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"6f70dcec-493f-4237-86c9-e8074a49e05b\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"Arno_TimeStunInvulnerable\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 5.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"70c29b3b-9767-4892-af6c-f2e8efd2c6b8\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"34b413e7-b54f-4470-95f4-cbb23f4e50b0\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"Arno_PercentageDamageReductionBlock\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 0.8\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"10485ab2-cf1e-4c7d-b662-8e7792b86760\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"e64ccfd1-ffa9-43e2-b19a-f289202dfb49\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"AmountPlayerHypeDecrease\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 0.1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"ad78a8b4-0359-4110-8825-b84e60d19070\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"8d63ea24-fb98-417a-93e8-c94da08b52d8\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"PlayerPunch0HypeAmount\",\r\n      \"type\": \"float\",\r\n      \"value\":
-    5.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"c005aff9-17c1-49d5-923f-827cf6bb894b\"\r\n   
+    5.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"92d57fcd-a80b-4446-adfe-0a2cb00b4cb9\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"PlayerPunch1HypeAmount\",\r\n      \"type\":
     \"float\",\r\n      \"value\": 5.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"8b393097-15eb-421f-9211-1f379e170f31\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"a6703871-7744-4599-8fb5-360a5f43c76b\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"PlayerPunch2HypeAmount\",\r\n      \"type\": \"float\",\r\n     
-    \"value\": 10.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"22922692-e283-4417-b891-86f30b28f5bb\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"value\": 8.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"c7551ef1-829a-47d0-a939-0db029d03f75\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"PlayerHypeStartValue\",\r\n      \"type\": \"float\",\r\n      \"value\":
-    0.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"acc6981f-bb67-4c95-a680-fea41f47d476\"\r\n   
+    0.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"4a566aa1-62a6-4086-9214-9e688993d2e6\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"EnemyHypeStartValue\",\r\n      \"type\":
     \"float\",\r\n      \"value\": 0.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"76275fdd-78dc-45b8-ba67-ea15a83befca\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"f60b393a-6476-4875-b360-4c6cf018dddb\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"PlayerHypeUltimateValue\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 45.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"a5cd4f3b-83eb-413f-9a34-1da0365029c1\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"661e1bae-1122-4ec2-b394-81ab2072aedf\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"EnemyHypeUltimateValue\",\r\n      \"type\": \"float\",\r\n      \"value\":
-    45.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"e007419d-fba9-420c-b524-6aa37bb23fe1\"\r\n   
+    45.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"c751fca6-bab2-4254-bc62-6f88522bb75b\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"TimeBeforePlayerHypeDecrease\",\r\n     
     \"type\": \"float\",\r\n      \"value\": 1.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"7899c78a-7fef-4d13-911e-70fb913aebea\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"f88a24c0-36ee-411b-b900-f9815487b61c\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"Arno_AngleBlock\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 90.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"02dba935-81b7-45ce-b73d-9640b471e240\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"416e463f-0b8b-4b74-9fd7-fd956462b7fb\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"MJ_TimeStun\",\r\n      \"type\": \"float\",\r\n      \"value\": 10.0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"422dd6a0-16ca-45c1-a4fa-1105764947a6\"\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"8c12fc34-e510-41a2-b032-00a37291ffe6\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"MJ_TimeStunInvulnerable\",\r\n      \"type\":
     \"float\",\r\n      \"value\": 5.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"2dbebe51-b26e-44c2-9490-a15283dbcf51\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"ea948ca9-2c69-4523-9d9a-32b5f034bc6b\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"MJ_PercentageHealthStun\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 0.05\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"70b19bf1-d392-438d-82fc-20619f8644c7\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"3f818db9-d840-4925-a4b2-865a8584916f\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"MJ_PercentageDamageReductionBlock\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 0.8\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"8d993874-b5bf-4b68-999d-d4acf7f67d86\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"c1309222-791a-4a4f-962f-e8b9161b3d3b\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"MJ_AngleBlock\",\r\n      \"type\": \"float\",\r\n      \"value\":
-    90.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"2a204f28-0302-4887-a47d-eb077d755079\"\r\n   
+    90.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"7c4002f3-7919-4d94-a331-b7a44a1d051f\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"Chimi_TimeStun\",\r\n      \"type\":
     \"float\",\r\n      \"value\": 10.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"79d5d351-e4e1-4f46-a8c6-510d5b9ffa36\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"64ccc6be-9f48-43f6-b75a-e33fb9308cf0\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"Chimi_TimeStunInvulnerable\",\r\n      \"type\":
     \"float\",\r\n      \"value\": 5.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"52d7fcf9-d83f-4c2c-bffe-59da7244b433\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"fbadfc54-a08c-439b-8984-eae142227d7a\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"Chimi_PercentageHealthStun\",\r\n      \"type\":
     \"float\",\r\n      \"value\": 0.05\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"5b5fc83f-103f-4b17-8c00-0c9f208e3ece\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"7ad5269c-3245-448f-aea5-5f61ffed4303\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"Chimi_PercentageDamageReductionBlock\",\r\n     
     \"type\": \"float\",\r\n      \"value\": 0.8\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"bb2f5c87-af46-47f6-b9e2-8dab0f8cae00\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"286bb385-19bb-48ee-9984-9e6bd5a4c57a\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"Chimi_AngleBlock\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 90.0\r\n    }\r\n  }\r\n]"
-  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"48b9b40a-5779-4247-8028-7b5fd9664ac7\"\r\n   
+  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"be44776f-cf7f-47a0-8ce0-8187ee74fe5d\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"CameraSpeedPosition\",\r\n      \"type\":
     \"float\",\r\n      \"value\": 31.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"64b7390d-46ea-4993-9a03-37cf818292c7\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"a49df145-8f2c-4fb7-97eb-1f287c2523f9\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"CameraSpeedRotation\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 41.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"8f247592-d646-4b73-b0e2-830a83eaae4c\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"d6b7d977-d5ee-47fb-b2d2-34d3371cad22\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"PlayerMovementMaxTime\",\r\n      \"type\": \"float\",\r\n      \"value\":
-    0.4\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"9230a250-f7e7-4253-9b8f-5ab923da2025\"\r\n   
+    0.4\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"a650fee4-c3cd-4fe1-8d1a-654aaa86ebd1\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"PlayerTauntEndTime\",\r\n      \"type\":
     \"float\",\r\n      \"value\": 0.9\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"07e24eb1-8559-40d4-b7c6-12b1a5364b89\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"d2ecdf12-bd2c-401d-bbf6-34ade7b3f58f\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"SwipeDownTime\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 2.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"0dfe4545-9db7-4f88-97d4-e18fd8e97e5c\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"bc024f63-f17f-4314-b227-b8ac1d1f315e\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"SwipeDownMinDistancePercentage\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 0.1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"dd1d6732-c9c4-4cc8-9ade-d1a513d43c31\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"1bc7f105-6184-4deb-94a1-0cbb07345de0\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"SwipeDownDirectionTolerance\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 0.8\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"17609345-6725-4553-870e-17d91663cba2\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"6a0d8ece-f71a-4431-a668-d7e68321cda0\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"SwipeUpTime\",\r\n      \"type\": \"float\",\r\n      \"value\": 2.0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"bf98897e-fce7-4aa2-99a6-dd68e3d3e947\"\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"54039cda-73af-4425-83a5-83dce9c520ad\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"SwipeUpMinDistancePercentage\",\r\n     
     \"type\": \"float\",\r\n      \"value\": 0.1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"63b9d7f6-595e-4b83-a29c-cc5477857089\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"3d6e8b3e-7d61-460e-8d77-d6cb5bd1df8c\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"SwipeUpDirectionTolerance\",\r\n      \"type\":
     \"float\",\r\n      \"value\": 0.8\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"2229423b-e7eb-45cc-9f82-e1a4ca489cb6\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"afb37a60-150a-4cf0-bb1e-afca71bf399d\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"SwipeLeftTime\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 2.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"6f39ef3a-2909-4a55-8fdd-3be6c156af06\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"1ed4d793-7208-4943-a8df-05553b46dde9\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"SwipeLeftMinDistancePercentage\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 0.25\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"011f0805-4fb8-4bad-b7c7-678b178fcd6f\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"51ce3df0-7ded-46a4-ae50-ecf3be0cb0db\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"SwipeLeftDirectionTolerance\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 0.8\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"1c0b32c4-5a29-47ac-911e-2ccb126b5357\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"4b29acc2-48a9-41b1-b7d6-d99f3a38a6ec\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"SwipeRightTime\",\r\n      \"type\": \"float\",\r\n      \"value\":
-    2.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"f3e08b1a-8cfb-4412-888a-da45909c2c29\"\r\n   
+    2.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"af2857c7-93f4-4c75-a31a-52103cacdf43\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"SwipeRightMinDistancePercentage\",\r\n     
     \"type\": \"float\",\r\n      \"value\": 0.2\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"2a1c1bad-7e4d-4970-a890-1c05d7c74ff6\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"ed9315a0-02d6-4813-b8ab-691f2e96ead2\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"SwipeRightDirectionTolerance\",\r\n      \"type\":
     \"float\",\r\n      \"value\": 0.8\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"e305083d-c2ea-4f08-8799-7fdfdd8347d9\"\r\n    },\r\n   
-    \"rs\": {\r\n      \"key\": \"PlayerPunch1Damage\",\r\n      \"type\": \"float\",\r\n     
-    \"value\": 10.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"c6446bcb-efc8-46a6-ad2b-abce5f2f8bce\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"PlayerPunch1CancelTime\",\r\n      \"type\": \"float\",\r\n      \"value\":
-    0.25\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"282fbd73-afaf-42cc-b9b6-66e2641c43ec\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"PlayerPunch1TimeBeforeHit\",\r\n     
-    \"type\": \"float\",\r\n      \"value\": 0.05\r\n    }\r\n  },\r\n  {\r\n   
-    \"metadata\": {\r\n      \"entityId\": \"8989d6e6-bfcd-47c4-a62d-b40fb96690fb\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"PlayerPunch1RecoveryTime\",\r\n     
-    \"type\": \"float\",\r\n      \"value\": 0.2\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"a55e362c-37bd-41b3-9729-79360b67e487\"\r\n    },\r\n   
-    \"rs\": {\r\n      \"key\": \"PlayerPunch1ComboTime\",\r\n      \"type\": \"float\",\r\n     
-    \"value\": 0.5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"b8e8474e-a021-4090-ad3a-5223612e8645\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"PlayerPunch1HitMovePointsDistance\",\r\n      \"type\": \"int\",\r\n     
-    \"value\": 1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"5e4fc21c-20c2-47d5-9894-33af8c650250\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"PlayerPunch2Damage\",\r\n      \"type\": \"float\",\r\n      \"value\":
-    20.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"e70aa88e-fb93-4456-bcbd-d2e394b93db3\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"PlayerPunch2CancelTime\",\r\n      \"type\":
-    \"float\",\r\n      \"value\": 0.4\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"9a509d7c-cfd0-4ec2-ba09-f67241e071ec\"\r\n    },\r\n   
-    \"rs\": {\r\n      \"key\": \"PlayerPunch2TimeBeforeHit\",\r\n      \"type\":
-    \"float\",\r\n      \"value\": 0.2\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"befab46b-1d5a-4649-a165-c07a1e40fd7f\"\r\n    },\r\n   
-    \"rs\": {\r\n      \"key\": \"PlayerPunch2RecoveryTime\",\r\n      \"type\":
-    \"float\",\r\n      \"value\": 0.4\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"06b1fb3f-72ee-4336-86e2-e210bea055f9\"\r\n    },\r\n   
-    \"rs\": {\r\n      \"key\": \"PlayerPunch2ComboTime\",\r\n      \"type\": \"float\",\r\n     
-    \"value\": 0.5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"7c5420d9-faf8-4b93-9673-814c6182c565\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"PlayerPunch2HitMovePointsDistance\",\r\n      \"type\": \"int\",\r\n     
-    \"value\": 1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"869b4d6d-3e09-4000-ab13-5cc4fe2eb4e3\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"PlayerPunch0Damage\",\r\n      \"type\": \"float\",\r\n      \"value\":
-    10.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"6d47b5fd-f929-4eb7-8212-6ec31df01f20\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"PlayerPunch0CancelTime\",\r\n      \"type\":
-    \"float\",\r\n      \"value\": 0.3\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"494411cd-ea7f-42df-a328-227e841b8026\"\r\n    },\r\n   
-    \"rs\": {\r\n      \"key\": \"PlayerPunch0TimeBeforeHit\",\r\n      \"type\":
-    \"float\",\r\n      \"value\": 0.1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"33b1cbbc-7e54-4c03-8d8f-67e1502b1cd1\"\r\n    },\r\n   
-    \"rs\": {\r\n      \"key\": \"PlayerPunch0RecoveryTime\",\r\n      \"type\":
-    \"float\",\r\n      \"value\": 0.2\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"0eab3167-7901-46ea-9a3c-ecb579965a50\"\r\n    },\r\n   
-    \"rs\": {\r\n      \"key\": \"PlayerPunch0ComboTime\",\r\n      \"type\": \"float\",\r\n     
-    \"value\": 0.5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"9203894f-adde-4211-b8ca-1fc5079b32fe\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"PlayerPunch0HitMovePointsDistance\",\r\n      \"type\": \"int\",\r\n     
-    \"value\": 1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"c95b836c-9d76-4270-a652-a2b1c0fff58b\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"CooldownTimeBetweenTwoMovement\",\r\n      \"type\": \"float\",\r\n     
+    {\r\n      \"entityId\": \"2712e792-6302-438d-8dab-10819226aa66\"\r\n    },\r\n   
+    \"rs\": {\r\n      \"key\": \"PlayerPunch1CancelTime\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 0.25\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"3278ca92-1286-4d4c-889f-57002a831394\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"PlayerTauntStartTime\",\r\n      \"type\": \"float\",\r\n      \"value\":
-    0.5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"683e629e-b749-42e2-877b-b54f1325c4bd\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"MinHype\",\r\n      \"type\": \"float\",\r\n     
-    \"value\": 0.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"e6657a52-5718-4ad8-be56-adb57b4babed\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"MaxHype\",\r\n      \"type\": \"float\",\r\n      \"value\": 50.0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"39564ea0-afcb-44cf-9408-0d7f528f9362\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"BaseValueHype\",\r\n      \"type\": \"float\",\r\n     
-    \"value\": 0.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"606d9e16-693f-4354-8d39-7b09d0b548a5\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"PlayerTauntHypeAmount\",\r\n      \"type\": \"float\",\r\n      \"value\":
-    7.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"0f009dbd-6f8d-4903-b976-01b930a26234\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"Arno_PercentageHealthStun\",\r\n     
-    \"type\": \"float\",\r\n      \"value\": 0.05\r\n    }\r\n  },\r\n  {\r\n   
-    \"metadata\": {\r\n      \"entityId\": \"9a75ab7b-5bec-4c02-864b-3cfee2431980\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"Arno_TimeStun\",\r\n      \"type\": \"float\",\r\n     
+    \"b59c4981-24ba-4cca-a014-b54e0516dec7\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"PlayerPunch1TimeBeforeHit\",\r\n      \"type\": \"float\",\r\n     
+    \"value\": 0.05\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"b2ee9e49-a912-4664-9553-f1c372e2ae77\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"PlayerPunch1RecoveryTime\",\r\n      \"type\": \"float\",\r\n     
+    \"value\": 0.2\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"93889587-f722-4c18-b637-92ab2dada732\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"PlayerPunch1ComboTime\",\r\n      \"type\": \"float\",\r\n      \"value\":
+    0.5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"c9567db3-289f-450d-aa0e-1bd490b53d49\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"PlayerPunch1HitMovePointsDistance\",\r\n     
+    \"type\": \"int\",\r\n      \"value\": 1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
+    {\r\n      \"entityId\": \"fa34fa65-5dda-4116-b9eb-1aca32b65e39\"\r\n    },\r\n   
+    \"rs\": {\r\n      \"key\": \"PlayerPunch2CancelTime\",\r\n      \"type\": \"float\",\r\n     
+    \"value\": 0.4\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"4d2cdc7a-1b34-491a-8e73-f07909f1c4d9\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"PlayerPunch2TimeBeforeHit\",\r\n      \"type\": \"float\",\r\n     
+    \"value\": 0.2\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"2313bbb5-9f6a-415d-a272-6005bd0bcf64\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"PlayerPunch2RecoveryTime\",\r\n      \"type\": \"float\",\r\n     
+    \"value\": 0.4\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"92fb1007-876f-4f1e-a949-516402a6ddaa\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"PlayerPunch2ComboTime\",\r\n      \"type\": \"float\",\r\n      \"value\":
+    0.5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"2d5ad57d-a28d-4659-a1bd-3a48e6743eb1\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"PlayerPunch2HitMovePointsDistance\",\r\n     
+    \"type\": \"int\",\r\n      \"value\": 1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
+    {\r\n      \"entityId\": \"bf0f4e47-edad-4c28-96f9-7e510e2ed035\"\r\n    },\r\n   
+    \"rs\": {\r\n      \"key\": \"PlayerPunch0CancelTime\",\r\n      \"type\": \"float\",\r\n     
+    \"value\": 0.3\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"23baf9a6-bd58-4d0c-9311-5ff9750dce4b\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"PlayerPunch0TimeBeforeHit\",\r\n      \"type\": \"float\",\r\n     
+    \"value\": 0.1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"cf6f2130-16c4-43b5-92d6-4c531dc57ea0\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"PlayerPunch0RecoveryTime\",\r\n      \"type\": \"float\",\r\n     
+    \"value\": 0.2\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"730fa0ee-5380-40ed-88b3-5782a3393c1d\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"PlayerPunch0ComboTime\",\r\n      \"type\": \"float\",\r\n      \"value\":
+    0.5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"72c8d43f-4daa-48b9-ae48-3b51a8fb3a67\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"PlayerPunch0HitMovePointsDistance\",\r\n     
+    \"type\": \"int\",\r\n      \"value\": 1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
+    {\r\n      \"entityId\": \"7c147a08-f6dc-41fb-afcf-f5909c6b790b\"\r\n    },\r\n   
+    \"rs\": {\r\n      \"key\": \"CooldownTimeBetweenTwoMovement\",\r\n      \"type\":
+    \"float\",\r\n      \"value\": 0.25\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
+    {\r\n      \"entityId\": \"438e2815-4475-4428-9642-a6c6720cf036\"\r\n    },\r\n   
+    \"rs\": {\r\n      \"key\": \"PlayerTauntStartTime\",\r\n      \"type\": \"float\",\r\n     
+    \"value\": 0.5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"f8f07943-1432-412c-a38c-a3840668aa63\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"MinHype\",\r\n      \"type\": \"float\",\r\n      \"value\": 0.0\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"e08216dc-d4fd-43ad-91e5-054cb0b140da\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"MaxHype\",\r\n      \"type\": \"float\",\r\n     
+    \"value\": 50.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"77057c15-64a8-486a-8eac-ffe7bf28f68c\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"BaseValueHype\",\r\n      \"type\": \"float\",\r\n      \"value\":
+    0.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"43527c1b-8fec-41bc-a212-e342c6abd1ed\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"PlayerTauntHypeAmount\",\r\n      \"type\":
+    \"float\",\r\n      \"value\": 7.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
+    {\r\n      \"entityId\": \"b0cbea13-7684-4d7f-98e8-b6144cc59727\"\r\n    },\r\n   
+    \"rs\": {\r\n      \"key\": \"Arno_PercentageHealthStun\",\r\n      \"type\":
+    \"float\",\r\n      \"value\": 0.05\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
+    {\r\n      \"entityId\": \"9bbdc75d-d88f-4870-8751-79252a092500\"\r\n    },\r\n   
+    \"rs\": {\r\n      \"key\": \"Arno_TimeStun\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 10.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"ff829278-67d3-449d-8f6a-accd26973a55\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"6f70dcec-493f-4237-86c9-e8074a49e05b\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"Arno_TimeStunInvulnerable\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 5.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"70c29b3b-9767-4892-af6c-f2e8efd2c6b8\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"34b413e7-b54f-4470-95f4-cbb23f4e50b0\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"Arno_PercentageDamageReductionBlock\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 0.8\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"10485ab2-cf1e-4c7d-b662-8e7792b86760\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"e64ccfd1-ffa9-43e2-b19a-f289202dfb49\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"AmountPlayerHypeDecrease\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 0.1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"ad78a8b4-0359-4110-8825-b84e60d19070\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"8d63ea24-fb98-417a-93e8-c94da08b52d8\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"PlayerPunch0HypeAmount\",\r\n      \"type\": \"float\",\r\n      \"value\":
-    5.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"c005aff9-17c1-49d5-923f-827cf6bb894b\"\r\n   
+    5.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"92d57fcd-a80b-4446-adfe-0a2cb00b4cb9\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"PlayerPunch1HypeAmount\",\r\n      \"type\":
     \"float\",\r\n      \"value\": 5.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"8b393097-15eb-421f-9211-1f379e170f31\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"a6703871-7744-4599-8fb5-360a5f43c76b\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"PlayerPunch2HypeAmount\",\r\n      \"type\": \"float\",\r\n     
-    \"value\": 10.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"22922692-e283-4417-b891-86f30b28f5bb\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"value\": 8.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"c7551ef1-829a-47d0-a939-0db029d03f75\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"PlayerHypeStartValue\",\r\n      \"type\": \"float\",\r\n      \"value\":
-    0.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"acc6981f-bb67-4c95-a680-fea41f47d476\"\r\n   
+    0.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"4a566aa1-62a6-4086-9214-9e688993d2e6\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"EnemyHypeStartValue\",\r\n      \"type\":
     \"float\",\r\n      \"value\": 0.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"76275fdd-78dc-45b8-ba67-ea15a83befca\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"f60b393a-6476-4875-b360-4c6cf018dddb\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"PlayerHypeUltimateValue\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 45.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"a5cd4f3b-83eb-413f-9a34-1da0365029c1\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"661e1bae-1122-4ec2-b394-81ab2072aedf\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"EnemyHypeUltimateValue\",\r\n      \"type\": \"float\",\r\n      \"value\":
-    45.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"e007419d-fba9-420c-b524-6aa37bb23fe1\"\r\n   
+    45.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"c751fca6-bab2-4254-bc62-6f88522bb75b\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"TimeBeforePlayerHypeDecrease\",\r\n     
     \"type\": \"float\",\r\n      \"value\": 1.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"7899c78a-7fef-4d13-911e-70fb913aebea\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"f88a24c0-36ee-411b-b900-f9815487b61c\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"Arno_AngleBlock\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 90.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"02dba935-81b7-45ce-b73d-9640b471e240\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"416e463f-0b8b-4b74-9fd7-fd956462b7fb\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"MJ_TimeStun\",\r\n      \"type\": \"float\",\r\n      \"value\": 10.0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"422dd6a0-16ca-45c1-a4fa-1105764947a6\"\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"8c12fc34-e510-41a2-b032-00a37291ffe6\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"MJ_TimeStunInvulnerable\",\r\n      \"type\":
     \"float\",\r\n      \"value\": 5.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"2dbebe51-b26e-44c2-9490-a15283dbcf51\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"ea948ca9-2c69-4523-9d9a-32b5f034bc6b\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"MJ_PercentageHealthStun\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 0.05\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"70b19bf1-d392-438d-82fc-20619f8644c7\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"3f818db9-d840-4925-a4b2-865a8584916f\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"MJ_PercentageDamageReductionBlock\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 0.8\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"8d993874-b5bf-4b68-999d-d4acf7f67d86\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"c1309222-791a-4a4f-962f-e8b9161b3d3b\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"MJ_AngleBlock\",\r\n      \"type\": \"float\",\r\n      \"value\":
-    90.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"2a204f28-0302-4887-a47d-eb077d755079\"\r\n   
+    90.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"7c4002f3-7919-4d94-a331-b7a44a1d051f\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"Chimi_TimeStun\",\r\n      \"type\":
     \"float\",\r\n      \"value\": 10.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"79d5d351-e4e1-4f46-a8c6-510d5b9ffa36\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"64ccc6be-9f48-43f6-b75a-e33fb9308cf0\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"Chimi_TimeStunInvulnerable\",\r\n      \"type\":
     \"float\",\r\n      \"value\": 5.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"52d7fcf9-d83f-4c2c-bffe-59da7244b433\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"fbadfc54-a08c-439b-8984-eae142227d7a\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"Chimi_PercentageHealthStun\",\r\n      \"type\":
     \"float\",\r\n      \"value\": 0.05\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"5b5fc83f-103f-4b17-8c00-0c9f208e3ece\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"7ad5269c-3245-448f-aea5-5f61ffed4303\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"Chimi_PercentageDamageReductionBlock\",\r\n     
     \"type\": \"float\",\r\n      \"value\": 0.8\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"bb2f5c87-af46-47f6-b9e2-8dab0f8cae00\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"286bb385-19bb-48ee-9984-9e6bd5a4c57a\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"Chimi_AngleBlock\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 90.0\r\n    }\r\n  }\r\n]"
   _environments: "[\r\n  {\r\n    \"projectId\": \"4f23496d-6893-47d5-b844-27fd1d26f6be\",\r\n   
