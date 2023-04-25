@@ -15,7 +15,7 @@ namespace Player
         private const string EndMovementParameterBaseName = "EndMovementSpeed";
         private int _dirToSend = -1;
         private string _currentDirName;
-        
+
         [Serializable]
         private struct FloatAnimationParameter
         {
@@ -28,8 +28,11 @@ namespace Player
         private void SetEndAnimationMovementSpeedAnimation()
         {
             for (int i = 0; i < _endMovementTimeParameters.Length; i++)
-            { 
-                _endMovementTimeParameters[i].SetTime((_endMovementTimeParameters[i].animationClip.length/Animator.GetFloat(EndMovementParameterBaseName + i))-_playerMovementHandler.GetRecoveryMovementTime());
+            {
+                _endMovementTimeParameters[i]
+                    .SetTime((_endMovementTimeParameters[i].animationClip.length /
+                              Animator.GetFloat(EndMovementParameterBaseName + i)) -
+                             _playerMovementHandler.GetRecoveryMovementTime());
             }
         }
 
@@ -83,7 +86,8 @@ namespace Player
 
         private void LaunchEndMovementPlayerAnimation(float time)
         {
-            if (_movementPlayerAction.GetMaxTimeMovement()-_endMovementTimeParameters[_dirToSend].GetTime >= _movementPlayerAction.GetMaxTimeMovement() - time)
+            if (_movementPlayerAction.GetMaxTimeMovement() - _endMovementTimeParameters[_dirToSend].GetTime >=
+                _movementPlayerAction.GetMaxTimeMovement() - time)
             {
                 SetDirParameter(Vector2.zero);
                 AnimSetBool(_endMovementParameterName, true);
@@ -119,17 +123,18 @@ namespace Player
         public void EnableAttackAnimatorParameter(HitSO hitSo)
         {
             Animator.SetBool(hitSo.NameAnimationTrigger, true);
-            Debug.Log(hitSo.NameAnimationTrigger+ "true");
         }
+
         public void PlayIdle(HitSO hitSo)
         {
             Animator.Play("Idle");
         }
+
         public void DisableAttackAnimatorParameter(HitSO hitSo)
         {
             Animator.SetBool(hitSo.NameAnimationTrigger, false);
-            Debug.Log(hitSo.NameAnimationTrigger + "false");
         }
+
         public void AnimSetTrigger(string nameParameter)
         {
             Animator.SetTrigger(nameParameter);

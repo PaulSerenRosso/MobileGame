@@ -43,9 +43,7 @@ namespace Player
         {
             UpdateManager.UnRegister(this);
         }
-        
-        // TODO : Add feedback on stun
-        
+
         public void OnUpdate()
         {
             TimerStun();
@@ -60,7 +58,7 @@ namespace Player
             if (!_currentStunTriggers.Any(entityStunTrigger =>
                     (entityStunTrigger.DamageAmount / _hypeService.GetMaximumHype()) >=
                     _percentageHealthStun)) return;
-            Debug.Log("Player is stun");
+            _playerRenderer.ActivateStunFX();
             LockController();
             _isStun = true;
             _currentStunTriggers.Clear();
@@ -72,7 +70,7 @@ namespace Player
             _timer += Time.deltaTime;
             if (_timer >= _timerStun)
             {
-                Debug.Log("Player is free");
+                _playerRenderer.DeactivateStunFX();
                 UnlockController();
                 _timer = 0;
                 _isStun = false;
@@ -102,8 +100,10 @@ namespace Player
                 gridManager, _hypeService);
             _playerTauntHandler.AddCondition(CheckIsLockedController);
             _playerTauntHandler.Setup(_inputService, _tickeableService.GetTickManager, _hypeService);
+            _playerTauntHandler.MakeActionEvent += _playerRenderer.ActivateTauntFX;
+            _playerTauntHandler.MakeFinishActionEvent += _playerRenderer.DeactivateTauntFX;
             playerUltimateHandler.AddCondition(CheckIsLockedController);
-            playerUltimateHandler.Setup(hypeService);
+            playerUltimateHandler.Setup(_hypeService);
             _playerRenderer.Init();
         }
 
@@ -131,6 +131,7 @@ namespace Player
         public void LockController()
         {
             _isLocked = true;
+            _playerTauntHandler.TryCancelTaunt();
         }
 
         public void UnlockController()

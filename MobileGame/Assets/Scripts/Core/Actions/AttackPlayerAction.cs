@@ -37,9 +37,8 @@ namespace Actions
             get => _isAttacking;
         }
 
-        public async override void MakeAction()
+        public override void MakeAction()
         {
-            
             if (_comboCount != 0)
             {
                 AttackTimer.Cancel();
@@ -52,7 +51,6 @@ namespace Actions
             AttackTimer.Initiate();
             MakeActionEvent?.Invoke();
             MakeActionAnimationEvent?.Invoke(AttackActionSo.HitsSO[_comboCount]);
-           
         }
 
         public override void SetupAction(params object[] arguments)
@@ -77,7 +75,6 @@ namespace Actions
             AttackTimer.CancelEvent += BreakCombo;
             AttackTimer.CancelEvent +=()=>  CancelAnimationEvent?.Invoke(AttackActionSo.HitsSO[_comboCount]);
             AttackTimer.CancelEvent += AttackTimer.ResetCancelEvent;
-            
             InitCancelAttackEvent?.Invoke();
         }
 
@@ -131,7 +128,6 @@ namespace Actions
 
         private void Hit()
         {
-          
             if (CheckCanDamageEvent.Invoke(AttackActionSo.HitsSO[_comboCount]))
             {
                 var hit = _hitPools[_comboCount].GetFromPool();

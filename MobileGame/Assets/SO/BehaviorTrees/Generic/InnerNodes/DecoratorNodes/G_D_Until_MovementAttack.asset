@@ -9,13 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe3c0bb747104f0aa1d730d81cb216de, type: 3}
-  m_Name: A_T_Remap_LerpPlayerHypeProbabilityAttack_Data
+  m_Script: {fileID: 11500000, guid: 1696cee13330e83448a3510eb7a31162, type: 3}
+  m_Name: G_D_Until_MovementAttack
   m_EditorClassIdentifier: 
   IsDuplicable: 1
-  ExternValues: 
-  EnemyValues: 
-  OldMinValue: 0
-  OldMaxValue: 1
-  NewMinValue: 0
-  NewMaxValue: 8.01
+  Comment: "Continue d'\xE9valuer le n\u0153ud jusqu'\xE0 recevoir le statut demand\xE9"
+  Child: {fileID: 11400000, guid: 7b3e136064f681f41ada71b983918e35, type: 2}
+  BreakStateCondition: 0

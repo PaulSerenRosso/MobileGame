@@ -1,4 +1,3 @@
-using System;
 using HelperPSR.MonoLoopFunctions;
 using HelperPSR.Tick;
 using Service.Hype;
@@ -29,10 +28,10 @@ namespace Actions
             if (!_isTaunting)
             {
                 _isTaunting = true;
-            _tauntText.text = "Start Taunt";
-            _startTauntTimer.TickEvent += Taunt;
-            _startTauntTimer.Initiate();
-            _isStartTaunting = true;
+                _tauntText.text = "Start Taunt";
+                _startTauntTimer.TickEvent += Taunt;
+                _startTauntTimer.Initiate();
+                _isStartTaunting = true;
             }
         }
 
@@ -50,7 +49,6 @@ namespace Actions
             _endTauntTimer = new TickTimer(SO.EndTime, (TickManager)arguments[0]);
             _endTauntTimer.TickEvent += TickEndTaunt;
             _tauntText.text = "";
-
             _hypeService = (IHypeService)arguments[1];
         }
 
@@ -63,12 +61,10 @@ namespace Actions
                 if (_isStartTaunting)
                 {
                     _startTauntTimer.TickEvent -= Taunt;
-           
                     _startTauntTimer.TickEvent += TickCancelTaunt;
                 }
                 else
                 {
-                  
                     _startTauntTimer.TickEvent -= Taunt;
                     CancelTaunt();
                 }
@@ -89,10 +85,9 @@ namespace Actions
             CancelActionEvent?.Invoke();
         }
 
-        void TickEndTaunt()
+        private void TickEndTaunt()
         {
             _isTaunting = false;
-
             _tauntText.text = "";
             EndActionEvent?.Invoke();
         }
@@ -105,7 +100,6 @@ namespace Actions
         private void OnDisable()
         {
             UpdateManager.UnRegister(this);
-            
         }
     }
 }
