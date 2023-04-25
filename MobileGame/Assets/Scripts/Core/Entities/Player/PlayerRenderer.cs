@@ -18,7 +18,9 @@ namespace Player
         public void Init()
         {
             _playerMovementHandler.MakeActionEvent += SetDirParameter;
-            _attackPlayerAction.HitAnimationEvent += AnimPlay;
+            _attackPlayerAction.MakeActionAnimationEvent += EnableAttackAnimatorParameter;
+            _attackPlayerAction.MakeActionAnimationEvent += PlayIdle;
+            _attackPlayerAction.CancelAnimationEvent += DisableAttackAnimatorParameter;
             _tauntPlayerAction.MakeActionEvent += LaunchTauntPlayerAnimation;
             _tauntPlayerAction.EndActionEvent += LaunchEndTauntPlayerAnimation;
             _movementPlayerAction.MakeActionEvent += ResetEndMovementAnimationParameter;

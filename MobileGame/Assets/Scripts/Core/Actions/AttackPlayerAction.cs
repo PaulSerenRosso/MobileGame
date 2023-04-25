@@ -1,7 +1,9 @@
 using System;
+using Cysharp.Threading.Tasks;
 using HelperPSR.Pool;
 using HelperPSR.Tick;
 using Service.Hype;
+using UnityEditor.VersionControl;
 using UnityEngine;
 
 namespace Actions
@@ -22,7 +24,9 @@ namespace Actions
         private Pool<GameObject>[] _hitPools;
 
         public event Action HitDamagedEvent;
-        public event Action<string> HitAnimationEvent;
+        public event Action<HitSO> CancelAnimationEvent;
+
+        public event Action<HitSO> MakeActionAnimationEvent;
         public event Action InitCancelAttackEvent;
         public event Action InitBeforeHitEvent;
         public event Action EndRecoveryEvent;
@@ -33,8 +37,9 @@ namespace Actions
             get => _isAttacking;
         }
 
-        public override void MakeAction()
+        public async override void MakeAction()
         {
+            
             if (_comboCount != 0)
             {
                 AttackTimer.Cancel();
@@ -46,6 +51,8 @@ namespace Actions
             AttackTimer.InitiateEvent += InitiateCancelTimer;
             AttackTimer.Initiate();
             MakeActionEvent?.Invoke();
+            MakeActionAnimationEvent?.Invoke(AttackActionSo.HitsSO[_comboCount]);
+           
         }
 
         public override void SetupAction(params object[] arguments)
@@ -68,7 +75,9 @@ namespace Actions
             AttackTimer.Time = AttackActionSo.HitsSO[_comboCount].CancelTime;
             AttackTimer.TickEvent += InitiateBeforeHitTimer;
             AttackTimer.CancelEvent += BreakCombo;
+            AttackTimer.CancelEvent +=()=>  CancelAnimationEvent?.Invoke(AttackActionSo.HitsSO[_comboCount]);
             AttackTimer.CancelEvent += AttackTimer.ResetCancelEvent;
+            
             InitCancelAttackEvent?.Invoke();
         }
 
@@ -99,6 +108,7 @@ namespace Actions
             AttackTimer.ResetEvents();
             Hit();
             AttackTimer.Time = AttackActionSo.HitsSO[_comboCount].RecoveryTime;
+            AttackTimer.TickEvent += RaiseEndRecovery;
             if (_comboCount != AttackActionSo.HitsSO.Length - 1)
             {
                 AttackTimer.TickEvent += InitiateComboTimer;
@@ -108,19 +118,19 @@ namespace Actions
                 AttackTimer.TickEvent += BreakCombo;
             }
 
-            AttackTimer.TickEvent += RaiseEndRecovery;
             AttackTimer.Initiate();
         }
 
         private void RaiseEndRecovery()
         {
             EndRecoveryEvent?.Invoke();
+            CancelAnimationEvent?.Invoke(AttackActionSo.HitsSO[_comboCount]);
             AttackTimer.TickEvent -= RaiseEndRecovery;
         }
 
         private void Hit()
         {
-            HitAnimationEvent?.Invoke(AttackActionSo.HitsSO[_comboCount].NameAnimationTrigger);
+          
             if (CheckCanDamageEvent.Invoke(AttackActionSo.HitsSO[_comboCount]))
             {
                 var hit = _hitPools[_comboCount].GetFromPool();

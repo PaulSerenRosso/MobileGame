@@ -1,4 +1,5 @@
 ﻿using System;
+using Actions;
 using UnityEngine;
 
 namespace Player
@@ -115,11 +116,20 @@ namespace Player
             Animator.SetInteger(nameParameter, count);
         }
 
-        public void AnimPlay(string nameParameter)
+        public void EnableAttackAnimatorParameter(HitSO hitSo)
         {
-            Animator.Play(nameParameter);
+            Animator.SetBool(hitSo.NameAnimationTrigger, true);
+            Debug.Log(hitSo.NameAnimationTrigger+ "true");
         }
-
+        public void PlayIdle(HitSO hitSo)
+        {
+            Animator.Play("Idle");
+        }
+        public void DisableAttackAnimatorParameter(HitSO hitSo)
+        {
+            Animator.SetBool(hitSo.NameAnimationTrigger, false);
+            Debug.Log(hitSo.NameAnimationTrigger + "false");
+        }
         public void AnimSetTrigger(string nameParameter)
         {
             Animator.SetTrigger(nameParameter);

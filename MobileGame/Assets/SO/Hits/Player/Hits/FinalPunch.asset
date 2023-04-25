@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbbcd091bbbc458c8ab4e60cc59387d4, type: 3}
   m_Name: FinalPunch
   m_EditorClassIdentifier: 
-  CancelTime: 0.4
-  TimeBeforeHit: 0.2
+  CancelTime: 0.2
+  TimeBeforeHit: 0.1
   RecoveryTime: 0.4
   ComboTime: 0.5
   HitMovePointsDistance: 1
-  HypeAmount: 25
+  HypeAmount: 8
   Particle: {fileID: 4796189906997997625, guid: ca24286e1a892b048bafcb053dac02af,
     type: 3}
-  NameAnimationTrigger: AttackLeft
+  NameAnimationTrigger: IsAttackLeft

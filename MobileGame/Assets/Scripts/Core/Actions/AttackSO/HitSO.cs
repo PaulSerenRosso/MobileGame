@@ -13,5 +13,6 @@ namespace Actions
         public float HypeAmount;
         public GameObject Particle;
         public string NameAnimationTrigger;
+        
     }
 }
