@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6b4900caef0400cbeba41a9ad4d9693, type: 3}
   m_Name: A_T_EvaluateCurve_GapHypeProbabilityTaunt_Data
   m_EditorClassIdentifier: 
+  IsDuplicable: 1
   ExternValues: 
   EnemyValues: 
   Curve:
@@ -19,7 +20,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.99633026
+      value: 1
       inSlope: -2.3040833
       outSlope: -2.3040833
       tangentMode: 0
