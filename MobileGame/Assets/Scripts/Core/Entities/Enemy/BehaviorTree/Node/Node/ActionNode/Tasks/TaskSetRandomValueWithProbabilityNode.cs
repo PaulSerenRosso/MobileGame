@@ -31,6 +31,13 @@ namespace BehaviorTree.Nodes.Actions
         public override void Evaluate()
         {
             base.Evaluate();
+
+            for (var index = 0; index < _currentProbabilities.Count; index++)
+            {
+                var currentProbability = _currentProbabilities[index];
+                Debug.Log($"{index} : {currentProbability}");
+            }
+
             if (_randomProbilityIndexes.Count == 0)
             {
                 State = BehaviorTreeEnums.NodeState.FAILURE;
