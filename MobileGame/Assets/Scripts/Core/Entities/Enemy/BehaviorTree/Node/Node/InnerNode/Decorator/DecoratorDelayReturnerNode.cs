@@ -1,11 +1,8 @@
 ﻿using BehaviorTree.SO.Decorator;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 
 namespace BehaviorTree.Nodes.Decorator
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Decorator/DelayReturnerSO",
-        fileName = "new Tree_D_DelayReturner_Spe")]
     public class DecoratorDelayReturnerNode : DecoratorNode 
     {
         private DecoratorDelayReturnerNodeSO _so;
@@ -33,5 +30,4 @@ namespace BehaviorTree.Nodes.Decorator
           
         }
     }
-    
 }

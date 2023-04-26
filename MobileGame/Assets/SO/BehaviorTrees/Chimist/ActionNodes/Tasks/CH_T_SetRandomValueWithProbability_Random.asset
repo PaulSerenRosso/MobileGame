@@ -15,31 +15,36 @@ MonoBehaviour:
   IsDuplicable: 1
   Comment: "N\u0153ud qui permet d'ajouter des probabilit\xE9s modifiables dans les
     intern values"
-  _internValuesCount: 5
-  Data: {fileID: 11400000, guid: 36743be3b98cc7948b96e1b7ab85031f, type: 2}
+  _internValuesCount: 6
+  Data: {fileID: 11400000, guid: a867b1834fe8d7f40bf6d3c90de90ed6, type: 2}
   InternValues:
-  - Key: RedPotion
-    HashCode: -285419854
+  - Key: AttackAction
+    HashCode: 545973316
     Type: 1
     PropertyType: 2
     Comment: int(int) value to set in intern value
-  - Key: BluePotion
-    HashCode: -578808755
+  - Key: TauntAction
+    HashCode: -293010044
     Type: 1
     PropertyType: 2
     Comment: int(int) value to set in intern value
-  - Key: GreenPotion
-    HashCode: -1232315010
+  - Key: BlockAction
+    HashCode: 885675895
     Type: 1
     PropertyType: 2
     Comment: int(int) value to set in intern value
-  - Key: PotionChoosen
-    HashCode: 1934689034
+  - Key: AttackSpeAction
+    HashCode: -1825435210
+    Type: 1
+    PropertyType: 2
+    Comment: int(int) value to set in intern value
+  - Key: ActionToPlay
+    HashCode: -1046979775
     Type: 1
     PropertyType: 1
     Comment: int(int) value to set in intern value
-  - Key: ResetPotion
-    HashCode: 1389021278
+  - Key: ResetActions
+    HashCode: 31720976
     Type: 4
     PropertyType: 1
     Comment: callback(callback) value to set in intern value
