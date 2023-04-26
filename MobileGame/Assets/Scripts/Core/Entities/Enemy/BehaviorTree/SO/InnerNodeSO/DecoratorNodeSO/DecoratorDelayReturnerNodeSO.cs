@@ -1,8 +1,11 @@
 ﻿using System;
 using BehaviorTree.Nodes.Decorator;
+using UnityEngine;
 
 namespace BehaviorTree.SO.Decorator
 {
+    [CreateAssetMenu(menuName = "BehaviorTree/Decorator/DelayReturnerSO",
+        fileName = "new Tree_D_DelayReturner_Spe")]
     public class DecoratorDelayReturnerNodeSO : DecoratorSO
     {
         public BehaviorTreeEnums.NodeState ReturnState;
