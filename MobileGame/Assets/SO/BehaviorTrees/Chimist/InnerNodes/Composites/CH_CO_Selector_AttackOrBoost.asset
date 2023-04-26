@@ -10,15 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3531cbf97152c1047b56069617950d5d, type: 3}
-  m_Name: CH_CO_Selector_Actions
+  m_Name: CH_CO_Selector_AttackOrBoost
   m_EditorClassIdentifier: 
   IsDuplicable: 1
   Comment: "S\xE9lectionne un n\u0153ud et v\xE9rifie si le n\u0153ud est un succ\xE8s
     ou est en train de fonctionner et retourne le statut, sinon il continue de parcourir
     les n\u0153uds jusqu'\xE0 un succ\xE9s ou un fonctionnement"
   Children:
-  - {fileID: 11400000, guid: ce768129af0eb8e40b4d6069fd15242d, type: 2}
-  - {fileID: 11400000, guid: e523ef5b4c8229f4d9e36c1a9efdd45b, type: 2}
-  - {fileID: 11400000, guid: 01e2da32a7107fa4f9a9ab97ec2f917c, type: 2}
-  - {fileID: 11400000, guid: 9acb1b5279051054aaf642ef7491e2ef, type: 2}
-  - {fileID: 11400000, guid: eb40f4c77c794a740a7365f36ac38444, type: 2}
+  - {fileID: 11400000, guid: 4971972bcd991dc499966b928a6d1b19, type: 2}
+  - {fileID: 11400000, guid: 53164760de2843e4dbd674d77f81a9d0, type: 2}
+  - {fileID: 11400000, guid: 70f5c12343dcf744fb687d7ffae9985e, type: 2}
