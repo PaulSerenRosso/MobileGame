@@ -9,8 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 964129c80d92c0e468359104d05aabc1, type: 3}
-  m_Name: A_D_InverterRandomActions
+  m_Script: {fileID: 11500000, guid: fe3c0bb747104f0aa1d730d81cb216de, type: 3}
+  m_Name: CH_T_Remap_LerpEnemyHypeProbabilityBlock_Data
   m_EditorClassIdentifier: 
-  Comment: "Retourne le statut inverse que le n\u0153ud retourne"
-  Child: {fileID: 11400000, guid: 272b7eb5ff010f944973109c0f64f3f8, type: 2}
+  ExternValues: 
+  EnemyValues: 
+  OldMinValue: 0
+  OldMaxValue: 1
+  NewMinValue: 0
+  NewMaxValue: 7
