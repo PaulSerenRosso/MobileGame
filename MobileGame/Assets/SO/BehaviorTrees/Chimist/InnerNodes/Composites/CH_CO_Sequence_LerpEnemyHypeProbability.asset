@@ -12,19 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a554480369441f643a037b92f1ced7d6, type: 3}
   m_Name: CH_CO_Sequence_LerpEnemyHypeProbability
   m_EditorClassIdentifier: 
+  IsDuplicable: 1
   Comment: "S\xE9lectionne un n\u0153ud et v\xE9rifie si le n\u0153ud est un succ\xE8s
     ou est en train de fonctionner et retourne le statut, sinon d\xE9s qu'un n\u0153ud
     retourne un \xE9chec, la sequence retourne un \xE9chec"
   Children:
   - {fileID: 11400000, guid: e123e92d00b8ee54e8a66ccf3ac01820, type: 2}
-  - {fileID: 11400000, guid: 0f8885975629c194ba63c3240647b580, type: 2}
-  - {fileID: 11400000, guid: 1e18ec5f47896c84ba0f425715273c6e, type: 2}
-  - {fileID: 11400000, guid: 8dd3a3a4954f0fe4fb9e74433bbac8e2, type: 2}
-  - {fileID: 11400000, guid: 8e74fbf104e01004a9ff798a967ce189, type: 2}
-  - {fileID: 11400000, guid: 000ad83ed38873343a6997d783482a10, type: 2}
-  - {fileID: 11400000, guid: d52636604faf70a42a2b1c590a77b11e, type: 2}
-  - {fileID: 11400000, guid: 14998d3ecbc7c0e4daae6fc65a4dadba, type: 2}
-  - {fileID: 11400000, guid: 3ee59bc5ee52e68428431ca23add5e4f, type: 2}
+  - {fileID: 11400000, guid: f26358949daa242439e49d37aa9e2d5d, type: 2}
+  - {fileID: 11400000, guid: 31ee1969da9c977428ea6a5acd3ec786, type: 2}
+  - {fileID: 11400000, guid: f62dfd8a16bb178418884743166b5fbf, type: 2}
+  - {fileID: 11400000, guid: bc5c000c6af28e64499acd44cf42625f, type: 2}
+  - {fileID: 11400000, guid: 8049646b4c2b7ef4dad95a48de412b59, type: 2}
+  - {fileID: 11400000, guid: 1d842f486027de845a91e6674f6fdce6, type: 2}
+  - {fileID: 11400000, guid: e01fe41a77618a14dbd1fe9b2f6ecaf4, type: 2}
+  - {fileID: 11400000, guid: 9026bfbc7d6bc5a4687ea4d33c20309d, type: 2}
   - {fileID: 11400000, guid: a9f3cc6d9c2feff4f9b6610d9fbb54b9, type: 2}
   - {fileID: 11400000, guid: 58460f5751fa95148977f496e8bbe2b6, type: 2}
   - {fileID: 11400000, guid: 4713ac6ebc667e1498355da9cf411ca4, type: 2}

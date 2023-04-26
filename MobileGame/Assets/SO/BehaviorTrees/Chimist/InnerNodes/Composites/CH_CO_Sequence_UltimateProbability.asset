@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a554480369441f643a037b92f1ced7d6, type: 3}
-  m_Name: CH_CO_Sequence_Check&AttackSpe
+  m_Name: CH_CO_Sequence_UltimateProbability
   m_EditorClassIdentifier: 
   IsDuplicable: 1
   Comment: "S\xE9lectionne un n\u0153ud et v\xE9rifie si le n\u0153ud est un succ\xE8s
     ou est en train de fonctionner et retourne le statut, sinon d\xE9s qu'un n\u0153ud
     retourne un \xE9chec, la sequence retourne un \xE9chec"
   Children:
-  - {fileID: 11400000, guid: c7257bbd7f9afb747907810066463f89, type: 2}
-  - {fileID: 11400000, guid: c60d79e84d8cca447b946df044bf87cc, type: 2}
-  - {fileID: 11400000, guid: c1d3b86c9cc60564486dabdf7e18414f, type: 2}
-  - {fileID: 11400000, guid: 15b1b6ad2616f2841b0152809e72ab22, type: 2}
+  - {fileID: 11400000, guid: 0bc21ea3887e25e4eb37a88c76dd4368, type: 2}
+  - {fileID: 11400000, guid: 43d6ecee4b31f0746b08edab36936bde, type: 2}
+  - {fileID: 11400000, guid: 2659da61c380c314d88535a00bf4bb52, type: 2}
+  - {fileID: 11400000, guid: b58339dfb6b4a814ca72895801e5cd06, type: 2}
+  - {fileID: 11400000, guid: 23d43cceed1c9f244ad7a2e970e64775, type: 2}
