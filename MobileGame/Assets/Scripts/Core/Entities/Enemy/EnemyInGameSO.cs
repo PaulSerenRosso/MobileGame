@@ -11,6 +11,6 @@ namespace Enemy
         public float TimeStunAvailable;
         public float TimeInvulnerable;
         public float AngleBlock;
-      
+        public float PercentageDamageReductionBoostChimist;
     }
 }
