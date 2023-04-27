@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: CH_D_DelayReturner_PotionRemover
   m_EditorClassIdentifier: 
   IsDuplicable: 1
-  Comment: 
-  Child: {fileID: 0}
+  Comment: "Retourne toujours la m\xEAme valeur qui est renseign\xE9 sur le n\u0153ud
+    & d\xE9clenche les noeuds enfants au bout d'un certain temps"
+  Child: {fileID: 11400000, guid: 94a6483ee6b1ee14c8fedcbb83089f94, type: 2}
   ReturnState: 0
   TimeBeforeToReadChild: 0

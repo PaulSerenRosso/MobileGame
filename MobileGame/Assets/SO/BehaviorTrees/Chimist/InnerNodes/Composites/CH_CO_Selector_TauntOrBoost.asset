@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a554480369441f643a037b92f1ced7d6, type: 3}
-  m_Name: G_CO_Sequence_Check&Taunt
+  m_Script: {fileID: 11500000, guid: 3531cbf97152c1047b56069617950d5d, type: 3}
+  m_Name: CH_CO_Selector_TauntOrBoost
   m_EditorClassIdentifier: 
   IsDuplicable: 1
   Comment: "S\xE9lectionne un n\u0153ud et v\xE9rifie si le n\u0153ud est un succ\xE8s
-    ou est en train de fonctionner et retourne le statut, sinon d\xE9s qu'un n\u0153ud
-    retourne un \xE9chec, la sequence retourne un \xE9chec"
+    ou est en train de fonctionner et retourne le statut, sinon il continue de parcourir
+    les n\u0153uds jusqu'\xE0 un succ\xE9s ou un fonctionnement"
   Children:
-  - {fileID: 11400000, guid: c4c51c7d848fb8245871065ebcccf1d7, type: 2}
+  - {fileID: 11400000, guid: b4aba732e673a504992a0eaa966bae80, type: 2}
   - {fileID: 11400000, guid: 0d525cb50be61ca48b08c8bdcaa7c18c, type: 2}
