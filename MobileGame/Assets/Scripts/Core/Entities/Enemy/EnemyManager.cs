@@ -15,6 +15,7 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
 {
     public Action CanUltimateEvent;
     public Animator Animator;
+    public bool IsBoosted;
     public EnemyEnums.EnemyMobilityState CurrentMobilityState;
     public EnemyEnums.EnemyBlockingState CurrentBlockingState;
     public EnemyInGameSO EnemyInGameSo;
@@ -26,6 +27,7 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     [SerializeField] private string _remoteConfigStunPercentageHealthName;
     [SerializeField] private string _remoteConfigBlockPercentageDamageReduction;
     [SerializeField] private string _remoteConfigAngleBlock;
+    [SerializeField] private string _remoteConfigPercentageDamageReductionBoostChimist;
     [SerializeField] private ParticleSystem _ultimateParticle;
     [SerializeField] private GameObject _blockParticle;
 
@@ -111,6 +113,8 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
         EnemyInGameSo.PercentageDamageReduction =
             RemoteConfigManager.Config.GetFloat(_remoteConfigBlockPercentageDamageReduction);
         EnemyInGameSo.AngleBlock = RemoteConfigManager.Config.GetFloat(_remoteConfigAngleBlock);
+        EnemyInGameSo.PercentageDamageReductionBoostChimist =
+            RemoteConfigManager.Config.GetFloat(_remoteConfigPercentageDamageReductionBoostChimist);
     }
 
     public void ResetEnemy()
@@ -145,6 +149,7 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
 
     public bool TryDecreaseHypeEnemy(float amount, Vector3 posToCheck, Transform particleTransform)
     {
+        float damage = amount;
         if (CurrentBlockingState == EnemyEnums.EnemyBlockingState.BLOCKING)
         {
             _blockParticle.gameObject.transform.position =
@@ -155,7 +160,8 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
             float angle = Mathf.Acos(dot);
             if (angle > EnemyInGameSo.AngleBlock)
             {
-                float damage = (1 - EnemyInGameSo.PercentageDamageReduction) * amount;
+                damage = (1 - EnemyInGameSo.PercentageDamageReduction) * amount;
+                if (IsBoosted) damage = (1 - EnemyInGameSo.PercentageDamageReductionBoostChimist) * damage;
                 if (CurrentMobilityState != EnemyEnums.EnemyMobilityState.INVULNERABLE) TakeStun(damage);
                 _hypeService.DecreaseHypeEnemy(damage);
                 return true;
@@ -164,10 +170,11 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
             return false;
         }
 
+        if (IsBoosted) damage = (1 - EnemyInGameSo.PercentageDamageReductionBoostChimist) * amount;
         particleTransform.position = (1 * Vector3.Normalize(posToCheck - transform.position) + transform.position) +
                                      new Vector3(0, 1, 0);
         if (CurrentMobilityState != EnemyEnums.EnemyMobilityState.INVULNERABLE) TakeStun(amount);
-        _hypeService.DecreaseHypeEnemy(amount);
+        _hypeService.DecreaseHypeEnemy(damage);
         return true;
     }
 
