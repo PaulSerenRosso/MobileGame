@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a554480369441f643a037b92f1ced7d6, type: 3}
+  m_Name: CM_CO_Sequence_AttackDamage
+  m_EditorClassIdentifier: 
+  IsDuplicable: 1
+  Comment: "S\xE9lectionne un n\u0153ud et v\xE9rifie si le n\u0153ud est un succ\xE8s
+    ou est en train de fonctionner et retourne le statut, sinon d\xE9s qu'un n\u0153ud
+    retourne un \xE9chec, la sequence retourne un \xE9chec"
+  Children:
+  - {fileID: 11400000, guid: 70db3dc34dda9aa4b84d7859d8c53233, type: 2}
+  - {fileID: 11400000, guid: 7721bdb38e9c7704ab706cbb3e9eb093, type: 2}
+  - {fileID: 11400000, guid: a42d6489962fb7949b819b9dcf5ac795, type: 2}
+  - {fileID: 11400000, guid: dae8d53b6d83f424c9bf2672fa01bb46, type: 2}
+  - {fileID: 11400000, guid: 63241e215cb87ad4b8e8ee44bfd7cb88, type: 2}
+  - {fileID: 11400000, guid: fe64093b6dfa796449e2729ccb86192e, type: 2}
+  - {fileID: 11400000, guid: 4b52061a44b4e7c4dad9323a1a9d7b67, type: 2}
+  - {fileID: 11400000, guid: 73242ed741470304c829dc609b123a1c, type: 2}
+  - {fileID: 11400000, guid: 0bc21ea3887e25e4eb37a88c76dd4368, type: 2}
+  - {fileID: 11400000, guid: 6c2732b3f84a61343afff1aa3480dde7, type: 2}
