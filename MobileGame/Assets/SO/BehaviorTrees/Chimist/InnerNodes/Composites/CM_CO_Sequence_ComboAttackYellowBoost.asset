@@ -10,12 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a554480369441f643a037b92f1ced7d6, type: 3}
-  m_Name: CM_CO_Sequence_TauntYellowBoost
+  m_Name: CM_CO_Sequence_ComboAttackYellowBoost
   m_EditorClassIdentifier: 
   IsDuplicable: 1
   Comment: "S\xE9lectionne un n\u0153ud et v\xE9rifie si le n\u0153ud est un succ\xE8s
     ou est en train de fonctionner et retourne le statut, sinon d\xE9s qu'un n\u0153ud
     retourne un \xE9chec, la sequence retourne un \xE9chec"
   Children:
-  - {fileID: 11400000, guid: 540d2b673a5959f4ca66b16dce09e1ae, type: 2}
-  - {fileID: 11400000, guid: aa389cc809fa3014ca7f650aa5674f58, type: 2}
+  - {fileID: 11400000, guid: 87f63508fa685064e9e5b593473e4d67, type: 2}
+  - {fileID: 11400000, guid: 3dd66bb5bad39e04ea72db2bd3da464a, type: 2}
+  - {fileID: 11400000, guid: d89dcb8321ef6e6428a5ca978657d797, type: 2}
+  - {fileID: 11400000, guid: 8e6bac51c9181334f99aab25b2a22c3e, type: 2}
+  - {fileID: 11400000, guid: 6cebf1ce0a8a8e645ba6a9e78a1df6c1, type: 2}
+  - {fileID: 11400000, guid: 8e6bac51c9181334f99aab25b2a22c3e, type: 2}
+  - {fileID: 11400000, guid: ddb201f071a413845ab5d016ea4d3371, type: 2}
