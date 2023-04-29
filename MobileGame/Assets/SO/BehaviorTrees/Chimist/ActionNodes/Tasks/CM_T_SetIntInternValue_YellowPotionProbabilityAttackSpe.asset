@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 767c44011fda4a978c16a812f1edcf00, type: 3}
-  m_Name: CM_T_SetIntInternValue_YellowPotionProbability
+  m_Name: CM_T_SetIntInternValue_YellowPotionProbabilityAttackSpe
   m_EditorClassIdentifier: 
-  IsDuplicable: 1
+  IsDuplicable: 0
   Comment: "N\u0153ud qui permet de SET une valeur integer dans les interns values"
   _internValuesCount: 3
-  Data: {fileID: 11400000, guid: 425c51b65d92d9f48b79c017adab0a54, type: 2}
+  Data: {fileID: 11400000, guid: a73173cbd409dd44f85ba64aecf1b596, type: 2}
   InternValues:
-  - Key: YellowPotion
-    HashCode: 1009599283
+  - Key: AttackSpeAction
+    HashCode: -1825435210
     Type: 1
     PropertyType: 0
     Comment: Int(int) value to get from intern value
-  - Key: YellowPotion
-    HashCode: 1009599283
+  - Key: AttackSpeAction
+    HashCode: -1825435210
     Type: 1
     PropertyType: 1
     Comment: Int(int) value to set in intern value
