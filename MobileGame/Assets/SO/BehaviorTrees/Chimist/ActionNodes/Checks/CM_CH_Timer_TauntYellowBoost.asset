@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9430ee2b95904fd3bda52a157b2040c4, type: 3}
+  m_Name: CM_CH_Timer_TauntYellowBoost
+  m_EditorClassIdentifier: 
+  IsDuplicable: 1
+  Comment: "N\u0153ud qui permet de retourner un succ\xE8s selon un timer"
+  _internValuesCount: 2
+  Data: {fileID: 11400000, guid: a8a1cb23df09ac84c9e0e6f90b9855ea, type: 2}
+  InternValues:
+  - Key: ResetTimerEvent
+    HashCode: -1017431786
+    Type: 4
+    PropertyType: 1
+    Comment: set the function to reset timer manually, removed automatically when
+      timer is ended
