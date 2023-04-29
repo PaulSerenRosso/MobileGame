@@ -10,12 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a554480369441f643a037b92f1ced7d6, type: 3}
-  m_Name: CM_CO_Sequence_AttackYellowBoost
+  m_Name: CM_CO_Sequence_AttackRotationYellowBoost
   m_EditorClassIdentifier: 
   IsDuplicable: 1
   Comment: "S\xE9lectionne un n\u0153ud et v\xE9rifie si le n\u0153ud est un succ\xE8s
     ou est en train de fonctionner et retourne le statut, sinon d\xE9s qu'un n\u0153ud
     retourne un \xE9chec, la sequence retourne un \xE9chec"
   Children:
-  - {fileID: 11400000, guid: 540d2b673a5959f4ca66b16dce09e1ae, type: 2}
-  - {fileID: 11400000, guid: c144c804f29478d49b069eded8f1fd2c, type: 2}
+  - {fileID: 11400000, guid: 40c146c056c208647a4f8642f812696b, type: 2}
+  - {fileID: 11400000, guid: 7571930ca8c9989428ecaa62c6d95d87, type: 2}
+  - {fileID: 11400000, guid: 468968a7aa0ced442a05a9be96d5472c, type: 2}
+  - {fileID: 11400000, guid: ae3eaace0a769d848a9679bb2f63e8c8, type: 2}
+  - {fileID: 11400000, guid: c9eb65672c15bba4d8b8f6d1e75a8e20, type: 2}
