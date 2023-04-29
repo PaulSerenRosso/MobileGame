@@ -18,6 +18,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
+            Tree.ResetNodeList.Add(this);
             _so = (TaskIncreaseFloatNodeSO)nodeSO;
             _data = (TaskIncreaseFloatNodeDataSO)_so.Data;
         }
@@ -26,34 +27,29 @@ namespace BehaviorTree.Nodes.Actions
         {
             base.Evaluate();
             float result;
-            if (Sharer.InternValues[_so.InternValues[0].HashCode] == null) result = _data.StartValue;
-            else
+            switch (_data.InternValueCalculate)
             {
-                switch (_data.InternValueCalculate)
-                {
-                    case BehaviorTreeEnums.InternValueCalculate.ADD:
-                        result = (float)Sharer.InternValues[_so.InternValues[0].HashCode] + (_data.FloatValue * Time.deltaTime);
-                        break;
-                    case BehaviorTreeEnums.InternValueCalculate.SUBTRACT:
-                        result = (float)Sharer.InternValues[_so.InternValues[0].HashCode] - (_data.FloatValue * Time.deltaTime);
-                        break;
-                    case BehaviorTreeEnums.InternValueCalculate.SET:
-                        result = (float)Sharer.InternValues[_so.InternValues[0].HashCode];
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
+                case BehaviorTreeEnums.InternValueCalculate.ADD:
+                    result = (float)Sharer.InternValues[_so.InternValues[0].HashCode] + (_data.FloatValue * Time.deltaTime);
+                    break;
+                case BehaviorTreeEnums.InternValueCalculate.SUBTRACT:
+                    result = (float)Sharer.InternValues[_so.InternValues[0].HashCode] -
+                             (_data.FloatValue * Time.deltaTime);
+                    break;
+                case BehaviorTreeEnums.InternValueCalculate.SET:
+                    result = (float)Sharer.InternValues[_so.InternValues[0].HashCode];
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
-            CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[1].HashCode, result);
+            CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[0].HashCode, result);
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();
         }
 
-        public override void SetDependencyValues(
-            Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
-            Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
+        public override void Reset()
         {
-            
+            CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[0].HashCode, _data.StartValue);
         }
 
         public override ActionNodeDataSO GetDataSO()
