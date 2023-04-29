@@ -60,7 +60,9 @@ namespace BehaviorTreeEditor
                 SetupPaths();
                 CreateNodeSOAssetWithTypeNode(_nodeToDuplicate);
                 AssetDatabase.Refresh();
-                AssetDatabase.SaveAssets();
+        
+            
+            
             }
 
             GUI.enabled = true;
@@ -137,9 +139,10 @@ namespace BehaviorTreeEditor
                 case TaskNodeSO task:
                 {
                     return TryCreateNodeSOAsset(nodeSo, _taskPath, SetUpTaskNodeAsset);
+                    
                 }
             }
-
+            
             throw new Exception("Is not a Valid type node");
         }
 
@@ -154,6 +157,7 @@ namespace BehaviorTreeEditor
                     compositeDuplication.Children[i] = (NodeSO)childDuplication;
                 }
             }
+           
         }
 
 
@@ -198,9 +202,10 @@ namespace BehaviorTreeEditor
             if (duplicationNode != null)
             {
                 successEvent?.Invoke(duplicationNode);
+                EditorUtility.SetDirty(duplicationNode);
                 return duplicationNode;
             }
-
+            
             return null;
         }
 
