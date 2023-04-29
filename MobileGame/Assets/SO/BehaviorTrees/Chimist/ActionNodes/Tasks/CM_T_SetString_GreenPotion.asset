@@ -13,7 +13,12 @@ MonoBehaviour:
   m_Name: CM_T_SetString_GreenPotion
   m_EditorClassIdentifier: 
   IsDuplicable: 1
-  Comment: 
-  _internValuesCount: 0
-  Data: {fileID: 0}
-  InternValues: []
+  Comment: "N\u0153ud qui set la valeur d'un string en intern value"
+  _internValuesCount: 1
+  Data: {fileID: 11400000, guid: 8e148b3eb81b45f4eafc726563f0c2c5, type: 2}
+  InternValues:
+  - Key: StringPotion
+    HashCode: -242650572
+    Type: 6
+    PropertyType: 1
+    Comment: string(string) value to get from intern value

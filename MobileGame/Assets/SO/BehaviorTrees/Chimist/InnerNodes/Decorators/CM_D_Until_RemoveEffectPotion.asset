@@ -9,13 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d303b516ef124fb688df223acae86c86, type: 3}
-  m_Name: CM_T_ShaderSetFloat_IncreaseLerpSpe_Data
+  m_Script: {fileID: 11500000, guid: 1696cee13330e83448a3510eb7a31162, type: 3}
+  m_Name: CM_D_Until_RemoveEffectPotion
   m_EditorClassIdentifier: 
   IsDuplicable: 1
-  ExternValues: 
-  EnemyValues: 04000000
-  ReferenceNameValue: 
-  FloatValue: 0
-  IsInternReferenceNameValue: 1
-  IsInternFloatValue: 1
+  Comment: "Continue d'\xE9valuer le n\u0153ud jusqu'\xE0 recevoir le statut demand\xE9"
+  Child: {fileID: 11400000, guid: f24de1c57ed03e6488fec34a9b632cf9, type: 2}
+  BreakStateCondition: 0

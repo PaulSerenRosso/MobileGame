@@ -59,7 +59,7 @@ public class BehaviorTreeEnums
         REMOVE
     }
 
-    public enum InternValueIntCalculate
+    public enum InternValueCalculate
     {
         ADD,
         SUBTRACT,

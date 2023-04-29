@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a554480369441f643a037b92f1ced7d6, type: 3}
-  m_Name: CM_CO_Sequence_PotionRemover
+  m_Name: CM_CO_Sequence_RemoveEffectPotion
   m_EditorClassIdentifier: 
   IsDuplicable: 1
   Comment: "S\xE9lectionne un n\u0153ud et v\xE9rifie si le n\u0153ud est un succ\xE8s
     ou est en train de fonctionner et retourne le statut, sinon d\xE9s qu'un n\u0153ud
     retourne un \xE9chec, la sequence retourne un \xE9chec"
   Children:
-  - {fileID: 11400000, guid: 7fbdb92e90bb611488cb3d0a6a2fde44, type: 2}
-  - {fileID: 11400000, guid: 94a6483ee6b1ee14c8fedcbb83089f94, type: 2}
-  - {fileID: 11400000, guid: b0a01035aaabdb9419d053ec79f25a40, type: 2}
+  - {fileID: 11400000, guid: aea3d04e7eae2cc428a2bb2fa59248f1, type: 2}
+  - {fileID: 11400000, guid: 7032b0f9bbec26d43a3e4f02a9fe97ef, type: 2}
+  - {fileID: 11400000, guid: a0ff4728598ea964ea1e0b0561f3e7e7, type: 2}

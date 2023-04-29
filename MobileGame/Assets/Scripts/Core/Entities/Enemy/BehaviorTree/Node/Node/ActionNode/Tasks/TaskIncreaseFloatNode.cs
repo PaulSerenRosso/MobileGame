@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using HelperPSR.Collections;
 using UnityEngine;
@@ -24,10 +25,24 @@ namespace BehaviorTree.Nodes.Actions
         public override void Evaluate()
         {
             base.Evaluate();
-            var result = _data.StartValue;
-            if (Sharer.InternValues[_so.InternValues[0].HashCode] != null)
+            float result;
+            if (Sharer.InternValues[_so.InternValues[0].HashCode] == null) result = _data.StartValue;
+            else
             {
-                result = (float)Sharer.InternValues[_so.InternValues[0].HashCode] + (_data.FloatValue * Time.deltaTime);
+                switch (_data.InternValueCalculate)
+                {
+                    case BehaviorTreeEnums.InternValueCalculate.ADD:
+                        result = (float)Sharer.InternValues[_so.InternValues[0].HashCode] + (_data.FloatValue * Time.deltaTime);
+                        break;
+                    case BehaviorTreeEnums.InternValueCalculate.SUBTRACT:
+                        result = (float)Sharer.InternValues[_so.InternValues[0].HashCode] - (_data.FloatValue * Time.deltaTime);
+                        break;
+                    case BehaviorTreeEnums.InternValueCalculate.SET:
+                        result = (float)Sharer.InternValues[_so.InternValues[0].HashCode];
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
             }
             CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[1].HashCode, result);
             State = BehaviorTreeEnums.NodeState.SUCCESS;
