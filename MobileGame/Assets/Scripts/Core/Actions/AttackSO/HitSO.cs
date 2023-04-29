@@ -12,6 +12,7 @@ namespace Actions
         public int HitMovePointsDistance;
         public float HypeAmount;
         public GameObject Particle;
+        public Enums.ParticlePosition ParticlePosition;
         public string NameAnimationTrigger;
         
     }

@@ -147,7 +147,7 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
         Animator.SetBool("IsBlocking", false);
     }
 
-    public bool TryDecreaseHypeEnemy(float amount, Vector3 posToCheck, Transform particleTransform)
+    public bool TryDecreaseHypeEnemy(float amount, Vector3 posToCheck, Transform particleTransform, Enums.ParticlePosition particlePosition)
     {
         float damage = amount;
         if (CurrentBlockingState == EnemyEnums.EnemyBlockingState.BLOCKING)
@@ -171,8 +171,26 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
         }
 
         if (IsBoosted) damage = (1 - EnemyInGameSo.PercentageDamageReductionBoostChimist) * amount;
-        particleTransform.position = (1 * Vector3.Normalize(posToCheck - transform.position) + transform.position) +
-                                     new Vector3(0, 1, 0);
+        Vector3 pos;
+        switch (particlePosition)
+        {
+            case Enums.ParticlePosition.Neck:
+                pos = new Vector3(transform.position.x, transform.localScale.y + 0.5F, transform.position.z);
+                particleTransform.position = pos;
+                break;
+            case Enums.ParticlePosition.Punch:
+                particleTransform.position = (1 * Vector3.Normalize(posToCheck - transform.position) + transform.position) +
+                                             new Vector3(0, 1, 0);
+                break;
+            case Enums.ParticlePosition.Uppercut:
+                pos = (1 * Vector3.Normalize(posToCheck - transform.position) + transform.position) +
+                      new Vector3(0, 1, 0);
+                pos.y = transform.localScale.y + 0.5F;
+                particleTransform.position = pos;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(particlePosition), particlePosition, null);
+        }
         if (CurrentMobilityState != EnemyEnums.EnemyMobilityState.INVULNERABLE) TakeStun(amount);
         _hypeService.DecreaseHypeEnemy(damage);
         return true;
