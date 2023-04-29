@@ -14,6 +14,7 @@ namespace Player
         [SerializeField] private PlayerMovementHandler _playerMovementHandler;
         [SerializeField] private PlayerUltimateHandler playerUltimateHandler;
         [SerializeField] private TauntPlayerAction _tauntPlayerAction;
+        [SerializeField] private SkinnedMeshRenderer[] _skinnedMeshRenderers;
 
         public void Init()
         {
@@ -30,6 +31,11 @@ namespace Player
               //SetRecoverySpeedAnimation();
             // _tauntAction.MakeActionEvent += ActivateTauntFX;
             // _tauntAction.CancelActionEvent += DeactivateTauntFX;
+        }
+
+        public SkinnedMeshRenderer[] GetSkinnedMeshRenderers()
+        {
+            return _skinnedMeshRenderers;
         }
 
         private void ActivateFX()

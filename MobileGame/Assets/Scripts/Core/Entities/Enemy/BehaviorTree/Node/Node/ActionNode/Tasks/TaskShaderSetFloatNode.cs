@@ -1,5 +1,6 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
+using Player;
 
 namespace BehaviorTree.Nodes.Actions
 {
@@ -7,6 +8,7 @@ namespace BehaviorTree.Nodes.Actions
     {
         private TaskShaderSetFloatNodeSO _so;
         private TaskShaderSetFloatNodeDataSO _data;
+        private PlayerRenderer _playerRenderer;
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
@@ -25,7 +27,13 @@ namespace BehaviorTree.Nodes.Actions
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();
         }
-
+        public override void SetDependencyValues(
+            Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
+            Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
+        {
+            _playerRenderer = (PlayerRenderer)externDependencyValues[BehaviorTreeEnums.TreeExternValues.PlayerRenderer];
+        }
+        
         public override ActionNodeDataSO GetDataSO()
         {
             return _data;

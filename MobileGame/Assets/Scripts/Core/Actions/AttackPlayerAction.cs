@@ -68,7 +68,7 @@ namespace Actions
 
         private void InitiateCancelTimer()
         {
-            _meshRenderer.material = _materials[0];
+            // _meshRenderer.material = _materials[0];
             AttackTimer.ResetEvents();
             AttackTimer.Time = AttackActionSo.HitsSO[_comboCount].CancelTime;
             AttackTimer.TickEvent += InitiateBeforeHitTimer;
@@ -80,7 +80,7 @@ namespace Actions
 
         private void BreakCombo()
         {
-            _meshRenderer.material = _materials[3];
+            // _meshRenderer.material = _materials[3];
             AttackTimer.ResetEvents();
             AttackTimer.Cancel();
             _comboCount = 0;
@@ -91,7 +91,7 @@ namespace Actions
 
         private void InitiateBeforeHitTimer()
         {
-            _meshRenderer.material = _materials[1];
+            // _meshRenderer.material = _materials[1];
             AttackTimer.ResetEvents();
             IsCancelTimeOn = false;
             InitBeforeHitEvent?.Invoke();
@@ -102,7 +102,7 @@ namespace Actions
 
         private void InitiateRecoveryTimer()
         {
-            _meshRenderer.material = _materials[4];
+            // _meshRenderer.material = _materials[4];
             AttackTimer.ResetEvents();
             Hit();
             AttackTimer.Time = AttackActionSo.HitsSO[_comboCount].RecoveryTime;
@@ -141,7 +141,7 @@ namespace Actions
 
         private void InitiateComboTimer()
         {
-            _meshRenderer.material = _materials[2];
+            // _meshRenderer.material = _materials[2];
             AttackTimer.ResetEvents();
             _isAttacking = false;
             AttackTimer.Time = AttackActionSo.HitsSO[_comboCount].ComboTime;
