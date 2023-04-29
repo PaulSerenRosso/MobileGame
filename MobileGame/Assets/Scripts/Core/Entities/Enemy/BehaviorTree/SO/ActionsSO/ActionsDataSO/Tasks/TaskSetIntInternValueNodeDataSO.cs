@@ -1,6 +1,7 @@
 ﻿using System;
 using BehaviorTree.Nodes.Actions;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace BehaviorTree.SO.Actions
 {
@@ -8,7 +9,7 @@ namespace BehaviorTree.SO.Actions
         fileName = "new Tree_T_SetIntInternValue_Spe_Data")]
     public class TaskSetIntInternValueNodeDataSO : ActionNodeDataSO
     {
-        public BehaviorTreeEnums.InternValueIntCalculate InternValueIntCalculate;
+        [FormerlySerializedAs("InternValueIntCalculate")] public BehaviorTreeEnums.InternValueCalculate InternValueCalculate;
         public int Value;
         public bool IsValueInternValue;
 

@@ -44,7 +44,7 @@ namespace BehaviorTree.Nodes.Actions
                     State = BehaviorTreeEnums.NodeState.SUCCESS;
                     ReturnedEvent?.Invoke();
                     return;
-                }   
+                }
             }
             else
             {
@@ -55,17 +55,16 @@ namespace BehaviorTree.Nodes.Actions
                     State = BehaviorTreeEnums.NodeState.SUCCESS;
                     ReturnedEvent?.Invoke();
                     return;
-                }   
+                }
             }
 
-          
+
             IncreaseTimerEvent?.Invoke();
             _timer += Time.deltaTime;
             // Debug.Log("timer failure " + GetNodeSO().name + _timer + "  " + _data.Time);
             State = BehaviorTreeEnums.NodeState.FAILURE;
             ReturnedEvent?.Invoke();
-            // if (ReturnedEvent == null)
-            //     Debug.Log("returnevent null" + (TempReturnedEvent == null));
+            // if (ReturnedEvent == null) Debug.Log("returnevent null" + (TempReturnedEvent == null));
             // else Debug.Log("return event is not null");
         }
 
@@ -98,7 +97,7 @@ namespace BehaviorTree.Nodes.Actions
         {
             _timer = 0;
             EndTimerEvent?.Invoke();
-//            Debug.Log("reset timer");
+            // Debug.Log("reset timer");
         }
 
         public override ActionNodeDataSO GetDataSO()

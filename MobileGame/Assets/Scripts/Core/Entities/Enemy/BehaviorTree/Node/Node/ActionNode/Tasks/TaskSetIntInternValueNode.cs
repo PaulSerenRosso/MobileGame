@@ -33,15 +33,15 @@ namespace BehaviorTree.Nodes.Actions
                 value = _data.Value;
             }
             int probability = (int)Sharer.InternValues[_so.InternValues[0].HashCode];
-            switch (_data.InternValueIntCalculate)
+            switch (_data.InternValueCalculate)
             {
-                case BehaviorTreeEnums.InternValueIntCalculate.ADD:
+                case BehaviorTreeEnums.InternValueCalculate.ADD:
                     probability += (int)value;
                     break;
-                case BehaviorTreeEnums.InternValueIntCalculate.SUBTRACT:
+                case BehaviorTreeEnums.InternValueCalculate.SUBTRACT:
                     probability -= (int)value;
                     break;
-                case BehaviorTreeEnums.InternValueIntCalculate.SET:
+                case BehaviorTreeEnums.InternValueCalculate.SET:
                     probability = (int)value;
                     break;
                 default:
