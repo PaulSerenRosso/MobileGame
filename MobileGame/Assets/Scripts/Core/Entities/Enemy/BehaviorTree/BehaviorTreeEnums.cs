@@ -45,7 +45,8 @@ public class BehaviorTreeEnums
         FLOAT,
         NONE,
         CALLBACK,
-        BOOL
+        BOOL,
+        STRING
     }
 
     public enum InternValuePropertyType

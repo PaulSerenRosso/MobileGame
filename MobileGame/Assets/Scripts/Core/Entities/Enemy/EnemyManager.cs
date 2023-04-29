@@ -33,7 +33,7 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     [SerializeField] private ParticleSystem _ultimateParticle;
     [SerializeField] private GameObject _blockParticle;
     [SerializeField] private SkinnedMeshRenderer[] _skinnedMeshRenderers;
-    [SerializeField] private int _timeShaderActivate = 1500;
+    [SerializeField] private int _timeShaderActivate = 500;
 
     private List<EntityStunTrigger> _currentStunTriggers;
     private float _timerInvulnerable;
@@ -86,6 +86,11 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
         _timerInvulnerable = 0;
         _hypeService.GetEnemyGainUltimateEvent += ActivateFXUltimate;
         _hypeService.GetEnemyLoseUltimateEvent += DeactivateFXUltimate;
+    }
+
+    public SkinnedMeshRenderer[] GetSkinnedMeshRenderers()
+    {
+        return _skinnedMeshRenderers;
     }
 
     private void ActivateFXUltimate(float obj)

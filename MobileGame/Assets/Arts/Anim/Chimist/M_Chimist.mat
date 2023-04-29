@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_Chimist
-  m_Shader: {fileID: -6465566751694194690, guid: 065103e7100e0184195a0c2517dd7df4,
+  m_Shader: {fileID: -6465566751694194690, guid: 3307f08269c514b41b7211ad56083f11,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -78,6 +78,18 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Texture02:
+        m_Texture: {fileID: 2800000, guid: ce1e9a51077534244976794e9de777bb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture03:
+        m_Texture: {fileID: 2800000, guid: b2474d18e92e74706ac95ead229b9aee, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture04:
+        m_Texture: {fileID: 2800000, guid: 9793055ed714a4e10a9a67d5eb103125, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -95,6 +107,7 @@ Material:
     - _AlphaClip: 0
     - _Blend: 0
     - _BlendOp: 0
+    - _BlueTexture: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
@@ -113,6 +126,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _RedTexture: 0
     - _SampleGI: 0
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
@@ -121,6 +135,7 @@ Material:
     - _Surface: 0
     - _TakeDamage: 0
     - _WorkflowMode: 1
+    - _YellowTexture: 0
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 0}
