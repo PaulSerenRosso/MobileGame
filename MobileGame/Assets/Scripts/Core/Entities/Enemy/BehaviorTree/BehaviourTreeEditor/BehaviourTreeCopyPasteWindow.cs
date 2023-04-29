@@ -60,6 +60,7 @@ namespace BehaviorTreeEditor
                 SetupPaths();
                 CreateNodeSOAssetWithTypeNode(_nodeToDuplicate);
                 AssetDatabase.Refresh();
+                AssetDatabase.SaveAssets();
             }
 
             GUI.enabled = true;
