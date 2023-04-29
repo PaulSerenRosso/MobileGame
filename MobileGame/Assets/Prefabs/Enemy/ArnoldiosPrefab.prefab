@@ -85,7 +85,7 @@ PrefabInstance:
     - target: {fileID: 3911112695321858085, guid: 241ebed0774b86e4f8b4ef2150ead01a,
         type: 3}
       propertyPath: _nodeValuesInitializer.ExternValueObjects.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3911112695321858085, guid: 241ebed0774b86e4f8b4ef2150ead01a,
         type: 3}
@@ -122,6 +122,11 @@ PrefabInstance:
       propertyPath: _nodeValuesInitializer.EnemyValueObjects.Array.data[6].Type
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 3911112695321858085, guid: 241ebed0774b86e4f8b4ef2150ead01a,
+        type: 3}
+      propertyPath: _nodeValuesInitializer.ExternValueObjects.Array.data[6].Type
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4796771559047852942, guid: 241ebed0774b86e4f8b4ef2150ead01a,
         type: 3}
       propertyPath: Animator
@@ -146,14 +151,64 @@ PrefabInstance:
       objectReference: {fileID: 749790780813450357}
     - target: {fileID: 4796771559047852942, guid: 241ebed0774b86e4f8b4ef2150ead01a,
         type: 3}
+      propertyPath: _timeShaderActivate
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 4796771559047852942, guid: 241ebed0774b86e4f8b4ef2150ead01a,
+        type: 3}
       propertyPath: _remoteConfigTimeStunName
       value: Arno_TimeStunAvailable
+      objectReference: {fileID: 0}
+    - target: {fileID: 4796771559047852942, guid: 241ebed0774b86e4f8b4ef2150ead01a,
+        type: 3}
+      propertyPath: _skinnedMeshRenderers.Array.size
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4796771559047852942, guid: 241ebed0774b86e4f8b4ef2150ead01a,
         type: 3}
       propertyPath: _remoteConfigTimeStunAvailableName
       value: Arno_TimeStunAvailable
       objectReference: {fileID: 0}
+    - target: {fileID: 4796771559047852942, guid: 241ebed0774b86e4f8b4ef2150ead01a,
+        type: 3}
+      propertyPath: _skinnedMeshRenderers.Array.data[0]
+      value: 
+      objectReference: {fileID: 4798816744736842509}
+    - target: {fileID: 4796771559047852942, guid: 241ebed0774b86e4f8b4ef2150ead01a,
+        type: 3}
+      propertyPath: _skinnedMeshRenderers.Array.data[1]
+      value: 
+      objectReference: {fileID: 7171843778603516200}
+    - target: {fileID: 4796771559047852942, guid: 241ebed0774b86e4f8b4ef2150ead01a,
+        type: 3}
+      propertyPath: _skinnedMeshRenderers.Array.data[2]
+      value: 
+      objectReference: {fileID: 9174178310180755377}
+    - target: {fileID: 4796771559047852942, guid: 241ebed0774b86e4f8b4ef2150ead01a,
+        type: 3}
+      propertyPath: _skinnedMeshRenderers.Array.data[3]
+      value: 
+      objectReference: {fileID: 2239736499512438120}
+    - target: {fileID: 4796771559047852942, guid: 241ebed0774b86e4f8b4ef2150ead01a,
+        type: 3}
+      propertyPath: _skinnedMeshRenderers.Array.data[4]
+      value: 
+      objectReference: {fileID: 4204954379618644435}
+    - target: {fileID: 4796771559047852942, guid: 241ebed0774b86e4f8b4ef2150ead01a,
+        type: 3}
+      propertyPath: _skinnedMeshRenderers.Array.data[5]
+      value: 
+      objectReference: {fileID: 8821141607650596717}
+    - target: {fileID: 4796771559047852942, guid: 241ebed0774b86e4f8b4ef2150ead01a,
+        type: 3}
+      propertyPath: _skinnedMeshRenderers.Array.data[6]
+      value: 
+      objectReference: {fileID: 4634945686623306176}
+    - target: {fileID: 4796771559047852942, guid: 241ebed0774b86e4f8b4ef2150ead01a,
+        type: 3}
+      propertyPath: _skinnedMeshRenderers.Array.data[7]
+      value: 
+      objectReference: {fileID: 2025163630913597170}
     - target: {fileID: 4796771559047852942, guid: 241ebed0774b86e4f8b4ef2150ead01a,
         type: 3}
       propertyPath: _remoteConfigPercentageDamageReductionBoostChimist
@@ -445,9 +500,51 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!137 &2025163630913597170 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 92804340430949298, guid: 508661fcdfdcbb841b04603de0e6d9fc,
+    type: 3}
+  m_PrefabInstance: {fileID: 2113145461268636992}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &2239736499512438120 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -9059480056974342104, guid: 508661fcdfdcbb841b04603de0e6d9fc,
+    type: 3}
+  m_PrefabInstance: {fileID: 2113145461268636992}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &4204954379618644435 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -6410424217434516333, guid: 508661fcdfdcbb841b04603de0e6d9fc,
+    type: 3}
+  m_PrefabInstance: {fileID: 2113145461268636992}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &4634945686623306176 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -2521518733054434176, guid: 508661fcdfdcbb841b04603de0e6d9fc,
+    type: 3}
+  m_PrefabInstance: {fileID: 2113145461268636992}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &4798816744736842509 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6902809859399943757, guid: 508661fcdfdcbb841b04603de0e6d9fc,
+    type: 3}
+  m_PrefabInstance: {fileID: 2113145461268636992}
+  m_PrefabAsset: {fileID: 0}
 --- !u!137 &7171843778603516200 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: -84188012813523864, guid: 508661fcdfdcbb841b04603de0e6d9fc,
+    type: 3}
+  m_PrefabInstance: {fileID: 2113145461268636992}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &8821141607650596717 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7438146785430467117, guid: 508661fcdfdcbb841b04603de0e6d9fc,
+    type: 3}
+  m_PrefabInstance: {fileID: 2113145461268636992}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &9174178310180755377 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -2161063677094022415, guid: 508661fcdfdcbb841b04603de0e6d9fc,
     type: 3}
   m_PrefabInstance: {fileID: 2113145461268636992}
   m_PrefabAsset: {fileID: 0}

@@ -1,5 +1,6 @@
 using System;
 using Environment.MoveGrid;
+using Player;
 using Player.Handler;
 using Service;
 using Service.Hype;
@@ -15,7 +16,7 @@ namespace BehaviorTree.Trees
         public ExternValueObject[] ExternValueObjects;
 
         public void Setup(Transform playerTransform, ITickeableService tickeableService,
-            GridManager gridManager, IPoolService poolService, IHypeService hypeService)
+            GridManager gridManager, IPoolService poolService, IHypeService hypeService, PlayerRenderer playerRenderer)
         {
             for (int i = 0; i < ExternValueObjects.Length; i++)
             {
@@ -49,6 +50,11 @@ namespace BehaviorTree.Trees
                     case BehaviorTreeEnums.TreeExternValues.HypeService:
                     {
                         ExternValueObjects[i].Obj = hypeService;
+                        break;
+                    }
+                    case BehaviorTreeEnums.TreeExternValues.PlayerRenderer:
+                    {
+                        ExternValueObjects[i].Obj = playerRenderer;
                         break;
                     }
                 }

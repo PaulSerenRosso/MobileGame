@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using Enemy;
 using Environment.MoveGrid;
 using HelperPSR.MonoLoopFunctions;
 using HelperPSR.RemoteConfigs;
+using Player;
 using Service;
 using Service.Hype;
 using UnityEngine;
@@ -19,7 +21,7 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     public EnemyEnums.EnemyMobilityState CurrentMobilityState;
     public EnemyEnums.EnemyBlockingState CurrentBlockingState;
     public EnemyInGameSO EnemyInGameSo;
-
+    
     [SerializeField] private Tree.Tree _tree;
 
     [FormerlySerializedAs("_remoteConfigTimeStunName")] [SerializeField] private string _remoteConfigTimeStunAvailableName;
@@ -30,6 +32,8 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     [SerializeField] private string _remoteConfigPercentageDamageReductionBoostChimist;
     [SerializeField] private ParticleSystem _ultimateParticle;
     [SerializeField] private GameObject _blockParticle;
+    [SerializeField] private SkinnedMeshRenderer[] _skinnedMeshRenderers;
+    [SerializeField] private int _timeShaderActivate = 1500;
 
     private List<EntityStunTrigger> _currentStunTriggers;
     private float _timerInvulnerable;
@@ -75,10 +79,10 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     }
 
     public void Setup(Transform playerTransform, ITickeableService tickeableService,
-        GridManager gridManager, IPoolService poolService, IHypeService hypeService)
+        GridManager gridManager, IPoolService poolService, IHypeService hypeService, PlayerRenderer playerRenderer)
     {
         _hypeService = hypeService;
-        _tree.Setup(playerTransform, tickeableService, gridManager, poolService, hypeService);
+        _tree.Setup(playerTransform, tickeableService, gridManager, poolService, hypeService, playerRenderer);
         _timerInvulnerable = 0;
         _hypeService.GetEnemyGainUltimateEvent += ActivateFXUltimate;
         _hypeService.GetEnemyLoseUltimateEvent += DeactivateFXUltimate;
@@ -163,6 +167,7 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
                 damage = (1 - EnemyInGameSo.PercentageDamageReduction) * amount;
                 if (IsBoosted) damage = (1 - EnemyInGameSo.PercentageDamageReductionBoostChimist) * damage;
                 if (CurrentMobilityState != EnemyEnums.EnemyMobilityState.INVULNERABLE) TakeStun(damage);
+                ActivateShader();
                 _hypeService.DecreaseHypeEnemy(damage);
                 return true;
             }
@@ -191,9 +196,30 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
             default:
                 throw new ArgumentOutOfRangeException(nameof(particlePosition), particlePosition, null);
         }
+
         if (CurrentMobilityState != EnemyEnums.EnemyMobilityState.INVULNERABLE) TakeStun(amount);
+        ActivateShader();
         _hypeService.DecreaseHypeEnemy(damage);
         return true;
+    }
+
+    private void ActivateShader()
+    {
+        foreach (var skinnedMeshRenderer in _skinnedMeshRenderers)
+        {
+            skinnedMeshRenderer.material.SetInt("_TakeDamage", 1);
+        }
+
+        DeactivateShader();
+    }
+
+    private async void DeactivateShader()
+    {
+        await UniTask.Delay(_timeShaderActivate);
+        foreach (var skinnedMeshRenderer in _skinnedMeshRenderers)
+        {
+            skinnedMeshRenderer.material.SetInt("_TakeDamage", 0);
+        }
     }
 
     private void TakeStun(float amount)
