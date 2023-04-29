@@ -8,11 +8,14 @@ namespace BehaviorTree.SO.Actions
         fileName = "new Tree_T_ShaderSetFloat_Spe_Data")]
     public class TaskShaderSetFloatNodeDataSO : ActionNodeDataSO
     {
+        public string ReferenceNameValue;
         public float FloatValue;
+        public bool IsInternReferenceNameValue;
+        public bool IsInternFloatValue;
         
         protected override void SetDependencyValues()
         {
-            ExternValues = new[] { BehaviorTreeEnums.TreeExternValues.PlayerRenderer };
+            EnemyValues = new[] { BehaviorTreeEnums.TreeEnemyValues.EnemyManager };
         }
 
         public override Type GetTypeNode()
