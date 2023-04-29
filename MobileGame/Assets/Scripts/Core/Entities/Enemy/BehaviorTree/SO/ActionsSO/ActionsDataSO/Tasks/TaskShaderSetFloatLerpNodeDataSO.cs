@@ -8,9 +8,12 @@ namespace BehaviorTree.SO.Actions
         fileName = "new Tree_T_ShaderSetFloatLerp_Spe_Data")]
     public class TaskShaderSetFloatLerpNodeDataSO : ActionNodeDataSO
     {
+        public float MinFloatValue;
+        public float MaxFloatValue;
+        
         protected override void SetDependencyValues()
         {
-            
+            ExternValues = new[] { BehaviorTreeEnums.TreeExternValues.PlayerRenderer };
         }
 
         public override Type GetTypeNode()

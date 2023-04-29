@@ -171,7 +171,7 @@ PrefabInstance:
     - target: {fileID: 3911112695321858085, guid: 241ebed0774b86e4f8b4ef2150ead01a,
         type: 3}
       propertyPath: _nodeValuesInitializer.ExternValueObjects.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3911112695321858085, guid: 241ebed0774b86e4f8b4ef2150ead01a,
         type: 3}
@@ -208,6 +208,11 @@ PrefabInstance:
       propertyPath: _nodeValuesInitializer.EnemyValueObjects.Array.data[6].Type
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3911112695321858085, guid: 241ebed0774b86e4f8b4ef2150ead01a,
+        type: 3}
+      propertyPath: _nodeValuesInitializer.ExternValueObjects.Array.data[6].Type
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4796771559047852942, guid: 241ebed0774b86e4f8b4ef2150ead01a,
         type: 3}
       propertyPath: Animator
@@ -227,6 +232,11 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 4796771559047852942, guid: 241ebed0774b86e4f8b4ef2150ead01a,
         type: 3}
+      propertyPath: _timeShaderActivate
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 4796771559047852942, guid: 241ebed0774b86e4f8b4ef2150ead01a,
+        type: 3}
       propertyPath: _remoteConfigAngleBlock
       value: Chimi_AngleBlock
       objectReference: {fileID: 0}
@@ -237,9 +247,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4796771559047852942, guid: 241ebed0774b86e4f8b4ef2150ead01a,
         type: 3}
+      propertyPath: _skinnedMeshRenderers.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4796771559047852942, guid: 241ebed0774b86e4f8b4ef2150ead01a,
+        type: 3}
       propertyPath: _remoteConfigTimeStunAvailableName
       value: Chimi_TimeStunAvailable
       objectReference: {fileID: 0}
+    - target: {fileID: 4796771559047852942, guid: 241ebed0774b86e4f8b4ef2150ead01a,
+        type: 3}
+      propertyPath: _skinnedMeshRenderers.Array.data[0]
+      value: 
+      objectReference: {fileID: 8692847690895970244}
+    - target: {fileID: 4796771559047852942, guid: 241ebed0774b86e4f8b4ef2150ead01a,
+        type: 3}
+      propertyPath: _skinnedMeshRenderers.Array.data[1]
+      value: 
+      objectReference: {fileID: 1033664351666508539}
+    - target: {fileID: 4796771559047852942, guid: 241ebed0774b86e4f8b4ef2150ead01a,
+        type: 3}
+      propertyPath: _skinnedMeshRenderers.Array.data[2]
+      value: 
+      objectReference: {fileID: 8079160504962812493}
+    - target: {fileID: 4796771559047852942, guid: 241ebed0774b86e4f8b4ef2150ead01a,
+        type: 3}
+      propertyPath: _skinnedMeshRenderers.Array.data[3]
+      value: 
+      objectReference: {fileID: 2842510463371952493}
     - target: {fileID: 4796771559047852942, guid: 241ebed0774b86e4f8b4ef2150ead01a,
         type: 3}
       propertyPath: _remoteConfigStunPercentageHealthName
@@ -460,6 +495,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e5bcfd277f629244884aaeb157783b1, type: 3}
+--- !u!137 &1033664351666508539 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -93015479256385444, guid: 8e5bcfd277f629244884aaeb157783b1,
+    type: 3}
+  m_PrefabInstance: {fileID: 8137400526655351463}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &2842510463371952493 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -2909472012856218678, guid: 8e5bcfd277f629244884aaeb157783b1,
+    type: 3}
+  m_PrefabInstance: {fileID: 8137400526655351463}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &8079160504962812493 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -9154926309389704982, guid: 8e5bcfd277f629244884aaeb157783b1,
+    type: 3}
+  m_PrefabInstance: {fileID: 8137400526655351463}
+  m_PrefabAsset: {fileID: 0}
 --- !u!137 &8692847690895970244 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 598671167501608291, guid: 8e5bcfd277f629244884aaeb157783b1,
