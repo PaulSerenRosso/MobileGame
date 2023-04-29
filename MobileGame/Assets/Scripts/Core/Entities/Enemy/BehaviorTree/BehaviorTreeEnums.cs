@@ -8,7 +8,9 @@ public class BehaviorTreeEnums
         MeshRenderer,
         EnemyManager,
         TauntFX,
-        StunFX
+        StunFX,
+        PrevShoot,
+        MuzzleShoot
     }
 
     public enum TreeExternValues
