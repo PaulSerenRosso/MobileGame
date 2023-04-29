@@ -80,6 +80,8 @@ namespace BehaviorTree.Nodes.Actions
             }
             ResetRandomSelection();
             _resetRandomSelectionEvent = ResetRandomSelection;
+            CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[^2].HashCode,
+                -1);
             CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[^1].HashCode,
                 _resetRandomSelectionEvent);
         }
