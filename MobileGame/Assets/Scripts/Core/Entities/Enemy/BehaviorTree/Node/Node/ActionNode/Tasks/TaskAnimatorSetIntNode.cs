@@ -27,8 +27,7 @@ namespace BehaviorTree.Nodes.Actions
             base.Evaluate();
             if (_animator.HasParameter(_data.NameParameter))
             {
-                if (_data.IsValueIntern)
-                    _animator.SetInteger(_data.NameParameter, (int)Sharer.InternValues[_so.InternValues[0].HashCode]);
+                if (_data.IsValueIntern) _animator.SetInteger(_data.NameParameter, (int)Sharer.InternValues[_so.InternValues[0].HashCode]);
                 else _animator.SetInteger(_data.NameParameter, _data.ValueToPass);
             }
             State = BehaviorTreeEnums.NodeState.SUCCESS;
