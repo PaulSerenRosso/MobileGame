@@ -58,6 +58,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _GlowMask:
+        m_Texture: {fileID: 2800000, guid: 2db1547d8ccb42642abc9597f97d5dfa, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 03962f14f30fb4c708ac128d3970d424, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -74,6 +78,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_a09bc3ef256147d3ae7ae17b30030c24_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 260af3c8083966449ac3284b5820350e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_f7ac8f362e81475f9b1c220d1b8ba235_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 4855c0ec7b5ff9a46b068b50936c787b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -88,6 +100,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _Texture04:
         m_Texture: {fileID: 2800000, guid: 9793055ed714a4e10a9a67d5eb103125, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2DAsset_c8702a4318c64a6c9778f3e1eedb0898_Out_0:
+        m_Texture: {fileID: 2800000, guid: 2db1547d8ccb42642abc9597f97d5dfa, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -117,9 +133,12 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
+    - _Float: 0.0005
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _GlowLineDistortion: 0.00005
+    - _GlowLineSize: 4
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -140,7 +159,9 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 0}
-    - _DamageColor: {r: 1, g: 0, b: 0, a: 1}
+    - _ColorGlow: {r: 1, g: 0, b: 0, a: 1}
+    - _DamageColor: {r: 1, g: 0, b: 0.019385815, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _GlowLineColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []

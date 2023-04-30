@@ -11,6 +11,9 @@
         },
         {
             "m_Id": "2c1dfeba07ac49abbfb971a726fcde06"
+        },
+        {
+            "m_Id": "3ddc7fe30e0846f6b8d3cbdc8e9636c1"
         }
     ],
     "m_Keywords": [],
@@ -306,6 +309,35 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Texture2DShaderProperty",
+    "m_ObjectId": "3ddc7fe30e0846f6b8d3cbdc8e9636c1",
+    "m_Guid": {
+        "m_GuidSerialized": "d169aa1c-06ae-4005-a3e8-3d82c16d20d4"
+    },
+    "m_Name": "Mask",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "Mask",
+    "m_DefaultReferenceName": "_Mask",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": {
+        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"9384148de3f38aa48b3f630c26963c2a\",\"type\":3}}",
+        "m_Guid": ""
+    },
+    "isMainTexture": false,
+    "useTilingAndOffset": false,
+    "m_Modifiable": true,
+    "m_DefaultType": 1
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "40212593ba074c80a4ba546d6c7c7d8d",
     "m_Id": 5,
@@ -466,10 +498,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -702.0,
-            "y": 44.99996566772461,
-            "width": 208.0,
-            "height": 435.00006103515627
+            "x": -973.0,
+            "y": 513.9999389648438,
+            "width": 183.00006103515626,
+            "height": 251.00006103515626
         }
     },
     "m_Slots": [
@@ -500,7 +532,7 @@
     ],
     "synonyms": [],
     "m_Precision": 0,
-    "m_PreviewExpanded": true,
+    "m_PreviewExpanded": false,
     "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
@@ -524,6 +556,9 @@
         },
         {
             "m_Id": "2c1dfeba07ac49abbfb971a726fcde06"
+        },
+        {
+            "m_Id": "3ddc7fe30e0846f6b8d3cbdc8e9636c1"
         }
     ]
 }
@@ -573,10 +608,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -646.0,
-            "y": -23.00001335144043,
-            "width": 152.0,
-            "height": 34.00001525878906
+            "x": -643.9999389648438,
+            "y": 102.0000228881836,
+            "width": 151.99996948242188,
+            "height": 33.999961853027347
         }
     },
     "m_Slots": [
@@ -632,10 +667,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -831.0,
-            "y": 69.00001525878906,
+            "x": -1125.0,
+            "y": 533.9999389648438,
             "width": 129.0,
-            "height": 33.99999237060547
+            "height": 34.00006103515625
         }
     },
     "m_Slots": [
@@ -731,10 +766,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -324.24700927734377,
-            "y": 102.75296783447266,
-            "width": 208.0,
-            "height": 326.0
+            "x": -369.99993896484377,
+            "y": 199.99996948242188,
+            "width": 172.0,
+            "height": 142.00003051757813
         }
     },
     "m_Slots": [
@@ -839,10 +874,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -642.0,
-            "y": 11.00000286102295,
-            "width": 148.0,
-            "height": 33.999961853027347
+            "x": -639.9999389648438,
+            "y": 135.99998474121095,
+            "width": 147.99996948242188,
+            "height": 34.000030517578128
         }
     },
     "m_Slots": [
