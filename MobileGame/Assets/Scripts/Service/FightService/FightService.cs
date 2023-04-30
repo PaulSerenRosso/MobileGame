@@ -43,6 +43,7 @@ namespace Service.Fight
         private GridSO _gridSo;
 
         private string _enemyAddressableName;
+        private string _environmentAddressableName;
 
         private void ActivatePause(Action callback)
         {
@@ -63,10 +64,16 @@ namespace Service.Fight
         {
             _hypeService.EnabledService();
             _enemyAddressableName = enemyAddressableName;
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>(
-                environmentAddressableName,
-                GenerateEnvironment);
+            _environmentAddressableName = environmentAddressableName;
+            _hypeService.EnableHypeServiceEvent += GenerateFight;
             _canvasService.InitCanvasEvent += LaunchEntryCinematic;
+        }
+
+        private void GenerateFight()
+        {
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>(
+                _environmentAddressableName,
+                GenerateEnvironment);
         }
 
 
