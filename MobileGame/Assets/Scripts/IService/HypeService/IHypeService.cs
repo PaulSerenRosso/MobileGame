@@ -4,6 +4,8 @@ namespace Service.Hype
 {
     public interface IHypeService : ISwitchableService
     {
+        event Action EnableHypeServiceEvent;
+        
         void IncreaseHypePlayer(float amount);
         void IncreaseHypeEnemy(float amount);
         void DecreaseHypePlayer(float amount);
@@ -17,6 +19,8 @@ namespace Service.Hype
 
         float GetCurrentHypePlayer();
         float GetCurrentHypeEnemy();
+        float GetUltimateHypeValuePlayer();
+        float GetUltimateHypeValueEnemy();
         float GetMaximumHype();
         bool GetUltimateAreaPlayer();
         bool GetUltimateAreaEnemy();

@@ -11,12 +11,12 @@ namespace Service.Hype
         private EnemyManager _enemyManager;
         private Hype _hypePlayer;
         private Hype _hypeEnemy;
-        private HypeSO _playerHypeSO;
-        private HypeSO _enemyHypeSO;
         private HypeServiceSO _hypeServiceSo;
         private bool _isDecreasePlayerHype;
         private float _decreasePlayerHypeTimer;
         private bool _inCooldown;
+
+        public event Action EnableHypeServiceEvent;
 
         public void IncreaseHypePlayer(float amount)
         {
@@ -168,6 +168,16 @@ namespace Service.Hype
             return _hypeEnemy.CurrentValue;
         }
 
+        public float GetUltimateHypeValuePlayer()
+        {
+            return _hypePlayer.HypeSo.UltimateValue;
+        }
+        
+        public float GetUltimateHypeValueEnemy()
+        {
+            return _hypeEnemy.HypeSo.UltimateValue;
+        }
+
         public float GetMaximumHype()
         {
             return _hypeServiceSo.MaxHype;
@@ -286,6 +296,7 @@ namespace Service.Hype
             _decreasePlayerHypeTimer = 0;
             _hypePlayer.IncreaseHypeEvent += ResetDecreasePlayerHype;
             _hypeEnemy.DecreaseHypeEvent += ResetDecreasePlayerHype;
+            EnableHypeServiceEvent?.Invoke();
         }
 
         private void ResetDecreasePlayerHype(float amount) => _isDecreasePlayerHype = false;
@@ -305,6 +316,7 @@ namespace Service.Hype
             _hypePlayer.SetHypeEvent = null;
             ReachMaximumHypeEvent = null;
             ReachMinimumHypeEvent = null;
+            EnableHypeServiceEvent = null;
             UpdateManager.UnRegister(this);
             RemoteConfigManager.UnRegisterRemoteConfigurable(this);
         }
