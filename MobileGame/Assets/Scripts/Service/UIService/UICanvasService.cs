@@ -20,6 +20,7 @@ namespace Service.UI
         public void LoadMainMenu()
         {
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("MainMenu", GenerateMainMenu);
+            // LOAD les autres menus
         }
 
         public void LoadInGameMenu()

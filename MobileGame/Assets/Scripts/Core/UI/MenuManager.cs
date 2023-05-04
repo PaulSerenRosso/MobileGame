@@ -11,11 +11,6 @@ namespace Service.UI
         [Header("Menu UI")] 
         [SerializeField] private Button _playButton;
 
-        [Header("Settings UI")] 
-        [SerializeField] private Button _openSettingsButton;
-
-        [SerializeField] private Image _settingsMenu;
-        [SerializeField] private Button _closeSettingsButton;
         [SerializeField] private Button _reportButton;
         [SerializeField] private string _sceneToLoad;
         [SerializeField] private GridLayoutGroup _enemySelectionGrid;
@@ -30,10 +25,7 @@ namespace Service.UI
 
         public void SetupMenu(IGameService gameService)
         {
-            _settingsMenu.transform.DOScale(0f, 0f).SetEase(Ease.OutBack);
             _gameService = gameService;
-            _openSettingsButton.onClick.AddListener(OpenSettings);
-            _closeSettingsButton.onClick.AddListener(CloseSettings);
             foreach (var enemyGlobalSo in gameService.GlobalSettingsSO.AllEnemyGlobalSO)
             {
                 var button = Instantiate(_enemyButton, _enemySelectionGrid.transform);
@@ -59,21 +51,6 @@ namespace Service.UI
         {
             _playButton.interactable = false;
             _gameService.LoadGameScene(_nextEnvironmentAddressableName, _nextEnemyAddressableName);
-        }
-
-        private void OpenSettings()
-        {
-            _openSettingsButton.transform.DOKill();
-            _openSettingsButton.transform.DOScale(0f, 0.25f).SetEase(Ease.OutBack);
-            _settingsMenu.transform.DOScale(1f, 0.25f).SetEase(Ease.OutBack);
-        }
-
-        private void CloseSettings()
-        {
-            _settingsMenu.transform.DOKill();
-            _settingsMenu.transform.DOScale(0f, 0.25f).SetEase(Ease.OutBack);
-            _openSettingsButton.transform.DOKill();
-            _openSettingsButton.transform.DOScale(1f, 0.25f).SetEase(Ease.OutBack);
         }
     }
 }
