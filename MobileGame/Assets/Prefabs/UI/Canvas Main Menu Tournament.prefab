@@ -535,19 +535,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4975992119989969433}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2833353794349407008}
-        m_TargetAssemblyTypeName: Service.UI.MenuManager, UIAssembly
-        m_MethodName: StartFight
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &7213029912137002169
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,14 +624,13 @@ GameObject:
   - component: {fileID: 2819067549219884082}
   - component: {fileID: 6722040296317973529}
   - component: {fileID: 473415846802227528}
-  - component: {fileID: 2833353794349407008}
   m_Layer: 5
   m_Name: Canvas Main Menu Tournament
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2459048459054823552
 RectTransform:
   m_ObjectHideFlags: 0
@@ -726,27 +713,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &2833353794349407008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7829105376152096416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ee4eea702974b548bad09340c073ba6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playButton: {fileID: 2896239545299679601}
-  _reportButton: {fileID: 0}
-  _sceneToLoad: GameScene
-  _enemySelectionGrid: {fileID: 0}
-  _environnementSelectionGrid: {fileID: 0}
-  _environnementButton: {fileID: 8546088097357494332, guid: abe2990893171b149b2d99b25cc443fe,
-    type: 3}
-  _enemyButton: {fileID: 4696437879272063621, guid: 43fea35b6eb018143b8934a8359bf99a,
-    type: 3}
 --- !u!1 &8581052446909066336
 GameObject:
   m_ObjectHideFlags: 0
