@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Service.Hype
 {
-    public class HypeService : IHypeService, IRemoteConfigurable, IUpdatable
+    public class HypeService : IHypeService, IRemoteConfigurable
     {
         private EnemyManager _enemyManager;
         private Hype _hypePlayer;
@@ -140,15 +140,7 @@ namespace Service.Hype
             _hypeEnemy.LoseUltimateEvent?.Invoke(_hypeServiceSo.EnemyHypeSO.StartValue);
         }
 
-        public void ActivateDecreaseUpdateHypePlayer()
-        {
-            UpdateManager.Register(this);
-        }
 
-        public void DeactivateDecreaseUpdateHypePlayer()
-        {
-            UpdateManager.UnRegister(this);
-        }
 
         private void SetHype(float value, Hype hype)
         {
@@ -277,10 +269,7 @@ namespace Service.Hype
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<HypeServiceSO>("HypeSO", SetHypeSO);
         }
 
-        private void DecreaseHypeInUpdate()
-        {
-            DecreaseHype(_hypeServiceSo.AmountPlayerHypeDecrease * Time.deltaTime, _hypePlayer);
-        }
+    
 
         private void SetHypeSO(HypeServiceSO hypeServiceSo)
         {
@@ -317,7 +306,7 @@ namespace Service.Hype
             ReachMaximumHypeEvent = null;
             ReachMinimumHypeEvent = null;
             EnableHypeServiceEvent = null;
-            UpdateManager.UnRegister(this);
+         
             RemoteConfigManager.UnRegisterRemoteConfigurable(this);
         }
 
@@ -334,23 +323,6 @@ namespace Service.Hype
             _hypeServiceSo.TimeBeforePlayerHypeDecrease =
                 RemoteConfigManager.Config.GetFloat("TimeBeforePlayerHypeDecrease");
         }
-
-        public void OnUpdate()
-        {
-            if (_isDecreasePlayerHype)
-            {
-                DecreaseHypeInUpdate();
-            }
-            else
-            {
-                _decreasePlayerHypeTimer += Time.deltaTime;
-                if (_decreasePlayerHypeTimer > _hypeServiceSo.TimeBeforePlayerHypeDecrease)
-                {
-                    _decreasePlayerHypeTimer = 0;
-                    _isDecreasePlayerHype = true;
-                }
-
-            }
-        }
+        
     }
 }

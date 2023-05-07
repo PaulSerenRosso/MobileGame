@@ -48,7 +48,7 @@ namespace Service.Fight
 
         private void ActivatePause(Action callback)
         {
-            _hypeService.DeactivateDecreaseUpdateHypePlayer();
+          
             _playerController.LockController();
             _enemyManager.StopTree(callback);
             ActivatePauseEvent?.Invoke();
@@ -56,7 +56,7 @@ namespace Service.Fight
 
         private void DeactivatePause()
         {
-            _hypeService.ActivateDecreaseUpdateHypePlayer();
+         
             _playerController.UnlockController();
             DeactivatePauseEvent?.Invoke();
         }

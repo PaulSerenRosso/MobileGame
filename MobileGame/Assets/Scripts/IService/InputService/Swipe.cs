@@ -1,4 +1,5 @@
 using System;
+using HelperPSR.MonoLoopFunctions;
 using HelperPSR.Tick;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,7 +7,7 @@ using UnityEngine.InputSystem;
 namespace Service.Inputs
 {
     [Serializable]
-    public class Swipe
+    public class Swipe : IUpdatable
     {
         public SwipeSO SwipeSO;
         
@@ -35,66 +36,48 @@ namespace Service.Inputs
             _startPos = Input.GetTouch(0).position;
             _isSuccess = true;
             _swipeTimer.Initiate();
-        }
-
-        public void UpdateSwipe(InputAction.CallbackContext ctx)
-        {
-            // _currentPos = ctx.ReadValue<Vector2>();
-            //
-            // if ((_currentPos - _startPos).sqrMagnitude >=
-            //     _minScreenDistanceSq)
-            // {
-            //     if (Vector2.Dot(SwipeSO.DirectionV2,
-            //             (_currentPos - _startPos).normalized) >
-            //         SwipeSO.DirectionTolerance)
-            //     {
-            //         _isSuccess = true;
-            //         ReachMinDistanceSwipeEvent?.Invoke();
-            //         return;
-            //     }
-            //
-            //     CancelSwipe();
-            // }
-        }
-
-        public void EndSwipe(InputAction.CallbackContext ctx)
-        {
-            if (_isSuccess)
-            {
-                if (Input.touchCount > 0)
-                {
-                    _currentPos = Input.GetTouch(0).position;
-                }
-
-                if ((_currentPos - _startPos).sqrMagnitude >=
-                    _minScreenDistanceSq)
-                {
-                    if (Vector2.Dot(SwipeSO.DirectionV2,
-                            (_currentPos - _startPos).normalized) >
-                        SwipeSO.DirectionTolerance)
-                    {
-                        ReachMinDistanceSwipeEvent?.Invoke();
-                    }
-                    else CancelSwipe();
-                }
-                else CancelSwipe();
-                if (_isSuccess)
-                {
-                    _successEvent?.Invoke(this);
-                }
-
-                CancelSwipe();
-            }
+            UpdateManager.Register(this);
         }
 
         void CancelSwipe()
         {
             _isSuccess = false;
+            UpdateManager.UnRegister(this);
+        }
+        
+
+        public void EndSwipe()
+        {
+            if (_isSuccess)
+            {
+                _successEvent?.Invoke(this);
+                CancelSwipe();
+            }
         }
 
         public void CancelSwipe(InputAction.CallbackContext obj)
         {
              CancelSwipe();
+        }
+
+        public void OnUpdate()
+        {
+            _currentPos = Input.GetTouch(0).position;
+            
+            if ((_currentPos - _startPos).sqrMagnitude >=
+                _minScreenDistanceSq)
+            {
+                if (Vector2.Dot(SwipeSO.DirectionV2,
+                        (_currentPos - _startPos).normalized) >
+                    SwipeSO.DirectionTolerance)
+                {
+                  EndSwipe();
+                    ReachMinDistanceSwipeEvent?.Invoke();
+                    return;
+                }
+            
+                CancelSwipe();
+            }
         }
     }
 }
