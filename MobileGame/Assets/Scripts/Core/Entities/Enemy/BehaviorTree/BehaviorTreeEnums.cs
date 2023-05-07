@@ -10,7 +10,8 @@ public class BehaviorTreeEnums
         TauntFX,
         StunFX,
         PrevShoot,
-        MuzzleShoot
+        MuzzleShoot,
+        PotionFX
     }
 
     public enum TreeExternValues

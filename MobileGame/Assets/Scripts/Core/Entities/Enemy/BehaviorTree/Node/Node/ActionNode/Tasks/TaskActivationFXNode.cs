@@ -27,6 +27,11 @@ namespace BehaviorTree.Nodes.Actions
             foreach (var variableGameObject in _gameObjects)
             {
                 variableGameObject.gameObject.SetActive(!variableGameObject.gameObject.activeSelf);
+                if (_data.IsColorChanged)
+                {
+                    var mainModule = variableGameObject.GetComponent<ParticleSystem>().main;
+                    mainModule.startColor = _data.ParticleColor;
+                }
             }
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();

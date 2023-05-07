@@ -8,6 +8,8 @@ namespace BehaviorTree.SO.Actions
         fileName = "new Tree_T_ActivationFX_Spe_Data")]
     public class TaskActivationFXNodeDataSO : ActionNodeDataSO
     {
+        public bool IsColorChanged;
+        public Color ParticleColor;
         public BehaviorTreeEnums.TreeEnemyValues[] FXEnumValues;
         
         protected override void SetDependencyValues()
