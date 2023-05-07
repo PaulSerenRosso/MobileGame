@@ -21,7 +21,8 @@ public class BehaviorTreeEnums
         PlayerHandlerMovement,
         PoolService,
         HypeService,
-        PlayerRenderer
+        PlayerRenderer,
+        PlayerController
     }
 
     public enum HypeFunctionMode

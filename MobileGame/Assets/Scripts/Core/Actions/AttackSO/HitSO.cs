@@ -14,6 +14,6 @@ namespace Actions
         public GameObject Particle;
         public Enums.ParticlePosition ParticlePosition;
         public string NameAnimationTrigger;
-        
+        public bool isStun;
     }
 }

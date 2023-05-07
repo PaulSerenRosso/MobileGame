@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IHypeable
 {
-    public bool TryDecreaseHypeEnemy(float amount, Vector3 posToCheck, Transform particleTransform, Enums.ParticlePosition particlePosition);
+    public bool TryDecreaseHypeEnemy(float amount, Vector3 posToCheck, Transform particleTransform, Enums.ParticlePosition particlePosition, bool isStun);
 }
