@@ -114,6 +114,7 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
         transform.rotation = Quaternion.identity;
         CurrentMobilityState = EnemyEnums.EnemyMobilityState.VULNERABLE;
         CurrentBlockingState = EnemyEnums.EnemyBlockingState.VULNERABLE;
+        ResetShaderColor();
         _hypeService.ResetHypeEnemy();
     }
 
@@ -152,7 +153,7 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
             if (angle > EnemyInGameSo.AngleBlock)
             {
                 if (IsBoosted) damage = (1 - EnemyInGameSo.PercentageDamageReductionBoostChimist) * damage;
-                ActivateShader();
+                ActivateShaderDamage();
                 _hypeService.DecreaseHypeEnemy(damage);
                 return true;
             }
@@ -182,27 +183,47 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
                 throw new ArgumentOutOfRangeException(nameof(particlePosition), particlePosition, null);
         }
         
-        ActivateShader();
+        ActivateShaderDamage();
         _hypeService.DecreaseHypeEnemy(damage);
         return true;
     }
 
-    private void ActivateShader()
+    private void ActivateShaderDamage()
     {
         foreach (var skinnedMeshRenderer in _skinnedMeshRenderers)
         {
             skinnedMeshRenderer.material.SetInt("_TakeDamage", 1);
         }
 
-        DeactivateShader();
+        DeactivateShaderDamage();
     }
 
-    private async void DeactivateShader()
+    private async void DeactivateShaderDamage()
     {
         await UniTask.Delay(_timeShaderActivate);
         foreach (var skinnedMeshRenderer in _skinnedMeshRenderers)
         {
             skinnedMeshRenderer.material.SetInt("_TakeDamage", 0);
+        }
+    }
+
+    private void ResetShaderColor()
+    {
+        foreach (var skinnedMeshRenderer in _skinnedMeshRenderers)
+        {
+            skinnedMeshRenderer.material.SetInt("_TakeDamage", 0);
+            if (skinnedMeshRenderer.material.HasInt("_BlueTexture"))
+            {
+                skinnedMeshRenderer.material.SetInt("_BlueTexture", 0);
+            }
+            if (skinnedMeshRenderer.material.HasInt("_YellowTexture"))
+            {
+                skinnedMeshRenderer.material.SetInt("_YellowTexture", 0);
+            }
+            if (skinnedMeshRenderer.material.HasInt("_RedTexture"))
+            {
+                skinnedMeshRenderer.material.SetInt("_RedTexture", 0);
+            }
         }
     }
 
