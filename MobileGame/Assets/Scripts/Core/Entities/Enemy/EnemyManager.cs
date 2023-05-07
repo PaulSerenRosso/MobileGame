@@ -21,7 +21,7 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     public EnemyEnums.EnemyMobilityState CurrentMobilityState;
     public EnemyEnums.EnemyBlockingState CurrentBlockingState;
     public EnemyInGameSO EnemyInGameSo;
-    
+
     [SerializeField] private Tree.Tree _tree;
 
     [FormerlySerializedAs("_remoteConfigTimeStunName")] [SerializeField] private string _remoteConfigTimeStunAvailableName;
@@ -156,22 +156,20 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
         Animator.SetBool("IsBlocking", false);
     }
 
-    public bool TryDecreaseHypeEnemy(float amount, Vector3 posToCheck, Transform particleTransform, Enums.ParticlePosition particlePosition)
+    public bool TryDecreaseHypeEnemy(float amount, Vector3 posToCheck, Transform particleTransform,
+        Enums.ParticlePosition particlePosition)
     {
         float damage = amount;
         if (CurrentBlockingState == EnemyEnums.EnemyBlockingState.BLOCKING)
         {
-            _blockParticle.gameObject.transform.position =
-                (1 * Vector3.Normalize(posToCheck - transform.position) + transform.position) + new Vector3(0, 1, 0);
+            _blockParticle.gameObject.transform.position = (1 * (posToCheck - transform.position).normalized + transform.position);
             _blockParticle.gameObject.SetActive(true);
             Vector3 normalizedPos = (posToCheck - transform.position).normalized;
-            float dot = Vector3.Dot(normalizedPos, transform.forward);
-            float angle = Mathf.Acos(dot);
+            float angle = Vector3.Angle(normalizedPos, transform.forward);
             if (angle > EnemyInGameSo.AngleBlock)
             {
-                damage = (1 - EnemyInGameSo.PercentageDamageReduction) * amount;
                 if (IsBoosted) damage = (1 - EnemyInGameSo.PercentageDamageReductionBoostChimist) * damage;
-                if (CurrentMobilityState != EnemyEnums.EnemyMobilityState.INVULNERABLE) TakeStun(damage);
+                // if (CurrentMobilityState != EnemyEnums.EnemyMobilityState.INVULNERABLE) TakeStun(damage);
                 ActivateShader();
                 _hypeService.DecreaseHypeEnemy(damage);
                 return true;
@@ -182,6 +180,7 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
 
         if (IsBoosted) damage = (1 - EnemyInGameSo.PercentageDamageReductionBoostChimist) * amount;
         Vector3 pos;
+        particleTransform.gameObject.SetActive(true);
         switch (particlePosition)
         {
             case Enums.ParticlePosition.Neck:
@@ -189,12 +188,11 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
                 particleTransform.position = pos;
                 break;
             case Enums.ParticlePosition.Punch:
-                particleTransform.position = (1 * Vector3.Normalize(posToCheck - transform.position) + transform.position) +
-                                             new Vector3(0, 1, 0);
+                pos = (1 * (posToCheck - transform.position).normalized + transform.position) + new Vector3(0, 1, 0);
+                particleTransform.position = pos;
                 break;
             case Enums.ParticlePosition.Uppercut:
-                pos = (1 * Vector3.Normalize(posToCheck - transform.position) + transform.position) +
-                      new Vector3(0, 1, 0);
+                pos = (1 * (posToCheck - transform.position).normalized + transform.position) + new Vector3(0, 1, 0);
                 pos.y = transform.localScale.y + 0.5F;
                 particleTransform.position = pos;
                 break;
