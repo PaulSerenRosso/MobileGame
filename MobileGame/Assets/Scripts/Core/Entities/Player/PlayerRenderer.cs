@@ -27,8 +27,7 @@ namespace Player
             _movementPlayerAction.MakeActionEvent += ResetEndMovementAnimationParameter;
             playerUltimateHandler.ActivateUltimateEvent += ActivateFX;
             playerUltimateHandler.DeactivateUltimateEvent += DeactivateFX;
-            SetEndAnimationMovementSpeedAnimation();
-              //SetRecoverySpeedAnimation();
+            //SetRecoverySpeedAnimation();
             // _tauntAction.MakeActionEvent += ActivateTauntFX;
             // _tauntAction.CancelActionEvent += DeactivateTauntFX;
         }

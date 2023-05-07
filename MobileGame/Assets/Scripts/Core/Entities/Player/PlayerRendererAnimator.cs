@@ -7,7 +7,7 @@ namespace Player
     public partial class PlayerRenderer
     {
         [SerializeField] private AnimationClip _movementRecoveryAnimationClip;
-        [SerializeField] private FloatAnimationParameter[] _endMovementTimeParameters;
+       
         [SerializeField] private string _dirParameterName;
         [SerializeField] private string _endMovementParameterName;
         [SerializeField] private string _tauntParameterName;
@@ -16,25 +16,7 @@ namespace Player
         private int _dirToSend = -1;
         private string _currentDirName;
 
-        [Serializable]
-        private struct FloatAnimationParameter
-        {
-            public AnimationClip animationClip;
-            private float _time;
-            public float GetTime => _time;
-            public void SetTime(float value) => _time = value;
-        }
 
-        private void SetEndAnimationMovementSpeedAnimation()
-        {
-            for (int i = 0; i < _endMovementTimeParameters.Length; i++)
-            {
-                _endMovementTimeParameters[i]
-                    .SetTime((_endMovementTimeParameters[i].animationClip.length /
-                              Animator.GetFloat(EndMovementParameterBaseName + i)) -
-                             _playerMovementHandler.GetRecoveryMovementTime());
-            }
-        }
 
         private void SetRecoverySpeedAnimation()
         {
@@ -45,7 +27,6 @@ namespace Player
         private void SetDirParameter(Vector2 dir)
         {
             AnimSetBool(_endMovementParameterName, false);
-            _movementPlayerAction.MakeUpdateEvent -= LaunchEndMovementPlayerAnimation;
             switch (dir)
             {
                 case var v when v == Vector2.left:
@@ -81,18 +62,13 @@ namespace Player
         private void ResetEndMovementAnimationParameter()
         {
             AnimSetBool(_endMovementParameterName, false);
-            _movementPlayerAction.MakeUpdateEvent += LaunchEndMovementPlayerAnimation;
+            _movementPlayerAction.EndActionEvent += ResetMovementPlayerAnimation;
         }
 
-        private void LaunchEndMovementPlayerAnimation(float time)
+        private void ResetMovementPlayerAnimation()
         {
-            if (_movementPlayerAction.GetMaxTimeMovement() - _endMovementTimeParameters[_dirToSend].GetTime >=
-                _movementPlayerAction.GetMaxTimeMovement() - time)
-            {
-                SetDirParameter(Vector2.zero);
-                AnimSetBool(_endMovementParameterName, true);
-                _movementPlayerAction.MakeUpdateEvent -= LaunchEndMovementPlayerAnimation;
-            }
+            SetDirParameter(Vector2.zero);
+            _movementPlayerAction.EndActionEvent -= ResetMovementPlayerAnimation;
         }
 
         private void LaunchTauntPlayerAnimation()
