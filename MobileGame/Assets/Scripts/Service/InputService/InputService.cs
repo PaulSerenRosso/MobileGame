@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Attributes;
@@ -60,7 +60,6 @@ namespace Service.Inputs
             Swipe swipe = new Swipe(swipeSo, successEvent, _tickeableService.GetTickManager);
             _allSwipes.Add(swipe);
             PlayerInputs.GenericInputs.PressTouch.performed += swipe.StartSwipe;
-            PlayerInputs.GenericInputs.PressTouch.canceled += swipe.EndSwipe;
             swipe.ReachMinDistanceSwipeEvent += DeactivateTryHold;
             PlayerInputs.GenericInputs.HoldTouch.performed += swipe.CancelSwipe;
         }
@@ -68,10 +67,9 @@ namespace Service.Inputs
 
         public void RemoveSwipe(SwipeSO swipeSo)
         {
-            var swipeToRemoved = _allSwipes.Where((swipe => swipeSo == swipe.SwipeSO)).First();
-            _allSwipes.Remove(swipeToRemoved);
-            PlayerInputs.GenericInputs.PressTouch.performed -= swipeToRemoved.StartSwipe;
-            PlayerInputs.GenericInputs.PressTouch.canceled -= swipeToRemoved.EndSwipe;
+          var swipeToRemoved =_allSwipes.Where((swipe => swipeSo == swipe.SwipeSO)).First();
+                _allSwipes.Remove(swipeToRemoved);
+            PlayerInputs.GenericInputs.PressTouch.performed-= swipeToRemoved.StartSwipe;
             PlayerInputs.GenericInputs.HoldTouch.performed -= swipeToRemoved.CancelSwipe;
         }
 

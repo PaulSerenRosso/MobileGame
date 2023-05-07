@@ -11,8 +11,7 @@ namespace Actions
         public TauntActionSO SO;
 
         [SerializeField] private TextMeshPro _tauntText;
-
-        private TickTimer _endTauntTimer;
+        
         private TickTimer _startTauntTimer;
         private bool _isTaunting;
         private bool _isStartTaunting;
@@ -46,13 +45,11 @@ namespace Actions
         public override void SetupAction(params object[] arguments)
         {
             _startTauntTimer = new TickTimer(SO.StartTime, (TickManager)arguments[0]);
-            _endTauntTimer = new TickTimer(SO.EndTime, (TickManager)arguments[0]);
-            _endTauntTimer.TickEvent += TickEndTaunt;
             _tauntText.text = "";
             _hypeService = (IHypeService)arguments[1];
         }
 
-        public event System.Action CancelActionEvent;
+
 
         public void TryCancelTaunt()
         {
@@ -79,18 +76,12 @@ namespace Actions
 
         private void CancelTaunt()
         {
-            _endTauntTimer.Initiate();
-            _tauntText.text = "Cancel";
-            UpdateManager.UnRegister(this);
-            CancelActionEvent?.Invoke();
-        }
-
-        private void TickEndTaunt()
-        {
             _isTaunting = false;
             _tauntText.text = "";
+            UpdateManager.UnRegister(this);
             EndActionEvent?.Invoke();
         }
+        
 
         public void OnUpdate()
         {
