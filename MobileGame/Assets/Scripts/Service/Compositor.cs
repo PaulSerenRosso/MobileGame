@@ -212,6 +212,7 @@ public class Compositor : MonoBehaviour
         AddService<IAudioService>(new AudioService());
         AddService<ISceneService>(new SceneService());
         AddService<IUICanvasSwitchableService>(new UICanvasService());
+        AddService<ITournamentService>(new TournamentService());
         AddService<IFightService>(new FightService());
         AddService<IInputService>(new InputService());
         AddService<IGameService>(new GameService());

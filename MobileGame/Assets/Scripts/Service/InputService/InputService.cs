@@ -57,7 +57,7 @@ namespace Service.Inputs
 
         public void AddSwipe(SwipeSO swipeSo, Action<Swipe> successEvent)
         {
-            Swipe swipe = new Swipe(swipeSo, successEvent, PlayerInputs, _tickeableService.GetTickManager);
+            Swipe swipe = new Swipe(swipeSo, successEvent, _tickeableService.GetTickManager);
             _allSwipes.Add(swipe);
             PlayerInputs.GenericInputs.PressTouch.performed += swipe.StartSwipe;
             PlayerInputs.GenericInputs.PressTouch.canceled += swipe.EndSwipe;
@@ -68,9 +68,9 @@ namespace Service.Inputs
 
         public void RemoveSwipe(SwipeSO swipeSo)
         {
-          var swipeToRemoved =_allSwipes.Where((swipe => swipeSo == swipe.SwipeSO)).First();
-                _allSwipes.Remove(swipeToRemoved);
-            PlayerInputs.GenericInputs.PressTouch.performed-= swipeToRemoved.StartSwipe;
+            var swipeToRemoved = _allSwipes.Where((swipe => swipeSo == swipe.SwipeSO)).First();
+            _allSwipes.Remove(swipeToRemoved);
+            PlayerInputs.GenericInputs.PressTouch.performed -= swipeToRemoved.StartSwipe;
             PlayerInputs.GenericInputs.PressTouch.canceled -= swipeToRemoved.EndSwipe;
             PlayerInputs.GenericInputs.HoldTouch.performed -= swipeToRemoved.CancelSwipe;
         }

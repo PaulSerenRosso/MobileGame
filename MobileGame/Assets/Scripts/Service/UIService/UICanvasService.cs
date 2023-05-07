@@ -12,6 +12,7 @@ namespace Service.UI
     public class UICanvasService : IUICanvasSwitchableService
     {
         [DependsOnService] private IGameService _gameService;
+        [DependsOnService] private ITournamentService _tournamentService;
         [DependsOnService] private IFightService _fightService;
         [DependsOnService] private IHypeService _hypeService;
         
@@ -20,7 +21,6 @@ namespace Service.UI
         public void LoadMainMenu()
         {
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("MainMenu", GenerateMainMenu);
-            // LOAD les autres menus
         }
 
         public void LoadInGameMenu()
@@ -40,7 +40,7 @@ namespace Service.UI
         private void GenerateMainMenu(GameObject gameObject)
         {
             _mainMenu = Object.Instantiate(gameObject);
-            _mainMenu.GetComponent<MenuManager>().SetupMenu(_gameService);
+            _mainMenu.GetComponent<MenuManager>().SetupMenu(_gameService, _tournamentService);
             Release(gameObject);
         }
 

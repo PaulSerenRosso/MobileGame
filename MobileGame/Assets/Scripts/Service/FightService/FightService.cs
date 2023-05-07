@@ -27,6 +27,7 @@ namespace Service.Fight
         [DependsOnService] private IPoolService _poolService;
         [DependsOnService] private IHypeService _hypeService;
         [DependsOnService] private IGameService _gameService;
+        [DependsOnService] private ITournamentService _tournamentService;
 
         private const int _victoryRoundCount = 2;
         private CameraController _cameraController;
@@ -67,13 +68,6 @@ namespace Service.Fight
             _environmentAddressableName = environmentAddressableName;
             _hypeService.EnableHypeServiceEvent += GenerateFight;
             _canvasService.InitCanvasEvent += LaunchEntryCinematic;
-        }
-
-        private void GenerateFight()
-        {
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>(
-                _environmentAddressableName,
-                GenerateEnvironment);
         }
 
 
@@ -129,6 +123,14 @@ namespace Service.Fight
             EndFightEvent?.Invoke(_isPlayerWon);
         }
 
+        #region Generate Fight
+
+        private void GenerateFight()
+        {
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>(
+                _environmentAddressableName,
+                GenerateEnvironment);
+        }
 
         private void GenerateEnvironment(GameObject gameObject)
         {
@@ -191,6 +193,8 @@ namespace Service.Fight
             _cinematicFightManager.Init(_playerController.GetComponent<PlayerRenderer>().Animator,
                 _enemyManager.GetComponent<EnemyManager>().Animator);
         }
+        
+        #endregion
 
         private void InitTimerRound()
         {
@@ -219,6 +223,11 @@ namespace Service.Fight
 
         public void QuitFight()
         {
+            if (_isPlayerWon)
+            {
+                Fight currentFight = _tournamentService.GetCurrentFight();
+                currentFight._fightState = FightState.VICTORY;
+            }
             _playerRoundCount = 0;
             _enemyRoundCount = 0;
             _isPlayerWon = false;
