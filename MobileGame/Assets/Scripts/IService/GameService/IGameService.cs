@@ -6,6 +6,6 @@
 
         public void LoadMainMenuScene();
 
-        public void LoadGameScene(string environementName, string enemyAdressableName);
+        public void LoadGameScene(string environmentAddressableName, string enemyAddressableName);
     }
 }
