@@ -1,11 +1,10 @@
-using System.Collections.Generic;
-using System.Linq;
 using Environment.MoveGrid;
 using HelperPSR.MonoLoopFunctions;
 using Player.Handler;
 using Service.Hype;
 using Service.Inputs;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Player
 {
@@ -18,12 +17,13 @@ namespace Player
         [SerializeField] private PlayerRotationHandler _playerRotationHandler;
         [SerializeField] private PlayerTauntHandler _playerTauntHandler;
 
-        [SerializeField] private float _timeStunAvailable;
-        [SerializeField] private float _timerStun;
-        [SerializeField] private float _percentageHealthStun;
+        [FormerlySerializedAs("_timerStun")] [SerializeField] private float _timeStun;
+        [SerializeField] private float _timeInvunerable;
 
-        private float _timer;
+        private float _timerStun;
+        private float _timerInvulnerable;
         private bool _isStun;
+        private bool _isInvulnerable;
         
         private IInputService _inputService;
         private ITickeableService _tickeableService;
@@ -31,11 +31,9 @@ namespace Player
         private GridSO _gridSO;
         private IHypeService _hypeService;
         private bool _isLocked;
-        private List<EntityStunTrigger> _currentStunTriggers;
 
         private void OnEnable()
         {
-            _currentStunTriggers = new List<EntityStunTrigger>();
             UpdateManager.Register(this);
         }
 
@@ -46,35 +44,33 @@ namespace Player
 
         public void OnUpdate()
         {
-            TimerStun();
-            if (_currentStunTriggers.Count < 1 || _isStun) return;
-            _currentStunTriggers.RemoveAll(entityStunTrigger => entityStunTrigger.Time > _timeStunAvailable);
-            foreach (var entityStunTrigger in _currentStunTriggers.Where(entityStunTrigger =>
-                         entityStunTrigger.Time < _timeStunAvailable))
-            {
-                entityStunTrigger.Time += Time.deltaTime;
-            }
-            
-            if (!_currentStunTriggers.Any(entityStunTrigger =>
-                    (entityStunTrigger.DamageAmount / _hypeService.GetMaximumHype()) >=
-                    _percentageHealthStun)) return;
-            _playerRenderer.ActivateStunFX();
-            LockController();
-            _isStun = true;
-            _currentStunTriggers.Clear();
+            if (_isStun) TimerStun();
+            if (_isInvulnerable) TimerInvunerable();
         }
         
         private void TimerStun()
         {
-            if (!_isStun) return;
-            _timer += Time.deltaTime;
-            if (_timer >= _timerStun)
+            _timerStun += Time.deltaTime;
+            if (_timerStun >= _timeStun)
             {
                 _playerRenderer.DeactivateStunFX();
                 UnlockController();
-                _timer = 0;
+                _timerStun = 0;
                 _isStun = false;
-                _currentStunTriggers.Clear();
+                _isInvulnerable = true;
+            }
+        }
+        
+        private void TimerInvunerable()
+        {
+            _timerInvulnerable += Time.deltaTime;
+            if (_timerInvulnerable >= _timeInvunerable)
+            {
+                _playerRenderer.DeactivateStunFX();
+                UnlockController();
+                _timerInvulnerable = 0;
+                _isStun = false;
+                _isInvulnerable = false;
             }
         }
 
@@ -87,7 +83,6 @@ namespace Player
             _tickeableService = tickeableService;
             _enemyManager = enemyManager;
             _hypeService = hypeService;
-            _hypeService.GetPlayerDecreaseHypeEvent += TakeStun;
             _gridSO = gridSO;
             _playerMovementHandler.AddCondition(CheckIsLockedController);
             _playerMovementHandler.Setup(gridManager, gridSO.Index, _inputService,
@@ -139,14 +134,12 @@ namespace Player
             _isLocked = false;
         }
         
-        private void TakeStun(float amount)
+        public void TakeStun()
         {
-            _currentStunTriggers.Add(new EntityStunTrigger(0, amount));
-            foreach (var entityStunTrigger in _currentStunTriggers.Where(entityStunTrigger =>
-                         entityStunTrigger.Time < _timeStunAvailable))
-            {
-                entityStunTrigger.DamageAmount += amount;
-            }
+            if (_isStun || _isInvulnerable) return;
+            _playerRenderer.ActivateStunFX();
+            LockController();
+            _isStun = true;
         }
     }
 }

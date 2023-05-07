@@ -16,7 +16,7 @@ namespace BehaviorTree.Trees
         public ExternValueObject[] ExternValueObjects;
 
         public void Setup(Transform playerTransform, ITickeableService tickeableService,
-            GridManager gridManager, IPoolService poolService, IHypeService hypeService, PlayerRenderer playerRenderer)
+            GridManager gridManager, IPoolService poolService, IHypeService hypeService)
         {
             for (int i = 0; i < ExternValueObjects.Length; i++)
             {
@@ -54,7 +54,12 @@ namespace BehaviorTree.Trees
                     }
                     case BehaviorTreeEnums.TreeExternValues.PlayerRenderer:
                     {
-                        ExternValueObjects[i].Obj = playerRenderer;
+                        ExternValueObjects[i].Obj = playerTransform.GetComponent<PlayerRenderer>();
+                        break;
+                    }
+                    case BehaviorTreeEnums.TreeExternValues.PlayerController:
+                    {
+                        ExternValueObjects[i].Obj = playerTransform.GetComponent<PlayerController>();
                         break;
                     }
                 }

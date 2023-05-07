@@ -5261,9 +5261,8 @@ MonoBehaviour:
   _playerRenderer: {fileID: 7598208263566444310}
   _playerRotationHandler: {fileID: 1740439073084344159}
   _playerTauntHandler: {fileID: 4376894764709761957}
-  _timeStunAvailable: 4
-  _timerStun: 1.5
-  _percentageHealthStun: 0.4
+  _timeStun: 1.5
+  _timeInvunerable: 10
 --- !u!114 &7598208263566444310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5287,15 +5286,6 @@ MonoBehaviour:
   - {fileID: 31034216036086023}
   _movementRecoveryAnimationClip: {fileID: 7400000, guid: c91389c39d842cc4190ea8be0836798a,
     type: 2}
-  _endMovementTimeParameters:
-  - animationClip: {fileID: 837255572769927147, guid: 06cd78c7dcabad242964e249c7278f5e,
-      type: 3}
-  - animationClip: {fileID: 5336171071401514536, guid: 06cd78c7dcabad242964e249c7278f5e,
-      type: 3}
-  - animationClip: {fileID: -3545652582204683642, guid: 06cd78c7dcabad242964e249c7278f5e,
-      type: 3}
-  - animationClip: {fileID: -4807389317913785953, guid: 06cd78c7dcabad242964e249c7278f5e,
-      type: 3}
   _dirParameterName: Direction
   _endMovementParameterName: IsEndMovement
   _tauntParameterName: IsTaunting

@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Cysharp.Threading.Tasks;
 using Enemy;
 using Environment.MoveGrid;
@@ -35,7 +33,6 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     [SerializeField] private SkinnedMeshRenderer[] _skinnedMeshRenderers;
     [SerializeField] private int _timeShaderActivate = 500;
 
-    private List<EntityStunTrigger> _currentStunTriggers;
     private float _timerInvulnerable;
     private IHypeService _hypeService;
 
@@ -45,7 +42,6 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
         transform.rotation = Quaternion.identity;
         CurrentMobilityState = EnemyEnums.EnemyMobilityState.VULNERABLE;
         CurrentBlockingState = EnemyEnums.EnemyBlockingState.VULNERABLE;
-        _currentStunTriggers = new List<EntityStunTrigger>();
     }
 
     private void OnEnable()
@@ -63,26 +59,13 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     public void OnUpdate()
     {
         if (EnemyEnums.EnemyMobilityState.INVULNERABLE == CurrentMobilityState) TimerInvulnerable();
-        if (_currentStunTriggers.Count < 1 || CurrentMobilityState != EnemyEnums.EnemyMobilityState.VULNERABLE) return;
-        _currentStunTriggers.RemoveAll(enemyStunTrigger => enemyStunTrigger.Time > EnemyInGameSo.TimeStunAvailable);
-        foreach (var enemyStunTrigger in _currentStunTriggers.Where(enemyStunTrigger =>
-                     enemyStunTrigger.Time < EnemyInGameSo.TimeStunAvailable))
-        {
-            enemyStunTrigger.Time += Time.deltaTime;
-        }
-
-        if (!_currentStunTriggers.Any(enemyStunTrigger =>
-                (enemyStunTrigger.DamageAmount / _hypeService.GetMaximumHype()) >=
-                EnemyInGameSo.PercentageHealthStun)) return;
-        CurrentMobilityState = EnemyEnums.EnemyMobilityState.STAGGER;
-        _currentStunTriggers.Clear();
     }
 
     public void Setup(Transform playerTransform, ITickeableService tickeableService,
-        GridManager gridManager, IPoolService poolService, IHypeService hypeService, PlayerRenderer playerRenderer)
+        GridManager gridManager, IPoolService poolService, IHypeService hypeService)
     {
         _hypeService = hypeService;
-        _tree.Setup(playerTransform, tickeableService, gridManager, poolService, hypeService, playerRenderer);
+        _tree.Setup(playerTransform, tickeableService, gridManager, poolService, hypeService);
         _timerInvulnerable = 0;
         _hypeService.GetEnemyGainUltimateEvent += ActivateFXUltimate;
         _hypeService.GetEnemyLoseUltimateEvent += DeactivateFXUltimate;
@@ -108,7 +91,6 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
         _timerInvulnerable += Time.deltaTime;
         if (_timerInvulnerable >= EnemyInGameSo.TimeInvulnerable)
         {
-            _currentStunTriggers.Clear();
             CurrentMobilityState = EnemyEnums.EnemyMobilityState.VULNERABLE;
             _timerInvulnerable = 0;
         }
@@ -157,8 +139,9 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     }
 
     public bool TryDecreaseHypeEnemy(float amount, Vector3 posToCheck, Transform particleTransform,
-        Enums.ParticlePosition particlePosition)
+        Enums.ParticlePosition particlePosition, bool isStun)
     {
+        if (isStun) TakeStun();
         float damage = amount;
         if (CurrentBlockingState == EnemyEnums.EnemyBlockingState.BLOCKING)
         {
@@ -169,7 +152,6 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
             if (angle > EnemyInGameSo.AngleBlock)
             {
                 if (IsBoosted) damage = (1 - EnemyInGameSo.PercentageDamageReductionBoostChimist) * damage;
-                // if (CurrentMobilityState != EnemyEnums.EnemyMobilityState.INVULNERABLE) TakeStun(damage);
                 ActivateShader();
                 _hypeService.DecreaseHypeEnemy(damage);
                 return true;
@@ -199,8 +181,7 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
             default:
                 throw new ArgumentOutOfRangeException(nameof(particlePosition), particlePosition, null);
         }
-
-        if (CurrentMobilityState != EnemyEnums.EnemyMobilityState.INVULNERABLE) TakeStun(amount);
+        
         ActivateShader();
         _hypeService.DecreaseHypeEnemy(damage);
         return true;
@@ -225,14 +206,10 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
         }
     }
 
-    private void TakeStun(float amount)
+    private void TakeStun()
     {
-        if (CurrentMobilityState != EnemyEnums.EnemyMobilityState.VULNERABLE) return;
-        _currentStunTriggers.Add(new EntityStunTrigger(0, amount));
-        foreach (var enemyStunTrigger in _currentStunTriggers.Where(enemyStunTrigger =>
-                     enemyStunTrigger.Time < EnemyInGameSo.TimeStunAvailable))
-        {
-            enemyStunTrigger.DamageAmount += amount;
-        }
+        if (CurrentMobilityState is EnemyEnums.EnemyMobilityState.INVULNERABLE or EnemyEnums.EnemyMobilityState.STAGGER) return;
+        Debug.Log("Stagger");
+        CurrentMobilityState = EnemyEnums.EnemyMobilityState.STAGGER;
     }
 }
