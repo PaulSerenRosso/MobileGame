@@ -129,6 +129,7 @@ namespace Actions
             if (CheckCanDamageEvent.Invoke(AttackActionSo.HitsSO[_comboCount]))
             {
                 var hit = _hitPools[_comboCount].GetFromPool();
+                hit.SetActive(false);
                 _hitPools[_comboCount].AddToPoolLatter(hit, hit.GetComponent<ParticleSystem>().main.duration);
                 if (_hypeable.TryDecreaseHypeEnemy(AttackActionSo.HitsSO[_comboCount].HypeAmount, transform.position, hit.transform, AttackActionSo.HitsSO[_comboCount].ParticlePosition))
                 {
