@@ -34,5 +34,10 @@ namespace Service.Fight
         {
             return _fights.FirstOrDefault(fight => fight._fightState == FightState.DEFEAT);
         }
+
+        public Fight[] GetFights()
+        {
+            return _fights;
+        }
     }
 }

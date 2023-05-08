@@ -5,6 +5,8 @@
         void SetupTournament(IGameService gameService, EnvironmentSO[] environmentSOs, EnemyGlobalSO[] enemyGlobalSOs);
         
         Fight GetCurrentFight();
+        Fight[] GetFights();
+
     }
     public class Fight
     {

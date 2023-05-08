@@ -59,7 +59,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &6722040296317973529
 MonoBehaviour:
@@ -112,6 +112,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Background Bot
+      objectReference: {fileID: 0}
+    - target: {fileID: 3527716109514301718, guid: eeabda5cc81c0de459f93c46f82365fd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenInventory
       objectReference: {fileID: 0}
     - target: {fileID: 6101861764489901894, guid: eeabda5cc81c0de459f93c46f82365fd,
         type: 3}
@@ -217,6 +222,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8038016389320937214, guid: eeabda5cc81c0de459f93c46f82365fd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ActivateHome
+      objectReference: {fileID: 0}
+    - target: {fileID: 8828344739407357550, guid: eeabda5cc81c0de459f93c46f82365fd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenShop
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eeabda5cc81c0de459f93c46f82365fd, type: 3}
