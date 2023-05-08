@@ -2,12 +2,13 @@
 {
     public interface ITournamentService : IService
     {
-        void SetupTournament(IGameService gameService, EnvironmentSO[] environmentSOs, EnemyGlobalSO[] enemyGlobalSOs);
-        
+        void SetupTournament(EnvironmentSO[] environmentSOs, EnemyGlobalSO[] enemyGlobalSOs);
+        void ResetTournament();
+        bool GetStateTournament();
         Fight GetCurrentFight();
         Fight[] GetFights();
-
     }
+    
     public class Fight
     {
         public TournamentState _tournamentState;
