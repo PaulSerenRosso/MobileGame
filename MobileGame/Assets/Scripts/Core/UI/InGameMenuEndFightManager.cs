@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Service.Currency;
 using Service.Fight;
 using TMPro;
 using UnityEngine;
@@ -15,7 +16,7 @@ namespace Service.UI
         [SerializeField] private string endFightTitlePlayerVictoryName;
         [SerializeField] private string endFightTitlePlayerLoseName;
         [SerializeField] private Button backToMainMenuButton;
-        public void Init(IFightService fightService)
+        public void Init(IFightService fightService, ICurrencyService currencyService, ITournamentService tournamentService)
         {
             _fightService = fightService; 
             endFightPanel.SetActive(false);

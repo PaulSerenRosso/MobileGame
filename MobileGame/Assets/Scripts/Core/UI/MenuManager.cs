@@ -1,4 +1,6 @@
+using Service.Currency;
 using Service.Fight;
+using Service.Items;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,14 +9,14 @@ namespace Service.UI
 {
     public class MenuManager : MonoBehaviour
     {
-        [Header("Menu UI")] 
-        [SerializeField] private Button _playMatchButton;
+        [Header("Menu UI")] [SerializeField] private Button _playMatchButton;
         [SerializeField] private Button _playTournamentButton;
         [SerializeField] private GridLayoutGroup _enemySelectionGrid;
         [SerializeField] private GridLayoutGroup _environnementSelectionGrid;
         [SerializeField] private Button _environmentButton;
         [SerializeField] private Button _enemyButton;
 
+        [SerializeField] private MenuTopManager _menuTopManager;
         [SerializeField] private Canvas _topCanvas;
         [SerializeField] private Canvas _botCanvas;
 
@@ -22,10 +24,12 @@ namespace Service.UI
         [SerializeField] private MenuTournamentManager _menuTournamentManager;
         [SerializeField] private GameObject _tournamentCanvas;
         [SerializeField] private GameObject _debugFightCanvas;
-        
+
+        [SerializeField] private MenuShopManager _menuShopManager;
         [SerializeField] private Button _shopButton;
         [SerializeField] private Canvas _shopCanvas;
-        
+
+        [SerializeField] private MenuInventoryManager _menuInventoryManager;
         [SerializeField] private Button _inventoryButton;
         [SerializeField] private Canvas _inventoryCanvas;
 
@@ -37,16 +41,21 @@ namespace Service.UI
         private string _nextEnvironmentAddressableName;
         private string _nextEnemyAddressableName;
 
-        public void SetupMenu(IGameService gameService, ITournamentService tournamentService, IFightService fightService)
+        public void SetupMenu(IGameService gameService, ITournamentService tournamentService,
+            IFightService fightService, ICurrencyService currencyService, IItemsService itemsService)
         {
             _gameService = gameService;
             _tournamentService = tournamentService;
             _fightService = fightService;
+            _menuTopManager.SetUp(currencyService);
+            _menuInventoryManager.SetUp(itemsService);
+            _menuShopManager.SetUp(itemsService);
             if (_fightService.GetPub() <= 0)
             {
                 LaunchPub();
                 _fightService.ResetPub();
             }
+
             foreach (var enemyGlobalSo in gameService.GlobalSettingsSO.AllEnemyGlobalSO)
             {
                 var button = Instantiate(_enemyButton, _enemySelectionGrid.transform);
@@ -54,7 +63,7 @@ namespace Service.UI
                 button.image.sprite = enemyGlobalSo.Sprite;
                 button.GetComponentInChildren<TextMeshProUGUI>().text = enemyGlobalSo.Name;
             }
-            
+
             foreach (var environmentSo in gameService.GlobalSettingsSO.AllEnvironmentsSO)
             {
                 var button = Instantiate(_environmentButton, _environnementSelectionGrid.transform);
@@ -101,7 +110,7 @@ namespace Service.UI
             _shopButton.interactable = true;
             _inventoryButton.interactable = true;
         }
-        
+
         public void StartFight()
         {
             _playMatchButton.interactable = false;

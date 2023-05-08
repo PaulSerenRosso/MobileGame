@@ -41,23 +41,12 @@ namespace Service.Items
             return _globalSettingsSo.AllItemsSO;
         }
 
-        public void LinkItemPlayer(ItemSO itemSo)
+        public void LinkItemPlayer()
         {
-            switch (itemSo.Type)
+            if(playerItems.Count == 0) return;
+            foreach (var playerItem in playerItems)
             {
-                case ItemTypeEnum.Foot:
-                {
-                    break;
-                }
-                case ItemTypeEnum.Hand:
-                {
-                    _playerItemsLinker.SetHandItem(itemSo.Prefab);
-                    break;
-                }
-                case ItemTypeEnum.Head:
-                {
-                    break;
-                }
+                
             }
         }
 

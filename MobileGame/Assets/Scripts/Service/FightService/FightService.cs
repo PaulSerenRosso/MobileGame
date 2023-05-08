@@ -6,6 +6,7 @@ using HelperPSR.Tick;
 using Player;
 using Service.Hype;
 using Service.Inputs;
+using Service.Items;
 using Service.UI;
 using UnityEngine;
 using static UnityEngine.AddressableAssets.Addressables;
@@ -28,7 +29,7 @@ namespace Service.Fight
         [DependsOnService] private IHypeService _hypeService;
         [DependsOnService] private IGameService _gameService;
         [DependsOnService] private ITournamentService _tournamentService;
-
+        [DependsOnService] private IItemsService _itemsService;
         private const int _victoryRoundCount = 2;
         private CameraController _cameraController;
         private EnemyManager _enemyManager;
@@ -173,6 +174,8 @@ namespace Service.Fight
             var player = Object.Instantiate(gameObject);
             Release(gameObject);
             _playerController = player.GetComponent<PlayerController>();
+            _itemsService.SetPlayerItemLinker(player.GetComponent<PlayerItemsLinker>());
+            _itemsService.LinkItemPlayer();
             player.GetComponent<UltimatePlayerAction>().MakeActionEvent += LaunchUltimatePlayerCinematic;
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>(_enemyAddressableName, GenerateEnemy);
         }
