@@ -28,17 +28,25 @@ namespace Service.UI
         
         [SerializeField] private Button _inventoryButton;
         [SerializeField] private Canvas _inventoryCanvas;
-        
+
+        [SerializeField] private Canvas _pubCanvas;
 
         private IGameService _gameService;
         private ITournamentService _tournamentService;
+        private IFightService _fightService;
         private string _nextEnvironmentAddressableName;
         private string _nextEnemyAddressableName;
 
-        public void SetupMenu(IGameService gameService, ITournamentService tournamentService)
+        public void SetupMenu(IGameService gameService, ITournamentService tournamentService, IFightService fightService)
         {
             _gameService = gameService;
             _tournamentService = tournamentService;
+            _fightService = fightService;
+            if (_fightService.GetPub() <= 0)
+            {
+                LaunchPub();
+                _fightService.ResetPub();
+            }
             foreach (var enemyGlobalSo in gameService.GlobalSettingsSO.AllEnemyGlobalSO)
             {
                 var button = Instantiate(_enemyButton, _enemySelectionGrid.transform);
@@ -55,6 +63,16 @@ namespace Service.UI
                 button.image.sprite = environmentSo.EnvironmentSprite;
                 button.GetComponentInChildren<TextMeshProUGUI>().text = environmentSo.Name;
             }
+        }
+
+        private void LaunchPub()
+        {
+            _pubCanvas.gameObject.SetActive(true);
+        }
+
+        public void ClosePub()
+        {
+            _pubCanvas.gameObject.SetActive(false);
         }
 
         public void SetEnvironmentAddressableName(string value) => _nextEnvironmentAddressableName = value;

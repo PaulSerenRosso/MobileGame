@@ -40,7 +40,7 @@ namespace Service.UI
         private void GenerateMainMenu(GameObject gameObject)
         {
             _mainMenu = Object.Instantiate(gameObject);
-            _mainMenu.GetComponent<MenuManager>().SetupMenu(_gameService, _tournamentService);
+            _mainMenu.GetComponent<MenuManager>().SetupMenu(_gameService, _tournamentService, _fightService);
             Release(gameObject);
         }
 

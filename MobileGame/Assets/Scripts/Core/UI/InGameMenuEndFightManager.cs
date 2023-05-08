@@ -32,10 +32,8 @@ namespace Service.UI
         public void BackToMainMenu()
         {
             backToMainMenuButton.interactable = false;
+            _fightService.DecreasePub();
             _fightService.QuitFight();
-            
         }
-
     }
-
 }
