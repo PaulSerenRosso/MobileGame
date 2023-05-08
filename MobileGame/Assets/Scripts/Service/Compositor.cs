@@ -9,9 +9,11 @@ using UnityEngine;
 using System.Runtime.CompilerServices;
 using Cysharp.Threading.Tasks;
 using Service.AudioService;
+using Service.Currency;
 using Service.Fight;
 using Service.Hype;
 using Service.Inputs;
+using Service.Items;
 using Service.UI;
 using Unity.VisualScripting;
 
@@ -218,6 +220,8 @@ public class Compositor : MonoBehaviour
         AddService<IGameService>(new GameService());
         AddService<IPoolService>(new PoolService());
         AddService<IHypeService>(new HypeService());
+        AddService<IItemsService>(new ItemsService());
+        AddService<ICurrencyService>(new CurrencyService());
     }
 
     private void Awake()
