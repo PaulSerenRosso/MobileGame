@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Service.Currency;
 using Service.Fight;
 using Service.Items;
@@ -9,7 +10,8 @@ namespace Service.UI
 {
     public class MenuManager : MonoBehaviour
     {
-        [Header("Menu UI")] [SerializeField] private Button _playMatchButton;
+        [Header("Menu UI")] 
+        [SerializeField] private Button _playMatchButton;
         [SerializeField] private Button _playTournamentButton;
         [SerializeField] private GridLayoutGroup _enemySelectionGrid;
         [SerializeField] private GridLayoutGroup _environnementSelectionGrid;
@@ -33,6 +35,9 @@ namespace Service.UI
         [SerializeField] private Button _inventoryButton;
         [SerializeField] private Canvas _inventoryCanvas;
 
+        [SerializeField] private GameObject[] _tournaments;
+        private int _actualTournament;
+
         [SerializeField] private Canvas _pubCanvas;
 
         private IGameService _gameService;
@@ -50,6 +55,7 @@ namespace Service.UI
             _menuTopManager.SetUp(currencyService);
             _menuInventoryManager.SetUp(itemsService);
             _menuShopManager.SetUp(itemsService);
+            _tournaments[_actualTournament].SetActive(true);
             if (_fightService.GetPub() <= 0)
             {
                 LaunchPub();
@@ -123,9 +129,66 @@ namespace Service.UI
             _tournamentCanvas.SetActive(false);
             _topCanvas.gameObject.SetActive(false);
             _botCanvas.gameObject.SetActive(false);
-            _tournamentService.SetupTournament(_gameService.GlobalSettingsSO.AllEnvironmentsSO, _gameService.GlobalSettingsSO.AllEnemyGlobalSO);
+            _tournamentService.SetupTournament(_gameService.GlobalSettingsSO.AllEnvironmentsSO,
+                _gameService.GlobalSettingsSO.AllEnemyGlobalSO);
             _menuTournamentManager.SetupMenu(_gameService, _tournamentService, this);
             _menuTournamentManager.UpdateUITournament();
+        }
+
+        public void LeftTournament()
+        {
+            _actualTournament -= 1;
+            if (_actualTournament < 0)
+            {
+                _actualTournament = 0;
+                _tournaments[_actualTournament].SetActive(true);
+            }
+            else
+            {
+                for (int i = _actualTournament - 1; i >= 0; i--)
+                {
+                    _tournaments[i].GetComponent<RectTransform>()
+                        .DOAnchorPos(new Vector2(1920 * (i - _actualTournament), 0), 2f)
+                        .OnComplete(() => _tournaments[i].SetActive(false));
+                }
+
+                _tournaments[_actualTournament].SetActive(true);
+                _tournaments[_actualTournament].GetComponent<RectTransform>().DOAnchorPos(new Vector2(0, 0), 2f);
+                for (int i = _actualTournament + 1; i < _tournaments.Length; i++)
+                {
+                    _tournaments[i].GetComponent<RectTransform>()
+                        .DOAnchorPos(new Vector2(1920 * (i - _actualTournament), 0), 2f)
+                        .OnComplete(() => _tournaments[i].SetActive(false));
+                }
+            }
+        }
+
+        public void RightTournament()
+        {
+            _actualTournament += 1;
+            if (_actualTournament > _tournaments.Length)
+            {
+                _actualTournament = 0;
+                _tournaments[_actualTournament].SetActive(true);
+            }
+            else
+            {
+                for (int i = _actualTournament - 1; i >= 0; i--)
+                {
+                    _tournaments[i].GetComponent<RectTransform>()
+                        .DOAnchorPos(new Vector2(1920 * (i - _actualTournament), 0), 2f)
+                        .OnComplete(() => _tournaments[i].SetActive(false));
+                }
+
+                _tournaments[_actualTournament].SetActive(true);
+                _tournaments[_actualTournament].GetComponent<RectTransform>().DOAnchorPos(new Vector2(0, 0), 2f);
+                for (int i = _actualTournament + 1; i < _tournaments.Length; i++)
+                {
+                    _tournaments[i].GetComponent<RectTransform>()
+                        .DOAnchorPos(new Vector2(1920 * (i - _actualTournament), 0), 2f)
+                        .OnComplete(() => _tournaments[i].SetActive(false));
+                }
+            }
         }
 
         public void OpenShop()
