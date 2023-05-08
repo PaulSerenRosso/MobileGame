@@ -114,7 +114,7 @@ namespace Service.UI
             _tournamentCanvas.SetActive(false);
             _topCanvas.gameObject.SetActive(false);
             _botCanvas.gameObject.SetActive(false);
-            _tournamentService.SetupTournament(_gameService, _gameService.GlobalSettingsSO.AllEnvironmentsSO, _gameService.GlobalSettingsSO.AllEnemyGlobalSO);
+            _tournamentService.SetupTournament(_gameService.GlobalSettingsSO.AllEnvironmentsSO, _gameService.GlobalSettingsSO.AllEnemyGlobalSO);
             _menuTournamentManager.SetupMenu(_gameService, _tournamentService, this);
             _menuTournamentManager.UpdateUITournament();
         }
