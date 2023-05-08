@@ -6,9 +6,10 @@ using UnityEngine.UI;
 namespace Service.UI
 {
     public class MenuManager : MonoBehaviour
-    { 
+    {
         [Header("Menu UI")] 
-        [SerializeField] private Button _playButton;
+        [SerializeField] private Button _playMatchButton;
+        [SerializeField] private Button _playTournamentButton;
         [SerializeField] private GridLayoutGroup _enemySelectionGrid;
         [SerializeField] private GridLayoutGroup _environnementSelectionGrid;
         [SerializeField] private Button _environmentButton;
@@ -20,6 +21,7 @@ namespace Service.UI
         [SerializeField] private Button _homeButton;
         [SerializeField] private MenuTournamentManager _menuTournamentManager;
         [SerializeField] private GameObject _tournamentCanvas;
+        [SerializeField] private GameObject _debugFightCanvas;
         
         [SerializeField] private Button _shopButton;
         [SerializeField] private Canvas _shopCanvas;
@@ -62,25 +64,35 @@ namespace Service.UI
         public void ActivateHome()
         {
             _tournamentCanvas.SetActive(true);
+            _debugFightCanvas.SetActive(false);
             _shopCanvas.gameObject.SetActive(false);
             _inventoryCanvas.gameObject.SetActive(false);
             _topCanvas.gameObject.SetActive(true);
             _botCanvas.gameObject.SetActive(true);
-            _playButton.interactable = true;
+            _playTournamentButton.interactable = true;
             _homeButton.interactable = false;
+            _shopButton.interactable = true;
+            _inventoryButton.interactable = true;
+        }
+
+        public void ActivateDebug()
+        {
+            _debugFightCanvas.SetActive(true);
+            _tournamentCanvas.SetActive(false);
+            _homeButton.interactable = true;
             _shopButton.interactable = true;
             _inventoryButton.interactable = true;
         }
         
         public void StartFight()
         {
-            _playButton.interactable = false;
+            _playMatchButton.interactable = false;
             _gameService.LoadGameScene(_nextEnvironmentAddressableName, _nextEnemyAddressableName);
         }
 
         public void StartTournament()
         {
-            _playButton.interactable = false;
+            _playTournamentButton.interactable = false;
             _tournamentCanvas.SetActive(false);
             _topCanvas.gameObject.SetActive(false);
             _botCanvas.gameObject.SetActive(false);

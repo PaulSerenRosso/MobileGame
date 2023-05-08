@@ -33,7 +33,7 @@ namespace Service.Inputs
 
         public void StartSwipe(InputAction.CallbackContext ctx)
         {
-            _startPos = Input.GetTouch(0).position;
+            if (Input.touchCount > 0) _startPos = Input.GetTouch(0).position;
             _isSuccess = true;
             _swipeTimer.Initiate();
             UpdateManager.Register(this);

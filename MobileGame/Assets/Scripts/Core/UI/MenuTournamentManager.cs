@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using Service.Fight;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,9 +18,19 @@ namespace Service.UI
         [SerializeField] private RectTransform _tournamentDemiParent;
         [SerializeField] private Canvas _tournamentFinalCanvas;
         [SerializeField] private RectTransform _tournamentFinalParent;
+
+        [SerializeField] private Image[] _imageQuarterWinners;
+        [SerializeField] private Image[] _imageDemiWinners;
+        [SerializeField] private Image[] _imageFinalWinners;
+
+        [SerializeField] private TextMeshProUGUI[] _quarterPlayerNames;
+        [SerializeField] private TextMeshProUGUI _quarterName;
+        [SerializeField] private TextMeshProUGUI[] _demiNames;
+        [SerializeField] private TextMeshProUGUI[] _finalNames;
         
         private IGameService _gameService;
         private ITournamentService _tournamentService;
+        private Fight.Fight[] _fights;
         private MenuManager _menuManager;
         private string _enemyAddressableName;
         private string _environmentAddressableName;
@@ -29,6 +40,16 @@ namespace Service.UI
             _gameService = gameService;
             _tournamentService = tournamentService;
             _menuManager = menuManager;
+            _fights = _tournamentService.GetFights();
+            _quarterName.text = _fights[0]._enemyGlobalSO.Name;
+            foreach (var demiName in _demiNames)
+            {
+                demiName.text = _fights[1]._enemyGlobalSO.Name;
+            }
+            foreach (var finalName in _finalNames)
+            {
+                finalName.text = _fights[2]._enemyGlobalSO.Name;
+            }
         }
 
         public void UpdateUITournament()
@@ -41,12 +62,24 @@ namespace Service.UI
                     _tournamentQuarterCanvas.gameObject.SetActive(true);
                     break;
                 case TournamentState.DEMI:
+                    foreach (var imageQuarterWinner in _imageQuarterWinners)
+                    {
+                        imageQuarterWinner.color = Color.green;
+                    }
                     _tournamentQuarterCanvas.gameObject.SetActive(true);
                     _tournamentDemiCanvas.gameObject.SetActive(true);
                     _tournamentQuarterParent.DOAnchorPos(new Vector2(-1920, 0), 5f).OnComplete(() => _tournamentQuarterCanvas.gameObject.SetActive(false));
                     _tournamentDemiParent.DOAnchorPos(new Vector2(0, 0), 5f);
                     break;
                 case TournamentState.FINAL:
+                    foreach (var imageQuarterWinner in _imageQuarterWinners)
+                    {
+                        imageQuarterWinner.color = Color.green;
+                    }
+                    foreach (var imageDemiWinner in _imageDemiWinners)
+                    {
+                        imageDemiWinner.color = Color.green;
+                    }
                     _tournamentQuarterCanvas.gameObject.SetActive(true);
                     _tournamentDemiCanvas.gameObject.SetActive(true);
                     _tournamentFinalCanvas.gameObject.SetActive(true);

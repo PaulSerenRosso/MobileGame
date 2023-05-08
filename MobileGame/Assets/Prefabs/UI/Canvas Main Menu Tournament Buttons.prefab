@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6497639914791163200}
   - component: {fileID: 2340301586346487147}
   - component: {fileID: 8908963217517303866}
+  - component: {fileID: 8295636664398110626}
   m_Layer: 5
   m_Name: Canvas Main Menu Tournament Buttons
   m_TagString: Untagged
@@ -102,6 +103,49 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &8295636664398110626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267066443576793042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7337e5a6373f493499e30b5acccd4c63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playFightButton: {fileID: 5843123857928318043}
+  _backFightButton: {fileID: 164839394691253442}
+  _tournamentButtonsCanvas: {fileID: 6497639914791163200}
+  _tournamentQuarterCanvas: {fileID: 0}
+  _tournamentQuarterParent: {fileID: 0}
+  _tournamentDemiCanvas: {fileID: 0}
+  _tournamentDemiParent: {fileID: 0}
+  _tournamentFinalCanvas: {fileID: 0}
+  _tournamentFinalParent: {fileID: 0}
+  _imageQuarterWinners:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _imageDemiWinners:
+  - {fileID: 0}
+  - {fileID: 0}
+  _imageFinalWinners:
+  - {fileID: 0}
+  _quarterPlayerNames:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _quarterName: {fileID: 0}
+  _demiNames:
+  - {fileID: 0}
+  - {fileID: 0}
+  _finalNames:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &1981735771569170844
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,7 +267,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6155690437393438597}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8295636664398110626}
+        m_TargetAssemblyTypeName: Service.UI.MenuTournamentManager, UIAssembly
+        m_MethodName: BackMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6316069561031624184
 GameObject:
   m_ObjectHideFlags: 0
@@ -616,8 +672,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Service.UI.MenuManager, UIAssembly
+      - m_Target: {fileID: 8295636664398110626}
+        m_TargetAssemblyTypeName: Service.UI.MenuTournamentManager, UIAssembly
         m_MethodName: StartFight
         m_Mode: 1
         m_Arguments:
