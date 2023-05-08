@@ -41,11 +41,27 @@ namespace Service.Fight
         private const float _roundInitTimer = 3f;
         private CinematicFightManager _cinematicFightManager;
         private bool _isPlayerWon;
+        private int _numberOfMatchsBeforePub = 3;
         private GridSO _gridSo;
 
         private string _enemyAddressableName;
         private string _environmentAddressableName;
 
+        public void DecreasePub()
+        {
+            _numberOfMatchsBeforePub -= 1;
+        }
+
+        public void ResetPub()
+        {
+            _numberOfMatchsBeforePub = 1;
+        }
+
+        public int GetPub()
+        {
+            return _numberOfMatchsBeforePub;
+        }
+        
         private void ActivatePause(Action callback)
         {
           

@@ -6,6 +6,11 @@ namespace Service.Fight
     {
         public void StartFight(string environmentAddressableName, string enemyAddressableName);
         public void QuitFight();
+
+        public void DecreasePub();
+        public void ResetPub();
+        public int GetPub();
+        
         public event Action<int> InitiateRoundEvent;
         public event Action EndInitiateRoundEvent;
         
