@@ -24,6 +24,7 @@ namespace Service.Items
         private void LoadGlobalSettings(ItemsServiceGlobalSettingsSO so)
         {
             _globalSettingsSo = so;
+            if(_globalSettingsSo.StartItemsSO.Length ==0) return;
             for (int i = 0; i < _globalSettingsSo.StartItemsSO.Length; i++)
             {
                 SetItemPlayer(_globalSettingsSo.StartItemsSO[i]);
