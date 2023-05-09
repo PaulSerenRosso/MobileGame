@@ -224,7 +224,6 @@ namespace Service.Fight
 
         private void InitTimerRound()
         {
-            Debug.Log("TimerRound");
             _tickTimerInitRound = new TickTimer(_roundInitTimer, _tickeableService.GetTickManager);
             _tickTimerInitRound.TickEvent += EndInitRound;
             _tickTimerInitRound.InitiateEvent += StartInitRound;
