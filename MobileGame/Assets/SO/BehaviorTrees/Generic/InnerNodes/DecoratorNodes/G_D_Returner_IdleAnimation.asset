@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8413dc88300414abfdac06d4bd76f34, type: 3}
-  m_Name: G_T_AnimatorPlayAnimation_Stun
+  m_Script: {fileID: 11500000, guid: 76eac7996b8251749b7df2d6f366dc46, type: 3}
+  m_Name: G_D_Returner_IdleAnimation
   m_EditorClassIdentifier: 
   IsDuplicable: 1
-  Comment: "N\u0153ud qui permet de jouer une animation dans un animator"
-  _internValuesCount: 0
-  Data: {fileID: 11400000, guid: ca00e401abd97e54aa8d38117eff7db6, type: 2}
-  InternValues: []
+  Comment: "Retourne toujours la m\xEAme valeur qui est renseign\xE9 sur le n\u0153ud"
+  Child: {fileID: 11400000, guid: 615191c9d54706347905b4bf067b26df, type: 2}
+  ReturnState: 1
