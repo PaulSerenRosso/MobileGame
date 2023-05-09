@@ -36,6 +36,8 @@ namespace Service.UI
         [SerializeField] private Canvas _inventoryCanvas;
 
         [SerializeField] private GameObject[] _tournaments;
+        [SerializeField] private Button _leftArrowTournament;
+        [SerializeField] private Button _rightArrowTournament;
         private int _actualTournament;
 
         [SerializeField] private Canvas _pubCanvas;
@@ -56,6 +58,8 @@ namespace Service.UI
             _menuInventoryManager.SetUp(itemsService);
             _menuShopManager.SetUp(itemsService);
             _tournaments[_actualTournament].SetActive(true);
+            _leftArrowTournament.interactable = false;
+            _homeButton.interactable = false;
             if (_fightService.GetPub() <= 0)
             {
                 LaunchPub();
@@ -142,9 +146,13 @@ namespace Service.UI
             {
                 _actualTournament = 0;
                 _tournaments[_actualTournament].SetActive(true);
+                _leftArrowTournament.interactable = _actualTournament != 0;
+                _rightArrowTournament.interactable = true;
             }
             else
             {
+                _leftArrowTournament.interactable = _actualTournament != 0;
+                _rightArrowTournament.interactable = true;
                 for (int i = _actualTournament - 1; i >= 0; i--)
                 {
                     _tournaments[i].GetComponent<RectTransform>()
@@ -166,13 +174,17 @@ namespace Service.UI
         public void RightTournament()
         {
             _actualTournament += 1;
-            if (_actualTournament > _tournaments.Length)
+            if (_actualTournament > _tournaments.Length - 1)
             {
-                _actualTournament = 0;
+                _actualTournament = _tournaments.Length - 1;
                 _tournaments[_actualTournament].SetActive(true);
+                _rightArrowTournament.interactable = _actualTournament != _tournaments.Length - 1;
+                _leftArrowTournament.interactable = true;
             }
             else
             {
+                _rightArrowTournament.interactable = _actualTournament != _tournaments.Length - 1;
+                _leftArrowTournament.interactable = true;
                 for (int i = _actualTournament - 1; i >= 0; i--)
                 {
                     _tournaments[i].GetComponent<RectTransform>()
