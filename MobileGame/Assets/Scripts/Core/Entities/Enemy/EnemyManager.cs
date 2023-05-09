@@ -40,7 +40,7 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     {
         transform.position = new Vector3(0, 0, 0);
         transform.rotation = Quaternion.identity;
-        CurrentMobilityState = EnemyEnums.EnemyMobilityState.VULNERABLE;
+        CurrentMobilityState = EnemyEnums.EnemyMobilityState.INVULNERABLE;
         CurrentBlockingState = EnemyEnums.EnemyBlockingState.VULNERABLE;
     }
 
@@ -112,7 +112,7 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     {
         transform.position = new Vector3(0, 0, 0);
         transform.rotation = Quaternion.identity;
-        CurrentMobilityState = EnemyEnums.EnemyMobilityState.VULNERABLE;
+        CurrentMobilityState = EnemyEnums.EnemyMobilityState.INVULNERABLE;
         CurrentBlockingState = EnemyEnums.EnemyBlockingState.VULNERABLE;
         ResetShaderColor();
         _hypeService.ResetHypeEnemy();
@@ -142,7 +142,15 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     public bool TryDecreaseHypeEnemy(float amount, Vector3 posToCheck, Transform particleTransform,
         Enums.ParticlePosition particlePosition, bool isStun)
     {
-        if (isStun) TakeStun();
+        if (isStun)
+        {
+            Vector3 normalizedPos = (posToCheck - transform.position).normalized;
+            float angle = Vector3.Angle(normalizedPos, transform.forward);
+            if (angle > EnemyInGameSo.AngleStun)
+            {
+                TakeStun();
+            }
+        }
         float damage = amount;
         if (CurrentBlockingState == EnemyEnums.EnemyBlockingState.BLOCKING)
         {
@@ -230,7 +238,6 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     private void TakeStun()
     {
         if (CurrentMobilityState is EnemyEnums.EnemyMobilityState.INVULNERABLE or EnemyEnums.EnemyMobilityState.STAGGER) return;
-        Debug.Log("Stagger");
         CurrentMobilityState = EnemyEnums.EnemyMobilityState.STAGGER;
     }
 }
