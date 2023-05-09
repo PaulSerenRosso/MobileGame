@@ -108,6 +108,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2459048459054823552}
     m_Modifications:
+    - target: {fileID: 442906940806070506, guid: eeabda5cc81c0de459f93c46f82365fd,
+        type: 3}
+      propertyPath: m_text
+      value: Magasin
+      objectReference: {fileID: 0}
+    - target: {fileID: 2965504195544664892, guid: eeabda5cc81c0de459f93c46f82365fd,
+        type: 3}
+      propertyPath: m_text
+      value: Inventaire
+      objectReference: {fileID: 0}
     - target: {fileID: 3458366704389640797, guid: eeabda5cc81c0de459f93c46f82365fd,
         type: 3}
       propertyPath: m_Name
@@ -117,6 +127,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OpenInventory
+      objectReference: {fileID: 0}
+    - target: {fileID: 4236221849304258270, guid: eeabda5cc81c0de459f93c46f82365fd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5063546521028185662, guid: eeabda5cc81c0de459f93c46f82365fd,
+        type: 3}
+      propertyPath: m_text
+      value: Accueil
       objectReference: {fileID: 0}
     - target: {fileID: 6101861764489901894, guid: eeabda5cc81c0de459f93c46f82365fd,
         type: 3}
@@ -221,6 +241,11 @@ PrefabInstance:
     - target: {fileID: 6101861764489901894, guid: eeabda5cc81c0de459f93c46f82365fd,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7739691992415163671, guid: eeabda5cc81c0de459f93c46f82365fd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8038016389320937214, guid: eeabda5cc81c0de459f93c46f82365fd,

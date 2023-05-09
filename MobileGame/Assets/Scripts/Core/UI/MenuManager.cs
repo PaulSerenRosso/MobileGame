@@ -41,6 +41,7 @@ namespace Service.UI
         private int _actualTournament;
 
         [SerializeField] private Canvas _pubCanvas;
+        [SerializeField] private Canvas _unlockTournament;
 
         private IGameService _gameService;
         private ITournamentService _tournamentService;
@@ -129,6 +130,11 @@ namespace Service.UI
 
         public void StartTournament()
         {
+            if (_actualTournament != 0)
+            {
+                _unlockTournament.gameObject.SetActive(true);
+                return;
+            }
             _playTournamentButton.interactable = false;
             _tournamentCanvas.SetActive(false);
             _topCanvas.gameObject.SetActive(false);
@@ -188,16 +194,16 @@ namespace Service.UI
                 for (int i = _actualTournament - 1; i >= 0; i--)
                 {
                     _tournaments[i].GetComponent<RectTransform>()
-                        .DOAnchorPos(new Vector2(1920 * (i - _actualTournament), 0), 2f)
+                        .DOAnchorPos(new Vector2(1920 * (i - _actualTournament), 0), 1f)
                         .OnComplete(() => _tournaments[i].SetActive(false));
                 }
 
                 _tournaments[_actualTournament].SetActive(true);
-                _tournaments[_actualTournament].GetComponent<RectTransform>().DOAnchorPos(new Vector2(0, 0), 2f);
+                _tournaments[_actualTournament].GetComponent<RectTransform>().DOAnchorPos(new Vector2(0, 0), 1f);
                 for (int i = _actualTournament + 1; i < _tournaments.Length; i++)
                 {
                     _tournaments[i].GetComponent<RectTransform>()
-                        .DOAnchorPos(new Vector2(1920 * (i - _actualTournament), 0), 2f)
+                        .DOAnchorPos(new Vector2(1920 * (i - _actualTournament), 0), 1f)
                         .OnComplete(() => _tournaments[i].SetActive(false));
                 }
             }
@@ -221,6 +227,11 @@ namespace Service.UI
             _homeButton.interactable = true;
             _shopButton.interactable = true;
             _inventoryButton.interactable = false;
+        }
+
+        public void CloseLockTournament()
+        {
+            _unlockTournament.gameObject.SetActive(false);
         }
     }
 }
