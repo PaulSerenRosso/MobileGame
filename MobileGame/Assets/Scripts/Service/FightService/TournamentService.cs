@@ -56,6 +56,7 @@ namespace Service.Fight
 
         public void ResetTournament()
         {
+            _isTournamentSet = false;
             SetTournament();
         }
     }
