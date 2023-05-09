@@ -6,6 +6,6 @@
 
         public void LoadMainMenuScene();
 
-        public void LoadGameScene(string environmentAddressableName, string enemyAddressableName);
+        public void LoadGameScene(string environmentAddressableName, string enemyAddressableName, bool isDebugFight);
     }
 }

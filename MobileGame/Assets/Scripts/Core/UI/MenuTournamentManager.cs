@@ -140,11 +140,12 @@ namespace Service.UI
             _playFightButton.interactable = false;
             Fight.Fight currentFight = _tournamentService.GetCurrentFight();
             _gameService.LoadGameScene(currentFight._environmentSO.EnvironmentAddressableName,
-                currentFight._enemyGlobalSO.enemyAdressableName);
+                currentFight._enemyGlobalSO.enemyAdressableName, false);
         }
 
         public void QuitTournament()
         {
+            _winTournament.gameObject.SetActive(false);
             _tournamentService.ResetTournament();
             BackMenu();
         }

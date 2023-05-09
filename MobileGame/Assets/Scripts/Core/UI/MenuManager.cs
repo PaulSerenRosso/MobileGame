@@ -120,7 +120,7 @@ namespace Service.UI
         public void StartFight()
         {
             _playMatchButton.interactable = false;
-            _gameService.LoadGameScene(_nextEnvironmentAddressableName, _nextEnemyAddressableName);
+            _gameService.LoadGameScene(_nextEnvironmentAddressableName, _nextEnemyAddressableName, true);
         }
 
         public void StartTournament()
