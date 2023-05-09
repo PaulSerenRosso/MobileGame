@@ -22,7 +22,7 @@ public class CinematicFightManager : MonoBehaviour
         _playerAnimator = playerAnimator;
         _enemyAnimator = enemyAnimator;
     }
-    
+
     public void LaunchFightEntryCinematic(Action endCinematicCallBack)
     {
         StartCoroutine(PlayCinematic(_fightEntry, endCinematicCallBack));
@@ -37,6 +37,7 @@ public class CinematicFightManager : MonoBehaviour
     {
         StartCoroutine(PlayCinematic(_enemyUltimate, endCinematicCallBack));
     }
+
     public void ChangePostProcessVolume(VolumeProfile volumeProfile) => _volume.profile = volumeProfile;
 
     public void LaunchPlayerAnimation(string stateName) => _playerAnimator.Play(stateName);
@@ -46,7 +47,7 @@ public class CinematicFightManager : MonoBehaviour
     private IEnumerator PlayCinematic(TimelineAsset timelineAsset, Action endCinematicCallback)
     {
         _volume.profile = null;
-         _camera.enabled = false;
+        _camera.enabled = false;
         _playableDirector.playableAsset = timelineAsset;
         _playableDirector.Play();
         yield return new WaitForSeconds((float)_playableDirector.duration);

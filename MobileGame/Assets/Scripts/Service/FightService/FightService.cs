@@ -30,6 +30,7 @@ namespace Service.Fight
         [DependsOnService] private IGameService _gameService;
         [DependsOnService] private ITournamentService _tournamentService;
         [DependsOnService] private IItemsService _itemsService;
+        
         private const int _victoryRoundCount = 2;
         private CameraController _cameraController;
         private EnemyManager _enemyManager;
@@ -42,6 +43,7 @@ namespace Service.Fight
         private const float _roundInitTimer = 3f;
         private CinematicFightManager _cinematicFightManager;
         private bool _isPlayerWon;
+        private bool _isDebugFight;
         private int _numberOfMatchsBeforePub = 3;
         private GridSO _gridSo;
 
@@ -65,7 +67,6 @@ namespace Service.Fight
         
         private void ActivatePause(Action callback)
         {
-          
             _playerController.LockController();
             _enemyManager.StopTree(callback);
             ActivatePauseEvent?.Invoke();
@@ -73,18 +74,18 @@ namespace Service.Fight
 
         private void DeactivatePause()
         {
-         
             _playerController.UnlockController();
             DeactivatePauseEvent?.Invoke();
         }
 
-        public void StartFight(string environmentAddressableName, string enemyAddressableName)
+        public void StartFight(string environmentAddressableName, string enemyAddressableName, bool isDebugFight)
         {
             _hypeService.EnabledService();
             _enemyAddressableName = enemyAddressableName;
             _environmentAddressableName = environmentAddressableName;
+            _isDebugFight = isDebugFight;
             _hypeService.EnableHypeServiceEvent += GenerateFight;
-            _canvasService.InitCanvasEvent += LaunchEntryCinematic;
+            _canvasService.InitCanvasEvent += LoadCinematicFightManager;
         }
 
 
@@ -200,6 +201,11 @@ namespace Service.Fight
             _cameraController = camera.GetComponent<CameraController>();
             _cameraController.Setup(_playerController.transform, _enemyManager.transform);
             _canvasService.LoadInGameMenu();
+            
+        }
+
+        private void LoadCinematicFightManager()
+        {
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("CinematicFightManager",
                 GenerateCinematicFightManager);
         }
@@ -211,12 +217,14 @@ namespace Service.Fight
             _cinematicFightManager = cinematicManager.GetComponent<CinematicFightManager>();
             _cinematicFightManager.Init(_playerController.GetComponent<PlayerRenderer>().Animator,
                 _enemyManager.GetComponent<EnemyManager>().Animator);
+            LaunchEntryCinematic();
         }
         
         #endregion
 
         private void InitTimerRound()
         {
+            Debug.Log("TimerRound");
             _tickTimerInitRound = new TickTimer(_roundInitTimer, _tickeableService.GetTickManager);
             _tickTimerInitRound.TickEvent += EndInitRound;
             _tickTimerInitRound.InitiateEvent += StartInitRound;
@@ -242,17 +250,20 @@ namespace Service.Fight
 
         public void QuitFight()
         {
-            if (_isPlayerWon)
+            if (!_isDebugFight)
             {
-                Fight currentFight = _tournamentService.GetCurrentFight();
-                currentFight._fightState = FightState.VICTORY;
+                if (_isPlayerWon)
+                {
+                    Fight currentFight = _tournamentService.GetCurrentFight();
+                    currentFight._fightState = FightState.VICTORY;
+                }
             }
             _playerRoundCount = 0;
             _enemyRoundCount = 0;
             _isPlayerWon = false;
             _cameraController.Unlink();
             InitiateRoundEvent = null;
-            _canvasService.InitCanvasEvent -= LaunchEntryCinematic;
+            _canvasService.InitCanvasEvent -= LoadCinematicFightManager;
             EndInitiateRoundEvent = null;
             ActivatePauseEvent = null;
             DeactivatePauseEvent = null;
