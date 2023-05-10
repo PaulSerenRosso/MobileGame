@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
 using Environment.MoveGrid;
+using HelperPSR.Pool;
 using Service;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ namespace BehaviorTree.Nodes.Actions
     {
         private TaskInstantiateFXNodeSO _so;
         private TaskInstantiateFXNodeDataSO _data;
-        private IPoolService _poolService;
+        private Pool<GameObject> _pool;
         private GridManager _gridManager;
 
         public override void SetNodeSO(NodeSO nodeSO)
@@ -27,10 +28,10 @@ namespace BehaviorTree.Nodes.Actions
         public override void Evaluate()
         {
             base.Evaluate();
-            GameObject gameObject = _poolService.GetFromPool(_data.ParticleGO);
+            GameObject gameObject = _pool.GetFromPool();
             var index = (int)Sharer.InternValues[_so.InternValues[0].HashCode];
             gameObject.transform.position = _gridManager.MovePoints[index].MeshRenderer.transform.position + new Vector3(0, 1, 0);
-            _poolService.AddToPoolLater(_data.ParticleGO, gameObject, 5f);
+            _pool.AddToPoolLatter(gameObject, 5f);
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();
         }
@@ -40,8 +41,7 @@ namespace BehaviorTree.Nodes.Actions
             Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
         {
             _gridManager = (GridManager)externDependencyValues[BehaviorTreeEnums.TreeExternValues.GridManager];
-            _poolService = (IPoolService)externDependencyValues[BehaviorTreeEnums.TreeExternValues.PoolService];
-            _poolService.CreatePool(_data.ParticleGO, _data.Count);
+            _pool = new Pool<GameObject>(_data.ParticleGO, _data.Count);
         }
 
         public override ActionNodeDataSO GetDataSO()
