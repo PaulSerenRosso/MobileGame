@@ -2,6 +2,7 @@
 using Service.Fight;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Service.UI
@@ -22,12 +23,14 @@ namespace Service.UI
         [SerializeField] private Image[] _imageDemiWinners;
         [SerializeField] private Image[] _imageFinalWinners;
 
-        [SerializeField] private TextMeshProUGUI[] _quarterPlayerNames;
+        [FormerlySerializedAs("_quarterPlayerNames")] [SerializeField] private TextMeshProUGUI[] _playerNames;
         [SerializeField] private TextMeshProUGUI _quarterName;
         [SerializeField] private TextMeshProUGUI[] _demiNames;
         [SerializeField] private TextMeshProUGUI[] _finalNames;
 
+        [SerializeField] private Canvas _pubCanvas;
         [SerializeField] private Canvas _winTournament;
+        [SerializeField] private Canvas _defeatTournament;
 
         private IGameService _gameService;
         private ITournamentService _tournamentService;
@@ -42,57 +45,33 @@ namespace Service.UI
             _tournamentService = tournamentService;
             _menuManager = menuManager;
             _fights = _tournamentService.GetFights();
-            _quarterName.text = _fights[0]._enemyGlobalSO.Name;
+            _quarterName.text = _fights[0].EnemyGlobalSO.Name;
             foreach (var demiName in _demiNames)
             {
-                demiName.text = _fights[1]._enemyGlobalSO.Name;
+                demiName.text = _fights[1].EnemyGlobalSO.Name;
             }
 
             foreach (var finalName in _finalNames)
             {
-                finalName.text = _fights[2]._enemyGlobalSO.Name;
+                finalName.text = _fights[2].EnemyGlobalSO.Name;
             }
         }
 
         public void UpdateUITournament()
         {
             _tournamentButtonsCanvas.gameObject.SetActive(true);
-            Fight.Fight currentFight = _tournamentService.GetCurrentFight();
-            if (_tournamentService.GetStateTournament())
+            _tournamentQuarterCanvas.gameObject.SetActive(true);
+            if (_tournamentService.CompareState(FightState.DEFEAT)) _defeatTournament.gameObject.SetActive(true);
+            else if (_tournamentService.CompareState(FightState.WAITING)) UpdateCurrentFightUI();
+            else ActivateWinnerUI();
+        }
+
+        private void UpdateCurrentFightUI()
+        {
+            Fight.Fight currentFight = _tournamentService.GetCurrentFightPlayer();
+            switch (currentFight.TournamentStep)
             {
-                foreach (var imageQuarterWinner in _imageQuarterWinners)
-                {
-                    imageQuarterWinner.color = Color.green;
-                }
-
-                foreach (var imageDemiWinner in _imageDemiWinners)
-                {
-                    imageDemiWinner.color = Color.green;
-                }
-
-                foreach (var imageFinalWinner in _imageFinalWinners)
-                {
-                    imageFinalWinner.color = Color.green;
-                }
-
-                _tournamentQuarterCanvas.gameObject.SetActive(true);
-                _tournamentDemiCanvas.gameObject.SetActive(true);
-                _tournamentFinalCanvas.gameObject.SetActive(true);
-                _tournamentQuarterParent.DOAnchorPos(new Vector2(-3840, 0), 5f)
-                    .OnComplete(() => _tournamentQuarterCanvas.gameObject.SetActive(false));
-                _tournamentDemiParent.DOAnchorPos(new Vector2(-1920, 0), 5f)
-                    .OnComplete(() => _tournamentDemiCanvas.gameObject.SetActive(false));
-                _tournamentFinalParent.DOAnchorPos(new Vector2(0, 0), 5f)
-                    .OnComplete(() => _winTournament.gameObject.SetActive(true));
-            }
-
-            if (currentFight == null) return;
-            switch (currentFight._tournamentState)
-            {
-                case TournamentState.QUARTER:
-                    _tournamentQuarterCanvas.gameObject.SetActive(true);
-                    break;
-                case TournamentState.DEMI:
+                case TournamentStep.DEMI:
                     foreach (var imageQuarterWinner in _imageQuarterWinners)
                     {
                         imageQuarterWinner.color = Color.green;
@@ -104,7 +83,8 @@ namespace Service.UI
                         .OnComplete(() => _tournamentQuarterCanvas.gameObject.SetActive(false));
                     _tournamentDemiParent.DOAnchorPos(new Vector2(0, 0), 5f);
                     break;
-                case TournamentState.FINAL:
+                
+                case TournamentStep.FINAL:
                     foreach (var imageQuarterWinner in _imageQuarterWinners)
                     {
                         imageQuarterWinner.color = Color.green;
@@ -127,6 +107,34 @@ namespace Service.UI
             }
         }
 
+        private void ActivateWinnerUI()
+        {
+            foreach (var imageQuarterWinner in _imageQuarterWinners)
+            {
+                imageQuarterWinner.color = Color.green;
+            }
+
+            foreach (var imageDemiWinner in _imageDemiWinners)
+            {
+                imageDemiWinner.color = Color.green;
+            }
+
+            foreach (var imageFinalWinner in _imageFinalWinners)
+            {
+                imageFinalWinner.color = Color.green;
+            }
+
+            _tournamentQuarterCanvas.gameObject.SetActive(true);
+            _tournamentDemiCanvas.gameObject.SetActive(true);
+            _tournamentFinalCanvas.gameObject.SetActive(true);
+            _tournamentQuarterParent.DOAnchorPos(new Vector2(-3840, 0), 5f)
+                .OnComplete(() => _tournamentQuarterCanvas.gameObject.SetActive(false));
+            _tournamentDemiParent.DOAnchorPos(new Vector2(-1920, 0), 5f)
+                .OnComplete(() => _tournamentDemiCanvas.gameObject.SetActive(false));
+            _tournamentFinalParent.DOAnchorPos(new Vector2(0, 0), 5f)
+                .OnComplete(() => _winTournament.gameObject.SetActive(true));
+        }
+
         public void DeactivateUITournament()
         {
             _tournamentButtonsCanvas.gameObject.SetActive(false);
@@ -138,13 +146,14 @@ namespace Service.UI
         public void StartFight()
         {
             _playFightButton.interactable = false;
-            Fight.Fight currentFight = _tournamentService.GetCurrentFight();
-            _gameService.LoadGameScene(currentFight._environmentSO.EnvironmentAddressableName,
-                currentFight._enemyGlobalSO.enemyAdressableName, false);
+            Fight.Fight currentFight = _tournamentService.GetCurrentFightPlayer();
+            _gameService.LoadGameScene(currentFight.EnvironmentSO.EnvironmentAddressableName,
+                currentFight.EnemyGlobalSO.enemyAdressableName, false);
         }
 
         public void QuitTournament()
         {
+            _defeatTournament.gameObject.SetActive(false);
             _winTournament.gameObject.SetActive(false);
             _tournamentService.ResetTournament();
             BackMenu();
@@ -154,6 +163,19 @@ namespace Service.UI
         {
             DeactivateUITournament();
             _menuManager.ActivateHome();
+        }
+        
+        public void LaunchPub()
+        {
+            _defeatTournament.gameObject.SetActive(false);
+            _tournamentService.GetCurrentFightPlayer().FightState = FightState.WAITING;
+            _pubCanvas.gameObject.SetActive(true);
+        }
+
+        public void ClosePub()
+        {
+            _pubCanvas.gameObject.SetActive(false);
+            UpdateUITournament();
         }
     }
 }

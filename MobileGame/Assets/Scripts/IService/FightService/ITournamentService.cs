@@ -2,30 +2,33 @@
 {
     public interface ITournamentService : IService
     {
-        void SetupTournament(EnvironmentSO[] environmentSOs, EnemyGlobalSO[] enemyGlobalSOs);
+        void Setup(EnvironmentSO[] environmentSOs, EnemyGlobalSO[] enemyGlobalSOs);
         void ResetTournament();
-        bool GetStateTournament();
-        Fight GetCurrentFight();
+        void SetPlayerCurrentFight(TournamentStep tournamentStep);
+        bool CompareState(FightState stateToCompare);
+        bool GetSet();
+        Fight GetFightStep(TournamentStep tournamentStep);
+        Fight GetCurrentFightPlayer();
         Fight[] GetFights();
     }
     
     public class Fight
     {
-        public TournamentState _tournamentState;
-        public EnvironmentSO _environmentSO;
-        public EnemyGlobalSO _enemyGlobalSO;
-        public FightState _fightState;
+        public TournamentStep TournamentStep;
+        public EnvironmentSO EnvironmentSO;
+        public EnemyGlobalSO EnemyGlobalSO;
+        public FightState FightState;
 
-        public Fight(TournamentState tournamentState, EnvironmentSO environmentSO, EnemyGlobalSO enemyGlobalSO, FightState fightState)
+        public Fight(TournamentStep tournamentStep, EnvironmentSO environmentSO, EnemyGlobalSO enemyGlobalSO, FightState fightState)
         {
-            _tournamentState = tournamentState;
-            _environmentSO = environmentSO;
-            _enemyGlobalSO = enemyGlobalSO;
-            _fightState = fightState;
+            TournamentStep = tournamentStep;
+            EnvironmentSO = environmentSO;
+            EnemyGlobalSO = enemyGlobalSO;
+            FightState = fightState;
         }
     }
 
-    public enum TournamentState
+    public enum TournamentStep
     {
         QUARTER,
         DEMI,
@@ -35,7 +38,8 @@
     public enum FightState
     {
         VICTORY,
-        DEFEAT
+        DEFEAT,
+        WAITING
     }
     
 }

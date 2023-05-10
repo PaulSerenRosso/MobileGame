@@ -39,8 +39,7 @@ namespace Service.UI
         [SerializeField] private Button _leftArrowTournament;
         [SerializeField] private Button _rightArrowTournament;
         private int _actualTournament;
-
-        [SerializeField] private Canvas _pubCanvas;
+        
         [SerializeField] private Canvas _unlockTournament;
 
         private IGameService _gameService;
@@ -61,11 +60,7 @@ namespace Service.UI
             _tournaments[_actualTournament].SetActive(true);
             _leftArrowTournament.interactable = false;
             _homeButton.interactable = false;
-            if (_fightService.GetPub() <= 0)
-            {
-                LaunchPub();
-                _fightService.ResetPub();
-            }
+            if (_tournamentService.GetSet()) StartTournament();
 
             foreach (var enemyGlobalSo in gameService.GlobalSettingsSO.AllEnemyGlobalSO)
             {
@@ -83,16 +78,6 @@ namespace Service.UI
                 button.image.sprite = environmentSo.EnvironmentSprite;
                 button.GetComponentInChildren<TextMeshProUGUI>().text = environmentSo.Name;
             }
-        }
-
-        private void LaunchPub()
-        {
-            _pubCanvas.gameObject.SetActive(true);
-        }
-
-        public void ClosePub()
-        {
-            _pubCanvas.gameObject.SetActive(false);
         }
 
         public void SetEnvironmentAddressableName(string value) => _nextEnvironmentAddressableName = value;
@@ -139,7 +124,7 @@ namespace Service.UI
             _tournamentCanvas.SetActive(false);
             _topCanvas.gameObject.SetActive(false);
             _botCanvas.gameObject.SetActive(false);
-            _tournamentService.SetupTournament(_gameService.GlobalSettingsSO.AllEnvironmentsSO,
+            _tournamentService.Setup(_gameService.GlobalSettingsSO.AllEnvironmentsSO,
                 _gameService.GlobalSettingsSO.AllEnemyGlobalSO);
             _menuTournamentManager.SetupMenu(_gameService, _tournamentService, this);
             _menuTournamentManager.UpdateUITournament();
