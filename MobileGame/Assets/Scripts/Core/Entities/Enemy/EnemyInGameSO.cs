@@ -6,9 +6,6 @@ namespace Enemy
     public class EnemyInGameSO : ScriptableObject
     {
         [Header("Stats")]
-        public float PercentageHealthStun;
-        public float PercentageDamageReduction;
-        public float TimeStunAvailable;
         public float TimeInvulnerable;
         public float AngleBlock;
         public float AngleStun;

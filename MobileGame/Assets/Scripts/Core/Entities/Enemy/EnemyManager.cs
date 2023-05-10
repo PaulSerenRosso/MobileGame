@@ -4,11 +4,9 @@ using Enemy;
 using Environment.MoveGrid;
 using HelperPSR.MonoLoopFunctions;
 using HelperPSR.RemoteConfigs;
-using Player;
 using Service;
 using Service.Hype;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Tree = BehaviorTree.Trees;
 
 public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHypeable
@@ -21,12 +19,9 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     public EnemyInGameSO EnemyInGameSo;
 
     [SerializeField] private Tree.Tree _tree;
-
-    [FormerlySerializedAs("_remoteConfigTimeStunName")] [SerializeField] private string _remoteConfigTimeStunAvailableName;
-    [SerializeField] private string _remoteConfigTimeStunInvulnerableName;
-    [SerializeField] private string _remoteConfigStunPercentageHealthName;
-    [SerializeField] private string _remoteConfigBlockPercentageDamageReduction;
+    
     [SerializeField] private string _remoteConfigAngleBlock;
+    [SerializeField] private string _remoteConfigAngleStun;
     [SerializeField] private string _remoteConfigPercentageDamageReductionBoostChimist;
     [SerializeField] private ParticleSystem _ultimateParticle;
     [SerializeField] private GameObject _blockParticle;
@@ -98,12 +93,8 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
 
     public void SetRemoteConfigurableValues()
     {
-        EnemyInGameSo.PercentageHealthStun = RemoteConfigManager.Config.GetFloat(_remoteConfigStunPercentageHealthName);
-        EnemyInGameSo.TimeStunAvailable = RemoteConfigManager.Config.GetFloat(_remoteConfigTimeStunAvailableName);
-        EnemyInGameSo.TimeInvulnerable = RemoteConfigManager.Config.GetFloat(_remoteConfigTimeStunInvulnerableName);
-        EnemyInGameSo.PercentageDamageReduction =
-            RemoteConfigManager.Config.GetFloat(_remoteConfigBlockPercentageDamageReduction);
         EnemyInGameSo.AngleBlock = RemoteConfigManager.Config.GetFloat(_remoteConfigAngleBlock);
+        EnemyInGameSo.AngleStun = RemoteConfigManager.Config.GetFloat(_remoteConfigAngleStun);
         EnemyInGameSo.PercentageDamageReductionBoostChimist =
             RemoteConfigManager.Config.GetFloat(_remoteConfigPercentageDamageReductionBoostChimist);
     }
