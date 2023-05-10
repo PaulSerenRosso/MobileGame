@@ -25,6 +25,7 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     [SerializeField] private string _remoteConfigPercentageDamageReductionBoostChimist;
     [SerializeField] private ParticleSystem _ultimateParticle;
     [SerializeField] private GameObject _blockParticle;
+    [SerializeField] private GameObject[] _particleToReset;
     [SerializeField] private SkinnedMeshRenderer[] _skinnedMeshRenderers;
     [SerializeField] private int _timeShaderActivate = 500;
 
@@ -106,7 +107,16 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
         CurrentMobilityState = EnemyEnums.EnemyMobilityState.INVULNERABLE;
         CurrentBlockingState = EnemyEnums.EnemyBlockingState.VULNERABLE;
         ResetShaderColor();
+        ResetParticles();
         _hypeService.ResetHypeEnemy();
+    }
+
+    private void ResetParticles()
+    {
+        foreach (var particle in _particleToReset)
+        {
+            particle.SetActive(false);
+        }
     }
 
     public void StopTree(Action callback)
