@@ -7,29 +7,45 @@ namespace Service.Fight
         private EnvironmentSO[] _environmentSOs;
         private EnemyGlobalSO[] _enemyGlobalSOs;
         private Fight[] _fights = new Fight[3];
-        private bool _isTournamentSet;
+        private TournamentStep _playerCurrentStep;
+        private bool _isSet;
 
-        public void SetupTournament(EnvironmentSO[] environmentSOs, EnemyGlobalSO[] enemyGlobalSOs)
+        public void Setup(EnvironmentSO[] environmentSOs, EnemyGlobalSO[] enemyGlobalSOs)
         {
             _environmentSOs = environmentSOs;
             _enemyGlobalSOs = enemyGlobalSOs;
             SetTournament();
         }
 
-        public bool GetStateTournament()
+        public void SetPlayerCurrentFight(TournamentStep tournamentStep)
         {
-            bool isFinish = true;
+            _playerCurrentStep = tournamentStep;
+        }
+
+        public bool CompareState(FightState stateToCompare)
+        {
+            bool isFinish = false;
             foreach (var fight in _fights)
             {
-                if (fight._fightState == FightState.DEFEAT) isFinish = false;
+                if (fight.FightState == stateToCompare) isFinish = true;
             }
 
             return isFinish;
         }
 
-        public Fight GetCurrentFight()
+        public bool GetSet()
         {
-            return _fights.FirstOrDefault(fight => fight._fightState == FightState.DEFEAT);
+            return _isSet;
+        }
+
+        public Fight GetFightStep(TournamentStep tournamentStep)
+        {
+            return _fights.First(fight => fight.TournamentStep == tournamentStep);
+        }
+
+        public Fight GetCurrentFightPlayer()
+        {
+            return _fights.First(fight => fight.TournamentStep == _playerCurrentStep);
         }
 
         public Fight[] GetFights()
@@ -39,24 +55,25 @@ namespace Service.Fight
 
         private void SetTournament()
         {
-            if (!_isTournamentSet)
+            if (!_isSet)
             {
-                Fight quarterFight = new Fight(TournamentState.QUARTER, _environmentSOs[0], _enemyGlobalSOs[0],
-                    FightState.DEFEAT);
+                _playerCurrentStep = TournamentStep.QUARTER; 
+                Fight quarterFight = new Fight(TournamentStep.QUARTER, _environmentSOs[0], _enemyGlobalSOs[0],
+                    FightState.WAITING);
                 _fights[0] = quarterFight;
-                Fight demiFight = new Fight(TournamentState.DEMI, _environmentSOs[1], _enemyGlobalSOs[1],
-                    FightState.DEFEAT);
+                Fight demiFight = new Fight(TournamentStep.DEMI, _environmentSOs[1], _enemyGlobalSOs[1],
+                    FightState.WAITING);
                 _fights[1] = demiFight;
-                Fight finalFight = new Fight(TournamentState.FINAL, _environmentSOs[0], _enemyGlobalSOs[2],
-                    FightState.DEFEAT);
+                Fight finalFight = new Fight(TournamentStep.FINAL, _environmentSOs[0], _enemyGlobalSOs[2],
+                    FightState.WAITING);
                 _fights[2] = finalFight;
-                _isTournamentSet = true;
+                _isSet = true;
             }
         }
 
         public void ResetTournament()
         {
-            _isTournamentSet = false;
+            _isSet = false;
             SetTournament();
         }
     }

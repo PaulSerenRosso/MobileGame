@@ -44,27 +44,11 @@ namespace Service.Fight
         private CinematicFightManager _cinematicFightManager;
         private bool _isPlayerWon;
         private bool _isDebugFight;
-        private int _numberOfMatchsBeforePub = 3;
         private GridSO _gridSo;
 
         private string _enemyAddressableName;
         private string _environmentAddressableName;
 
-        public void DecreasePub()
-        {
-            _numberOfMatchsBeforePub -= 1;
-        }
-
-        public void ResetPub()
-        {
-            _numberOfMatchsBeforePub = 1;
-        }
-
-        public int GetPub()
-        {
-            return _numberOfMatchsBeforePub;
-        }
-        
         private void ActivatePause(Action callback)
         {
             _playerController.LockController();
@@ -251,11 +235,22 @@ namespace Service.Fight
         {
             if (!_isDebugFight)
             {
+                Fight currentFight = _tournamentService.GetCurrentFightPlayer();
                 if (_isPlayerWon)
                 {
-                    Fight currentFight = _tournamentService.GetCurrentFight();
-                    currentFight._fightState = FightState.VICTORY;
+                    currentFight.FightState = FightState.VICTORY;
+                    switch (currentFight.TournamentStep)
+                    {
+                        case TournamentStep.QUARTER:
+                            _tournamentService.SetPlayerCurrentFight(TournamentStep.DEMI);
+                            break;
+                        case TournamentStep.DEMI: 
+                            _tournamentService.SetPlayerCurrentFight(TournamentStep.FINAL);
+                            break;
+                    }
+                    
                 }
+                else currentFight.FightState = FightState.DEFEAT;
             }
             _playerRoundCount = 0;
             _enemyRoundCount = 0;
