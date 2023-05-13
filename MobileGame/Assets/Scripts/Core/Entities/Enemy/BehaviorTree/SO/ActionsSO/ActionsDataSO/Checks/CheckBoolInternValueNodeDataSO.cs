@@ -8,6 +8,8 @@ namespace BehaviorTree.SO.Actions
         fileName = "new Tree_CH_BoolInternValue_Spe_Data")]
     public class CheckBoolInternValueNodeDataSO : ActionNodeDataSO
     {
+        public bool ValueToCompare;
+        
         protected override void SetDependencyValues()
         {
             
