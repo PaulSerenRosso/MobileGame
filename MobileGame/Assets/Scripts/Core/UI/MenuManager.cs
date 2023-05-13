@@ -110,16 +110,29 @@ namespace Service.UI
         public void StartFight()
         {
             _playMatchButton.interactable = false;
-            _gameService.LoadGameScene(_nextEnvironmentAddressableName, _nextEnemyAddressableName, true);
+            _gameService.LoadGameScene(_nextEnvironmentAddressableName, _nextEnemyAddressableName, true, false);
+        }
+
+        public void StartFightTutorial()
+        {
+            _playMatchButton.interactable = false;
+            _gameService.LoadGameScene("Coliseum", "ArnoldiosTutorialPrefab", true, true);
         }
 
         public void StartTournament()
         {
-            if (_actualTournament != 0)
+            if (_actualTournament == 0)
+            {
+                StartFightTutorial();
+                return;
+            }
+
+            if (_actualTournament != 1)
             {
                 _unlockTournament.gameObject.SetActive(true);
                 return;
             }
+            
             _playTournamentButton.interactable = false;
             _tournamentCanvas.SetActive(false);
             _topCanvas.gameObject.SetActive(false);
@@ -147,8 +160,7 @@ namespace Service.UI
                 for (int i = _actualTournament - 1; i >= 0; i--)
                 {
                     _tournaments[i].GetComponent<RectTransform>()
-                        .DOAnchorPos(new Vector2(1920 * (i - _actualTournament), 0), 2f)
-                        .OnComplete(() => _tournaments[i].SetActive(false));
+                        .DOAnchorPos(new Vector2(1920 * (i - _actualTournament), 0), 2f);
                 }
 
                 _tournaments[_actualTournament].SetActive(true);
@@ -156,8 +168,7 @@ namespace Service.UI
                 for (int i = _actualTournament + 1; i < _tournaments.Length; i++)
                 {
                     _tournaments[i].GetComponent<RectTransform>()
-                        .DOAnchorPos(new Vector2(1920 * (i - _actualTournament), 0), 2f)
-                        .OnComplete(() => _tournaments[i].SetActive(false));
+                        .DOAnchorPos(new Vector2(1920 * (i - _actualTournament), 0), 2f);
                 }
             }
         }
@@ -179,8 +190,7 @@ namespace Service.UI
                 for (int i = _actualTournament - 1; i >= 0; i--)
                 {
                     _tournaments[i].GetComponent<RectTransform>()
-                        .DOAnchorPos(new Vector2(1920 * (i - _actualTournament), 0), 1f)
-                        .OnComplete(() => _tournaments[i].SetActive(false));
+                        .DOAnchorPos(new Vector2(1920 * (i - _actualTournament), 0), 1f);
                 }
 
                 _tournaments[_actualTournament].SetActive(true);
@@ -188,8 +198,7 @@ namespace Service.UI
                 for (int i = _actualTournament + 1; i < _tournaments.Length; i++)
                 {
                     _tournaments[i].GetComponent<RectTransform>()
-                        .DOAnchorPos(new Vector2(1920 * (i - _actualTournament), 0), 1f)
-                        .OnComplete(() => _tournaments[i].SetActive(false));
+                        .DOAnchorPos(new Vector2(1920 * (i - _actualTournament), 0), 1f);
                 }
             }
         }

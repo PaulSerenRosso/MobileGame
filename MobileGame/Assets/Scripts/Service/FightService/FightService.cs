@@ -17,9 +17,13 @@ namespace Service.Fight
     public class FightService : IFightService
     {
         public event Action<int> InitiateRoundEvent;
+
         public event Action EndInitiateRoundEvent;
+
         public event Action ActivatePauseEvent;
+
         public event Action DeactivatePauseEvent;
+
         public event Action<bool> EndFightEvent;
 
         [DependsOnService] private IUICanvasSwitchableService _canvasService;
@@ -30,12 +34,12 @@ namespace Service.Fight
         [DependsOnService] private IGameService _gameService;
         [DependsOnService] private ITournamentService _tournamentService;
         [DependsOnService] private IItemsService _itemsService;
-        
+
         private const int _victoryRoundCount = 2;
+        
         private CameraController _cameraController;
         private EnemyManager _enemyManager;
         private GridManager _gridManager;
-
         private PlayerController _playerController;
         private int _enemyRoundCount;
         private int _playerRoundCount;
@@ -44,30 +48,60 @@ namespace Service.Fight
         private CinematicFightManager _cinematicFightManager;
         private bool _isPlayerWon;
         private bool _isDebugFight;
+        private bool _isTutorialFight;
         private GridSO _gridSo;
-
         private string _enemyAddressableName;
         private string _environmentAddressableName;
 
-        private void ActivatePause(Action callback)
+        public bool GetFightTutorial()
+        {
+            return _isTutorialFight;
+        }
+
+        public void ActivatePause(Action callback)
         {
             _playerController.LockController();
             _enemyManager.StopTree(callback);
             ActivatePauseEvent?.Invoke();
         }
 
-        private void DeactivatePause()
+        public void DeactivatePause()
         {
             _playerController.UnlockController();
+            _enemyManager.ReplayTree();
             DeactivatePauseEvent?.Invoke();
         }
 
-        public void StartFight(string environmentAddressableName, string enemyAddressableName, bool isDebugFight)
+        public void ActivatePausePlayer()
         {
+            _playerController.LockController();
+        }
+
+        public void DeactivatePausePlayer()
+        {
+            _playerController.UnlockController();
+        }
+
+        public void StartFight(string environmentAddressableName, string enemyAddressableName, bool isDebugFight, bool isTutorialFight)
+        {
+            _isTutorialFight = isTutorialFight;
+            if (_isTutorialFight)
+            {
+                _hypeService.SetStartHypeEnemy(_gameService.GlobalSettingsSO.StartHypeEnemyTutorial);
+                _hypeService.SetStartHypePlayer(_gameService.GlobalSettingsSO.StartHypePlayerTutorial);
+                EndFightEvent += QuitFightTutorial;
+            }
+            else
+            {
+                _hypeService.SetStartHypeEnemy(_gameService.GlobalSettingsSO.StartHypeEnemy);
+                _hypeService.SetStartHypePlayer(_gameService.GlobalSettingsSO.StartHypePlayer);
+            }
+
             _hypeService.EnabledService();
             _enemyAddressableName = enemyAddressableName;
             _environmentAddressableName = environmentAddressableName;
             _isDebugFight = isDebugFight;
+            if (_isTutorialFight) _playerRoundCount = 1;
             _hypeService.EnableHypeServiceEvent += GenerateFight;
             _canvasService.InitCanvasEvent += LoadCinematicFightManager;
         }
@@ -122,7 +156,7 @@ namespace Service.Fight
 
         private void EndFight()
         {
-            EndFightEvent?.Invoke(_isPlayerWon);
+            EndFightEvent.Invoke(_isPlayerWon);
         }
 
         #region Generate Fight
@@ -174,7 +208,7 @@ namespace Service.Fight
             _playerController.SetupPlayer(_inputService, _tickeableService, _gridManager,
                 _gridSo, _enemyManager, _hypeService);
             _enemyManager.Setup(_playerController.transform, _tickeableService, _gridManager, _poolService,
-                _hypeService);
+                _hypeService, _canvasService);
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Camera", GenerateCamera);
         }
 
@@ -221,13 +255,13 @@ namespace Service.Fight
 
         private void StartInitRound()
         {
-            InitiateRoundEvent?.Invoke(_enemyRoundCount + _playerRoundCount);
+            if (_isTutorialFight) InitiateRoundEvent?.Invoke(-1); 
+            else InitiateRoundEvent?.Invoke(_enemyRoundCount + _playerRoundCount);
         }
 
         private void EndInitRound()
         {
             DeactivatePause();
-            _enemyManager.ReplayTree();
             EndInitiateRoundEvent?.Invoke();
         }
 
@@ -265,6 +299,11 @@ namespace Service.Fight
             _hypeService.DisabledService();
             _playerController.UnlinkPlayerController();
             _gameService.LoadMainMenuScene();
+        }
+
+        public void QuitFightTutorial(bool value)
+        {
+            QuitFight();
         }
     }
 }

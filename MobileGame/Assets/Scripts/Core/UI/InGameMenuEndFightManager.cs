@@ -20,7 +20,7 @@ namespace Service.UI
         {
             _fightService = fightService; 
             endFightPanel.SetActive(false);
-            _fightService.EndFightEvent += ActivateEndFightPanel;
+            if (!fightService.GetFightTutorial()) _fightService.EndFightEvent += ActivateEndFightPanel;
         }
 
         private void ActivateEndFightPanel(bool isPlayerWin)

@@ -17,7 +17,7 @@ namespace Service.UI
         private void ActivateChangeRound(int roundCount)
         {
             _roundTitle.gameObject.SetActive(true);
-            _roundTitle.text = $"Round {roundCount + 1}";
+            _roundTitle.text = roundCount == -1 ? "Start training" : $"Round {roundCount + 1}";
         }
 
         private void DeactivateChangeRound()

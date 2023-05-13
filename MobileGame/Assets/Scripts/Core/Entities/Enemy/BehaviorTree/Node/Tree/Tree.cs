@@ -11,6 +11,7 @@ using Environment.MoveGrid;
 using Player;
 using Service;
 using Service.Hype;
+using Service.UI;
 using UnityEngine;
 using Object = System.Object;
 
@@ -27,9 +28,9 @@ namespace BehaviorTree.Trees
         private NodeValuesSharer _nodeValuesSharer = new();
 
         public void Setup(Transform playerTransform, ITickeableService tickeableService,
-            GridManager gridManager, IPoolService poolService, IHypeService hypeService)
+            GridManager gridManager, IPoolService poolService, IHypeService hypeService, IUICanvasSwitchableService uiCanvasSwitchableService)
         {
-            _nodeValuesInitializer.Setup(playerTransform, tickeableService, gridManager, poolService, hypeService);
+            _nodeValuesInitializer.Setup(playerTransform, tickeableService, gridManager, poolService, hypeService, uiCanvasSwitchableService);
             _root = Node.CreateNodeSO(_rootSO);
             _root.Tree = this;
             switch (_rootSO)
