@@ -21,7 +21,7 @@ namespace BehaviorTree.Nodes.Actions
         public override void Evaluate()
         {
             base.Evaluate();
-            State = (bool)Sharer.InternValues[_so.InternValues[0].HashCode]
+            State = (bool)Sharer.InternValues[_so.InternValues[0].HashCode] == _data.ValueToCompare
                 ? BehaviorTreeEnums.NodeState.SUCCESS
                 : BehaviorTreeEnums.NodeState.FAILURE;
             ReturnedEvent?.Invoke();

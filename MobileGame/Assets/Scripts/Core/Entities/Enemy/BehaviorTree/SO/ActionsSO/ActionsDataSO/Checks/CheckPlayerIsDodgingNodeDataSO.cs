@@ -4,12 +4,9 @@ using UnityEngine;
 
 namespace BehaviorTree.SO.Actions
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Data/Checks/PlayerIfInDataSO",
-        fileName = "new Tree_CH_PlayerIfIn_Spe_Data")]
-    public class CheckPlayerIfInNodeDataSO : ActionNodeDataSO
+    [CreateAssetMenu(menuName = "BehaviorTree/Data/Checks/PlayerIsDodgingDataSO", fileName = "new Tree_CH_PlayerIsDodging_Spe_Data")]
+    public class CheckPlayerIsDodgingNodeDataSO : ActionNodeDataSO
     {
-        public bool isCurrentOrLastMovePoint;
-
         protected override void SetDependencyValues()
         {
             ExternValues = new[] { BehaviorTreeEnums.TreeExternValues.PlayerHandlerMovement };
@@ -17,7 +14,7 @@ namespace BehaviorTree.SO.Actions
 
         public override Type GetTypeNode()
         {
-            return typeof(CheckPlayerIfInNode);
+            return typeof(CheckPlayerIsDodgingNode);
         }
     }
 }

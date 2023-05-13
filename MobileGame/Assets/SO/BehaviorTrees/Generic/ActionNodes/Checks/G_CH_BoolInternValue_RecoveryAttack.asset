@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d7e936581be413683fb56b5b31646e8, type: 3}
+  m_Name: G_CH_BoolInternValue_RecoveryAttack
+  m_EditorClassIdentifier: 
+  IsDuplicable: 1
+  Comment: "N\u0153ud qui permet de v\xE9rifier la valeur boolean d'une intern value"
+  _internValuesCount: 1
+  Data: {fileID: 11400000, guid: fdee83ab3069c56469d9175caa422705, type: 2}
+  InternValues:
+  - Key: CheckDodge
+    HashCode: -1197520457
+    Type: 5
+    PropertyType: 0
+    Comment: Boolean(bool) to check in intern value

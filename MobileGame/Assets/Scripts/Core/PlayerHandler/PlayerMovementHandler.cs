@@ -15,13 +15,18 @@ namespace Player.Handler
         [SerializeField] private List<SwipeSO> _allMovementSwipesSO;
         [SerializeField] private AttackPlayerAction attackPlayerAction;
         [SerializeField] private TauntPlayerAction tauntPlayerAction;
-        [SerializeField] private TickTimer _recoveryTimer;
         [SerializeField] private MovementPlayerAction movementPlayerAction;
         [SerializeField] private float _cooldownTimeBetweenTwoMovement;
+        [SerializeField] private float _dodgeTime;
+        
+        private TickTimer _recoveryTimer;
+        private TickTimer _dodgeTimer;
         private IInputService _inputService;
         private bool _inCooldown;
+        private bool _isDodging;
         private GridManager _gridManager;
         private Swipe _currentSwipe;
+        private int _lastMovePointIndex;
         private int _currentMovePointIndex;
         private int _maxDestinationIndex;
         private MovePoint _currentMovePoint;
@@ -31,6 +36,8 @@ namespace Player.Handler
         public event Action<Vector2> MakeActionEvent;
 
         public float GetRecoveryMovementTime() => _cooldownTimeBetweenTwoMovement;
+        
+        public bool GetIsDodging() => _isDodging;
 
         public void TryMakeMovementAction(Swipe swipe)
         {
@@ -97,6 +104,11 @@ namespace Player.Handler
             return _currentMovePointIndex;
         }
 
+        public int GetLastIndexMovePoint()
+        {
+            return _lastMovePointIndex;
+        }
+
         private bool CheckIsOutOfRange()
         {
             if (_gridManager.CheckIfMovePointInIsCircles(_currentMovePointIndex))
@@ -159,9 +171,23 @@ namespace Player.Handler
             _recoveryTimer = new TickTimer(_cooldownTimeBetweenTwoMovement, (TickManager)arguments[3]);
             _recoveryTimer.TickEvent += FinishCooldown;
             _recoveryTimer.InitiateEvent += LaunchCooldownBetweenTwoMovement;
+            _dodgeTimer = new TickTimer(_dodgeTime, (TickManager)arguments[3]);
+            _dodgeTimer.TickEvent += FinishDodging;
+            _dodgeTimer.InitiateEvent += LaunchDodge;
+            movementPlayerAction.MakeActionEvent += _dodgeTimer.Initiate;
             movementPlayerAction.ReachDestinationEvent += _recoveryTimer.Initiate;
             FinishRecoveryMovementEvent += CheckActionsBlockedRecord;
             GetAction().SetupAction(_currentMovePoint.MeshRenderer.transform.position);
+        }
+
+        private void LaunchDodge()
+        {
+            _isDodging = true;
+        }
+
+        private void FinishDodging()
+        {
+            _isDodging = false;
         }
 
         public override void Unlink()
@@ -206,6 +232,7 @@ namespace Player.Handler
         {
             _currentMovePoint = _gridManager.MovePoints[_maxDestinationIndex];
             movementPlayerAction.Destination = _currentMovePoint.MeshRenderer.transform.position;
+            _lastMovePointIndex = _currentMovePointIndex;
             _currentMovePointIndex = _maxDestinationIndex;
             MakeActionEvent?.Invoke(_currentSwipe.SwipeSO.DirectionV2);
         }

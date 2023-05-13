@@ -4,10 +4,10 @@ using Player.Handler;
 
 namespace BehaviorTree.Nodes.Actions
 {
-    public class CheckPlayerIfInNode : ActionNode
+    public class CheckPlayerIsDodgingNode: ActionNode
     {
-        private CheckPlayerIfInNodeSO _so;
-        private CheckPlayerIfInNodeDataSO _data;
+        private CheckPlayerIsDodgingNodeSO _so;
+        private CheckPlayerIsDodgingNodeDataSO _data;
         private PlayerMovementHandler _playerMovementHandler;
 
         public override NodeSO GetNodeSO()
@@ -17,26 +17,16 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
-            _so = (CheckPlayerIfInNodeSO)nodeSO;
-            _data = (CheckPlayerIfInNodeDataSO)_so.Data;
+            _so = (CheckPlayerIsDodgingNodeSO)nodeSO;
+            _data = (CheckPlayerIsDodgingNodeDataSO)_so.Data;
         }
 
         public override void Evaluate()
         {
             base.Evaluate();
-            int attackIndex = (int)Sharer.InternValues[_so.InternValues[0].HashCode];
-            if (_data.isCurrentOrLastMovePoint)
-            {
-                State = _playerMovementHandler.GetCurrentIndexMovePoint() == attackIndex
-                    ? BehaviorTreeEnums.NodeState.SUCCESS
-                    : BehaviorTreeEnums.NodeState.FAILURE;
-            }
-            else
-            {
-                State = _playerMovementHandler.GetLastIndexMovePoint() == attackIndex
-                    ? BehaviorTreeEnums.NodeState.SUCCESS
-                    : BehaviorTreeEnums.NodeState.FAILURE;
-            }
+            State = _playerMovementHandler.GetIsDodging()
+                ? BehaviorTreeEnums.NodeState.SUCCESS
+                : BehaviorTreeEnums.NodeState.FAILURE;
             ReturnedEvent?.Invoke();
         }
 

@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76eac7996b8251749b7df2d6f366dc46, type: 3}
-  m_Name: G_D_Returner_AttackSpeMississippiJack
+  m_Script: {fileID: 11500000, guid: 981e60c905c84dffa7d8c61f8ae631fd, type: 3}
+  m_Name: G_CH_PlayerIsDodging_DodgeAttack
   m_EditorClassIdentifier: 
   IsDuplicable: 1
-  Comment: "Retourne toujours la m\xEAme valeur qui est renseign\xE9 sur le n\u0153ud"
-  Child: {fileID: 11400000, guid: 017aa39cc8a08ca4aa728eb13c2e8f07, type: 2}
-  ReturnState: 0
+  Comment: "N\u0153ud qui retourne si le joueur est en train d'esquiver"
+  _internValuesCount: 0
+  Data: {fileID: 11400000, guid: 5e25b6b784646074db4b6443c3902e02, type: 2}
+  InternValues: []
