@@ -4,6 +4,7 @@ using Player;
 using Player.Handler;
 using Service;
 using Service.Hype;
+using Service.UI;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -16,7 +17,8 @@ namespace BehaviorTree.Trees
         public ExternValueObject[] ExternValueObjects;
 
         public void Setup(Transform playerTransform, ITickeableService tickeableService,
-            GridManager gridManager, IPoolService poolService, IHypeService hypeService)
+            GridManager gridManager, IPoolService poolService, IHypeService hypeService,
+            IUICanvasSwitchableService uiCanvasSwitchableService)
         {
             for (int i = 0; i < ExternValueObjects.Length; i++)
             {
@@ -62,6 +64,11 @@ namespace BehaviorTree.Trees
                         ExternValueObjects[i].Obj = playerTransform.GetComponent<PlayerController>();
                         break;
                     }
+                    case BehaviorTreeEnums.TreeExternValues.UICanvasService:
+                    {
+                        ExternValueObjects[i].Obj = uiCanvasSwitchableService;
+                        break;
+                    }
                 }
             }
         }
@@ -84,7 +91,7 @@ namespace BehaviorTree.Trees
                 if (ExternValueObjects[i].Type == type)
                     return ExternValueObjects[i].Obj;
             }
-            
+
             throw new NullReferenceException();
         }
     }

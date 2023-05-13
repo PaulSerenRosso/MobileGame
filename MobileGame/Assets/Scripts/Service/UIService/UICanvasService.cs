@@ -19,11 +19,22 @@ namespace Service.UI
         [DependsOnService] private IHypeService _hypeService;
         [DependsOnService] private IItemsService _itemsService;
         [DependsOnService] private ICurrencyService _currencyService;
+        
         private GameObject _mainMenu;
+        private GameObject _inGameMenu;
+        private InGameMenuTutorialManager _inGameTutorialMenu;
 
         public void LoadMainMenu()
         {
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("MainMenu", GenerateMainMenu);
+        }
+
+        private void GenerateMainMenu(GameObject gameObject)
+        {
+            _mainMenu = Object.Instantiate(gameObject);
+            _mainMenu.GetComponent<MenuManager>().SetupMenu(_gameService, _tournamentService, _fightService,
+                _currencyService, _itemsService);
+            Release(gameObject);
         }
 
         public void LoadInGameMenu()
@@ -31,8 +42,34 @@ namespace Service.UI
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("InGameMenu", GenerateInGameMenu);
         }
 
-        public void LoadPopUpCanvas()
+        public void OpenFightTutoPanel()
         {
+            _inGameTutorialMenu.OpenFightPopup();
+        }
+
+        public void OpenMoveTutoPanel()
+        {
+            _inGameTutorialMenu.OpenMovePopup();
+        }
+
+        public void OpenTauntTutoPanel()
+        {
+            _inGameTutorialMenu.OpenTauntPopup();
+        }
+
+        public void OpenUltimateTutoPanel()
+        {
+            _inGameTutorialMenu.OpenUltimatePopup();
+        }
+
+        private void GenerateInGameMenu(GameObject gameObject)
+        {
+            _inGameMenu = Object.Instantiate(gameObject);
+            var inGameMenu = _inGameMenu.GetComponent<InGameMenuManager>();
+            inGameMenu.SetupMenu(_fightService, _hypeService, _tournamentService, _currencyService);
+            _inGameTutorialMenu = inGameMenu.InGameMenuTutorialManager;
+            InitCanvasEvent?.Invoke();
+            Release(gameObject);
         }
 
         public event Action InitCanvasEvent;
@@ -46,22 +83,5 @@ namespace Service.UI
         }
 
         public bool GetIsActiveService { get; }
-
-        private void GenerateMainMenu(GameObject gameObject)
-        {
-            _mainMenu = Object.Instantiate(gameObject);
-            _mainMenu.GetComponent<MenuManager>().SetupMenu(_gameService, _tournamentService, _fightService,
-                _currencyService, _itemsService);
-            Release(gameObject);
-        }
-
-        private void GenerateInGameMenu(GameObject gameObject)
-        {
-            var inGameMenu = Object.Instantiate(gameObject);
-            inGameMenu.GetComponent<InGameMenuManager>()
-                .SetupMenu(_fightService, _hypeService, _tournamentService, _currencyService);
-            InitCanvasEvent?.Invoke();
-            Release(gameObject);
-        }
     }
 }

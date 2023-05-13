@@ -16,6 +16,9 @@ namespace Service.Hype
         private float _decreasePlayerHypeTimer;
         private bool _inCooldown;
 
+        private float _startHypeValuePlayer;
+        private float _startHypeValueEnemy;
+
         public event Action EnableHypeServiceEvent;
 
         public void IncreaseHypePlayer(float amount)
@@ -127,19 +130,28 @@ namespace Service.Hype
 
         public void ResetHypePlayer()
         {
-            SetHypePlayer(_hypeServiceSo.PlayerHypeSO.StartValue);
+            SetHypePlayer(_startHypeValuePlayer);
             _hypePlayer.IsInUltimateArea = false;
-            _hypePlayer.LoseUltimateEvent?.Invoke(_hypeServiceSo.PlayerHypeSO.StartValue);
+            _hypePlayer.LoseUltimateEvent?.Invoke(_startHypeValuePlayer);
             
         }
 
         public void ResetHypeEnemy()
         {
-            SetHypeEnemy(_hypeServiceSo.EnemyHypeSO.StartValue);
+            SetHypeEnemy(_startHypeValueEnemy);
             _hypeEnemy.IsInUltimateArea = false;
-            _hypeEnemy.LoseUltimateEvent?.Invoke(_hypeServiceSo.EnemyHypeSO.StartValue);
+            _hypeEnemy.LoseUltimateEvent?.Invoke(_startHypeValueEnemy);
         }
 
+        public void SetStartHypePlayer(float value)
+        {
+            _startHypeValuePlayer = value;
+        }
+
+        public void SetStartHypeEnemy(float value)
+        {
+            _startHypeValueEnemy = value;
+        }
 
 
         private void SetHype(float value, Hype hype)
@@ -263,14 +275,11 @@ namespace Service.Hype
         public event Action<float> ReachMaximumHypeEvent;
         public event Action<float> ReachMinimumHypeEvent;
 
-
         public void EnabledService()
         {
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<HypeServiceSO>("HypeSO", SetHypeSO);
         }
-
-    
-
+        
         private void SetHypeSO(HypeServiceSO hypeServiceSo)
         {
             _hypeServiceSo = hypeServiceSo;
@@ -316,9 +325,7 @@ namespace Service.Hype
         {
             _hypeServiceSo.MaxHype = RemoteConfigManager.Config.GetFloat("MaxHype");
             _hypeServiceSo.AmountPlayerHypeDecrease = RemoteConfigManager.Config.GetFloat("AmountPlayerHypeDecrease");
-            _hypeServiceSo.EnemyHypeSO.StartValue = RemoteConfigManager.Config.GetFloat("EnemyHypeStartValue");
             _hypeServiceSo.EnemyHypeSO.UltimateValue = RemoteConfigManager.Config.GetFloat("EnemyHypeUltimateValue");
-            _hypeServiceSo.PlayerHypeSO.StartValue = RemoteConfigManager.Config.GetFloat("PlayerHypeStartValue");
             _hypeServiceSo.PlayerHypeSO.UltimateValue = RemoteConfigManager.Config.GetFloat("PlayerHypeUltimateValue");
             _hypeServiceSo.TimeBeforePlayerHypeDecrease =
                 RemoteConfigManager.Config.GetFloat("TimeBeforePlayerHypeDecrease");

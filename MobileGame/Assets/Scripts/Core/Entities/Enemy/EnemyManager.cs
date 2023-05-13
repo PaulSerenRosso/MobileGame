@@ -6,6 +6,7 @@ using HelperPSR.MonoLoopFunctions;
 using HelperPSR.RemoteConfigs;
 using Service;
 using Service.Hype;
+using Service.UI;
 using UnityEngine;
 using Tree = BehaviorTree.Trees;
 
@@ -58,10 +59,10 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     }
 
     public void Setup(Transform playerTransform, ITickeableService tickeableService,
-        GridManager gridManager, IPoolService poolService, IHypeService hypeService)
+        GridManager gridManager, IPoolService poolService, IHypeService hypeService, IUICanvasSwitchableService uiCanvasSwitchableService)
     {
         _hypeService = hypeService;
-        _tree.Setup(playerTransform, tickeableService, gridManager, poolService, hypeService);
+        _tree.Setup(playerTransform, tickeableService, gridManager, poolService, hypeService, uiCanvasSwitchableService);
         _timerInvulnerable = 0;
         _hypeService.GetEnemyGainUltimateEvent += ActivateFXUltimate;
         _hypeService.GetEnemyLoseUltimateEvent += DeactivateFXUltimate;
@@ -155,8 +156,6 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
         float damage = amount;
         if (CurrentBlockingState == EnemyEnums.EnemyBlockingState.BLOCKING)
         {
-            _blockParticle.gameObject.transform.position = (1 * (posToCheck - transform.position).normalized + transform.position);
-            _blockParticle.gameObject.SetActive(true);
             Vector3 normalizedPos = (posToCheck - transform.position).normalized;
             float angle = Vector3.Angle(normalizedPos, transform.forward);
             if (angle > EnemyInGameSo.AngleBlock)
@@ -166,6 +165,8 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
                 _hypeService.DecreaseHypeEnemy(damage);
                 return true;
             }
+            _blockParticle.gameObject.transform.position = (1 * (posToCheck - transform.position).normalized + transform.position);
+            _blockParticle.gameObject.SetActive(true);
 
             return false;
         }

@@ -8,6 +8,8 @@ namespace BehaviorTree.SO.Actions
         fileName = "new Tree_CH_UltimateHype_Spe_Data")]
     public class CheckUltimateHypeNodeDataSO: ActionNodeDataSO
     {
+        public bool IsPlayerHype;
+        
         protected override void SetDependencyValues()
         {
             ExternValues = new[]

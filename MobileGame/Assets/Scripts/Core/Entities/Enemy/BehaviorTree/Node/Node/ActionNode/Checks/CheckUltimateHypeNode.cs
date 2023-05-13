@@ -24,7 +24,8 @@ namespace BehaviorTree.Nodes.Actions
         public override void Evaluate()
         {
             base.Evaluate();
-            State = _hypeService.GetUltimateAreaEnemy() ? BehaviorTreeEnums.NodeState.SUCCESS : BehaviorTreeEnums.NodeState.FAILURE;
+            if (_data.IsPlayerHype) State = _hypeService.GetUltimateAreaPlayer() ? BehaviorTreeEnums.NodeState.SUCCESS : BehaviorTreeEnums.NodeState.FAILURE;
+            else State = _hypeService.GetUltimateAreaEnemy() ? BehaviorTreeEnums.NodeState.SUCCESS : BehaviorTreeEnums.NodeState.FAILURE;
             ReturnedEvent?.Invoke();
         }
 

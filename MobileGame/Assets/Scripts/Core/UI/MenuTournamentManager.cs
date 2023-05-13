@@ -148,7 +148,7 @@ namespace Service.UI
             _playFightButton.interactable = false;
             Fight.Fight currentFight = _tournamentService.GetCurrentFightPlayer();
             _gameService.LoadGameScene(currentFight.EnvironmentSO.EnvironmentAddressableName,
-                currentFight.EnemyGlobalSO.enemyAdressableName, false);
+                currentFight.EnemyGlobalSO.enemyAdressableName, false, false);
         }
 
         public void QuitTournament()

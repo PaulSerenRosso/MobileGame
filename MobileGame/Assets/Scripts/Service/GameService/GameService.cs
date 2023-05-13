@@ -33,10 +33,10 @@ namespace Service
                 LoadGlobalSettingsSO);
         }
 
-        public void LoadGameScene(string environmentAddressableName, string enemyAddressableName, bool isDebugFight)
+        public void LoadGameScene(string environmentAddressableName, string enemyAddressableName, bool isDebugFight, bool isTutorialFight)
         {
             _sceneService.LoadScene();
-            _fightService.StartFight(environmentAddressableName, enemyAddressableName, isDebugFight);
+            _fightService.StartFight(environmentAddressableName, enemyAddressableName, isDebugFight, isTutorialFight);
         }
 
         public void LoadMainMenuScene()

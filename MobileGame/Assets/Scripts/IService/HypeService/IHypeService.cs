@@ -15,6 +15,9 @@ namespace Service.Hype
         void ResetHypePlayer();
         void ResetHypeEnemy();
 
+        void SetStartHypePlayer(float value);
+        void SetStartHypeEnemy(float value);
+
         float GetCurrentHypePlayer();
         float GetCurrentHypeEnemy();
         float GetUltimateHypeValuePlayer();

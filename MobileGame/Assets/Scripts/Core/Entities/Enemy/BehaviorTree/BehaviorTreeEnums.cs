@@ -23,7 +23,8 @@ public class BehaviorTreeEnums
         PoolService,
         HypeService,
         PlayerRenderer,
-        PlayerController
+        PlayerController,
+        UICanvasService
     }
 
     public enum HypeFunctionMode
@@ -66,5 +67,12 @@ public class BehaviorTreeEnums
         ADD,
         SUBTRACT,
         SET
+    }
+
+    public enum PopupValue
+    {
+        MOVE,
+        TAUNT,
+        ULTIMATE
     }
 }

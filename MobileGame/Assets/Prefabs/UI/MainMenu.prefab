@@ -1078,6 +1078,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6964128934802873187}
     m_Modifications:
+    - target: {fileID: 1170865030345202984, guid: ec65bf0a1643e6548bac54e70fec0587,
+        type: 3}
+      propertyPath: m_text
+      value: Beginner Tournament
+      objectReference: {fileID: 0}
     - target: {fileID: 2249624447587587164, guid: ec65bf0a1643e6548bac54e70fec0587,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1198,6 +1203,21 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 4265215112276291577}
+    - target: {fileID: 7175527281770946961, guid: ec65bf0a1643e6548bac54e70fec0587,
+        type: 3}
+      propertyPath: m_text
+      value: Advanced Tournament
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469075246664377310, guid: ec65bf0a1643e6548bac54e70fec0587,
+        type: 3}
+      propertyPath: m_text
+      value: Tutorial
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469075246664377310, guid: ec65bf0a1643e6548bac54e70fec0587,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 88
+      objectReference: {fileID: 0}
     - target: {fileID: 7829105376152096416, guid: ec65bf0a1643e6548bac54e70fec0587,
         type: 3}
       propertyPath: m_Name
@@ -1905,6 +1925,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2896239545299679601, guid: 4e0f9e51f1ccdf24286bce090f19ab5b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2896239545299679601, guid: 4e0f9e51f1ccdf24286bce090f19ab5b,
         type: 3}
