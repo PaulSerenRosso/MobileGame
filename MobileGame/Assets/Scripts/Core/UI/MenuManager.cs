@@ -44,7 +44,6 @@ namespace Service.UI
 
         private IGameService _gameService;
         private ITournamentService _tournamentService;
-        private IFightService _fightService;
         private string _nextEnvironmentAddressableName;
         private string _nextEnemyAddressableName;
 
@@ -53,14 +52,13 @@ namespace Service.UI
         {
             _gameService = gameService;
             _tournamentService = tournamentService;
-            _fightService = fightService;
             _menuTopManager.SetUp(currencyService);
             _menuInventoryManager.SetUp(itemsService);
             _menuShopManager.SetUp(itemsService);
             _tournaments[_actualTournament].SetActive(true);
             _leftArrowTournament.interactable = false;
             _homeButton.interactable = false;
-            if (_tournamentService.GetSet()) StartTournament();
+            if (_tournamentService.GetSet()) OpenTournamentUI();
 
             foreach (var enemyGlobalSo in gameService.GlobalSettingsSO.AllEnemyGlobalSO)
             {
@@ -110,13 +108,16 @@ namespace Service.UI
         public void StartFight()
         {
             _playMatchButton.interactable = false;
+            if (_nextEnemyAddressableName == null) _nextEnemyAddressableName = _gameService.GlobalSettingsSO.AllEnemyGlobalSO[0].enemyAdressableName;
+            if (_nextEnvironmentAddressableName == null) _nextEnvironmentAddressableName = _gameService.GlobalSettingsSO.AllEnvironmentsSO[0].EnvironmentAddressableName;
             _gameService.LoadGameScene(_nextEnvironmentAddressableName, _nextEnemyAddressableName, true, false);
         }
 
         public void StartFightTutorial()
         {
             _playMatchButton.interactable = false;
-            _gameService.LoadGameScene("Coliseum", "ArnoldiosTutorialPrefab", true, true);
+            Debug.Log("StartTutorial");
+            _gameService.LoadGameScene("Coliseum", "ArnoldiosTutorialPrefab", false, true);
         }
 
         public void StartTournament()
@@ -133,6 +134,11 @@ namespace Service.UI
                 return;
             }
             
+            OpenTournamentUI();
+        }
+
+        private void OpenTournamentUI()
+        {
             _playTournamentButton.interactable = false;
             _tournamentCanvas.SetActive(false);
             _topCanvas.gameObject.SetActive(false);

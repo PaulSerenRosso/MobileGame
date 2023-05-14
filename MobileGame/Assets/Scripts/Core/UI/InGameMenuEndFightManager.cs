@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Service.Currency;
 using Service.Fight;
 using TMPro;
@@ -10,12 +8,14 @@ namespace Service.UI
 {
     public class InGameMenuEndFightManager : MonoBehaviour
     {
-        private IFightService _fightService;
         [SerializeField] private GameObject endFightPanel;
         [SerializeField] private TextMeshProUGUI endFightTitle;
         [SerializeField] private string endFightTitlePlayerVictoryName;
         [SerializeField] private string endFightTitlePlayerLoseName;
         [SerializeField] private Button backToMainMenuButton;
+        
+        private IFightService _fightService;
+
         public void Init(IFightService fightService, ICurrencyService currencyService, ITournamentService tournamentService)
         {
             _fightService = fightService; 

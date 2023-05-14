@@ -90,6 +90,7 @@ namespace Service.Fight
                 _hypeService.SetStartHypeEnemy(_gameService.GlobalSettingsSO.StartHypeEnemyTutorial);
                 _hypeService.SetStartHypePlayer(_gameService.GlobalSettingsSO.StartHypePlayerTutorial);
                 EndFightEvent += QuitFightTutorial;
+                _playerRoundCount = 1;
             }
             else
             {
@@ -101,7 +102,6 @@ namespace Service.Fight
             _enemyAddressableName = enemyAddressableName;
             _environmentAddressableName = environmentAddressableName;
             _isDebugFight = isDebugFight;
-            if (_isTutorialFight) _playerRoundCount = 1;
             _hypeService.EnableHypeServiceEvent += GenerateFight;
             _canvasService.InitCanvasEvent += LoadCinematicFightManager;
         }
@@ -267,7 +267,7 @@ namespace Service.Fight
 
         public void QuitFight()
         {
-            if (!_isDebugFight)
+            if (!_isDebugFight && !_isTutorialFight)
             {
                 Fight currentFight = _tournamentService.GetCurrentFightPlayer();
                 if (_isPlayerWon)
