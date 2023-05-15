@@ -208,6 +208,75 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: acc7faf6398ee4f61baa5b9debd33f9c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18cbd2148d72b433eb5222fd723dc334, type: 3}
+--- !u!1001 &892991699
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4356972328563754326, guid: a9af4d415e4efb742ada4256b5fd4db7,
+        type: 3}
+      propertyPath: m_Name
+      value: FX_ConstantShield
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239502535529908349, guid: a9af4d415e4efb742ada4256b5fd4db7,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239502535529908349, guid: a9af4d415e4efb742ada4256b5fd4db7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239502535529908349, guid: a9af4d415e4efb742ada4256b5fd4db7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239502535529908349, guid: a9af4d415e4efb742ada4256b5fd4db7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239502535529908349, guid: a9af4d415e4efb742ada4256b5fd4db7,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239502535529908349, guid: a9af4d415e4efb742ada4256b5fd4db7,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239502535529908349, guid: a9af4d415e4efb742ada4256b5fd4db7,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239502535529908349, guid: a9af4d415e4efb742ada4256b5fd4db7,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239502535529908349, guid: a9af4d415e4efb742ada4256b5fd4db7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239502535529908349, guid: a9af4d415e4efb742ada4256b5fd4db7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239502535529908349, guid: a9af4d415e4efb742ada4256b5fd4db7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a9af4d415e4efb742ada4256b5fd4db7, type: 3}
 --- !u!1001 &1219965654
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1255,15 +1324,13 @@ MonoBehaviour:
   CurrentBlockingState: 0
   EnemyInGameSo: {fileID: 11400000, guid: ebf1cb9d414e3e941bc03eb64a88ea8b, type: 2}
   _tree: {fileID: 3354438797412674938}
-  _remoteConfigTimeStunAvailableName: Chimi_TimeStunAvailable
-  _remoteConfigTimeStunInvulnerableName: Chimi_TimeStunInvulnerable
-  _remoteConfigStunPercentageHealthName: Chimi_PercentageHealthStun
-  _remoteConfigBlockPercentageDamageReduction: Chimi_PercentageDamageReductionBlock
   _remoteConfigAngleBlock: Chimi_AngleBlock
+  _remoteConfigAngleStun: 
   _remoteConfigPercentageDamageReductionBoostChimist: Chimi_PercentageDamageReductionBoost
   _ultimateParticle: {fileID: 8229145754637067984}
   _blockParticle: {fileID: 1305880678447699195, guid: db0a32e1ed8bdfc4c80257230125166d,
     type: 3}
+  _particleToReset: []
   _skinnedMeshRenderers:
   - {fileID: 2408009244513043512}
   - {fileID: 2408009244513043511}
