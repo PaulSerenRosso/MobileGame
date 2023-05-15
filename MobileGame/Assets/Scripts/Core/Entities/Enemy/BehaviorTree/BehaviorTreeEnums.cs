@@ -8,6 +8,7 @@ public class BehaviorTreeEnums
         MeshRenderer,
         EnemyManager,
         TauntFX,
+        ShieldFX,
         StunFX,
         PrevShoot,
         MuzzleShoot,

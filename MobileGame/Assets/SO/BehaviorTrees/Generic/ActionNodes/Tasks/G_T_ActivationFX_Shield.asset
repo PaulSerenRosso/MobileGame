@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd8f6293998c40feaea404d1bdf926a9, type: 3}
-  m_Name: G_T_ActivationFX_Stun_Data
+  m_Script: {fileID: 11500000, guid: 05a3a49cf9d24c5ab78d199a0359271b, type: 3}
+  m_Name: G_T_ActivationFX_Shield
   m_EditorClassIdentifier: 
   IsDuplicable: 0
-  ExternValues: 
-  EnemyValues: 07000000
-  IsColorChanged: 0
-  ParticleColor: {r: 0, g: 0, b: 0, a: 0}
-  FXEnumValues: 07000000
+  Comment: "N\u0153ud qui s'occupe d'activer des FX sur le boss"
+  _internValuesCount: 0
+  Data: {fileID: 11400000, guid: bc827534b3d4d7e46b8ff91f4ed4cf03, type: 2}
+  InternValues: []

@@ -10,7 +10,7 @@ using Service.UI;
 using UnityEngine;
 using Tree = BehaviorTree.Trees;
 
-public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHypeable
+public class EnemyManager : MonoBehaviour, IRemoteConfigurable, IHypeable
 {
     public Action CanUltimateEvent;
     public Animator Animator;
@@ -30,7 +30,6 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     [SerializeField] private SkinnedMeshRenderer[] _skinnedMeshRenderers;
     [SerializeField] private int _timeShaderActivate = 500;
 
-    private float _timerInvulnerable;
     private IHypeService _hypeService;
 
     private void Start()
@@ -43,19 +42,12 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
 
     private void OnEnable()
     {
-        UpdateManager.Register(this);
         RemoteConfigManager.RegisterRemoteConfigurable(this);
     }
 
     private void OnDisable()
     {
         RemoteConfigManager.UnRegisterRemoteConfigurable(this);
-        UpdateManager.UnRegister(this);
-    }
-
-    public void OnUpdate()
-    {
-        if (EnemyEnums.EnemyMobilityState.INVULNERABLE == CurrentMobilityState) TimerInvulnerable();
     }
 
     public void Setup(Transform playerTransform, ITickeableService tickeableService,
@@ -63,7 +55,6 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     {
         _hypeService = hypeService;
         _tree.Setup(playerTransform, tickeableService, gridManager, poolService, hypeService, uiCanvasSwitchableService);
-        _timerInvulnerable = 0;
         _hypeService.GetEnemyGainUltimateEvent += ActivateFXUltimate;
         _hypeService.GetEnemyLoseUltimateEvent += DeactivateFXUltimate;
     }
@@ -81,16 +72,6 @@ public class EnemyManager : MonoBehaviour, IUpdatable, IRemoteConfigurable, IHyp
     private void DeactivateFXUltimate(float obj)
     {
         _ultimateParticle.gameObject.SetActive(false);
-    }
-
-    private void TimerInvulnerable()
-    {
-        _timerInvulnerable += Time.deltaTime;
-        if (_timerInvulnerable >= EnemyInGameSo.TimeInvulnerable)
-        {
-            CurrentMobilityState = EnemyEnums.EnemyMobilityState.VULNERABLE;
-            _timerInvulnerable = 0;
-        }
     }
 
     public void SetRemoteConfigurableValues()
