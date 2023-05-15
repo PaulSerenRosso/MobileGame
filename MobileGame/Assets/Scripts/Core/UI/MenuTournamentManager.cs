@@ -1,8 +1,9 @@
-﻿using DG.Tweening;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DG.Tweening;
 using Service.Fight;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Service.UI
@@ -22,11 +23,13 @@ namespace Service.UI
         [SerializeField] private Image[] _imageQuarterWinners;
         [SerializeField] private Image[] _imageDemiWinners;
         [SerializeField] private Image[] _imageFinalWinners;
-
-        [FormerlySerializedAs("_quarterPlayerNames")] [SerializeField] private TextMeshProUGUI[] _playerNames;
+        
         [SerializeField] private TextMeshProUGUI _quarterName;
         [SerializeField] private TextMeshProUGUI[] _demiNames;
         [SerializeField] private TextMeshProUGUI[] _finalNames;
+
+        [SerializeField] private TextMeshProUGUI[] _quarterFakeNames;
+        [SerializeField] private TextMeshProUGUI[] _demiFakeNames;
 
         [SerializeField] private Canvas _pubCanvas;
         [SerializeField] private Canvas _winTournament;
@@ -35,6 +38,7 @@ namespace Service.UI
         private IGameService _gameService;
         private ITournamentService _tournamentService;
         private Fight.Fight[] _fights;
+        private List<string> _fakeNames;
         private MenuManager _menuManager;
         private string _enemyAddressableName;
         private string _environmentAddressableName;
@@ -45,6 +49,12 @@ namespace Service.UI
             _tournamentService = tournamentService;
             _menuManager = menuManager;
             _fights = _tournamentService.GetFights();
+            _fakeNames = _tournamentService.GetFakeNames();
+            SetTournamentNames();
+        }
+
+        private void SetTournamentNames()
+        {
             _quarterName.text = _fights[0].EnemyGlobalSO.Name;
             foreach (var demiName in _demiNames)
             {
@@ -54,6 +64,17 @@ namespace Service.UI
             foreach (var finalName in _finalNames)
             {
                 finalName.text = _fights[2].EnemyGlobalSO.Name;
+            }
+
+            for (var index = 0; index < _quarterFakeNames.Length; index++)
+            {
+                var quarterFakeName = _quarterFakeNames[index];
+                quarterFakeName.text = _fakeNames[index];
+            }
+
+            foreach (var demiFakeName in _demiFakeNames)
+            {
+                demiFakeName.text = _fakeNames.LastOrDefault();
             }
         }
 

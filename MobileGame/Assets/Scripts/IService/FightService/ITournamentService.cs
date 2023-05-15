@@ -1,12 +1,17 @@
-﻿namespace Service.Fight
+﻿using System;
+using System.Collections.Generic;
+
+namespace Service.Fight
 {
     public interface ITournamentService : IService
     {
         void Setup(EnvironmentSO[] environmentSOs, EnemyGlobalSO[] enemyGlobalSOs);
+        void SetTournament();
         void ResetTournament();
         void SetPlayerCurrentFight(TournamentStep tournamentStep);
         bool CompareState(FightState stateToCompare);
         bool GetSet();
+        List<string> GetFakeNames();
         Fight GetFightStep(TournamentStep tournamentStep);
         Fight GetCurrentFightPlayer();
         Fight[] GetFights();
