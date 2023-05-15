@@ -17,6 +17,8 @@ namespace Service
 
         [DependsOnService] private IFightService _fightService;
 
+        [DependsOnService] private ITournamentService _tournamentService;
+
         public GlobalSettingsGameSO GlobalSettingsSO
         {
             get => _globalSettingsSO;
@@ -48,6 +50,8 @@ namespace Service
         private void LoadGlobalSettingsSO(GlobalSettingsGameSO so)
         {
             _globalSettingsSO = so;
+            _tournamentService.Setup(GlobalSettingsSO.AllEnvironmentsSO,
+                GlobalSettingsSO.AllEnemyGlobalSO);
             LoadMainMenuScene();
         }
     }

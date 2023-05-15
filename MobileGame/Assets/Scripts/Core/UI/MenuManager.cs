@@ -39,17 +39,17 @@ namespace Service.UI
         [SerializeField] private GameObject[] _tournaments;
         [SerializeField] private Button _leftArrowTournament;
         [SerializeField] private Button _rightArrowTournament;
-        private int _actualTournament;
-        
+
         [SerializeField] private Canvas _unlockTournament;
 
+        private int _actualTournament;
         private IGameService _gameService;
         private ITournamentService _tournamentService;
         private string _nextEnvironmentAddressableName;
         private string _nextEnemyAddressableName;
 
         public void SetupMenu(IGameService gameService, ITournamentService tournamentService,
-            IFightService fightService, ICurrencyService currencyService, IItemsService itemsService, IShopService shopService)
+            ICurrencyService currencyService, IItemsService itemsService, IShopService shopService)
         {
             _gameService = gameService;
             _tournamentService = tournamentService;
@@ -59,7 +59,16 @@ namespace Service.UI
             _tournaments[_actualTournament].SetActive(true);
             _leftArrowTournament.interactable = false;
             _homeButton.interactable = false;
-            if (_tournamentService.GetSet()) OpenTournamentUI();
+            if (_tournamentService.GetSet())
+            {
+                _menuTournamentManager.SetupMenu(_gameService, _tournamentService, this);
+                OpenTournamentUI();
+            }
+            else
+            {
+                _tournamentService.SetTournament();
+                _menuTournamentManager.SetupMenu(_gameService, _tournamentService, this);
+            }
 
             foreach (var enemyGlobalSo in gameService.GlobalSettingsSO.AllEnemyGlobalSO)
             {
@@ -109,8 +118,11 @@ namespace Service.UI
         public void StartFight()
         {
             _playMatchButton.interactable = false;
-            if (_nextEnemyAddressableName == null) _nextEnemyAddressableName = _gameService.GlobalSettingsSO.AllEnemyGlobalSO[0].enemyAdressableName;
-            if (_nextEnvironmentAddressableName == null) _nextEnvironmentAddressableName = _gameService.GlobalSettingsSO.AllEnvironmentsSO[0].EnvironmentAddressableName;
+            if (_nextEnemyAddressableName == null)
+                _nextEnemyAddressableName = _gameService.GlobalSettingsSO.AllEnemyGlobalSO[0].enemyAdressableName;
+            if (_nextEnvironmentAddressableName == null)
+                _nextEnvironmentAddressableName =
+                    _gameService.GlobalSettingsSO.AllEnvironmentsSO[0].EnvironmentAddressableName;
             _gameService.LoadGameScene(_nextEnvironmentAddressableName, _nextEnemyAddressableName, true, false);
         }
 
@@ -134,7 +146,7 @@ namespace Service.UI
                 _unlockTournament.gameObject.SetActive(true);
                 return;
             }
-            
+
             OpenTournamentUI();
         }
 
@@ -144,9 +156,6 @@ namespace Service.UI
             _tournamentCanvas.SetActive(false);
             _topCanvas.gameObject.SetActive(false);
             _botCanvas.gameObject.SetActive(false);
-            _tournamentService.Setup(_gameService.GlobalSettingsSO.AllEnvironmentsSO,
-                _gameService.GlobalSettingsSO.AllEnemyGlobalSO);
-            _menuTournamentManager.SetupMenu(_gameService, _tournamentService, this);
             _menuTournamentManager.UpdateUITournament();
         }
 

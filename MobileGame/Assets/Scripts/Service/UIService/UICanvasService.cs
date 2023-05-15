@@ -21,6 +21,7 @@ namespace Service.UI
         [DependsOnService] private IItemsService _itemsService;
         [DependsOnService] private ICurrencyService _currencyService;
         [DependsOnService] private IShopService _shopService;
+        
         private GameObject _mainMenu;
         private GameObject _inGameMenu;
         private InGameMenuTutorialManager _inGameTutorialMenu;
@@ -33,8 +34,8 @@ namespace Service.UI
         private void GenerateMainMenu(GameObject gameObject)
         {
             _mainMenu = Object.Instantiate(gameObject);
-            _mainMenu.GetComponent<MenuManager>().SetupMenu(_gameService, _tournamentService, _fightService,
-                _currencyService, _itemsService, _shopService);
+            _mainMenu.GetComponent<MenuManager>().SetupMenu(_gameService, _tournamentService, _currencyService,
+                _itemsService, _shopService);
             Release(gameObject);
         }
 
