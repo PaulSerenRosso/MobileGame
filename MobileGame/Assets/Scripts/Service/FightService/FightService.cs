@@ -116,7 +116,6 @@ namespace Service.Fight
         {
             ActivatePause(() =>
             {
-                ResetEntities();
                 _enemyRoundCount++;
                 if (_enemyRoundCount == _victoryRoundCount)
                 {
@@ -140,7 +139,6 @@ namespace Service.Fight
         {
             ActivatePause(() =>
             {
-                ResetEntities();
                 _playerRoundCount++;
                 if (_playerRoundCount == _victoryRoundCount)
                 {
@@ -156,6 +154,7 @@ namespace Service.Fight
 
         private void EndFight()
         {
+            ResetEntities();
             EndFightEvent.Invoke(_isPlayerWon);
         }
 
@@ -234,7 +233,7 @@ namespace Service.Fight
             Release(gameObject);
             _cinematicFightManager = cinematicManager.GetComponent<CinematicFightManager>();
             _cinematicFightManager.Init(_playerController.GetComponent<PlayerRenderer>().Animator,
-                _enemyManager.GetComponent<EnemyManager>().Animator);
+                _enemyManager.GetComponent<EnemyManager>().Animator, _playerController.transform,_enemyManager.transform);
             LaunchEntryCinematic();
         }
         
@@ -242,6 +241,7 @@ namespace Service.Fight
 
         private void InitTimerRound()
         {
+            ResetEntities();
             _tickTimerInitRound = new TickTimer(_roundInitTimer, _tickeableService.GetTickManager);
             _tickTimerInitRound.TickEvent += EndInitRound;
             _tickTimerInitRound.InitiateEvent += StartInitRound;
@@ -250,6 +250,7 @@ namespace Service.Fight
 
         private void ResetRound()
         {
+            ResetEntities();
             _tickTimerInitRound.Initiate();
         }
 
