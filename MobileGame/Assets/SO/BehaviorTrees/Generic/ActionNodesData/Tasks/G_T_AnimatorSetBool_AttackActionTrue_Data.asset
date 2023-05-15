@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ee079f7a9324b1fbb587419c1be9cb6, type: 3}
-  m_Name: A_T_AnimatorSetInt_ResetRetractation_Data
+  m_Script: {fileID: 11500000, guid: dd7894303049429dae7b645d69b76270, type: 3}
+  m_Name: G_T_AnimatorSetBool_AttackActionTrue_Data
   m_EditorClassIdentifier: 
   IsDuplicable: 1
   ExternValues: 
   EnemyValues: 01000000
-  NameParameter: Dodge
-  ValueToPass: -1
+  ValueToPass: 1
+  NameParameter: CanAttack
   IsValueIntern: 0
