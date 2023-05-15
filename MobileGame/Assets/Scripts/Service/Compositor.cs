@@ -14,6 +14,7 @@ using Service.Fight;
 using Service.Hype;
 using Service.Inputs;
 using Service.Items;
+using Service.Shop;
 using Service.UI;
 using Unity.VisualScripting;
 
@@ -222,6 +223,7 @@ public class Compositor : MonoBehaviour
         AddService<IHypeService>(new HypeService());
         AddService<IItemsService>(new ItemsService());
         AddService<ICurrencyService>(new CurrencyService());
+        AddService<IShopService>(new ShopService());
     }
 
     private void Awake()

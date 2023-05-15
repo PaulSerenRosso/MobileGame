@@ -1,4 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using UnityEngine;
+using HelperPSR;
+using HelperPSR.Collections;
 
 namespace Service.Fight
 {
@@ -57,14 +61,17 @@ namespace Service.Fight
         {
             if (!_isSet)
             {
+                int[] randIndex = new[] { 0, 1, 2 };
+                System.Random random = new System.Random();
+                CollectionHelper.ShuffleArray(ref random, randIndex);
                 _playerCurrentStep = TournamentStep.QUARTER; 
-                Fight quarterFight = new Fight(TournamentStep.QUARTER, _environmentSOs[0], _enemyGlobalSOs[0],
+                Fight quarterFight = new Fight(TournamentStep.QUARTER, _environmentSOs[randIndex[0]], _enemyGlobalSOs[randIndex[0]],
                     FightState.WAITING);
                 _fights[0] = quarterFight;
-                Fight demiFight = new Fight(TournamentStep.DEMI, _environmentSOs[1], _enemyGlobalSOs[1],
+                Fight demiFight = new Fight(TournamentStep.DEMI, _environmentSOs[randIndex[1]], _enemyGlobalSOs[randIndex[1]],
                     FightState.WAITING);
                 _fights[1] = demiFight;
-                Fight finalFight = new Fight(TournamentStep.FINAL, _environmentSOs[0], _enemyGlobalSOs[2],
+                Fight finalFight = new Fight(TournamentStep.FINAL, _environmentSOs[randIndex[2]], _enemyGlobalSOs[randIndex[2]],
                     FightState.WAITING);
                 _fights[2] = finalFight;
                 _isSet = true;
