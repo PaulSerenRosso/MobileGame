@@ -1,5 +1,67 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2046111564109860488
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2862359028044661174}
+  m_Layer: 0
+  m_Name: EnemyBossPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2862359028044661174
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046111564109860488}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6701380354893991470}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3757927492971641546
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6277886430820751052}
+  m_Layer: 0
+  m_Name: PlayerBossPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6277886430820751052
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3757927492971641546}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6701380354893991470}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6701380353398409156
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,6 +274,8 @@ Transform:
   m_Children:
   - {fileID: 6701380353611488687}
   - {fileID: 6701380353398409158}
+  - {fileID: 2862359028044661174}
+  - {fileID: 6277886430820751052}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -233,6 +297,10 @@ MonoBehaviour:
   _enemyUltimate: {fileID: 11400000, guid: 031dcc90c80ee11488cc75132e41948c, type: 2}
   _volume: {fileID: 6701380353398409159}
   _camera: {fileID: 0}
+  _playerPivot: {fileID: 6277886430820751052}
+  _bossPivot: {fileID: 2862359028044661174}
+  _player: {fileID: 0}
+  _boss: {fileID: 0}
 --- !u!320 &6701380354893991468
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -258,6 +326,16 @@ PlayableDirector:
     value: {fileID: 127638207}
   - key: {fileID: 5791231044460361527, guid: 031dcc90c80ee11488cc75132e41948c, type: 2}
     value: {fileID: 6701380353398409156}
+  - key: {fileID: 5468825420539566234, guid: 031dcc90c80ee11488cc75132e41948c, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 6556927675686542696, guid: 031dcc90c80ee11488cc75132e41948c, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -5957862789523514329, guid: 031dcc90c80ee11488cc75132e41948c, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2147855336565096128, guid: 031dcc90c80ee11488cc75132e41948c, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4535490506885369224, guid: 031dcc90c80ee11488cc75132e41948c, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &127638207

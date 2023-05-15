@@ -13,14 +13,21 @@ public class CinematicFightManager : MonoBehaviour
     [SerializeField] private TimelineAsset _enemyUltimate;
     [SerializeField] private Volume _volume;
     [SerializeField] private Camera _camera;
+    [SerializeField] private Transform _playerPivot;
+    [SerializeField] private Transform _bossPivot;
+    private Transform _player;
+    private Transform _boss;
     private Animator _playerAnimator;
     private Animator _enemyAnimator;
 
-    public void Init(Animator playerAnimator, Animator enemyAnimator)
+    public void Init(Animator playerAnimator, Animator enemyAnimator, Transform player, Transform boss)
     {
         _camera = Camera.main;
         _playerAnimator = playerAnimator;
         _enemyAnimator = enemyAnimator;
+        _player = player;
+        _boss = boss;
+
     }
 
     public void LaunchFightEntryCinematic(Action endCinematicCallBack)
@@ -46,12 +53,18 @@ public class CinematicFightManager : MonoBehaviour
 
     private IEnumerator PlayCinematic(TimelineAsset timelineAsset, Action endCinematicCallback)
     {
+        _player.parent = _playerPivot;
+        _player.localPosition = Vector3.zero;
+        _boss.parent = _bossPivot;
+        _boss.localPosition = Vector3.zero;
         _volume.profile = null;
         _camera.enabled = false;
         _playableDirector.playableAsset = timelineAsset;
         _playableDirector.Play();
         yield return new WaitForSeconds((float)_playableDirector.duration);
         endCinematicCallback?.Invoke();
+        _player.parent = null;
+        _boss.parent = null;
         _camera.enabled = true;
     }
 }
