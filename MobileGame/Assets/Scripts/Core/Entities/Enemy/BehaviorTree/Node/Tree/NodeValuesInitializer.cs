@@ -80,7 +80,7 @@ namespace BehaviorTree.Trees
                 if (EnemyValueObjects[i].Type == type)
                     return EnemyValueObjects[i].Obj;
             }
-
+            
             throw new NullReferenceException();
         }
 
