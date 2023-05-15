@@ -2,6 +2,7 @@ using DG.Tweening;
 using Service.Currency;
 using Service.Fight;
 using Service.Items;
+using Service.Shop;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -48,13 +49,13 @@ namespace Service.UI
         private string _nextEnemyAddressableName;
 
         public void SetupMenu(IGameService gameService, ITournamentService tournamentService,
-            IFightService fightService, ICurrencyService currencyService, IItemsService itemsService)
+            IFightService fightService, ICurrencyService currencyService, IItemsService itemsService, IShopService shopService)
         {
             _gameService = gameService;
             _tournamentService = tournamentService;
             _menuTopManager.SetUp(currencyService);
             _menuInventoryManager.SetUp(itemsService);
-            _menuShopManager.SetUp(itemsService);
+            _menuShopManager.SetUp(itemsService, currencyService, shopService);
             _tournaments[_actualTournament].SetActive(true);
             _leftArrowTournament.interactable = false;
             _homeButton.interactable = false;

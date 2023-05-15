@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Attributes;
@@ -35,11 +36,16 @@ public class CurrencyService : ICurrencyService
     public void AddCoins(int amount)
     {
         currentCoins += amount; 
+        OnAddCoins?.Invoke(currentCoins);
     }
+
+    public event Action<int> OnAddCoins;
+    public event Action<int> OnRemoveCoins;
 
     public void RemoveCoins(int amount)
     {
         currentCoins -= amount;
+        OnRemoveCoins?.Invoke(currentCoins);
     }
 }
 }

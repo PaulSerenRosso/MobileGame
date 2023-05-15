@@ -6,8 +6,8 @@ namespace Service.Items
 {
     public enum ItemTypeEnum
     {
-        Hand,
-        Foot,
+        Short,
+        TShirt,
         Head
     }
 }

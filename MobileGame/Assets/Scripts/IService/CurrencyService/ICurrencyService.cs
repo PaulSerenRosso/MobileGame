@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,9 @@ public interface ICurrencyService : IService
     void AddXP(int amount);
 
     void AddCoins(int amount);
+
+    event Action<int> OnAddCoins;
+    event Action<int> OnRemoveCoins;
 
     void RemoveCoins(int amount);
 }

@@ -114,6 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b54c3c4936b5bf47944b5f8d3c9e4a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coinsText: {fileID: 7176617279906134223}
 --- !u!1001 &1048168196200007757
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -239,3 +240,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1048168196200007757}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7176617279906134223 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7859801762299981954, guid: da9a8d0a69dfad94a8a646d4b0b67692,
+    type: 3}
+  m_PrefabInstance: {fileID: 1048168196200007757}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
