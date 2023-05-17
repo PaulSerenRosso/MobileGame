@@ -20,12 +20,11 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_MainPlayer
+  m_Name: M_PlayerTshirt
   m_Shader: {fileID: -6465566751694194690, guid: 065103e7100e0184195a0c2517dd7df4,
     type: 3}
   m_ValidKeywords: []
-  m_InvalidKeywords:
-  - _ALPHATEST_ON
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -60,7 +59,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 3ebe69d2f4ffb5d4d976935837e9ec59, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Mask:
@@ -105,7 +104,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlphaClip: 1
+    - _AlphaClip: 0
     - _Blend: 0
     - _BlendOp: 0
     - _BumpScale: 1

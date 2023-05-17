@@ -44,9 +44,44 @@ namespace Service.Items
         public void LinkItemPlayer()
         {
             if(playerItems.Count == 0) return;
-            foreach (var playerItem in playerItems)
+            LinkHat();
+            LinkShort();
+            LinkTShirt();
+        }
+
+        private void LinkTShirt()
+        {
+            if (playerItems.ContainsKey(ItemTypeEnum.TShirt))
             {
-                
+               // _playerItemsLinker.SetTShirt(playerItems[ItemTypeEnum.TShirt].Prefab);
+            }
+            else
+            {
+                _playerItemsLinker.RemoveTShirt();
+            }
+        }
+
+        private void LinkShort()
+        {
+            if (playerItems.ContainsKey(ItemTypeEnum.Short))
+            {
+               // _playerItemsLinker.SetShort(playerItems[ItemTypeEnum.Short].Prefab);
+            }
+            else
+            {
+                _playerItemsLinker.RemoveTShirt();
+            }
+        }
+
+        private void LinkHat()
+        {
+            if (playerItems.ContainsKey(ItemTypeEnum.Head))
+            {
+                _playerItemsLinker.SetHat(playerItems[ItemTypeEnum.Head].Prefab);
+            }
+            else
+            {
+                _playerItemsLinker.RemoveHat();
             }
         }
 
@@ -54,7 +89,7 @@ namespace Service.Items
         {
             CollectionHelper.AddOrSet(ref playerItems, itemSo.Type, itemSo);
         }
-
+        
         public void SetPlayerItemLinker(PlayerItemsLinker linker)
         {
             _playerItemsLinker = linker;
@@ -63,6 +98,11 @@ namespace Service.Items
         public Dictionary<ItemTypeEnum, ItemSO> GetPlayerItems()
         {
             return playerItems;
+        }
+
+        public void RemoveItemPlayer(ItemTypeEnum typeEnum)
+        {
+            playerItems.Remove(typeEnum);
         }
     }
 }

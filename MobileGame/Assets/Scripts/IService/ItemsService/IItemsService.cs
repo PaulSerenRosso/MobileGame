@@ -14,5 +14,7 @@ namespace Service.Items
         void SetPlayerItemLinker(PlayerItemsLinker linker);
         Dictionary<ItemTypeEnum, ItemSO> GetPlayerItems();
 
+        void RemoveItemPlayer(ItemTypeEnum typeEnum);
+
     }
 }
