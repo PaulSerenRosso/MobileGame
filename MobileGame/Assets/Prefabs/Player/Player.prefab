@@ -4871,6 +4871,7 @@ GameObject:
   - component: {fileID: 6848145212107949030}
   - component: {fileID: 7989795260116397858}
   - component: {fileID: 4151950253264653231}
+  - component: {fileID: 7443049158626927852}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -5167,6 +5168,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attackPlayerAction: {fileID: 1800965582552254606}
   _ultimatePlayerAction: {fileID: 7989795260116397858}
+--- !u!114 &7443049158626927852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6686433966917593852}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27d902fa78554b847a0e8cb6f8f3aba8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perfectDodge: 0
+  activeTime: 2
+  meshRefreshRate: 0.1
+  meshDestroyDelay: 3
+  positionToSpawn: {fileID: 5258500676255778547}
+  mat: {fileID: 2100000, guid: 8c98487c56aa00a4f882c865a614097b, type: 2}
+  shaderVarRef: _Alpha
+  shaderVarRate: 0.1
+  shaderVarRefreshRate: 0.05
 --- !u!1001 &4372422417458162480
 PrefabInstance:
   m_ObjectHideFlags: 0
