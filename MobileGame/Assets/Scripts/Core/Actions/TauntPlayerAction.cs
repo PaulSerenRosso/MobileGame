@@ -9,8 +9,7 @@ namespace Actions
     public class TauntPlayerAction : PlayerAction, IUpdatable
     {
         public TauntActionSO SO;
-
-        [SerializeField] private TextMeshPro _tauntText;
+        
         
         private TickTimer _startTauntTimer;
         private bool _isTaunting;
@@ -27,7 +26,7 @@ namespace Actions
             if (!_isTaunting)
             {
                 _isTaunting = true;
-                _tauntText.text = "Start Taunt";
+   
                 _startTauntTimer.TickEvent += Taunt;
                 _startTauntTimer.Initiate();
                 _isStartTaunting = true;
@@ -39,13 +38,12 @@ namespace Actions
             _isStartTaunting = false;
             MakeActionEvent?.Invoke();
             UpdateManager.Register(this);
-            _tauntText.text = "Taunt";
+      
         }
 
         public override void SetupAction(params object[] arguments)
         {
             _startTauntTimer = new TickTimer(SO.StartTime, (TickManager)arguments[0]);
-            _tauntText.text = "";
             _hypeService = (IHypeService)arguments[1];
         }
 
@@ -77,7 +75,6 @@ namespace Actions
         private void CancelTaunt()
         {
             _isTaunting = false;
-            _tauntText.text = "";
             UpdateManager.UnRegister(this);
             EndActionEvent?.Invoke();
         }
