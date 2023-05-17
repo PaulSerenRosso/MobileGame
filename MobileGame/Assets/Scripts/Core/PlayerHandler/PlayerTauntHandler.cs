@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 namespace Player.Handler
 {
-    public class PlayerTauntHandler : PlayerHandler, IRemoteConfigurable
+    public class PlayerTauntHandler : PlayerHandlerRecordable, IRemoteConfigurable
     {
         public event Action MakeActionEvent;
         public event Action MakeFinishActionEvent;
@@ -45,6 +45,7 @@ namespace Player.Handler
 
         public override void Setup(params object[] arguments)
         {
+            base.Setup();
             RemoteConfigManager.RegisterRemoteConfigurable(this);
             _inputService = (IInputService)arguments[0];
             AddCondition(CheckIsInAttack);

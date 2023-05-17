@@ -228,6 +228,7 @@ public class Compositor : MonoBehaviour
 
     private void Awake()
     {
+        UnityEngine.Rendering.DebugManager.instance.enableRuntimeUI = false;
         InitCompositor().Forget();
     }
 
