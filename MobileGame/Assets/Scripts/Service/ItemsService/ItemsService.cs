@@ -1,18 +1,16 @@
-using System.Collections;
 using System.Collections.Generic;
 using Addressables;
 using Attributes;
 using HelperPSR.Collections;
-using UnityEngine;
 
 namespace Service.Items
 {
     public class ItemsService : IItemsService
     {
-        private List<ItemSO> _unlockItems = new List<ItemSO>();
+        private List<ItemSO> _unlockItems = new();
         private ItemsServiceGlobalSettingsSO _globalSettingsSo;
         private PlayerItemsLinker _playerItemsLinker;
-        private Dictionary<ItemTypeEnum, ItemSO> playerItems = new Dictionary<ItemTypeEnum, ItemSO>();
+        private Dictionary<ItemTypeEnum, ItemSO> playerItems = new();
 
         [ServiceInit]
         private void Init()

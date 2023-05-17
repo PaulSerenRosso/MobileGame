@@ -54,7 +54,7 @@ namespace Service.UI
             _gameService = gameService;
             _tournamentService = tournamentService;
             _menuTopManager.SetUp(currencyService);
-            _menuInventoryManager.SetUp(itemsService);
+            _menuInventoryManager.Setup(itemsService);
             _menuShopManager.SetUp(itemsService, currencyService, shopService);
             _tournaments[_actualTournament].SetActive(true);
             _leftArrowTournament.interactable = false;
@@ -129,7 +129,6 @@ namespace Service.UI
         public void StartFightTutorial()
         {
             _playMatchButton.interactable = false;
-            Debug.Log("StartTutorial");
             _gameService.LoadGameScene("Coliseum", "ArnoldiosTutorialPrefab", false, true);
         }
 
