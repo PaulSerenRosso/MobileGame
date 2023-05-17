@@ -23,11 +23,26 @@ namespace Service.UI
         [DependsOnService] private IShopService _shopService;
         
         private GameObject _mainMenu;
+        private PlayerItemsLinker _playerItemsLinker;
         private GameObject _inGameMenu;
         private InGameMenuTutorialManager _inGameTutorialMenu;
 
         public void LoadMainMenu()
         {
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Environment", GenerateEnvironment);
+        }
+
+        private void GenerateEnvironment(GameObject gameObject)
+        {
+            var environment = Object.Instantiate(gameObject);
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("PlayerRenderer", GeneratePlayerRenderer);
+        }
+
+        private void GeneratePlayerRenderer(GameObject gameObject)
+        {
+            var player = Object.Instantiate(gameObject);
+            player.transform.eulerAngles = new Vector3(0, -180, 0);
+            _playerItemsLinker = player.GetComponent<PlayerItemsLinker>();
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("MainMenu", GenerateMainMenu);
         }
 
@@ -35,7 +50,7 @@ namespace Service.UI
         {
             _mainMenu = Object.Instantiate(gameObject);
             _mainMenu.GetComponent<MenuManager>().SetupMenu(_gameService, _tournamentService, _currencyService,
-                _itemsService, _shopService);
+                _itemsService, _shopService, _playerItemsLinker);
             Release(gameObject);
         }
 

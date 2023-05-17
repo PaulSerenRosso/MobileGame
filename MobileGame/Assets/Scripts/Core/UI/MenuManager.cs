@@ -22,6 +22,7 @@ namespace Service.UI
         [SerializeField] private MenuTopManager _menuTopManager;
         [SerializeField] private Canvas _topCanvas;
         [SerializeField] private Canvas _botCanvas;
+        [SerializeField] private Canvas _backgroundCanvas;
 
         [SerializeField] private Button _homeButton;
         [SerializeField] private MenuTournamentManager _menuTournamentManager;
@@ -49,12 +50,12 @@ namespace Service.UI
         private string _nextEnemyAddressableName;
 
         public void SetupMenu(IGameService gameService, ITournamentService tournamentService,
-            ICurrencyService currencyService, IItemsService itemsService, IShopService shopService)
+            ICurrencyService currencyService, IItemsService itemsService, IShopService shopService, PlayerItemsLinker playerItemsLinker)
         {
             _gameService = gameService;
             _tournamentService = tournamentService;
             _menuTopManager.SetUp(currencyService);
-            _menuInventoryManager.Setup(itemsService);
+            _menuInventoryManager.Setup(itemsService, playerItemsLinker);
             _menuShopManager.SetUp(itemsService, currencyService, shopService);
             _tournaments[_actualTournament].SetActive(true);
             _leftArrowTournament.interactable = false;
@@ -95,6 +96,7 @@ namespace Service.UI
         public void ActivateHome()
         {
             _tournamentCanvas.SetActive(true);
+            _backgroundCanvas.gameObject.SetActive(true);
             _debugFightCanvas.SetActive(false);
             _shopCanvas.gameObject.SetActive(false);
             _inventoryCanvas.gameObject.SetActive(false);
@@ -221,6 +223,7 @@ namespace Service.UI
         public void OpenShop()
         {
             _tournamentCanvas.SetActive(false);
+            _backgroundCanvas.gameObject.SetActive(true);
             _inventoryCanvas.gameObject.SetActive(false);
             _shopCanvas.gameObject.SetActive(true);
             _homeButton.interactable = true;
@@ -231,6 +234,7 @@ namespace Service.UI
         public void OpenInventory()
         {
             _tournamentCanvas.SetActive(false);
+            _backgroundCanvas.gameObject.SetActive(false);
             _inventoryCanvas.gameObject.SetActive(true);
             _shopCanvas.gameObject.SetActive(false);
             _homeButton.interactable = true;

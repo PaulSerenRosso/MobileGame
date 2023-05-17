@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Addressables;
 using Attributes;
 using HelperPSR.Collections;
+using UnityEngine;
 
 namespace Service.Items
 {
@@ -41,7 +42,6 @@ namespace Service.Items
 
         public void LinkItemPlayer()
         {
-            if(playerItems.Count == 0) return;
             LinkHat();
             LinkShort();
             LinkTShirt();
@@ -51,7 +51,8 @@ namespace Service.Items
         {
             if (playerItems.ContainsKey(ItemTypeEnum.TShirt))
             {
-               // _playerItemsLinker.SetTShirt(playerItems[ItemTypeEnum.TShirt].Prefab);
+                var tshirtItem = (GearSO)playerItems[ItemTypeEnum.TShirt];
+               _playerItemsLinker.SetTShirt(tshirtItem.SpriteTexture.texture);
             }
             else
             {
@@ -63,7 +64,8 @@ namespace Service.Items
         {
             if (playerItems.ContainsKey(ItemTypeEnum.Short))
             {
-               // _playerItemsLinker.SetShort(playerItems[ItemTypeEnum.Short].Prefab);
+                var shortItem = (GearSO)playerItems[ItemTypeEnum.Short];
+               _playerItemsLinker.SetShort(shortItem.SpriteTexture.texture);
             }
             else
             {
@@ -75,7 +77,8 @@ namespace Service.Items
         {
             if (playerItems.ContainsKey(ItemTypeEnum.Head))
             {
-                _playerItemsLinker.SetHat(playerItems[ItemTypeEnum.Head].Prefab);
+                var hatItem = (HatSO)playerItems[ItemTypeEnum.Head];
+                _playerItemsLinker.SetHat(hatItem.PrefabHat);
             }
             else
             {

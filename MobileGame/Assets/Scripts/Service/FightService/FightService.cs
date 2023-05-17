@@ -192,7 +192,7 @@ namespace Service.Fight
             var player = Object.Instantiate(gameObject);
             Release(gameObject);
             _playerController = player.GetComponent<PlayerController>();
-            _itemsService.SetPlayerItemLinker(player.GetComponent<PlayerItemsLinker>());
+            _itemsService.SetPlayerItemLinker(_playerController.GetComponent<PlayerRenderer>().Animator.GetComponent<PlayerItemsLinker>());
             _itemsService.LinkItemPlayer();
             player.GetComponent<UltimatePlayerAction>().MakeActionEvent += LaunchUltimatePlayerCinematic;
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>(_enemyAddressableName, GenerateEnemy);
