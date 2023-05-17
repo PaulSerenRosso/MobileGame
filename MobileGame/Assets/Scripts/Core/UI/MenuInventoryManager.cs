@@ -1,4 +1,6 @@
-﻿using Service.Items;
+﻿using System.Linq;
+using Service.Items;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,22 +8,39 @@ namespace Service.UI
 {
     public class MenuInventoryManager : MonoBehaviour
     {
-        [SerializeField] private Image _hat;
-        [SerializeField] private Image _tshirt;
-        [SerializeField] private Image _short;
+        [Header("Actual Gear Player")]
+        [SerializeField] private Button _hat;
+        [SerializeField] private Button _tshirt;
+        [SerializeField] private Button _short;
+        
+        [Header("Popup Gear")]
+        [SerializeField] private GameObject _itemPopupPanel;
+        [SerializeField] private Image _itemPopupImage;
+        [SerializeField] private TextMeshProUGUI _itemPopupTitleText;
+        [SerializeField] private TextMeshProUGUI _itemPopupDescriptionText;
+        [SerializeField] private Button _equipButton;
+        [SerializeField] private TextMeshProUGUI _equipButtonText;
+        
+        [Header("Inventory")]
         [SerializeField] private Button _buttonPrefab;
         [SerializeField] private GridLayoutGroup _gridLayout;
         
         private IItemsService _itemsService;
         
-        public void Setup(IItemsService itemsService)
+        public void Setup(IItemsService itemsService, PlayerItemsLinker playerItemsLinker)
         {
             _itemsService = itemsService;
+            _itemsService.SetPlayerItemLinker(playerItemsLinker);
+            UpdateUIInventory();
+        }
+
+        private void UpdateUIInventory()
+        {
             foreach (var itemSO in _itemsService.GetAllItems())
             {
                 var buttonItem = Instantiate(_buttonPrefab, _gridLayout.transform);
                 buttonItem.image.sprite = itemSO.SpriteUI;
-                buttonItem.onClick.AddListener(() => UpdateItemPlayer(itemSO));
+                buttonItem.onClick.AddListener(() => OpenPopupItem(itemSO));
             }
 
             foreach (var playerItem in _itemsService.GetPlayerItems())
@@ -29,20 +48,50 @@ namespace Service.UI
                 switch (playerItem.Value.Type)
                 {
                     case ItemTypeEnum.Head:
-                        _hat.sprite = playerItem.Value.SpriteUI;
+                        _hat.image.sprite = playerItem.Value.SpriteUI;
+                        _hat.onClick.AddListener(() => OpenPopupItem(playerItem.Value));
                         break;
                     case ItemTypeEnum.TShirt:
-                        _tshirt.sprite = playerItem.Value.SpriteUI;
+                        _tshirt.image.sprite = playerItem.Value.SpriteUI;
+                        _tshirt.onClick.AddListener(() => OpenPopupItem(playerItem.Value));
                         break;
                     case ItemTypeEnum.Short:
-                        _short.sprite = playerItem.Value.SpriteUI;
+                        _short.image.sprite = playerItem.Value.SpriteUI;
+                        _short.onClick.AddListener(() => OpenPopupItem(playerItem.Value));
                         break;
                 }
             }
         }
 
-        public void UpdateItemPlayer(ItemSO itemSO)
+        private void OpenPopupItem(ItemSO itemSO)
         {
+            _itemPopupPanel.SetActive(true);
+            _itemPopupImage.sprite = itemSO.SpriteUI;
+            _itemPopupTitleText.text = itemSO.TitleItem;
+            _itemPopupDescriptionText.text = itemSO.DescriptionItem;
+            _equipButton.onClick.RemoveAllListeners();
+            if (_itemsService.GetPlayerItems().Any(playerItem => playerItem.Value == itemSO))
+            {
+                _equipButtonText.text = "Unequip";
+                _equipButton.onClick.AddListener(() => RemoveItemPlayer(itemSO));
+            }
+            else
+            {
+                _equipButtonText.text = "Equip";
+                _equipButton.onClick.AddListener(() => UpdateItemPlayer(itemSO));
+            }
+        }
+
+        public void ClosePopupItem()
+        {
+            _itemPopupPanel.SetActive(false);
+        }
+
+        private void UpdateItemPlayer(ItemSO itemSO)
+        {
+            _equipButton.onClick.RemoveAllListeners();
+            _equipButtonText.text = "Unequip";
+            _equipButton.onClick.AddListener(() => RemoveItemPlayer(itemSO));
             _itemsService.SetItemPlayer(itemSO);
             _itemsService.LinkItemPlayer();
             foreach (var playerItem in _itemsService.GetPlayerItems())
@@ -50,16 +99,36 @@ namespace Service.UI
                 switch (playerItem.Value.Type)
                 {
                     case ItemTypeEnum.Head:
-                        _hat.sprite = playerItem.Value.SpriteUI;
+                        _hat.image.sprite = playerItem.Value.SpriteUI;
                         break;
                     case ItemTypeEnum.TShirt:
-                        _tshirt.sprite = playerItem.Value.SpriteUI;
+                        _tshirt.image.sprite = playerItem.Value.SpriteUI;
                         break;
                     case ItemTypeEnum.Short:
-                        _short.sprite = playerItem.Value.SpriteUI;
+                        _short.image.sprite = playerItem.Value.SpriteUI;
                         break;
                 }
-                
+            }
+        }
+
+        private void RemoveItemPlayer(ItemSO itemSO)
+        {
+            _equipButton.onClick.RemoveAllListeners();
+            _equipButtonText.text = "Equip";
+            _equipButton.onClick.AddListener(() => UpdateItemPlayer(itemSO));
+            _itemsService.RemoveItemPlayer(itemSO.Type);
+            _itemsService.LinkItemPlayer();
+            switch (itemSO.Type)
+            {
+                case ItemTypeEnum.Head:
+                    _hat.image.sprite = null;
+                    break;
+                case ItemTypeEnum.TShirt:
+                    _tshirt.image.sprite = null;
+                    break;
+                case ItemTypeEnum.Short:
+                    _short.image.sprite = null;
+                    break;
             }
         }
     }

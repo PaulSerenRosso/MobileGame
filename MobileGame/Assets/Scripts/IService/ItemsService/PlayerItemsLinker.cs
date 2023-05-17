@@ -25,8 +25,7 @@ namespace Service.Items
 
         public void RemoveHat()
         {
-            if(_currentHat)
-                Destroy(_currentHat);
+            if(_currentHat) Destroy(_currentHat);
         }
 
         public void RemoveShort()
