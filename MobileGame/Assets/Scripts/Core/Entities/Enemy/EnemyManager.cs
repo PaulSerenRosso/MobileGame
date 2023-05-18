@@ -125,15 +125,6 @@ public class EnemyManager : MonoBehaviour, IRemoteConfigurable, IHypeable
     public bool TryDecreaseHypeEnemy(float amount, Vector3 posToCheck, Transform particleTransform,
         Enums.ParticlePosition particlePosition, bool isStun)
     {
-        if (isStun)
-        {
-            Vector3 normalizedPos = (posToCheck - transform.position).normalized;
-            float angle = Vector3.Angle(normalizedPos, transform.forward);
-            if (angle > EnemyInGameSo.AngleStun)
-            {
-                TakeStun();
-            }
-        }
         float damage = amount;
         if (CurrentBlockingState == EnemyEnums.EnemyBlockingState.BLOCKING)
         {
@@ -144,6 +135,7 @@ public class EnemyManager : MonoBehaviour, IRemoteConfigurable, IHypeable
                 if (IsBoosted) damage = (1 - EnemyInGameSo.PercentageDamageReductionBoostChimist) * damage;
                 ActivateShaderDamage();
                 _hypeService.DecreaseHypeEnemy(damage);
+                if (isStun) TakeStun();
                 return true;
             }
             _blockParticle.gameObject.transform.position = (1 * (posToCheck - transform.position).normalized + transform.position);
@@ -151,6 +143,8 @@ public class EnemyManager : MonoBehaviour, IRemoteConfigurable, IHypeable
 
             return false;
         }
+        
+        if (isStun) TakeStun();
 
         if (IsBoosted) damage = (1 - EnemyInGameSo.PercentageDamageReductionBoostChimist) * amount;
         Vector3 pos;
