@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f18172894b484f5dbf0bce347aeda8ee, type: 3}
   m_Name: MJ_T_SetRandomValueWithProbability_Random
   m_EditorClassIdentifier: 
+  IsDuplicable: 1
   Comment: "N\u0153ud qui permet d'ajouter des probabilit\xE9s modifiables dans les
     intern values"
-  _internValuesCount: 6
+  _internValuesCount: 5
   Data: {fileID: 11400000, guid: 107e4766ef3407949ab3e61853896ee6, type: 2}
   InternValues:
   - Key: AttackAction
@@ -24,11 +25,6 @@ MonoBehaviour:
     Comment: int(int) value to set in intern value
   - Key: TauntAction
     HashCode: -293010044
-    Type: 1
-    PropertyType: 2
-    Comment: int(int) value to set in intern value
-  - Key: BlockAction
-    HashCode: 885675895
     Type: 1
     PropertyType: 2
     Comment: int(int) value to set in intern value
