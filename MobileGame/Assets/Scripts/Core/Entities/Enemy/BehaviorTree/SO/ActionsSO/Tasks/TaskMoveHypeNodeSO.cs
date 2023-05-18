@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace BehaviorTree
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/DecreaseHypeNodeSO", fileName = "new Tree_T_DecreaseHype_Spe")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/MoveHypeNodeSO", fileName = "new Tree_T_MoveHype_Spe")]
     public class TaskMoveHypeNodeSO : TaskNodeSO
     {
         public override void UpdateComment()
