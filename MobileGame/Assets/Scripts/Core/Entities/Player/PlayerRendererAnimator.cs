@@ -26,7 +26,7 @@ namespace Player
 
         private void SetDirParameter(Vector2 dir)
         {
-            AnimSetBool(_endMovementParameterName, false);
+            // AnimSetBool(_endMovementParameterName, false);
             switch (dir)
             {
                 case var v when v == Vector2.left:
@@ -61,7 +61,7 @@ namespace Player
 
         private void ResetEndMovementAnimationParameter()
         {
-            AnimSetBool(_endMovementParameterName, false);
+            // AnimSetBool(_endMovementParameterName, false);
             _movementPlayerAction.EndActionEvent += ResetMovementPlayerAnimation;
         }
 
