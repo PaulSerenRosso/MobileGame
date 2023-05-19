@@ -42,7 +42,7 @@ namespace BehaviorTree.Nodes.Actions
                 externDependencyValues[BehaviorTreeEnums.TreeExternValues.GridManager];
             _playerMovementHandler =
                 (PlayerMovementHandler)externDependencyValues[
-                    BehaviorTreeEnums.TreeExternValues.PlayerHandlerMovement];
+                    BehaviorTreeEnums.TreeExternValues.PlayerMovementHandler];
         }
 
         public override ActionNodeDataSO GetDataSO()

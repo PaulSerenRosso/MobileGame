@@ -4,11 +4,11 @@ using Player.Handler;
 
 namespace BehaviorTree.Nodes.Actions
 {
-    public class CheckPlayerIsDodgingNode: ActionNode
+    public class CheckPlayerIsTauntingNode : ActionNode
     {
-        private CheckPlayerIsDodgingNodeSO _so;
-        private CheckPlayerIsDodgingNodeDataSO _data;
-        private PlayerMovementHandler _playerMovementHandler;
+        private CheckPlayerIsTauntingNodeSO _so;
+        private CheckPlayerIsTauntingNodeDataSO _data;
+        private PlayerTauntHandler _playerTauntHandler;
 
         public override NodeSO GetNodeSO()
         {
@@ -17,14 +17,14 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
-            _so = (CheckPlayerIsDodgingNodeSO)nodeSO;
-            _data = (CheckPlayerIsDodgingNodeDataSO)_so.Data;
+            _so = (CheckPlayerIsTauntingNodeSO)nodeSO;
+            _data = (CheckPlayerIsTauntingNodeDataSO)_so.Data;
         }
 
         public override void Evaluate()
         {
             base.Evaluate();
-            State = _playerMovementHandler.GetIsDodging()
+            State = _playerTauntHandler.CheckIsTaunting()
                 ? BehaviorTreeEnums.NodeState.SUCCESS
                 : BehaviorTreeEnums.NodeState.FAILURE;
             ReturnedEvent?.Invoke();
@@ -34,8 +34,9 @@ namespace BehaviorTree.Nodes.Actions
             Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
             Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
         {
-            _playerMovementHandler =
-                (PlayerMovementHandler)externDependencyValues[BehaviorTreeEnums.TreeExternValues.PlayerMovementHandler];
+            _playerTauntHandler =
+                (PlayerTauntHandler)externDependencyValues[
+                    BehaviorTreeEnums.TreeExternValues.PlayerTauntHandler];
         }
 
         public override ActionNodeDataSO GetDataSO()

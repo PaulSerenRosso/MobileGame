@@ -53,6 +53,7 @@ namespace Service
             _tournamentService.Setup(GlobalSettingsSO.AllEnvironmentsSO,
                 GlobalSettingsSO.AllEnemyGlobalSO);
             LoadMainMenuScene();
+            // LoadGameScene("Coliseum", "ArnoldiosTutorialPrefab", false, true);
         }
     }
 }

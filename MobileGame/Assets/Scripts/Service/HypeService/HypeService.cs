@@ -1,8 +1,6 @@
 using System;
 using Addressables;
-using HelperPSR.MonoLoopFunctions;
 using HelperPSR.RemoteConfigs;
-using UnityEngine;
 
 namespace Service.Hype
 {
@@ -43,7 +41,6 @@ namespace Service.Hype
             {
                 if (CheckHypeReachOtherHype(hype, amount, otherHype))
                 {
-                  
                     TryGainUltimateValue(hype, hype.CurrentValue - _hypeServiceSo.MaxHype - otherHype.CurrentValue);
                     hype.CurrentValue = _hypeServiceSo.MaxHype - otherHype.CurrentValue;
                 }
@@ -133,7 +130,6 @@ namespace Service.Hype
             SetHypePlayer(_startHypeValuePlayer);
             _hypePlayer.IsInUltimateArea = false;
             _hypePlayer.LoseUltimateEvent?.Invoke(_startHypeValuePlayer);
-            
         }
 
         public void ResetHypeEnemy()
@@ -176,7 +172,7 @@ namespace Service.Hype
         {
             return _hypePlayer.HypeSo.UltimateValue;
         }
-        
+
         public float GetUltimateHypeValueEnemy()
         {
             return _hypeEnemy.HypeSo.UltimateValue;
@@ -279,13 +275,12 @@ namespace Service.Hype
         {
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<HypeServiceSO>("HypeSO", SetHypeSO);
         }
-        
+
         private void SetHypeSO(HypeServiceSO hypeServiceSo)
         {
             _hypeServiceSo = hypeServiceSo;
             _hypeEnemy = new Hype();
             _hypePlayer = new Hype();
-            RemoteConfigManager.RegisterRemoteConfigurable(this);
             ResetHypePlayer();
             _hypePlayer.HypeSo = _hypeServiceSo.PlayerHypeSO;
             ResetHypeEnemy();
@@ -294,6 +289,8 @@ namespace Service.Hype
             _decreasePlayerHypeTimer = 0;
             _hypePlayer.IncreaseHypeEvent += ResetDecreasePlayerHype;
             _hypeEnemy.DecreaseHypeEvent += ResetDecreasePlayerHype;
+            
+            RemoteConfigManager.RegisterRemoteConfigurable(this);
             EnableHypeServiceEvent?.Invoke();
         }
 
@@ -315,7 +312,7 @@ namespace Service.Hype
             ReachMaximumHypeEvent = null;
             ReachMinimumHypeEvent = null;
             EnableHypeServiceEvent = null;
-         
+
             RemoteConfigManager.UnRegisterRemoteConfigurable(this);
         }
 
@@ -330,6 +327,5 @@ namespace Service.Hype
             _hypeServiceSo.TimeBeforePlayerHypeDecrease =
                 RemoteConfigManager.Config.GetFloat("TimeBeforePlayerHypeDecrease");
         }
-        
     }
 }

@@ -4,10 +4,10 @@ using Player.Handler;
 
 namespace BehaviorTree.Nodes.Actions
 {
-    public class CheckPlayerIsInMovingNode : ActionNode
+    public class CheckPlayerIsMovingNode : ActionNode
     {
-        private CheckPlayerIsInMovingNodeSO _so;
-        private CheckPlayerIsInMovingNodeDataSO _data;
+        private CheckPlayerIsMovingNodeSO _so;
+        private CheckPlayerIsMovingNodeDataSO _data;
         private PlayerMovementHandler _playerMovementHandler;
 
         public override NodeSO GetNodeSO()
@@ -17,8 +17,8 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
-            _so = (CheckPlayerIsInMovingNodeSO)nodeSO;
-            _data = (CheckPlayerIsInMovingNodeDataSO)_so.Data;
+            _so = (CheckPlayerIsMovingNodeSO)nodeSO;
+            _data = (CheckPlayerIsMovingNodeDataSO)_so.Data;
         }
 
         public override void Evaluate()
@@ -36,7 +36,7 @@ namespace BehaviorTree.Nodes.Actions
         {
             _playerMovementHandler =
                 (PlayerMovementHandler)externDependencyValues[
-                    BehaviorTreeEnums.TreeExternValues.PlayerHandlerMovement];
+                    BehaviorTreeEnums.TreeExternValues.PlayerMovementHandler];
         }
 
         public override ActionNodeDataSO GetDataSO()

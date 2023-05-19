@@ -11,12 +11,20 @@ public class InGameMenuManager : MonoBehaviour
     [SerializeField] private InGameMenuEndFightManager _inGameMenuEndFightManager;
     public InGameMenuTutorialManager InGameMenuTutorialManager;
 
+    private IFightService _fightService;
+
     public void SetupMenu(IFightService fightService, IHypeService hypeService, ITournamentService tournamentService,
         ICurrencyService currencyService)
     {
         _inGameMenuHypeManager.Init(hypeService);
         _inGameMenuRoundManager.Init(fightService);
         _inGameMenuEndFightManager.Init(fightService, currencyService, tournamentService);
-        if (fightService.GetFightTutorial()) InGameMenuTutorialManager.Init(fightService);
+        _fightService = fightService;
+        if (_fightService.GetFightTutorial()) InGameMenuTutorialManager.Init(fightService);
+    }
+    
+    public void QuitTutorial()
+    {
+        _fightService.QuitFightTutorial(true);
     }
 }

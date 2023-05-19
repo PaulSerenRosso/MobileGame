@@ -39,7 +39,7 @@ namespace BehaviorTree.Trees
                         ExternValueObjects[i].Obj = tickeableService.GetTickManager;
                         break;
                     }
-                    case BehaviorTreeEnums.TreeExternValues.PlayerHandlerMovement:
+                    case BehaviorTreeEnums.TreeExternValues.PlayerMovementHandler:
                     {
                         ExternValueObjects[i].Obj = playerTransform.GetComponent<PlayerMovementHandler>();
                         break;
@@ -67,6 +67,11 @@ namespace BehaviorTree.Trees
                     case BehaviorTreeEnums.TreeExternValues.UICanvasService:
                     {
                         ExternValueObjects[i].Obj = uiCanvasSwitchableService;
+                        break;
+                    }
+                    case BehaviorTreeEnums.TreeExternValues.PlayerTauntHandler:
+                    {
+                        ExternValueObjects[i].Obj = playerTransform.GetComponent<PlayerTauntHandler>();
                         break;
                     }
                 }
