@@ -11,7 +11,7 @@ namespace Player
     public class PlayerController : MonoBehaviour, IUpdatable
     {
         [SerializeField] private PlayerAttackHandler _playerAttackHandler;
-        [SerializeField] private PlayerUltimateHandler playerUltimateHandler;
+        [FormerlySerializedAs("playerUltimateHandler")] [SerializeField] private PlayerUltimateHandler _playerUltimateHandler;
         [SerializeField] private PlayerMovementHandler _playerMovementHandler;
         [SerializeField] private PlayerRenderer _playerRenderer;
         [SerializeField] private PlayerRotationHandler _playerRotationHandler;
@@ -97,15 +97,15 @@ namespace Player
             _playerTauntHandler.Setup(_inputService, _tickeableService.GetTickManager, _hypeService);
             _playerTauntHandler.MakeActionEvent += _playerRenderer.ActivateTauntFX;
             _playerTauntHandler.MakeFinishActionEvent += _playerRenderer.DeactivateTauntFX;
-            playerUltimateHandler.AddCondition(CheckIsLockedController);
-            playerUltimateHandler.Setup(_hypeService);
+            _playerUltimateHandler.AddCondition(CheckIsLockedController);
+            _playerUltimateHandler.Setup(_hypeService);
             _playerRenderer.Init();
         }
 
         public void UnlinkPlayerController()
         {
             _playerAttackHandler.Unlink();
-            playerUltimateHandler.Unlink();
+            _playerUltimateHandler.Unlink();
             _playerRotationHandler.Unlink();
             _playerMovementHandler.Unlink();
             _playerTauntHandler.Unlink();

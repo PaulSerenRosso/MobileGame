@@ -51,7 +51,7 @@ namespace Service.Fight
             return isFinish;
         }
 
-        public bool GetSet()
+        public bool GetTournamentIsActive()
         {
             return _isSet;
         }

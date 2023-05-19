@@ -16,7 +16,6 @@ using Service.Inputs;
 using Service.Items;
 using Service.Shop;
 using Service.UI;
-using Unity.VisualScripting;
 
 public class Compositor : MonoBehaviour
 {
@@ -29,6 +28,7 @@ public class Compositor : MonoBehaviour
     protected readonly Dictionary<Type, IService> m_services = new Dictionary<Type, IService>();
     protected readonly Dictionary<Type, List<FieldEntry>> m_dependencySlots = new Dictionary<Type, List<FieldEntry>>();
     ITickeableService iTickeableService;
+    
     private bool ResolveDependencies()
     {
         foreach (KeyValuePair<Type, List<FieldEntry>> slotsForType in m_dependencySlots)
@@ -226,7 +226,7 @@ public class Compositor : MonoBehaviour
         AddService<IShopService>(new ShopService());
     }
 
-    private void Awake()
+    public void SetupCompositor()
     {
         UnityEngine.Rendering.DebugManager.instance.enableRuntimeUI = false;
         InitCompositor().Forget();

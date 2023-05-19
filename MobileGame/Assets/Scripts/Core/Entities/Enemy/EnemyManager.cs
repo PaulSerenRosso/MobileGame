@@ -185,6 +185,7 @@ public class EnemyManager : MonoBehaviour, IRemoteConfigurable, IHypeable
     private async void DeactivateShaderDamage()
     {
         await UniTask.Delay(_timeShaderActivate);
+        if (_skinnedMeshRenderers is null) return;
         foreach (var skinnedMeshRenderer in _skinnedMeshRenderers)
         {
             skinnedMeshRenderer.material.SetInt("_TakeDamage", 0);

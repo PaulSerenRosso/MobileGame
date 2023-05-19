@@ -67,6 +67,7 @@ namespace Player.Handler
 
         public override void Unlink()
         {
+            base.Unlink();
             _inputService.RemoveTap(TryMakeAttackAction);
             RemoteConfigManager.UnRegisterRemoteConfigurable(this);
         }

@@ -60,16 +60,7 @@ namespace Service.UI
             _tournaments[_actualTournament].SetActive(true);
             _leftArrowTournament.interactable = false;
             _homeButton.interactable = false;
-            if (_tournamentService.GetSet())
-            {
-                _menuTournamentManager.SetupMenu(_gameService, _tournamentService, this);
-                OpenTournamentUI();
-            }
-            else
-            {
-                _tournamentService.SetTournament();
-                _menuTournamentManager.SetupMenu(_gameService, _tournamentService, this);
-            }
+            if (_tournamentService.GetTournamentIsActive()) OpenTournamentUI();
 
             foreach (var enemyGlobalSo in gameService.GlobalSettingsSO.AllEnemyGlobalSO)
             {
@@ -148,6 +139,8 @@ namespace Service.UI
                 return;
             }
 
+            if (!_tournamentService.GetTournamentIsActive()) _tournamentService.SetTournament();
+            _menuTournamentManager.SetupMenu(_gameService, _tournamentService, this);
             OpenTournamentUI();
         }
 

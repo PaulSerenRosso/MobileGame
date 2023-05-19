@@ -10,7 +10,7 @@ namespace BehaviorTree.SO.Actions
     {
         public float MinValue;
         public float MaxValue;
-        
+
         protected override void SetDependencyValues()
         {
             

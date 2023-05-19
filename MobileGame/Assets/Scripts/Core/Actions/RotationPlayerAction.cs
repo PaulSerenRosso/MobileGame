@@ -1,4 +1,3 @@
-using System;
 using HelperPSR.MonoLoopFunctions;
 using UnityEngine;
 
@@ -25,12 +24,17 @@ namespace Actions
         private void OnDisable()
         {
             UpdateManager.UnRegister(this);
-  
         }
 
         public override void SetupAction(params object[] arguments)
         {
             _lookTarget = (Transform)arguments[0];
+        }
+
+        public override void UnlinkAction()
+        {
+            base.UnlinkAction();
+            UpdateManager.UnRegister(this);
         }
     }
 }

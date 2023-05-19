@@ -1,7 +1,6 @@
 using HelperPSR.MonoLoopFunctions;
 using HelperPSR.Tick;
 using Service.Hype;
-using TMPro;
 using UnityEngine;
 
 namespace Actions
@@ -9,7 +8,6 @@ namespace Actions
     public class TauntPlayerAction : PlayerAction, IUpdatable
     {
         public TauntActionSO SO;
-        
         
         private TickTimer _startTauntTimer;
         private bool _isTaunting;
@@ -38,7 +36,6 @@ namespace Actions
             _isStartTaunting = false;
             MakeActionEvent?.Invoke();
             UpdateManager.Register(this);
-      
         }
 
         public override void SetupAction(params object[] arguments)
@@ -46,9 +43,7 @@ namespace Actions
             _startTauntTimer = new TickTimer(SO.StartTime, (TickManager)arguments[0]);
             _hypeService = (IHypeService)arguments[1];
         }
-
-
-
+        
         public void TryCancelTaunt()
         {
             if (_isTaunting)
@@ -79,7 +74,6 @@ namespace Actions
             EndActionEvent?.Invoke();
         }
         
-
         public void OnUpdate()
         {
             _hypeService.IncreaseHypePlayer(SO.HypeAmount * Time.deltaTime);
@@ -88,6 +82,14 @@ namespace Actions
         private void OnDisable()
         {
             UpdateManager.UnRegister(this);
+        }
+
+        public override void UnlinkAction()
+        {
+            base.UnlinkAction();
+            UpdateManager.UnRegister(this);
+            _startTauntTimer.ResetEvents();
+            _startTauntTimer.Cancel();
         }
     }
 }
