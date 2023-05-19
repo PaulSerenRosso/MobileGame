@@ -22,6 +22,11 @@ namespace Player.Handler
         {
             return tauntPlayerAction;
         }
+        
+        public bool CheckIsTaunting()
+        {
+            return !GetAction().IsInAction;
+        }
 
         public override void InitializeAction()
         {

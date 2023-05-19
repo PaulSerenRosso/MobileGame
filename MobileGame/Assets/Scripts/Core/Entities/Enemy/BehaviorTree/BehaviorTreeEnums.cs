@@ -20,12 +20,13 @@ public class BehaviorTreeEnums
         PlayerTransform,
         GridManager,
         TickManager,
-        PlayerHandlerMovement,
+        PlayerMovementHandler,
         PoolService,
         HypeService,
         PlayerRenderer,
         PlayerController,
-        UICanvasService
+        UICanvasService,
+        PlayerTauntHandler
     }
 
     public enum HypeFunctionMode

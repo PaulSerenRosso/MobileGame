@@ -6,6 +6,7 @@ namespace Service.Fight
     {
         public void StartFight(string environmentAddressableName, string enemyAddressableName, bool isDebugFight, bool isTutorialFight);
         public void QuitFight();
+        void QuitFightTutorial(bool value);
         public bool GetFightTutorial();
 
         public void ActivatePause(Action callback);

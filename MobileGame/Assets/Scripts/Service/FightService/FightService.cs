@@ -155,7 +155,7 @@ namespace Service.Fight
         private void EndFight()
         {
             ResetEntities();
-            EndFightEvent.Invoke(_isPlayerWon);
+            EndFightEvent?.Invoke(_isPlayerWon);
         }
 
         #region Generate Fight

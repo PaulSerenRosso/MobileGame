@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace BehaviorTree.SO.Actions
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Data/Checks/PlayerIsDodgingDataSO", fileName = "new Tree_CH_PlayerIsDodging_Spe_Data")]
-    public class CheckPlayerIsDodgingNodeDataSO : ActionNodeDataSO
+    [CreateAssetMenu(menuName = "BehaviorTree/Data/Checks/PlayerIsMovingDataSO",
+        fileName = "new Tree_CH_PlayerIsMoving_Spe_Data")]
+    public class CheckPlayerIsMovingNodeDataSO : ActionNodeDataSO
     {
         protected override void SetDependencyValues()
         {
@@ -14,7 +15,7 @@ namespace BehaviorTree.SO.Actions
 
         public override Type GetTypeNode()
         {
-            return typeof(CheckPlayerIsDodgingNode);
+            return typeof(CheckPlayerIsMovingNode);
         }
     }
 }
