@@ -10,7 +10,7 @@ namespace Service.Fight
         void ResetTournament();
         void SetPlayerCurrentFight(TournamentStep tournamentStep);
         bool CompareState(FightState stateToCompare);
-        bool GetSet();
+        bool GetTournamentIsActive();
         List<string> GetFakeNames();
         Fight GetFightStep(TournamentStep tournamentStep);
         Fight GetCurrentFightPlayer();

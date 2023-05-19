@@ -304,7 +304,7 @@ namespace Service.Fight
 
         public void QuitFightTutorial(bool value)
         {
-            QuitFight();
+            ActivatePause(QuitFight);
         }
     }
 }

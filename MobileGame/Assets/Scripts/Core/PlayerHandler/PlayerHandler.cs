@@ -38,6 +38,9 @@ namespace Player.Handler
 
         public abstract void Setup(params object[] arguments);
 
-        public abstract void Unlink();
+        public virtual void Unlink()
+        {
+            GetAction().UnlinkAction();
+        }
     }
 }

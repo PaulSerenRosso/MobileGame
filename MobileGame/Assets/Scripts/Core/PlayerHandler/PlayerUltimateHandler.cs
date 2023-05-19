@@ -36,7 +36,8 @@ public class PlayerUltimateHandler : PlayerHandler
 
     public override void Unlink()
     {
-        
+        ActivateUltimateEvent = null;
+        DeactivateUltimateEvent = null;
     }
 
     private void DeactivateInputUltimate()

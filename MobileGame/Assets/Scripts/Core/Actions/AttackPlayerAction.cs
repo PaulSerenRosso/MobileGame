@@ -23,7 +23,6 @@ namespace Actions
 
         public event Action HitDamagedEvent;
         public event Action<HitSO> CancelAnimationEvent;
-
         public event Action<HitSO> MakeActionAnimationEvent;
         public event Action InitCancelAttackEvent;
         public event Action InitBeforeHitEvent;
@@ -148,6 +147,20 @@ namespace Actions
             AttackTimer.TickEvent += BreakCombo;
             AttackTimer.Initiate();
             EndActionEvent?.Invoke();
+        }
+
+        public override void UnlinkAction()
+        {
+            base.UnlinkAction();
+            HitDamagedEvent = null;
+            CancelAnimationEvent = null;
+            MakeActionAnimationEvent = null;
+            InitCancelAttackEvent = null;
+            InitBeforeHitEvent = null;
+            EndRecoveryEvent = null;
+            CheckCanDamageEvent = null;
+            AttackTimer.ResetEvents();
+            AttackTimer.Cancel();
         }
     }
 }

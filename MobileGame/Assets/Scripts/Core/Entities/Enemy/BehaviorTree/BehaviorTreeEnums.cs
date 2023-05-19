@@ -53,7 +53,8 @@ public class BehaviorTreeEnums
         NONE,
         CALLBACK,
         BOOL,
-        STRING
+        STRING,
+        VECTOR3LIST
     }
 
     public enum InternValuePropertyType

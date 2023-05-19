@@ -29,7 +29,6 @@ namespace Player.Handler
             {
                 if (_allActionsWhichRecord[i].IsInAction)
                 {
-                   
                     SendRecordAction(args);
                     return true;
                 }

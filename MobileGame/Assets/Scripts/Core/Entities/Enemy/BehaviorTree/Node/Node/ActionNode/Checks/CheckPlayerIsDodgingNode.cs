@@ -4,7 +4,7 @@ using Player.Handler;
 
 namespace BehaviorTree.Nodes.Actions
 {
-    public class CheckPlayerIsDodgingNode: ActionNode
+    public class CheckPlayerIsDodgingNode : ActionNode
     {
         private CheckPlayerIsDodgingNodeSO _so;
         private CheckPlayerIsDodgingNodeDataSO _data;

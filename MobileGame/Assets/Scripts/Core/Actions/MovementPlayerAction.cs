@@ -63,5 +63,13 @@ namespace Actions
         {
             transform.position = Destination;
         }
+
+        public override void UnlinkAction()
+        {
+            base.UnlinkAction();
+            ReachDestinationEvent = null;
+            MakeUpdateEvent = null;
+            FixedUpdateManager.UnRegister(this);
+        }
     }
 }

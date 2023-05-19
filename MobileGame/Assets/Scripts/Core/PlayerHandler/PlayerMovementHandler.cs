@@ -171,10 +171,10 @@ namespace Player.Handler
             _recoveryTimer = new TickTimer(_cooldownTimeBetweenTwoMovement, (TickManager)arguments[3]);
             _recoveryTimer.TickEvent += FinishCooldown;
             _recoveryTimer.InitiateEvent += LaunchCooldownBetweenTwoMovement;
-            _dodgeTimer = new TickTimer(_dodgeTime, (TickManager)arguments[3]);
-            _dodgeTimer.TickEvent += FinishDodging;
-            _dodgeTimer.InitiateEvent += LaunchDodge;
-            movementPlayerAction.MakeActionEvent += _dodgeTimer.Initiate;
+            // _dodgeTimer = new TickTimer(_dodgeTime, (TickManager)arguments[3]);
+            // _dodgeTimer.TickEvent += FinishDodging;
+            // _dodgeTimer.InitiateEvent += LaunchDodge;
+            // movementPlayerAction.MakeActionEvent += _dodgeTimer.Initiate;
             movementPlayerAction.ReachDestinationEvent += _recoveryTimer.Initiate;
             FinishRecoveryMovementEvent += CheckActionsBlockedRecord;
             GetAction().SetupAction(_currentMovePoint.MeshRenderer.transform.position);
@@ -192,11 +192,16 @@ namespace Player.Handler
 
         public override void Unlink()
         {
+            base.Unlink();
             foreach (var movementSwipeSO in _allMovementSwipesSO)
             {
                 _inputService.RemoveSwipe(movementSwipeSO);
             }
 
+            MakeActionEvent = null;
+            FinishRecoveryMovementEvent = null;
+            _recoveryTimer.ResetEvents();
+            _recoveryTimer.Cancel();
             RemoteConfigManager.UnRegisterRemoteConfigurable(this);
         }
 
