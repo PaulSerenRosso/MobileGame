@@ -72,6 +72,7 @@ namespace Service.UI
 
             foreach (var enemyGlobalSo in gameService.GlobalSettingsSO.AllEnemyGlobalSO)
             {
+                if (enemyGlobalSo.enemyAdressableName.Contains("Tutorial")) continue;
                 var button = Instantiate(_enemyButton, _enemySelectionGrid.transform);
                 button.onClick.AddListener(() => SetEnemyAddressableName(enemyGlobalSo.enemyAdressableName));
                 button.image.sprite = enemyGlobalSo.Sprite;

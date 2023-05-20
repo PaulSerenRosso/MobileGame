@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Addressables;
 using Attributes;
 using HelperPSR.Collections;
-using UnityEngine;
 
 namespace Service.Items
 {
@@ -69,7 +68,7 @@ namespace Service.Items
             }
             else
             {
-                _playerItemsLinker.RemoveTShirt();
+                _playerItemsLinker.RemoveShort();
             }
         }
 
