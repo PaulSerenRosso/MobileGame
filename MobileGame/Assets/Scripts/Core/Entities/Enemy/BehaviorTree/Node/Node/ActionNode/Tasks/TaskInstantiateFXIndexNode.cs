@@ -31,7 +31,7 @@ namespace BehaviorTree.Nodes.Actions
             GameObject gameObject = _pool.GetFromPool();
             var index = (int)Sharer.InternValues[_so.InternValues[0].HashCode];
             gameObject.transform.position = _gridManager.MovePoints[index].MeshRenderer.transform.position + new Vector3(0, 1, 0);
-            _pool.AddToPoolLatter(gameObject, 5f);
+            _gridManager.StartCoroutine(_pool.AddToPoolLatter(gameObject, 5f));
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();
         }

@@ -5052,6 +5052,7 @@ MonoBehaviour:
   - {fileID: 169635548301635626}
   - {fileID: 1717764375971292754}
   - {fileID: 4557624730345092549}
+  _ghostTrail: {fileID: 7443049158626927852}
   _movementRecoveryAnimationClip: {fileID: 7400000, guid: c91389c39d842cc4190ea8be0836798a,
     type: 2}
   _dirParameterName: Direction
@@ -5109,15 +5110,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27d902fa78554b847a0e8cb6f8f3aba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  perfectDodge: 0
-  activeTime: 2
-  meshRefreshRate: 0.1
-  meshDestroyDelay: 3
-  positionToSpawn: {fileID: 5258500676255778547}
-  mat: {fileID: 2100000, guid: 8c98487c56aa00a4f882c865a614097b, type: 2}
-  shaderVarRef: _Alpha
-  shaderVarRate: 0.1
-  shaderVarRefreshRate: 0.05
+  _ghostGO: {fileID: 6189762597105401895, guid: 8523bf186fa400a498ac665eac783501,
+    type: 3}
+  _activeTime: 0.3
+  _meshRefreshRate: 0.025
+  _meshDisableDelay: 0.5
 --- !u!1 &8755845569173248904
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ namespace BehaviorTree.SO.Actions
         
         protected override void SetDependencyValues()
         {
-            
+            EnemyValues = new[] { BehaviorTreeEnums.TreeEnemyValues.EnemyManager };
         }
 
         public override Type GetTypeNode()
