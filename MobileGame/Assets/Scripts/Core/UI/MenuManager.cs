@@ -64,7 +64,7 @@ namespace Service.UI
             _tournaments[_actualTournament].SetActive(true);
             _leftArrowTournament.interactable = false;
             _homeButton.interactable = false;
-            if (_tournamentService.GetTournamentIsActive())
+            if (_tournamentService.GetTournamentIsActive() && _tournamentService.GetCurrentFightPlayer().FightState != FightState.WAITING)
             {
                 _menuTournamentManager.SetupMenu(_gameService, _tournamentService, this, _currencyService);
                 OpenTournamentUI();
