@@ -61,7 +61,7 @@ namespace Player
 
         private void ResetEndMovementAnimationParameter()
         {
-            // AnimSetBool(_endMovementParameterName, false);
+            AnimSetBool(_endMovementParameterName, false);
             _movementPlayerAction.EndActionEvent += ResetMovementPlayerAnimation;
         }
 
