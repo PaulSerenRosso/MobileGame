@@ -1,5 +1,6 @@
 ﻿using System;
 using Actions;
+using Core.Entities;
 using Player.Handler;
 using UnityEngine;
 
@@ -17,6 +18,7 @@ namespace Player
         [SerializeField] private PlayerUltimateHandler playerUltimateHandler;
         [SerializeField] private TauntPlayerAction _tauntPlayerAction;
         [SerializeField] private SkinnedMeshRenderer[] _skinnedMeshRenderers;
+        [SerializeField] private GhostTrail _ghostTrail;
 
         public void Init()
         {
@@ -29,7 +31,9 @@ namespace Player
             _movementPlayerAction.MakeActionEvent += ResetEndMovementAnimationParameter;
             playerUltimateHandler.ActivateUltimateEvent += ActivateFX;
             playerUltimateHandler.DeactivateUltimateEvent += DeactivateFX;
-            //SetRecoverySpeedAnimation();
+            _ghostTrail.InitGhostTrail();
+            _playerMovementHandler.MakeActionEvent += _ghostTrail.ActivateTrail;
+            // SetRecoverySpeedAnimation();
             // _tauntAction.MakeActionEvent += ActivateTauntFX;
             // _tauntAction.CancelActionEvent += DeactivateTauntFX;
         }

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
-using Environment.MoveGrid;
 using HelperPSR.Pool;
 using UnityEngine;
 
@@ -11,6 +10,7 @@ namespace BehaviorTree.Nodes.Actions
         private TaskInstantiateFXVectorNodeSO _so;
         private TaskInstantiateFXVectorNodeDataSO _data;
         private Pool<GameObject> _pool;
+        private EnemyManager _enemyManager;
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
@@ -31,7 +31,7 @@ namespace BehaviorTree.Nodes.Actions
             {
                 GameObject gameObject = _pool.GetFromPool();
                 gameObject.transform.position = movePointPositions[i];
-                _pool.AddToPoolLatter(gameObject, 5f);
+                _enemyManager.StartCoroutine(_pool.AddToPoolLatter(gameObject, 5f));
             }
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();
@@ -42,6 +42,7 @@ namespace BehaviorTree.Nodes.Actions
             Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
         {
             _pool = new Pool<GameObject>(_data.ParticleGO, _data.Count);
+            _enemyManager = (EnemyManager)enemyDependencyValues[BehaviorTreeEnums.TreeEnemyValues.EnemyManager];
         }
 
         public override ActionNodeDataSO GetDataSO()
