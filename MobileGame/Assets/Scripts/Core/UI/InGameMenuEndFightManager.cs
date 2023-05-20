@@ -32,7 +32,7 @@ namespace Service.UI
             if (isPlayerWin)
             {
                 int expAmount = _tournamentService.GetSettings()
-                    .ExpAmountWhenWinStepTournament[(int)_tournamentService.GetCurrentFightPlayer().FightState];
+                    .ExpAmountWhenWinStepTournament[(int)_tournamentService.GetCurrentFightPlayer().TournamentStep];
                 expAmountText.text = "+"+ expAmount.ToString();
                 _currencyService.AddXP(expAmount);
                 //endFightTitle.text = endFightTitlePlayerVictoryName;
@@ -40,7 +40,7 @@ namespace Service.UI
             else
             {
                 int expAmount = _tournamentService.GetSettings()
-                    .ExpAmountWhenLoseStepTournament[(int)_tournamentService.GetCurrentFightPlayer().FightState];
+                    .ExpAmountWhenLoseStepTournament[(int)_tournamentService.GetCurrentFightPlayer().TournamentStep];
                 expAmountText.text = "+"+ expAmount.ToString();
                 _currencyService.AddXP(expAmount);
                 //endFightTitle.text = endFightTitlePlayerLoseName;
