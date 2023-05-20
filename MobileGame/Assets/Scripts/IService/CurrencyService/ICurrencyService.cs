@@ -18,6 +18,9 @@ public interface ICurrencyService : IService
 
     event Action<int> OnAddCoins;
     event Action<int> OnRemoveCoins;
+    
+    event Action<int> OnAddXP;
+  
 
     void RemoveCoins(int amount);
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using Service.Currency;
 using Service.Fight;
 using TMPro;
 using UnityEngine;
@@ -34,16 +35,17 @@ namespace Service.UI
         [SerializeField] private Canvas _pubCanvas;
         [SerializeField] private Canvas _winTournament;
         [SerializeField] private Canvas _defeatTournament;
-
+        [SerializeField] private TextMeshProUGUI _winTournamentText;
         private IGameService _gameService;
         private ITournamentService _tournamentService;
         private Fight.Fight[] _fights;
         private List<string> _fakeNames;
         private MenuManager _menuManager;
         private string _enemyAddressableName;
+        private ICurrencyService _currencyService;
         private string _environmentAddressableName;
 
-        public void SetupMenu(IGameService gameService, ITournamentService tournamentService, MenuManager menuManager)
+        public void SetupMenu(IGameService gameService, ITournamentService tournamentService, MenuManager menuManager, ICurrencyService currencyService)
         {
             _gameService = gameService;
             _tournamentService = tournamentService;
@@ -51,6 +53,7 @@ namespace Service.UI
             _fights = _tournamentService.GetFights();
             _fakeNames = _tournamentService.GetFakeNames();
             SetTournamentNames();
+            _currencyService = currencyService;
         }
 
         private void SetTournamentNames()
@@ -144,7 +147,6 @@ namespace Service.UI
             {
                 imageFinalWinner.color = Color.green;
             }
-
             _tournamentQuarterCanvas.gameObject.SetActive(true);
             _tournamentDemiCanvas.gameObject.SetActive(true);
             _tournamentFinalCanvas.gameObject.SetActive(true);
@@ -153,7 +155,18 @@ namespace Service.UI
             _tournamentDemiParent.DOAnchorPos(new Vector2(-1920, 0), 5f)
                 .OnComplete(() => _tournamentDemiCanvas.gameObject.SetActive(false));
             _tournamentFinalParent.DOAnchorPos(new Vector2(0, 0), 5f)
-                .OnComplete(() => _winTournament.gameObject.SetActive(true));
+                .OnComplete( ActivateWinTournamentCanvas);
+        }
+
+        private void ActivateWinTournamentCanvas()
+        {
+            _winTournamentText.text = "+" + _tournamentService.GetSettings().CoinsAmountWhenWinTournament.ToString();
+            _winTournament.gameObject.SetActive(true);
+        }
+
+        private void GainEndTournamentCoins()
+        {
+            _currencyService.AddCoins(_tournamentService.GetSettings().CoinsAmountWhenWinTournament);
         }
 
         public void DeactivateUITournament()
@@ -177,6 +190,7 @@ namespace Service.UI
             _defeatTournament.gameObject.SetActive(false);
             _winTournament.gameObject.SetActive(false);
             _tournamentService.ResetTournament();
+            GainEndTournamentCoins();
             BackMenu();
         }
 

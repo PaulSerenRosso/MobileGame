@@ -15,6 +15,8 @@ namespace Service.Fight
         Fight GetFightStep(TournamentStep tournamentStep);
         Fight GetCurrentFightPlayer();
         Fight[] GetFights();
+
+        TournamentSettingsSO GetSettings();
     }
     
     public class Fight

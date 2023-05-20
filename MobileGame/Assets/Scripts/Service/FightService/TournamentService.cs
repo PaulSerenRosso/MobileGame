@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Addressables;
+using Attributes;
 using UnityEngine;
 using HelperPSR;
 using HelperPSR.Collections;
@@ -14,21 +16,23 @@ namespace Service.Fight
         private Fight[] _fights = new Fight[3];
         private TournamentStep _playerCurrentStep;
         private bool _isSet;
+        private TournamentSettingsSO _so;
 
-        private List<string> _fakeNames = new()
-        {
-            "moxxi42",
-            "enitic34",
-            "kayz98",
-            "coco63",
-            "oneshoot16",
-            "turlupin55",
-            "wetime87",
-            "eraz03"
-        };
+   
 
         private List<string> _orderFakeNames;
 
+        [ServiceInit]
+        private void Init()
+        {
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<TournamentSettingsSO>("TournamentSettingsSO", SetSO);
+        }
+
+        private void SetSO(TournamentSettingsSO so)
+        {
+            _so = so;
+        }
+        
         public void Setup(EnvironmentSO[] environmentSOs, EnemyGlobalSO[] enemyGlobalSOs)
         {
             _environmentSOs = environmentSOs;
@@ -76,6 +80,11 @@ namespace Service.Fight
             return _fights;
         }
 
+        public TournamentSettingsSO GetSettings()
+        {
+            return _so;
+        }
+
         public void SetTournament()
         {
             if (!_isSet)
@@ -99,10 +108,10 @@ namespace Service.Fight
                 CollectionHelper.ShuffleArray(ref random, randIndex);
                 _orderFakeNames = new List<string>(4)
                 {
-                    _fakeNames[randIndex[0]],
-                    _fakeNames[randIndex[1]],
-                    _fakeNames[randIndex[2]],
-                    _fakeNames[randIndex[3]]
+                    _so.FakeNames[randIndex[0]],
+                    _so.FakeNames[randIndex[1]],
+                    _so.FakeNames[randIndex[2]],
+                    _so.FakeNames[randIndex[3]]
                 };
             }
         }
