@@ -29,7 +29,6 @@ namespace Player.Handler
 
         public void TryMakeAttackAction(InputAction.CallbackContext ctx)
         {
-            Debug.Log("attack input");
             TryMakeAction(ctx);
         }
 

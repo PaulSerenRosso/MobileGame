@@ -24,7 +24,6 @@ namespace Actions
             if (!_isTaunting)
             {
                 _isTaunting = true;
-                Debug.Log("is taunting");
                 _startTauntTimer.TickEvent += Taunt;
                 _startTauntTimer.Initiate();
                 _isStartTaunting = true;
@@ -51,13 +50,11 @@ namespace Actions
            
                 if (_isStartTaunting)
                 {
-                    Debug.Log("start cancel ");
                     _startTauntTimer.TickEvent -= Taunt;
                     _startTauntTimer.TickEvent += TickCancelTaunt;
                 }
                 else
                 {
-                    Debug.Log("cancel");
                     _startTauntTimer.TickEvent -= Taunt;
                     CancelTaunt();
                 }
@@ -66,14 +63,12 @@ namespace Actions
 
         private void TickCancelTaunt()
         {
-            Debug.Log("tick cancel taunt");
             CancelTaunt();
             _startTauntTimer.TickEvent -= TickCancelTaunt;
         }
 
         private void CancelTaunt()
         {
-            Debug.Log("cancel taunt");
             _isTaunting = false;
             UpdateManager.UnRegister(this);
             EndActionEvent?.Invoke();
