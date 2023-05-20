@@ -1,21 +1,20 @@
 ﻿using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
-using Player;
 using UnityEngine;
 
 namespace BehaviorTree.Nodes.Actions
 {
-    public class TaskShaderDamageSetIntPlayerNode : ActionNode
+    public class TaskShaderSetIntNode : ActionNode
     {
-        private TaskShaderDamageSetIntPlayerNodeSO _so;
-        private TaskShaderDamageSetIntPlayerNodeDataSO _data;
-        private PlayerRenderer _playerRenderer;
+        private TaskShaderSetIntNodeSO _so;
+        private TaskShaderSetIntNodeDataSO _data;
+        private EnemyManager _enemyManager;
         private SkinnedMeshRenderer[] _skinnedMeshRenderers;
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
-            _so = (TaskShaderDamageSetIntPlayerNodeSO)nodeSO;
-            _data = (TaskShaderDamageSetIntPlayerNodeDataSO)_so.Data;
+            _so = (TaskShaderSetIntNodeSO)nodeSO;
+            _data = (TaskShaderSetIntNodeDataSO)_so.Data;
         }
 
         public override NodeSO GetNodeSO()
@@ -38,8 +37,8 @@ namespace BehaviorTree.Nodes.Actions
             Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
             Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
         {
-            _playerRenderer = (PlayerRenderer)externDependencyValues[BehaviorTreeEnums.TreeExternValues.PlayerRenderer];
-            _skinnedMeshRenderers = _playerRenderer.GetSkinnedMeshRenderers();
+            _enemyManager = (EnemyManager)enemyDependencyValues[BehaviorTreeEnums.TreeEnemyValues.EnemyManager];
+            _skinnedMeshRenderers = _enemyManager.GetSkinnedMeshRenderers();
         }
 
         public override ActionNodeDataSO GetDataSO()
