@@ -60,6 +60,7 @@ namespace Service.Fight
 
         public void ActivatePause(Action callback)
         {
+            ResetEntities();
             _playerController.LockController();
             _enemyManager.StopTree(callback);
             ActivatePauseEvent?.Invoke();
