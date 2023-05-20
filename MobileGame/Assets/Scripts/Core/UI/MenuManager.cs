@@ -42,12 +42,15 @@ namespace Service.UI
         [SerializeField] private Button _rightArrowTournament;
 
         [SerializeField] private Canvas _unlockTournament;
+        
+        
 
         private int _actualTournament;
         private IGameService _gameService;
         private ITournamentService _tournamentService;
         private string _nextEnvironmentAddressableName;
         private string _nextEnemyAddressableName;
+        private ICurrencyService _currencyService;
 
         public void SetupMenu(IGameService gameService, ITournamentService tournamentService,
             ICurrencyService currencyService, IItemsService itemsService, IShopService shopService, PlayerItemsLinker playerItemsLinker)
@@ -55,6 +58,7 @@ namespace Service.UI
             _gameService = gameService;
             _tournamentService = tournamentService;
             _menuTopManager.SetUp(currencyService);
+            _currencyService = currencyService;
             _menuInventoryManager.Setup(itemsService, playerItemsLinker);
             _menuShopManager.SetUp(itemsService, currencyService, shopService);
             _tournaments[_actualTournament].SetActive(true);
@@ -140,7 +144,7 @@ namespace Service.UI
             }
 
             if (!_tournamentService.GetTournamentIsActive()) _tournamentService.SetTournament();
-            _menuTournamentManager.SetupMenu(_gameService, _tournamentService, this);
+            _menuTournamentManager.SetupMenu(_gameService, _tournamentService, this, _currencyService);
             OpenTournamentUI();
         }
 

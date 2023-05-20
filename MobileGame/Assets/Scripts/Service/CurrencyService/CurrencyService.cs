@@ -31,6 +31,7 @@ public class CurrencyService : ICurrencyService
     public void AddXP(int amount)
     {
         currentXp += amount;
+        OnAddXP?.Invoke(currentXp);
     }
 
     public void AddCoins(int amount)
@@ -41,6 +42,8 @@ public class CurrencyService : ICurrencyService
 
     public event Action<int> OnAddCoins;
     public event Action<int> OnRemoveCoins;
+    public event Action<int> OnAddXP;
+  
 
     public void RemoveCoins(int amount)
     {
