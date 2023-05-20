@@ -16,7 +16,7 @@ public class InGameMenuManager : MonoBehaviour
     public void SetupMenu(IFightService fightService, IHypeService hypeService, ITournamentService tournamentService,
         ICurrencyService currencyService)
     {
-        _inGameMenuHypeManager.Init(hypeService);
+        _inGameMenuHypeManager.Init(hypeService, fightService);
         _inGameMenuRoundManager.Init(fightService);
         _inGameMenuEndFightManager.Init(fightService, currencyService, tournamentService);
         _fightService = fightService;

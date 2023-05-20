@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Addressables;
 using Attributes;
 using Environment.MoveGrid;
@@ -52,10 +53,16 @@ namespace Service.Fight
         private GridSO _gridSo;
         private string _enemyAddressableName;
         private string _environmentAddressableName;
+        private EnemyGlobalSO _enemyGlobalSO;
 
         public bool GetFightTutorial()
         {
             return _isTutorialFight;
+        }
+
+        public EnemyGlobalSO GetEnemySO()
+        {
+            return _enemyGlobalSO;
         }
 
         public void ActivatePause(Action callback)
@@ -204,6 +211,7 @@ namespace Service.Fight
             var enemy = Object.Instantiate(gameObject);
             Release(gameObject);
             _enemyManager = enemy.GetComponent<EnemyManager>();
+            _enemyGlobalSO = _gameService.GlobalSettingsSO.AllEnemyGlobalSO.First(enemy => enemy.enemyAdressableName == _enemyAddressableName);
             _enemyManager.CanUltimateEvent += LaunchUltimateEnemyCinematic;
             _playerController.SetupPlayer(_inputService, _tickeableService, _gridManager,
                 _gridSo, _enemyManager, _hypeService);
@@ -219,7 +227,6 @@ namespace Service.Fight
             _cameraController = camera.GetComponent<CameraController>();
             _cameraController.Setup(_playerController.transform, _enemyManager.transform);
             _canvasService.LoadInGameMenu();
-            
         }
 
         private void LoadCinematicFightManager()

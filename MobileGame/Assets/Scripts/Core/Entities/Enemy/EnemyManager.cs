@@ -18,6 +18,7 @@ public class EnemyManager : MonoBehaviour, IRemoteConfigurable, IHypeable
     public EnemyEnums.EnemyMobilityState CurrentMobilityState;
     public EnemyEnums.EnemyBlockingState CurrentBlockingState;
     public EnemyInGameSO EnemyInGameSo;
+    public EnemyGlobalSO EnemyGlobalSO;
 
     [SerializeField] private Tree.Tree _tree;
     [SerializeField] private string _remoteConfigAngleBlock;

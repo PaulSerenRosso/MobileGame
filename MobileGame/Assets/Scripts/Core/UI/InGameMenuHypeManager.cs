@@ -1,5 +1,6 @@
 using System;
 using HelperPSR.MonoLoopFunctions;
+using Service.Fight;
 using Service.Hype;
 using UnityEngine;
 using UnityEngine.UI;
@@ -38,6 +39,7 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
 
     private Sprite _hypeLogoEnemy;
     private IHypeService _hypeService;
+    private IFightService _fightService;
 
     private float _timerHypeTauntPlayer;
     private float _timerHypeAttackPlayer;
@@ -51,9 +53,12 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
         UpdateManager.UnRegister(this);
     }
 
-    public void Init(IHypeService hypeService)
+    public void Init(IHypeService hypeService, IFightService fightService)
     {
         _hypeService = hypeService;
+        _fightService = fightService;
+        _hypeLogoEnemy = _fightService.GetEnemySO().Sprite;
+        _hypeFillEnemyLogo.sprite = _hypeLogoEnemy;
         hypeService.GetEnemyDecreaseHypeEvent += SetEnemySliderValue;
         hypeService.GetEnemyDecreaseHypeEvent += SetEnemySliderDecreaseOutline;
         hypeService.GetEnemyIncreaseHypeEvent += SetEnemySliderValue;
