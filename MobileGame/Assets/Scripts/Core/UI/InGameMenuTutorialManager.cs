@@ -16,12 +16,15 @@ namespace Service.UI
         [SerializeField] private GameObject _tauntOverlayPanel;
         [SerializeField] private GameObject _ultimateOverlayPanel;
 
+        [SerializeField] private GameObject _debugPanel;
+
         private IFightService _fightService;
         
         public void Init(IFightService fightService)
         {
             _fightService = fightService;
             gameObject.SetActive(true);
+            _debugPanel.SetActive(true);
             _fightService.ActivatePausePlayer();
             _fightService.DeactivatePauseEvent += OpenIntroPopup;
             _fightService.ActivatePauseEvent += DeactivateOverlays;
