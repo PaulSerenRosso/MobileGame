@@ -13,7 +13,7 @@ namespace BehaviorTree.SO.Actions
         
         protected override void SetDependencyValues()
         {
-            ExternValues = new[] { BehaviorTreeEnums.TreeExternValues.PlayerRenderer };
+            
         }
 
         public override Type GetTypeNode()

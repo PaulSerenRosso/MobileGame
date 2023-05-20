@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace BehaviorTree.SO.Actions
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/ShaderDamageSetIntPlayerNodeDataSO",
-        fileName = "new Tree_T_ShaderDamageSetIntPlayer_Spe_Data")]
-    public class TaskShaderDamageSetIntPlayerNodeDataSO : ActionNodeDataSO
+    [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/ShaderSetIntPlayerNodeDataSO",
+        fileName = "new Tree_T_ShaderSetIntPlayer_Spe_Data")]
+    public class TaskShaderSetIntPlayerNodeDataSO : ActionNodeDataSO
     {
         public string ReferenceNameValue;
         public int IntValue;
@@ -18,7 +18,7 @@ namespace BehaviorTree.SO.Actions
 
         public override Type GetTypeNode()
         {
-            return typeof(TaskShaderDamageSetIntPlayerNode);
+            return typeof(TaskShaderSetIntPlayerNode);
         }
     }
 }
