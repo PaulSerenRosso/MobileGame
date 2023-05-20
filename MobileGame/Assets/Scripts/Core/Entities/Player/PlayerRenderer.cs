@@ -11,6 +11,7 @@ namespace Player
         
         [SerializeField] private AttackPlayerAction _attackPlayerAction;
         [SerializeField] private MovementPlayerAction _movementPlayerAction;
+        [SerializeField] private ParticleSystem _startUltimateParticle;
         [SerializeField] private ParticleSystem _ultimateParticle;
         [SerializeField] private PlayerMovementHandler _playerMovementHandler;
         [SerializeField] private PlayerUltimateHandler playerUltimateHandler;
@@ -40,10 +41,12 @@ namespace Player
 
         private void ActivateFX()
         {
+            _startUltimateParticle.gameObject.SetActive(true);
             _ultimateParticle.gameObject.SetActive(true);
         }
         private void DeactivateFX()
         {
+            _startUltimateParticle.gameObject.SetActive(false);
             _ultimateParticle.gameObject.SetActive(false);
         }
     }
