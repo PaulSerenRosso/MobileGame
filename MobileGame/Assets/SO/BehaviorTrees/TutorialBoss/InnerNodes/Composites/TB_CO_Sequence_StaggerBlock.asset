@@ -10,19 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a554480369441f643a037b92f1ced7d6, type: 3}
-  m_Name: TB_CO_Sequence_BlockTutorial
+  m_Name: TB_CO_Sequence_StaggerBlock
   m_EditorClassIdentifier: 
   IsDuplicable: 1
   Comment: "S\xE9lectionne un n\u0153ud et v\xE9rifie si le n\u0153ud est un succ\xE8s
     ou est en train de fonctionner et retourne le statut, sinon d\xE9s qu'un n\u0153ud
     retourne un \xE9chec, la sequence retourne un \xE9chec"
   Children:
-  - {fileID: 11400000, guid: 6fbbf477a2cd7814984f7bdb8e24854e, type: 2}
-  - {fileID: 11400000, guid: 87e13198cd5ef374d96d85c23b01f991, type: 2}
-  - {fileID: 11400000, guid: 73fc4e850c0f0044a8f216d2ab9335de, type: 2}
+  - {fileID: 11400000, guid: 3bbe78f49b9b69d48abcbdba70edad32, type: 2}
+  - {fileID: 11400000, guid: 615191c9d54706347905b4bf067b26df, type: 2}
+  - {fileID: 11400000, guid: 58f0be449dd642147b27cea8e50c365d, type: 2}
   - {fileID: 11400000, guid: 57d31c921f76d2d4eb0aa06263b79631, type: 2}
-  - {fileID: 11400000, guid: 87187af95b0198c45a59be3646627726, type: 2}
-  - {fileID: 11400000, guid: 5960ab549635d2647b855a3b91eac77f, type: 2}
-  - {fileID: 11400000, guid: 04024611d13b5d7418168e86d321ea8b, type: 2}
-  - {fileID: 11400000, guid: 50b6923f4738fd24db60984e56e3b1f7, type: 2}
-  - {fileID: 11400000, guid: bab758c1659db4f42a22eef6e2dd8428, type: 2}
+  - {fileID: 11400000, guid: edbb71cc504846040a0a9c0e1cfde961, type: 2}
+  - {fileID: 11400000, guid: 58f0be449dd642147b27cea8e50c365d, type: 2}
+  - {fileID: 11400000, guid: baed98f71ea30424cb99782ec4de0695, type: 2}
+  - {fileID: 11400000, guid: 9b6c0ce878e2aed4b98f9ba3ff10583c, type: 2}
+  - {fileID: 11400000, guid: d040d7c92f4e13c4f82725637ad98f86, type: 2}
+  - {fileID: 11400000, guid: 0aa7680c8c509f54790e2c48ac184737, type: 2}
