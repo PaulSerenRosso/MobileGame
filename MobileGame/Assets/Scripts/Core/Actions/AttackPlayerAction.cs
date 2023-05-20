@@ -42,7 +42,6 @@ namespace Actions
                 AttackTimer.ResetEvents();
             }
 
-            Debug.Log("attack action");
             IsCancelTimeOn = true;
             _isAttacking = true;
             AttackTimer.InitiateEvent += InitiateCancelTimer;

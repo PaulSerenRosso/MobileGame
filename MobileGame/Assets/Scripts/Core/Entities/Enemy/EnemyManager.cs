@@ -1,9 +1,9 @@
 using System;
+using Core.Entities;
 using Cysharp.Threading.Tasks;
 using Enemy;
 using Environment.MoveGrid;
 using HelperPSR.RemoteConfigs;
-using JetBrains.Annotations;
 using Service;
 using Service.Hype;
 using Service.UI;
@@ -20,7 +20,6 @@ public class EnemyManager : MonoBehaviour, IRemoteConfigurable, IHypeable
     public EnemyInGameSO EnemyInGameSo;
 
     [SerializeField] private Tree.Tree _tree;
-    
     [SerializeField] private string _remoteConfigAngleBlock;
     [SerializeField] private string _remoteConfigAngleStun;
     [SerializeField] private string _remoteConfigPercentageDamageReductionBoostChimist;
@@ -30,6 +29,7 @@ public class EnemyManager : MonoBehaviour, IRemoteConfigurable, IHypeable
     [SerializeField] private GameObject[] _particleToReset;
     [SerializeField] private SkinnedMeshRenderer[] _skinnedMeshRenderers;
     [SerializeField] private int _timeShaderActivate = 500;
+    [SerializeField] private GhostTrail _ghostTrail;
 
     private IHypeService _hypeService;
 
@@ -39,6 +39,7 @@ public class EnemyManager : MonoBehaviour, IRemoteConfigurable, IHypeable
         transform.rotation = Quaternion.identity;
         CurrentMobilityState = EnemyEnums.EnemyMobilityState.INVULNERABLE;
         CurrentBlockingState = EnemyEnums.EnemyBlockingState.VULNERABLE;
+        _ghostTrail.InitGhostTrail();
     }
 
     private void OnEnable()
@@ -63,6 +64,11 @@ public class EnemyManager : MonoBehaviour, IRemoteConfigurable, IHypeable
     public SkinnedMeshRenderer[] GetSkinnedMeshRenderers()
     {
         return _skinnedMeshRenderers;
+    }
+
+    public void ActivateGhostTrail(Vector2 direction)
+    {
+        _ghostTrail.ActivateTrail(direction);
     }
 
     private void ActivateFXUltimate(float obj)

@@ -744,6 +744,11 @@ PrefabInstance:
       objectReference: {fileID: 7347612506560858284}
     - target: {fileID: 4796771559047852942, guid: 241ebed0774b86e4f8b4ef2150ead01a,
         type: 3}
+      propertyPath: _ghostTrail
+      value: 
+      objectReference: {fileID: 8169700797074418496}
+    - target: {fileID: 4796771559047852942, guid: 241ebed0774b86e4f8b4ef2150ead01a,
+        type: 3}
       propertyPath: EnemyInGameSo
       value: 
       objectReference: {fileID: 11400000, guid: ebf1cb9d414e3e941bc03eb64a88ea8b,
@@ -910,6 +915,29 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5281984702623568842}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1631409059901265467 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6912617506752955889, guid: 241ebed0774b86e4f8b4ef2150ead01a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5281984702623568842}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8169700797074418496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631409059901265467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27d902fa78554b847a0e8cb6f8f3aba8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ghostGO: {fileID: 4699583927154120315, guid: 963f0e26b77c9454c844c09d9a5e69c1,
+    type: 3}
+  _activeTime: 1
+  _meshRefreshRate: 0.1
+  _meshDisableDelay: 0.8
 --- !u!4 &4244426461217846362 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8334573544675780496, guid: 241ebed0774b86e4f8b4ef2150ead01a,
