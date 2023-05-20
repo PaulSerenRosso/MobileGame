@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using Enemy;
 using Environment.MoveGrid;
 using HelperPSR.RemoteConfigs;
+using JetBrains.Annotations;
 using Service;
 using Service.Hype;
 using Service.UI;
@@ -23,6 +24,7 @@ public class EnemyManager : MonoBehaviour, IRemoteConfigurable, IHypeable
     [SerializeField] private string _remoteConfigAngleBlock;
     [SerializeField] private string _remoteConfigAngleStun;
     [SerializeField] private string _remoteConfigPercentageDamageReductionBoostChimist;
+    [SerializeField] private ParticleSystem _startUltimateParticle;
     [SerializeField] private ParticleSystem _ultimateParticle;
     [SerializeField] private GameObject _blockParticle;
     [SerializeField] private GameObject[] _particleToReset;
@@ -65,11 +67,13 @@ public class EnemyManager : MonoBehaviour, IRemoteConfigurable, IHypeable
 
     private void ActivateFXUltimate(float obj)
     {
+        _startUltimateParticle.gameObject.SetActive(true);
         _ultimateParticle.gameObject.SetActive(true);
     }
 
     private void DeactivateFXUltimate(float obj)
     {
+        _startUltimateParticle.gameObject.SetActive(false);
         _ultimateParticle.gameObject.SetActive(false);
     }
 
