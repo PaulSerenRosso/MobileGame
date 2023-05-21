@@ -29,20 +29,29 @@ namespace Service.UI
         private void ActivateEndFightPanel(bool isPlayerWin)
         {
             endFightPanel.SetActive(true);
+            int expAmount = 0;
+            expAmountText.text = "+" + expAmount;
             if (isPlayerWin)
             {
-                int expAmount = _tournamentService.GetSettings()
-                    .ExpAmountWhenWinStepTournament[(int)_tournamentService.GetCurrentFightPlayer().TournamentStep];
-                expAmountText.text = "+"+ expAmount.ToString();
-                _currencyService.AddXP(expAmount);
+                if (!_fightService.GetFightTutorial() && !_fightService.GetFightDebug())
+                {
+                    expAmount = _tournamentService.GetSettings()
+                        .ExpAmountWhenWinStepTournament[(int)_tournamentService.GetCurrentFightPlayer().TournamentStep];
+                    expAmountText.text = "+" + expAmount;
+                    _currencyService.AddXP(expAmount);
+                }
                 //endFightTitle.text = endFightTitlePlayerVictoryName;
             }
             else
             {
-                int expAmount = _tournamentService.GetSettings()
-                    .ExpAmountWhenLoseStepTournament[(int)_tournamentService.GetCurrentFightPlayer().TournamentStep];
-                expAmountText.text = "+"+ expAmount.ToString();
-                _currencyService.AddXP(expAmount);
+                if (!_fightService.GetFightTutorial() && !_fightService.GetFightDebug())
+                {
+                    expAmount = _tournamentService.GetSettings()
+                        .ExpAmountWhenLoseStepTournament[
+                            (int)_tournamentService.GetCurrentFightPlayer().TournamentStep];
+                    expAmountText.text = "+" + expAmount;
+                    _currencyService.AddXP(expAmount);
+                }
                 //endFightTitle.text = endFightTitlePlayerLoseName;
             }
         }

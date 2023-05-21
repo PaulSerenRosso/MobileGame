@@ -45,7 +45,7 @@ namespace Service.Fight
         private int _enemyRoundCount;
         private int _playerRoundCount;
         private TickTimer _tickTimerInitRound;
-        private const float _roundInitTimer = 3f;
+        private const float _roundInitTimer = 2f;
         private CinematicFightManager _cinematicFightManager;
         private bool _isPlayerWon;
         private bool _isDebugFight;
@@ -58,6 +58,11 @@ namespace Service.Fight
         public bool GetFightTutorial()
         {
             return _isTutorialFight;
+        }
+
+        public bool GetFightDebug()
+        {
+            return _isDebugFight;
         }
 
         public EnemyGlobalSO GetEnemySO()
@@ -163,6 +168,24 @@ namespace Service.Fight
         private void EndFight()
         {
             ResetEntities();
+            if (!_isDebugFight && !_isTutorialFight)
+            {
+                Fight currentFight = _tournamentService.GetCurrentFightPlayer();
+                if (_isPlayerWon)
+                {
+                    currentFight.FightState = FightState.VICTORY;
+                    switch (currentFight.TournamentStep)
+                    {
+                        case TournamentStep.QUARTER:
+                            _tournamentService.SetPlayerCurrentFight(TournamentStep.DEMI);
+                            break;
+                        case TournamentStep.DEMI: 
+                            _tournamentService.SetPlayerCurrentFight(TournamentStep.FINAL);
+                            break;
+                    }
+                }
+                else currentFight.FightState = FightState.DEFEAT;
+            }
             EndFightEvent?.Invoke(_isPlayerWon);
         }
 
@@ -276,25 +299,6 @@ namespace Service.Fight
 
         public void QuitFight()
         {
-            if (!_isDebugFight && !_isTutorialFight)
-            {
-                Fight currentFight = _tournamentService.GetCurrentFightPlayer();
-                if (_isPlayerWon)
-                {
-                    currentFight.FightState = FightState.VICTORY;
-                    switch (currentFight.TournamentStep)
-                    {
-                        case TournamentStep.QUARTER:
-                            _tournamentService.SetPlayerCurrentFight(TournamentStep.DEMI);
-                            break;
-                        case TournamentStep.DEMI: 
-                            _tournamentService.SetPlayerCurrentFight(TournamentStep.FINAL);
-                            break;
-                    }
-                    
-                }
-                else currentFight.FightState = FightState.DEFEAT;
-            }
             _playerRoundCount = 0;
             _enemyRoundCount = 0;
             _isPlayerWon = false;
@@ -312,6 +316,11 @@ namespace Service.Fight
 
         public void QuitFightTutorial(bool value)
         {
+            if (_tickTimerInitRound != null)
+            {
+                _tickTimerInitRound.ResetEvents();
+                _tickTimerInitRound.Cancel();
+            }
             ActivatePause(QuitFight);
         }
     }

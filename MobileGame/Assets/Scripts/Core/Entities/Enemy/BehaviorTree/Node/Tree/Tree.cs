@@ -8,7 +8,6 @@ using BehaviorTree.SO.Composite;
 using BehaviorTree.SO.Decorator;
 using Cysharp.Threading.Tasks;
 using Environment.MoveGrid;
-using Player;
 using Service;
 using Service.Hype;
 using Service.UI;
@@ -20,6 +19,8 @@ namespace BehaviorTree.Trees
     public class Tree : MonoBehaviour
     {
         public List<Node> ResetNodeList = new();
+        public event Action OnStopTreeEvent;
+        public event Action OnReplayTreeEvent;
 
         [SerializeField] private NodeSO _rootSO;
         [SerializeField] private NodeValuesInitializer _nodeValuesInitializer;
@@ -33,6 +34,8 @@ namespace BehaviorTree.Trees
             _nodeValuesInitializer.Setup(playerTransform, tickeableService, gridManager, poolService, hypeService, uiCanvasSwitchableService);
             _root = Node.CreateNodeSO(_rootSO);
             _root.Tree = this;
+            OnStopTreeEvent += _root.Stop;
+            OnReplayTreeEvent += _root.Replay;
             switch (_rootSO)
             {
                 case CompositeSO compositeSO:
@@ -67,6 +70,8 @@ namespace BehaviorTree.Trees
         {
             var node = Node.CreateNodeSO(childSO);
             node.Tree = this;
+            OnStopTreeEvent += node.Stop;
+            OnReplayTreeEvent += node.Replay;
             return node;
         }
 
@@ -122,10 +127,11 @@ namespace BehaviorTree.Trees
 
         public void StopTree()
         {
-            foreach (var node in ResetNodeList)
-            {
-                node.Stop();
-            }
+            OnStopTreeEvent?.Invoke();
+            // foreach (var node in ResetNodeList)
+            // {
+            //     node.Stop();
+            // }
         }
 
         public async void ResetTree(Action callback)
@@ -141,10 +147,11 @@ namespace BehaviorTree.Trees
 
         public void ReplayTree()
         {
-            foreach (var node in ResetNodeList)
-            {
-                node.Replay();
-            }
+            OnReplayTreeEvent?.Invoke();
+            // foreach (var node in ResetNodeList)
+            // {
+            //     node.Replay();
+            // }
             _root.Evaluate();
         }
     }

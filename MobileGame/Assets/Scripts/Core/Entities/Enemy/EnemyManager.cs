@@ -94,7 +94,7 @@ public class EnemyManager : MonoBehaviour, IRemoteConfigurable, IHypeable
 
     public void ResetEnemy()
     {
-        transform.position = new Vector3(0, 0, 0);
+        transform.position = Vector3.zero;
         transform.rotation = Quaternion.identity;
         CurrentMobilityState = EnemyEnums.EnemyMobilityState.INVULNERABLE;
         CurrentBlockingState = EnemyEnums.EnemyBlockingState.VULNERABLE;
@@ -208,6 +208,7 @@ public class EnemyManager : MonoBehaviour, IRemoteConfigurable, IHypeable
         foreach (var skinnedMeshRenderer in _skinnedMeshRenderers)
         {
             skinnedMeshRenderer.material.SetInt("_TakeDamage", 0);
+            skinnedMeshRenderer.material.SetInt("_Vulnerable", 0);
             if (skinnedMeshRenderer.material.HasInt("_BlueTexture"))
             {
                 skinnedMeshRenderer.material.SetInt("_BlueTexture", 0);
