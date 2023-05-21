@@ -31,7 +31,7 @@ namespace BehaviorTree.Nodes.Actions
             {
                 GameObject gameObject = _pool.GetFromPool();
                 gameObject.transform.position = movePointPositions[i];
-                _enemyManager.StartCoroutine(_pool.AddToPoolLatter(gameObject, 5f));
+                _enemyManager.StartCoroutine(_pool.AddToPoolLatter(gameObject, _data.Lifetime));
             }
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();

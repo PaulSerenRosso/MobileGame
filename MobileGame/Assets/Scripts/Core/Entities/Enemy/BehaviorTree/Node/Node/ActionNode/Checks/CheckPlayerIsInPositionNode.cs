@@ -25,10 +25,20 @@ namespace BehaviorTree.Nodes.Actions
         {
             base.Evaluate();
             Vector3[] movePointPositions = ((List<Vector3>)Sharer.InternValues[_so.InternValues[0].HashCode]).ToArray();
+            if (movePointPositions.Length < 1)
+            {
+                State = BehaviorTreeEnums.NodeState.FAILURE;
+                ReturnedEvent?.Invoke();
+                return;
+            }
             for (int i = 0; i < movePointPositions.Length; i++)
             {
                 if (Vector3.Distance(_playerTransform.position, movePointPositions[i]) < _data.Radius)
                 {
+                    Debug.Log($"movePointPosition : {movePointPositions[i]}");
+                    Debug.Log($"playerPosition: {_playerTransform.position}");
+                    Debug.Log($"distance: {Vector3.Distance(_playerTransform.position, movePointPositions[i])}");
+                    Debug.Log($"PlayerIsInPuddle");
                     State = BehaviorTreeEnums.NodeState.SUCCESS;
                     ReturnedEvent?.Invoke();
                     return;
