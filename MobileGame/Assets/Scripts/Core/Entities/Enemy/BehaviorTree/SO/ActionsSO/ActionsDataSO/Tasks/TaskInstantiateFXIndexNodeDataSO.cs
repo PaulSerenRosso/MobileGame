@@ -10,6 +10,7 @@ namespace BehaviorTree.SO.Actions
     {
         public GameObject ParticleGO;
         public int Count;
+        public float Lifetime;
         
         protected override void SetDependencyValues()
         {
