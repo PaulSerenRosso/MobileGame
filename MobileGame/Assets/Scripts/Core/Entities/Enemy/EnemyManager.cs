@@ -94,7 +94,7 @@ public class EnemyManager : MonoBehaviour, IRemoteConfigurable, IHypeable
 
     public void ResetEnemy()
     {
-        transform.position = new Vector3(0, 0, 0);
+        transform.position = Vector3.zero;
         transform.rotation = Quaternion.identity;
         CurrentMobilityState = EnemyEnums.EnemyMobilityState.INVULNERABLE;
         CurrentBlockingState = EnemyEnums.EnemyBlockingState.VULNERABLE;

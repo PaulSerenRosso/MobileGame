@@ -64,10 +64,13 @@ namespace Service.UI
             _tournaments[_actualTournament].SetActive(true);
             _leftArrowTournament.interactable = false;
             _homeButton.interactable = false;
-            if (_tournamentService.GetTournamentIsActive() && _tournamentService.GetCurrentFightPlayer().FightState != FightState.WAITING)
+            if (_tournamentService.GetTournamentIsActive())
             {
-                _menuTournamentManager.SetupMenu(_gameService, _tournamentService, this, _currencyService);
-                OpenTournamentUI();
+                if (_tournamentService.GetCurrentFightPlayer().FightState != FightState.WAITING)
+                {
+                    _menuTournamentManager.SetupMenu(_gameService, _tournamentService, this, _currencyService);
+                    OpenTournamentUI();   
+                }
             }
 
             foreach (var enemyGlobalSo in gameService.GlobalSettingsSO.AllEnemyGlobalSO)
