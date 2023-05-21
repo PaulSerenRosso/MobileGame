@@ -8,6 +8,7 @@ namespace Service.Fight
         public void QuitFight();
         void QuitFightTutorial(bool value);
         public bool GetFightTutorial();
+        public bool GetFightDebug();
         public EnemyGlobalSO GetEnemySO();
 
         public void ActivatePause(Action callback);

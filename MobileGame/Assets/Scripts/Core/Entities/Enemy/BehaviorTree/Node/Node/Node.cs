@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 using Tree = BehaviorTree.Trees.Tree;
 
 namespace BehaviorTree.Nodes

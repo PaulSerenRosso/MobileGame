@@ -208,6 +208,7 @@ public class EnemyManager : MonoBehaviour, IRemoteConfigurable, IHypeable
         foreach (var skinnedMeshRenderer in _skinnedMeshRenderers)
         {
             skinnedMeshRenderer.material.SetInt("_TakeDamage", 0);
+            skinnedMeshRenderer.material.SetInt("_Vulnerable", 0);
             if (skinnedMeshRenderer.material.HasInt("_BlueTexture"))
             {
                 skinnedMeshRenderer.material.SetInt("_BlueTexture", 0);

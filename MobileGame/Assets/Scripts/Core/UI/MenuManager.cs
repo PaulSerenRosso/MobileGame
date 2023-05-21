@@ -42,21 +42,21 @@ namespace Service.UI
         [SerializeField] private Button _rightArrowTournament;
 
         [SerializeField] private Canvas _unlockTournament;
-        
-        
 
         private int _actualTournament;
         private IGameService _gameService;
         private ITournamentService _tournamentService;
+        private IFightService _fightService;
         private string _nextEnvironmentAddressableName;
         private string _nextEnemyAddressableName;
         private ICurrencyService _currencyService;
 
         public void SetupMenu(IGameService gameService, ITournamentService tournamentService,
-            ICurrencyService currencyService, IItemsService itemsService, IShopService shopService, PlayerItemsLinker playerItemsLinker)
+            ICurrencyService currencyService, IItemsService itemsService, IShopService shopService, PlayerItemsLinker playerItemsLinker, IFightService fightService)
         {
             _gameService = gameService;
             _tournamentService = tournamentService;
+            _fightService = fightService;
             _menuTopManager.SetUp(currencyService);
             _currencyService = currencyService;
             _menuInventoryManager.Setup(itemsService, playerItemsLinker);
@@ -64,13 +64,10 @@ namespace Service.UI
             _tournaments[_actualTournament].SetActive(true);
             _leftArrowTournament.interactable = false;
             _homeButton.interactable = false;
-            if (_tournamentService.GetTournamentIsActive())
+            _menuTournamentManager.SetupMenu(_gameService, _tournamentService, this, _currencyService);
+            if (!_fightService.GetFightTutorial() && !_fightService.GetFightDebug())
             {
-                if (_tournamentService.GetCurrentFightPlayer().FightState != FightState.WAITING)
-                {
-                    _menuTournamentManager.SetupMenu(_gameService, _tournamentService, this, _currencyService);
-                    OpenTournamentUI();   
-                }
+                OpenTournamentUI();   
             }
 
             foreach (var enemyGlobalSo in gameService.GlobalSettingsSO.AllEnemyGlobalSO)
@@ -150,9 +147,7 @@ namespace Service.UI
                 _unlockTournament.gameObject.SetActive(true);
                 return;
             }
-
-            if (!_tournamentService.GetTournamentIsActive()) _tournamentService.SetTournament();
-            _menuTournamentManager.SetupMenu(_gameService, _tournamentService, this, _currencyService);
+            
             OpenTournamentUI();
         }
 

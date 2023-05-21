@@ -50,7 +50,7 @@ namespace Service.UI
         {
             _mainMenu = Object.Instantiate(gameObject);
             _mainMenu.GetComponent<MenuManager>().SetupMenu(_gameService, _tournamentService, _currencyService,
-                _itemsService, _shopService, _playerItemsLinker);
+                _itemsService, _shopService, _playerItemsLinker, _fightService);
             Release(gameObject);
         }
 

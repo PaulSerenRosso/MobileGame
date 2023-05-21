@@ -35,10 +35,6 @@ namespace BehaviorTree.Nodes.Actions
             {
                 if (Vector3.Distance(_playerTransform.position, movePointPositions[i]) < _data.Radius)
                 {
-                    Debug.Log($"movePointPosition : {movePointPositions[i]}");
-                    Debug.Log($"playerPosition: {_playerTransform.position}");
-                    Debug.Log($"distance: {Vector3.Distance(_playerTransform.position, movePointPositions[i])}");
-                    Debug.Log($"PlayerIsInPuddle");
                     State = BehaviorTreeEnums.NodeState.SUCCESS;
                     ReturnedEvent?.Invoke();
                     return;

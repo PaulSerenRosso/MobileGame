@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Service.Currency;
 using Service.Fight;
@@ -12,6 +13,7 @@ namespace Service.UI
     public class MenuTournamentManager : MonoBehaviour
     {
         [SerializeField] private Button _playFightButton;
+        [SerializeField] private Button _backMenuButton;
 
         [SerializeField] private Canvas _tournamentButtonsCanvas;
         [SerializeField] private Canvas _tournamentQuarterCanvas;
@@ -24,7 +26,7 @@ namespace Service.UI
         [SerializeField] private Image[] _imageQuarterWinners;
         [SerializeField] private Image[] _imageDemiWinners;
         [SerializeField] private Image[] _imageFinalWinners;
-        
+
         [SerializeField] private TextMeshProUGUI _quarterName;
         [SerializeField] private TextMeshProUGUI[] _demiNames;
         [SerializeField] private TextMeshProUGUI[] _finalNames;
@@ -36,6 +38,7 @@ namespace Service.UI
         [SerializeField] private Canvas _winTournament;
         [SerializeField] private Canvas _defeatTournament;
         [SerializeField] private TextMeshProUGUI _winTournamentText;
+        
         private IGameService _gameService;
         private ITournamentService _tournamentService;
         private Fight.Fight[] _fights;
@@ -45,14 +48,20 @@ namespace Service.UI
         private ICurrencyService _currencyService;
         private string _environmentAddressableName;
 
-        public void SetupMenu(IGameService gameService, ITournamentService tournamentService, MenuManager menuManager, ICurrencyService currencyService)
+        public void SetupMenu(IGameService gameService, ITournamentService tournamentService, MenuManager menuManager,
+            ICurrencyService currencyService)
         {
             _gameService = gameService;
             _tournamentService = tournamentService;
             _menuManager = menuManager;
+            if (!_tournamentService.GetTournamentIsActive()) _tournamentService.SetTournament();
             _fights = _tournamentService.GetFights();
             _fakeNames = _tournamentService.GetFakeNames();
             SetTournamentNames();
+            UpdateCurrentFightUI();
+            if (_tournamentService.CompareState(FightState.DEFEAT)) _defeatTournament.gameObject.SetActive(true);
+            else if (_tournamentService.CompareState(FightState.WAITING)) UpdateCurrentFightUI();
+            else ActivateWinnerUI();
             _currencyService = currencyService;
         }
 
@@ -84,18 +93,29 @@ namespace Service.UI
         public void UpdateUITournament()
         {
             _tournamentButtonsCanvas.gameObject.SetActive(true);
-            _tournamentQuarterCanvas.gameObject.SetActive(true);
-            if (_tournamentService.CompareState(FightState.DEFEAT)) _defeatTournament.gameObject.SetActive(true);
-            else if (_tournamentService.CompareState(FightState.WAITING)) UpdateCurrentFightUI();
-            else ActivateWinnerUI();
+            switch (_tournamentService.GetCurrentFightPlayer().TournamentStep)
+            {
+                case TournamentStep.QUARTER : 
+                    _tournamentQuarterCanvas.gameObject.SetActive(true);
+                    break;
+                case TournamentStep.DEMI :
+                    _tournamentDemiCanvas.gameObject.SetActive(true);
+                    break;
+                case TournamentStep.FINAL :
+                    _tournamentFinalCanvas.gameObject.SetActive(true);
+                    break;
+            }
+            
         }
 
-        private void UpdateCurrentFightUI()
+        private async void UpdateCurrentFightUI()
         {
             Fight.Fight currentFight = _tournamentService.GetCurrentFightPlayer();
             switch (currentFight.TournamentStep)
             {
                 case TournamentStep.DEMI:
+                    _playFightButton.interactable = false;
+                    _backMenuButton.interactable = false;
                     foreach (var imageQuarterWinner in _imageQuarterWinners)
                     {
                         imageQuarterWinner.color = Color.green;
@@ -103,12 +123,16 @@ namespace Service.UI
 
                     _tournamentQuarterCanvas.gameObject.SetActive(true);
                     _tournamentDemiCanvas.gameObject.SetActive(true);
+                    await UniTask.Delay(2000);
                     _tournamentQuarterParent.DOAnchorPos(new Vector2(-1920, 0), 5f)
                         .OnComplete(() => _tournamentQuarterCanvas.gameObject.SetActive(false));
-                    _tournamentDemiParent.DOAnchorPos(new Vector2(0, 0), 5f);
+                    _tournamentDemiParent.DOAnchorPos(new Vector2(0, 0), 5f)
+                        .OnComplete(ActivateButtons);
                     break;
-                
+
                 case TournamentStep.FINAL:
+                    _playFightButton.interactable = false;
+                    _backMenuButton.interactable = false;
                     foreach (var imageQuarterWinner in _imageQuarterWinners)
                     {
                         imageQuarterWinner.color = Color.green;
@@ -122,17 +146,20 @@ namespace Service.UI
                     _tournamentQuarterCanvas.gameObject.SetActive(true);
                     _tournamentDemiCanvas.gameObject.SetActive(true);
                     _tournamentFinalCanvas.gameObject.SetActive(true);
+                    await UniTask.Delay(2000);
                     _tournamentQuarterParent.DOAnchorPos(new Vector2(-3840, 0), 5f)
                         .OnComplete(() => _tournamentQuarterCanvas.gameObject.SetActive(false));
                     _tournamentDemiParent.DOAnchorPos(new Vector2(-1920, 0), 5f)
                         .OnComplete(() => _tournamentDemiCanvas.gameObject.SetActive(false));
-                    _tournamentFinalParent.DOAnchorPos(new Vector2(0, 0), 5f);
+                    _tournamentFinalParent.DOAnchorPos(new Vector2(0, 0), 5f)
+                        .OnComplete(ActivateButtons);
                     break;
             }
         }
 
-        private void ActivateWinnerUI()
+        private async void ActivateWinnerUI()
         {
+            _playFightButton.interactable = false;
             foreach (var imageQuarterWinner in _imageQuarterWinners)
             {
                 imageQuarterWinner.color = Color.green;
@@ -147,21 +174,30 @@ namespace Service.UI
             {
                 imageFinalWinner.color = Color.green;
             }
+
             _tournamentQuarterCanvas.gameObject.SetActive(true);
             _tournamentDemiCanvas.gameObject.SetActive(true);
             _tournamentFinalCanvas.gameObject.SetActive(true);
+            await UniTask.Delay(2000);
             _tournamentQuarterParent.DOAnchorPos(new Vector2(-3840, 0), 5f)
                 .OnComplete(() => _tournamentQuarterCanvas.gameObject.SetActive(false));
             _tournamentDemiParent.DOAnchorPos(new Vector2(-1920, 0), 5f)
                 .OnComplete(() => _tournamentDemiCanvas.gameObject.SetActive(false));
             _tournamentFinalParent.DOAnchorPos(new Vector2(0, 0), 5f)
-                .OnComplete( ActivateWinTournamentCanvas);
+                .OnComplete(ActivateWinTournamentCanvas);
         }
 
         private void ActivateWinTournamentCanvas()
         {
-            _winTournamentText.text = "+" + _tournamentService.GetSettings().CoinsAmountWhenWinTournament.ToString();
+            ActivateButtons();
+            _winTournamentText.text = "+" + _tournamentService.GetSettings().CoinsAmountWhenWinTournament;
             _winTournament.gameObject.SetActive(true);
+        }
+
+        private void ActivateButtons()
+        {
+            _playFightButton.interactable = true;
+            _backMenuButton.interactable = true;
         }
 
         private void GainEndTournamentCoins()
@@ -199,7 +235,7 @@ namespace Service.UI
             DeactivateUITournament();
             _menuManager.ActivateHome();
         }
-        
+
         public void LaunchPub()
         {
             _defeatTournament.gameObject.SetActive(false);
