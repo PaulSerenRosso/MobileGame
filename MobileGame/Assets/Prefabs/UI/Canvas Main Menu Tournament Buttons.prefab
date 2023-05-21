@@ -116,6 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playFightButton: {fileID: 5843123857928318043}
+  _backMenuButton: {fileID: 0}
   _tournamentButtonsCanvas: {fileID: 6497639914791163200}
   _tournamentQuarterCanvas: {fileID: 0}
   _tournamentQuarterParent: {fileID: 0}
@@ -133,10 +134,6 @@ MonoBehaviour:
   - {fileID: 0}
   _imageFinalWinners:
   - {fileID: 0}
-  _quarterPlayerNames:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   _quarterName: {fileID: 0}
   _demiNames:
   - {fileID: 0}
@@ -145,7 +142,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  _quarterFakeNames: []
+  _demiFakeNames: []
+  _pubCanvas: {fileID: 0}
   _winTournament: {fileID: 0}
+  _defeatTournament: {fileID: 0}
+  _winTournamentText: {fileID: 0}
 --- !u!1 &1981735771569170844
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,7 +483,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Play
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -618,8 +620,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 28accf987471243de9eeea99726d5122, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
