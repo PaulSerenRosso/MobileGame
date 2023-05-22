@@ -29,7 +29,7 @@ namespace Service
         [ServiceInit]
         private void Initialize()
         {
-            Application.targetFrameRate = 60;
+            Application.targetFrameRate = 30;
             QualitySettings.vSyncCount = 0;
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GlobalSettingsGameSO>("GlobalSettingsGame",
                 LoadGlobalSettingsSO);

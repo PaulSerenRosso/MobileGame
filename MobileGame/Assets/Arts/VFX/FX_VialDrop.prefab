@@ -19595,7 +19595,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 1.2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -23149,7 +23149,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 4
     type: 0
     collisionMode: 0
@@ -24324,7 +24324,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e43e826cd1964654cb1189ef50bf8cb1, type: 2}
+  - {fileID: 2100000, guid: 1776e1a2cd951bc43ab8ffc93884f23a, type: 2}
   - {fileID: 2100000, guid: a3e9bf5cc769ad44899b03f9a5c160fc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -28047,7 +28047,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 4
     type: 0
     collisionMode: 0
@@ -30234,7 +30234,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 30
+        scalar: 5
         minScalar: 30
         maxCurve:
           serializedVersion: 2
