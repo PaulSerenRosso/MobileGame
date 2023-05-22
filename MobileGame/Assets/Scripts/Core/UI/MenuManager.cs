@@ -1,4 +1,5 @@
 using DG.Tweening;
+using HelperPSR.MonoLoopFunctions;
 using Service.Currency;
 using Service.Fight;
 using Service.Items;
@@ -50,16 +51,19 @@ namespace Service.UI
         private string _nextEnvironmentAddressableName;
         private string _nextEnemyAddressableName;
         private ICurrencyService _currencyService;
+        private GameObject _player;
 
         public void SetupMenu(IGameService gameService, ITournamentService tournamentService,
-            ICurrencyService currencyService, IItemsService itemsService, IShopService shopService, PlayerItemsLinker playerItemsLinker, IFightService fightService)
+            ICurrencyService currencyService, IItemsService itemsService, IShopService shopService,
+            GameObject player, IFightService fightService)
         {
             _gameService = gameService;
             _tournamentService = tournamentService;
             _fightService = fightService;
             _menuTopManager.SetUp(currencyService);
             _currencyService = currencyService;
-            _menuInventoryManager.Setup(itemsService, playerItemsLinker);
+            _player = player;
+            _menuInventoryManager.Setup(itemsService, _player,  player.GetComponentInChildren<PlayerItemsLinker>());
             _menuShopManager.SetUp(itemsService, currencyService, shopService);
             _tournaments[_actualTournament].SetActive(true);
             _leftArrowTournament.interactable = false;
@@ -67,7 +71,11 @@ namespace Service.UI
             _menuTournamentManager.SetupMenu(_gameService, _tournamentService, this, _currencyService);
             if (!_fightService.GetFightTutorial() && !_fightService.GetFightDebug())
             {
-                OpenTournamentUI();   
+                _playTournamentButton.interactable = false;
+                _tournamentCanvas.SetActive(false);        
+                _topCanvas.gameObject.SetActive(false);    
+                _botCanvas.gameObject.SetActive(false);    
+                _menuTournamentManager.OpenUITournament();
             }
 
             foreach (var enemyGlobalSo in gameService.GlobalSettingsSO.AllEnemyGlobalSO)
@@ -95,6 +103,8 @@ namespace Service.UI
 
         public void ActivateHome()
         {
+            UpdateManager.UnRegister(_menuInventoryManager);  
+            _player.SetActive(false); 
             _tournamentCanvas.SetActive(true);
             _backgroundCanvas.gameObject.SetActive(true);
             _debugFightCanvas.SetActive(false);
@@ -147,7 +157,7 @@ namespace Service.UI
                 _unlockTournament.gameObject.SetActive(true);
                 return;
             }
-            
+
             OpenTournamentUI();
         }
 
@@ -177,7 +187,7 @@ namespace Service.UI
                 for (int i = _actualTournament - 1; i >= 0; i--)
                 {
                     _tournaments[i].GetComponent<RectTransform>()
-                        .DOAnchorPos(new Vector2(1920 * (i - _actualTournament), 0), 2f);
+                        .DOAnchorPos(new Vector2(1920 * (i - _actualTournament), 0), 1f);
                 }
 
                 _tournaments[_actualTournament].SetActive(true);
@@ -185,7 +195,7 @@ namespace Service.UI
                 for (int i = _actualTournament + 1; i < _tournaments.Length; i++)
                 {
                     _tournaments[i].GetComponent<RectTransform>()
-                        .DOAnchorPos(new Vector2(1920 * (i - _actualTournament), 0), 2f);
+                        .DOAnchorPos(new Vector2(1920 * (i - _actualTournament), 0), 1f);
                 }
             }
         }
@@ -222,6 +232,8 @@ namespace Service.UI
 
         public void OpenShop()
         {
+            UpdateManager.UnRegister(_menuInventoryManager);
+            _player.SetActive(false);
             _tournamentCanvas.SetActive(false);
             _backgroundCanvas.gameObject.SetActive(true);
             _inventoryCanvas.gameObject.SetActive(false);
@@ -233,6 +245,8 @@ namespace Service.UI
 
         public void OpenInventory()
         {
+            UpdateManager.Register(_menuInventoryManager);
+            _player.SetActive(true);
             _tournamentCanvas.SetActive(false);
             _backgroundCanvas.gameObject.SetActive(false);
             _inventoryCanvas.gameObject.SetActive(true);

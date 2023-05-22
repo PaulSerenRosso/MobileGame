@@ -19,12 +19,12 @@ namespace Service
 
         [DependsOnService] private ITournamentService _tournamentService;
 
+        private GlobalSettingsGameSO _globalSettingsSO;
+
         public GlobalSettingsGameSO GlobalSettingsSO
         {
             get => _globalSettingsSO;
         }
-
-        private GlobalSettingsGameSO _globalSettingsSO;
 
         [ServiceInit]
         private void Initialize()
@@ -34,7 +34,8 @@ namespace Service
                 LoadGlobalSettingsSO);
         }
 
-        public void LoadGameScene(string environmentAddressableName, string enemyAddressableName, bool isDebugFight, bool isTutorialFight)
+        public void LoadGameScene(string environmentAddressableName, string enemyAddressableName, bool isDebugFight,
+            bool isTutorialFight)
         {
             _sceneService.LoadScene();
             _fightService.StartFight(environmentAddressableName, enemyAddressableName, isDebugFight, isTutorialFight);
@@ -51,7 +52,6 @@ namespace Service
             _globalSettingsSO = so;
             _tournamentService.Setup(GlobalSettingsSO.AllEnvironmentsSO,
                 GlobalSettingsSO.AllEnemyGlobalSO);
-            // LoadMainMenuScene();
             LoadGameScene("Coliseum", "ArnoldiosTutorialPrefab", false, true);
         }
     }

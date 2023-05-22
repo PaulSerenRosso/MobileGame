@@ -6,30 +6,43 @@ using UnityEngine.UI;
 
 namespace Service.UI
 {
-    public class MenuInventoryManager : MonoBehaviour
+    public class MenuInventoryManager : MonoBehaviour, IUpdatable
     {
-        [Header("Actual Gear Player")]
+        [Header("Actual Gear Player")] 
         [SerializeField] private Button _hat;
         [SerializeField] private Button _tshirt;
         [SerializeField] private Button _short;
-        
-        [Header("Popup Gear")]
+
+        [Header("Popup Gear")] 
         [SerializeField] private GameObject _itemPopupPanel;
         [SerializeField] private Image _itemPopupImage;
         [SerializeField] private TextMeshProUGUI _itemPopupTitleText;
         [SerializeField] private TextMeshProUGUI _itemPopupDescriptionText;
         [SerializeField] private Button _equipButton;
         [SerializeField] private TextMeshProUGUI _equipButtonText;
-        
-        [Header("Inventory")]
+
+        [Header("Inventory")] 
         [SerializeField] private Button _buttonPrefab;
         [SerializeField] private GridLayoutGroup _gridLayout;
-        
+        [SerializeField] private float _speedRotationPlayer = 0.02f;
+
         private IItemsService _itemsService;
-        
-        public void Setup(IItemsService itemsService, PlayerItemsLinker playerItemsLinker)
+
+        private GameObject _player;
+        private float _screenPosition;
+
+        public void OnUpdate()
+        {
+            if (Input.touchCount <= 0) return;
+            Touch touch = Input.GetTouch(0);
+            if (touch.phase is TouchPhase.Ended) return;
+            _player.transform.Rotate(Vector3.up * touch.deltaPosition.x * _speedRotationPlayer, Space.World);
+        }
+
+        public void Setup(IItemsService itemsService, GameObject player, PlayerItemsLinker playerItemsLinker)
         {
             _itemsService = itemsService;
+            _player = player;
             _itemsService.SetPlayerItemLinker(playerItemsLinker);
             UpdateUIInventory();
         }
