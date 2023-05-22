@@ -90,6 +90,23 @@ namespace Service.UI
             }
         }
 
+        public void OpenUITournament()
+        {
+            _tournamentButtonsCanvas.gameObject.SetActive(true);
+            switch (_tournamentService.GetCurrentFightPlayer().TournamentStep)
+            {
+                case TournamentStep.QUARTER :
+                    _tournamentQuarterCanvas.gameObject.SetActive(true);
+                    break;
+                case TournamentStep.DEMI :
+                    _tournamentDemiCanvas.gameObject.SetActive(true);
+                    break;
+                case TournamentStep.FINAL :
+                    _tournamentFinalCanvas.gameObject.SetActive(true);
+                    break;
+            }
+        }
+
         public void UpdateUITournament()
         {
             _tournamentButtonsCanvas.gameObject.SetActive(true);
@@ -114,7 +131,6 @@ namespace Service.UI
                     _tournamentFinalCanvas.gameObject.SetActive(true);
                     break;
             }
-            
         }
 
         private async void UpdateCurrentFightUI()

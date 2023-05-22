@@ -23,7 +23,7 @@ namespace Service.UI
         [DependsOnService] private IShopService _shopService;
         
         private GameObject _mainMenu;
-        private PlayerItemsLinker _playerItemsLinker;
+        private GameObject _player;
         private GameObject _inGameMenu;
         private InGameMenuTutorialManager _inGameTutorialMenu;
 
@@ -36,21 +36,23 @@ namespace Service.UI
         {
             var environment = Object.Instantiate(gameObject);
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("PlayerRenderer", GeneratePlayerRenderer);
+            Release(gameObject);
         }
 
         private void GeneratePlayerRenderer(GameObject gameObject)
         {
-            var player = Object.Instantiate(gameObject);
-            player.transform.eulerAngles = new Vector3(0, -180, 0);
-            _playerItemsLinker = player.GetComponent<PlayerItemsLinker>();
+            _player = Object.Instantiate(gameObject);
+            _player.transform.eulerAngles = new Vector3(0, -180, 0);
+            _player.SetActive(false);
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("MainMenu", GenerateMainMenu);
+            Release(gameObject);
         }
 
         private void GenerateMainMenu(GameObject gameObject)
         {
             _mainMenu = Object.Instantiate(gameObject);
             _mainMenu.GetComponent<MenuManager>().SetupMenu(_gameService, _tournamentService, _currencyService,
-                _itemsService, _shopService, _playerItemsLinker, _fightService);
+                _itemsService, _shopService, _player, _fightService);
             Release(gameObject);
         }
 
@@ -91,13 +93,9 @@ namespace Service.UI
 
         public event Action InitCanvasEvent;
 
-        public void EnabledService()
-        {
-        }
+        public void EnabledService() { }
 
-        public void DisabledService()
-        {
-        }
+        public void DisabledService() { }
 
         public bool GetIsActiveService { get; }
     }
