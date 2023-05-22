@@ -86,11 +86,12 @@ Material:
     - _TakeDamage: 0
     - _TakeDamageFlashSpeed: 0
     - _Vulnerable: 0
-    - _VulnerableFresnelSize: 3
+    - _VulnerableFlashSpeed: 2
+    - _VulnerableFresnelSize: 5
     - _VulnerablePower: 30
     - _YellowTexture: 0
     m_Colors:
     - _DamageColor: {r: 1, g: 0.2688679, b: 0.2688679, a: 1}
     - _GlowLineColor: {r: 0, g: 0, b: 0, a: 1}
-    - _VulnerableColor: {r: 1, g: 0.550563, b: 0, a: 1}
+    - _VulnerableColor: {r: 1, g: 0, b: 0.019385815, a: 1}
   m_BuildTextureStacks: []
