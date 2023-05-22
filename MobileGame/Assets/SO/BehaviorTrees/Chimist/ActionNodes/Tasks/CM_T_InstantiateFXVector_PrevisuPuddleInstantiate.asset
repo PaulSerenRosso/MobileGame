@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67b35bbb04fb4585860ceeda2371c88a, type: 3}
+  m_Name: CM_T_InstantiateFXVector_PrevisuPuddleInstantiate
+  m_EditorClassIdentifier: 
+  IsDuplicable: 1
+  Comment: "N\u0153ud qui permet d'instancier des FXs aux positions"
+  _internValuesCount: 1
+  Data: {fileID: 11400000, guid: b91a81018a666ad4486f97892e8450e2, type: 2}
+  InternValues:
+  - Key: MovePointPositions
+    HashCode: -484309845
+    Type: 7
+    PropertyType: 0
+    Comment: Vector3(List<Vector3>()) vector3 positions
