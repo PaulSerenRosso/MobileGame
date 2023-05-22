@@ -95,13 +95,22 @@ namespace Service.UI
             _tournamentButtonsCanvas.gameObject.SetActive(true);
             switch (_tournamentService.GetCurrentFightPlayer().TournamentStep)
             {
-                case TournamentStep.QUARTER : 
+                case TournamentStep.QUARTER :
+                    _tournamentQuarterParent.DOAnchorPos(new Vector2(0, 0), 0f);
+                    _tournamentDemiParent.DOAnchorPos(new Vector2(1920, 0), 0f);
+                    _tournamentFinalParent.DOAnchorPos(new Vector2(3840, 0), 0f);
                     _tournamentQuarterCanvas.gameObject.SetActive(true);
                     break;
                 case TournamentStep.DEMI :
+                    _tournamentQuarterParent.DOAnchorPos(new Vector2(-1920, 0), 0f);
+                    _tournamentDemiParent.DOAnchorPos(new Vector2(0, 0), 0f);
+                    _tournamentFinalParent.DOAnchorPos(new Vector2(1920, 0), 0f);
                     _tournamentDemiCanvas.gameObject.SetActive(true);
                     break;
                 case TournamentStep.FINAL :
+                    _tournamentQuarterParent.DOAnchorPos(new Vector2(-3840, 0), 0f);
+                    _tournamentDemiParent.DOAnchorPos(new Vector2(-1920, 0), 0f);
+                    _tournamentFinalParent.DOAnchorPos(new Vector2(0, 0), 0f);
                     _tournamentFinalCanvas.gameObject.SetActive(true);
                     break;
             }

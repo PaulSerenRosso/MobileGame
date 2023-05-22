@@ -29,23 +29,23 @@ namespace BehaviorTree.Nodes.Actions
         public override void Evaluate()
         {
             base.Evaluate();
-            var count = (int)(float)Sharer.InternValues[_so.InternValues[0].HashCode];
+            var count = (int)(float)Sharer.InternValues[_so.InternValues[0].HashCode] - 1;
             List<MovePoint> movePoints = new List<MovePoint>(_gridManager.MovePoints);
-            movePoints.RemoveAt(_playerMovementHandler.GetCurrentIndexMovePoint());
+            List<Vector3> movePointPositions = new();
+            movePointPositions.Add(movePoints[_playerMovementHandler.GetCurrentIndexMovePoint()].MeshRenderer.transform.position);
             for (int i = movePoints.Count - 1; i >= 0 ; i--)
             {
                 if (movePoints[i].IsOccupied) movePoints.RemoveAt(i);
             }
 
             movePoints.ShuffleList();
-            List<Vector3> _movePointPositions = new();
             if (count > movePoints.Count) count = movePoints.Count;
             for (int i = 0; i < count; i++)
             {
-                _movePointPositions.Add(movePoints[i].MeshRenderer.transform.position);
+                movePointPositions.Add(movePoints[i].MeshRenderer.transform.position);
             }
             
-            CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[1].HashCode, _movePointPositions);
+            CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[1].HashCode, movePointPositions);
 
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();
