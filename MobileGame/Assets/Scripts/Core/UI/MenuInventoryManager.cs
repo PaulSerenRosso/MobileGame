@@ -24,7 +24,7 @@ namespace Service.UI
         [Header("Inventory")] 
         [SerializeField] private Button _buttonPrefab;
         [SerializeField] private GridLayoutGroup _gridLayout;
-        [SerializeField] private float _speedRotationPlayer = 0.02f;
+        [SerializeField] private float _speedRotationPlayer = 0.2f;
 
         private IItemsService _itemsService;
 
