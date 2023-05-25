@@ -76,7 +76,7 @@ namespace Service.UI
             _menuTopManager.SetUp(currencyService);
             _currencyService = currencyService;
             _player = player;
-            _menuInventoryManager.Setup(itemsService, _player,  player.GetComponentInChildren<PlayerItemsLinker>());
+            _menuInventoryManager.Setup(itemsService, player.GetComponentInChildren<PlayerItemsLinker>());
             _menuShopManager.SetUp(itemsService, currencyService, shopService);
             _tournaments[_actualTournament].SetActive(true);
             _leftArrowTournament.interactable = false;

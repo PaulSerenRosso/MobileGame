@@ -22,11 +22,11 @@ namespace Service.Items
         private void LoadGlobalSettings(ItemsServiceGlobalSettingsSO so)
         {
             _globalSettingsSO = so;
-            if(_globalSettingsSO.StartItemsSO.Length == 0) return;
             foreach (var itemSO in _globalSettingsSO.UnlockedItemsSO)
             {
                 _unlockItems.Add(itemSO);
             }
+            if(_globalSettingsSO.StartItemsSO.Length == 0) return;
             foreach (var itemSO in _globalSettingsSO.StartItemsSO)
             {
                 SetItemPlayer(itemSO);
@@ -50,17 +50,30 @@ namespace Service.Items
 
         public void LinkItemPlayer()
         {
-            LinkHat();
+            LinkHead();
             LinkShort();
-            LinkTShirt();
+            LinkShirt();
         }
 
-        private void LinkTShirt()
+        private void LinkHead()
         {
-            if (playerItems.ContainsKey(ItemTypeEnum.TShirt))
+            if (playerItems.ContainsKey(ItemTypeEnum.Head))
             {
-                var tshirtItem = (GearSO)playerItems[ItemTypeEnum.TShirt];
-               _playerItemsLinker.SetTShirt(tshirtItem.SpriteTexture.texture);
+                var hatItem = (HatSO)playerItems[ItemTypeEnum.Head];
+                _playerItemsLinker.SetHat(hatItem.PrefabHat);
+            }
+            else
+            {
+                _playerItemsLinker.RemoveHat();
+            }
+        }
+
+        private void LinkShirt()
+        {
+            if (playerItems.ContainsKey(ItemTypeEnum.Shirt))
+            {
+                var shirtItem = (GearSO)playerItems[ItemTypeEnum.Shirt];
+               _playerItemsLinker.SetTShirt(shirtItem.SpriteTexture.texture);
             }
             else
             {
@@ -81,32 +94,19 @@ namespace Service.Items
             }
         }
 
-        private void LinkHat()
+        public Dictionary<ItemTypeEnum, ItemSO> GetPlayerItems()
         {
-            if (playerItems.ContainsKey(ItemTypeEnum.Head))
-            {
-                var hatItem = (HatSO)playerItems[ItemTypeEnum.Head];
-                _playerItemsLinker.SetHat(hatItem.PrefabHat);
-            }
-            else
-            {
-                _playerItemsLinker.RemoveHat();
-            }
+            return playerItems;
         }
 
-        public void SetItemPlayer(ItemSO itemSo)
-        {
-            CollectionHelper.AddOrSet(ref playerItems, itemSo.Type, itemSo);
-        }
-        
         public void SetPlayerItemLinker(PlayerItemsLinker linker)
         {
             _playerItemsLinker = linker;
         }
 
-        public Dictionary<ItemTypeEnum, ItemSO> GetPlayerItems()
+        public void SetItemPlayer(ItemSO itemSo)
         {
-            return playerItems;
+            CollectionHelper.AddOrSet(ref playerItems, itemSo.Type, itemSo);
         }
 
         public void RemoveItemPlayer(ItemTypeEnum typeEnum)

@@ -1,141 +1,55 @@
 ﻿using System.Linq;
 using Service.Items;
-using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace Service.UI
 {
     public class MenuInventoryManager : MonoBehaviour
     {
-        [Header("Actual Gear Player")] 
-        [SerializeField] private Button _hat;
-        [SerializeField] private Button _tshirt;
-        [SerializeField] private Button _short;
+        [SerializeField] private GameObject _headPanel;
+        [SerializeField] private GameObject _shirtPanel;
+        [SerializeField] private GameObject _shortPanel;
 
-        [Header("Popup Gear")] 
-        [SerializeField] private GameObject _itemPopupPanel;
-        [SerializeField] private Image _itemPopupImage;
-        [SerializeField] private TextMeshProUGUI _itemPopupTitleText;
-        [SerializeField] private TextMeshProUGUI _itemPopupDescriptionText;
-        [SerializeField] private Button _equipButton;
-        [SerializeField] private TextMeshProUGUI _equipButtonText;
-
-        [Header("Inventory")] 
-        [SerializeField] private Button _buttonPrefab;
-        [SerializeField] private GridLayoutGroup _gridLayout;
-        [SerializeField] private float _speedRotationPlayer = 0.2f;
+        [SerializeField] private ScrollSnapRect _headScroll;
+        [SerializeField] private ScrollSnapRect _shirtScroll;
+        [SerializeField] private ScrollSnapRect _shortScroll;
 
         private IItemsService _itemsService;
 
-        private GameObject _player;
-        private float _screenPosition;
-
-        public void Setup(IItemsService itemsService, GameObject player, PlayerItemsLinker playerItemsLinker)
+        public void Setup(IItemsService itemsService, PlayerItemsLinker playerItemsLinker)
         {
             _itemsService = itemsService;
-            _player = player;
             _itemsService.SetPlayerItemLinker(playerItemsLinker);
-            UpdateUIInventory();
+            _headScroll.InitializeScroll(
+                _itemsService.GetUnlockedItems().Where(i => i.Type == ItemTypeEnum.Head).ToArray(),
+                _itemsService.GetPlayerItems().FirstOrDefault(i => i.Key == ItemTypeEnum.Head).Value);
+            _shirtScroll.InitializeScroll(
+                _itemsService.GetUnlockedItems().Where(i => i.Type == ItemTypeEnum.Shirt).ToArray(),
+                _itemsService.GetPlayerItems().FirstOrDefault(i => i.Key == ItemTypeEnum.Shirt).Value);
+            _shortScroll.InitializeScroll(
+                _itemsService.GetUnlockedItems().Where(i => i.Type == ItemTypeEnum.Short).ToArray(),
+                _itemsService.GetPlayerItems().FirstOrDefault(i => i.Key == ItemTypeEnum.Short).Value);
         }
 
-        private void UpdateUIInventory()
+        public void OpenHat()
         {
-            foreach (var itemSO in _itemsService.GetUnlockedItems())
-            {
-                var buttonItem = Instantiate(_buttonPrefab, _gridLayout.transform);
-                buttonItem.image.sprite = itemSO.SpriteUI;
-                buttonItem.onClick.AddListener(() => OpenPopupItem(itemSO));
-            }
-
-            foreach (var playerItem in _itemsService.GetPlayerItems())
-            {
-                switch (playerItem.Value.Type)
-                {
-                    case ItemTypeEnum.Head:
-                        _hat.image.sprite = playerItem.Value.SpriteUI;
-                        _hat.onClick.AddListener(() => OpenPopupItem(playerItem.Value));
-                        break;
-                    case ItemTypeEnum.TShirt:
-                        _tshirt.image.sprite = playerItem.Value.SpriteUI;
-                        _tshirt.onClick.AddListener(() => OpenPopupItem(playerItem.Value));
-                        break;
-                    case ItemTypeEnum.Short:
-                        _short.image.sprite = playerItem.Value.SpriteUI;
-                        _short.onClick.AddListener(() => OpenPopupItem(playerItem.Value));
-                        break;
-                }
-            }
+            _headPanel.SetActive(true);
+            _shirtPanel.SetActive(false);
+            _shortPanel.SetActive(false);
         }
 
-        private void OpenPopupItem(ItemSO itemSO)
+        public void OpenShirt()
         {
-            _itemPopupPanel.SetActive(true);
-            _itemPopupImage.sprite = itemSO.SpriteUI;
-            _itemPopupTitleText.text = itemSO.TitleItem;
-            _itemPopupDescriptionText.text = itemSO.DescriptionItem;
-            _equipButton.onClick.RemoveAllListeners();
-            if (_itemsService.GetPlayerItems().Any(playerItem => playerItem.Value == itemSO))
-            {
-                _equipButtonText.text = "Unequip";
-                _equipButton.onClick.AddListener(() => RemoveItemPlayer(itemSO));
-            }
-            else
-            {
-                _equipButtonText.text = "Equip";
-                _equipButton.onClick.AddListener(() => UpdateItemPlayer(itemSO));
-            }
+            _headPanel.SetActive(false);
+            _shirtPanel.SetActive(true);
+            _shortPanel.SetActive(false);
         }
 
-        public void ClosePopupItem()
+        public void OpenShort()
         {
-            _itemPopupPanel.SetActive(false);
-        }
-
-        private void UpdateItemPlayer(ItemSO itemSO)
-        {
-            _equipButton.onClick.RemoveAllListeners();
-            _equipButtonText.text = "Unequip";
-            _equipButton.onClick.AddListener(() => RemoveItemPlayer(itemSO));
-            _itemsService.SetItemPlayer(itemSO);
-            _itemsService.LinkItemPlayer();
-            foreach (var playerItem in _itemsService.GetPlayerItems())
-            {
-                switch (playerItem.Value.Type)
-                {
-                    case ItemTypeEnum.Head:
-                        _hat.image.sprite = playerItem.Value.SpriteUI;
-                        break;
-                    case ItemTypeEnum.TShirt:
-                        _tshirt.image.sprite = playerItem.Value.SpriteUI;
-                        break;
-                    case ItemTypeEnum.Short:
-                        _short.image.sprite = playerItem.Value.SpriteUI;
-                        break;
-                }
-            }
-        }
-
-        private void RemoveItemPlayer(ItemSO itemSO)
-        {
-            _equipButton.onClick.RemoveAllListeners();
-            _equipButtonText.text = "Equip";
-            _equipButton.onClick.AddListener(() => UpdateItemPlayer(itemSO));
-            _itemsService.RemoveItemPlayer(itemSO.Type);
-            _itemsService.LinkItemPlayer();
-            switch (itemSO.Type)
-            {
-                case ItemTypeEnum.Head:
-                    _hat.image.sprite = null;
-                    break;
-                case ItemTypeEnum.TShirt:
-                    _tshirt.image.sprite = null;
-                    break;
-                case ItemTypeEnum.Short:
-                    _short.image.sprite = null;
-                    break;
-            }
+            _headPanel.SetActive(false);
+            _shirtPanel.SetActive(false);
+            _shortPanel.SetActive(true);
         }
     }
 }

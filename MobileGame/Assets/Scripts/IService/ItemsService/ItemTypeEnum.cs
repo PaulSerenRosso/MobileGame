@@ -7,7 +7,7 @@ namespace Service.Items
     public enum ItemTypeEnum
     {
         Short,
-        TShirt,
+        Shirt,
         Head
     }
 }
