@@ -103,10 +103,10 @@ namespace Service.Fight
                 CollectionHelper.ShuffleArray(ref random, randIndex);
                 _orderFakeNames = new List<string>(4)
                 {
-                    _so.FakeNames[randIndex[0]],
-                    _so.FakeNames[randIndex[1]],
-                    _so.FakeNames[randIndex[2]],
-                    _so.FakeNames[randIndex[3]]
+                    _so.FakeNames[randIndex[0]].name,
+                    _so.FakeNames[randIndex[1]].name,
+                    _so.FakeNames[randIndex[2]].name,
+                    _so.FakeNames[randIndex[3]].name
                 };
             }
         }
