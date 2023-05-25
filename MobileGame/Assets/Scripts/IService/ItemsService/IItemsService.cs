@@ -9,6 +9,7 @@ namespace Service.Items
     {
         void UnlockItem(ItemSO itemSo);
         ItemSO[] GetAllItems();
+        List<ItemSO> GetUnlockedItems();
         void LinkItemPlayer();
         void SetItemPlayer(ItemSO itemSo);
         void SetPlayerItemLinker(PlayerItemsLinker linker);

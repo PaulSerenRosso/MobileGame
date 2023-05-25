@@ -126,6 +126,7 @@ public class EnemyManager : MonoBehaviour, IRemoteConfigurable, IHypeable
 
     private void ResetAnimatorParameters()
     {
+        Animator.Play("Idle");
         Animator.SetInteger("Direction", -1);
         Animator.SetInteger("Attack", -1);
         Animator.SetBool("IsTaunting", false);

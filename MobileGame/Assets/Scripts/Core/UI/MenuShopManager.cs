@@ -1,5 +1,4 @@
-﻿using Attributes;
-using Service.Currency;
+﻿using Service.Currency;
 using Service.Items;
 using Service.Shop;
 using UnityEngine;
@@ -8,11 +7,12 @@ namespace Service.UI
 {
     public class MenuShopManager : MonoBehaviour
     {
+        [SerializeField] private GameObject deactivateBundlePanel;
+        [SerializeField] private GameObject[] deactivateItemPanel;
+        
         private IItemsService _itemsService;
         private IShopService _shopService;
         private ICurrencyService _currencyService;
-        [SerializeField] private GameObject deactivateBundlePanel;
-        [SerializeField] private GameObject[] deactivateItemPanel;
 
         private void SetBundlePanel(bool value)
         {
@@ -33,6 +33,7 @@ namespace Service.UI
         {
             _currencyService.AddCoins(amount);
         }
+        
         public void BuyBundle()
         {
             deactivateBundlePanel.SetActive(true); 
@@ -44,6 +45,7 @@ namespace Service.UI
             deactivateItemPanel[index].SetActive(true);
             _shopService.DisableItemDaily(index);
         }
+        
         public void SetUp(IItemsService itemsService, ICurrencyService currencyService, IShopService shopService )
         {
             _itemsService = itemsService;
@@ -54,7 +56,6 @@ namespace Service.UI
             {
                 SetDailyItem(shopService.GetItemDaily(i), i);
             }
-            
         }
     }
 }
