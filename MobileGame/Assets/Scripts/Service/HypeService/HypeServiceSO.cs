@@ -9,14 +9,7 @@ namespace Service.Hype
         public float MaxHype;
         public HypeSO PlayerHypeSO;
         public HypeSO EnemyHypeSO;
-        [SerializeField] private float _ultimateAreaReachedHalfHypeTime;
-         public float HalfHype;
+        public float _ultimateAreaReachedHalfHypeTime;
       
-        public float UltimateAreaReachedHalfHypeSpeed;
-        private void OnValidate()
-        {
-            HalfHype = MaxHype / 2;
-            UltimateAreaReachedHalfHypeSpeed = (PlayerHypeSO.UltimateValue-HalfHype)/_ultimateAreaReachedHalfHypeTime;
-        }
     }
 }

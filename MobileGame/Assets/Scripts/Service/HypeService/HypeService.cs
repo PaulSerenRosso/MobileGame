@@ -18,7 +18,9 @@ namespace Service.Hype
         private bool _isDecreasePlayerHype;
         private float _decreasePlayerHypeTimer;
         private bool _inCooldown;
-        
+        private float _halfHype;
+
+        private float _ultimateAreaReachedHalfHypeSpeed;
         private float _startHypeValuePlayer;
         private float _startHypeValueEnemy;
  
@@ -301,6 +303,8 @@ namespace Service.Hype
 
         private void SetHypeSO(HypeServiceSO hypeServiceSo)
         {
+            _halfHype = hypeServiceSo.MaxHype / 2;
+            _ultimateAreaReachedHalfHypeSpeed = (hypeServiceSo.PlayerHypeSO.UltimateValue-_halfHype)/hypeServiceSo._ultimateAreaReachedHalfHypeTime;
             _hypeServiceSo = hypeServiceSo;
             _hypeEnemy = new Hype();
             _hypePlayer = new Hype();
@@ -351,10 +355,10 @@ namespace Service.Hype
 
         public void OnUpdate()
         {
-            if (_hypePlayer.UltimateCurrentValue >= _hypeServiceSo.HalfHype)
+            if (_hypePlayer.UltimateCurrentValue >= _halfHype)
             {
-                _hypePlayer.UltimateCurrentValue -= Time.deltaTime * _hypeServiceSo.UltimateAreaReachedHalfHypeSpeed;
-                _hypeEnemy.UltimateCurrentValue -= Time.deltaTime * _hypeServiceSo.UltimateAreaReachedHalfHypeSpeed;
+                _hypePlayer.UltimateCurrentValue -= Time.deltaTime * _ultimateAreaReachedHalfHypeSpeed;
+                _hypeEnemy.UltimateCurrentValue -= Time.deltaTime * _ultimateAreaReachedHalfHypeSpeed;
                 UltimateAreaIncreaseEvent?.Invoke(_hypePlayer.UltimateCurrentValue);
                 TryGainUltimateValue(_hypeEnemy,0);
                 TryGainUltimateValue(_hypePlayer,0);
