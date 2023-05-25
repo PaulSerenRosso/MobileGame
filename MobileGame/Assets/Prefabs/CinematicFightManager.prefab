@@ -551,7 +551,7 @@ PlayableDirector:
   m_GameObject: {fileID: 6701380354893991469}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: f08d8810ea3504345a719455bcdf1a61, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: 031dcc90c80ee11488cc75132e41948c, type: 2}
   m_InitialState: 1
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -583,6 +583,8 @@ PlayableDirector:
     value: {fileID: 2826823035701052272}
   - key: {fileID: 4412964913053720016, guid: f08d8810ea3504345a719455bcdf1a61, type: 2}
     value: {fileID: 9201896899990890750}
+  - key: {fileID: 1335035716791224800, guid: f08d8810ea3504345a719455bcdf1a61, type: 2}
+    value: {fileID: 1521152588}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &127638207
@@ -722,6 +724,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5993273938202031723, guid: 7ce14cea2cbe67e4a86d95d1ece6c304,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9924048
+      objectReference: {fileID: 0}
+    - target: {fileID: 5993273938202031723, guid: 7ce14cea2cbe67e4a86d95d1ece6c304,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.123014666
+      objectReference: {fileID: 0}
+    - target: {fileID: 5993273938202031723, guid: 7ce14cea2cbe67e4a86d95d1ece6c304,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.00037665412
+      objectReference: {fileID: 0}
+    - target: {fileID: 5993273938202031723, guid: 7ce14cea2cbe67e4a86d95d1ece6c304,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.000109418754
       objectReference: {fileID: 0}
     - target: {fileID: 6686433966917593852, guid: 7ce14cea2cbe67e4a86d95d1ece6c304,
         type: 3}
