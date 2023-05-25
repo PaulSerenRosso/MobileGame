@@ -82,10 +82,20 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
         _hypeEnemySlider.value = hypeService.GetCurrentHypeEnemy();
         _hypePlayerSlider.value = hypeService.GetCurrentHypePlayer();
         _hypePlayerSliderOutlineAreaUltimate.maxValue = hypeService.GetMaximumHype();
-        _hypePlayerSliderOutlineAreaUltimate.value = hypeService.GetMaximumHype() - hypeService.GetUltimateHypeValuePlayer();
         _hypeEnemySliderOutlineAreaUltimate.maxValue = hypeService.GetMaximumHype();
-        _hypeEnemySliderOutlineAreaUltimate.value = hypeService.GetMaximumHype() - hypeService.GetUltimateHypeValueEnemy();
+        UpdateUltimateArea(hypeService.GetUltimateHypeValueEnemy());
+
+        hypeService.UltimateAreaIncreaseEvent += UpdateUltimateArea;
+      
         UpdateManager.Register(this);
+    }
+
+    private void UpdateUltimateArea(float amount)
+    {
+        
+        _hypePlayerSliderOutlineAreaUltimate.value =
+            _hypeService.GetMaximumHype()- amount;
+        _hypeEnemySliderOutlineAreaUltimate.value =  _hypeService.GetMaximumHype()- amount;
     }
 
     public void OnUpdate()

@@ -75,12 +75,14 @@ namespace Service.Fight
             ResetEntities();
             _playerController.LockController();
             _enemyManager.StopTree(callback);
+            _hypeService.StopUltimateAreasIncreased();
             ActivatePauseEvent?.Invoke();
         }
 
         public void DeactivatePause()
         {
             _playerController.UnlockController();
+            _hypeService.PlayUltimateAreasIncreased();
             _enemyManager.ReplayTree();
             DeactivatePauseEvent?.Invoke();
         }
@@ -145,6 +147,7 @@ namespace Service.Fight
         {
             _gridManager.MoveGrid(new Vector3(0, 0, 0));
             _playerController.ResetPlayer();
+            
             _enemyManager.ResetEnemy();
         }
 

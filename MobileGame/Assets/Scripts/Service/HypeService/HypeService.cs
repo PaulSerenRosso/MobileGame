@@ -1,12 +1,16 @@
 using System;
 using Addressables;
+using Attributes;
+using HelperPSR.MonoLoopFunctions;
 using HelperPSR.RemoteConfigs;
+using Service.Fight;
 using UnityEngine;
 
 namespace Service.Hype
 {
-    public class HypeService : IHypeService, IRemoteConfigurable
+    public class HypeService : IHypeService, IRemoteConfigurable, IUpdatable
     {
+        [DependsOnService] private IFightService _fightService;
         private EnemyManager _enemyManager;
         private Hype _hypePlayer;
         private Hype _hypeEnemy;
@@ -14,11 +18,25 @@ namespace Service.Hype
         private bool _isDecreasePlayerHype;
         private float _decreasePlayerHypeTimer;
         private bool _inCooldown;
-
+        
         private float _startHypeValuePlayer;
         private float _startHypeValueEnemy;
-
+ 
         public event Action EnableHypeServiceEvent;
+ 
+        public void StopUltimateAreasIncreased()
+        {
+            UpdateManager.UnRegister(this);
+        }
+
+        public void PlayUltimateAreasIncreased()
+        {
+            if(!_fightService.GetFightTutorial())
+            {
+            UpdateManager.Register(this);
+                
+            }
+        }
 
         public void IncreaseHypePlayer(float amount)
         {
@@ -59,7 +77,7 @@ namespace Service.Hype
         {
             if (!hype.IsInUltimateArea)
             {
-                if (hype.CurrentValue + amount >= hype.HypeSo.UltimateValue)
+                if (hype.CurrentValue + amount >= hype.UltimateCurrentValue)
                 {
                     hype.IsInUltimateArea = true;
                     hype.GainUltimateEvent?.Invoke(amount);
@@ -71,7 +89,7 @@ namespace Service.Hype
         {
             if (hype.IsInUltimateArea)
             {
-                if (hype.CurrentValue - amount < hype.HypeSo.UltimateValue)
+                if (hype.CurrentValue - amount < hype.UltimateCurrentValue)
                 {
                     hype.IsInUltimateArea = false;
                     hype.LoseUltimateEvent?.Invoke(amount);
@@ -88,6 +106,8 @@ namespace Service.Hype
         {
             return _hypeEnemy.IsInUltimateArea;
         }
+
+        public event Action<float> UltimateAreaIncreaseEvent;
 
         public void DecreaseHypePlayer(float amount)
         {
@@ -128,6 +148,7 @@ namespace Service.Hype
 
         public void ResetHypePlayer()
         {
+            _hypePlayer.UltimateCurrentValue = _hypePlayer.HypeSo.UltimateValue;
             SetHypePlayer(_startHypeValuePlayer);
             _hypePlayer.IsInUltimateArea = false;
             _hypePlayer.LoseUltimateEvent?.Invoke(_startHypeValuePlayer);
@@ -135,6 +156,7 @@ namespace Service.Hype
 
         public void ResetHypeEnemy()
         {
+            _hypeEnemy.UltimateCurrentValue = _hypeEnemy.HypeSo.UltimateValue;
             SetHypeEnemy(_startHypeValueEnemy);
             _hypeEnemy.IsInUltimateArea = false;
             _hypeEnemy.LoseUltimateEvent?.Invoke(_startHypeValueEnemy);
@@ -282,15 +304,14 @@ namespace Service.Hype
             _hypeServiceSo = hypeServiceSo;
             _hypeEnemy = new Hype();
             _hypePlayer = new Hype();
-            ResetHypePlayer();
-            _hypePlayer.HypeSo = _hypeServiceSo.PlayerHypeSO;
-            ResetHypeEnemy();
             _hypeEnemy.HypeSo = _hypeServiceSo.EnemyHypeSO;
+            _hypePlayer.HypeSo = _hypeServiceSo.PlayerHypeSO;
+            ResetHypePlayer();
+            ResetHypeEnemy();
             _isDecreasePlayerHype = false;
             _decreasePlayerHypeTimer = 0;
             _hypePlayer.IncreaseHypeEvent += ResetDecreasePlayerHype;
             _hypeEnemy.DecreaseHypeEvent += ResetDecreasePlayerHype;
-            
             RemoteConfigManager.RegisterRemoteConfigurable(this);
             EnableHypeServiceEvent?.Invoke();
         }
@@ -312,8 +333,9 @@ namespace Service.Hype
             _hypePlayer.SetHypeEvent = null;
             ReachMaximumHypeEvent = null;
             ReachMinimumHypeEvent = null;
+            UltimateAreaIncreaseEvent = null;
             EnableHypeServiceEvent = null;
-
+            UpdateManager.UnRegister(this);
             RemoteConfigManager.UnRegisterRemoteConfigurable(this);
         }
 
@@ -322,11 +344,25 @@ namespace Service.Hype
         public void SetRemoteConfigurableValues()
         {
             _hypeServiceSo.MaxHype = RemoteConfigManager.Config.GetFloat("MaxHype");
-            _hypeServiceSo.AmountPlayerHypeDecrease = RemoteConfigManager.Config.GetFloat("AmountPlayerHypeDecrease");
             _hypeServiceSo.EnemyHypeSO.UltimateValue = RemoteConfigManager.Config.GetFloat("EnemyHypeUltimateValue");
             _hypeServiceSo.PlayerHypeSO.UltimateValue = RemoteConfigManager.Config.GetFloat("PlayerHypeUltimateValue");
-            _hypeServiceSo.TimeBeforePlayerHypeDecrease =
-                RemoteConfigManager.Config.GetFloat("TimeBeforePlayerHypeDecrease");
+      
+        }
+
+        public void OnUpdate()
+        {
+            if (_hypePlayer.UltimateCurrentValue >= _hypeServiceSo.HalfHype)
+            {
+                _hypePlayer.UltimateCurrentValue -= Time.deltaTime * _hypeServiceSo.UltimateAreaReachedHalfHypeSpeed;
+                _hypeEnemy.UltimateCurrentValue -= Time.deltaTime * _hypeServiceSo.UltimateAreaReachedHalfHypeSpeed;
+                UltimateAreaIncreaseEvent?.Invoke(_hypePlayer.UltimateCurrentValue);
+                TryGainUltimateValue(_hypeEnemy,0);
+                TryGainUltimateValue(_hypePlayer,0);
+            }
+            else
+            {
+                UpdateManager.UnRegister(this);
+            }
         }
     }
 }
