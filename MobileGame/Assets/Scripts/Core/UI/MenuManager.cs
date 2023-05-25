@@ -44,6 +44,15 @@ namespace Service.UI
 
         [SerializeField] private Canvas _unlockTournament;
 
+        [SerializeField] private GameObject _friendsPanel;
+        [SerializeField] private GameObject _friendPopup;
+        [SerializeField] private GameObject _dailyPanel;
+        [SerializeField] private GameObject _friendsLayout;
+        [SerializeField] private Button _friendTag;
+        [SerializeField] private Image _friendPopupImage;
+        [SerializeField] private TextMeshProUGUI _friendPopupNameText;
+        
+        private TournamentSettingsSO _tournamentSettingsSO;
         private int _actualTournament;
         private IGameService _gameService;
         private ITournamentService _tournamentService;
@@ -59,6 +68,7 @@ namespace Service.UI
         {
             _gameService = gameService;
             _tournamentService = tournamentService;
+            _tournamentSettingsSO = _tournamentService.GetSettings();
             _fightService = fightService;
             _menuTopManager.SetUp(currencyService);
             _currencyService = currencyService;
@@ -94,6 +104,13 @@ namespace Service.UI
                     () => SetEnvironmentAddressableName(environmentSo.EnvironmentAddressableName));
                 button.image.sprite = environmentSo.EnvironmentSprite;
                 button.GetComponentInChildren<TextMeshProUGUI>().text = environmentSo.Name;
+            }
+
+            foreach (var fakeName in _tournamentSettingsSO.FakeNames)
+            {
+                var button = Instantiate(_friendTag, _friendsLayout.transform);
+                button.onClick.AddListener(() => OpenFriendPopup(fakeName.picture, fakeName.name));
+                button.GetComponent<FriendComponent>().SetValue(fakeName.picture,fakeName.name);
             }
         }
 
@@ -256,9 +273,37 @@ namespace Service.UI
             _inventoryButton.interactable = false;
         }
 
+        public void OpenDaily()
+        {
+            _dailyPanel.SetActive(true);
+        }
+
+        public void OpenFriends()
+        {
+            _friendsPanel.SetActive(true);
+        }
+
+        private void OpenFriendPopup(Sprite picture, string name)
+        {
+            _friendPopupImage.sprite = picture;
+            _friendPopupNameText.text = name;
+            _friendPopup.SetActive(true);
+        }
+
         public void CloseLockTournament()
         {
             _unlockTournament.gameObject.SetActive(false);
+        }
+
+        public void ClosePopup()
+        {
+            _friendsPanel.SetActive(false);
+            _dailyPanel.SetActive(false);
+        }
+
+        public void CloseFriendPopup()
+        {
+            _friendPopup.SetActive(false);
         }
     }
 }
