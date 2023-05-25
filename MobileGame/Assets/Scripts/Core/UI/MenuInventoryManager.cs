@@ -2,11 +2,12 @@
 using Service.Items;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Service.UI
 {
-    public class MenuInventoryManager : MonoBehaviour, IUpdatable
+    public class MenuInventoryManager : MonoBehaviour
     {
         [Header("Actual Gear Player")] 
         [SerializeField] private Button _hat;
@@ -31,14 +32,6 @@ namespace Service.UI
         private GameObject _player;
         private float _screenPosition;
 
-        public void OnUpdate()
-        {
-            if (Input.touchCount <= 0) return;
-            Touch touch = Input.GetTouch(0);
-            if (touch.phase is TouchPhase.Ended) return;
-            _player.transform.Rotate(Vector3.up * touch.deltaPosition.x * _speedRotationPlayer, Space.World);
-        }
-
         public void Setup(IItemsService itemsService, GameObject player, PlayerItemsLinker playerItemsLinker)
         {
             _itemsService = itemsService;
@@ -49,7 +42,7 @@ namespace Service.UI
 
         private void UpdateUIInventory()
         {
-            foreach (var itemSO in _itemsService.GetAllItems())
+            foreach (var itemSO in _itemsService.GetUnlockedItems())
             {
                 var buttonItem = Instantiate(_buttonPrefab, _gridLayout.transform);
                 buttonItem.image.sprite = itemSO.SpriteUI;

@@ -51,6 +51,8 @@ namespace Service.UI
         [SerializeField] private Button _friendTag;
         [SerializeField] private Image _friendPopupImage;
         [SerializeField] private TextMeshProUGUI _friendPopupNameText;
+
+        [SerializeField] private DragPlayer _dragPlayer;
         
         private TournamentSettingsSO _tournamentSettingsSO;
         private int _actualTournament;
@@ -68,6 +70,7 @@ namespace Service.UI
         {
             _gameService = gameService;
             _tournamentService = tournamentService;
+            _dragPlayer.Init(player);
             _tournamentSettingsSO = _tournamentService.GetSettings();
             _fightService = fightService;
             _menuTopManager.SetUp(currencyService);
@@ -120,7 +123,6 @@ namespace Service.UI
 
         public void ActivateHome()
         {
-            UpdateManager.UnRegister(_menuInventoryManager);  
             _player.SetActive(false); 
             _tournamentCanvas.SetActive(true);
             _backgroundCanvas.gameObject.SetActive(true);
@@ -249,7 +251,7 @@ namespace Service.UI
 
         public void OpenShop()
         {
-            UpdateManager.UnRegister(_menuInventoryManager);
+            
             _player.SetActive(false);
             _tournamentCanvas.SetActive(false);
             _backgroundCanvas.gameObject.SetActive(true);
@@ -262,7 +264,6 @@ namespace Service.UI
 
         public void OpenInventory()
         {
-            UpdateManager.Register(_menuInventoryManager);
             _player.SetActive(true);
             _tournamentCanvas.SetActive(false);
             _backgroundCanvas.gameObject.SetActive(false);

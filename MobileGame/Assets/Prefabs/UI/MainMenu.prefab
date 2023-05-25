@@ -307,6 +307,7 @@ MonoBehaviour:
     type: 3}
   _friendPopupImage: {fileID: 1428089554799750812}
   _friendPopupNameText: {fileID: 6216919790637961887}
+  _dragPlayer: {fileID: 860565058990442549}
 --- !u!1 &3664865942858656059
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,17 +412,17 @@ PrefabInstance:
     - target: {fileID: 1646263866892153975, guid: 84d0eeee6b898bc4ca21b851a07f393a,
         type: 3}
       propertyPath: m_Size
-      value: 0.9640919
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2346785327317132816, guid: 84d0eeee6b898bc4ca21b851a07f393a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.20800781
+      value: -604048.4
       objectReference: {fileID: 0}
     - target: {fileID: 2346785327317132816, guid: 84d0eeee6b898bc4ca21b851a07f393a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.045043945
+      value: 0.00012207031
       objectReference: {fileID: 0}
     - target: {fileID: 2753210169409560905, guid: 84d0eeee6b898bc4ca21b851a07f393a,
         type: 3}
@@ -431,7 +432,7 @@ PrefabInstance:
     - target: {fileID: 2753210169409560905, guid: 84d0eeee6b898bc4ca21b851a07f393a,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.9640919
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3979027823416382824, guid: 84d0eeee6b898bc4ca21b851a07f393a,
         type: 3}
@@ -561,7 +562,7 @@ PrefabInstance:
     - target: {fileID: 4617532399771407946, guid: 84d0eeee6b898bc4ca21b851a07f393a,
         type: 3}
       propertyPath: m_Value
-      value: 0.7080332
+      value: 604048.8
       objectReference: {fileID: 0}
     - target: {fileID: 6309756339121559169, guid: 84d0eeee6b898bc4ca21b851a07f393a,
         type: 3}
@@ -620,6 +621,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84d0eeee6b898bc4ca21b851a07f393a, type: 3}
+--- !u!114 &860565058990442549 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1144948420899154110, guid: 84d0eeee6b898bc4ca21b851a07f393a,
+    type: 3}
+  m_PrefabInstance: {fileID: 293573836751478923}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eda83fc82f252e48b4f1e6ce34045ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1815432959263569134 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2099606999894021221, guid: 84d0eeee6b898bc4ca21b851a07f393a,
@@ -2089,6 +2102,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Canvas Main Menu Tournament
+      objectReference: {fileID: 0}
+    - target: {fileID: 7829105376152096416, guid: ec65bf0a1643e6548bac54e70fec0587,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7993981962845224754, guid: ec65bf0a1643e6548bac54e70fec0587,
         type: 3}
