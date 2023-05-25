@@ -8,7 +8,7 @@ namespace Service.Items
     public class ItemsService : IItemsService
     {
         private List<ItemSO> _unlockItems = new();
-        private ItemsServiceGlobalSettingsSO _globalSettingsSo;
+        private ItemsServiceGlobalSettingsSO _globalSettingsSO;
         private PlayerItemsLinker _playerItemsLinker;
         private Dictionary<ItemTypeEnum, ItemSO> playerItems = new();
 
@@ -21,11 +21,15 @@ namespace Service.Items
 
         private void LoadGlobalSettings(ItemsServiceGlobalSettingsSO so)
         {
-            _globalSettingsSo = so;
-            if(_globalSettingsSo.StartItemsSO.Length ==0) return;
-            for (int i = 0; i < _globalSettingsSo.StartItemsSO.Length; i++)
+            _globalSettingsSO = so;
+            if(_globalSettingsSO.StartItemsSO.Length == 0) return;
+            foreach (var itemSO in _globalSettingsSO.UnlockedItemsSO)
             {
-                SetItemPlayer(_globalSettingsSo.StartItemsSO[i]);
+                _unlockItems.Add(itemSO);
+            }
+            foreach (var itemSO in _globalSettingsSO.StartItemsSO)
+            {
+                SetItemPlayer(itemSO);
             }
         }
 
@@ -36,7 +40,12 @@ namespace Service.Items
 
         public ItemSO[] GetAllItems()
         {
-            return _globalSettingsSo.AllItemsSO;
+            return _globalSettingsSO.AllItemsSO;
+        }
+
+        public List<ItemSO> GetUnlockedItems()
+        {
+            return _unlockItems;
         }
 
         public void LinkItemPlayer()

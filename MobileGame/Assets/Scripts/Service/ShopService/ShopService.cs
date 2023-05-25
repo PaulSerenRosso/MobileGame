@@ -1,29 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using Attributes;
 using Service.Shop;
-using UnityEngine;
 
-namespace Service.Shop
-{
-    
-}
 public class ShopService : IShopService
 {
-    private bool _bundleIsEnabled ;
+    private bool _bundleIsEnabled;
     private bool[] _dailyItemAreEnabled = new bool[3];
-    public bool GetBundleIsEnabled { get => _bundleIsEnabled; }
+
+    public bool GetBundleIsEnabled
+    {
+        get => _bundleIsEnabled;
+    }
 
     [ServiceInit]
     private void Init()
     {
-      EnableBundle();
-      for (int i = 0; i < _dailyItemAreEnabled.Length; i++)
-      {
-          EnableItemDaily(i);
-      }
+        EnableBundle();
+        for (int i = 0; i < _dailyItemAreEnabled.Length; i++)
+        {
+            EnableItemDaily(i);
+        }
     }
-    
+
     public bool GetItemDaily(int index)
     {
         return _dailyItemAreEnabled[index];
@@ -36,7 +33,7 @@ public class ShopService : IShopService
 
     public void DisableBundle()
     {
-        _bundleIsEnabled = false; 
+        _bundleIsEnabled = false;
     }
 
     public void EnableItemDaily(int index)
