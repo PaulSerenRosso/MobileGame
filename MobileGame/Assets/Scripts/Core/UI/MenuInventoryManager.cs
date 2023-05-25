@@ -49,7 +49,7 @@ namespace Service.UI
 
         private void UpdateUIInventory()
         {
-            foreach (var itemSO in _itemsService.GetUnlockedItems())
+            foreach (var itemSO in _itemsService.GetAllItems())
             {
                 var buttonItem = Instantiate(_buttonPrefab, _gridLayout.transform);
                 buttonItem.image.sprite = itemSO.SpriteUI;
