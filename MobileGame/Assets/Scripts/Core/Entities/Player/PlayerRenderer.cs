@@ -18,7 +18,7 @@ namespace Player
         [SerializeField] private PlayerUltimateHandler playerUltimateHandler;
         [SerializeField] private TauntPlayerAction _tauntPlayerAction;
         [SerializeField] private SkinnedMeshRenderer[] _skinnedMeshRenderers;
-        [SerializeField] private GhostTrail _ghostTrail;
+        
 
         public void Init()
         {
@@ -31,8 +31,8 @@ namespace Player
             _movementPlayerAction.MakeActionEvent += ResetEndMovementAnimationParameter;
             playerUltimateHandler.ActivateUltimateEvent += ActivateFX;
             playerUltimateHandler.DeactivateUltimateEvent += DeactivateFX;
-            _ghostTrail.InitGhostTrail();
-            _playerMovementHandler.MakeActionEvent += _ghostTrail.ActivateTrail;
+            _playerMovementHandler.MakeActionEvent += ActivateMovementParticle;
+            _movementPlayerAction.EndActionEvent += DeactivateMovementParticle;
             // SetRecoverySpeedAnimation();
             // _tauntAction.MakeActionEvent += ActivateTauntFX;
             // _tauntAction.CancelActionEvent += DeactivateTauntFX;
@@ -42,6 +42,7 @@ namespace Player
         {
             return _skinnedMeshRenderers;
         }
+        
 
         private void ActivateFX()
         {

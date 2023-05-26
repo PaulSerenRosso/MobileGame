@@ -4996,17 +4996,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 8152168790444815023}
+  IsBoosted: 0
   CurrentMobilityState: 0
   CurrentBlockingState: 0
   EnemyInGameSo: {fileID: 0}
+  EnemyGlobalSO: {fileID: 0}
   _tree: {fileID: 3911112695321858085}
-  _remoteConfigTimeStunName: Arno_TimeStun
-  _remoteConfigTimeStunInvulnerableName: Arno_TimeStunInvulnerable
-  _remoteConfigStunPercentageHealthName: Arno_PercentageHealthStun
-  _remoteConfigBlockPercentageDamageReduction: Arno_PercentageDamageReductionBlock
   _remoteConfigAngleBlock: Arno_AngleBlock
+  _remoteConfigAngleStun: 
+  _remoteConfigPercentageDamageReductionBoostChimist: 
+  _startUltimateParticle: {fileID: 0}
   _ultimateParticle: {fileID: 7708333390443993999}
   _blockParticle: {fileID: 0}
+  _particleToReset: []
+  _skinnedMeshRenderers: []
+  _timeShaderActivate: 500
+  _ghostTrail: {fileID: 0}
 --- !u!114 &3911112695321858085
 MonoBehaviour:
   m_ObjectHideFlags: 0
