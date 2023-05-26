@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Addressables;
 using Attributes;
 using HelperPSR.Collections;
@@ -8,6 +9,7 @@ namespace Service.Items
     public class ItemsService : IItemsService
     {
         private List<ItemSO> _unlockItems = new();
+        private List<ItemSO> _lockedItems = new();
         private ItemsServiceGlobalSettingsSO _globalSettingsSO;
         private PlayerItemsLinker _playerItemsLinker;
         private Dictionary<ItemTypeEnum, ItemSO> playerItems = new();
@@ -22,9 +24,10 @@ namespace Service.Items
         private void LoadGlobalSettings(ItemsServiceGlobalSettingsSO so)
         {
             _globalSettingsSO = so;
-            foreach (var itemSO in _globalSettingsSO.UnlockedItemsSO)
+            foreach (var itemSO in _globalSettingsSO.AllItemsSO)
             {
-                _unlockItems.Add(itemSO);
+                if (_globalSettingsSO.UnlockedItemsSO.Contains(itemSO)) _unlockItems.Add(itemSO);
+                else _lockedItems.Add(itemSO);
             }
             if(_globalSettingsSO.StartItemsSO.Length == 0) return;
             foreach (var itemSO in _globalSettingsSO.StartItemsSO)
@@ -35,12 +38,18 @@ namespace Service.Items
 
         public void UnlockItem(ItemSO itemSo)
         {
+            _lockedItems.Remove(itemSo);
             _unlockItems.Add(itemSo);
         }
 
         public ItemSO[] GetAllItems()
         {
             return _globalSettingsSO.AllItemsSO;
+        }
+
+        public List<ItemSO> GetLockedItems()
+        {
+            return _lockedItems;
         }
 
         public List<ItemSO> GetUnlockedItems()

@@ -8,5 +8,8 @@ namespace Service.Items
         public string TitleItem;
         public string DescriptionItem;
         public Sprite SpriteUI;
+        public int Price;
+        public bool IsUnlockableWithStar;
+        public int ExperienceStar;
     }
 }

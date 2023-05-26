@@ -1,29 +1,54 @@
+using System.Collections.Generic;
+using System.Linq;
 using Attributes;
+using HelperPSR.Collections;
+using Service.Items;
 using Service.Shop;
 
 public class ShopService : IShopService
 {
-    private bool _bundleIsEnabled;
-    private bool[] _dailyItemAreEnabled = new bool[3];
+    [DependsOnService] private IItemsService _itemsService;
 
-    public bool GetBundleIsEnabled
-    {
-        get => _bundleIsEnabled;
-    }
+    private bool _bundleIsEnabled;
+    private bool _dailyIsEnabled;
+    private List<ItemSO> _dailyItems;
+
+    public bool GetBundleIsEnabled => _bundleIsEnabled;
+    public bool GetDailyIsEnabled { get; }
 
     [ServiceInit]
     private void Init()
     {
         EnableBundle();
-        for (int i = 0; i < _dailyItemAreEnabled.Length; i++)
+        _dailyItems.Clear();
+        var listUnlock = _itemsService.GetLockedItems();
+        listUnlock.ShuffleList();
+        if (listUnlock.FirstOrDefault(i => i.IsUnlockableWithStar == true) != null)
+            _dailyItems.Add(listUnlock.FirstOrDefault(i => i.IsUnlockableWithStar));
+        foreach (var itemSO in listUnlock.Where(i => i.IsUnlockableWithStar == false))
         {
-            EnableItemDaily(i);
+            if (_dailyItems.Count > 3) break;
+            _dailyItems.Add(itemSO);
         }
     }
 
-    public bool GetItemDaily(int index)
+    public List<ItemSO> GetItemDaily()
     {
-        return _dailyItemAreEnabled[index];
+        return _dailyItems;
+    }
+
+    public void RefreshDaily()
+    {
+        _dailyItems.Clear();
+        var listUnlock = _itemsService.GetLockedItems();
+        listUnlock.ShuffleList();
+        if (listUnlock.FirstOrDefault(i => i.IsUnlockableWithStar == true) != null)
+            _dailyItems.Add(listUnlock.FirstOrDefault(i => i.IsUnlockableWithStar));
+        foreach (var itemSO in listUnlock.Where(i => i.IsUnlockableWithStar == false))
+        {
+            if (_dailyItems.Count > 3) break;
+            _dailyItems.Add(itemSO);
+        }
     }
 
     public void EnableBundle()
@@ -34,15 +59,5 @@ public class ShopService : IShopService
     public void DisableBundle()
     {
         _bundleIsEnabled = false;
-    }
-
-    public void EnableItemDaily(int index)
-    {
-        _dailyItemAreEnabled[index] = true;
-    }
-
-    public void DisableItemDaily(int index)
-    {
-        _dailyItemAreEnabled[index] = false;
     }
 }

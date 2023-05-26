@@ -1,21 +1,15 @@
-using System.Collections;
 using System.Collections.Generic;
-using Service;
-using UnityEngine;
+using Service.Items;
 
-namespace Service.Shop 
+namespace Service.Shop
 {
-public interface IShopService : IService
-{
-
-   bool GetBundleIsEnabled { get; }
-   bool GetItemDaily(int index);
-   void EnableBundle();
-
-   void DisableBundle();
-
-   void EnableItemDaily(int index);
-
-   void DisableItemDaily(int index);
-}
+    public interface IShopService : IService
+    {
+        bool GetBundleIsEnabled { get; }
+        bool GetDailyIsEnabled { get;  }
+        List<ItemSO> GetItemDaily();
+        void RefreshDaily();
+        void EnableBundle();
+        void DisableBundle();
+    }
 }

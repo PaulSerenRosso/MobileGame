@@ -7,6 +7,7 @@ namespace Service.Items
     {
         void UnlockItem(ItemSO itemSo);
         ItemSO[] GetAllItems();
+        List<ItemSO> GetLockedItems();
         List<ItemSO> GetUnlockedItems();
         void LinkItemPlayer();
         Dictionary<ItemTypeEnum, ItemSO> GetPlayerItems();
