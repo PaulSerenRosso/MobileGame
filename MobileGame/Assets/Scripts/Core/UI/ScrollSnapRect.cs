@@ -81,8 +81,8 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     private void SetItemPositions()
     {
         int width = (int)_scrollRectRectTransform.rect.width;
-        int offsetX = width / 4;
-        int containerWidth = width * (int)Mathf.Ceil(_itemCount / 3);
+        int offsetX = width / 3;
+        int containerWidth = width * _itemCount / 3;
         int containerHeight = (int)_scrollRectRectTransform.rect.height;
         _fastSwipeThresholdMaxLimit = width;
 
