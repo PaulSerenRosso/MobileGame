@@ -16,16 +16,18 @@ namespace Service.Items
             _currentHat = Instantiate(prefab, _hatPivot);
         }
 
-        public void SetShort(Texture sprite)
+        public void SetTShirt(Texture sprite)
         {
-            _playerShort.enabled = true;
-            _playerShort.material.mainTexture = sprite;
+            RemoveTShirt();
+            _playerTshirt.enabled = true;
+            _playerTshirt.material.mainTexture = sprite;
         }
 
-        public void SetTShirt(Texture texture)
+        public void SetShort(Texture sprite)
         {
-            _playerTshirt.enabled = true;
-            _playerTshirt.material.mainTexture = texture;
+            RemoveShort();
+            _playerShort.enabled = true;
+            _playerShort.material.mainTexture = sprite;
         }
 
         public void RemoveHat()

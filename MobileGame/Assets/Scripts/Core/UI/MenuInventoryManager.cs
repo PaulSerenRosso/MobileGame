@@ -20,14 +20,14 @@ namespace Service.UI
         {
             _itemsService = itemsService;
             _itemsService.SetPlayerItemLinker(playerItemsLinker);
-            _headScroll.InitializeScroll(
-                _itemsService.GetUnlockedItems().Where(i => i.Type == ItemTypeEnum.Head).ToArray(),
+            _headScroll.InitializeScroll(_itemsService,
+                _itemsService.GetAllItems().Where(i => i.Type == ItemTypeEnum.Head).ToArray(),
                 _itemsService.GetPlayerItems().FirstOrDefault(i => i.Key == ItemTypeEnum.Head).Value);
-            _shirtScroll.InitializeScroll(
-                _itemsService.GetUnlockedItems().Where(i => i.Type == ItemTypeEnum.Shirt).ToArray(),
+            _shirtScroll.InitializeScroll(_itemsService,
+                _itemsService.GetAllItems().Where(i => i.Type == ItemTypeEnum.Shirt).ToArray(),
                 _itemsService.GetPlayerItems().FirstOrDefault(i => i.Key == ItemTypeEnum.Shirt).Value);
-            _shortScroll.InitializeScroll(
-                _itemsService.GetUnlockedItems().Where(i => i.Type == ItemTypeEnum.Short).ToArray(),
+            _shortScroll.InitializeScroll(_itemsService,
+                _itemsService.GetAllItems().Where(i => i.Type == ItemTypeEnum.Short).ToArray(),
                 _itemsService.GetPlayerItems().FirstOrDefault(i => i.Key == ItemTypeEnum.Short).Value);
         }
 

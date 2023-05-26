@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Service;
-using UnityEngine;
 
 namespace Service.Items
 {
@@ -11,10 +9,9 @@ namespace Service.Items
         ItemSO[] GetAllItems();
         List<ItemSO> GetUnlockedItems();
         void LinkItemPlayer();
-        void SetItemPlayer(ItemSO itemSo);
-        void SetPlayerItemLinker(PlayerItemsLinker linker);
         Dictionary<ItemTypeEnum, ItemSO> GetPlayerItems();
-
+        void SetPlayerItemLinker(PlayerItemsLinker linker);
+        void SetItemPlayer(ItemSO itemSo);
         void RemoveItemPlayer(ItemTypeEnum typeEnum);
 
     }

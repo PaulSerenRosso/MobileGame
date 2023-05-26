@@ -60,7 +60,8 @@ namespace Service.Items
             if (playerItems.ContainsKey(ItemTypeEnum.Head))
             {
                 var hatItem = (HatSO)playerItems[ItemTypeEnum.Head];
-                _playerItemsLinker.SetHat(hatItem.PrefabHat);
+                if (hatItem.PrefabHat) _playerItemsLinker.SetHat(hatItem.PrefabHat);
+                else _playerItemsLinker.RemoveHat();
             }
             else
             {
@@ -73,7 +74,8 @@ namespace Service.Items
             if (playerItems.ContainsKey(ItemTypeEnum.Shirt))
             {
                 var shirtItem = (GearSO)playerItems[ItemTypeEnum.Shirt];
-               _playerItemsLinker.SetTShirt(shirtItem.SpriteTexture.texture);
+                if (shirtItem.SpriteTexture) _playerItemsLinker.SetTShirt(shirtItem.SpriteTexture.texture);
+                else _playerItemsLinker.RemoveTShirt();
             }
             else
             {
@@ -86,7 +88,8 @@ namespace Service.Items
             if (playerItems.ContainsKey(ItemTypeEnum.Short))
             {
                 var shortItem = (GearSO)playerItems[ItemTypeEnum.Short];
-               _playerItemsLinker.SetShort(shortItem.SpriteTexture.texture);
+                if (shortItem.SpriteTexture) _playerItemsLinker.SetShort(shortItem.SpriteTexture.texture);
+                else _playerItemsLinker.RemoveShort();
             }
             else
             {
