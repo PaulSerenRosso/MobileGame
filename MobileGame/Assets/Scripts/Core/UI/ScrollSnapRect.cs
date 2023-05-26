@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
+using System.Linq;
 using Service.Items;
 
 [RequireComponent(typeof(Image))]
@@ -10,14 +11,16 @@ using Service.Items;
 [RequireComponent(typeof(ScrollRect))]
 public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 {
-    [Tooltip("Threshold time for fast swipe in seconds")]
-    [SerializeField] private float _fastSwipeThresholdTime = 0.3f;
+    [Tooltip("Threshold time for fast swipe in seconds")] [SerializeField]
+    private float _fastSwipeThresholdTime = 0.3f;
 
-    [Tooltip("Threshold time for fast swipe in (unscaled) pixels")]
-    [SerializeField] private int _fastSwipeThresholdMinDistance = 100;
+    [Tooltip("Threshold time for fast swipe in (unscaled) pixels")] [SerializeField]
+    private int _fastSwipeThresholdMinDistance = 100;
 
-    [Tooltip("How fast will page lerp to target position")]
-    [SerializeField] private float _decelerationRate = 10f;
+    [Tooltip("How fast will page lerp to target position")] [SerializeField]
+    private float _decelerationRate = 10f;
+
+    [SerializeField] private int _spacing = 1000;
 
     [SerializeField] private Image _itemImage;
 
@@ -34,23 +37,30 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     private Vector2 _lerpTo;
 
     private List<Vector2> _itemPositions = new();
+    private ItemSO[] _items;
 
     private float _timeStamp;
     private Vector2 _startPosition;
-    
-    public void InitializeScroll(ItemSO[] items, ItemSO currentItem)
+
+    private IItemsService _itemsService;
+
+    public void InitializeScroll(IItemsService itemsService, ItemSO[] items, ItemSO currentItem)
     {
+        _itemsService = itemsService;
         _scrollRectComponent = GetComponent<ScrollRect>();
         _scrollRectRectTransform = GetComponent<RectTransform>();
         _container = _scrollRectComponent.content;
+        _items = items;
         int indexCurrentItem = 0;
         if (currentItem is not null) indexCurrentItem = Array.IndexOf(items, currentItem);
         foreach (var item in items)
         {
             var itemImage = Instantiate(_itemImage, _container);
+            if (_itemsService.GetUnlockedItems().FirstOrDefault(i => i == item) == null) 
+                itemImage.transform.GetChild(0).gameObject.SetActive(true);
             itemImage.sprite = item.SpriteUI;
         }
-        
+
         _itemCount = _container.childCount;
 
         _lerp = false;
@@ -88,7 +98,7 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         for (int i = 0; i < _itemCount; i++)
         {
             RectTransform child = _container.GetChild(i).GetComponent<RectTransform>();
-            var childPosition = new Vector2(- containerWidth / 2 + offsetX * i, 0);
+            var childPosition = new Vector2(-containerWidth / 2 + offsetX * i + _spacing * i, 0);
             child.anchoredPosition = childPosition;
             _itemPositions.Add(-child.anchoredPosition);
         }
@@ -101,12 +111,17 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         _currentItem = itemIndex;
     }
 
-    private void LerpToPage(int aPageIndex)
+    private void LerpToPage(int itemIndex)
     {
-        aPageIndex = Mathf.Clamp(aPageIndex, 0, _itemCount - 1);
-        _lerpTo = _itemPositions[aPageIndex];
+        var currentItemPlayer = _currentItem;
+        itemIndex = Mathf.Clamp(itemIndex, 0, _itemCount - 1);
+        _lerpTo = _itemPositions[itemIndex];
         _lerp = true;
-        _currentItem = aPageIndex;
+        _currentItem = itemIndex;
+        if (_itemsService.GetUnlockedItems().FirstOrDefault(i => i == _items[itemIndex]) == null) return;
+        _itemsService.RemoveItemPlayer(_items[currentItemPlayer].Type);
+        _itemsService.SetItemPlayer(_items[itemIndex]);
+        _itemsService.LinkItemPlayer();
     }
 
     private void NextScreen()
