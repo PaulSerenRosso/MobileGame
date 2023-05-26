@@ -20,8 +20,6 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     [Tooltip("How fast will page lerp to target position")] [SerializeField]
     private float _decelerationRate = 10f;
 
-    [SerializeField] private int _spacing = 1000;
-
     [SerializeField] private Image _itemImage;
 
     private int _fastSwipeThresholdMaxLimit;
@@ -88,7 +86,7 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         int containerHeight = (int)_scrollRectRectTransform.rect.height;
         _fastSwipeThresholdMaxLimit = width;
 
-        Vector2 newSize = new Vector2(containerWidth, containerHeight);
+        Vector2 newSize = new Vector2(containerWidth, 0);
         _container.sizeDelta = newSize;
         Vector2 newPosition = new Vector2(containerWidth / 2, containerHeight / 2);
         _container.anchoredPosition = newPosition;
@@ -98,7 +96,7 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         for (int i = 0; i < _itemCount; i++)
         {
             RectTransform child = _container.GetChild(i).GetComponent<RectTransform>();
-            var childPosition = new Vector2(-containerWidth / 2 + offsetX * i + _spacing * i, 0);
+            var childPosition = new Vector2(-containerWidth / 2 + offsetX * i, 0);
             child.anchoredPosition = childPosition;
             _itemPositions.Add(-child.anchoredPosition);
         }
