@@ -17,14 +17,16 @@ namespace Player
             _tauntParticle.gameObject.SetActive(false);
         }
 
-        public void ActivateStunFX()
+        public void ActivateStunFeedback()
         {
             _stunParticle.SetActive(true);
+            AnimSetBool("IsStun", true);
         }
         
-        public void DeactivateStunFX()
+        public void DeactivateStunFeedback()
         {
             _stunParticle.SetActive(false);
+            AnimSetBool("IsStun", false);
         }
 
         private void ActivateMovementParticle(Vector2 obj)

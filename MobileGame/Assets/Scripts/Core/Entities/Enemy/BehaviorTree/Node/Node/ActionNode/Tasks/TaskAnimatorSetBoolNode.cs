@@ -30,6 +30,7 @@ namespace BehaviorTree.Nodes.Actions
                 if (_data.IsValueIntern) _animator.SetBool(_data.NameParameter, (bool)Sharer.InternValues[_so.InternValues[0].HashCode]);
                 else  _animator.SetBool(_data.NameParameter, _data.ValueToPass);
             }
+            Debug.Log(_data.NameParameter);
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();
         }

@@ -54,7 +54,7 @@ namespace Player
             _timerStun += Time.deltaTime;
             if (_timerStun >= _timeStun)
             {
-                _playerRenderer.DeactivateStunFX();
+                _playerRenderer.DeactivateStunFeedback();
                 UnlockController();
                 _timerStun = 0;
                 _isStun = false;
@@ -67,7 +67,7 @@ namespace Player
             _timerInvulnerable += Time.deltaTime;
             if (_timerInvulnerable >= _timeInvunerable)
             {
-                _playerRenderer.DeactivateStunFX();
+                _playerRenderer.DeactivateStunFeedback();
                 UnlockController();
                 _timerInvulnerable = 0;
                 _isStun = false;
@@ -138,7 +138,7 @@ namespace Player
         public void TakeStun()
         {
             if (_isStun || _isInvulnerable) return;
-            _playerRenderer.ActivateStunFX();
+            _playerRenderer.ActivateStunFeedback();
             LockController();
             _isStun = true;
         }
