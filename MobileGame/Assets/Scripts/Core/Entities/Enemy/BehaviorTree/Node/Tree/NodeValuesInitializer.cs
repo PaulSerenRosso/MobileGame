@@ -85,7 +85,7 @@ namespace BehaviorTree.Trees
                 if (EnemyValueObjects[i].Type == type)
                     return EnemyValueObjects[i].Obj;
             }
-            
+            Debug.Log(type);
             throw new NullReferenceException();
         }
 

@@ -241,6 +241,81 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1710544587561899595}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2349987717075743652
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4244426461217846362}
+    m_Modifications:
+    - target: {fileID: 3693118626838243504, guid: 49b71f98dc0373340af5017ddb049087,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3693118626838243504, guid: 49b71f98dc0373340af5017ddb049087,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3693118626838243504, guid: 49b71f98dc0373340af5017ddb049087,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3693118626838243504, guid: 49b71f98dc0373340af5017ddb049087,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3693118626838243504, guid: 49b71f98dc0373340af5017ddb049087,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3693118626838243504, guid: 49b71f98dc0373340af5017ddb049087,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3693118626838243504, guid: 49b71f98dc0373340af5017ddb049087,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3693118626838243504, guid: 49b71f98dc0373340af5017ddb049087,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3693118626838243504, guid: 49b71f98dc0373340af5017ddb049087,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3693118626838243504, guid: 49b71f98dc0373340af5017ddb049087,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3693118626838243504, guid: 49b71f98dc0373340af5017ddb049087,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905224395713216660, guid: 49b71f98dc0373340af5017ddb049087,
+        type: 3}
+      propertyPath: m_Name
+      value: FX_MoveDustParent
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 49b71f98dc0373340af5017ddb049087, type: 3}
+--- !u!1 &9171752577775022896 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6905224395713216660, guid: 49b71f98dc0373340af5017ddb049087,
+    type: 3}
+  m_PrefabInstance: {fileID: 2349987717075743652}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2932257869933252636
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -651,7 +726,7 @@ PrefabInstance:
     - target: {fileID: 3911112695321858085, guid: 241ebed0774b86e4f8b4ef2150ead01a,
         type: 3}
       propertyPath: _nodeValuesInitializer.EnemyValueObjects.Array.size
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3911112695321858085, guid: 241ebed0774b86e4f8b4ef2150ead01a,
         type: 3}
@@ -692,7 +767,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _nodeValuesInitializer.EnemyValueObjects.Array.data[9].Obj
       value: 
-      objectReference: {fileID: 4987254922660194699}
+      objectReference: {fileID: 9171752577775022896}
     - target: {fileID: 3911112695321858085, guid: 241ebed0774b86e4f8b4ef2150ead01a,
         type: 3}
       propertyPath: _nodeValuesInitializer.EnemyValueObjects.Array.data[4].Type
@@ -721,7 +796,7 @@ PrefabInstance:
     - target: {fileID: 3911112695321858085, guid: 241ebed0774b86e4f8b4ef2150ead01a,
         type: 3}
       propertyPath: _nodeValuesInitializer.EnemyValueObjects.Array.data[9].Type
-      value: 6
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3911112695321858085, guid: 241ebed0774b86e4f8b4ef2150ead01a,
         type: 3}

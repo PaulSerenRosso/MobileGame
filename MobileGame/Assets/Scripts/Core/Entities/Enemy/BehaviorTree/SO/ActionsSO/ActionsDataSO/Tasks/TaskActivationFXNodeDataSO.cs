@@ -11,10 +11,16 @@ namespace BehaviorTree.SO.Actions
         public bool IsColorChanged;
         public Color ParticleColor;
         public BehaviorTreeEnums.TreeEnemyValues[] FXEnumValues;
-        
+        public bool IsDirectionChanged;
+        public Vector2 ParticleDirection;
         protected override void SetDependencyValues()
         {
-            EnemyValues = FXEnumValues;
+            EnemyValues = new BehaviorTreeEnums.TreeEnemyValues[FXEnumValues.Length+1];
+            for (int i = 0; i < EnemyValues.Length-1; i++)
+            {
+                EnemyValues[i] = FXEnumValues[i];
+            }
+            EnemyValues[^1] = BehaviorTreeEnums.TreeEnemyValues.Transform;
         }
 
         public override Type GetTypeNode()
