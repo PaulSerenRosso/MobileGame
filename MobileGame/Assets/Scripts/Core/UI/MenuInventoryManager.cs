@@ -31,6 +31,13 @@ namespace Service.UI
                 _itemsService.GetPlayerItems().FirstOrDefault(i => i.Key == ItemTypeEnum.Short).Value);
         }
 
+        public void UpdateScrollRect()
+        {
+            _headScroll.UpdateUIInventory();
+            _shirtScroll.UpdateUIInventory();
+            _shortScroll.UpdateUIInventory();
+        }
+
         public void OpenHat()
         {
             _headPanel.SetActive(true);

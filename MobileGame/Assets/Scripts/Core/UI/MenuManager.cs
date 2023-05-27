@@ -272,6 +272,7 @@ namespace Service.UI
             _homeButton.interactable = true;
             _shopButton.interactable = true;
             _inventoryButton.interactable = false;
+            _menuInventoryManager.UpdateScrollRect();
         }
 
         public void OpenDaily()
