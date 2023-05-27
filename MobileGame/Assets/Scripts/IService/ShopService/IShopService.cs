@@ -7,6 +7,7 @@ namespace Service.Shop
     {
         bool GetBundleIsEnabled { get; }
         bool GetDailyIsEnabled { get;  }
+        void Setup();
         List<ItemSO> GetItemDaily();
         void RefreshDaily();
         void EnableBundle();

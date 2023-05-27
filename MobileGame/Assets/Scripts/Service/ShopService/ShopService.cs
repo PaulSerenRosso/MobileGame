@@ -4,6 +4,7 @@ using Attributes;
 using HelperPSR.Collections;
 using Service.Items;
 using Service.Shop;
+using UnityEngine;
 
 public class ShopService : IShopService
 {
@@ -11,23 +12,23 @@ public class ShopService : IShopService
 
     private bool _bundleIsEnabled;
     private bool _dailyIsEnabled;
-    private List<ItemSO> _dailyItems;
+    private List<ItemSO> _dailyItems = new();
 
     public bool GetBundleIsEnabled => _bundleIsEnabled;
     public bool GetDailyIsEnabled { get; }
 
-    [ServiceInit]
-    private void Init()
+    public void Setup()
     {
         EnableBundle();
-        _dailyItems.Clear();
         var listUnlock = _itemsService.GetLockedItems();
         listUnlock.ShuffleList();
-        if (listUnlock.FirstOrDefault(i => i.IsUnlockableWithStar == true) != null)
+        if (listUnlock.FirstOrDefault(i => i.IsUnlockableWithStar) != null)
+        {
             _dailyItems.Add(listUnlock.FirstOrDefault(i => i.IsUnlockableWithStar));
+        }
         foreach (var itemSO in listUnlock.Where(i => i.IsUnlockableWithStar == false))
         {
-            if (_dailyItems.Count > 3) break;
+            if (_dailyItems.Count >= 3) break;
             _dailyItems.Add(itemSO);
         }
     }

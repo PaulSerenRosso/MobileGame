@@ -3,11 +3,14 @@ using System.Linq;
 using Addressables;
 using Attributes;
 using HelperPSR.Collections;
+using Service.Shop;
 
 namespace Service.Items
 {
     public class ItemsService : IItemsService
     {
+        [DependsOnService] private IShopService _shopService;
+        
         private List<ItemSO> _unlockItems = new();
         private List<ItemSO> _lockedItems = new();
         private ItemsServiceGlobalSettingsSO _globalSettingsSO;
@@ -34,6 +37,7 @@ namespace Service.Items
             {
                 SetItemPlayer(itemSO);
             }
+            _shopService.Setup();
         }
 
         public void UnlockItem(ItemSO itemSo)

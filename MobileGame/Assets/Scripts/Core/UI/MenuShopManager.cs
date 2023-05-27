@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Service.Currency;
 using Service.Items;
 using Service.Shop;
@@ -11,10 +12,8 @@ namespace Service.UI
     {
         [SerializeField] private GameObject deactivateBundlePanel;
 
-        [SerializeField] private Image _firstItemImage;
         [SerializeField] private Button[] _itemsButton;
-        [SerializeField] private Image _secondItemImage;
-        [SerializeField] private Image _thirdItemImage;
+        [SerializeField] private Image[] _itemsImage;
 
         private GameObject[] deactivateItemPanel;
         private IItemsService _itemsService;
@@ -22,7 +21,7 @@ namespace Service.UI
         private ICurrencyService _currencyService;
         private List<Button> _buttons;
 
-        public void Setup(IItemsService itemsService, ICurrencyService currencyService, IShopService shopService )
+        public void Setup(IItemsService itemsService, ICurrencyService currencyService, IShopService shopService)
         {
             _itemsService = itemsService;
             _currencyService = currencyService;
@@ -42,26 +41,48 @@ namespace Service.UI
             for (var index = 0; index < _itemsButton.Length; index++)
             {
                 var itemSO = shopService[index];
+                var indexButton = index;
                 if (itemSO.IsUnlockableWithStar)
                 {
-                    _itemsButton[index].onClick.AddListener(() => BuyItem(itemSO));
-                    _itemsButton[index].onClick.AddListener(() => BuyItem(itemSO));
+                    _itemsImage[index].sprite = itemSO.SpriteUI;
+                    _itemsButton[index].onClick.AddListener(() => BuyItem(itemSO, indexButton));
                     _itemsButton[index].transform.GetChild(0).GetComponent<Image>().sprite = itemSO.SpriteUI;
+                    if (_itemsService.GetUnlockedItems().FirstOrDefault(i => i == itemSO) != null) 
+                        _itemsButton[index].interactable = false;
                 }
                 else
                 {
-                    _itemsButton[index].onClick.AddListener(() => BuyItem(itemSO));
-                    _itemsButton[index].onClick.AddListener(() => BuyItem(itemSO));
+                    _itemsImage[index].sprite = itemSO.SpriteUI;
+                    _itemsButton[index].onClick.AddListener(() => BuyItem(itemSO, indexButton));
                     _itemsButton[index].transform.GetChild(0).GetComponent<Image>().sprite = itemSO.SpriteUI;
+                    if (_itemsService.GetUnlockedItems().FirstOrDefault(i => i == itemSO) != null) 
+                        _itemsButton[index].interactable = false;
                 }
             }
         }
 
-        public void BuyItem(ItemSO itemSo)
+        private void BuyItem(ItemSO itemSo, int index)
         {
-            if (_currencyService.GetCoins() < itemSo.Price) return; 
-            _itemsService.UnlockItem(itemSo);
-            _currencyService.RemoveCoins(itemSo.Price);
+            switch (itemSo.IsUnlockableWithStar)
+            {
+                case true:
+                    if (_currencyService.GetXP() < itemSo.ExperienceStar) return;
+                    if (_currencyService.GetCoins() < itemSo.Price) return;
+                    _itemsButton[index].interactable = false;
+                    _itemsButton[index].transform.GetChild(0).GetComponent<Image>().color =
+                        new Color(0.5f, 0.5f, 0.5f, 0.5f);
+                    _itemsService.UnlockItem(itemSo);
+                    _currencyService.RemoveCoins(itemSo.Price);
+                    break;
+                case false:
+                    if (_currencyService.GetCoins() < itemSo.Price) return;
+                    _itemsButton[index].interactable = false;
+                    _itemsButton[index].transform.GetChild(0).GetComponent<Image>().color =
+                        new Color(0.5f, 0.5f, 0.5f, 0.5f);
+                    _itemsService.UnlockItem(itemSo);
+                    _currencyService.RemoveCoins(itemSo.Price);
+                    break;
+            }
         }
 
         public void BuyCoins(int amount)

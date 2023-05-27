@@ -42,6 +42,8 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     private IItemsService _itemsService;
 
+    private List<ItemInventory> _itemsInventory = new();
+
     public void InitializeScroll(IItemsService itemsService, ItemSO[] items, ItemSO currentItem)
     {
         _itemsService = itemsService;
@@ -57,6 +59,8 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             if (_itemsService.GetUnlockedItems().FirstOrDefault(i => i == item) == null) 
                 itemImage.transform.GetChild(0).gameObject.SetActive(true);
             itemImage.sprite = item.SpriteUI;
+            ItemInventory itemInventory = new ItemInventory(item, itemImage);
+            _itemsInventory.Add(itemInventory);
         }
 
         _itemCount = _container.childCount;
@@ -65,6 +69,14 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
         SetItemPositions();
         SetItem(indexCurrentItem);
+    }
+
+    public void UpdateUIInventory()
+    {
+        foreach (var itemInventory in _itemsInventory.Where(itemInventory => _itemsService.GetUnlockedItems().FirstOrDefault(i => i == itemInventory.ItemSOInventory) != null))
+        {
+            itemInventory.ItemImage.transform.GetChild(0).gameObject.SetActive(false);
+        }
     }
 
     private void Update()
@@ -180,5 +192,18 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         {
             LerpToPage(GetNearestPage());
         }
+    }
+}
+
+[Serializable]
+public class ItemInventory
+{
+    public ItemSO ItemSOInventory;
+    public Image ItemImage;
+
+    public ItemInventory(ItemSO itemSO, Image itemImage)
+    {
+        ItemSOInventory = itemSO;
+        ItemImage = itemImage;
     }
 }
