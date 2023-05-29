@@ -53,7 +53,7 @@ namespace Service.UI
         [SerializeField] private TextMeshProUGUI _friendPopupNameText;
 
         [SerializeField] private DragPlayer _dragPlayer;
-        
+
         private TournamentSettingsSO _tournamentSettingsSO;
         private int _actualTournament;
         private IGameService _gameService;
@@ -85,9 +85,9 @@ namespace Service.UI
             if (!_fightService.GetFightTutorial() && !_fightService.GetFightDebug())
             {
                 _playTournamentButton.interactable = false;
-                _tournamentCanvas.SetActive(false);        
-                _topCanvas.gameObject.SetActive(false);    
-                _botCanvas.gameObject.SetActive(false);    
+                _tournamentCanvas.SetActive(false);
+                _topCanvas.gameObject.SetActive(false);
+                _botCanvas.gameObject.SetActive(false);
                 _menuTournamentManager.OpenUITournament();
             }
 
@@ -113,7 +113,7 @@ namespace Service.UI
             {
                 var button = Instantiate(_friendTag, _friendsLayout.transform);
                 button.onClick.AddListener(() => OpenFriendPopup(fakeName.picture, fakeName.name));
-                button.GetComponent<FriendComponent>().SetValue(fakeName.picture,fakeName.name);
+                button.GetComponent<FriendComponent>().SetValue(fakeName.picture, fakeName.name);
             }
         }
 
@@ -123,7 +123,7 @@ namespace Service.UI
 
         public void ActivateHome()
         {
-            _player.SetActive(false); 
+            _player.SetActive(false);
             _tournamentCanvas.SetActive(true);
             _backgroundCanvas.gameObject.SetActive(true);
             _debugFightCanvas.SetActive(false);
@@ -157,7 +157,7 @@ namespace Service.UI
             _gameService.LoadGameScene(_nextEnvironmentAddressableName, _nextEnemyAddressableName, true, false);
         }
 
-        public void StartFightTutorial()
+        private void StartFightTutorial()
         {
             _playMatchButton.interactable = false;
             _gameService.LoadGameScene("Coliseum", "ArnoldiosTutorialPrefab", false, true);
@@ -195,28 +195,36 @@ namespace Service.UI
             if (_actualTournament < 0)
             {
                 _actualTournament = 0;
-                _tournaments[_actualTournament].SetActive(true);
-                _leftArrowTournament.interactable = _actualTournament != 0;
-                _rightArrowTournament.interactable = true;
             }
             else
             {
-                _leftArrowTournament.interactable = _actualTournament != 0;
-                _rightArrowTournament.interactable = true;
+                _leftArrowTournament.interactable = false;
+                _rightArrowTournament.interactable = false;
                 for (int i = _actualTournament - 1; i >= 0; i--)
                 {
-                    _tournaments[i].GetComponent<RectTransform>()
-                        .DOAnchorPos(new Vector2(1920 * (i - _actualTournament), 0), 1f);
+                    var index = i;
+                    _tournaments[index].GetComponent<RectTransform>()
+                        .DOAnchorPos(new Vector2(1920 * (index - _actualTournament), 0), 0.5f)
+                        .OnComplete(() => MoveLeftTournament(index));
                 }
 
                 _tournaments[_actualTournament].SetActive(true);
-                _tournaments[_actualTournament].GetComponent<RectTransform>().DOAnchorPos(new Vector2(0, 0), 2f);
+                _tournaments[_actualTournament].GetComponent<RectTransform>().DOAnchorPos(new Vector2(0, 0), 0.5f);
                 for (int i = _actualTournament + 1; i < _tournaments.Length; i++)
                 {
-                    _tournaments[i].GetComponent<RectTransform>()
-                        .DOAnchorPos(new Vector2(1920 * (i - _actualTournament), 0), 1f);
+                    var index = i;
+                    _tournaments[index].GetComponent<RectTransform>()
+                        .DOAnchorPos(new Vector2(1920 * (index - _actualTournament), 0), 0.5f)
+                        .OnComplete(() => MoveLeftTournament(index));
                 }
             }
+        }
+
+        private void MoveLeftTournament(int index)
+        {
+            _tournaments[index].SetActive(false);
+            _leftArrowTournament.interactable = _actualTournament != 0;
+            _rightArrowTournament.interactable = true;
         }
 
         public void RightTournament()
@@ -225,28 +233,36 @@ namespace Service.UI
             if (_actualTournament > _tournaments.Length - 1)
             {
                 _actualTournament = _tournaments.Length - 1;
-                _tournaments[_actualTournament].SetActive(true);
-                _rightArrowTournament.interactable = _actualTournament != _tournaments.Length - 1;
-                _leftArrowTournament.interactable = true;
             }
             else
             {
-                _rightArrowTournament.interactable = _actualTournament != _tournaments.Length - 1;
-                _leftArrowTournament.interactable = true;
+                _rightArrowTournament.interactable = false;
+                _leftArrowTournament.interactable = false;
                 for (int i = _actualTournament - 1; i >= 0; i--)
                 {
-                    _tournaments[i].GetComponent<RectTransform>()
-                        .DOAnchorPos(new Vector2(1920 * (i - _actualTournament), 0), 1f);
+                    var index = i;
+                    _tournaments[index].GetComponent<RectTransform>()
+                        .DOAnchorPos(new Vector2(1920 * (index - _actualTournament), 0), 0.5f)
+                        .OnComplete(() => MoveRightTournament(index));
                 }
 
                 _tournaments[_actualTournament].SetActive(true);
-                _tournaments[_actualTournament].GetComponent<RectTransform>().DOAnchorPos(new Vector2(0, 0), 1f);
+                _tournaments[_actualTournament].GetComponent<RectTransform>().DOAnchorPos(new Vector2(0, 0), 0.5f);
                 for (int i = _actualTournament + 1; i < _tournaments.Length; i++)
                 {
-                    _tournaments[i].GetComponent<RectTransform>()
-                        .DOAnchorPos(new Vector2(1920 * (i - _actualTournament), 0), 1f);
+                    var index = i;
+                    _tournaments[index].GetComponent<RectTransform>()
+                        .DOAnchorPos(new Vector2(1920 * (index - _actualTournament), 0), 0.5f)
+                        .OnComplete(() => MoveRightTournament(index));
                 }
             }
+        }
+
+        private void MoveRightTournament(int index)
+        {
+            _tournaments[index].SetActive(false);
+            _rightArrowTournament.interactable = _actualTournament != _tournaments.Length - 1;
+            _leftArrowTournament.interactable = true;
         }
 
         public void OpenShop()
