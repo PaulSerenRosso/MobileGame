@@ -26,7 +26,7 @@ public class EnemyManager : MonoBehaviour, IRemoteConfigurable, IHypeable
     [SerializeField] private string _remoteConfigPercentageDamageReductionBoostChimist;
     [SerializeField] private ParticleSystem _startUltimateParticle;
     [SerializeField] private ParticleSystem _ultimateParticle;
-    [SerializeField] private GameObject _blockParticle;
+    [SerializeField] private ParticleSystem _blockParticle;
     [SerializeField] private GameObject[] _particleToReset;
     [SerializeField] private SkinnedMeshRenderer[] _skinnedMeshRenderers;
     [SerializeField] private int _timeShaderActivate = 500;
@@ -149,8 +149,16 @@ public class EnemyManager : MonoBehaviour, IRemoteConfigurable, IHypeable
                 return true;
             }
             _blockParticle.gameObject.transform.position = (1 * (posToCheck - transform.position).normalized + transform.position);
-            _blockParticle.gameObject.SetActive(true);
-
+            if (_blockParticle.isPlaying)
+            {
+                _blockParticle.Clear();
+                _blockParticle.Play();
+            }
+            else
+            {
+                _blockParticle.gameObject.SetActive(true);
+            }
+            
             return false;
         }
         
