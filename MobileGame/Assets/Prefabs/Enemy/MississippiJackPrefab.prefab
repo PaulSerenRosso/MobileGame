@@ -911,7 +911,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _ghostTrail
       value: 
-      objectReference: {fileID: 3783266421166270642}
+      objectReference: {fileID: 0}
     - target: {fileID: 4796771559047852942, guid: 241ebed0774b86e4f8b4ef2150ead01a,
         type: 3}
       propertyPath: EnemyInGameSo
@@ -1109,29 +1109,6 @@ PrefabInstance:
     - {fileID: 3468216822340678009, guid: 241ebed0774b86e4f8b4ef2150ead01a, type: 3}
     - {fileID: 8152168790444815023, guid: 241ebed0774b86e4f8b4ef2150ead01a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 241ebed0774b86e4f8b4ef2150ead01a, type: 3}
---- !u!1 &881699121002915775 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6912617506752955889, guid: 241ebed0774b86e4f8b4ef2150ead01a,
-    type: 3}
-  m_PrefabInstance: {fileID: 6040136696070087246}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3783266421166270642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 881699121002915775}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27d902fa78554b847a0e8cb6f8f3aba8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _ghostGO: {fileID: 7693012760970501383, guid: 907560893741fad4fbccf62ca3e020e4,
-    type: 3}
-  _activeTime: 1
-  _meshRefreshRate: 0.1
-  _meshDisableDelay: 0.8
 --- !u!1 &2278810346657771090 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5498074623512300572, guid: 241ebed0774b86e4f8b4ef2150ead01a,
@@ -1405,12 +1382,12 @@ PrefabInstance:
         type: 3}
       propertyPath: ShapeModule.m_SkinnedMeshRenderer
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5217563916950187514}
     - target: {fileID: 2649706527625204144, guid: def7e55c1a874224ca242847fd97b397,
         type: 3}
       propertyPath: ShapeModule.m_SkinnedMeshRenderer
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5217563916950187514}
     - target: {fileID: 2734173244690438128, guid: def7e55c1a874224ca242847fd97b397,
         type: 3}
       propertyPath: m_RootOrder
@@ -1470,7 +1447,7 @@ PrefabInstance:
         type: 3}
       propertyPath: ShapeModule.m_SkinnedMeshRenderer
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5217563916950187514}
     - target: {fileID: 8083910226122333515, guid: def7e55c1a874224ca242847fd97b397,
         type: 3}
       propertyPath: m_Name

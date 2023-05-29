@@ -30,7 +30,6 @@ public class EnemyManager : MonoBehaviour, IRemoteConfigurable, IHypeable
     [SerializeField] private GameObject[] _particleToReset;
     [SerializeField] private SkinnedMeshRenderer[] _skinnedMeshRenderers;
     [SerializeField] private int _timeShaderActivate = 500;
-    [SerializeField] private GhostTrail _ghostTrail;
 
     private IHypeService _hypeService;
 
@@ -40,7 +39,7 @@ public class EnemyManager : MonoBehaviour, IRemoteConfigurable, IHypeable
         transform.rotation = Quaternion.identity;
         CurrentMobilityState = EnemyEnums.EnemyMobilityState.INVULNERABLE;
         CurrentBlockingState = EnemyEnums.EnemyBlockingState.VULNERABLE;
-        _ghostTrail.InitGhostTrail();
+    
     }
 
     private void OnEnable()
@@ -69,7 +68,7 @@ public class EnemyManager : MonoBehaviour, IRemoteConfigurable, IHypeable
 
     public void ActivateGhostTrail(Vector2 direction)
     {
-        _ghostTrail.ActivateTrail(direction);
+    //    _ghostTrail.ActivateTrail(direction);
     }
 
     private void ActivateFXUltimate(float obj)
