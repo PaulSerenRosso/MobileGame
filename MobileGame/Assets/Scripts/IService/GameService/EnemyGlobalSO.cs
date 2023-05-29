@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
+
 [CreateAssetMenu(menuName = "EnemyGlobalSO", fileName = "new EnemyGlobaleSO")]
 public class EnemyGlobalSO : ScriptableObject
 {
     public string Name;
-    public Sprite Sprite;
+    [FormerlySerializedAs("Sprite")] public Sprite IconSprite;
+    public Sprite BannerSprite;
     public string enemyAdressableName;
 }
