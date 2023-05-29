@@ -26,6 +26,8 @@ namespace Service.Fight
         public event Action DeactivatePauseEvent;
 
         public event Action<bool> EndFightEvent;
+        public event Action ActivateFightCinematic;
+        public event Action DeactivateFightCinematic;
 
         [DependsOnService] private IUICanvasSwitchableService _canvasService;
         [DependsOnService] private IInputService _inputService;
@@ -124,11 +126,13 @@ namespace Service.Fight
 
         private void LaunchEntryCinematic()
         {
+            ActivateFightCinematic?.Invoke();
             ActivatePause(() => _cinematicFightManager.LaunchFightEntryCinematic(InitTimerRound));
         }
 
         private void LaunchUltimateEnemyCinematic()
         {
+            ActivateFightCinematic?.Invoke();
             ActivatePause(() =>
             {
                 _enemyRoundCount++;
@@ -141,6 +145,7 @@ namespace Service.Fight
                     _cinematicFightManager.LaunchEnemyUltimateCinematic(ResetRound);
                 }
             });
+            
         }
 
         private void ResetEntities()
@@ -153,6 +158,7 @@ namespace Service.Fight
 
         private void LaunchUltimatePlayerCinematic()
         {
+            ActivateFightCinematic?.Invoke();
             ActivatePause(() =>
             {
                 _playerRoundCount++;
@@ -275,6 +281,7 @@ namespace Service.Fight
 
         private void InitTimerRound()
         {
+            DeactivateFightCinematic?.Invoke();
             ResetEntities();
             _tickTimerInitRound = new TickTimer(_roundInitTimer, _tickeableService.GetTickManager);
             _tickTimerInitRound.TickEvent += EndInitRound;
@@ -284,6 +291,7 @@ namespace Service.Fight
 
         private void ResetRound()
         {
+          
             ResetEntities();
             _tickTimerInitRound.Initiate();
         }
@@ -306,6 +314,8 @@ namespace Service.Fight
             _enemyRoundCount = 0;
             _isPlayerWon = false;
             _cameraController.Unlink();
+            ActivateFightCinematic = null;
+            DeactivateFightCinematic = null;
             InitiateRoundEvent = null;
             _canvasService.InitCanvasEvent -= LoadCinematicFightManager;
             EndInitiateRoundEvent = null;

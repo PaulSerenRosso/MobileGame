@@ -24,5 +24,8 @@ namespace Service.Fight
         public event Action DeactivatePauseEvent;
 
         public event Action<bool> EndFightEvent;
+
+        public event Action ActivateFightCinematic;
+        public event Action DeactivateFightCinematic;
     }
 }

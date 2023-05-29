@@ -31,6 +31,7 @@ public class CinematicFightManager : MonoBehaviour
 
     public void LaunchFightEntryCinematic(Action endCinematicCallBack)
     {
+
         StartCoroutine(PlayCinematic(_fightEntry, endCinematicCallBack));
     }
 

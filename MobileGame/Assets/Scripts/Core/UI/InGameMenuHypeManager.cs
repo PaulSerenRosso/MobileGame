@@ -57,6 +57,8 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
     {
         _hypeService = hypeService;
         _fightService = fightService;
+        fightService.ActivateFightCinematic += () => gameObject.SetActive(false);
+        fightService.DeactivateFightCinematic += () => gameObject.SetActive(true);
         _hypeLogoEnemy = _fightService.GetEnemySO().Sprite;
         _hypeFillEnemyLogo.sprite = _hypeLogoEnemy;
         hypeService.GetEnemyDecreaseHypeEvent += SetEnemySliderValue;

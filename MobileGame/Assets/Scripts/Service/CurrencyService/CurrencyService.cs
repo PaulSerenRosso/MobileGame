@@ -32,7 +32,8 @@ public class CurrencyService : ICurrencyService
 
     public void AddCoins(int amount)
     {
-        currentCoins += amount; 
+        if (amount + currentCoins > 10000) currentCoins = 10000;
+        else currentCoins += amount; 
         OnAddCoins?.Invoke(currentCoins);
     }
 

@@ -177,7 +177,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _ghostTrail
       value: 
-      objectReference: {fileID: 2404081063544745113}
+      objectReference: {fileID: 0}
     - target: {fileID: 4796771559047852942, guid: 241ebed0774b86e4f8b4ef2150ead01a,
         type: 3}
       propertyPath: EnemyInGameSo
@@ -360,6 +360,11 @@ PrefabInstance:
       propertyPath: _remoteConfigPercentageDamageReductionBoostChimist
       value: Arno_PercentageDamageReductionBoost
       objectReference: {fileID: 0}
+    - target: {fileID: 5498074623512300572, guid: 241ebed0774b86e4f8b4ef2150ead01a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6912617506752955889, guid: 241ebed0774b86e4f8b4ef2150ead01a,
         type: 3}
       propertyPath: m_Name
@@ -411,29 +416,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 358803665395806989}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6562930992312383228 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6912617506752955889, guid: 241ebed0774b86e4f8b4ef2150ead01a,
-    type: 3}
-  m_PrefabInstance: {fileID: 358803665395806989}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2404081063544745113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6562930992312383228}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27d902fa78554b847a0e8cb6f8f3aba8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _ghostGO: {fileID: 6054508033775392880, guid: 351c8a4691af1c041a4380d3be06b17e,
-    type: 3}
-  _activeTime: 1
-  _meshRefreshRate: 0.1
-  _meshDisableDelay: 0.8
 --- !u!4 &8597618471578293405 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8334573544675780496, guid: 241ebed0774b86e4f8b4ef2150ead01a,
@@ -996,12 +978,12 @@ PrefabInstance:
         type: 3}
       propertyPath: ShapeModule.m_SkinnedMeshRenderer
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8063304079453930449}
     - target: {fileID: 2649706527625204144, guid: def7e55c1a874224ca242847fd97b397,
         type: 3}
       propertyPath: ShapeModule.m_SkinnedMeshRenderer
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8063304079453930449}
     - target: {fileID: 2734173244690438128, guid: def7e55c1a874224ca242847fd97b397,
         type: 3}
       propertyPath: m_RootOrder
@@ -1061,7 +1043,7 @@ PrefabInstance:
         type: 3}
       propertyPath: ShapeModule.m_SkinnedMeshRenderer
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8063304079453930449}
     - target: {fileID: 8083910226122333515, guid: def7e55c1a874224ca242847fd97b397,
         type: 3}
       propertyPath: m_Name
