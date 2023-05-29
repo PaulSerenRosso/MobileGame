@@ -96,7 +96,7 @@ namespace Service.UI
                 if (enemyGlobalSo.enemyAdressableName.Contains("Tutorial")) continue;
                 var button = Instantiate(_enemyButton, _enemySelectionGrid.transform);
                 button.onClick.AddListener(() => SetEnemyAddressableName(enemyGlobalSo.enemyAdressableName));
-                button.image.sprite = enemyGlobalSo.Sprite;
+                button.image.sprite = enemyGlobalSo.IconSprite;
                 button.GetComponentInChildren<TextMeshProUGUI>().text = enemyGlobalSo.Name;
             }
 
