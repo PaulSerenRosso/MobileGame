@@ -1390,7 +1390,23 @@ PrefabInstance:
     - target: {fileID: 3247664928439510318, guid: 5f30d5c716b73d74a87bf169b54f07a1,
         type: 3}
       propertyPath: m_text
-      value: The tournament is not unlocked !
+      value: The tournament is not unlocked ! You need 1,000,000 stars to unlock
+        it.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3247664928439510318, guid: 5f30d5c716b73d74a87bf169b54f07a1,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 131.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3247664928439510318, guid: 5f30d5c716b73d74a87bf169b54f07a1,
+        type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 3247664928439510318, guid: 5f30d5c716b73d74a87bf169b54f07a1,
+        type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3831921048709257874, guid: 5f30d5c716b73d74a87bf169b54f07a1,
         type: 3}

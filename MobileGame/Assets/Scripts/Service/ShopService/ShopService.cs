@@ -4,7 +4,6 @@ using Attributes;
 using HelperPSR.Collections;
 using Service.Items;
 using Service.Shop;
-using UnityEngine;
 
 public class ShopService : IShopService
 {
@@ -20,17 +19,7 @@ public class ShopService : IShopService
     public void Setup()
     {
         EnableBundle();
-        var listUnlock = _itemsService.GetLockedItems();
-        listUnlock.ShuffleList();
-        if (listUnlock.FirstOrDefault(i => i.IsUnlockableWithStar) != null)
-        {
-            _dailyItems.Add(listUnlock.FirstOrDefault(i => i.IsUnlockableWithStar));
-        }
-        foreach (var itemSO in listUnlock.Where(i => i.IsUnlockableWithStar == false))
-        {
-            if (_dailyItems.Count >= 3) break;
-            _dailyItems.Add(itemSO);
-        }
+        RefreshDaily();
     }
 
     public List<ItemSO> GetItemDaily()
@@ -43,9 +32,9 @@ public class ShopService : IShopService
         _dailyItems.Clear();
         var listUnlock = _itemsService.GetLockedItems();
         listUnlock.ShuffleList();
-        if (listUnlock.FirstOrDefault(i => i.IsUnlockableWithStar == true) != null)
+        if (listUnlock.FirstOrDefault(i => i.IsUnlockableWithStar) != null)
             _dailyItems.Add(listUnlock.FirstOrDefault(i => i.IsUnlockableWithStar));
-        foreach (var itemSO in listUnlock.Where(i => i.IsUnlockableWithStar == false))
+        foreach (var itemSO in listUnlock.Where(i => i.IsUnlockableWithStar == false && i.IsUnlockableInDaily))
         {
             if (_dailyItems.Count > 3) break;
             _dailyItems.Add(itemSO);

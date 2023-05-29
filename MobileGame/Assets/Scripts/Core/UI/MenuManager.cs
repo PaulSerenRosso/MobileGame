@@ -251,7 +251,6 @@ namespace Service.UI
 
         public void OpenShop()
         {
-            
             _player.SetActive(false);
             _tournamentCanvas.SetActive(false);
             _backgroundCanvas.gameObject.SetActive(true);
