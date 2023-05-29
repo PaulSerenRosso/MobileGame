@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using Service.Items;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Service.UI
 {
@@ -14,11 +16,27 @@ namespace Service.UI
         [SerializeField] private ScrollSnapRect _shirtScroll;
         [SerializeField] private ScrollSnapRect _shortScroll;
 
+        [SerializeField] private BadgeSO[] _badgeSOs;
+        
+        [SerializeField] private Button[] _badgeButtons;
+
+        [SerializeField] private GameObject _badgePopup;
+        [SerializeField] private Image _imagePopup;
+        [SerializeField] private TextMeshProUGUI _titlePopup;
+        [SerializeField] private TextMeshProUGUI _descriptionPopup;
+
         private IItemsService _itemsService;
 
         public void Setup(IItemsService itemsService, PlayerItemsLinker playerItemsLinker)
         {
             _itemsService = itemsService;
+            for (var i = 0; i < _badgeButtons.Length; i++)
+            {
+                var index = i;
+                var badgeButton = _badgeButtons[index];
+                badgeButton.image.sprite = _badgeSOs[index].SpriteBadge;
+                badgeButton.onClick.AddListener(() => OpenPopup(_badgeSOs[index]));
+            }
             _itemsService.SetPlayerItemLinker(playerItemsLinker);
             _headScroll.InitializeScroll(_itemsService,
                 _itemsService.GetAllItems().Where(i => i.Type == ItemTypeEnum.Head).ToArray(),
@@ -57,6 +75,19 @@ namespace Service.UI
             _headPanel.SetActive(false);
             _shirtPanel.SetActive(false);
             _shortPanel.SetActive(true);
+        }
+
+        private void OpenPopup(BadgeSO badgeSO)
+        {
+            _badgePopup.SetActive(true);
+            _imagePopup.sprite = badgeSO.SpriteBadge;
+            _titlePopup.text = badgeSO.TitleBadge;
+            _descriptionPopup.text = badgeSO.DescriptionBadge;
+        }
+
+        public void ClosePopup()
+        {
+            _badgePopup.SetActive(false);
         }
     }
 }
