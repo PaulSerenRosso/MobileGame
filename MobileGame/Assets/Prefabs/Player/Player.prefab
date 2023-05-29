@@ -5222,12 +5222,12 @@ PrefabInstance:
         type: 3}
       propertyPath: ShapeModule.m_SkinnedMeshRenderer
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6901132842937188275}
     - target: {fileID: 2649706527625204144, guid: def7e55c1a874224ca242847fd97b397,
         type: 3}
       propertyPath: ShapeModule.m_SkinnedMeshRenderer
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6901132842937188275}
     - target: {fileID: 2734173244690438128, guid: def7e55c1a874224ca242847fd97b397,
         type: 3}
       propertyPath: m_RootOrder
@@ -5287,7 +5287,7 @@ PrefabInstance:
         type: 3}
       propertyPath: ShapeModule.m_SkinnedMeshRenderer
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6901132842937188275}
     - target: {fileID: 8083910226122333515, guid: def7e55c1a874224ca242847fd97b397,
         type: 3}
       propertyPath: m_Name
@@ -5296,7 +5296,7 @@ PrefabInstance:
     - target: {fileID: 8083910226122333515, guid: def7e55c1a874224ca242847fd97b397,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: def7e55c1a874224ca242847fd97b397, type: 3}
@@ -5675,6 +5675,26 @@ PrefabInstance:
       propertyPath: looping
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6955547491824572146, guid: fca284cc0c3fa20488ef57f89cfc9565,
+        type: 3}
+      propertyPath: ShapeModule.type
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955547491824572146, guid: fca284cc0c3fa20488ef57f89cfc9565,
+        type: 3}
+      propertyPath: ShapeModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955547491824572146, guid: fca284cc0c3fa20488ef57f89cfc9565,
+        type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955547491824572146, guid: fca284cc0c3fa20488ef57f89cfc9565,
+        type: 3}
+      propertyPath: ShapeModule.m_SkinnedMeshRenderer
+      value: 
+      objectReference: {fileID: 6901132842937188275}
     - target: {fileID: 8685084110298333247, guid: fca284cc0c3fa20488ef57f89cfc9565,
         type: 3}
       propertyPath: m_Name
