@@ -27,6 +27,10 @@ namespace Service.UI
         [SerializeField] private Image[] _imageDemiWinners;
         [SerializeField] private Image[] _imageFinalWinners;
 
+        [SerializeField] private Image _imageLogoQuarter;
+        [SerializeField] private Image[] _imageLogoDemi;
+        [SerializeField] private Image[] _imageLogoFinal;
+
         [SerializeField] private TextMeshProUGUI _quarterName;
         [SerializeField] private TextMeshProUGUI[] _demiNames;
         [SerializeField] private TextMeshProUGUI[] _finalNames;
@@ -68,14 +72,23 @@ namespace Service.UI
         private void SetTournamentNames()
         {
             _quarterName.text = _fights[0].EnemyGlobalSO.Name;
+            _imageLogoQuarter.sprite = _fights[0].EnemyGlobalSO.Sprite;
             foreach (var demiName in _demiNames)
             {
                 demiName.text = _fights[1].EnemyGlobalSO.Name;
+            }
+            foreach (var demiName in _imageLogoDemi)
+            {
+                demiName.sprite = _fights[1].EnemyGlobalSO.Sprite;
             }
 
             foreach (var finalName in _finalNames)
             {
                 finalName.text = _fights[2].EnemyGlobalSO.Name;
+            }
+            foreach (var finalName in _imageLogoFinal)
+            {
+                finalName.sprite = _fights[2].EnemyGlobalSO.Sprite;
             }
 
             for (var index = 0; index < _quarterFakeNames.Length; index++)
