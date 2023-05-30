@@ -72,14 +72,14 @@ namespace Service.UI
         private void SetTournamentNames()
         {
             _quarterName.text = _fights[0].EnemyGlobalSO.Name;
-            _imageLogoQuarter.sprite = _fights[0].EnemyGlobalSO.Sprite;
+            _imageLogoQuarter.sprite = _fights[0].EnemyGlobalSO.IconSprite;
             foreach (var demiName in _demiNames)
             {
                 demiName.text = _fights[1].EnemyGlobalSO.Name;
             }
             foreach (var demiName in _imageLogoDemi)
             {
-                demiName.sprite = _fights[1].EnemyGlobalSO.Sprite;
+                demiName.sprite = _fights[1].EnemyGlobalSO.IconSprite;
             }
 
             foreach (var finalName in _finalNames)
@@ -88,7 +88,7 @@ namespace Service.UI
             }
             foreach (var finalName in _imageLogoFinal)
             {
-                finalName.sprite = _fights[2].EnemyGlobalSO.Sprite;
+                finalName.sprite = _fights[2].EnemyGlobalSO.IconSprite;
             }
 
             for (var index = 0; index < _quarterFakeNames.Length; index++)
