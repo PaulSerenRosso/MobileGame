@@ -281,7 +281,7 @@ namespace Service.Fight
 
         private void InitTimerRound()
         {
-            DeactivateFightCinematic?.Invoke();
+        
             ResetEntities();
             _tickTimerInitRound = new TickTimer(_roundInitTimer, _tickeableService.GetTickManager);
             _tickTimerInitRound.TickEvent += EndInitRound;
@@ -291,13 +291,14 @@ namespace Service.Fight
 
         private void ResetRound()
         {
-          
+       
             ResetEntities();
             _tickTimerInitRound.Initiate();
         }
 
         private void StartInitRound()
         {
+            DeactivateFightCinematic?.Invoke();
             if (_isTutorialFight) InitiateRoundEvent?.Invoke(-1); 
             else InitiateRoundEvent?.Invoke(_enemyRoundCount + _playerRoundCount);
         }
