@@ -35,7 +35,6 @@ public class JuicyPopup : MonoBehaviour
         _rectTransform.DOKill();
         _rectTransform.DOScale(0, _deactivateTime).OnComplete(()=>
         {
-            
             DeactivatePopUpEvent?.Invoke();
             gameObject.SetActive(false);
         });
