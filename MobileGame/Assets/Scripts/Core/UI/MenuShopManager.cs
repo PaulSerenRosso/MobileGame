@@ -155,7 +155,11 @@ namespace Service.UI
 
         public void ReloadItems()
         {
-            if (_currencyService.GetCoins() < _reloadCost) return;
+            if (_currencyService.GetCoins() < _reloadCost)
+            {
+                _enoughPanel.SetActive(true);
+                return;
+            }
             _currencyService.RemoveCoins(_reloadCost);
             _shopService.RefreshDaily();
             SetDailyItem();
