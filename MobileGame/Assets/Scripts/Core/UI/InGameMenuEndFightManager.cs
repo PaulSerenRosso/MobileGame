@@ -13,8 +13,9 @@ namespace Service.UI
         [SerializeField] private string endFightTitlePlayerVictoryName;
         [SerializeField] private string endFightTitlePlayerLoseName;
         [SerializeField] private Button backToMainMenuButton;
-        private ITournamentService _tournamentService;
         [SerializeField] private TextMeshProUGUI expAmountText;
+        
+        private ITournamentService _tournamentService;
         private IFightService _fightService;
         private ICurrencyService _currencyService;
 
@@ -40,7 +41,7 @@ namespace Service.UI
                     expAmountText.text = "+" + expAmount;
                     _currencyService.AddXP(expAmount);
                 }
-                //endFightTitle.text = endFightTitlePlayerVictoryName;
+                // endFightTitle.text = endFightTitlePlayerVictoryName;
             }
             else
             {
@@ -52,7 +53,7 @@ namespace Service.UI
                     expAmountText.text = "+" + expAmount;
                     _currencyService.AddXP(expAmount);
                 }
-                //endFightTitle.text = endFightTitlePlayerLoseName;
+                // endFightTitle.text = endFightTitlePlayerLoseName;
             }
         }
 

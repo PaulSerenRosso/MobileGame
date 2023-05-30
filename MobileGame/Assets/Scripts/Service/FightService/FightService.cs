@@ -243,7 +243,7 @@ namespace Service.Fight
             var enemy = Object.Instantiate(gameObject);
             Release(gameObject);
             _enemyManager = enemy.GetComponent<EnemyManager>();
-            _enemyGlobalSO = _gameService.GlobalSettingsSO.AllEnemyGlobalSO.First(enemy => enemy.enemyAdressableName == _enemyAddressableName);
+            _enemyGlobalSO = _gameService.GlobalSettingsSO.AllEnemyGlobalSO.First(enemy => enemy.EnemyAddressableName == _enemyAddressableName);
             _enemyManager.CanUltimateEvent += LaunchUltimateEnemyCinematic;
             _playerController.SetupPlayer(_inputService, _tickeableService, _gridManager,
                 _gridSo, _enemyManager, _hypeService);

@@ -1,5 +1,4 @@
 using DG.Tweening;
-using HelperPSR.MonoLoopFunctions;
 using Service.Currency;
 using Service.Fight;
 using Service.Items;
@@ -54,6 +53,8 @@ namespace Service.UI
 
         [SerializeField] private DragPlayer _dragPlayer;
 
+        [SerializeField] private Image _rewardImage;
+
         private TournamentSettingsSO _tournamentSettingsSO;
         private int _actualTournament;
         private IGameService _gameService;
@@ -81,7 +82,8 @@ namespace Service.UI
             _tournaments[_actualTournament].SetActive(true);
             _leftArrowTournament.interactable = false;
             _homeButton.interactable = false;
-            _menuTournamentManager.SetupMenu(_gameService, _tournamentService, this, _currencyService);
+            _menuTournamentManager.SetupMenu(_gameService, _tournamentService, this, _currencyService, itemsService);
+            _rewardImage.sprite = _tournamentService.GetFights()[^1].EnemyGlobalSO.ItemSO.SpriteUI;
             if (!_fightService.GetFightTutorial() && !_fightService.GetFightDebug())
             {
                 _playTournamentButton.interactable = false;
@@ -93,9 +95,9 @@ namespace Service.UI
 
             foreach (var enemyGlobalSo in gameService.GlobalSettingsSO.AllEnemyGlobalSO)
             {
-                if (enemyGlobalSo.enemyAdressableName.Contains("Tutorial")) continue;
+                if (enemyGlobalSo.EnemyAddressableName.Contains("Tutorial")) continue;
                 var button = Instantiate(_enemyButton, _enemySelectionGrid.transform);
-                button.onClick.AddListener(() => SetEnemyAddressableName(enemyGlobalSo.enemyAdressableName));
+                button.onClick.AddListener(() => SetEnemyAddressableName(enemyGlobalSo.EnemyAddressableName));
                 button.image.sprite = enemyGlobalSo.IconSprite;
                 button.GetComponentInChildren<TextMeshProUGUI>().text = enemyGlobalSo.Name;
             }
@@ -150,7 +152,7 @@ namespace Service.UI
         {
             _playMatchButton.interactable = false;
             if (_nextEnemyAddressableName == null)
-                _nextEnemyAddressableName = _gameService.GlobalSettingsSO.AllEnemyGlobalSO[0].enemyAdressableName;
+                _nextEnemyAddressableName = _gameService.GlobalSettingsSO.AllEnemyGlobalSO[0].EnemyAddressableName;
             if (_nextEnvironmentAddressableName == null)
                 _nextEnvironmentAddressableName =
                     _gameService.GlobalSettingsSO.AllEnvironmentsSO[0].EnvironmentAddressableName;

@@ -22,22 +22,38 @@ namespace Service.Hype
 
         private float _ultimateAreaReachedHalfHypeSpeed;
         private float _startHypeValuePlayer;
+
         private float _startHypeValueEnemy;
- 
+
         public event Action EnableHypeServiceEvent;
- 
-        public void StopUltimateAreasIncreased()
+
+        public void OnUpdate()
         {
-            UpdateManager.UnRegister(this);
+            if (_hypePlayer.UltimateCurrentValue >= _halfHype)
+            {
+                _hypePlayer.UltimateCurrentValue -= Time.deltaTime * _ultimateAreaReachedHalfHypeSpeed;
+                _hypeEnemy.UltimateCurrentValue -= Time.deltaTime * _ultimateAreaReachedHalfHypeSpeed;
+                UltimateAreaIncreaseEvent?.Invoke(_hypePlayer.UltimateCurrentValue);
+                TryGainUltimateValue(_hypeEnemy,0);
+                TryGainUltimateValue(_hypePlayer,0);
+            }
+            else
+            {
+                UpdateManager.UnRegister(this);
+            }
         }
 
         public void PlayUltimateAreasIncreased()
         {
             if(!_fightService.GetFightTutorial())
             {
-            UpdateManager.Register(this);
-                
+                UpdateManager.Register(this);
             }
+        }
+
+        public void StopUltimateAreasIncreased()
+        {
+            UpdateManager.UnRegister(this);
         }
 
         public void IncreaseHypePlayer(float amount)
@@ -294,6 +310,7 @@ namespace Service.Hype
         }
 
         public event Action<float> ReachMaximumHypeEvent;
+
         public event Action<float> ReachMinimumHypeEvent;
 
         public void EnabledService()
@@ -351,22 +368,6 @@ namespace Service.Hype
             _hypeServiceSo.EnemyHypeSO.UltimateValue = RemoteConfigManager.Config.GetFloat("EnemyHypeUltimateValue");
             _hypeServiceSo.PlayerHypeSO.UltimateValue = RemoteConfigManager.Config.GetFloat("PlayerHypeUltimateValue");
       
-        }
-
-        public void OnUpdate()
-        {
-            if (_hypePlayer.UltimateCurrentValue >= _halfHype)
-            {
-                _hypePlayer.UltimateCurrentValue -= Time.deltaTime * _ultimateAreaReachedHalfHypeSpeed;
-                _hypeEnemy.UltimateCurrentValue -= Time.deltaTime * _ultimateAreaReachedHalfHypeSpeed;
-                UltimateAreaIncreaseEvent?.Invoke(_hypePlayer.UltimateCurrentValue);
-                TryGainUltimateValue(_hypeEnemy,0);
-                TryGainUltimateValue(_hypePlayer,0);
-            }
-            else
-            {
-                UpdateManager.UnRegister(this);
-            }
         }
     }
 }

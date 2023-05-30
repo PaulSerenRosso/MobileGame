@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Service.Currency;
 using Service.Fight;
+using Service.Items;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -42,6 +43,8 @@ namespace Service.UI
         [SerializeField] private Canvas _winTournament;
         [SerializeField] private Canvas _defeatTournament;
         [SerializeField] private TextMeshProUGUI _winTournamentText;
+        [SerializeField] private Image _rewardImage;
+        [SerializeField] private TextMeshProUGUI _rewardTournamentText;
         
         private IGameService _gameService;
         private ITournamentService _tournamentService;
@@ -51,13 +54,15 @@ namespace Service.UI
         private string _enemyAddressableName;
         private ICurrencyService _currencyService;
         private string _environmentAddressableName;
+        private IItemsService _itemsService;
 
         public void SetupMenu(IGameService gameService, ITournamentService tournamentService, MenuManager menuManager,
-            ICurrencyService currencyService)
+            ICurrencyService currencyService, IItemsService itemsService)
         {
             _gameService = gameService;
             _tournamentService = tournamentService;
             _menuManager = menuManager;
+            _itemsService = itemsService;
             if (!_tournamentService.GetTournamentIsActive()) _tournamentService.SetTournament();
             _fights = _tournamentService.GetFights();
             _fakeNames = _tournamentService.GetFakeNames();
@@ -229,6 +234,8 @@ namespace Service.UI
         {
             ActivateButtons();
             _winTournamentText.text = "+" + _tournamentService.GetSettings().CoinsAmountWhenWinTournament;
+            _rewardImage.sprite = _tournamentService.GetCurrentFightPlayer().EnemyGlobalSO.ItemSO.SpriteUI;
+            _rewardTournamentText.text = _tournamentService.GetCurrentFightPlayer().EnemyGlobalSO.ItemSO.name;
             _winTournament.gameObject.SetActive(true);
         }
 
@@ -241,6 +248,7 @@ namespace Service.UI
         private void GainEndTournamentCoins()
         {
             _currencyService.AddCoins(_tournamentService.GetSettings().CoinsAmountWhenWinTournament);
+            _itemsService.UnlockItem(_tournamentService.GetCurrentFightPlayer().EnemyGlobalSO.ItemSO);
         }
 
         public void DeactivateUITournament()
@@ -256,7 +264,7 @@ namespace Service.UI
             _playFightButton.interactable = false;
             Fight.Fight currentFight = _tournamentService.GetCurrentFightPlayer();
             _gameService.LoadGameScene(currentFight.EnvironmentSO.EnvironmentAddressableName,
-                currentFight.EnemyGlobalSO.enemyAdressableName, false, false);
+                currentFight.EnemyGlobalSO.EnemyAddressableName, false, false);
         }
 
         public void QuitTournament()
