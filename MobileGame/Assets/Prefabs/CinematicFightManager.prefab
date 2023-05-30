@@ -1326,6 +1326,8 @@ PlayableDirector:
     value: {fileID: 9179834426492997406}
   - key: {fileID: 5482328242952519816, guid: f08d8810ea3504345a719455bcdf1a61, type: 2}
     value: {fileID: 9179834426492997406}
+  - key: {fileID: 6320323306508424888, guid: f08d8810ea3504345a719455bcdf1a61, type: 2}
+    value: {fileID: 127638207}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &127638207
@@ -1343,6 +1345,8 @@ MonoBehaviour:
   m_Events:
     m_Signals:
     - {fileID: 11400000, guid: afe5d6329d500604bbfdae08a9949fc9, type: 2}
+    - {fileID: 11400000, guid: 0b5de3f97f8dda744af731e75268991e, type: 2}
+    - {fileID: 11400000, guid: 89596c4347c5d984dbd7b31007ec5e85, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
@@ -1382,6 +1386,70 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 6701380354893991469}
+          m_TargetAssemblyTypeName: CinematicFightManager, Service
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 6701380354893991469}
+          m_TargetAssemblyTypeName: CinematicFightManager, Service
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 6701380354893991469}
+          m_TargetAssemblyTypeName: CinematicFightManager, Service
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6701380354893991471}
+          m_TargetAssemblyTypeName: CinematicFightManager, Service
+          m_MethodName: LaunchPlayerAnimation
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: UltimatePose1
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6701380354893991471}
+          m_TargetAssemblyTypeName: CinematicFightManager, Service
+          m_MethodName: LaunchEnemyAnimation
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: EntryPose1
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!1 &7085371866443686774
@@ -1545,6 +1613,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6277886430820751052}
     m_Modifications:
+    - target: {fileID: 3717682229715436180, guid: 7ce14cea2cbe67e4a86d95d1ece6c304,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.058062747
+      objectReference: {fileID: 0}
+    - target: {fileID: 3717682229715436180, guid: 7ce14cea2cbe67e4a86d95d1ece6c304,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.74857503
+      objectReference: {fileID: 0}
     - target: {fileID: 4062385868837534695, guid: 7ce14cea2cbe67e4a86d95d1ece6c304,
         type: 3}
       propertyPath: m_LocalRotation.w
