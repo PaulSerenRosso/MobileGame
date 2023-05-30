@@ -273,7 +273,7 @@ namespace Service.Fight
             Release(gameObject);
             _cinematicFightManager = cinematicManager.GetComponent<CinematicFightManager>();
             _cinematicFightManager.Init(_playerController.GetComponent<PlayerRenderer>().Animator,
-                _enemyManager.GetComponent<EnemyManager>().Animator, _playerController.transform,_enemyManager.transform);
+                _enemyManager.GetComponent<EnemyManager>().Animator, _playerController.transform,_enemyManager.transform, _enemyGlobalSO);
             LaunchEntryCinematic();
         }
         
@@ -281,7 +281,6 @@ namespace Service.Fight
 
         private void InitTimerRound()
         {
-        
             ResetEntities();
             _tickTimerInitRound = new TickTimer(_roundInitTimer, _tickeableService.GetTickManager);
             _tickTimerInitRound.TickEvent += EndInitRound;
@@ -291,7 +290,6 @@ namespace Service.Fight
 
         private void ResetRound()
         {
-       
             ResetEntities();
             _tickTimerInitRound.Initiate();
         }
