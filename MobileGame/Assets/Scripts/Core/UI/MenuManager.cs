@@ -11,7 +11,7 @@ namespace Service.UI
 {
     public class MenuManager : MonoBehaviour
     {
-        [Header("Menu UI")] 
+        [Header("Menu UI")]
         [SerializeField] private Button _playMatchButton;
         [SerializeField] private Button _playTournamentButton;
         [SerializeField] private GridLayoutGroup _enemySelectionGrid;
@@ -82,7 +82,7 @@ namespace Service.UI
             _tournaments[_actualTournament].SetActive(true);
             _leftArrowTournament.interactable = false;
             _homeButton.interactable = false;
-            _menuTournamentManager.SetupMenu(_gameService, _tournamentService, this, _currencyService, itemsService);
+            _menuTournamentManager.SetupMenu(_gameService, _tournamentService, this, _currencyService, itemsService, _fightService);
             _rewardImage.sprite = _tournamentService.GetFights()[^1].EnemyGlobalSO.ItemSO.SpriteUI;
             if (!_fightService.GetFightTutorial() && !_fightService.GetFightDebug())
             {

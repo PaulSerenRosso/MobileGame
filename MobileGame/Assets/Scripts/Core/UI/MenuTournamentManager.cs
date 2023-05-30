@@ -57,7 +57,7 @@ namespace Service.UI
         private IItemsService _itemsService;
 
         public void SetupMenu(IGameService gameService, ITournamentService tournamentService, MenuManager menuManager,
-            ICurrencyService currencyService, IItemsService itemsService)
+            ICurrencyService currencyService, IItemsService itemsService, IFightService fightService)
         {
             _gameService = gameService;
             _tournamentService = tournamentService;
@@ -67,10 +67,14 @@ namespace Service.UI
             _fights = _tournamentService.GetFights();
             _fakeNames = _tournamentService.GetFakeNames();
             SetTournamentNames();
-            UpdateCurrentFightUI();
-            if (_tournamentService.CompareState(FightState.DEFEAT)) _defeatTournament.gameObject.SetActive(true);
-            else if (_tournamentService.CompareState(FightState.WAITING)) UpdateCurrentFightUI();
-            else ActivateWinnerUI();
+            if (!fightService.GetFightTutorial() && !fightService.GetFightDebug())
+            {
+                UpdateCurrentFightUI();
+                if (_tournamentService.CompareState(FightState.DEFEAT)) _defeatTournament.gameObject.SetActive(true);
+                else if (_tournamentService.CompareState(FightState.WAITING)) UpdateCurrentFightUI();
+                else ActivateWinnerUI();
+            }
+
             _currencyService = currencyService;
         }
 

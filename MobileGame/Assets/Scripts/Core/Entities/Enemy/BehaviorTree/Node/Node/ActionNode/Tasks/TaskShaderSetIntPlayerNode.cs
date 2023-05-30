@@ -10,7 +10,7 @@ namespace BehaviorTree.Nodes.Actions
         private TaskShaderSetIntPlayerNodeSO _so;
         private TaskShaderSetIntPlayerNodeDataSO _data;
         private PlayerRenderer _playerRenderer;
-        private SkinnedMeshRenderer[] _skinnedMeshRenderers;
+        private Renderer[] _renderers;
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
@@ -26,7 +26,7 @@ namespace BehaviorTree.Nodes.Actions
         public override void Evaluate()
         {
             base.Evaluate();
-            foreach (var skinnedMeshRenderer in _skinnedMeshRenderers)
+            foreach (var skinnedMeshRenderer in _renderers)
             {
                 skinnedMeshRenderer.material.SetInt(_data.ReferenceNameValue, _data.IntValue);
             }
@@ -39,7 +39,7 @@ namespace BehaviorTree.Nodes.Actions
             Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
         {
             _playerRenderer = (PlayerRenderer)externDependencyValues[BehaviorTreeEnums.TreeExternValues.PlayerRenderer];
-            _skinnedMeshRenderers = _playerRenderer.GetSkinnedMeshRenderers();
+            _renderers = _playerRenderer.GetSkinnedMeshRenderers();
         }
 
         public override ActionNodeDataSO GetDataSO()

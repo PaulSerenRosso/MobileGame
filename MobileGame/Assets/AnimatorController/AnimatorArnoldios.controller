@@ -93,13 +93,13 @@ AnimatorStateMachine:
     m_Position: {x: 300, y: 160, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6866253906981928667}
-    m_Position: {x: 0, y: 360, z: 0}
+    m_Position: {x: 180, y: 360, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1644853980341373953}
     m_Position: {x: 0, y: 260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1071200860237183705}
-    m_Position: {x: 600, y: 360, z: 0}
+    m_Position: {x: 600, y: 410, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6080476733544368083}
     m_Position: {x: 600, y: 260, z: 0}
@@ -821,7 +821,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CinematicAnimation
+  m_Name: EntryPose1
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -835,7 +835,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 921055daa4031e148bb08ffd76e0bba9, type: 2}
+  m_Motion: {fileID: 7400000, guid: 781ae6405784fc640ae41a5fa8b01d41, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

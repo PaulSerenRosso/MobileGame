@@ -26,6 +26,8 @@ namespace Service.UI
         
         [SerializeField] private GameObject _enoughPanel;
         [SerializeField] private GameObject _purchasedPanel;
+        [SerializeField] private GameObject _newItemPanel;
+        [SerializeField] private Image _newItemImage;
 
         private ICurrencyService _currencyService;
         private IItemsService _itemsService;
@@ -70,6 +72,7 @@ namespace Service.UI
                     _itemsImage[index].sprite = itemSO.SpriteUI;
                     _itemPricesText[index].text = itemSO.Price.ToString();
                     _itemStarPriceText.text = itemSO.ExperienceStar.ToString();
+                    _itemsButton[index].onClick.RemoveAllListeners();
                     _itemsButton[index].onClick.AddListener(() => BuyItem(itemSO, indexButton));
                     _itemsButton[index].transform.GetChild(0).GetComponent<Image>().sprite = itemSO.SpriteUI;
                     if (_itemsService.GetUnlockedItems().FirstOrDefault(i => i == itemSO) == null)
@@ -87,6 +90,7 @@ namespace Service.UI
                 {
                     _itemsImage[index].sprite = itemSO.SpriteUI;
                     _itemPricesText[index].text = itemSO.Price.ToString();
+                    _itemsButton[index].onClick.RemoveAllListeners();
                     _itemsButton[index].onClick.AddListener(() => BuyItem(itemSO, indexButton));
                     _itemsButton[index].transform.GetChild(0).GetComponent<Image>().sprite = itemSO.SpriteUI;
                     if (_itemsService.GetUnlockedItems().FirstOrDefault(i => i == itemSO) == null)
@@ -119,6 +123,9 @@ namespace Service.UI
                         _enoughPanel.SetActive(true);
                         return;
                     }
+                    
+                    _newItemPanel.SetActive(true);
+                    _newItemImage.sprite = itemSO.SpriteUI;
                     _itemsButton[index].interactable = false;
                     deactivateItemsPanel[index].SetActive(true);
                     _itemsService.UnlockItem(itemSO);
@@ -130,6 +137,9 @@ namespace Service.UI
                         _enoughPanel.SetActive(true);
                         return;
                     }
+                    
+                    _newItemPanel.SetActive(true);
+                    _newItemImage.sprite = itemSO.SpriteUI;
                     _itemsButton[index].interactable = false;
                     deactivateItemsPanel[index].SetActive(true);
                     _itemsService.UnlockItem(itemSO);
@@ -160,6 +170,7 @@ namespace Service.UI
         {
             _enoughPanel.SetActive(false);
             _purchasedPanel.SetActive(false);
+            _newItemPanel.SetActive(false);
         }
     }
 }

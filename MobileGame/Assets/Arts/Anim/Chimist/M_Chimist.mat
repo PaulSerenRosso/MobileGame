@@ -155,7 +155,8 @@ Material:
     - _TakeDamage: 0
     - _TakeDamageFlashSpeed: 0
     - _Vulnerable: 0
-    - _VulnerableFresnelSize: 3
+    - _VulnerableFlashSpeed: 2
+    - _VulnerableFresnelSize: 5
     - _VulnerablePower: 30
     - _WorkflowMode: 1
     - _YellowTexture: 0
@@ -164,9 +165,9 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 0}
     - _ColorGlow: {r: 1, g: 0, b: 0, a: 1}
-    - _DamageColor: {r: 1, g: 0, b: 0.019385815, a: 1}
+    - _DamageColor: {r: 1, g: 0.3333333, b: 0.3333333, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GlowLineColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _VulnerableColor: {r: 1, g: 0.691121, b: 0.31509426, a: 1}
+    - _VulnerableColor: {r: 1, g: 0, b: 0.019385815, a: 1}
   m_BuildTextureStacks: []
