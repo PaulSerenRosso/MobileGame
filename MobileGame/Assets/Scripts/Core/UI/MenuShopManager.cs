@@ -72,6 +72,7 @@ namespace Service.UI
                     _itemsImage[index].sprite = itemSO.SpriteUI;
                     _itemPricesText[index].text = itemSO.Price.ToString();
                     _itemStarPriceText.text = itemSO.ExperienceStar.ToString();
+                    _itemsButton[index].onClick.RemoveAllListeners();
                     _itemsButton[index].onClick.AddListener(() => BuyItem(itemSO, indexButton));
                     _itemsButton[index].transform.GetChild(0).GetComponent<Image>().sprite = itemSO.SpriteUI;
                     if (_itemsService.GetUnlockedItems().FirstOrDefault(i => i == itemSO) == null)
@@ -89,6 +90,7 @@ namespace Service.UI
                 {
                     _itemsImage[index].sprite = itemSO.SpriteUI;
                     _itemPricesText[index].text = itemSO.Price.ToString();
+                    _itemsButton[index].onClick.RemoveAllListeners();
                     _itemsButton[index].onClick.AddListener(() => BuyItem(itemSO, indexButton));
                     _itemsButton[index].transform.GetChild(0).GetComponent<Image>().sprite = itemSO.SpriteUI;
                     if (_itemsService.GetUnlockedItems().FirstOrDefault(i => i == itemSO) == null)

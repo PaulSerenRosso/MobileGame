@@ -1,8 +1,7 @@
-﻿using System;
-using Actions;
-using Core.Entities;
+﻿using Actions;
 using Player.Handler;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Player
 {
@@ -17,7 +16,7 @@ namespace Player
         [SerializeField] private PlayerMovementHandler _playerMovementHandler;
         [SerializeField] private PlayerUltimateHandler playerUltimateHandler;
         [SerializeField] private TauntPlayerAction _tauntPlayerAction;
-        [SerializeField] private SkinnedMeshRenderer[] _skinnedMeshRenderers;
+        [FormerlySerializedAs("_skinnedMeshRenderers")] [SerializeField] private Renderer[] _renderers;
         
 
         public void Init()
@@ -38,11 +37,10 @@ namespace Player
             // _tauntAction.CancelActionEvent += DeactivateTauntFX;
         }
 
-        public SkinnedMeshRenderer[] GetSkinnedMeshRenderers()
+        public Renderer[] GetSkinnedMeshRenderers()
         {
-            return _skinnedMeshRenderers;
+            return _renderers;
         }
-        
 
         private void ActivateFX()
         {

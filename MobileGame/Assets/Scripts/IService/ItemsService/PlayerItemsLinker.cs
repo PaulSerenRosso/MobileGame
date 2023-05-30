@@ -7,6 +7,7 @@ namespace Service.Items
         [SerializeField] private Transform _hatPivot;   
         [SerializeField] private SkinnedMeshRenderer _playerTshirt; 
         [SerializeField] private SkinnedMeshRenderer _playerShort;
+        [SerializeField] private MeshRenderer[] _playerSockets;
         
         private GameObject _currentHat;
         
@@ -27,6 +28,11 @@ namespace Service.Items
         {
             RemoveShort();
             _playerShort.enabled = true;
+            foreach (var playerSocket in _playerSockets)
+            {
+                playerSocket.enabled = true;
+                playerSocket.material.mainTexture = sprite;
+            }
             _playerShort.material.mainTexture = sprite;
         }
 
@@ -38,6 +44,10 @@ namespace Service.Items
         public void RemoveShort()
         { 
             _playerShort.enabled = false;
+            foreach (var playerSocket in _playerSockets)
+            {
+                playerSocket.enabled = false;
+            }
         }
 
         public void RemoveTShirt()
