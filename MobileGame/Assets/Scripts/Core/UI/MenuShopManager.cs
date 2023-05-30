@@ -12,6 +12,7 @@ namespace Service.UI
     public class MenuShopManager : MonoBehaviour
     {
         [SerializeField] private GameObject deactivateBundlePanel;
+        [SerializeField] private GameObject[] deactivateItemsPanel;
         
         [Header("Item Panels")]
         [SerializeField] private Button[] _itemsButton;
@@ -22,6 +23,9 @@ namespace Service.UI
         [Header("Reload Panel")]
         [SerializeField] private int _reloadCost;
         [SerializeField] private TextMeshProUGUI _reloadCostText;
+        
+        [SerializeField] private GameObject _enoughPanel;
+        [SerializeField] private GameObject _purchasedPanel;
 
         private ICurrencyService _currencyService;
         private IItemsService _itemsService;
@@ -71,16 +75,13 @@ namespace Service.UI
                     if (_itemsService.GetUnlockedItems().FirstOrDefault(i => i == itemSO) == null)
                     {
                         _itemsButton[index].interactable = true;
-                        _itemsButton[index].transform.GetChild(0).GetComponent<Image>().color =
-                            new Color(1, 1, 1, 1);
+                        deactivateItemsPanel[index].SetActive(false);
                     }
                     else
                     {
                         _itemsButton[index].interactable = false;
-                        _itemsButton[index].transform.GetChild(0).GetComponent<Image>().color =
-                            new Color(0.5f, 0.5f, 0.5f, 0.5f);
+                        deactivateItemsPanel[index].SetActive(true);
                     }
-                    
                 }
                 else
                 {
@@ -91,14 +92,12 @@ namespace Service.UI
                     if (_itemsService.GetUnlockedItems().FirstOrDefault(i => i == itemSO) == null)
                     {
                         _itemsButton[index].interactable = true;
-                        _itemsButton[index].transform.GetChild(0).GetComponent<Image>().color =
-                            new Color(1, 1, 1, 1);
+                        deactivateItemsPanel[index].SetActive(false);
                     }
                     else
                     {
                         _itemsButton[index].interactable = false;
-                        _itemsButton[index].transform.GetChild(0).GetComponent<Image>().color =
-                            new Color(0.5f, 0.5f, 0.5f, 0.5f);
+                        deactivateItemsPanel[index].SetActive(true);
                     }
                 }
             }
@@ -109,19 +108,30 @@ namespace Service.UI
             switch (itemSO.IsUnlockableWithStar)
             {
                 case true:
-                    if (_currencyService.GetXP() < itemSO.ExperienceStar) return;
-                    if (_currencyService.GetCoins() < itemSO.Price) return;
+                    if (_currencyService.GetXP() < itemSO.ExperienceStar)
+                    {
+                        _enoughPanel.SetActive(true);
+                        return;
+                    }
+
+                    if (_currencyService.GetCoins() < itemSO.Price)
+                    {
+                        _enoughPanel.SetActive(true);
+                        return;
+                    }
                     _itemsButton[index].interactable = false;
-                    _itemsButton[index].transform.GetChild(0).GetComponent<Image>().color =
-                        new Color(0.5f, 0.5f, 0.5f, 0.5f);
+                    deactivateItemsPanel[index].SetActive(true);
                     _itemsService.UnlockItem(itemSO);
                     _currencyService.RemoveCoins(itemSO.Price);
                     break;
                 case false:
-                    if (_currencyService.GetCoins() < itemSO.Price) return;
+                    if (_currencyService.GetCoins() < itemSO.Price)
+                    {
+                        _enoughPanel.SetActive(true);
+                        return;
+                    }
                     _itemsButton[index].interactable = false;
-                    _itemsButton[index].transform.GetChild(0).GetComponent<Image>().color =
-                        new Color(0.5f, 0.5f, 0.5f, 0.5f);
+                    deactivateItemsPanel[index].SetActive(true);
                     _itemsService.UnlockItem(itemSO);
                     _currencyService.RemoveCoins(itemSO.Price);
                     break;
@@ -139,6 +149,17 @@ namespace Service.UI
             _currencyService.RemoveCoins(_reloadCost);
             _shopService.RefreshDaily();
             SetDailyItem();
+        }
+
+        public void OpenPurchased()
+        {
+            _purchasedPanel.SetActive(true);
+        }
+
+        public void ClosePopup()
+        {
+            _enoughPanel.SetActive(false);
+            _purchasedPanel.SetActive(false);
         }
     }
 }
