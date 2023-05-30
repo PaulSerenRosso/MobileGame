@@ -600,15 +600,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2046111564109860488}
-  m_LocalRotation: {x: 0, y: 0.6087636, z: 0, w: -0.79335165}
-  m_LocalPosition: {x: 0, y: 0, z: 1.38}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.82, z: 0.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5793816456217653850}
   m_Father: {fileID: 6701380354893991470}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: -0.000001260772, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2826823035701052272
 Animator:
   serializedVersion: 5
@@ -1347,6 +1347,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: afe5d6329d500604bbfdae08a9949fc9, type: 2}
     - {fileID: 11400000, guid: 0b5de3f97f8dda744af731e75268991e, type: 2}
     - {fileID: 11400000, guid: 89596c4347c5d984dbd7b31007ec5e85, type: 2}
+    - {fileID: 11400000, guid: 50c1ac4f18f884e49a76c302f90d310b, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
@@ -1462,6 +1463,32 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: EntryPose1
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6701380354893991471}
+          m_TargetAssemblyTypeName: CinematicFightManager, Service
+          m_MethodName: LaunchEnemyAnimation
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: UltimatePose2
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 6701380354893991471}
+          m_TargetAssemblyTypeName: CinematicFightManager, Service
+          m_MethodName: LaunchPlayerAnimation
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: UltimatePose2
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!1 &7085371866443686774
@@ -1768,7 +1795,7 @@ PrefabInstance:
     - target: {fileID: 3994717302638191917, guid: 518bd527981b8ad4f8b4a88bf914b140,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3994717302638191917, guid: 518bd527981b8ad4f8b4a88bf914b140,
         type: 3}
