@@ -1,9 +1,12 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Rendering;
+using UnityEngine.Serialization;
 using UnityEngine.Timeline;
+using UnityEngine.UI;
 
 public class CinematicFightManager : MonoBehaviour
 {
@@ -19,14 +22,30 @@ public class CinematicFightManager : MonoBehaviour
     private Transform _boss;
     private Animator _playerAnimator;
     private Animator _enemyAnimator;
-
-    public void Init(Animator playerAnimator, Animator enemyAnimator, Transform player, Transform boss)
+    private EnemyGlobalSO _enemyGlobalSo;
+    [SerializeField] private TextMeshProUGUI _playerBannerText;
+    [SerializeField] private string _playerBannerName;
+    [SerializeField] private TextMeshProUGUI  _enemyBannerText;
+    [SerializeField] private Image _playerBannerImage;
+    [SerializeField] private Image _enemyBannerImage;
+   [SerializeField] private Image _enemyBannerCharacterImage;
+     [SerializeField] private Image _playerBannerCharacterImage;
+    [SerializeField] private Sprite _playerBannerCharacterSprite;
+    [SerializeField] private Sprite _playerBannerSprite;
+    public void Init(Animator playerAnimator, Animator enemyAnimator, Transform player, Transform boss, EnemyGlobalSO enemyGlobalSo)
     {
         _camera = Camera.main;
         _playerAnimator = playerAnimator;
         _enemyAnimator = enemyAnimator;
         _player = player;
         _boss = boss;
+        _enemyGlobalSo = enemyGlobalSo;
+        _playerBannerText.text = _playerBannerName;
+        _enemyBannerText.text = _enemyGlobalSo.Name;
+        _playerBannerImage.sprite = _playerBannerSprite;
+        _enemyBannerImage.sprite = enemyGlobalSo.BannerSprite;
+        _playerBannerCharacterImage.sprite = _playerBannerCharacterSprite;
+        _enemyBannerCharacterImage.sprite = enemyGlobalSo.BannerCharacterSprite;
     }
 
     public void LaunchFightEntryCinematic(Action endCinematicCallBack)
