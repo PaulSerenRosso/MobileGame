@@ -243,6 +243,24 @@ namespace Service.UI
             _winTournament.gameObject.SetActive(true);
         }
 
+        private void ResetUITournament()
+        {
+            foreach (var imageQuarterWinner in _imageQuarterWinners)
+            {
+                imageQuarterWinner.color = Color.red;
+            }
+
+            foreach (var imageDemiWinner in _imageDemiWinners)
+            {
+                imageDemiWinner.color = Color.red;
+            }
+
+            foreach (var imageFinalWinner in _imageFinalWinners)
+            {
+                imageFinalWinner.color = Color.red;
+            }
+        }
+
         private void ActivateButtons()
         {
             _playFightButton.interactable = true;
@@ -277,6 +295,7 @@ namespace Service.UI
             _winTournament.gameObject.SetActive(false);
             _tournamentService.ResetTournament();
             GainEndTournamentCoins();
+            ResetUITournament();
             BackMenu();
         }
 

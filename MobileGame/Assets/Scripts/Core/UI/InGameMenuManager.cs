@@ -1,3 +1,4 @@
+using Service;
 using Service.Currency;
 using Service.Fight;
 using Service.Hype;
@@ -14,11 +15,11 @@ public class InGameMenuManager : MonoBehaviour
     private IFightService _fightService;
 
     public void SetupMenu(IFightService fightService, IHypeService hypeService, ITournamentService tournamentService,
-        ICurrencyService currencyService)
+        ICurrencyService currencyService, IGameService gameService)
     {
         _inGameMenuHypeManager.Init(hypeService, fightService);
         _inGameMenuRoundManager.Init(fightService);
-        _inGameMenuEndFightManager.Init(fightService, currencyService, tournamentService);
+        _inGameMenuEndFightManager.Init(fightService, currencyService, tournamentService, gameService);
         _fightService = fightService;
         if (_fightService.GetFightTutorial()) InGameMenuTutorialManager.Init(fightService);
     }
