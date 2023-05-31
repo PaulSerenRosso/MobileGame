@@ -141,6 +141,7 @@ namespace Player
             _playerRenderer.ActivateStunFeedback();
             LockController();
             _isStun = true;
+            Handheld.Vibrate();
         }
     }
 }
