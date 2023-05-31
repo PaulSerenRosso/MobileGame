@@ -20,7 +20,7 @@ namespace Service.UI
         
         [SerializeField] private Button[] _badgeButtons;
 
-        [SerializeField] private GameObject _badgePopup;
+        [SerializeField] private JuicyPopup _badgePopup;
         [SerializeField] private Image _imagePopup;
         [SerializeField] private TextMeshProUGUI _titlePopup;
         [SerializeField] private TextMeshProUGUI _descriptionPopup;
@@ -79,7 +79,7 @@ namespace Service.UI
 
         private void OpenPopup(BadgeSO badgeSO)
         {
-            _badgePopup.SetActive(true);
+            _badgePopup.ActivatePopUp();
             _imagePopup.sprite = badgeSO.SpriteBadge;
             _titlePopup.text = badgeSO.TitleBadge;
             _descriptionPopup.text = badgeSO.DescriptionBadge;
@@ -87,7 +87,7 @@ namespace Service.UI
 
         public void ClosePopup()
         {
-            _badgePopup.SetActive(false);
+            _badgePopup.gameObject.SetActive(false);
         }
     }
 }

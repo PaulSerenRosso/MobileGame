@@ -43,9 +43,9 @@ namespace Service.UI
 
         [SerializeField] private Canvas _unlockTournament;
 
-        [SerializeField] private GameObject _friendsPanel;
+        [SerializeField] private JuicyPopup _friendsPanel;
         [SerializeField] private GameObject _friendPopup;
-        [SerializeField] private GameObject _dailyPanel;
+        [SerializeField] private JuicyPopup _dailyPanel;
         [SerializeField] private GameObject _friendsLayout;
         [SerializeField] private Button _friendTag;
         [SerializeField] private Image _friendPopupImage;
@@ -294,12 +294,12 @@ namespace Service.UI
 
         public void OpenDaily()
         {
-            _dailyPanel.SetActive(true);
+            _dailyPanel.ActivatePopUp();
         }
 
         public void OpenFriends()
         {
-            _friendsPanel.SetActive(true);
+            _friendsPanel.ActivatePopUp();
         }
 
         private void OpenFriendPopup(Sprite picture, string name)
@@ -316,8 +316,8 @@ namespace Service.UI
 
         public void ClosePopup()
         {
-            _friendsPanel.SetActive(false);
-            _dailyPanel.SetActive(false);
+            _friendsPanel.gameObject.SetActive(false);
+            _dailyPanel.gameObject.SetActive(false);
         }
 
         public void CloseFriendPopup()
