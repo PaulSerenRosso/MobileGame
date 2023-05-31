@@ -4423,7 +4423,12 @@ PrefabInstance:
         type: 3}
       propertyPath: _backMenuButton
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2627767719294222711}
+    - target: {fileID: 8295636664398110626, guid: d961ebdc078a6b64bb614e94749d6f58,
+        type: 3}
+      propertyPath: _playFightButton
+      value: 
+      objectReference: {fileID: 2591973227745681036}
     - target: {fileID: 8295636664398110626, guid: d961ebdc078a6b64bb614e94749d6f58,
         type: 3}
       propertyPath: _defeatTournament
@@ -4652,6 +4657,30 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 6342329406978426328}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2591973227745681036 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8934283031853407060, guid: d961ebdc078a6b64bb614e94749d6f58,
+    type: 3}
+  m_PrefabInstance: {fileID: 6342329406978426328}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2627767719294222711 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8967737985956299951, guid: d961ebdc078a6b64bb614e94749d6f58,
+    type: 3}
+  m_PrefabInstance: {fileID: 6342329406978426328}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3108749718861208186 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8295636664398110626, guid: d961ebdc078a6b64bb614e94749d6f58,
