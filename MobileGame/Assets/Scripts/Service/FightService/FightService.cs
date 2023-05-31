@@ -18,13 +18,9 @@ namespace Service.Fight
     public class FightService : IFightService
     {
         public event Action<int> InitiateRoundEvent;
-
         public event Action EndInitiateRoundEvent;
-
         public event Action ActivatePauseEvent;
-
         public event Action DeactivatePauseEvent;
-
         public event Action<bool> EndFightEvent;
         public event Action ActivateFightCinematic;
         public event Action DeactivateFightCinematic;
@@ -39,7 +35,6 @@ namespace Service.Fight
         [DependsOnService] private IItemsService _itemsService;
 
         private const int _victoryRoundCount = 2;
-        
         private CameraController _cameraController;
         private EnemyManager _enemyManager;
         private GridManager _gridManager;
@@ -99,6 +94,22 @@ namespace Service.Fight
             _playerController.UnlockController();
         }
 
+        public void StopCinematic()
+        {
+            if (_enemyRoundCount == _victoryRoundCount || _playerRoundCount == _victoryRoundCount)
+            {
+                _cinematicFightManager.StopCinematic(EndFight);
+            }
+            else if (_enemyRoundCount == 0 || _playerRoundCount == 0)
+            {
+                _cinematicFightManager.StopCinematic(InitTimerRound);
+            }
+            else
+            {
+                _cinematicFightManager.StopCinematic(ResetRound);
+            }
+        }
+
         public void StartFight(string environmentAddressableName, string enemyAddressableName, bool isDebugFight, bool isTutorialFight)
         {
             _isTutorialFight = isTutorialFight;
@@ -122,7 +133,6 @@ namespace Service.Fight
             _hypeService.EnableHypeServiceEvent += GenerateFight;
             _canvasService.InitCanvasEvent += LoadCinematicFightManager;
         }
-
 
         private void LaunchEntryCinematic()
         {

@@ -1,4 +1,3 @@
-using Core.Entities;
 using Environment.MoveGrid;
 using HelperPSR.MonoLoopFunctions;
 using Player.Handler;
@@ -17,7 +16,6 @@ namespace Player
         [SerializeField] private PlayerRenderer _playerRenderer;
         [SerializeField] private PlayerRotationHandler _playerRotationHandler;
         [SerializeField] private PlayerTauntHandler _playerTauntHandler;
-
         [FormerlySerializedAs("_timerStun")] [SerializeField] private float _timeStun;
         [SerializeField] private float _timeInvunerable;
 
@@ -25,7 +23,6 @@ namespace Player
         private float _timerInvulnerable;
         private bool _isStun;
         private bool _isInvulnerable;
-        
         private IInputService _inputService;
         private ITickeableService _tickeableService;
         private EnemyManager _enemyManager;

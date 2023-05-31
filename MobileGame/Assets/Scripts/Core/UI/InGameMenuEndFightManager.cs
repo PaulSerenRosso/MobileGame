@@ -61,9 +61,10 @@ namespace Service.UI
 
         public void LaunchNextFight()
         {
-            Fight.Fight currentFight = _tournamentService.GetCurrentFightPlayer();
-            _gameService.LoadGameScene(currentFight.EnvironmentSO.EnvironmentAddressableName,
-                currentFight.EnemyGlobalSO.EnemyAddressableName, false, false);
+            // _fightService.QuitFight();
+            // Fight.Fight currentFight = _tournamentService.GetCurrentFightPlayer();
+            // _gameService.LoadGameScene(currentFight.EnvironmentSO.EnvironmentAddressableName,
+            //     currentFight.EnemyGlobalSO.EnemyAddressableName, false, false);
         }
 
         public void BackToMainMenu()

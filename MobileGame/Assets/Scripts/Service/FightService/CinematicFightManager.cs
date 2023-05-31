@@ -4,7 +4,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Rendering;
-using UnityEngine.Serialization;
 using UnityEngine.Timeline;
 using UnityEngine.UI;
 
@@ -18,21 +17,24 @@ public class CinematicFightManager : MonoBehaviour
     [SerializeField] private Camera _camera;
     [SerializeField] private Transform _playerPivot;
     [SerializeField] private Transform _bossPivot;
+    [SerializeField] private TextMeshProUGUI _playerBannerText;
+    [SerializeField] private string _playerBannerName;
+    [SerializeField] private TextMeshProUGUI _enemyBannerText;
+    [SerializeField] private Image _playerBannerImage;
+    [SerializeField] private Image _enemyBannerImage;
+    [SerializeField] private Image _enemyBannerCharacterImage;
+    [SerializeField] private Image _playerBannerCharacterImage;
+    [SerializeField] private Sprite _playerBannerCharacterSprite;
+    [SerializeField] private Sprite _playerBannerSprite;
+    
     private Transform _player;
     private Transform _boss;
     private Animator _playerAnimator;
     private Animator _enemyAnimator;
     private EnemyGlobalSO _enemyGlobalSo;
-    [SerializeField] private TextMeshProUGUI _playerBannerText;
-    [SerializeField] private string _playerBannerName;
-    [SerializeField] private TextMeshProUGUI  _enemyBannerText;
-    [SerializeField] private Image _playerBannerImage;
-    [SerializeField] private Image _enemyBannerImage;
-   [SerializeField] private Image _enemyBannerCharacterImage;
-     [SerializeField] private Image _playerBannerCharacterImage;
-    [SerializeField] private Sprite _playerBannerCharacterSprite;
-    [SerializeField] private Sprite _playerBannerSprite;
-    public void Init(Animator playerAnimator, Animator enemyAnimator, Transform player, Transform boss, EnemyGlobalSO enemyGlobalSo)
+
+    public void Init(Animator playerAnimator, Animator enemyAnimator, Transform player, Transform boss,
+        EnemyGlobalSO enemyGlobalSo)
     {
         _camera = Camera.main;
         _playerAnimator = playerAnimator;
@@ -50,7 +52,6 @@ public class CinematicFightManager : MonoBehaviour
 
     public void LaunchFightEntryCinematic(Action endCinematicCallBack)
     {
-
         StartCoroutine(PlayCinematic(_fightEntry, endCinematicCallBack));
     }
 
@@ -83,6 +84,20 @@ public class CinematicFightManager : MonoBehaviour
         _playableDirector.playableAsset = timelineAsset;
         _playableDirector.Play();
         yield return new WaitForSeconds((float)_playableDirector.duration);
+        _player.parent = null;
+        _boss.parent = null;
+        _camera.enabled = true;
+        _playerPivot.position = Vector3.zero;
+        _playerPivot.rotation = Quaternion.identity;
+        _bossPivot.position = Vector3.zero;
+        _bossPivot.rotation = Quaternion.identity;
+        endCinematicCallback?.Invoke();
+    }
+
+    public void StopCinematic(Action endCinematicCallback)
+    {
+        StopAllCoroutines();
+        _playableDirector.Stop();
         _player.parent = null;
         _boss.parent = null;
         _camera.enabled = true;
