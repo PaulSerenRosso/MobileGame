@@ -5,12 +5,14 @@ namespace Service.UI
 {
     public class InGameMenuTutorialManager : MonoBehaviour
     {
+        [Header("Popups Panel")]
         [SerializeField] private GameObject _introPopupPanel;
         [SerializeField] private GameObject _fightPopupPanel;
         [SerializeField] private GameObject _movePopupPanel;
         [SerializeField] private GameObject _tauntPopupPanel;
         [SerializeField] private GameObject _ultimatePopupPanel;
 
+        [Header("Overlays Panel")]
         [SerializeField] private GameObject _fightOverlayPanel;
         [SerializeField] private GameObject _moveOverlayPanel;
         [SerializeField] private GameObject _tauntOverlayPanel;
@@ -30,7 +32,7 @@ namespace Service.UI
             _fightService.ActivatePauseEvent += DeactivateOverlays;
         }
 
-        public void OpenIntroPopup()
+        private void OpenIntroPopup()
         {
             _fightService.DeactivatePauseEvent -= OpenIntroPopup;
             DeactivateOverlays();
