@@ -41,7 +41,10 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
     [SerializeField] private float _timeHypeTaunt;
     [SerializeField] private float _timeHypeAttack;
 
-    [SerializeField] private RectTransform _blankImage;
+    [SerializeField] private ParticleSystem _particleHypePlayer;
+    [SerializeField] private ParticleSystem _particleHypeEnemy;
+    [SerializeField] private RectTransform _damageHypePlayer;
+    [SerializeField] private RectTransform _damageHypeBoss;
 
     private Sprite _hypeLogoEnemy;
     private IHypeService _hypeService;
@@ -61,11 +64,6 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
     private Pool<RectTransform> _poolEnemy;
 
     private event Action _hypeUpdateEvent;
-
-    private void OnDisable()
-    {
-        UpdateManager.UnRegister(this);
-    }
 
     public void Init(IHypeService hypeService, IFightService fightService)
     {
@@ -103,10 +101,20 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
 
         hypeService.UltimateAreaIncreaseEvent += UpdateUltimateArea;
       
-        _poolPlayer = new Pool<RectTransform>(_blankImage, 10);
-        _poolEnemy = new Pool<RectTransform>(_blankImage, 10);
+        _poolPlayer = new Pool<RectTransform>(_damageHypePlayer, 10);
+        _poolEnemy = new Pool<RectTransform>(_damageHypeBoss, 10);
         
         UpdateManager.Register(this);
+    }
+
+    private void OnEnable()
+    {
+        UpdateManager.Register(this);
+    }
+
+    private void OnDisable()
+    {
+        UpdateManager.UnRegister(this);
     }
 
     private void UpdateUltimateArea(float amount)
@@ -200,6 +208,7 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
     private void SetPlayerSliderIncreaseOutline(float obj)
     {
         _hypeUpdateEvent -= TimerTauntPlayer;
+        _particleHypePlayer.Play();
         _timerHypeTauntPlayer = 0;
         _hypeTauntPlayer.color = new Color(1, 1, 1, 1);
         _hypeUpdateEvent += TimerTauntPlayer;
@@ -216,6 +225,7 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
     private void SetEnemySliderIncreaseOutline(float amount)
     {
         _hypeUpdateEvent -= TimerTauntEnemy;
+        _particleHypeEnemy.Play();
         _timerHypeTauntEnemy = 0;
         _hypeTauntEnemy.color = new Color(1, 1, 1, 1);
         _hypeUpdateEvent += TimerTauntEnemy;
@@ -231,9 +241,10 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
 
     private void TimerTauntPlayer()
     {
-        if (_timerHypeTauntPlayer < _timeHypeTaunt) _timerHypeTauntPlayer += Time.deltaTime;
-        else
+        _timerHypeTauntPlayer += Time.deltaTime;
+        if (_timerHypeTauntPlayer > _timeHypeTaunt)
         {
+            _particleHypePlayer.Stop();
             _hypeTauntPlayer.color = new Color(1, 1, 1, 0);
             _hypeUpdateEvent -= TimerTauntPlayer;
         }
@@ -241,9 +252,10 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
 
     private void TimerTauntEnemy()
     {
-        if (_timerHypeTauntEnemy < _timeHypeTaunt) _timerHypeTauntEnemy += Time.deltaTime;
-        else
+        _timerHypeTauntEnemy += Time.deltaTime;
+        if (_timerHypeTauntEnemy > _timeHypeTaunt)
         {
+            _particleHypeEnemy.Stop();
             _hypeTauntEnemy.color = new Color(1, 1, 1, 0);
             _hypeUpdateEvent -= TimerTauntEnemy;
         }
@@ -251,8 +263,8 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
 
     private void TimerAttackPlayer()
     {
-        if (_timerHypeAttackPlayer < _timeHypeAttack) _timerHypeAttackPlayer += Time.deltaTime;
-        else
+        _timerHypeAttackPlayer += Time.deltaTime;
+        if (_timerHypeAttackPlayer > _timeHypeAttack)
         {
             _hypeAttackPlayer.color = new Color(1, 1, 1, 0);
             _hypeUpdateEvent -= TimerAttackPlayer;
@@ -261,8 +273,8 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
 
     private void TimerAttackEnemy()
     {
-        if (_timerHypeAttackEnemy < _timeHypeAttack) _timerHypeAttackEnemy += Time.deltaTime;
-        else
+        _timerHypeAttackEnemy += Time.deltaTime;
+        if (_timerHypeAttackEnemy > _timeHypeAttack)
         {
             _hypeAttackEnemy.color = new Color(1, 1, 1, 0);
             _hypeUpdateEvent -= TimerAttackEnemy;

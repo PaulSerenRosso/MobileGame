@@ -7180,7 +7180,11 @@ MonoBehaviour:
   _hypeAttackEnemy: {fileID: 7497363095816306002}
   _timeHypeTaunt: 1
   _timeHypeAttack: 1
-  _blankImage: {fileID: 1832099167320750537, guid: 4edb356dc0bd55243a09b9134a465ff1,
+  _particleHypePlayer: {fileID: 4158891283137382002}
+  _particleHypeEnemy: {fileID: 1676507341137604476}
+  _damageHypePlayer: {fileID: 1832099167320750537, guid: dbfef2e2fbb709a448a78d803298d28b,
+    type: 3}
+  _damageHypeBoss: {fileID: 1832099167320750537, guid: 4edb356dc0bd55243a09b9134a465ff1,
     type: 3}
 --- !u!1 &6980966018218093887
 GameObject:
@@ -9236,7 +9240,17 @@ PrefabInstance:
     - target: {fileID: 3858698395051728619, guid: 9a9ebc746e1bea14fa0cb8d06f8868bf,
         type: 3}
       propertyPath: m_Name
-      value: Test
+      value: Particle Hype
+      objectReference: {fileID: 0}
+    - target: {fileID: 3858698395051728619, guid: 9a9ebc746e1bea14fa0cb8d06f8868bf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5792739221353237671, guid: 9a9ebc746e1bea14fa0cb8d06f8868bf,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5792739221353237671, guid: 9a9ebc746e1bea14fa0cb8d06f8868bf,
         type: 3}
@@ -9258,8 +9272,19 @@ PrefabInstance:
       propertyPath: InitialModule.startLifetime.scalar
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8673068128484697634, guid: 9a9ebc746e1bea14fa0cb8d06f8868bf,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a9ebc746e1bea14fa0cb8d06f8868bf, type: 3}
+--- !u!198 &1676507341137604476 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5792739221353237671, guid: 9a9ebc746e1bea14fa0cb8d06f8868bf,
+    type: 3}
+  m_PrefabInstance: {fileID: 5127303277228909531}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &7541221024323899195 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3422766207737294048, guid: 9a9ebc746e1bea14fa0cb8d06f8868bf,
@@ -9583,10 +9608,31 @@ PrefabInstance:
     - target: {fileID: 3858698395051728619, guid: 9a9ebc746e1bea14fa0cb8d06f8868bf,
         type: 3}
       propertyPath: m_Name
-      value: Test
+      value: Particle Hype
+      objectReference: {fileID: 0}
+    - target: {fileID: 3858698395051728619, guid: 9a9ebc746e1bea14fa0cb8d06f8868bf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5792739221353237671, guid: 9a9ebc746e1bea14fa0cb8d06f8868bf,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8673068128484697634, guid: 9a9ebc746e1bea14fa0cb8d06f8868bf,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a9ebc746e1bea14fa0cb8d06f8868bf, type: 3}
+--- !u!198 &4158891283137382002 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5792739221353237671, guid: 9a9ebc746e1bea14fa0cb8d06f8868bf,
+    type: 3}
+  m_PrefabInstance: {fileID: 7625905024226609877}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &5067872894617429557 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3422766207737294048, guid: 9a9ebc746e1bea14fa0cb8d06f8868bf,
