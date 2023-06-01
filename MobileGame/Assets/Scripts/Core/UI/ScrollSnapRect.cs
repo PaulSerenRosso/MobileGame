@@ -11,19 +11,11 @@ using Service.Items;
 [RequireComponent(typeof(ScrollRect))]
 public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 {
-    [Tooltip("Threshold time for fast swipe in seconds")] [SerializeField]
-    private float _fastSwipeThresholdTime = 0.3f;
-
-    [Tooltip("Threshold time for fast swipe in (unscaled) pixels")] [SerializeField]
-    private int _fastSwipeThresholdMinDistance = 100;
-
     [Tooltip("How fast will page lerp to target position")] [SerializeField]
     private float _decelerationRate = 10f;
 
     [SerializeField] private Image _itemImage;
-
-    private int _fastSwipeThresholdMaxLimit;
-
+    
     private ScrollRect _scrollRectComponent;
     private RectTransform _scrollRectRectTransform;
     private RectTransform _container;
@@ -36,9 +28,6 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     private List<Vector2> _itemPositions = new();
     private ItemSO[] _items;
-
-    private float _timeStamp;
-    private Vector2 _startPosition;
 
     private IItemsService _itemsService;
 
@@ -73,15 +62,6 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         SetItem(indexCurrentItem);
     }
 
-    public void UpdateUIInventory()
-    {
-        foreach (var itemInventory in _itemsInventory.Where(itemInventory => _itemsService.GetUnlockedItems().FirstOrDefault(i => i == itemInventory.ItemSOInventory) != null))
-        {
-            itemInventory.ItemImage.transform.GetChild(0).gameObject.SetActive(false);
-        }
-        SetItem(_currentItem);
-    }
-
     private void Update()
     {
         if (!_lerp) return;
@@ -93,13 +73,47 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         _scrollRectComponent.velocity = Vector2.zero;
     }
 
+    public void UpdateUIInventory()
+    {
+        List<Vector2> itemsUnlockedPos = new List<Vector2>();
+        List<Vector2> itemsLockedPos = new List<Vector2>();
+        List<ItemInventory> itemsInventoryUnlocked = new List<ItemInventory>();
+        List<ItemInventory> itemsInventoryLocked = new List<ItemInventory>();
+
+        int count = 0;
+        for (int i = 0; i < _itemsInventory.Count; i++)
+        {
+            if (!_itemsService.GetUnlockedItems().Contains(_itemsInventory[i].ItemSOInventory)) continue;
+            itemsUnlockedPos.Add(_itemPositions[count]);
+            _itemsInventory[i].ItemImage.rectTransform.anchoredPosition = -_itemPositions[count];
+            itemsInventoryUnlocked.Add(_itemsInventory[i]);
+            _itemsInventory[i].ItemImage.transform.GetChild(0).gameObject.SetActive(false);
+            count++;
+        }
+
+        for (int i = 0; i < _itemsInventory.Count; i++)
+        {
+            if (_itemsService.GetUnlockedItems().Contains(_itemsInventory[i].ItemSOInventory)) continue;
+            itemsLockedPos.Add(_itemPositions[count]);
+            _itemsInventory[i].ItemImage.rectTransform.anchoredPosition = -_itemPositions[count];
+            itemsInventoryLocked.Add(_itemsInventory[i]);
+            _itemsInventory[i].ItemImage.transform.GetChild(0).gameObject.SetActive(true);
+            count++;
+        }
+
+        _itemPositions.Clear();
+        _itemPositions = itemsUnlockedPos.Concat(itemsLockedPos).ToList();
+        _itemsInventory.Clear();
+        _itemsInventory = itemsInventoryUnlocked.Concat(itemsInventoryLocked).ToList();
+        SetItem(_currentItem);
+    }
+
     private void SetItemPositions()
     {
         int width = (int)_scrollRectRectTransform.rect.width;
         int offsetX = width / 3;
         int containerWidth = width * _itemCount / 3;
         int containerHeight = (int)_scrollRectRectTransform.rect.height;
-        _fastSwipeThresholdMaxLimit = width;
 
         Vector2 newSize = new Vector2(containerWidth, 0);
         _container.sizeDelta = newSize;
@@ -137,16 +151,6 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         _itemsService.LinkItemPlayer();
     }
 
-    private void NextScreen()
-    {
-        LerpToPage(_currentItem + 1);
-    }
-
-    private void PreviousScreen()
-    {
-        LerpToPage(_currentItem - 1);
-    }
-
     private int GetNearestPage()
     {
         Vector2 currentPosition = _container.anchoredPosition;
@@ -170,8 +174,6 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     public void OnBeginDrag(PointerEventData aEventData)
     {
         _lerp = false;
-        _timeStamp = Time.unscaledTime;
-        _startPosition = _container.anchoredPosition;
     }
 
     public void OnEndDrag(PointerEventData aEventData)
