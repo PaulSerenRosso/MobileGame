@@ -77,6 +77,7 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         {
             itemInventory.ItemImage.transform.GetChild(0).gameObject.SetActive(false);
         }
+        SetItem(_currentItem);
     }
 
     private void Update()

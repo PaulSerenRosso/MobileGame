@@ -59,6 +59,7 @@ namespace Service.UI
         public void OpenHat()
         {
             _headPanel.SetActive(true);
+            _headScroll.UpdateUIInventory();
             _shirtPanel.SetActive(false);
             _shortPanel.SetActive(false);
         }
@@ -67,6 +68,7 @@ namespace Service.UI
         {
             _headPanel.SetActive(false);
             _shirtPanel.SetActive(true);
+            _shirtScroll.UpdateUIInventory();
             _shortPanel.SetActive(false);
         }
 
@@ -75,6 +77,7 @@ namespace Service.UI
             _headPanel.SetActive(false);
             _shirtPanel.SetActive(false);
             _shortPanel.SetActive(true);
+            _shortScroll.UpdateUIInventory();
         }
 
         private void OpenPopup(BadgeSO badgeSO)
