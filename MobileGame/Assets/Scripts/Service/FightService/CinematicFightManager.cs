@@ -96,6 +96,7 @@ public class CinematicFightManager : MonoBehaviour
 
     public void StopCinematic(Action endCinematicCallback)
     {
+        // TODO: à vérifier ! 
         StopAllCoroutines();
         _playableDirector.Stop();
         _player.parent = null;
