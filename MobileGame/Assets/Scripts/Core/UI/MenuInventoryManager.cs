@@ -38,6 +38,7 @@ namespace Service.UI
                 badgeButton.onClick.AddListener(() => OpenPopup(_badgeSOs[index]));
             }
             _itemsService.SetPlayerItemLinker(playerItemsLinker);
+            _itemsService.LinkItemPlayer();
             _headScroll.InitializeScroll(_itemsService,
                 _itemsService.GetAllItems().Where(i => i.Type == ItemTypeEnum.Head).ToArray(),
                 _itemsService.GetPlayerItems().FirstOrDefault(i => i.Key == ItemTypeEnum.Head).Value);
