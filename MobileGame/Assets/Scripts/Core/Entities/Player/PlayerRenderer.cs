@@ -18,7 +18,6 @@ namespace Player
         [SerializeField] private TauntPlayerAction _tauntPlayerAction;
         [FormerlySerializedAs("_skinnedMeshRenderers")] [SerializeField] private Renderer[] _renderers;
         
-
         public void Init()
         {
             _playerMovementHandler.MakeActionEvent += SetDirParameter;
@@ -31,6 +30,7 @@ namespace Player
             playerUltimateHandler.ActivateUltimateEvent += ActivateFX;
             playerUltimateHandler.DeactivateUltimateEvent += DeactivateFX;
             _playerMovementHandler.MakeActionEvent += ActivateMovementParticle;
+            _playerMovementHandler.CheckIsOccupiedEvent += ActivateInvisibleWall;
             _movementPlayerAction.EndActionEvent += DeactivateMovementParticle;
             // SetRecoverySpeedAnimation();
             // _tauntAction.MakeActionEvent += ActivateTauntFX;

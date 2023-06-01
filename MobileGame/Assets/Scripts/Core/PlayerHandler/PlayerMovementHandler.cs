@@ -18,7 +18,7 @@ namespace Player.Handler
         [SerializeField] private MovementPlayerAction movementPlayerAction;
         [SerializeField] private float _cooldownTimeBetweenTwoMovement;
         [SerializeField] private float _dodgeTime;
-        
+
         private TickTimer _recoveryTimer;
         private TickTimer _dodgeTimer;
         private IInputService _inputService;
@@ -34,9 +34,10 @@ namespace Player.Handler
 
         public event Action FinishRecoveryMovementEvent;
         public event Action<Vector2> MakeActionEvent;
+        public event Action<Vector3> CheckIsOccupiedEvent;
 
         public float GetRecoveryMovementTime() => _cooldownTimeBetweenTwoMovement;
-        
+
         public bool GetIsDodging() => _isDodging;
 
         public void TryMakeMovementAction(Swipe swipe)
@@ -90,6 +91,9 @@ namespace Player.Handler
                 }
             }
 
+            if (_gridManager.MovePoints[_maxDestinationIndex].IsOccupied)
+                CheckIsOccupiedEvent?.Invoke(_gridManager.MovePoints[_maxDestinationIndex].MeshRenderer.transform
+                    .position);
             return !_gridManager.MovePoints[_maxDestinationIndex].IsOccupied;
         }
 

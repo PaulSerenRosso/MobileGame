@@ -7,6 +7,8 @@ namespace Player
         [SerializeField] private GameObject _tauntParticle;
         [SerializeField] private GameObject _stunParticle;
         [SerializeField] private GameObject _movementParticle;
+        [SerializeField] private GameObject _invisibleWall;
+        
         public void ActivateTauntFX()
         {
             _tauntParticle.gameObject.SetActive(true);
@@ -35,11 +37,15 @@ namespace Player
             _movementParticle.transform.forward = transform.TransformDirection(-new Vector3(obj.x,0 , obj.y));
         }
         
-    
-
         private void DeactivateMovementParticle()
         {
             _movementParticle.SetActive(false);
+        }
+
+        private void ActivateInvisibleWall(Vector3 posToCheck)
+        {
+            _invisibleWall.gameObject.transform.position = (1 * (posToCheck - transform.position).normalized + transform.position);
+            _invisibleWall.SetActive(true);
         }
     }
 }
