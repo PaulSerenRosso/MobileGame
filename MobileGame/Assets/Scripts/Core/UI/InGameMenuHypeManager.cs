@@ -59,7 +59,7 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
     private Vector2 _newPositionHypePlayer;
     private Vector2 _oldPositionHypeEnemy;
     private Vector2 _newPositionHypeEnemy;
-    
+
     private Pool<RectTransform> _poolPlayer;
     private Pool<RectTransform> _poolEnemy;
 
@@ -100,10 +100,10 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
         UpdateUltimateArea(hypeService.GetUltimateHypeValueEnemy());
 
         hypeService.UltimateAreaIncreaseEvent += UpdateUltimateArea;
-      
+
         _poolPlayer = new Pool<RectTransform>(_damageHypePlayer, 10);
         _poolEnemy = new Pool<RectTransform>(_damageHypeBoss, 10);
-        
+
         UpdateManager.Register(this);
     }
 
@@ -120,15 +120,15 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
     private void UpdateUltimateArea(float amount)
     {
         _hypePlayerSliderOutlineAreaUltimate.value =
-            _hypeService.GetMaximumHype()- amount;
-        _hypeEnemySliderOutlineAreaUltimate.value =  _hypeService.GetMaximumHype()- amount;
+            _hypeService.GetMaximumHype() - amount;
+        _hypeEnemySliderOutlineAreaUltimate.value = _hypeService.GetMaximumHype() - amount;
     }
 
     public void OnUpdate()
     {
         _hypeUpdateEvent?.Invoke();
     }
-    
+
     private void SetIncreaseEnemySliderValue(float amount)
     {
         _hypeEnemySlider.value = _hypeService.GetCurrentHypeEnemy();
@@ -149,12 +149,12 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
         var decreaseImageAnchorMax = decreaseImage.anchorMax;
         decreaseImageAnchorMax.x = _hypeFillEnemy.rectTransform.anchorMin.x;
         decreaseImage.anchorMax = decreaseImageAnchorMax;
-        image.DOColor(new Color(0, 0, 0), 1.5f);
-        StartCoroutine(_poolEnemy.AddToPoolLatter(decreaseImage, 2f));
+        image.DOColor(new Color(1, 1, 1, 0), 0.8f)
+            .OnComplete(() => _poolEnemy.AddToPool(decreaseImage));
         _hypeEnemySliderOutlineAttack.value = _hypeService.GetCurrentHypeEnemy();
         _hypeEnemySliderOutlineTaunt.value = _hypeService.GetCurrentHypeEnemy();
     }
-    
+
     private void SetIncreasePlayerSliderValue(float amount)
     {
         _hypePlayerSlider.value = _hypeService.GetCurrentHypePlayer();
@@ -175,8 +175,8 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
         var decreaseImageAnchorMax = decreaseImage.anchorMax;
         decreaseImageAnchorMax.x = oldAnchorMin;
         decreaseImage.anchorMax = decreaseImageAnchorMax;
-        image.DOColor(new Color(0, 0, 0), 1.5f);
-        StartCoroutine(_poolPlayer.AddToPoolLatter(decreaseImage, 2f));
+        image.DOColor(new Color(1, 1, 1, 0), 0.8f)
+            .OnComplete(() => _poolPlayer.AddToPool(decreaseImage));
         _hypePlayerSliderOutlineAttack.value = _hypeService.GetCurrentHypePlayer();
         _hypePlayerSliderOutlineTaunt.value = _hypeService.GetCurrentHypePlayer();
     }
