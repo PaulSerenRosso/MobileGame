@@ -19,7 +19,6 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
     [SerializeField] private Slider _hypePlayerSliderOutlineAreaUltimate;
     [SerializeField] private Slider _hypePlayerSliderOutlineTaunt;
     [SerializeField] private Slider _hypePlayerSliderOutlineAttack;
-
     [SerializeField] private Slider _hypeEnemySliderOutlineAreaUltimate;
     [SerializeField] private Slider _hypeEnemySliderOutlineTaunt;
     [SerializeField] private Slider _hypeEnemySliderOutlineAttack;
@@ -47,6 +46,8 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
     [SerializeField] private RectTransform _damageHypeBoss;
     [SerializeField] private float _amountDamageNeedToReceive;
 
+    [SerializeField] private ParticleSystem[] ultimateEnemyFire;
+    [SerializeField] private ParticleSystem[] ultimatePlayerFire;
     private Sprite _hypeLogoEnemy;
     private IHypeService _hypeService;
     private IFightService _fightService;
@@ -102,7 +103,6 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
         _hypePlayerSliderOutlineAreaUltimate.maxValue = hypeService.GetMaximumHype();
         _hypeEnemySliderOutlineAreaUltimate.maxValue = hypeService.GetMaximumHype();
         UpdateUltimateArea(hypeService.GetUltimateHypeValueEnemy());
-
         hypeService.UltimateAreaIncreaseEvent += UpdateUltimateArea;
 
         _poolPlayer = new Pool<RectTransform>(_damageHypePlayer, 10);
@@ -114,6 +114,11 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
     private void OnEnable()
     {
         UpdateManager.Register(this);
+        ultimatePlayerFire[0].Stop();
+        ultimatePlayerFire[1].Stop();
+        ultimateEnemyFire[0].Stop();
+        ultimateEnemyFire[1].Stop();
+     
     }
 
     private void OnDisable()
@@ -195,24 +200,32 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
     {
         _hypeFillPlayer.sprite = _hypeSpriteUltimate;
         _hypeFillPlayerLogo.sprite = _hypeLogoUltimate;
+        ultimatePlayerFire[0].Play();
+        ultimatePlayerFire[1].Play();
     }
 
     private void SetPlayerSliderLoseUltimate(float amount)
     {
         _hypeFillPlayer.sprite = _hypeSpritePlayer;
         _hypeFillPlayerLogo.sprite = _hypeLogoPlayer;
+        ultimatePlayerFire[0].Stop();
+        ultimatePlayerFire[1].Stop();
     }
 
     private void SetEnemySliderGainUltimate(float amount)
     {
         _hypeFillEnemy.sprite = _hypeSpriteUltimate;
         _hypeFillEnemyLogo.sprite = _hypeLogoUltimate;
+        ultimateEnemyFire[0].Play();
+        ultimateEnemyFire[1].Play();
     }
 
     private void SetEnemySliderLoseUltimate(float amount)
     {
         _hypeFillEnemy.sprite = _hypeSpriteEnemy;
         _hypeFillEnemyLogo.sprite = _hypeLogoEnemy;
+        ultimateEnemyFire[0].Stop();
+        ultimateEnemyFire[1].Stop();
     }
 
     private void SetPlayerSliderIncreaseOutline(float obj)
@@ -255,6 +268,7 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
         if (_timerHypeTauntPlayer > _timeHypeTaunt)
         {
             _particleHypePlayer.Stop();
+        
             _hypeTauntPlayer.color = new Color(1, 1, 1, 0);
             _hypeUpdateEvent -= TimerTauntPlayer;
         }
