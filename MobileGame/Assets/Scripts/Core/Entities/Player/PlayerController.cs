@@ -3,6 +3,7 @@ using HelperPSR.MonoLoopFunctions;
 using Player.Handler;
 using Service.Hype;
 using Service.Inputs;
+using Service.UI;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -138,7 +139,7 @@ namespace Player
             _playerRenderer.ActivateStunFeedback();
             LockController();
             _isStun = true;
-            Handheld.Vibrate();
+            Vibration.Vibrate(100);
         }
     }
 }

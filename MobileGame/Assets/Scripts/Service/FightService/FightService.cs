@@ -81,6 +81,7 @@ namespace Service.Fight
             _playerController.UnlockController();
             _hypeService.PlayUltimateAreasIncreased();
             _enemyManager.ReplayTree();
+            Vibration.Vibrate(100);
             DeactivatePauseEvent?.Invoke();
         }
 

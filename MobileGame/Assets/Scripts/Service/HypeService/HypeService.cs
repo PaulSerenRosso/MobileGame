@@ -4,6 +4,7 @@ using Attributes;
 using HelperPSR.MonoLoopFunctions;
 using HelperPSR.RemoteConfigs;
 using Service.Fight;
+using Service.UI;
 using UnityEngine;
 
 namespace Service.Hype
@@ -98,6 +99,7 @@ namespace Service.Hype
                 if (hype.CurrentValue + amount >= hype.UltimateCurrentValue)
                 {
                     hype.IsInUltimateArea = true;
+                    Vibration.Vibrate(100);
                     hype.GainUltimateEvent?.Invoke(amount);
                 }
             }

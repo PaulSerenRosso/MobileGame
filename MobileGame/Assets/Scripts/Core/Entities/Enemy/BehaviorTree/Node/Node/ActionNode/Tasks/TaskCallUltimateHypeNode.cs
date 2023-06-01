@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
+using Service.UI;
 
 namespace BehaviorTree.Nodes.Actions
 {
@@ -23,6 +24,7 @@ namespace BehaviorTree.Nodes.Actions
         public override void Evaluate()
         {
             base.Evaluate();
+            Vibration.Vibrate(100);
             _enemyManager.CanUltimateEvent?.Invoke();
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();

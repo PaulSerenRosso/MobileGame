@@ -1,4 +1,5 @@
 using Actions;
+using Service.UI;
 
 public class UltimatePlayerAction : PlayerAction
 {
@@ -6,6 +7,7 @@ public class UltimatePlayerAction : PlayerAction
 
     public override void MakeAction()
     {
+        Vibration.Vibrate(100);
         MakeActionEvent?.Invoke();
     }
 
