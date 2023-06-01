@@ -173,25 +173,7 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     public void OnEndDrag(PointerEventData aEventData)
     {
-        float difference = _startPosition.x - _container.anchoredPosition.x;
-
-        if (Time.unscaledTime - _timeStamp < _fastSwipeThresholdTime &&
-            Mathf.Abs(difference) > _fastSwipeThresholdMinDistance &&
-            Mathf.Abs(difference) < _fastSwipeThresholdMaxLimit)
-        {
-            if (difference > 0)
-            {
-                NextScreen();
-            }
-            else
-            {
-                PreviousScreen();
-            }
-        }
-        else
-        {
-            LerpToPage(GetNearestPage());
-        }
+        LerpToPage(GetNearestPage());
     }
 }
 
