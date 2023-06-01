@@ -117,6 +117,7 @@ namespace Player
 
         public void ResetPlayer()
         {
+            _playerRenderer.PlayAnimation("Idle");
             _playerMovementHandler.ResetMovePoint(_gridSO.Index);
             transform.rotation = Quaternion.identity;
             _hypeService.ResetHypePlayer();

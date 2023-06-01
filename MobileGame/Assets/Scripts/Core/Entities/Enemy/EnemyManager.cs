@@ -99,6 +99,7 @@ public class EnemyManager : MonoBehaviour, IRemoteConfigurable, IHypeable
         ResetShaderColor();
         ResetParticles();
         _hypeService.ResetHypeEnemy();
+        Animator.Play("Idle");
     }
 
     private void ResetParticles()

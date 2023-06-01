@@ -163,7 +163,6 @@ namespace Service.Fight
         {
             _gridManager.MoveGrid(new Vector3(0, 0, 0));
             _playerController.ResetPlayer();
-            
             _enemyManager.ResetEnemy();
         }
 

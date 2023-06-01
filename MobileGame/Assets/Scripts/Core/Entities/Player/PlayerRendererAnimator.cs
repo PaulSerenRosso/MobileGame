@@ -106,6 +106,11 @@ namespace Player
             Animator.Play("Idle");
         }
 
+        public void PlayAnimation(string nameParameter)
+        {
+            Animator.Play(nameParameter);
+        }
+
         public void DisableAttackAnimatorParameter(HitSO hitSo)
         {
             Animator.SetBool(hitSo.NameAnimationTrigger, false);
