@@ -23,8 +23,9 @@ public class DragPlayer : MonoBehaviour, IDragHandler, IBeginDragHandler
 
     public void OnDrag(PointerEventData eventData)
     {
-        float speed = (eventData.position.x - _beginPosition.x) * _speed;
+        float speed = Mathf.Sign(eventData.position.x - _beginPosition.x) * _speed;
         _player.transform.Rotate(Vector3.up * -speed, Space.World);
+        _beginPosition = eventData.position;
         
     }
 }
