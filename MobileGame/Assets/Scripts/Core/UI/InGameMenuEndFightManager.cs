@@ -18,14 +18,12 @@ namespace Service.UI
         private ITournamentService _tournamentService;
         private IFightService _fightService;
         private ICurrencyService _currencyService;
-        private IGameService _gameService;
 
-        public void Init(IFightService fightService, ICurrencyService currencyService, ITournamentService tournamentService, IGameService gameService)
+        public void Init(IFightService fightService, ICurrencyService currencyService, ITournamentService tournamentService)
         {
             _fightService = fightService;
             _tournamentService = tournamentService;
             _currencyService = currencyService;
-            _gameService = gameService;
             if (!fightService.GetFightTutorial()) _fightService.EndFightEvent += ActivateEndFightPanel;
         }
 
@@ -57,14 +55,6 @@ namespace Service.UI
                 }
                 // endFightTitle.text = endFightTitlePlayerLoseName;
             }
-        }
-
-        public void LaunchNextFight()
-        {
-            // _fightService.QuitFight();
-            // Fight.Fight currentFight = _tournamentService.GetCurrentFightPlayer();
-            // _gameService.LoadGameScene(currentFight.EnvironmentSO.EnvironmentAddressableName,
-            //     currentFight.EnemyGlobalSO.EnemyAddressableName, false, false);
         }
 
         public void BackToMainMenu()

@@ -17,15 +17,16 @@ public class InGameMenuManager : MonoBehaviour
     private IFightService _fightService;
 
     public void SetupMenu(IFightService fightService, IHypeService hypeService, ITournamentService tournamentService,
-        ICurrencyService currencyService, IGameService gameService)
+        ICurrencyService currencyService)
     {
         _inGameMenuHypeManager.Init(hypeService, fightService);
         _inGameMenuRoundManager.Init(fightService);
-        _inGameMenuEndFightManager.Init(fightService, currencyService, tournamentService, gameService);
+        _inGameMenuEndFightManager.Init(fightService, currencyService, tournamentService);
         _fightService = fightService;
         if (_fightService.GetFightTutorial()) InGameMenuTutorialManager.Init(fightService);
         _fightService.ActivatePauseEvent += () => _stopCinematicButton.gameObject.SetActive(true);
-        _fightService.DeactivatePauseEvent += () => _stopCinematicButton.gameObject.SetActive(false);
+        _fightService.InitiateRoundEvent += i => _stopCinematicButton.gameObject.SetActive(false);
+        _fightService.EndFightEvent += i => _stopCinematicButton.gameObject.SetActive(false);
     }
     
     public void StopCinematic()

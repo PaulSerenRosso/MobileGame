@@ -85,7 +85,7 @@ namespace Service.UI
         {
             _inGameMenu = Object.Instantiate(gameObject);
             var inGameMenu = _inGameMenu.GetComponent<InGameMenuManager>();
-            inGameMenu.SetupMenu(_fightService, _hypeService, _tournamentService, _currencyService, _gameService);
+            inGameMenu.SetupMenu(_fightService, _hypeService, _tournamentService, _currencyService);
             _inGameTutorialMenu = inGameMenu.InGameMenuTutorialManager;
             InitCanvasEvent?.Invoke();
             Release(gameObject);
