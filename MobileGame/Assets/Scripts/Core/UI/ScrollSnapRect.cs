@@ -53,12 +53,14 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         _items = items;
         int indexCurrentItem = 0;
         if (currentItem is not null) indexCurrentItem = Array.IndexOf(items, currentItem);
-        foreach (var item in items)
+        for (var index = 0; index < items.Length; index++)
         {
+            var item = items[index];
             var itemImage = Instantiate(_itemImage, _container);
-            if (_itemsService.GetUnlockedItems().FirstOrDefault(i => i == item) == null) 
+            if (_itemsService.GetUnlockedItems().FirstOrDefault(i => i == item) == null)
                 itemImage.transform.GetChild(0).gameObject.SetActive(true);
             itemImage.sprite = item.SpriteUI;
+            itemImage.transform.SetSiblingIndex(index);
             ItemInventory itemInventory = new ItemInventory(item, itemImage);
             _itemsInventory.Add(itemInventory);
         }

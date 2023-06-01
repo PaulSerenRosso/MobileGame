@@ -45,6 +45,7 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
     [SerializeField] private ParticleSystem _particleHypeEnemy;
     [SerializeField] private RectTransform _damageHypePlayer;
     [SerializeField] private RectTransform _damageHypeBoss;
+    [SerializeField] private float _amountDamageNeedToReceive;
 
     private Sprite _hypeLogoEnemy;
     private IHypeService _hypeService;
@@ -62,6 +63,9 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
 
     private Pool<RectTransform> _poolPlayer;
     private Pool<RectTransform> _poolEnemy;
+
+    private float _oldAnchorMaxPlayer = -1;
+    private float _amountDamageReceived;
 
     private event Action _hypeUpdateEvent;
 
@@ -164,19 +168,25 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
 
     private void SetDecreasePlayerSliderValue(float amount)
     {
-        var oldAnchorMin = _hypeFillPlayer.rectTransform.anchorMax.x;
+        if (_oldAnchorMaxPlayer < 0) _oldAnchorMaxPlayer = _hypeFillPlayer.rectTransform.anchorMax.x;
+        _amountDamageReceived += amount;
         _hypePlayerSlider.value = _hypeService.GetCurrentHypePlayer();
-        var decreaseImage = _poolPlayer.GetFromPool();
-        var image = decreaseImage.GetComponent<Image>();
-        decreaseImage.SetParent(_hypeFillAreaPlayer.transform, false);
-        var decreaseImageAnchorMin = decreaseImage.anchorMin;
-        decreaseImageAnchorMin.x = _hypeFillPlayer.rectTransform.anchorMax.x;
-        decreaseImage.anchorMin = decreaseImageAnchorMin;
-        var decreaseImageAnchorMax = decreaseImage.anchorMax;
-        decreaseImageAnchorMax.x = oldAnchorMin;
-        decreaseImage.anchorMax = decreaseImageAnchorMax;
-        image.DOColor(new Color(1, 1, 1, 0), 0.8f)
-            .OnComplete(() => _poolPlayer.AddToPool(decreaseImage));
+        if (_amountDamageReceived > _amountDamageNeedToReceive)
+        {
+            var decreaseImage = _poolPlayer.GetFromPool();
+            var image = decreaseImage.GetComponent<Image>();
+            decreaseImage.SetParent(_hypeFillAreaPlayer.transform, false);
+            var decreaseImageAnchorMin = decreaseImage.anchorMin;
+            decreaseImageAnchorMin.x = _hypeFillPlayer.rectTransform.anchorMax.x;
+            decreaseImage.anchorMin = decreaseImageAnchorMin;
+            var decreaseImageAnchorMax = decreaseImage.anchorMax;
+            decreaseImageAnchorMax.x = _oldAnchorMaxPlayer;
+            decreaseImage.anchorMax = decreaseImageAnchorMax;
+            image.DOColor(new Color(1, 1, 1, 0), 0.8f)
+                .OnComplete(() => _poolPlayer.AddToPool(decreaseImage));
+            _amountDamageReceived = 0;
+            _oldAnchorMaxPlayer = -1;
+        }
         _hypePlayerSliderOutlineAttack.value = _hypeService.GetCurrentHypePlayer();
         _hypePlayerSliderOutlineTaunt.value = _hypeService.GetCurrentHypePlayer();
     }

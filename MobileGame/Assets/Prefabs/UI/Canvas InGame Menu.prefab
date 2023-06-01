@@ -7186,6 +7186,7 @@ MonoBehaviour:
     type: 3}
   _damageHypeBoss: {fileID: 1832099167320750537, guid: 4edb356dc0bd55243a09b9134a465ff1,
     type: 3}
+  _amountDamageNeedToReceive: 10
 --- !u!1 &6980966018218093887
 GameObject:
   m_ObjectHideFlags: 0
@@ -9306,7 +9307,7 @@ PrefabInstance:
     - target: {fileID: 509043234070557814, guid: 11c8a8a6a2523844f9d5283e76eb7eed,
         type: 3}
       propertyPath: m_text
-      value: Back to Main Menu
+      value: Continue
       objectReference: {fileID: 0}
     - target: {fileID: 509043234070557814, guid: 11c8a8a6a2523844f9d5283e76eb7eed,
         type: 3}
