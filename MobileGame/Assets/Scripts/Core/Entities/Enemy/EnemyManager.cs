@@ -162,10 +162,15 @@ public class EnemyManager : MonoBehaviour, IRemoteConfigurable, IHypeable
             
             return false;
         }
+
+        if (IsBoosted)
+        {
+            // damage = (1 - EnemyInGameSo.PercentageDamageReductionBoostChimist) * amount;
+            return false;
+        }
         
         if (isStun) TakeStun();
 
-        if (IsBoosted) damage = (1 - EnemyInGameSo.PercentageDamageReductionBoostChimist) * amount;
         Vector3 pos;
         particleTransform.gameObject.SetActive(true);
         switch (particlePosition)
