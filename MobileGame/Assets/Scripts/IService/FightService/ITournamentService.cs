@@ -11,7 +11,7 @@ namespace Service.Fight
         void SetPlayerCurrentFight(TournamentStep tournamentStep);
         bool CompareState(FightState stateToCompare);
         bool GetTournamentIsActive();
-        List<string> GetFakeNames();
+        List<FriendUser> GetFakes();
         Fight GetFightStep(TournamentStep tournamentStep);
         Fight GetCurrentFightPlayer();
         Fight[] GetFights();

@@ -29,8 +29,11 @@ namespace Service.UI
         [SerializeField] private Image[] _imageFinalWinners;
 
         [SerializeField] private Image _imageLogoQuarter;
+        [SerializeField] private Image[] _imageLogoQuarterFake;
         [SerializeField] private Image[] _imageLogoDemi;
+        [SerializeField] private Image[] _imageLogoDemiFakes;
         [SerializeField] private Image[] _imageLogoFinal;
+        
 
         [SerializeField] private TextMeshProUGUI _quarterName;
         [SerializeField] private TextMeshProUGUI[] _demiNames;
@@ -49,7 +52,7 @@ namespace Service.UI
         private IGameService _gameService;
         private ITournamentService _tournamentService;
         private Fight.Fight[] _fights;
-        private List<string> _fakeNames;
+        private List<FriendUser> _fakes;
         private MenuManager _menuManager;
         private string _enemyAddressableName;
         private ICurrencyService _currencyService;
@@ -65,7 +68,7 @@ namespace Service.UI
             _itemsService = itemsService;
             if (!_tournamentService.GetTournamentIsActive()) _tournamentService.SetTournament();
             _fights = _tournamentService.GetFights();
-            _fakeNames = _tournamentService.GetFakeNames();
+            _fakes = _tournamentService.GetFakes();
             SetTournamentNames();
             if (!fightService.GetFightTutorial() && !fightService.GetFightDebug())
             {
@@ -103,12 +106,19 @@ namespace Service.UI
             for (var index = 0; index < _quarterFakeNames.Length; index++)
             {
                 var quarterFakeName = _quarterFakeNames[index];
-                quarterFakeName.text = _fakeNames[index];
+                quarterFakeName.text = _fakes[index].name;
+                var quarterFakeImage = _imageLogoQuarterFake[index];
+                quarterFakeImage.sprite = _fakes[index].picture;
             }
 
             foreach (var demiFakeName in _demiFakeNames)
             {
-                demiFakeName.text = _fakeNames.LastOrDefault();
+                demiFakeName.text = _fakes.LastOrDefault().name;
+            }
+
+            foreach (var imageLogoDemiFake in _imageLogoDemiFakes)
+            {
+                imageLogoDemiFake.sprite = _fakes.LastOrDefault().picture;
             }
         }
 

@@ -15,7 +15,7 @@ namespace Service.Fight
         private bool _isSet;
         private TournamentSettingsSO _so;
         
-        private List<string> _orderFakeNames;
+        private List<FriendUser> _fakeFriends;
 
         [ServiceInit]
         private void Init()
@@ -55,9 +55,9 @@ namespace Service.Fight
             return _isSet;
         }
 
-        public List<string> GetFakeNames()
+        public List<FriendUser> GetFakes()
         {
-            return _orderFakeNames;
+            return _fakeFriends;
         }
 
         public Fight GetFightStep(TournamentStep tournamentStep)
@@ -101,12 +101,12 @@ namespace Service.Fight
                 randIndex = new[] { 0, 1, 2, 3, 4, 5, 6, 7 };
                 random = new System.Random();
                 CollectionHelper.ShuffleArray(ref random, randIndex);
-                _orderFakeNames = new List<string>(4)
+                _fakeFriends = new List<FriendUser>(4)
                 {
-                    _so.FakeNames[randIndex[0]].name,
-                    _so.FakeNames[randIndex[1]].name,
-                    _so.FakeNames[randIndex[2]].name,
-                    _so.FakeNames[randIndex[3]].name
+                    _so.FakeNames[randIndex[0]],
+                    _so.FakeNames[randIndex[1]],
+                    _so.FakeNames[randIndex[2]],
+                    _so.FakeNames[randIndex[3]]
                 };
             }
         }
