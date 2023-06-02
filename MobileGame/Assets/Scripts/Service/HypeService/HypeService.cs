@@ -169,7 +169,9 @@ namespace Service.Hype
         public void ResetHypePlayer()
         {
             _hypePlayer.UltimateCurrentValue = _hypePlayer.HypeSo.UltimateValue;
+            
             SetHypePlayer(_startHypeValuePlayer);
+            UltimateAreaIncreaseEvent?.Invoke( _hypePlayer.UltimateCurrentValue);
             _hypePlayer.IsInUltimateArea = false;
             _hypePlayer.LoseUltimateEvent?.Invoke(_startHypeValuePlayer);
         }
@@ -179,6 +181,7 @@ namespace Service.Hype
             _hypeEnemy.UltimateCurrentValue = _hypeEnemy.HypeSo.UltimateValue;
             SetHypeEnemy(_startHypeValueEnemy);
             _hypeEnemy.IsInUltimateArea = false;
+            UltimateAreaIncreaseEvent?.Invoke( _hypePlayer.UltimateCurrentValue);
             _hypeEnemy.LoseUltimateEvent?.Invoke(_startHypeValueEnemy);
         }
 
