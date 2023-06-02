@@ -1,4 +1,5 @@
 ﻿using System;
+using DG.Tweening;
 using HelperPSR.MonoLoopFunctions;
 using Service.Fight;
 using TMPro;
@@ -17,6 +18,7 @@ namespace Service.UI
         [SerializeField] private Sprite _neutralRound;
         [SerializeField] private Sprite _playerRound;
         [SerializeField] private Sprite _enemyRound;
+        [SerializeField] private Image _fightSpriteImage;
 
         private float _timer;
         private IFightService _fightService;
@@ -33,7 +35,13 @@ namespace Service.UI
             _timer -= Time.deltaTime;
             float seconds = Mathf.FloorToInt(_timer % 60);
             if (seconds < 0) return;
-            if (seconds == 0) _countdownRound.text = "FIGHT!";
+            if (seconds == 0)
+            {
+                _countdownRound.gameObject.SetActive(false);
+                _fightSpriteImage.rectTransform.localScale = Vector3.zero;
+                _fightSpriteImage.gameObject.SetActive(true);
+                _fightSpriteImage.rectTransform.DOScale(Vector3.one, 0.25f);
+            }
             else _countdownRound.text = seconds.ToString();
         }
 
@@ -87,6 +95,7 @@ namespace Service.UI
         {
             _roundTitle.gameObject.SetActive(false);
             _countdownRound.gameObject.SetActive(false);
+            _fightSpriteImage.gameObject.SetActive(false);
             UpdateManager.UnRegister(this);
         }
     }
