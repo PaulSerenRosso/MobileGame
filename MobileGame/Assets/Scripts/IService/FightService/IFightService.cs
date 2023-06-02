@@ -10,6 +10,8 @@ namespace Service.Fight
         public bool GetFightTutorial();
         public bool GetFightDebug();
         public EnemyGlobalSO GetEnemySO();
+        public int GetEnemyRoundCount();
+        public int GetPlayerRoundCount();
 
         public void ActivatePause(Action callback);
         public void DeactivatePause();

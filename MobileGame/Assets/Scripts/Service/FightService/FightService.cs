@@ -67,6 +67,16 @@ namespace Service.Fight
             return _enemyGlobalSO;
         }
 
+        public int GetEnemyRoundCount()
+        {
+            return _enemyRoundCount;
+        }
+
+        public int GetPlayerRoundCount()
+        {
+            return _playerRoundCount;
+        }
+
         public void ActivatePause(Action callback)
         {
             ResetEntities();

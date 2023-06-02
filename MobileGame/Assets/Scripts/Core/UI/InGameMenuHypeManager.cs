@@ -49,6 +49,7 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
 
     [SerializeField] private ParticleSystem[] ultimateEnemyFire;
     [SerializeField] private ParticleSystem[] ultimatePlayerFire;
+
     private Sprite _hypeLogoEnemy;
     private IHypeService _hypeService;
     private IFightService _fightService;
@@ -119,7 +120,6 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
         ultimatePlayerFire[1].Stop();
         ultimateEnemyFire[0].Stop();
         ultimateEnemyFire[1].Stop();
-     
     }
 
     private void OnDisable()
