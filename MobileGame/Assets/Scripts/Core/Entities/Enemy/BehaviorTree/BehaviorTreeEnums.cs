@@ -12,8 +12,11 @@ public class BehaviorTreeEnums
         StunFX,
         PrevShoot,
         MuzzleShoot,
-        PotionFX,
+        PotionSpeedUpFX,
         MovementFX,
+        ShieldChemistFX,
+        PotionDefenseUpFX,
+        PotionAttackUpFX
     }
 
     public enum TreeExternValues
