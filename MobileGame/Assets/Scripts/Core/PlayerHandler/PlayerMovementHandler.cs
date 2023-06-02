@@ -65,35 +65,50 @@ namespace Player.Handler
                 {
                     if (_currentMovePoint.NeighborLeftIndex != -1)
                         _maxDestinationIndex = _currentMovePoint.NeighborLeftIndex;
-                    else return false;
+                    else
+                    {
+                        CheckIsOccupiedEvent?.Invoke(_currentSwipe.SwipeSO.DirectionV3);
+                        return false;
+                    }
                     break;
                 }
                 case var v when v == Vector2.right:
                 {
                     if (_currentMovePoint.NeighborRightIndex != -1)
                         _maxDestinationIndex = _currentMovePoint.NeighborRightIndex;
-                    else return false;
+                    else
+                    {
+                        CheckIsOccupiedEvent?.Invoke(_currentSwipe.SwipeSO.DirectionV3);
+                        return false;
+                    }
                     break;
                 }
                 case var v when v == Vector2.up:
                 {
                     if (_currentMovePoint.NeighborTopIndex != -1)
                         _maxDestinationIndex = _currentMovePoint.NeighborTopIndex;
-                    else return false;
+                    else
+                    {
+                        CheckIsOccupiedEvent?.Invoke(_currentSwipe.SwipeSO.DirectionV3);
+                        return false;
+                    }
                     break;
                 }
                 case var v when v == Vector2.down:
                 {
                     if (_currentMovePoint.NeighborDownIndex != -1)
                         _maxDestinationIndex = _currentMovePoint.NeighborDownIndex;
-                    else return false;
+                    else
+                    {
+                        CheckIsOccupiedEvent?.Invoke(_currentSwipe.SwipeSO.DirectionV3);
+                        return false;
+                    }
                     break;
                 }
             }
 
             if (_gridManager.MovePoints[_maxDestinationIndex].IsOccupied)
-                CheckIsOccupiedEvent?.Invoke(_gridManager.MovePoints[_maxDestinationIndex].MeshRenderer.transform
-                    .position);
+                CheckIsOccupiedEvent?.Invoke(_currentSwipe.SwipeSO.DirectionV3);
             return !_gridManager.MovePoints[_maxDestinationIndex].IsOccupied;
         }
 

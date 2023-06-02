@@ -27,7 +27,6 @@ namespace Service
             transform.rotation = Quaternion.Lerp(transform.rotation,
                 Quaternion.LookRotation(((_enemy.position + _player.TransformDirection(_cameraSettingsSO.OffsetRotation).normalized) - transform.position).normalized),
                 _cameraSettingsSO.SpeedRotation );
-            Debug.Log("update camera");
         }
 
         public void Setup(Transform player, Transform enemy)
