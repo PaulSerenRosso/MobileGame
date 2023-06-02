@@ -33,7 +33,8 @@ namespace Service.UI
             _timer -= Time.deltaTime;
             float seconds = Mathf.FloorToInt(_timer % 60);
             if (seconds < 0) return;
-            _countdownRound.text = seconds.ToString();
+            if (seconds == 0) _countdownRound.text = "FIGHT!";
+            else _countdownRound.text = seconds.ToString();
         }
 
         private void ActivateChangeRound(int roundCount)
