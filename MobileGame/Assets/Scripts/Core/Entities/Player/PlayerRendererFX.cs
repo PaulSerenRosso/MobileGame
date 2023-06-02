@@ -44,6 +44,7 @@ namespace Player
 
         private void ActivateInvisibleWall(Vector3 dir)
         { 
+            if(dir == Vector3.forward) return;
             _invisibleWall.transform.parent = this.transform;
             _invisibleWall.gameObject.SetActive(true);
             _invisibleWall.Play();
