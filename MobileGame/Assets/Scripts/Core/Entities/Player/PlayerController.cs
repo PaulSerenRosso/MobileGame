@@ -18,6 +18,7 @@ namespace Player
         [SerializeField] private PlayerRotationHandler _playerRotationHandler;
         [SerializeField] private PlayerTauntHandler _playerTauntHandler;
         [FormerlySerializedAs("_timerStun")] [SerializeField] private float _timeStun;
+        [FormerlySerializedAs("CameraPivot")] [FormerlySerializedAs("_cameraPivot")] [SerializeField] public Transform EndFightCameraPivot;
         [SerializeField] private float _timeInvunerable;
 
         private float _timerStun;
