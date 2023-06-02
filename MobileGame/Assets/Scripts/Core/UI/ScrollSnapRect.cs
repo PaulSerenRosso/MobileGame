@@ -145,9 +145,9 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         _lerpTo = _itemPositions[itemIndex];
         _lerp = true;
         _currentItem = itemIndex;
-        if (_itemsService.GetUnlockedItems().FirstOrDefault(i => i == _items[itemIndex]) == null) return;
+        if (_itemsService.GetUnlockedItems().FirstOrDefault(i => i == _itemsInventory[itemIndex].ItemSOInventory) == null) return;
         _itemsService.RemoveItemPlayer(_items[currentItemPlayer].Type);
-        _itemsService.SetItemPlayer(_items[itemIndex]);
+        _itemsService.SetItemPlayer(_itemsInventory[itemIndex].ItemSOInventory);
         _itemsService.LinkItemPlayer();
     }
 

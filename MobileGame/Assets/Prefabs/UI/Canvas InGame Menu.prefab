@@ -7308,7 +7308,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4707574865801539911
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11653,6 +11653,7 @@ MonoBehaviour:
   _damageHypeBoss: {fileID: 1832099167320750537, guid: 4edb356dc0bd55243a09b9134a465ff1,
     type: 3}
   _amountDamageNeedToReceive: 10
+  _durationDamage: 0
   ultimateEnemyFire:
   - {fileID: 1675760498844928700}
   - {fileID: 1505780367038645006}
