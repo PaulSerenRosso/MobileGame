@@ -9,9 +9,6 @@ namespace Service.UI
     public class InGameMenuEndFightManager : MonoBehaviour
     {
         [SerializeField] private GameObject endFightPanel;
-        [SerializeField] private TextMeshProUGUI endFightTitle;
-        [SerializeField] private string endFightTitlePlayerVictoryName;
-        [SerializeField] private string endFightTitlePlayerLoseName;
         [SerializeField] private Button backToMainMenuButton;
         [SerializeField] private TextMeshProUGUI expAmountText;
         
@@ -41,7 +38,6 @@ namespace Service.UI
                     expAmountText.text = "+" + expAmount;
                     _currencyService.AddXP(expAmount);
                 }
-                // endFightTitle.text = endFightTitlePlayerVictoryName;
             }
             else
             {
@@ -53,7 +49,6 @@ namespace Service.UI
                     expAmountText.text = "+" + expAmount;
                     _currencyService.AddXP(expAmount);
                 }
-                // endFightTitle.text = endFightTitlePlayerLoseName;
             }
         }
 
