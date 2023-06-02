@@ -166,6 +166,16 @@ public class EnemyManager : MonoBehaviour, IRemoteConfigurable, IHypeable
         if (IsBoosted)
         {
             // damage = (1 - EnemyInGameSo.PercentageDamageReductionBoostChimist) * amount;
+            _blockParticle.gameObject.transform.position = (1 * (posToCheck - transform.position).normalized + transform.position);
+            if (_blockParticle.isPlaying)
+            {
+                _blockParticle.Clear();
+                _blockParticle.Play();
+            }
+            else
+            {
+                _blockParticle.gameObject.SetActive(true);
+            }
             return false;
         }
         
