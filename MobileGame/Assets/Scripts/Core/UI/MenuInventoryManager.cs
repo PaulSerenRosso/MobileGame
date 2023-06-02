@@ -8,9 +8,9 @@ namespace Service.UI
 {
     public class MenuInventoryManager : MonoBehaviour
     {
-        [SerializeField] private GameObject _headPanel;
-        [SerializeField] private GameObject _shirtPanel;
-        [SerializeField] private GameObject _shortPanel;
+        [SerializeField] private Canvas _headPanel;
+        [SerializeField] private Canvas _shirtPanel;
+        [SerializeField] private Canvas _shortPanel;
 
         [SerializeField] private ScrollSnapRect _headScroll;
         [SerializeField] private ScrollSnapRect _shirtScroll;
@@ -59,25 +59,25 @@ namespace Service.UI
 
         public void OpenHat()
         {
-            _headPanel.SetActive(true);
+            _headPanel.sortingOrder = 1;
+            _shirtPanel.sortingOrder = 0;
+            _shortPanel.sortingOrder = 0;
             _headScroll.UpdateUIInventory();
-            _shirtPanel.SetActive(false);
-            _shortPanel.SetActive(false);
         }
 
         public void OpenShirt()
         {
-            _headPanel.SetActive(false);
-            _shirtPanel.SetActive(true);
+            _headPanel.sortingOrder = 0;
+            _shirtPanel.sortingOrder = 1;
+            _shortPanel.sortingOrder = 0;
             _shirtScroll.UpdateUIInventory();
-            _shortPanel.SetActive(false);
         }
 
         public void OpenShort()
         {
-            _headPanel.SetActive(false);
-            _shirtPanel.SetActive(false);
-            _shortPanel.SetActive(true);
+            _headPanel.sortingOrder = 0;
+            _shirtPanel.sortingOrder = 0;
+            _shortPanel.sortingOrder = 1;
             _shortScroll.UpdateUIInventory();
         }
 
