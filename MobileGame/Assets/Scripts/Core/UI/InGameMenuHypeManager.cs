@@ -45,6 +45,7 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
     [SerializeField] private RectTransform _damageHypePlayer;
     [SerializeField] private RectTransform _damageHypeBoss;
     [SerializeField] private float _amountDamageNeedToReceive;
+    [SerializeField] private float _durationDamage;
 
     [SerializeField] private ParticleSystem[] ultimateEnemyFire;
     [SerializeField] private ParticleSystem[] ultimatePlayerFire;
@@ -158,7 +159,7 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
         var decreaseImageAnchorMax = decreaseImage.anchorMax;
         decreaseImageAnchorMax.x = _hypeFillEnemy.rectTransform.anchorMin.x;
         decreaseImage.anchorMax = decreaseImageAnchorMax;
-        image.DOColor(new Color(1, 1, 1, 0), 0.8f)
+        image.DOColor(new Color(1, 1, 1, 0), _durationDamage)
             .OnComplete(() => _poolEnemy.AddToPool(decreaseImage));
         _hypeEnemySliderOutlineAttack.value = _hypeService.GetCurrentHypeEnemy();
         _hypeEnemySliderOutlineTaunt.value = _hypeService.GetCurrentHypeEnemy();
@@ -187,7 +188,7 @@ public class InGameMenuHypeManager : MonoBehaviour, IUpdatable
             var decreaseImageAnchorMax = decreaseImage.anchorMax;
             decreaseImageAnchorMax.x = _oldAnchorMaxPlayer;
             decreaseImage.anchorMax = decreaseImageAnchorMax;
-            image.DOColor(new Color(1, 1, 1, 0), 0.8f)
+            image.DOColor(new Color(1, 1, 1, 0), _durationDamage)
                 .OnComplete(() => _poolPlayer.AddToPool(decreaseImage));
             _amountDamageReceived = 0;
             _oldAnchorMaxPlayer = -1;
