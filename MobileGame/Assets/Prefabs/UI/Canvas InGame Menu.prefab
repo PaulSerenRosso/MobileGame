@@ -692,9 +692,9 @@ RectTransform:
   m_Father: {fileID: 7002854513087077368}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250.36499, y: -200}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 389.448, y: 364.366}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4282299879876864680
@@ -5802,6 +5802,9 @@ MonoBehaviour:
   endFightPanel: {fileID: 6591425345829761456}
   backToMainMenuButton: {fileID: 3152466023308577373}
   expAmountText: {fileID: 5321432316547430560}
+  _stateMatchImage: {fileID: 4455097991395341402}
+  _victorySprite: {fileID: 21300000, guid: b851f0bb2864744cfb07524c51918798, type: 3}
+  _defeatSprite: {fileID: 21300000, guid: a6fb2bb8d6fd2438c9ac71ad852c8dcc, type: 3}
 --- !u!1 &3980829321241277031
 GameObject:
   m_ObjectHideFlags: 0
@@ -7000,9 +7003,9 @@ RectTransform:
   m_Father: {fileID: 7002854513087077368}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 694.724, y: -200}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 419.27, y: 140.917}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9158510792211939385
@@ -10569,7 +10572,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1575789017133715912
 RectTransform:
   m_ObjectHideFlags: 0

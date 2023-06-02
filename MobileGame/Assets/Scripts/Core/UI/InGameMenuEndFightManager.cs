@@ -11,7 +11,10 @@ namespace Service.UI
         [SerializeField] private GameObject endFightPanel;
         [SerializeField] private Button backToMainMenuButton;
         [SerializeField] private TextMeshProUGUI expAmountText;
-        
+        [SerializeField] private Image _stateMatchImage;
+        [SerializeField] private Sprite _victorySprite;
+        [SerializeField] private Sprite _defeatSprite;
+
         private ITournamentService _tournamentService;
         private IFightService _fightService;
         private ICurrencyService _currencyService;
@@ -31,6 +34,7 @@ namespace Service.UI
             expAmountText.text = "+" + expAmount;
             if (isPlayerWin)
             {
+                _stateMatchImage.sprite = _victorySprite;
                 if (!_fightService.GetFightTutorial() && !_fightService.GetFightDebug())
                 {
                     expAmount = _tournamentService.GetSettings()
@@ -41,6 +45,7 @@ namespace Service.UI
             }
             else
             {
+                _stateMatchImage.sprite = _defeatSprite;
                 if (!_fightService.GetFightTutorial() && !_fightService.GetFightDebug())
                 {
                     expAmount = _tournamentService.GetSettings()
