@@ -59,7 +59,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: AttackLeftRetractation
-  m_Speed: 3
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 5701357607289843913}
@@ -131,10 +131,10 @@ AnimatorStateMachine:
     m_Position: {x: 600, y: 260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7611374605492325974}
-    m_Position: {x: -200, y: -40, z: 0}
+    m_Position: {x: -190, y: -30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3044240894770359611}
-    m_Position: {x: 110, y: -20, z: 0}
+    m_Position: {x: 130, y: 0, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6714288155653925730}
     m_Position: {x: 430, y: -240, z: 0}
@@ -146,16 +146,16 @@ AnimatorStateMachine:
     m_Position: {x: 50, y: -120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8583137481362232202}
-    m_Position: {x: 820, y: 0, z: 0}
+    m_Position: {x: 810, y: -130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2492511659909828365}
-    m_Position: {x: 790, y: -130, z: 0}
+    m_Position: {x: 920, y: -20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8625040202424397839}
-    m_Position: {x: 610, y: -80, z: 0}
+    m_Position: {x: 640, y: 90, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3827938142624746609}
-    m_Position: {x: 730, y: 60, z: 0}
+    m_Position: {x: 550, y: -20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7506377912172158830}
     m_Position: {x: 190, y: -210, z: 0}
@@ -1091,7 +1091,7 @@ AnimatorStateTransition:
   m_TransitionOffset: 0
   m_ExitTime: 0
   m_HasExitTime: 0
-  m_HasFixedDuration: 0
+  m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
@@ -1103,7 +1103,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: AttackLeftAnticipation
-  m_Speed: 1
+  m_Speed: 3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -8294235915044498505}
