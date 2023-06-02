@@ -9,7 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: ARCO for OSX SDF Material
   m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - UNDERLAY_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -115,11 +116,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: ARCO for OSX SDF
+  m_Name: F_ArcoTournament
   m_EditorClassIdentifier: 
-  hashCode: 1256276113
+  hashCode: 812945756
   material: {fileID: -3279929579497296497}
-  materialHashCode: 236087441
+  materialHashCode: -670212356
   m_Version: 1.1.0
   m_SourceFontFileGUID: 84162e4cbb15748fbad78dfc2167b812
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 84162e4cbb15748fbad78dfc2167b812,
