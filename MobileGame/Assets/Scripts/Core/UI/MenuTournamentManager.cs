@@ -47,7 +47,6 @@ namespace Service.UI
         [SerializeField] private Canvas _defeatTournament;
         [SerializeField] private TextMeshProUGUI _winTournamentText;
         [SerializeField] private Image _rewardImage;
-        [SerializeField] private TextMeshProUGUI _rewardTournamentText;
         
         private IGameService _gameService;
         private ITournamentService _tournamentService;
@@ -249,7 +248,6 @@ namespace Service.UI
             ActivateButtons();
             _winTournamentText.text = "+" + _tournamentService.GetSettings().CoinsAmountWhenWinTournament;
             _rewardImage.sprite = _tournamentService.GetCurrentFightPlayer().EnemyGlobalSO.ItemSO.SpriteUI;
-            _rewardTournamentText.text = _tournamentService.GetCurrentFightPlayer().EnemyGlobalSO.ItemSO.name;
             _winTournament.gameObject.SetActive(true);
         }
 
