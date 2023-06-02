@@ -187,6 +187,11 @@ namespace Service.Fight
         private void EndFight()
         {
             ResetEntities();
+            _cameraController.Unlink();
+            _cameraController.transform.parent = _playerController.EndFightCameraPivot;
+            _cameraController.transform.localPosition = Vector3.zero;
+            _cameraController.transform.localRotation = Quaternion.identity;
+            _enemyManager.transform.gameObject.SetActive(false);
             if (!_isDebugFight && !_isTutorialFight)
             {
                 Fight currentFight = _tournamentService.GetCurrentFightPlayer();
@@ -206,6 +211,7 @@ namespace Service.Fight
                 else currentFight.FightState = FightState.DEFEAT;
             }
             EndFightEvent?.Invoke(_isPlayerWon);
+            Debug.Log( _cameraController.transform.position);
         }
 
         #region Generate Fight
