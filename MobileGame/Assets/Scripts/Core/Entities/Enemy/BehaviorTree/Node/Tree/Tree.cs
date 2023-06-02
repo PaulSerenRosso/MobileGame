@@ -9,6 +9,7 @@ using BehaviorTree.SO.Decorator;
 using Cysharp.Threading.Tasks;
 using Environment.MoveGrid;
 using Service;
+using Service.Fight;
 using Service.Hype;
 using Service.UI;
 using UnityEngine;
@@ -29,9 +30,9 @@ namespace BehaviorTree.Trees
         private NodeValuesSharer _nodeValuesSharer = new();
 
         public void Setup(Transform playerTransform, ITickeableService tickeableService,
-            GridManager gridManager, IPoolService poolService, IHypeService hypeService, IUICanvasSwitchableService uiCanvasSwitchableService)
+            GridManager gridManager, IPoolService poolService, IHypeService hypeService, IUICanvasSwitchableService uiCanvasSwitchableService, IFightService fightService)
         {
-            _nodeValuesInitializer.Setup(playerTransform, tickeableService, gridManager, poolService, hypeService, uiCanvasSwitchableService);
+            _nodeValuesInitializer.Setup(playerTransform, tickeableService, gridManager, poolService, hypeService, uiCanvasSwitchableService, fightService);
             _root = Node.CreateNodeSO(_rootSO);
             _root.Tree = this;
             OnStopTreeEvent += _root.Stop;

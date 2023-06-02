@@ -30,7 +30,8 @@ public class BehaviorTreeEnums
         PlayerRenderer,
         PlayerController,
         UICanvasService,
-        PlayerTauntHandler
+        PlayerTauntHandler,
+        FightService
     }
 
     public enum HypeFunctionMode

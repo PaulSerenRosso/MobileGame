@@ -14670,6 +14670,7 @@ GameObject:
   - component: {fileID: 335260615191423623}
   - component: {fileID: 335260615191423620}
   - component: {fileID: 335260615191423621}
+  - component: {fileID: 1200933782507791115}
   m_Layer: 0
   m_Name: FX_VialDrop
   m_TagString: Untagged
@@ -19472,6 +19473,18 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &1200933782507791115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335260615191423642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 057eaba2d99eac34e93499244f261ca3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &335260615810334821
 GameObject:
   m_ObjectHideFlags: 0

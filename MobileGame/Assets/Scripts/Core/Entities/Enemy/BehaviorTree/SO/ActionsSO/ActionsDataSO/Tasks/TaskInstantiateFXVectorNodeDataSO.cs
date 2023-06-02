@@ -15,6 +15,7 @@ namespace BehaviorTree.SO.Actions
         protected override void SetDependencyValues()
         {
             EnemyValues = new[] { BehaviorTreeEnums.TreeEnemyValues.EnemyManager };
+            ExternValues = new[] { BehaviorTreeEnums.TreeExternValues.FightService };
         }
 
         public override Type GetTypeNode()

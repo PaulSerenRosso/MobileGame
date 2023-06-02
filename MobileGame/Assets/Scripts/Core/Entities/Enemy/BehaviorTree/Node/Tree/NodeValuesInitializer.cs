@@ -3,6 +3,7 @@ using Environment.MoveGrid;
 using Player;
 using Player.Handler;
 using Service;
+using Service.Fight;
 using Service.Hype;
 using Service.UI;
 using UnityEngine;
@@ -18,7 +19,7 @@ namespace BehaviorTree.Trees
 
         public void Setup(Transform playerTransform, ITickeableService tickeableService,
             GridManager gridManager, IPoolService poolService, IHypeService hypeService,
-            IUICanvasSwitchableService uiCanvasSwitchableService)
+            IUICanvasSwitchableService uiCanvasSwitchableService, IFightService fightService)
         {
             for (int i = 0; i < ExternValueObjects.Length; i++)
             {
@@ -72,6 +73,11 @@ namespace BehaviorTree.Trees
                     case BehaviorTreeEnums.TreeExternValues.PlayerTauntHandler:
                     {
                         ExternValueObjects[i].Obj = playerTransform.GetComponent<PlayerTauntHandler>();
+                        break;
+                    }
+                    case BehaviorTreeEnums.TreeExternValues.FightService:
+                    {
+                        ExternValueObjects[i].Obj = fightService;
                         break;
                     }
                 }

@@ -4,6 +4,7 @@ using Enemy;
 using Environment.MoveGrid;
 using HelperPSR.RemoteConfigs;
 using Service;
+using Service.Fight;
 using Service.Hype;
 using Service.UI;
 using UnityEngine;
@@ -52,10 +53,10 @@ public class EnemyManager : MonoBehaviour, IRemoteConfigurable, IHypeable
     }
 
     public void Setup(Transform playerTransform, ITickeableService tickeableService,
-        GridManager gridManager, IPoolService poolService, IHypeService hypeService, IUICanvasSwitchableService uiCanvasSwitchableService)
+        GridManager gridManager, IPoolService poolService, IHypeService hypeService, IUICanvasSwitchableService uiCanvasSwitchableService, IFightService fightService)
     {
         _hypeService = hypeService;
-        _tree.Setup(playerTransform, tickeableService, gridManager, poolService, hypeService, uiCanvasSwitchableService);
+        _tree.Setup(playerTransform, tickeableService, gridManager, poolService, hypeService, uiCanvasSwitchableService, fightService);
         _hypeService.GetEnemyGainUltimateEvent += ActivateFXUltimate;
         _hypeService.GetEnemyLoseUltimateEvent += DeactivateFXUltimate;
     }

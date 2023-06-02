@@ -274,7 +274,7 @@ namespace Service.Fight
             _playerController.SetupPlayer(_inputService, _tickeableService, _gridManager,
                 _gridSo, _enemyManager, _hypeService);
             _enemyManager.Setup(_playerController.transform, _tickeableService, _gridManager, _poolService,
-                _hypeService, _canvasService);
+                _hypeService, _canvasService, this);
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Camera", GenerateCamera);
         }
 
