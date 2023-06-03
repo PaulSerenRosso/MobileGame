@@ -48,8 +48,6 @@ public class CinematicFightManager : MonoBehaviour
         _enemyBannerImage.sprite = enemyGlobalSo.BannerSprite;
         // _enemyBannerImage.gameObject.SetActive(true);
         _fadeGameObject.SetActive(true);
-        _versusGameObject.SetActive(true);
-        _ultimateGameObject.SetActive(true);
     }
 
     public void LaunchFightEntryCinematic(Action endCinematicCallBack)
@@ -78,7 +76,6 @@ public class CinematicFightManager : MonoBehaviour
         _playerBannerImage.gameObject.SetActive(true);
         _enemyBannerImage.gameObject.SetActive(true);
         _versusGameObject.SetActive(true);
-        _ultimateGameObject.SetActive(true);
         _fadeGameObject.SetActive(true);
         _player.parent = _playerPivot;
         _player.localPosition = Vector3.zero;
