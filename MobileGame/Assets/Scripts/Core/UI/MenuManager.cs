@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using Service.Currency;
 using Service.Fight;
@@ -43,6 +44,7 @@ namespace Service.UI
 
         [SerializeField] private Canvas _unlockTournament;
 
+        [SerializeField] private GameObject _badgesPopup;
         [SerializeField] private JuicyPopup _friendsPanel;
         [SerializeField] private GameObject _friendPopup;
         [SerializeField] private JuicyPopup _dailyPanel;
@@ -302,6 +304,11 @@ namespace Service.UI
             _friendsPanel.ActivatePopUp();
         }
 
+        public void OpenBadges()
+        {
+            _badgesPopup.SetActive(true);
+        }
+
         private void OpenFriendPopup(Sprite picture, string name)
         {
             _friendPopupImage.sprite = picture;
@@ -318,6 +325,7 @@ namespace Service.UI
         {
             _friendsPanel.gameObject.SetActive(false);
             _dailyPanel.gameObject.SetActive(false);
+            _badgesPopup.gameObject.SetActive(false);
         }
 
         public void CloseFriendPopup()

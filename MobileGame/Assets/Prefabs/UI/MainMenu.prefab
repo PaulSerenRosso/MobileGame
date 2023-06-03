@@ -91,6 +91,7 @@ MonoBehaviour:
   _leftArrowTournament: {fileID: 2285750244289706114}
   _rightArrowTournament: {fileID: 6305328230300460133}
   _unlockTournament: {fileID: 6849407542122452263}
+  _badgesPopup: {fileID: 3710273431636230477}
   _friendsPanel: {fileID: 8169048245060240233}
   _friendPopup: {fileID: 8714044190704321108}
   _dailyPanel: {fileID: 8295886086757074405}
@@ -2282,6 +2283,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6964128934802873187}
     m_Modifications:
+    - target: {fileID: 379668301977055417, guid: ec65bf0a1643e6548bac54e70fec0587,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1977464068269908429, guid: ec65bf0a1643e6548bac54e70fec0587,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2412,6 +2418,26 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 4265215112276291577}
+    - target: {fileID: 5774271546409865244, guid: ec65bf0a1643e6548bac54e70fec0587,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4265215112276291577}
+    - target: {fileID: 5774271546409865244, guid: ec65bf0a1643e6548bac54e70fec0587,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenBadges
+      objectReference: {fileID: 0}
+    - target: {fileID: 5981637547380115818, guid: ec65bf0a1643e6548bac54e70fec0587,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4265215112276291577}
+    - target: {fileID: 5981637547380115818, guid: ec65bf0a1643e6548bac54e70fec0587,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ClosePopup
+      objectReference: {fileID: 0}
     - target: {fileID: 6408580442159809499, guid: ec65bf0a1643e6548bac54e70fec0587,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2495,6 +2521,12 @@ MonoBehaviour:
 --- !u!1 &2691705194953032292 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1397114057279009680, guid: ec65bf0a1643e6548bac54e70fec0587,
+    type: 3}
+  m_PrefabInstance: {fileID: 3907242422558405108}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3710273431636230477 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 379668301977055417, guid: ec65bf0a1643e6548bac54e70fec0587,
     type: 3}
   m_PrefabInstance: {fileID: 3907242422558405108}
   m_PrefabAsset: {fileID: 0}
