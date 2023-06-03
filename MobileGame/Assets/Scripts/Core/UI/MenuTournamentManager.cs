@@ -13,9 +13,11 @@ namespace Service.UI
 {
     public class MenuTournamentManager : MonoBehaviour
     {
+        [Header("Buttons")]
         [SerializeField] private Button _playFightButton;
         [SerializeField] private Button _backMenuButton;
 
+        [Header("Tournament Canvas & Parent")]
         [SerializeField] private Canvas _tournamentButtonsCanvas;
         [SerializeField] private Canvas _tournamentQuarterCanvas;
         [SerializeField] private RectTransform _tournamentQuarterParent;
@@ -24,39 +26,42 @@ namespace Service.UI
         [SerializeField] private Canvas _tournamentFinalCanvas;
         [SerializeField] private RectTransform _tournamentFinalParent;
 
+        [Header("Image Fighters")]
         [SerializeField] private Image[] _imageQuarterWinners;
         [SerializeField] private Image[] _imageDemiWinners;
         [SerializeField] private Image[] _imageFinalWinners;
-
         [SerializeField] private Image _imageLogoQuarter;
-        [SerializeField] private Image[] _imageLogoQuarterFake;
         [SerializeField] private Image[] _imageLogoDemi;
-        [SerializeField] private Image[] _imageLogoDemiFakes;
         [SerializeField] private Image[] _imageLogoFinal;
-        
+        [SerializeField] private Image[] _imageLogoQuarterFake;
+        [SerializeField] private Image[] _imageLogoDemiFakes;
+        [SerializeField] private Sprite _neutralImage;
+        [SerializeField] private Sprite _winnerImage;
+        [SerializeField] private Sprite _loserImage;
 
+        [Header("Name Fighters")]
         [SerializeField] private TextMeshProUGUI _quarterName;
         [SerializeField] private TextMeshProUGUI[] _demiNames;
         [SerializeField] private TextMeshProUGUI[] _finalNames;
-
         [SerializeField] private TextMeshProUGUI[] _quarterFakeNames;
         [SerializeField] private TextMeshProUGUI[] _demiFakeNames;
 
+        [Header("Popups")]
         [SerializeField] private Canvas _pubCanvas;
         [SerializeField] private Canvas _winTournament;
         [SerializeField] private Canvas _defeatTournament;
         [SerializeField] private TextMeshProUGUI _winTournamentText;
         [SerializeField] private Image _rewardImage;
-        
+
+        private Fight.Fight[] _fights;
+        private MenuManager _menuManager;
         private IGameService _gameService;
         private ITournamentService _tournamentService;
-        private Fight.Fight[] _fights;
-        private List<FriendUser> _fakes;
-        private MenuManager _menuManager;
-        private string _enemyAddressableName;
         private ICurrencyService _currencyService;
-        private string _environmentAddressableName;
         private IItemsService _itemsService;
+        private List<FriendUser> _fakes;
+        private string _enemyAddressableName;
+        private string _environmentAddressableName;
 
         public void SetupMenu(IGameService gameService, ITournamentService tournamentService, MenuManager menuManager,
             ICurrencyService currencyService, IItemsService itemsService, IFightService fightService)
@@ -112,12 +117,12 @@ namespace Service.UI
 
             foreach (var demiFakeName in _demiFakeNames)
             {
-                demiFakeName.text = _fakes.LastOrDefault().name;
+                demiFakeName.text = _fakes.LastOrDefault()?.name;
             }
 
             foreach (var imageLogoDemiFake in _imageLogoDemiFakes)
             {
-                imageLogoDemiFake.sprite = _fakes.LastOrDefault().picture;
+                imageLogoDemiFake.sprite = _fakes.LastOrDefault()?.picture;
             }
         }
 
@@ -174,12 +179,12 @@ namespace Service.UI
                     _backMenuButton.interactable = false;
                     foreach (var imageQuarterWinner in _imageQuarterWinners)
                     {
-                        imageQuarterWinner.color = Color.green;
+                        imageQuarterWinner.sprite = _winnerImage;
                     }
 
                     _tournamentQuarterCanvas.gameObject.SetActive(true);
                     _tournamentDemiCanvas.gameObject.SetActive(true);
-                    await UniTask.Delay(2000);
+                    await UniTask.Delay(1000);
                     _tournamentQuarterParent.DOAnchorPos(new Vector2(-1920, 0), 5f)
                         .OnComplete(() => _tournamentQuarterCanvas.gameObject.SetActive(false));
                     _tournamentDemiParent.DOAnchorPos(new Vector2(0, 0), 5f)
@@ -191,21 +196,22 @@ namespace Service.UI
                     _backMenuButton.interactable = false;
                     foreach (var imageQuarterWinner in _imageQuarterWinners)
                     {
-                        imageQuarterWinner.color = Color.green;
+                        imageQuarterWinner.sprite = _winnerImage;
                     }
 
                     foreach (var imageDemiWinner in _imageDemiWinners)
                     {
-                        imageDemiWinner.color = Color.green;
+                        imageDemiWinner.sprite = _winnerImage;
                     }
 
                     _tournamentQuarterCanvas.gameObject.SetActive(true);
                     _tournamentDemiCanvas.gameObject.SetActive(true);
                     _tournamentFinalCanvas.gameObject.SetActive(true);
-                    await UniTask.Delay(2000);
-                    _tournamentQuarterParent.DOAnchorPos(new Vector2(-3840, 0), 5f)
+                    _tournamentQuarterParent.DOAnchorPos(new Vector2(-3840, 0), 0f)
                         .OnComplete(() => _tournamentQuarterCanvas.gameObject.SetActive(false));
-                    _tournamentDemiParent.DOAnchorPos(new Vector2(-1920, 0), 5f)
+                    _tournamentDemiParent.DOAnchorPos(new Vector2(0, 0), 0f);
+                    await UniTask.Delay(1000);
+                    _tournamentDemiParent.DOAnchorPos(new Vector2(-1920, 0), 0f)
                         .OnComplete(() => _tournamentDemiCanvas.gameObject.SetActive(false));
                     _tournamentFinalParent.DOAnchorPos(new Vector2(0, 0), 5f)
                         .OnComplete(ActivateButtons);
@@ -213,33 +219,32 @@ namespace Service.UI
             }
         }
 
-        private async void ActivateWinnerUI()
+        private void ActivateWinnerUI()
         {
             _playFightButton.interactable = false;
             foreach (var imageQuarterWinner in _imageQuarterWinners)
             {
-                imageQuarterWinner.color = Color.green;
+                imageQuarterWinner.sprite = _winnerImage;
             }
 
             foreach (var imageDemiWinner in _imageDemiWinners)
             {
-                imageDemiWinner.color = Color.green;
+                imageDemiWinner.sprite = _winnerImage;
             }
 
             foreach (var imageFinalWinner in _imageFinalWinners)
             {
-                imageFinalWinner.color = Color.green;
+                imageFinalWinner.sprite = _winnerImage;
             }
 
             _tournamentQuarterCanvas.gameObject.SetActive(true);
             _tournamentDemiCanvas.gameObject.SetActive(true);
             _tournamentFinalCanvas.gameObject.SetActive(true);
-            await UniTask.Delay(2000);
-            _tournamentQuarterParent.DOAnchorPos(new Vector2(-3840, 0), 5f)
+            _tournamentQuarterParent.DOAnchorPos(new Vector2(-3840, 0), 0f)
                 .OnComplete(() => _tournamentQuarterCanvas.gameObject.SetActive(false));
-            _tournamentDemiParent.DOAnchorPos(new Vector2(-1920, 0), 5f)
+            _tournamentDemiParent.DOAnchorPos(new Vector2(-1920, 0), 0f)
                 .OnComplete(() => _tournamentDemiCanvas.gameObject.SetActive(false));
-            _tournamentFinalParent.DOAnchorPos(new Vector2(0, 0), 5f)
+            _tournamentFinalParent.DOAnchorPos(new Vector2(0, 0), 0f)
                 .OnComplete(ActivateWinTournamentCanvas);
         }
 
@@ -255,17 +260,17 @@ namespace Service.UI
         {
             foreach (var imageQuarterWinner in _imageQuarterWinners)
             {
-                imageQuarterWinner.color = Color.red;
+                imageQuarterWinner.sprite = _neutralImage;
             }
 
             foreach (var imageDemiWinner in _imageDemiWinners)
             {
-                imageDemiWinner.color = Color.red;
+                imageDemiWinner.sprite = _neutralImage;
             }
 
             foreach (var imageFinalWinner in _imageFinalWinners)
             {
-                imageFinalWinner.color = Color.red;
+                imageFinalWinner.sprite = _neutralImage;
             }
         }
 
@@ -281,7 +286,7 @@ namespace Service.UI
             _itemsService.UnlockItem(_tournamentService.GetCurrentFightPlayer().EnemyGlobalSO.ItemSO);
         }
 
-        public void DeactivateUITournament()
+        private void DeactivateUITournament()
         {
             _tournamentButtonsCanvas.gameObject.SetActive(false);
             _tournamentQuarterCanvas.gameObject.SetActive(false);
