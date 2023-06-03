@@ -16,6 +16,9 @@ namespace Player
         [SerializeField] private PlayerMovementHandler _playerMovementHandler;
         [SerializeField] private PlayerUltimateHandler playerUltimateHandler;
         [SerializeField] private TauntPlayerAction _tauntPlayerAction;
+        private const string attackRightAnimation ="IsAttackRight";
+        private const string attackLeftAnimation ="IsAttackLeft";
+        private bool isAttackRight = false;
         [FormerlySerializedAs("_skinnedMeshRenderers")] [SerializeField] private Renderer[] _renderers;
         
         public void Init()

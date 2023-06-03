@@ -98,7 +98,8 @@ namespace Player
 
         public void EnableAttackAnimatorParameter(HitSO hitSo)
         {
-            Animator.SetBool(hitSo.NameAnimationTrigger, true);
+            isAttackRight = !isAttackRight;
+            Animator.SetBool(isAttackRight ? attackRightAnimation : attackLeftAnimation, true);
         }
 
         public void PlayIdle(HitSO hitSo)
@@ -113,7 +114,7 @@ namespace Player
 
         public void DisableAttackAnimatorParameter(HitSO hitSo)
         {
-            Animator.SetBool(hitSo.NameAnimationTrigger, false);
+            Animator.SetBool(isAttackRight ? attackRightAnimation : attackLeftAnimation, false);
         }
 
         public void AnimSetTrigger(string nameParameter)

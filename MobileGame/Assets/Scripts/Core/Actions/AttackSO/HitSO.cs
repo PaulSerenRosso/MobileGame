@@ -13,7 +13,6 @@ namespace Actions
         public float HypeAmount;
         public GameObject Particle;
         public Enums.ParticlePosition ParticlePosition;
-        public string NameAnimationTrigger;
         public bool isStun;
     }
 }
