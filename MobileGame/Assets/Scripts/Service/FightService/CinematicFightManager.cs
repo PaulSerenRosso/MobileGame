@@ -21,7 +21,9 @@ public class CinematicFightManager : MonoBehaviour
     [SerializeField] private Image _enemyBannerImage;
     [SerializeField] private Sprite _playerBannerSprite;
     [SerializeField] private GameObject _fadeGameObject;
-    
+    [SerializeField] private GameObject _versusGameObject;
+    [SerializeField] private GameObject _ultimateGameObject;
+
     private Transform _player;
     private Transform _boss;
     private Animator _playerAnimator;
@@ -46,6 +48,8 @@ public class CinematicFightManager : MonoBehaviour
         _enemyBannerImage.sprite = enemyGlobalSo.BannerSprite;
         // _enemyBannerImage.gameObject.SetActive(true);
         _fadeGameObject.SetActive(true);
+        _versusGameObject.SetActive(true);
+        _ultimateGameObject.SetActive(true);
     }
 
     public void LaunchFightEntryCinematic(Action endCinematicCallBack)
@@ -71,12 +75,10 @@ public class CinematicFightManager : MonoBehaviour
 
     private IEnumerator PlayCinematic(TimelineAsset timelineAsset, Action endCinematicCallback)
     {
-    
-        _playerBannerImage.gameObject.SetActive(true);
-
-
-        _enemyBannerImage.gameObject.SetActive(true);
-     
+        _playerBannerCharacterImage.gameObject.SetActive(true);
+        _enemyBannerCharacterImage.gameObject.SetActive(true);
+        _versusGameObject.SetActive(true);
+        _ultimateGameObject.SetActive(true);
         _fadeGameObject.SetActive(true);
         _player.parent = _playerPivot;
         _player.localPosition = Vector3.zero;
@@ -89,9 +91,11 @@ public class CinematicFightManager : MonoBehaviour
         _playableDirector.playableAsset = timelineAsset;
         _playableDirector.Play();
         yield return new WaitForSeconds((float)_playableDirector.duration);
-        _playerBannerImage.gameObject.SetActive(false);
-        _enemyBannerImage.gameObject.SetActive(false);
+        _playerBannerCharacterImage.gameObject.SetActive(false);
+        _enemyBannerCharacterImage.gameObject.SetActive(false);
         _fadeGameObject.SetActive(false);
+        _versusGameObject.SetActive(false);
+        _ultimateGameObject.SetActive(false);
         _player.parent = null;
         _boss.parent = null;
         _camera.enabled = true;
