@@ -73,7 +73,7 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         _scrollRectComponent.velocity = Vector2.zero;
     }
 
-    public void UpdateUIInventory()
+    public void UpdateUIInventory(ItemSO itemSO = null)
     {
         List<Vector2> itemsUnlockedPos = new List<Vector2>();
         List<Vector2> itemsLockedPos = new List<Vector2>();
@@ -105,7 +105,9 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         _itemPositions = itemsUnlockedPos.Concat(itemsLockedPos).ToList();
         _itemsInventory.Clear();
         _itemsInventory = itemsInventoryUnlocked.Concat(itemsInventoryLocked).ToList();
-        SetItem(_currentItem);
+
+        var index = _itemsInventory.FindIndex(i => i.ItemSOInventory == itemSO);
+        SetItem(index);
     }
 
     private void SetItemPositions()

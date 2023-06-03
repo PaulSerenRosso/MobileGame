@@ -52,9 +52,9 @@ namespace Service.UI
 
         public void UpdateScrollRect()
         {
-            _headScroll.UpdateUIInventory();
-            _shirtScroll.UpdateUIInventory();
-            _shortScroll.UpdateUIInventory();
+            _headScroll.UpdateUIInventory(_itemsService.GetPlayerItems().FirstOrDefault(i => i.Value.Type == ItemTypeEnum.Head).Value);
+            _shirtScroll.UpdateUIInventory(_itemsService.GetPlayerItems().FirstOrDefault(i => i.Value.Type == ItemTypeEnum.Shirt).Value);
+            _shortScroll.UpdateUIInventory(_itemsService.GetPlayerItems().FirstOrDefault(i => i.Value.Type == ItemTypeEnum.Short).Value);
         }
 
         public void OpenHat()
@@ -62,7 +62,7 @@ namespace Service.UI
             _headPanel.sortingOrder = 1;
             _shirtPanel.sortingOrder = 0;
             _shortPanel.sortingOrder = 0;
-            _headScroll.UpdateUIInventory();
+            _headScroll.UpdateUIInventory(_itemsService.GetPlayerItems().FirstOrDefault(i => i.Value.Type == ItemTypeEnum.Head).Value);
         }
 
         public void OpenShirt()
@@ -70,7 +70,7 @@ namespace Service.UI
             _headPanel.sortingOrder = 0;
             _shirtPanel.sortingOrder = 1;
             _shortPanel.sortingOrder = 0;
-            _shirtScroll.UpdateUIInventory();
+            _shirtScroll.UpdateUIInventory(_itemsService.GetPlayerItems().FirstOrDefault(i => i.Value.Type == ItemTypeEnum.Shirt).Value);
         }
 
         public void OpenShort()
@@ -78,7 +78,7 @@ namespace Service.UI
             _headPanel.sortingOrder = 0;
             _shirtPanel.sortingOrder = 0;
             _shortPanel.sortingOrder = 1;
-            _shortScroll.UpdateUIInventory();
+            _shortScroll.UpdateUIInventory(_itemsService.GetPlayerItems().FirstOrDefault(i => i.Value.Type == ItemTypeEnum.Short).Value);
         }
 
         private void OpenPopup(BadgeSO badgeSO)
