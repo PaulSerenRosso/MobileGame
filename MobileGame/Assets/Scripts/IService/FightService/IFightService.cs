@@ -21,6 +21,7 @@ namespace Service.Fight
 
         public void StopCinematic();
 
+
         public event Action<int> InitiateRoundEvent;
         public event Action EndInitiateRoundEvent;
         

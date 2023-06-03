@@ -121,6 +121,8 @@ namespace Service.Fight
             }
         }
 
+        public event Action EndLoadFight;
+
         public void StartFight(string environmentAddressableName, string enemyAddressableName, bool isDebugFight, bool isTutorialFight)
         {
             _isTutorialFight = isTutorialFight;
@@ -300,6 +302,7 @@ namespace Service.Fight
             _cinematicFightManager.Init(_playerController.GetComponent<PlayerRenderer>().Animator,
                 _enemyManager.GetComponent<EnemyManager>().Animator, _playerController.transform,_enemyManager.transform, _enemyGlobalSO);
             LaunchEntryCinematic();
+            LoadingScreenManager.Instance.gameObject.SetActive(false);
         }
         
         #endregion
@@ -346,6 +349,8 @@ namespace Service.Fight
             ActivatePauseEvent = null;
             DeactivatePauseEvent = null;
             EndFightEvent = null;
+            EndLoadFight = null;
+            LoadingScreenManager.Instance.gameObject.SetActive(true);
             _hypeService.DisabledService();
             _playerController.UnlinkPlayerController();
             _gameService.LoadMainMenuScene();
