@@ -26,10 +26,7 @@ namespace BehaviorTree.Nodes.Actions
         {
             base.Evaluate();
             float angle = Vector3.Dot(_transform.forward, ((Vector3)Sharer.InternValues[_so.InternValues[0].HashCode] - _transform.position).normalized);
-            Debug.Log("Angle: " + angle);
-            Debug.Log("PosPlayer: " + (Vector3)Sharer.InternValues[_so.InternValues[0].HashCode]);
             State = angle > 0.95f ? BehaviorTreeEnums.NodeState.SUCCESS : BehaviorTreeEnums.NodeState.FAILURE;
-            Debug.Log("CheckRotationPlayer: " + State);
             ReturnedEvent?.Invoke();
         }
 
