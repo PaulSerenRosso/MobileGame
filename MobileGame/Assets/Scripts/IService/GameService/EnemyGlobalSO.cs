@@ -7,7 +7,6 @@ public class EnemyGlobalSO : ScriptableObject
 {
     public string Name;
     [FormerlySerializedAs("Sprite")] public Sprite IconSprite;
-    public Sprite BannerCharacterSprite;
     public Sprite BannerSprite;
     [FormerlySerializedAs("enemyAdressableName")] public string EnemyAddressableName;
     public ItemSO ItemSO;
