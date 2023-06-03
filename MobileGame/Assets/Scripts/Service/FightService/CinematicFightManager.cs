@@ -81,11 +81,7 @@ public class CinematicFightManager : MonoBehaviour
 
     private IEnumerator PlayCinematic(TimelineAsset timelineAsset, Action endCinematicCallback)
     {
-        _playerBannerText.gameObject.SetActive(true);
-        _playerBannerImage.gameObject.SetActive(true);
         _playerBannerCharacterImage.gameObject.SetActive(true);
-        _enemyBannerText.gameObject.SetActive(true);
-        _enemyBannerImage.gameObject.SetActive(true);
         _enemyBannerCharacterImage.gameObject.SetActive(true);
         _fadeGameObject.SetActive(true);
         _player.parent = _playerPivot;
