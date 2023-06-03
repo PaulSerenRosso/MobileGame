@@ -6,22 +6,14 @@ namespace Player
 {
     public partial class PlayerRenderer
     {
-        [SerializeField] private AnimationClip _movementRecoveryAnimationClip;
-       
+
         [SerializeField] private string _dirParameterName;
         [SerializeField] private string _tauntParameterName;
         
         private int _dirToSend = -1;
         private string _currentDirName;
 
-
-
-        private void SetRecoverySpeedAnimation()
-        {
-            Animator.SetFloat("RecoveryAnimationSpeed",
-                _playerMovementHandler.GetRecoveryMovementTime() / _movementRecoveryAnimationClip.length);
-        }
-
+        
         private void SetDirParameter(Vector2 dir)
         {
             // AnimSetBool(_endMovementParameterName, false);

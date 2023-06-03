@@ -19,7 +19,6 @@ namespace Service.UI
         [SerializeField] private GridLayoutGroup _environnementSelectionGrid;
         [SerializeField] private Button _environmentButton;
         [SerializeField] private Button _enemyButton;
-
         [SerializeField] private MenuTopManager _menuTopManager;
         [SerializeField] private Canvas _topCanvas;
         [SerializeField] private Canvas _botCanvas;
@@ -71,6 +70,7 @@ namespace Service.UI
             ICurrencyService currencyService, IItemsService itemsService, IShopService shopService,
             GameObject player, IFightService fightService)
         {
+            LoadingScreenManager.Instance.gameObject.SetActive(false);
             _gameService = gameService;
             _tournamentService = tournamentService;
             _dragPlayer.Init(player);

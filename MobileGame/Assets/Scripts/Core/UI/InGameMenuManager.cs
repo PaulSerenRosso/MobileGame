@@ -12,6 +12,7 @@ public class InGameMenuManager : MonoBehaviour
     [SerializeField] private InGameMenuRoundManager _inGameMenuRoundManager;
     [SerializeField] private InGameMenuEndFightManager _inGameMenuEndFightManager;
     [SerializeField] private Button _stopCinematicButton;
+
     public InGameMenuTutorialManager InGameMenuTutorialManager;
 
     private IFightService _fightService;
@@ -27,6 +28,8 @@ public class InGameMenuManager : MonoBehaviour
         _fightService.ActivatePauseEvent += () => _stopCinematicButton.gameObject.SetActive(true);
         _fightService.InitiateRoundEvent += i => _stopCinematicButton.gameObject.SetActive(false);
         _fightService.EndFightEvent += i => _stopCinematicButton.gameObject.SetActive(false);
+
+
     }
     
     public void StopCinematic()

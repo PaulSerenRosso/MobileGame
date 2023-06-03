@@ -6866,7 +6866,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4707574865801539911
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11704,6 +11704,7 @@ MonoBehaviour:
   _inGameMenuRoundManager: {fileID: 4907321051047298360}
   _inGameMenuEndFightManager: {fileID: 5443177839883061977}
   _stopCinematicButton: {fileID: 7475968441463409951}
+  _loadingScreen: {fileID: 0}
   InGameMenuTutorialManager: {fileID: 1101903994427507132}
 --- !u!1 &8028376071156555566
 GameObject:
