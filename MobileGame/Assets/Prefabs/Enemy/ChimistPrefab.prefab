@@ -642,7 +642,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 36c3f83252c2331449cda299e79051d1, type: 2}
+      objectReference: {fileID: 2100000, guid: b6796c5ea403540beacb78611fbfd78c, type: 2}
     - target: {fileID: 598671167501608291, guid: 4331b45306ec4854bb110c4862973012,
         type: 3}
       propertyPath: m_Materials.Array.data[1]
@@ -652,6 +652,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: chimist_mesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 3857631087417032622, guid: 4331b45306ec4854bb110c4862973012,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4331b45306ec4854bb110c4862973012, type: 3}
