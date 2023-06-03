@@ -23,6 +23,7 @@ public class CinematicFightManager : MonoBehaviour
     [SerializeField] private GameObject _fadeGameObject;
     [SerializeField] private GameObject _versusGameObject;
     [SerializeField] private GameObject _ultimateGameObject;
+    [SerializeField] private GameObject _roundWonGameObject;
 
     private Transform _player;
     private Transform _boss;
@@ -39,15 +40,8 @@ public class CinematicFightManager : MonoBehaviour
         _player = player;
         _boss = boss;
         _enemyGlobalSo = enemyGlobalSo;
-
-        // _playerBannerText.gameObject.SetActive(true);
-
-        // _enemyBannerText.gameObject.SetActive(true);
         _playerBannerImage.sprite = _playerBannerSprite;
-        // _playerBannerImage.gameObject.SetActive(true);
         _enemyBannerImage.sprite = enemyGlobalSo.BannerSprite;
-        // _enemyBannerImage.gameObject.SetActive(true);
-        _fadeGameObject.SetActive(true);
     }
 
     public void LaunchFightEntryCinematic(Action endCinematicCallBack)
@@ -92,6 +86,7 @@ public class CinematicFightManager : MonoBehaviour
         _fadeGameObject.SetActive(false);
         _versusGameObject.SetActive(false);
         _ultimateGameObject.SetActive(false);
+        _roundWonGameObject.SetActive(false);
         _playerAnimator.Play("Idle");
         _enemyAnimator.Play("Idle");
         _player.parent = null;
@@ -112,6 +107,7 @@ public class CinematicFightManager : MonoBehaviour
         _fadeGameObject.SetActive(false);
         _versusGameObject.SetActive(false);
         _ultimateGameObject.SetActive(false);
+        _roundWonGameObject.SetActive(false);
         _playerAnimator.Play("Idle");
         _enemyAnimator.Play("Idle");
         _playableDirector.Stop();
