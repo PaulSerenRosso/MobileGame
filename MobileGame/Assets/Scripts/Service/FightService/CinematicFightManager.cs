@@ -92,6 +92,8 @@ public class CinematicFightManager : MonoBehaviour
         _fadeGameObject.SetActive(false);
         _versusGameObject.SetActive(false);
         _ultimateGameObject.SetActive(false);
+        _playerAnimator.Play("Idle");
+        _enemyAnimator.Play("Idle");
         _player.parent = null;
         _boss.parent = null;
         _camera.enabled = true;
@@ -108,6 +110,10 @@ public class CinematicFightManager : MonoBehaviour
         _playerBannerImage.gameObject.SetActive(false);
         _enemyBannerImage.gameObject.SetActive(false);
         _fadeGameObject.SetActive(false);
+        _versusGameObject.SetActive(false);
+        _ultimateGameObject.SetActive(false);
+        _playerAnimator.Play("Idle");
+        _enemyAnimator.Play("Idle");
         _playableDirector.Stop();
         _player.parent = null;
         _boss.parent = null;
