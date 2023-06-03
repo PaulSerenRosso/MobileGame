@@ -355,7 +355,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -11.604}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 8, y: 415}
+  m_AnchoredPosition: {x: 8, y: 547}
   m_SizeDelta: {x: 496.4429, y: -677.8179}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1257922761
@@ -1684,7 +1684,7 @@ MonoBehaviour:
   _playableDirector: {fileID: 6701380354893991468}
   _fightEntry: {fileID: 11400000, guid: 031dcc90c80ee11488cc75132e41948c, type: 2}
   _playerUltimate: {fileID: 11400000, guid: f08d8810ea3504345a719455bcdf1a61, type: 2}
-  _enemyUltimate: {fileID: 11400000, guid: ae4b7c1ced9e4432a95b3f64326d45f5, type: 2}
+  _enemyUltimate: {fileID: 11400000, guid: f08d8810ea3504345a719455bcdf1a61, type: 2}
   _volume: {fileID: 6701380353398409159}
   _camera: {fileID: 0}
   _playerPivot: {fileID: 6277886430820751052}
@@ -1776,9 +1776,13 @@ PlayableDirector:
   - key: {fileID: -2421956582043562124, guid: 031dcc90c80ee11488cc75132e41948c, type: 2}
     value: {fileID: 492853219}
   - key: {fileID: 4714203019437237828, guid: f08d8810ea3504345a719455bcdf1a61, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 1521152583}
   - key: {fileID: 6538418637062368590, guid: f08d8810ea3504345a719455bcdf1a61, type: 2}
     value: {fileID: 687788460}
+  - key: {fileID: -2263705641066652553, guid: f08d8810ea3504345a719455bcdf1a61, type: 2}
+    value: {fileID: 127638204}
+  - key: {fileID: -467365463354430302, guid: f08d8810ea3504345a719455bcdf1a61, type: 2}
+    value: {fileID: 1058200827952769906}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &127638207
