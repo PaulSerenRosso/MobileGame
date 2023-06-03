@@ -34,7 +34,7 @@ namespace Service.UI
             {
                 var index = i;
                 var badgeButton = _badgeButtons[index];
-                badgeButton.transform.GetChild(0).GetComponent<Image>().sprite = _badgeSOs[index].SpriteBadge;
+                badgeButton.transform.GetChild(1).GetComponent<Image>().sprite = _badgeSOs[index].SpriteBadge;
                 badgeButton.onClick.AddListener(() => OpenPopup(_badgeSOs[index]));
             }
             _itemsService.SetPlayerItemLinker(playerItemsLinker);
