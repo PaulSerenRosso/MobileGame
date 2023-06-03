@@ -75,8 +75,8 @@ public class CinematicFightManager : MonoBehaviour
 
     private IEnumerator PlayCinematic(TimelineAsset timelineAsset, Action endCinematicCallback)
     {
-        _playerBannerCharacterImage.gameObject.SetActive(true);
-        _enemyBannerCharacterImage.gameObject.SetActive(true);
+        _playerBannerImage.gameObject.SetActive(true);
+        _enemyBannerImage.gameObject.SetActive(true);
         _versusGameObject.SetActive(true);
         _ultimateGameObject.SetActive(true);
         _fadeGameObject.SetActive(true);
@@ -91,8 +91,8 @@ public class CinematicFightManager : MonoBehaviour
         _playableDirector.playableAsset = timelineAsset;
         _playableDirector.Play();
         yield return new WaitForSeconds((float)_playableDirector.duration);
-        _playerBannerCharacterImage.gameObject.SetActive(false);
-        _enemyBannerCharacterImage.gameObject.SetActive(false);
+        _playerBannerImage.gameObject.SetActive(false);
+        _enemyBannerImage.gameObject.SetActive(false);
         _fadeGameObject.SetActive(false);
         _versusGameObject.SetActive(false);
         _ultimateGameObject.SetActive(false);
