@@ -75,7 +75,6 @@ public class CinematicFightManager : MonoBehaviour
     {
         _playerBannerImage.gameObject.SetActive(true);
         _enemyBannerImage.gameObject.SetActive(true);
-        _versusGameObject.SetActive(true);
         _fadeGameObject.SetActive(true);
         _player.parent = _playerPivot;
         _player.localPosition = Vector3.zero;
