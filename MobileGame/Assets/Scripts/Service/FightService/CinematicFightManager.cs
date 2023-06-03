@@ -113,6 +113,7 @@ public class CinematicFightManager : MonoBehaviour
         _player.parent = null;
         _boss.parent = null;
         _camera.enabled = true;
+        _enemyAnimator.Play("Idle");
         _playerPivot.position = Vector3.zero;
         _playerPivot.rotation = Quaternion.identity;
         _bossPivot.position = Vector3.zero;

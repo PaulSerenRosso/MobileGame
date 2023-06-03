@@ -9,10 +9,8 @@ namespace Player
         [SerializeField] private AnimationClip _movementRecoveryAnimationClip;
        
         [SerializeField] private string _dirParameterName;
-        [SerializeField] private string _endMovementParameterName;
         [SerializeField] private string _tauntParameterName;
-
-        private const string EndMovementParameterBaseName = "EndMovementSpeed";
+        
         private int _dirToSend = -1;
         private string _currentDirName;
 
