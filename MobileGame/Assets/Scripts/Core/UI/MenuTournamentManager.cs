@@ -26,16 +26,21 @@ namespace Service.UI
         [SerializeField] private Canvas _tournamentFinalCanvas;
         [SerializeField] private RectTransform _tournamentFinalParent;
 
-        [Header("Image Fighters")]
+        [Header("Image Fighters")] 
+        [SerializeField] private Image[] _imagePlayerFighter;
         [SerializeField] private Image[] _imageQuarterWinners;
+        [SerializeField] private Image[] _imageQuarterLosers;
         [SerializeField] private Image[] _imageDemiWinners;
+        [SerializeField] private Image[] _imageDemiLosers;
         [SerializeField] private Image[] _imageFinalWinners;
+        [SerializeField] private Image _imageFinalLoser;
         [SerializeField] private Image _imageLogoQuarter;
         [SerializeField] private Image[] _imageLogoDemi;
         [SerializeField] private Image[] _imageLogoFinal;
         [SerializeField] private Image[] _imageLogoQuarterFake;
         [SerializeField] private Image[] _imageLogoDemiFakes;
         [SerializeField] private Sprite _neutralImage;
+        [SerializeField] private Sprite _neutralPlayerImage;
         [SerializeField] private Sprite _winnerImage;
         [SerializeField] private Sprite _loserImage;
 
@@ -181,6 +186,10 @@ namespace Service.UI
                     {
                         imageQuarterWinner.sprite = _winnerImage;
                     }
+                    foreach (var imageQuarterLoser in _imageQuarterLosers)
+                    {
+                        imageQuarterLoser.sprite = _loserImage;
+                    }
 
                     _tournamentQuarterCanvas.gameObject.SetActive(true);
                     _tournamentDemiCanvas.gameObject.SetActive(true);
@@ -198,10 +207,18 @@ namespace Service.UI
                     {
                         imageQuarterWinner.sprite = _winnerImage;
                     }
+                    foreach (var imageQuarterLoser in _imageQuarterLosers)
+                    {
+                        imageQuarterLoser.sprite = _loserImage;
+                    }
 
                     foreach (var imageDemiWinner in _imageDemiWinners)
                     {
                         imageDemiWinner.sprite = _winnerImage;
+                    }
+                    foreach (var imageDemiLoser in _imageDemiLosers)
+                    {
+                        imageDemiLoser.sprite = _loserImage;
                     }
 
                     _tournamentQuarterCanvas.gameObject.SetActive(true);
@@ -226,16 +243,26 @@ namespace Service.UI
             {
                 imageQuarterWinner.sprite = _winnerImage;
             }
+            foreach (var imageQuarterLoser in _imageQuarterLosers)
+            {
+                imageQuarterLoser.sprite = _loserImage;
+            }
 
             foreach (var imageDemiWinner in _imageDemiWinners)
             {
                 imageDemiWinner.sprite = _winnerImage;
+            }
+            foreach (var imageDemiLoser in _imageDemiLosers)
+            {
+                imageDemiLoser.sprite = _loserImage;
             }
 
             foreach (var imageFinalWinner in _imageFinalWinners)
             {
                 imageFinalWinner.sprite = _winnerImage;
             }
+            _imageFinalLoser.sprite = _loserImage;
+            
 
             _tournamentQuarterCanvas.gameObject.SetActive(true);
             _tournamentDemiCanvas.gameObject.SetActive(true);
@@ -271,6 +298,11 @@ namespace Service.UI
             foreach (var imageFinalWinner in _imageFinalWinners)
             {
                 imageFinalWinner.sprite = _neutralImage;
+            }
+
+            foreach (var imagePlayerFighter in _imagePlayerFighter)
+            {
+                imagePlayerFighter.sprite = _neutralPlayerImage;
             }
         }
 
