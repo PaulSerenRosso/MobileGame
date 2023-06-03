@@ -249,8 +249,9 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 021bfe4a723b540e496931c26a85e617, type: 2}
+  m_sharedMaterial: {fileID: -3279929579497296497, guid: 021bfe4a723b540e496931c26a85e617,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -274,7 +275,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
+  m_fontSize: 97.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -327,11 +328,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FighterSlot
-      objectReference: {fileID: 0}
-    - target: {fileID: 4125300647803198749, guid: 1928ca90218f25a4aa2d1145f7d78119,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9191331243031904403, guid: 1928ca90218f25a4aa2d1145f7d78119,
         type: 3}
@@ -462,6 +458,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: Magicien
+      objectReference: {fileID: 0}
+    - target: {fileID: 5158063128035907766, guid: 1928ca90218f25a4aa2d1145f7d78119,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 79.05
       objectReference: {fileID: 0}
     - target: {fileID: 9191331243031904403, guid: 1928ca90218f25a4aa2d1145f7d78119,
         type: 3}
