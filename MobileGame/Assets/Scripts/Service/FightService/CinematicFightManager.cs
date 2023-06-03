@@ -26,6 +26,7 @@ public class CinematicFightManager : MonoBehaviour
     [SerializeField] private Image _playerBannerCharacterImage;
     [SerializeField] private Sprite _playerBannerCharacterSprite;
     [SerializeField] private Sprite _playerBannerSprite;
+    [SerializeField] private GameObject _fadeGameObject;
     
     private Transform _player;
     private Transform _boss;
@@ -43,11 +44,18 @@ public class CinematicFightManager : MonoBehaviour
         _boss = boss;
         _enemyGlobalSo = enemyGlobalSo;
         _playerBannerText.text = _playerBannerName;
+        // _playerBannerText.gameObject.SetActive(true);
         _enemyBannerText.text = _enemyGlobalSo.Name;
+        // _enemyBannerText.gameObject.SetActive(true);
         _playerBannerImage.sprite = _playerBannerSprite;
+        // _playerBannerImage.gameObject.SetActive(true);
         _enemyBannerImage.sprite = enemyGlobalSo.BannerSprite;
+        // _enemyBannerImage.gameObject.SetActive(true);
         _playerBannerCharacterImage.sprite = _playerBannerCharacterSprite;
+        _playerBannerCharacterImage.gameObject.SetActive(true);
         _enemyBannerCharacterImage.sprite = enemyGlobalSo.BannerCharacterSprite;
+        _enemyBannerCharacterImage.gameObject.SetActive(true);
+        _fadeGameObject.SetActive(true);
     }
 
     public void LaunchFightEntryCinematic(Action endCinematicCallBack)
@@ -84,6 +92,13 @@ public class CinematicFightManager : MonoBehaviour
         _playableDirector.playableAsset = timelineAsset;
         _playableDirector.Play();
         yield return new WaitForSeconds((float)_playableDirector.duration);
+        _playerBannerText.gameObject.SetActive(false);
+        _playerBannerImage.gameObject.SetActive(false);
+        _playerBannerCharacterImage.gameObject.SetActive(false);
+        _enemyBannerText.gameObject.SetActive(false);
+        _enemyBannerImage.gameObject.SetActive(false);
+        _enemyBannerCharacterImage.gameObject.SetActive(false);
+        _fadeGameObject.SetActive(false);
         _player.parent = null;
         _boss.parent = null;
         _camera.enabled = true;
@@ -96,8 +111,14 @@ public class CinematicFightManager : MonoBehaviour
 
     public void StopCinematic(Action endCinematicCallback)
     {
-        // TODO: à vérifier ! 
         StopAllCoroutines();
+        _playerBannerText.gameObject.SetActive(false);
+        _playerBannerImage.gameObject.SetActive(false);
+        _playerBannerCharacterImage.gameObject.SetActive(false);
+        _enemyBannerText.gameObject.SetActive(false);
+        _enemyBannerImage.gameObject.SetActive(false);
+        _enemyBannerCharacterImage.gameObject.SetActive(false);
+        _fadeGameObject.SetActive(false);
         _playableDirector.Stop();
         _player.parent = null;
         _boss.parent = null;
