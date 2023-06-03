@@ -37,6 +37,7 @@ namespace Service.UI
             if (seconds < 0) return;
             if (seconds == 0)
             {
+                if (_countdownRound.IsDestroyed() || _fightSpriteImage.IsDestroyed()) return;
                 _countdownRound.gameObject.SetActive(false);
                 _fightSpriteImage.rectTransform.localScale = Vector3.zero;
                 _fightSpriteImage.gameObject.SetActive(true);

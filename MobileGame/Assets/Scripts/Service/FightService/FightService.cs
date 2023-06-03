@@ -221,7 +221,6 @@ namespace Service.Fight
                 else currentFight.FightState = FightState.DEFEAT;
             }
             EndFightEvent?.Invoke(_isPlayerWon);
-            Debug.Log( _cameraController.transform.position);
         }
 
         #region Generate Fight

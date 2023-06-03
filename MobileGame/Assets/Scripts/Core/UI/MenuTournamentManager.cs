@@ -211,7 +211,7 @@ namespace Service.UI
                         .OnComplete(() => _tournamentQuarterCanvas.gameObject.SetActive(false));
                     _tournamentDemiParent.DOAnchorPos(new Vector2(0, 0), 0f);
                     await UniTask.Delay(1000);
-                    _tournamentDemiParent.DOAnchorPos(new Vector2(-1920, 0), 0f)
+                    _tournamentDemiParent.DOAnchorPos(new Vector2(-1920, 0), 5f)
                         .OnComplete(() => _tournamentDemiCanvas.gameObject.SetActive(false));
                     _tournamentFinalParent.DOAnchorPos(new Vector2(0, 0), 5f)
                         .OnComplete(ActivateButtons);

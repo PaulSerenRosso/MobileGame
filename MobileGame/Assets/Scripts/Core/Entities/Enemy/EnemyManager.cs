@@ -68,7 +68,7 @@ public class EnemyManager : MonoBehaviour, IRemoteConfigurable, IHypeable
 
     public void ActivateGhostTrail(Vector2 direction)
     {
-    //    _ghostTrail.ActivateTrail(direction);
+        // _ghostTrail.ActivateTrail(direction);
     }
 
     private void ActivateFXUltimate(float obj)
@@ -97,10 +97,26 @@ public class EnemyManager : MonoBehaviour, IRemoteConfigurable, IHypeable
         transform.rotation = Quaternion.identity;
         CurrentMobilityState = EnemyEnums.EnemyMobilityState.INVULNERABLE;
         CurrentBlockingState = EnemyEnums.EnemyBlockingState.VULNERABLE;
-        ResetShaderColor();
+        ResetAnimator();
         ResetParticles();
+        ResetShaderColor();
         _hypeService.ResetHypeEnemy();
+    }
+
+    private void ResetAnimator()
+    {
         Animator.Play("Idle");
+        Animator.SetInteger("Direction", -1);
+        Animator.SetInteger("RecoveryAnimationSpeed", 1);
+        Animator.SetInteger("EndMovementSpeed0", 1);
+        Animator.SetInteger("EndMovementSpeed1", 1);
+        Animator.SetBool("IsTauting", false);
+        Animator.SetInteger("Attack", -1);
+        Animator.SetBool("IsBlocking", false);
+        Animator.SetBool("IsBoosting", false);
+        Animator.SetInteger("Dodge", -1);
+        Animator.SetBool("IsStun", false);
+        Animator.SetBool("IsStartShooting", false);
     }
 
     private void ResetParticles()
