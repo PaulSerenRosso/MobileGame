@@ -1227,7 +1227,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5700735836658788815}
   m_HandleRect: {fileID: 3178932948620335957}
   m_Direction: 0
-  m_Value: 0
+  m_Value: -0.0000035903033
   m_Size: 0.99114585
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1663,8 +1663,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2134699009868401576}
   m_HandleRect: {fileID: 1279185038161067892}
   m_Direction: 2
-  m_Value: 1.0000013
-  m_Size: 0.9111219
+  m_Value: 1.0000005
+  m_Size: 0.8870253
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4764,6 +4764,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Item Panel With Stars
+      objectReference: {fileID: 0}
+    - target: {fileID: 6236117094070408771, guid: c84d4350eae39ea49a0b8ebadb98f81d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6350205748964505513, guid: c84d4350eae39ea49a0b8ebadb98f81d,
         type: 3}
