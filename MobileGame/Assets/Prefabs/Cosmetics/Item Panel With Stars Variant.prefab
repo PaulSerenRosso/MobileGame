@@ -584,7 +584,12 @@ PrefabInstance:
     - target: {fileID: 348409158283050632, guid: 11c8a8a6a2523844f9d5283e76eb7eed,
         type: 3}
       propertyPath: m_Name
-      value: Item Panel With Stars
+      value: Item Panel With Stars Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 348409158283050632, guid: 11c8a8a6a2523844f9d5283e76eb7eed,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 756210320478232418, guid: 11c8a8a6a2523844f9d5283e76eb7eed,
         type: 3}
