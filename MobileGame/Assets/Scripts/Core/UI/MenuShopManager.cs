@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Service.Currency;
 using Service.Items;
@@ -19,6 +20,8 @@ namespace Service.UI
         [SerializeField] private Image[] _itemsImage;
         [SerializeField] private TextMeshProUGUI[] _itemPricesText;
         [SerializeField] private TextMeshProUGUI _itemStarPriceText;
+        [SerializeField] private Image _lockerStarImage;
+        [SerializeField] private Image _coinStarImage;
         
         [Header("Reload Panel")]
         [SerializeField] private int _reloadCost;
@@ -70,7 +73,19 @@ namespace Service.UI
                 if (itemSO.IsUnlockableWithStar)
                 {
                     _itemsImage[index].sprite = itemSO.SpriteUI;
-                    _itemPricesText[index].text = itemSO.Price.ToString();
+                    if (_currencyService.GetXP() < itemSO.ExperienceStar)
+                    {
+                        _lockerStarImage.gameObject.SetActive(true);
+                        _coinStarImage.gameObject.SetActive(false);
+                        _itemPricesText[index].gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        _lockerStarImage.gameObject.SetActive(false);
+                        _coinStarImage.gameObject.SetActive(true);
+                        _itemPricesText[index].gameObject.SetActive(true);
+                        _itemPricesText[index].text = itemSO.Price.ToString();
+                    }
                     _itemStarPriceText.text = itemSO.ExperienceStar.ToString();
                     _itemsButton[index].onClick.RemoveAllListeners();
                     _itemsButton[index].onClick.AddListener(() => BuyItem(itemSO, indexButton));
