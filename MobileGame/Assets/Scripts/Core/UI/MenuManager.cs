@@ -185,6 +185,7 @@ namespace Service.UI
             if (_nextEnvironmentAddressableName == null)
                 _nextEnvironmentAddressableName =
                     _gameService.GlobalSettingsSO.AllEnvironmentsSO[0].EnvironmentAddressableName;
+            LoadingScreenManager.Instance.gameObject.SetActive(true);
             _gameService.LoadGameScene(_nextEnvironmentAddressableName, _nextEnemyAddressableName, true, false);
         }
 
