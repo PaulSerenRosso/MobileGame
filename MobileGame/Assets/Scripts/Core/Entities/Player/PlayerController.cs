@@ -124,6 +124,10 @@ namespace Player
             _playerMovementHandler.ResetMovePoint(_gridSO.Index);
             transform.rotation = Quaternion.identity;
             _hypeService.ResetHypePlayer();
+            _isStun = false;
+            _timerStun = 0; 
+            _playerRenderer.DeactivateStunFeedback();
+            _timerInvulnerable = 0;
             foreach (var particlePlayer in _particlesPlayer)
             {
                 particlePlayer.SetActive(false);
