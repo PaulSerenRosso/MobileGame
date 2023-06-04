@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f02f27a9c4df452ba82797f8c062c485, type: 3}
   m_Name: MJ_T_EvaluateCurve_LerpPlayerHypeProbabilityAttackSpe
   m_EditorClassIdentifier: 
+  IsDuplicable: 1
   Comment: "N\u0153ud qui permet de d\xE9terminer une probabilit\xE9 selon un ratio
     obtenu"
   _internValuesCount: 2
   Data: {fileID: 11400000, guid: debfaf6b569963848bb1c639ae24a3f3, type: 2}
   InternValues:
-  - Key: RatioHype
-    HashCode: 191104473
+  - Key: RatioPlayer
+    HashCode: 764886120
     Type: 2
     PropertyType: 0
     Comment: Float(float) get value float in intern values
