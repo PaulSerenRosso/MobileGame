@@ -3,7 +3,7 @@
 namespace BehaviorTree
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/GetIndexMovePointPositionNodeSO",
-        fileName = "new T_GetIndexMovePointPosition_Spe")]
+        fileName = "new Tree_T_GetIndexMovePointPosition_Spe")]
     public class TaskGetIndexMovePointPositionNodeSO : TaskNodeSO
     {
         public override void UpdateInterValues()

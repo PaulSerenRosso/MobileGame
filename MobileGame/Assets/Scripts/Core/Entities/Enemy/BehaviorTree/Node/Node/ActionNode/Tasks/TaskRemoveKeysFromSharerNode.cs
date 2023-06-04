@@ -20,6 +20,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void Evaluate()
         {
+            base.Evaluate();
             foreach (var key in _so.InternValues)
             {
                 Sharer.InternValues.Remove(key.HashCode);

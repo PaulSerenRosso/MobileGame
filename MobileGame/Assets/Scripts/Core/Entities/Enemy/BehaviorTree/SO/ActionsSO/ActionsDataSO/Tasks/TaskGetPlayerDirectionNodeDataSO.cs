@@ -5,12 +5,12 @@ using UnityEngine;
 namespace BehaviorTree.SO.Actions
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/GetPlayerDirectionNodeDataSO",
-        fileName = "new T_GetPlayerDirection_Spe_Data")]
+        fileName = "new Tree_T_GetPlayerDirection_Spe_Data")]
     public class TaskGetPlayerDirectionNodeDataSO : ActionNodeDataSO
     {
         protected override void SetDependencyValues()
         {
-            ExternValues = new[] { BehaviorTreeEnums.TreeExternValues.EnvironmentGridManager };
+            ExternValues = new[] { BehaviorTreeEnums.TreeExternValues.GridManager };
             EnemyValues = new[] { BehaviorTreeEnums.TreeEnemyValues.Transform };
         }
 

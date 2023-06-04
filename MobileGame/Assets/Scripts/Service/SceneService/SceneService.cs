@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Attributes;
@@ -12,12 +13,13 @@ public class SceneService : ISceneService
     //  [ServiceInit]
     public void LoadScene()
     {
-        SceneManager.LoadScene("GameScene");
+
+        SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
     }
 
     public void LoadScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 }
 }

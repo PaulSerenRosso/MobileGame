@@ -1,25 +1,32 @@
 using System;
 using HelperPSR.Pool;
 using HelperPSR.Tick;
-using Interfaces;
+using Service.Hype;
 using UnityEngine;
 
 namespace Actions
 {
     public class AttackPlayerAction : PlayerAction
     {
-        public TickTimer AttackTimer;
-        public bool IsCancelTimeOn;
         public AttackActionSO AttackActionSo;
+        public bool IsCancelTimeOn;
+        public TickTimer AttackTimer;
 
         [SerializeField] private Material[] _materials;
         [SerializeField] private Renderer _meshRenderer;
 
-        private IDamageable _damageable;
-
-        private Pool<GameObject>[] _hitPools;
         private bool _isAttacking;
         private int _comboCount;
+        private IHypeService _hypeService;
+        private IHypeable _hypeable;
+        private Pool<GameObject>[] _hitPools;
+
+        public event Action HitDamagedEvent;
+        public event Action<HitSO> CancelAnimationEvent;
+        public event Action<HitSO> MakeActionAnimationEvent;
+        public event Action InitCancelAttackEvent;
+        public event Action InitBeforeHitEvent;
+        public event Action EndRecoveryEvent;
         public event Func<HitSO, bool> CheckCanDamageEvent;
 
         public override bool IsInAction
@@ -40,37 +47,37 @@ namespace Actions
             AttackTimer.InitiateEvent += InitiateCancelTimer;
             AttackTimer.Initiate();
             MakeActionEvent?.Invoke();
+            MakeActionAnimationEvent?.Invoke(AttackActionSo.HitsSO[_comboCount]);
         }
 
         public override void SetupAction(params object[] arguments)
         {
             AttackTimer = new TickTimer(0, (TickManager)arguments[0]);
             _hitPools = new Pool<GameObject>[AttackActionSo.HitsSO.Length];
-            _damageable = (IDamageable)arguments[1];
             for (int i = 0; i < _hitPools.Length; i++)
             {
                 _hitPools[i] = new Pool<GameObject>(AttackActionSo.HitsSO[i].Particle, 2);
             }
-        }
 
-        public event System.Action InitCancelAttackEvent;
-        public event System.Action InitBeforeHitEvent;
-        public event System.Action EndRecoveryEvent;
+            _hypeable = (IHypeable)arguments[1];
+            _hypeService = (IHypeService)arguments[2];
+        }
 
         private void InitiateCancelTimer()
         {
-            _meshRenderer.material = _materials[0];
+            // _meshRenderer.material = _materials[0];
             AttackTimer.ResetEvents();
             AttackTimer.Time = AttackActionSo.HitsSO[_comboCount].CancelTime;
             AttackTimer.TickEvent += InitiateBeforeHitTimer;
             AttackTimer.CancelEvent += BreakCombo;
+            AttackTimer.CancelEvent +=()=>  CancelAnimationEvent?.Invoke(AttackActionSo.HitsSO[_comboCount]);
             AttackTimer.CancelEvent += AttackTimer.ResetCancelEvent;
             InitCancelAttackEvent?.Invoke();
         }
 
         private void BreakCombo()
         {
-            _meshRenderer.material = _materials[3];
+            // _meshRenderer.material = _materials[3];
             AttackTimer.ResetEvents();
             AttackTimer.Cancel();
             _comboCount = 0;
@@ -81,7 +88,7 @@ namespace Actions
 
         private void InitiateBeforeHitTimer()
         {
-            _meshRenderer.material = _materials[1];
+            // _meshRenderer.material = _materials[1];
             AttackTimer.ResetEvents();
             IsCancelTimeOn = false;
             InitBeforeHitEvent?.Invoke();
@@ -89,12 +96,14 @@ namespace Actions
             AttackTimer.TickEvent += InitiateRecoveryTimer;
             AttackTimer.Initiate();
         }
-        
+
         private void InitiateRecoveryTimer()
         {
+            // _meshRenderer.material = _materials[4];
             AttackTimer.ResetEvents();
             Hit();
             AttackTimer.Time = AttackActionSo.HitsSO[_comboCount].RecoveryTime;
+            AttackTimer.TickEvent += RaiseEndRecovery;
             if (_comboCount != AttackActionSo.HitsSO.Length - 1)
             {
                 AttackTimer.TickEvent += InitiateComboTimer;
@@ -104,13 +113,13 @@ namespace Actions
                 AttackTimer.TickEvent += BreakCombo;
             }
 
-            AttackTimer.TickEvent += RaiseEndRecovery;
             AttackTimer.Initiate();
         }
 
         private void RaiseEndRecovery()
         {
             EndRecoveryEvent?.Invoke();
+            CancelAnimationEvent?.Invoke(AttackActionSo.HitsSO[_comboCount]);
             AttackTimer.TickEvent -= RaiseEndRecovery;
         }
 
@@ -119,14 +128,18 @@ namespace Actions
             if (CheckCanDamageEvent.Invoke(AttackActionSo.HitsSO[_comboCount]))
             {
                 var hit = _hitPools[_comboCount].GetFromPool();
+                hit.SetActive(false);
                 _hitPools[_comboCount].AddToPoolLatter(hit, hit.GetComponent<ParticleSystem>().main.duration);
-                _damageable.TakeDamage(AttackActionSo.HitsSO[_comboCount].Damage, transform.position);
+                if (_hypeable.TryDecreaseHypeEnemy(AttackActionSo.HitsSO[_comboCount].HypeAmount, transform.position, hit.transform, AttackActionSo.HitsSO[_comboCount].ParticlePosition, AttackActionSo.HitsSO[_comboCount].isStun))
+                {
+                    HitDamagedEvent?.Invoke();
+                }
             }
         }
 
         private void InitiateComboTimer()
         {
-            _meshRenderer.material = _materials[2];
+            // _meshRenderer.material = _materials[2];
             AttackTimer.ResetEvents();
             _isAttacking = false;
             AttackTimer.Time = AttackActionSo.HitsSO[_comboCount].ComboTime;
@@ -134,6 +147,20 @@ namespace Actions
             AttackTimer.TickEvent += BreakCombo;
             AttackTimer.Initiate();
             EndActionEvent?.Invoke();
+        }
+
+        public override void UnlinkAction()
+        {
+            base.UnlinkAction();
+            HitDamagedEvent = null;
+            CancelAnimationEvent = null;
+            MakeActionAnimationEvent = null;
+            InitCancelAttackEvent = null;
+            InitBeforeHitEvent = null;
+            EndRecoveryEvent = null;
+            CheckCanDamageEvent = null;
+            AttackTimer.ResetEvents();
+            AttackTimer.Cancel();
         }
     }
 }

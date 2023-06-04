@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using BehaviorTree.SO.Actions;
+using HelperPSR.Object;
 using UnityEngine;
 
 namespace BehaviorTree.Nodes.Actions
@@ -23,7 +24,12 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void Evaluate()
         {
-            _animator.SetBool(_data.NameParameter, _data.ValueToPass);
+            base.Evaluate();
+            if (_animator.HasParameter(_data.NameParameter))
+            {
+                if (_data.IsValueIntern) _animator.SetBool(_data.NameParameter, (bool)Sharer.InternValues[_so.InternValues[0].HashCode]);
+                else  _animator.SetBool(_data.NameParameter, _data.ValueToPass);
+            }
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();
         }

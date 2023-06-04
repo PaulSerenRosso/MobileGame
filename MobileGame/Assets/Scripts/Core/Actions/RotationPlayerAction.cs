@@ -1,6 +1,5 @@
 using HelperPSR.MonoLoopFunctions;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Actions
 {
@@ -22,12 +21,20 @@ namespace Actions
             UpdateManager.Register(this);
         }
 
+        private void OnDisable()
+        {
+            UpdateManager.UnRegister(this);
+        }
+
         public override void SetupAction(params object[] arguments)
         {
             _lookTarget = (Transform)arguments[0];
         }
 
- 
-      
+        public override void UnlinkAction()
+        {
+            base.UnlinkAction();
+            UpdateManager.UnRegister(this);
+        }
     }
 }

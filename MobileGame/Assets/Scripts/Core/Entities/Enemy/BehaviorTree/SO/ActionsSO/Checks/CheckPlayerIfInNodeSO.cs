@@ -3,7 +3,7 @@
 namespace BehaviorTree
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Actions/Checks/PlayerIfInNodeSO",
-        fileName = "new  CH_PlayerIfIn_Spe")]
+        fileName = "new  Tree_CH_PlayerIfIn_Spe")]
     public class CheckPlayerIfInNodeSO : CheckNodeSO
     {
         public override void UpdateInterValues()

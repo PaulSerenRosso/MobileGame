@@ -1,4 +1,6 @@
-﻿using BehaviorTree.SO.Actions;
+﻿using System.Collections.Generic;
+using BehaviorTree.SO.Actions;
+using Player;
 
 namespace BehaviorTree.Nodes.Actions
 {
@@ -20,8 +22,16 @@ namespace BehaviorTree.Nodes.Actions
         
         public override void Evaluate()
         {
-            State =BehaviorTreeEnums.NodeState.SUCCESS;
+            base.Evaluate();
+            State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();
+        }
+        
+        public override void SetDependencyValues(
+            Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
+            Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
+        {
+            
         }
 
         public override ActionNodeDataSO GetDataSO()

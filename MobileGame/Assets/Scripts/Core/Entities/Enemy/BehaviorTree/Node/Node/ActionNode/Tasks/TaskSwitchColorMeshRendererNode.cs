@@ -23,6 +23,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void Evaluate()
         {
+            base.Evaluate();
             if (_meshRenderer) _meshRenderer.material.color = _data.SwitchableColor;
             State = BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();
@@ -32,7 +33,8 @@ namespace BehaviorTree.Nodes.Actions
             Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
             Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
         {
-            _meshRenderer = (MeshRenderer)enemyDependencyValues[BehaviorTreeEnums.TreeEnemyValues.MeshRenderer];
+            var obj = enemyDependencyValues[BehaviorTreeEnums.TreeEnemyValues.MeshRenderer];
+            if (obj is MeshRenderer) _meshRenderer = (MeshRenderer)obj;
         }
 
         public override ActionNodeDataSO GetDataSO()

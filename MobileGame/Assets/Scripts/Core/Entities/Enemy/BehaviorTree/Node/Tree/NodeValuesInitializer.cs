@@ -3,7 +3,9 @@ using Environment.MoveGrid;
 using Player;
 using Player.Handler;
 using Service;
+using Service.Fight;
 using Service.Hype;
+using Service.UI;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -16,7 +18,8 @@ namespace BehaviorTree.Trees
         public ExternValueObject[] ExternValueObjects;
 
         public void Setup(Transform playerTransform, ITickeableService tickeableService,
-            EnvironmentGridManager environmentGridManager, IPoolService poolService, IHypeService hypeService)
+            GridManager gridManager, IPoolService poolService, IHypeService hypeService,
+            IUICanvasSwitchableService uiCanvasSwitchableService, IFightService fightService)
         {
             for (int i = 0; i < ExternValueObjects.Length; i++)
             {
@@ -27,9 +30,9 @@ namespace BehaviorTree.Trees
                         ExternValueObjects[i].Obj = playerTransform;
                         break;
                     }
-                    case BehaviorTreeEnums.TreeExternValues.EnvironmentGridManager:
+                    case BehaviorTreeEnums.TreeExternValues.GridManager:
                     {
-                        ExternValueObjects[i].Obj = environmentGridManager;
+                        ExternValueObjects[i].Obj = gridManager;
                         break;
                     }
                     case BehaviorTreeEnums.TreeExternValues.TickManager:
@@ -37,7 +40,7 @@ namespace BehaviorTree.Trees
                         ExternValueObjects[i].Obj = tickeableService.GetTickManager;
                         break;
                     }
-                    case BehaviorTreeEnums.TreeExternValues.PlayerHandlerMovement:
+                    case BehaviorTreeEnums.TreeExternValues.PlayerMovementHandler:
                     {
                         ExternValueObjects[i].Obj = playerTransform.GetComponent<PlayerMovementHandler>();
                         break;
@@ -47,14 +50,34 @@ namespace BehaviorTree.Trees
                         ExternValueObjects[i].Obj = poolService;
                         break;
                     }
-                    case BehaviorTreeEnums.TreeExternValues.PlayerHealth:
-                    {
-                        ExternValueObjects[i].Obj = playerTransform.GetComponent<PlayerHealth>();
-                        break;
-                    }
                     case BehaviorTreeEnums.TreeExternValues.HypeService:
                     {
                         ExternValueObjects[i].Obj = hypeService;
+                        break;
+                    }
+                    case BehaviorTreeEnums.TreeExternValues.PlayerRenderer:
+                    {
+                        ExternValueObjects[i].Obj = playerTransform.GetComponent<PlayerRenderer>();
+                        break;
+                    }
+                    case BehaviorTreeEnums.TreeExternValues.PlayerController:
+                    {
+                        ExternValueObjects[i].Obj = playerTransform.GetComponent<PlayerController>();
+                        break;
+                    }
+                    case BehaviorTreeEnums.TreeExternValues.UICanvasService:
+                    {
+                        ExternValueObjects[i].Obj = uiCanvasSwitchableService;
+                        break;
+                    }
+                    case BehaviorTreeEnums.TreeExternValues.PlayerTauntHandler:
+                    {
+                        ExternValueObjects[i].Obj = playerTransform.GetComponent<PlayerTauntHandler>();
+                        break;
+                    }
+                    case BehaviorTreeEnums.TreeExternValues.FightService:
+                    {
+                        ExternValueObjects[i].Obj = fightService;
                         break;
                     }
                 }
@@ -68,7 +91,7 @@ namespace BehaviorTree.Trees
                 if (EnemyValueObjects[i].Type == type)
                     return EnemyValueObjects[i].Obj;
             }
-
+            Debug.Log(type);
             throw new NullReferenceException();
         }
 
@@ -79,7 +102,7 @@ namespace BehaviorTree.Trees
                 if (ExternValueObjects[i].Type == type)
                     return ExternValueObjects[i].Obj;
             }
-            
+
             throw new NullReferenceException();
         }
     }

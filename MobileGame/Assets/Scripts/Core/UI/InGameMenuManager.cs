@@ -1,20 +1,44 @@
-using Interfaces;
 using Service;
+using Service.Currency;
+using Service.Fight;
 using Service.Hype;
+using Service.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InGameMenuManager : MonoBehaviour
 {
-    [SerializeField] private InGameMenuSettingsManager _inGameMenuSettingsManager;
-
     [SerializeField] private InGameMenuHypeManager _inGameMenuHypeManager;
+    [SerializeField] private InGameMenuRoundManager _inGameMenuRoundManager;
+    [SerializeField] private InGameMenuEndFightManager _inGameMenuEndFightManager;
+    [SerializeField] private Button _stopCinematicButton;
 
-    [SerializeField] private InGameMenuHealthManager _inGameMenuHealthManager;
+    public InGameMenuTutorialManager InGameMenuTutorialManager;
 
-    public void SetupMenu(ISceneService sceneService, IHypeService hypeService, ILifeable interfaceLifeable, IDamageable interfaceDamageable)
+    private IFightService _fightService;
+
+    public void SetupMenu(IFightService fightService, IHypeService hypeService, ITournamentService tournamentService,
+        ICurrencyService currencyService)
     {
-        _inGameMenuSettingsManager.Init(sceneService);
-        _inGameMenuHypeManager.Init(hypeService);
-        _inGameMenuHealthManager.Init(interfaceLifeable, interfaceDamageable);
+        _inGameMenuHypeManager.Init(hypeService, fightService);
+        _inGameMenuRoundManager.Init(fightService);
+        _inGameMenuEndFightManager.Init(fightService, currencyService, tournamentService);
+        _fightService = fightService;
+        if (_fightService.GetFightTutorial()) InGameMenuTutorialManager.Init(fightService);
+        _fightService.ActivatePauseEvent += () => _stopCinematicButton.gameObject.SetActive(true);
+        _fightService.InitiateRoundEvent += i => _stopCinematicButton.gameObject.SetActive(false);
+        _fightService.EndFightEvent += i => _stopCinematicButton.gameObject.SetActive(false);
+
+
+    }
+    
+    public void StopCinematic()
+    {
+        _fightService.StopCinematic();
+    }
+    
+    public void QuitTutorial()
+    {
+        _fightService.QuitFightTutorial(true);
     }
 }

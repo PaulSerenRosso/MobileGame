@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a554480369441f643a037b92f1ced7d6, type: 3}
+  m_Name: CM_CO_Sequence_AppliesDamageTaunt
+  m_EditorClassIdentifier: 
+  IsDuplicable: 1
+  Comment: "S\xE9lectionne un n\u0153ud et v\xE9rifie si le n\u0153ud est un succ\xE8s
+    ou est en train de fonctionner et retourne le statut, sinon d\xE9s qu'un n\u0153ud
+    retourne un \xE9chec, la sequence retourne un \xE9chec"
+  Children:
+  - {fileID: 11400000, guid: a400ca31d90db2b49a3c4574d7268be7, type: 2}
+  - {fileID: 11400000, guid: ecf1b69e6fb8a924bb78eaa0776f885b, type: 2}
+  - {fileID: 11400000, guid: ee16127a915059a48a79aa17cff53c25, type: 2}

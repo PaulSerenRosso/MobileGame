@@ -2,12 +2,12 @@
 
 namespace BehaviorTree
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/GetPlayerDirectionNodeSO", fileName = "new T_GetPlayerDirection_Spe")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/GetPlayerDirectionNodeSO",
+        fileName = "new Tree_T_GetPlayerDirection_Spe")]
     public class TaskGetPlayerDirectionNodeSO : TaskNodeSO
     {
         public override void UpdateInterValues()
         {
-            base.UpdateInterValues();
             base.UpdateInterValues();
             _internValuesCount = 2;
             if (InternValues.Count > 0)

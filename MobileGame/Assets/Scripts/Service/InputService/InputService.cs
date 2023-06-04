@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Attributes;
 using UnityEngine.InputSystem;
 
@@ -56,22 +57,20 @@ namespace Service.Inputs
 
         public void AddSwipe(SwipeSO swipeSo, Action<Swipe> successEvent)
         {
-            Swipe swipe = new Swipe(swipeSo, successEvent, PlayerInputs, _tickeableService.GetTickManager);
+            Swipe swipe = new Swipe(swipeSo, successEvent, _tickeableService.GetTickManager);
             _allSwipes.Add(swipe);
-            PlayerInputs.GenericInputs.PressTouch.started += swipe.StartSwipe;
-            // add hold cancel
-            PlayerInputs.GenericInputs.PressTouch.canceled += swipe.EndSwipe;
+            PlayerInputs.GenericInputs.PressTouch.performed += swipe.StartSwipe;
             swipe.ReachMinDistanceSwipeEvent += DeactivateTryHold;
             PlayerInputs.GenericInputs.HoldTouch.performed += swipe.CancelSwipe;
         }
 
 
-        public void RemoveSwipe(Swipe swipeToRemoved)
+        public void RemoveSwipe(SwipeSO swipeSo)
         {
-            _allSwipes.Remove(swipeToRemoved);
-            PlayerInputs.GenericInputs.PressTouch.started -= swipeToRemoved.StartSwipe;
-            // remove hold cancel
-            PlayerInputs.GenericInputs.PressTouch.canceled -= swipeToRemoved.EndSwipe;
+          var swipeToRemoved =_allSwipes.Where((swipe => swipeSo == swipe.SwipeSO)).First();
+                _allSwipes.Remove(swipeToRemoved);
+            PlayerInputs.GenericInputs.PressTouch.performed-= swipeToRemoved.StartSwipe;
+            PlayerInputs.GenericInputs.HoldTouch.performed -= swipeToRemoved.CancelSwipe;
         }
 
         public void SetHold(Action<InputAction.CallbackContext> successHoldEvent,
@@ -79,6 +78,12 @@ namespace Service.Inputs
         {
             successEventHold = successHoldEvent;
             successEventReleaseHold = successCancelHoldEvent;
+        }
+
+        public void ClearHold()
+        {
+            successEventHold = null;
+            successEventReleaseHold = null;
         }
 
         private void TryHold(InputAction.CallbackContext obj)

@@ -2,7 +2,8 @@
 
 namespace BehaviorTree
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/GetTimeAnimationNodeSO", fileName = "new T_GetTimeAnimation_Spe")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/GetTimeAnimationNodeSO",
+        fileName = "new Tree_T_GetTimeAnimation_Spe")]
     public class TaskGetTimeAnimationNodeSO : TaskNodeSO
     {
         public override void UpdateInterValues()

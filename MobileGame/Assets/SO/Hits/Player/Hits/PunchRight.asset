@@ -12,11 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbbcd091bbbc458c8ab4e60cc59387d4, type: 3}
   m_Name: PunchRight
   m_EditorClassIdentifier: 
-  Damage: 10
-  CancelTime: 1
-  TimeBeforeHit: 0.6
-  RecoveryTime: 0.8
-  ComboTime: 1
+  CancelTime: 0.1
+  TimeBeforeHit: 0.05
+  RecoveryTime: 0.2
+  ComboTime: 0.5
   HitMovePointsDistance: 1
-  Particle: {fileID: 2524343937660045500, guid: 8d0aac982f524d545834dd4299cdbf50,
+  HypeAmount: 5
+  Particle: {fileID: 3281627917254943850, guid: 0f13ea1f5198a094bb0884c8f28c7645,
     type: 3}
+  ParticlePosition: 1
+  NameAnimationTrigger: IsAttackRight
+  isStun: 1

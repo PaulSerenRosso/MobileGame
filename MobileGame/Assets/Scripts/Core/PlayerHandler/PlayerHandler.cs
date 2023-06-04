@@ -7,8 +7,9 @@ namespace Player.Handler
 {
     public abstract class PlayerHandler : MonoBehaviour
     {
-        protected abstract Actions.PlayerAction GetAction();
+        protected abstract PlayerAction GetAction();
         protected List<Func<bool>> _conditions = new();
+        
         protected virtual void TryMakeAction(params object[] args)
         {
             foreach (var condition in _conditions)
@@ -36,5 +37,10 @@ namespace Player.Handler
         public abstract void InitializeAction();
 
         public abstract void Setup(params object[] arguments);
+
+        public virtual void Unlink()
+        {
+            GetAction().UnlinkAction();
+        }
     }
 }

@@ -12,5 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeef59f7b1e069642b9ad20416048a7d, type: 3}
   m_Name: GlobalSettingsGame
   m_EditorClassIdentifier: 
-  AllEnvironmentsAdressableName:
-  - FirstEnvironment
+  AllEnvironmentsSO:
+  - {fileID: 11400000, guid: 4466a156560245a4e9f5f73b22729323, type: 2}
+  - {fileID: 11400000, guid: a05405db467ae344993254c99e067b62, type: 2}
+  - {fileID: 11400000, guid: 5b9734e38ac117c44ab64d977144750b, type: 2}
+  AllEnemyGlobalSO:
+  - {fileID: 11400000, guid: d91d2cf0c108231469ee0378c105566a, type: 2}
+  - {fileID: 11400000, guid: 3aaa6596e69e9ac4e8c2fb94e16937a0, type: 2}
+  - {fileID: 11400000, guid: ba812d1499017eb4baaf83b6eb9cd780, type: 2}
+  - {fileID: 11400000, guid: bebb81d82fd14b443ad3b56bb8c5f9bc, type: 2}
+  StartHypeEnemy: 0
+  StartHypePlayer: 0
+  StartHypeEnemyTutorial: 30
+  StartHypePlayerTutorial: 10

@@ -14,7 +14,7 @@ namespace BehaviorTree.Nodes.Composite
                 case BehaviorTreeEnums.NodeState.FAILURE:
                     if (_counter < Children.Count - 1)
                     {
-                        _counter++; 
+                        _counter++;
                         Children[_counter].Evaluate();
                     }
                     else

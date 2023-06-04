@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78fa92ff14b94bcc9d4b988940d5ee8a, type: 3}
+  m_Name: G_CH_PlayerDirection_Rotation
+  m_EditorClassIdentifier: 
+  IsDuplicable: 0
+  Comment: "N\u0153ud qui permet de v\xE9rifier si le boss regarde bien dans la direction
+    du joueur"
+  _internValuesCount: 1
+  Data: {fileID: 11400000, guid: 795be8eec1c7bd7489a754819c2a70b3, type: 2}
+  InternValues:
+  - Key: PlayerIndexMovePointPosition
+    HashCode: 479747565
+    Type: 0
+    PropertyType: 0
+    Comment: Direction(Vector3) where the boss need to look

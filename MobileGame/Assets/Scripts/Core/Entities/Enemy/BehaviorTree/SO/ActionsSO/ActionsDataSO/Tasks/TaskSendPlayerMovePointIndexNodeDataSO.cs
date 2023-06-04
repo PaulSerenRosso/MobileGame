@@ -5,12 +5,12 @@ using UnityEngine;
 namespace BehaviorTree.SO.Actions
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/SendPlayerMovePointIndexNodeDataSO",
-        fileName = "new T_SendPlayerMovePointIndex_Spe_Data")]
+        fileName = "new Tree_T_SendPlayerMovePointIndex_Spe_Data")]
     public class TaskSendPlayerMovePointIndexNodeDataSO : ActionNodeDataSO
     {
         protected override void SetDependencyValues()
         {
-            ExternValues = new[] { BehaviorTreeEnums.TreeExternValues.PlayerHandlerMovement };
+            ExternValues = new[] { BehaviorTreeEnums.TreeExternValues.PlayerMovementHandler };
         }
 
         public override Type GetTypeNode()

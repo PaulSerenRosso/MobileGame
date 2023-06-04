@@ -9,11 +9,12 @@ namespace BehaviorTree.Nodes.Actions
     {
         private CheckCirclesAreOccupiedNodeSO _so;
         private CheckCirclesAreOccupiedNodeDataSO _data;
-        private EnvironmentGridManager _environmentGridManager;
+        private GridManager _gridManager;
 
         public override void Evaluate()
         {
-            if (!_environmentGridManager.CheckIfOneMovePointInCirclesIsOccupied(_data.CircleIndexes,
+            base.Evaluate();
+            if (!_gridManager.CheckIfOneMovePointInCirclesIsOccupied(_data.CircleIndexes,
                     (Vector3)Sharer.InternValues[_so.InternValues[0].HashCode]))
             {
                 State = BehaviorTreeEnums.NodeState.SUCCESS;
@@ -35,8 +36,8 @@ namespace BehaviorTree.Nodes.Actions
             Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
             Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
         {
-            _environmentGridManager = (EnvironmentGridManager)
-                externDependencyValues[BehaviorTreeEnums.TreeExternValues.EnvironmentGridManager];
+            _gridManager = (GridManager)
+                externDependencyValues[BehaviorTreeEnums.TreeExternValues.GridManager];
         }
 
         public override NodeSO GetNodeSO()

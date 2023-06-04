@@ -2,7 +2,7 @@
 
 namespace BehaviorTree
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/MoveNodeSO", fileName = "new T_Move_Spe")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/MoveNodeSO", fileName = "new Tree_T_Move_Spe")]
     public class TaskMoveNodeSO : TaskNodeSO
     {
         public override void UpdateInterValues()

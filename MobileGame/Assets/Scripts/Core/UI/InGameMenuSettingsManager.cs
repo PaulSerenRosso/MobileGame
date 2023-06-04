@@ -11,7 +11,7 @@ public class InGameMenuSettingsManager : MonoBehaviour
     [SerializeField] private Button _closeSettingsButton;
     [SerializeField] private Button _reportButton;
     [SerializeField] private Button _leaveGame;
-    
+
     private ISceneService _sceneService;
 
     private void Awake()
@@ -19,15 +19,17 @@ public class InGameMenuSettingsManager : MonoBehaviour
         _settingsMenu.transform.DOScale(0f, 0f).SetEase(Ease.OutBack);
     }
 
-    public void Init(ISceneService sceneService)
+    public void Init()
     {
-        _sceneService = sceneService;
+      
         _openSettingsButton.onClick.AddListener(OpenSettings);
         _closeSettingsButton.onClick.AddListener(CloseSettings);
         // _reportButton.onClick.AddListener();
-        _leaveGame.onClick.AddListener(() => _sceneService.LoadScene("MenuScene"));
+       // _leaveGame.onClick.AddListener(() => _sceneService.LoadScene("MenuScene", null));
     }
 
+    
+    
     private void OpenSettings()
     {
         _openSettingsButton.transform.DOKill();

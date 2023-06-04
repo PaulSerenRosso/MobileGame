@@ -3,7 +3,7 @@
 namespace BehaviorTree
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Actions/Checks/BoolInternValueNodeSO",
-        fileName = "new CH_BoolInternValue_Spe")]
+        fileName = "new Tree_CH_BoolInternValue_Spe")]
     public class CheckBoolInternValueNodeSO : CheckNodeSO
     {
         public override void UpdateInterValues()

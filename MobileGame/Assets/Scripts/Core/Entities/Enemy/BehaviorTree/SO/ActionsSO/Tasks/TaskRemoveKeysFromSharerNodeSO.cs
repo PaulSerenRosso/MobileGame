@@ -3,7 +3,7 @@
 namespace BehaviorTree
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/RemoveKeysFromSharerNodeSO",
-        fileName = "new T_RemoveKeysFromSharer_Spe")]
+        fileName = "new Tree_T_RemoveKeysFromSharer_Spe")]
     public class TaskRemoveKeysFromSharerNodeSO : TaskNodeSO
     {
         public override void UpdateInterValues()

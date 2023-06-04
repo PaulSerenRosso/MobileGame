@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c37ae15910f3480b89c14d40b085a619, type: 3}
+  m_Name: G_T_GetIndexMovePointPosition_Rotation
+  m_EditorClassIdentifier: 
+  IsDuplicable: 0
+  Comment: "Retourne le point de d\xE9placement du grid"
+  _internValuesCount: 2
+  Data: {fileID: 11400000, guid: c674167ed9770434e84a277a8b5df273, type: 2}
+  InternValues:
+  - Key: IndexPlayer
+    HashCode: 1098768601
+    Type: 1
+    PropertyType: 0
+    Comment: Index(int) of a MovePoint
+  - Key: PlayerIndexMovePointPosition
+    HashCode: 479747565
+    Type: 0
+    PropertyType: 1
+    Comment: Destination(Vector3) of a MovePoint

@@ -6,11 +6,11 @@ namespace Service
 {
     public class PoolService : IPoolService
     {
-        private Dictionary<GameObject, Pool<GameObject>> _pools;
+        private Dictionary<GameObject, Pool<GameObject>> _pools = new();
 
         public void CreatePool(GameObject gameObject, int count)
         {
-            _pools.Add(gameObject, new Pool<GameObject>(gameObject, count));
+            if (!_pools.ContainsKey(gameObject)) _pools.Add(gameObject, new Pool<GameObject>(gameObject, count));
         }
 
         public void RemovePool(GameObject gameObject)
@@ -28,9 +28,9 @@ namespace Service
             _pools[gameObject].AddToPool(gameObject);
         }
 
-        public void AddToPoolLater(GameObject gameObject, float lifeTime)
+        public void AddToPoolLater(GameObject gameObjectReference, GameObject gameObjectItem, float lifeTime)
         {
-            _pools[gameObject].AddToPoolLatter(gameObject, lifeTime);
+            _pools[gameObjectReference].AddToPoolLatter(gameObjectItem, lifeTime);
         }
     }
 }

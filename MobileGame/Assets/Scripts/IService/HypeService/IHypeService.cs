@@ -4,17 +4,45 @@ namespace Service.Hype
 {
     public interface IHypeService : ISwitchableService
     {
-        void IncreaseHype(float amount);
-        void DecreaseHype(float amount);
-        void SetHype(float value);
+        event Action EnableHypeServiceEvent;
+    
+        void StopUltimateAreasIncreased();
+        void PlayUltimateAreasIncreased();
+        void IncreaseHypePlayer(float amount);
+        void IncreaseHypeEnemy(float amount);
+        void DecreaseHypePlayer(float amount);
+        void DecreaseHypeEnemy(float amount);
+        void SetHypePlayer(float value);
+        void SetHypeEnemy(float value);
+        void ResetHypePlayer();
+        void ResetHypeEnemy();
+        
+        
+        void SetStartHypePlayer(float value);
+        void SetStartHypeEnemy(float value);
 
-        float GetCurrentHype();
+        float GetCurrentHypePlayer();
+        float GetCurrentHypeEnemy();
+        float GetUltimateHypeValuePlayer();
+        float GetUltimateHypeValueEnemy();
         float GetMaximumHype();
-        float GetMinimumHype();
-        event Action<float> IncreaseHypeEvent;
-        event Action<float> DecreaseHypeEvent;
+        bool GetUltimateAreaPlayer();
+        bool GetUltimateAreaEnemy();
+
+        event Action<float> UltimateAreaIncreaseEvent;
+        Action<float> GetPlayerIncreaseHypeEvent{ set; get; }
+        Action<float> GetPlayerDecreaseHypeEvent{ set;get; }
+        Action<float> GetPlayerSetHypeEvent { set;get; }
+        Action<float> GetPlayerGainUltimateEvent { set; get;}
+        Action<float> GetPlayerLoseUltimateEvent { set;get; }
+      
+        Action<float> GetEnemyIncreaseHypeEvent{ set;get; }
+        Action<float> GetEnemyDecreaseHypeEvent{ set; get;}
+        Action<float> GetEnemySetHypeEvent { get; set; }
+        Action<float> GetEnemyGainUltimateEvent{ set;get; }
+        Action<float> GetEnemyLoseUltimateEvent{ set; get;}
+
         event Action<float> ReachMaximumHypeEvent;
         event Action<float> ReachMinimumHypeEvent;
-        event Action SetHypeEvent;
     }
 }

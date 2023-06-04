@@ -1,31 +1,41 @@
+using System;
 using Actions;
 using HelperPSR.RemoteConfigs;
-using HelperPSR.Tick;
 using Service.Inputs;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Player.Handler
 {
-    public class PlayerTauntHandler : PlayerHandler, IRemoteConfigurable
+    public class PlayerTauntHandler : PlayerHandlerRecordable, IRemoteConfigurable
     {
+        public event Action MakeActionEvent;
+        public event Action MakeFinishActionEvent;
+        
         [SerializeField] private MovementPlayerAction movementPlayerAction;
         [SerializeField] private AttackPlayerAction attackPlayerAction;
         [SerializeField] private TauntPlayerAction tauntPlayerAction;
         
-        protected override Actions.PlayerAction GetAction()
+        private IInputService _inputService;
+
+        protected override PlayerAction GetAction()
         {
             return tauntPlayerAction;
+        }
+        
+        public bool CheckIsTaunting()
+        {
+            return !GetAction().IsInAction;
         }
 
         public override void InitializeAction()
         {
-            
+            MakeActionEvent?.Invoke();
         }
 
         void TryMakeTauntAction(InputAction.CallbackContext ctx)
         {
-           TryMakeAction(ctx);
+            TryMakeAction(ctx);
         }
 
         bool CheckIsInAttack()
@@ -40,18 +50,35 @@ namespace Player.Handler
 
         public override void Setup(params object[] arguments)
         {
-          
+            base.Setup();
             RemoteConfigManager.RegisterRemoteConfigurable(this);
-            IInputService inputService = (IInputService)arguments[0];
+            _inputService = (IInputService)arguments[0];
             AddCondition(CheckIsInAttack);
             AddCondition(CheckIsInMovement);
-            inputService.SetHold(TryMakeTauntAction, CancelTaunt);
+            _inputService.SetHold(TryMakeTauntAction, CancelTaunt);
             tauntPlayerAction.SetupAction(arguments[1], arguments[2]);
+        }
+
+        public override void Unlink()
+        {
+            base.Unlink();
+            _inputService.ClearHold();
+            MakeActionEvent = null;
+            MakeFinishActionEvent = null;
+            RemoteConfigManager.UnRegisterRemoteConfigurable(this);
+        }
+
+        public void TryCancelTaunt()
+        {
+            tauntPlayerAction.TryCancelTaunt();
+            MakeFinishActionEvent?.Invoke();
         }
 
         private void CancelTaunt(InputAction.CallbackContext obj)
         {
+            CancelRecord();
             tauntPlayerAction.TryCancelTaunt();
+            MakeFinishActionEvent?.Invoke();
         }
 
         public void SetRemoteConfigurableValues()

@@ -3,7 +3,7 @@
 namespace BehaviorTree
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/SendPlayerMovePointIndexNodeSO",
-        fileName = "new T_SendPlayerMovePointIndex_Spe")]
+        fileName = "new Tree_T_SendPlayerMovePointIndex_Spe")]
     public class TaskSendPlayerMovePointIndexNodeSO : TaskNodeSO
     {
         public override void UpdateInterValues()
@@ -19,7 +19,7 @@ namespace BehaviorTree
 
         public override void UpdateComment()
         {
-            Comment = "Nœud qui permet d'enregistrer la position du joueur durant une partie";
+            Comment = "Nœud qui permet d'enregistrer la node du joueur durant une partie";
         }
     }
 }

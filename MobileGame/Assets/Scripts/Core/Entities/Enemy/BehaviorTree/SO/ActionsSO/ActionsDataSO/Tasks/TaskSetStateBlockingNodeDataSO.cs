@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BehaviorTree.SO.Actions
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/SetStateBlockingDataSO",
-        fileName = "new T_SetStateBlocking_Spe_Data")]
+        fileName = "new Tree_T_SetStateBlocking_Spe_Data")]
     public class TaskSetStateBlockingNodeDataSO : ActionNodeDataSO
     {
         public EnemyEnums.EnemyBlockingState EnemyBlockingState;

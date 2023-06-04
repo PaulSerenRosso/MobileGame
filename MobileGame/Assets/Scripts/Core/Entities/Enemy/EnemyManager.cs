@@ -1,167 +1,273 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using Cysharp.Threading.Tasks;
 using Enemy;
 using Environment.MoveGrid;
-using HelperPSR.MonoLoopFunctions;
 using HelperPSR.RemoteConfigs;
-using Interfaces;
 using Service;
+using Service.Fight;
 using Service.Hype;
+using Service.UI;
 using UnityEngine;
 using Tree = BehaviorTree.Trees;
 
-public class EnemyManager : MonoBehaviour, IDeathable, IDamageable, ILifeable, IUpdatable, IRemoteConfigurable
+public class EnemyManager : MonoBehaviour, IRemoteConfigurable, IHypeable
 {
+    public Action CanUltimateEvent;
+    public Animator Animator;
+    public bool IsBoosted;
     public EnemyEnums.EnemyMobilityState CurrentMobilityState;
     public EnemyEnums.EnemyBlockingState CurrentBlockingState;
+    public EnemyInGameSO EnemyInGameSo;
+    public EnemyGlobalSO EnemyGlobalSO;
 
     [SerializeField] private Tree.Tree _tree;
-    [SerializeField] private EnemySO _so;
-    [SerializeField] private string _remoteConfigHealthName;
-    [SerializeField] private string _remoteConfigTimeStunName;
-    [SerializeField] private string _remoteConfigTimeStunInvulnerableName;
-    [SerializeField] private string _remoteConfigStunPercentageHealthName;
-    private float _health;
-    private List<EnemyStunTrigger> _currentStunTriggers;
-    private float _timerInvulnerable;
+    [SerializeField] private string _remoteConfigAngleBlock;
+    [SerializeField] private string _remoteConfigAngleStun;
+    [SerializeField] private string _remoteConfigPercentageDamageReductionBoostChimist;
+    [SerializeField] private ParticleSystem _startUltimateParticle;
+    [SerializeField] private ParticleSystem _ultimateParticle;
+    [SerializeField] private ParticleSystem _blockParticle;
+    [SerializeField] private GameObject[] _particleToReset;
+    [SerializeField] private SkinnedMeshRenderer[] _skinnedMeshRenderers;
+    [SerializeField] private int _timeShaderActivate = 500;
 
-    public event Action<float> OnDamageReceived;
+    private IHypeService _hypeService;
 
     private void Start()
     {
         transform.position = new Vector3(0, 0, 0);
-        _health = _so.Health;
-        CurrentMobilityState = EnemyEnums.EnemyMobilityState.VULNERABLE;
+        transform.rotation = Quaternion.identity;
+        CurrentMobilityState = EnemyEnums.EnemyMobilityState.INVULNERABLE;
         CurrentBlockingState = EnemyEnums.EnemyBlockingState.VULNERABLE;
-        OnDamageReceived += TakeStun;
-        UpdateManager.Register(this);
+    
+    }
+
+    private void OnEnable()
+    {
         RemoteConfigManager.RegisterRemoteConfigurable(this);
-        _currentStunTriggers = new List<EnemyStunTrigger>();
     }
 
     private void OnDisable()
     {
         RemoteConfigManager.UnRegisterRemoteConfigurable(this);
-        UpdateManager.UnRegister(this);
-    }
-
-    public void OnUpdate()
-    {
-        if (EnemyEnums.EnemyMobilityState.INVULNERABLE == CurrentMobilityState) TimerInvulnerable();
-        if (_currentStunTriggers.Count < 1 || CurrentMobilityState != EnemyEnums.EnemyMobilityState.VULNERABLE) return;
-        _currentStunTriggers.RemoveAll(enemyStunTrigger => enemyStunTrigger.Time > _so.TimeStunAvailable);
-        foreach (var enemyStunTrigger in _currentStunTriggers.Where(enemyStunTrigger =>
-                     enemyStunTrigger.Time < _so.TimeStunAvailable))
-        {
-            enemyStunTrigger.Time += Time.deltaTime;
-        }
-
-        if (_currentStunTriggers.Any(enemyStunTrigger =>
-                (enemyStunTrigger.DamageAmount / _so.Health) >= _so.PercentageHealth))
-        {
-            CurrentMobilityState = EnemyEnums.EnemyMobilityState.STAGGER;
-            _currentStunTriggers.Clear();
-        }
     }
 
     public void Setup(Transform playerTransform, ITickeableService tickeableService,
-        EnvironmentGridManager environmentGridManager, IPoolService poolService, IHypeService hypeService)
+        GridManager gridManager, IPoolService poolService, IHypeService hypeService, IUICanvasSwitchableService uiCanvasSwitchableService, IFightService fightService)
     {
-        _tree.Setup(playerTransform, tickeableService, environmentGridManager, poolService, hypeService);
-        _timerInvulnerable = 0;
-        // TODO: Add the right EnemySO in setup
+        _hypeService = hypeService;
+        _tree.Setup(playerTransform, tickeableService, gridManager, poolService, hypeService, uiCanvasSwitchableService, fightService);
+        _hypeService.GetEnemyGainUltimateEvent += ActivateFXUltimate;
+        _hypeService.GetEnemyLoseUltimateEvent += DeactivateFXUltimate;
     }
 
-    private void TimerInvulnerable()
+    public SkinnedMeshRenderer[] GetSkinnedMeshRenderers()
     {
-        _timerInvulnerable += Time.deltaTime;
-        if (_timerInvulnerable >= _so.TimeInvulnerable)
-        {
-            _currentStunTriggers.Clear();
-            CurrentMobilityState = EnemyEnums.EnemyMobilityState.VULNERABLE;
-            _timerInvulnerable = 0;
-        }
+        return _skinnedMeshRenderers;
     }
 
-    public void Die()
+    public void ActivateGhostTrail(Vector2 direction)
     {
-        Debug.Log("BOSS IS KO, CONGRATS!");
+        // _ghostTrail.ActivateTrail(direction);
     }
 
-    [ContextMenu("TakeDamage")]
-    public void TakeDamageTest()
+    private void ActivateFXUltimate(float obj)
     {
-        OnDamageReceived.Invoke(5);
-        if (_health - 5 <= 0)
-        {
-            _health = 0;
-            Die();
-        }
-        else _health -= 5;
+        _startUltimateParticle.gameObject.SetActive(true);
+        _ultimateParticle.gameObject.SetActive(true);
     }
 
-    public void TakeDamage(float amount, Vector3 posToCheck = new())
+    private void DeactivateFXUltimate(float obj)
     {
-        if (CurrentBlockingState == EnemyEnums.EnemyBlockingState.BLOCKING)
-        {
-            float angle = Vector3.Angle(transform.forward, posToCheck);
-            if (angle < 10) return;
-            OnDamageReceived.Invoke(amount);
-            if (_health - (1 - _so.PercentageDamageReduction) * amount <= 0)
-            {
-                _health = 0;
-                Die();
-            }
-            else
-            {
-                _health -= (1 - _so.PercentageDamageReduction) * amount;
-            }
-            return;
-        }
-
-        OnDamageReceived.Invoke(amount);
-        if (_health - amount <= 0)
-        {
-            _health = 0;
-            Die();
-        }
-        else
-        {
-            _health -= amount;
-        }
-    }
-
-    public event Action ChangeHealth;
-
-    public float GetHealth()
-    {
-        return _health;
-    }
-
-    public void GainHealth(float amount)
-    {
-        if (_health >= _so.Health) return;
-        if (_health + amount >= _so.Health) _health = _so.Health;
-        else _health += amount;
-    }
-
-    private void TakeStun(float amount)
-    {
-        if (CurrentMobilityState != EnemyEnums.EnemyMobilityState.VULNERABLE) return;
-        _currentStunTriggers.Add(new EnemyStunTrigger(0, amount));
-        foreach (var enemyStunTrigger in _currentStunTriggers.Where(enemyStunTrigger =>
-                     enemyStunTrigger.Time < _so.TimeStunAvailable))
-        {
-            enemyStunTrigger.DamageAmount += amount;
-        }
+        _startUltimateParticle.gameObject.SetActive(false);
+        _ultimateParticle.gameObject.SetActive(false);
     }
 
     public void SetRemoteConfigurableValues()
     {
-        _so.Health = RemoteConfigManager.Config.GetFloat(_remoteConfigHealthName);
-        _so.PercentageHealth = RemoteConfigManager.Config.GetFloat(_remoteConfigStunPercentageHealthName);
-        _so.TimeStunAvailable = RemoteConfigManager.Config.GetFloat(_remoteConfigTimeStunName);
-        _so.TimeInvulnerable = RemoteConfigManager.Config.GetFloat(_remoteConfigTimeStunInvulnerableName);
+        EnemyInGameSo.AngleBlock = RemoteConfigManager.Config.GetFloat(_remoteConfigAngleBlock);
+        EnemyInGameSo.AngleStun = RemoteConfigManager.Config.GetFloat(_remoteConfigAngleStun);
+        EnemyInGameSo.PercentageDamageReductionBoostChimist =
+            RemoteConfigManager.Config.GetFloat(_remoteConfigPercentageDamageReductionBoostChimist);
+    }
+
+    public void ResetEnemy()
+    {
+        transform.position = Vector3.zero;
+        transform.rotation = Quaternion.identity;
+        CurrentMobilityState = EnemyEnums.EnemyMobilityState.INVULNERABLE;
+        CurrentBlockingState = EnemyEnums.EnemyBlockingState.VULNERABLE;
+        ResetAnimator();
+        ResetParticles();
+        ResetShaderColor();
+        _hypeService.ResetHypeEnemy();
+    }
+
+    private void ResetAnimator()
+    {
+        Animator.Play("Idle");
+        Animator.SetInteger("Direction", -1);
+        Animator.SetInteger("RecoveryAnimationSpeed", 1);
+        Animator.SetInteger("EndMovementSpeed0", 1);
+        Animator.SetInteger("EndMovementSpeed1", 1);
+        Animator.SetBool("IsTauting", false);
+        Animator.SetInteger("Attack", -1);
+        Animator.SetBool("IsBlocking", false);
+        Animator.SetBool("IsBoosting", false);
+        Animator.SetInteger("Dodge", -1);
+        Animator.SetBool("IsStun", false);
+        Animator.SetBool("IsStartShooting", false);
+        Animator.SetInteger("SpeedAttackAnimation", 0);
+    }
+
+    private void ResetParticles()
+    {
+        foreach (var particle in _particleToReset)
+        {
+            particle.SetActive(false);
+        }
+    }
+
+    public void StopTree(Action callback)
+    {
+        ResetAnimatorParameters();
+        _tree.StopTree();
+        _tree.ResetTree(callback);
+    }
+
+    public void ReplayTree()
+    {
+        ResetAnimatorParameters();
+        _tree.ReplayTree();
+    }
+
+    private void ResetAnimatorParameters()
+    {
+        Animator.Play("Idle");
+        Animator.SetInteger("Direction", -1);
+        Animator.SetInteger("Attack", -1);
+        Animator.SetBool("IsTaunting", false);
+        Animator.SetBool("IsBlocking", false);
+    }
+
+    public bool TryDecreaseHypeEnemy(float amount, Vector3 posToCheck, Transform particleTransform,
+        Enums.ParticlePosition particlePosition, bool isStun)
+    {
+        float damage = amount;
+        if (CurrentBlockingState == EnemyEnums.EnemyBlockingState.BLOCKING)
+        {
+            Vector3 normalizedPos = (posToCheck - transform.position).normalized;
+            float angle = Vector3.Angle(normalizedPos, transform.forward);
+            if (angle > EnemyInGameSo.AngleBlock)
+            {
+                if (IsBoosted) damage = (1 - EnemyInGameSo.PercentageDamageReductionBoostChimist) * damage;
+                ActivateShaderDamage();
+                _hypeService.DecreaseHypeEnemy(damage);
+                if (isStun) TakeStun();
+                return true;
+            }
+            _blockParticle.gameObject.transform.position = (1 * (posToCheck - transform.position).normalized + transform.position);
+            if (_blockParticle.isPlaying)
+            {
+                _blockParticle.Clear();
+                _blockParticle.Play();
+            }
+            else
+            {
+                _blockParticle.gameObject.SetActive(true);
+            }
+            
+            return false;
+        }
+
+        if (IsBoosted)
+        {
+            // damage = (1 - EnemyInGameSo.PercentageDamageReductionBoostChimist) * amount;
+            _blockParticle.gameObject.transform.position = (1 * (posToCheck - transform.position).normalized + transform.position);
+            if (_blockParticle.isPlaying)
+            {
+                _blockParticle.Clear();
+                _blockParticle.Play();
+            }
+            else
+            {
+                _blockParticle.gameObject.SetActive(true);
+            }
+            return false;
+        }
+        
+        if (isStun) TakeStun();
+
+        Vector3 pos;
+        particleTransform.gameObject.SetActive(true);
+        switch (particlePosition)
+        {
+            case Enums.ParticlePosition.Neck:
+                pos = new Vector3(transform.position.x, transform.localScale.y + 0.5F, transform.position.z);
+                particleTransform.position = pos;
+                break;
+            case Enums.ParticlePosition.Punch:
+                pos = (1 * (posToCheck - transform.position).normalized + transform.position) + new Vector3(0, 1, 0);
+                particleTransform.position = pos;
+                break;
+            case Enums.ParticlePosition.Uppercut:
+                pos = (1 * (posToCheck - transform.position).normalized + transform.position) + new Vector3(0, 1, 0);
+                pos.y = transform.localScale.y + 0.5F;
+                particleTransform.position = pos;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(particlePosition), particlePosition, null);
+        }
+        
+        ActivateShaderDamage();
+        _hypeService.DecreaseHypeEnemy(damage);
+        return true;
+    }
+
+    private void ActivateShaderDamage()
+    {
+        foreach (var skinnedMeshRenderer in _skinnedMeshRenderers)
+        {
+            skinnedMeshRenderer.material.SetInt("_TakeDamage", 1);
+        }
+
+        DeactivateShaderDamage();
+    }
+
+    private async void DeactivateShaderDamage()
+    {
+        await UniTask.Delay(_timeShaderActivate);
+        if (_skinnedMeshRenderers is null) return;
+        foreach (var skinnedMeshRenderer in _skinnedMeshRenderers)
+        {
+            skinnedMeshRenderer.material.SetInt("_TakeDamage", 0);
+        }
+    }
+
+    private void ResetShaderColor()
+    {
+        foreach (var skinnedMeshRenderer in _skinnedMeshRenderers)
+        {
+            skinnedMeshRenderer.material.SetInt("_TakeDamage", 0);
+            skinnedMeshRenderer.material.SetInt("_Vulnerable", 0);
+            if (skinnedMeshRenderer.material.HasInt("_BlueTexture"))
+            {
+                skinnedMeshRenderer.material.SetInt("_BlueTexture", 0);
+            }
+            if (skinnedMeshRenderer.material.HasInt("_YellowTexture"))
+            {
+                skinnedMeshRenderer.material.SetInt("_YellowTexture", 0);
+            }
+            if (skinnedMeshRenderer.material.HasInt("_RedTexture"))
+            {
+                skinnedMeshRenderer.material.SetInt("_RedTexture", 0);
+            }
+        }
+    }
+
+    private void TakeStun()
+    {
+        if (CurrentMobilityState is EnemyEnums.EnemyMobilityState.INVULNERABLE or EnemyEnums.EnemyMobilityState.STAGGER) return;
+        CurrentMobilityState = EnemyEnums.EnemyMobilityState.STAGGER;
     }
 }

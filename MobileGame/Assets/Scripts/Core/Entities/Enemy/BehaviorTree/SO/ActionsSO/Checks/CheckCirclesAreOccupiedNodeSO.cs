@@ -3,7 +3,7 @@
 namespace BehaviorTree
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Actions/Checks/CirclesAreOccupiedNodeSO",
-        fileName = "new CH_CirclesAreOccupied_Spe")]
+        fileName = "new Tree_CH_CirclesAreOccupied_Spe")]
     public class CheckCirclesAreOccupiedNodeSO : CheckNodeSO
     {
         public override void UpdateInterValues()

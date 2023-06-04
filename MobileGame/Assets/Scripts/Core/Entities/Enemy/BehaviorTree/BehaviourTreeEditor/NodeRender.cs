@@ -7,7 +7,7 @@ namespace BehaviorTreeEditor
 {
     public abstract class NodeRender
     {
-        protected BehaviourTreeWindow _behaviourTreeWindow;
+        protected BehaviourTreeViewerWindow BehaviourTreeViewerWindow;
         protected BehaviourTreeContainer _currentContainer;
         
         private Color _backgroundColor;
@@ -23,9 +23,9 @@ namespace BehaviorTreeEditor
 
         public abstract NodeSO GetSO();
 
-        public NodeRender(BehaviourTreeWindow behaviourTreeWindow, Color backgroundColor, string titleName)
+        public NodeRender(BehaviourTreeViewerWindow behaviourTreeViewerWindow, Color backgroundColor, string titleName)
         {
-            _behaviourTreeWindow = behaviourTreeWindow;
+            BehaviourTreeViewerWindow = behaviourTreeViewerWindow;
             _backgroundColor = backgroundColor;
             _titleName = titleName;
         }
@@ -46,9 +46,9 @@ namespace BehaviorTreeEditor
             GUILayout.Label(_titleName);
             GUILayout.FlexibleSpace();
             EditorGUILayout.EndHorizontal();
-            GUI.backgroundColor = _behaviourTreeWindow.BaseColor;
+            GUI.backgroundColor = BehaviourTreeViewerWindow.BaseColor;
             GUI.backgroundColor = Color.red;
-            GUI.backgroundColor = _behaviourTreeWindow.BaseColor;
+            GUI.backgroundColor = BehaviourTreeViewerWindow.BaseColor;
         }
 
         protected virtual void Render()

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f5ed7b2ca8330e47bd72debfaddf289, type: 3}
+  m_Name: CM_T_DecreaseHype_AttackTauntBlueBoost
+  m_EditorClassIdentifier: 
+  IsDuplicable: 1
+  Comment: "Fait bouger la hype en fonction de la fonction choisie ainsi que de la
+    valeur renseign\xE9e dans le DATA. Vous pouvez cocher le param\xE8tre isUpdated
+    en fonction de si votre node sera lancer \xE0 chaque frame ou non"
+  _internValuesCount: 0
+  Data: {fileID: 11400000, guid: 5addf2422ba5a9e46abe1bc869170c3f, type: 2}
+  InternValues: []

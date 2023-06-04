@@ -26,6 +26,7 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void Evaluate()
         {
+            base.Evaluate();
             CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[0].HashCode,
                 _playerMovementHandler.GetCurrentIndexMovePoint());
 
@@ -39,7 +40,7 @@ namespace BehaviorTree.Nodes.Actions
         {
             _playerMovementHandler =
                 (PlayerMovementHandler)externDependencyValues[
-                    BehaviorTreeEnums.TreeExternValues.PlayerHandlerMovement];
+                    BehaviorTreeEnums.TreeExternValues.PlayerMovementHandler];
         }
 
         public override ActionNodeDataSO GetDataSO()

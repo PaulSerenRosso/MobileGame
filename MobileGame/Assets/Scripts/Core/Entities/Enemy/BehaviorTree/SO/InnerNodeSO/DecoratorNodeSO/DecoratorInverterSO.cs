@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BehaviorTree.SO.Decorator
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Decorator/InverterSO",
-        fileName = "new D_Inverter_Spe")]
+        fileName = "new Tree_D_Inverter_Spe")]
     public class DecoratorInverterSO : DecoratorSO
     {
         public override Type GetTypeNode()

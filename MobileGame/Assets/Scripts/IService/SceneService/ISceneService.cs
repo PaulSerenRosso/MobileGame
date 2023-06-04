@@ -1,3 +1,7 @@
+using System;
+using UnityEngine;
+
+
 namespace Service
 {
     public interface ISceneService : IService

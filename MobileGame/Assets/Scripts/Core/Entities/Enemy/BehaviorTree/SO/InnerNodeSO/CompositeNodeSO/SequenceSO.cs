@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BehaviorTree.SO.Composite
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Composite/SequenceSO", fileName = "new CO_Sequence_Spe")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Composite/SequenceSO", fileName = "new Tree_CO_Sequence_Spe")]
     public class SequenceSO : CompositeSO
     {
         public override Type GetTypeNode()

@@ -23,12 +23,14 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void SetNodeSO(NodeSO nodeSO)
         {
+            Tree.ResetNodeList.Add(this);
             _so = (TaskMoveNodeSO)nodeSO;
             _data = (TaskMoveNodeDataSO)_so.Data;
         }
 
         public override void Evaluate()
         {
+            base.Evaluate();
             if (!_isInit)
             {
                 _destination = (Vector3)Sharer.InternValues[_so.InternValues[0].HashCode];
@@ -50,6 +52,16 @@ namespace BehaviorTree.Nodes.Actions
 
             State = BehaviorTreeEnums.NodeState.FAILURE;
             ReturnedEvent?.Invoke();
+        }
+
+        public override void Reset()
+        {
+            base.Reset();
+            _rb.position = _destination;
+            _startPosition = _destination;
+            FixedUpdateManager.UnRegister(this);
+            _timer = 0;
+            _isInit = false;
         }
 
         public override void SetDependencyValues(

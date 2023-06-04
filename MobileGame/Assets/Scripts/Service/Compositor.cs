@@ -9,11 +9,13 @@ using UnityEngine;
 using System.Runtime.CompilerServices;
 using Cysharp.Threading.Tasks;
 using Service.AudioService;
+using Service.Currency;
 using Service.Fight;
 using Service.Hype;
 using Service.Inputs;
+using Service.Items;
+using Service.Shop;
 using Service.UI;
-using Unity.VisualScripting;
 
 public class Compositor : MonoBehaviour
 {
@@ -26,6 +28,7 @@ public class Compositor : MonoBehaviour
     protected readonly Dictionary<Type, IService> m_services = new Dictionary<Type, IService>();
     protected readonly Dictionary<Type, List<FieldEntry>> m_dependencySlots = new Dictionary<Type, List<FieldEntry>>();
     ITickeableService iTickeableService;
+    
     private bool ResolveDependencies()
     {
         foreach (KeyValuePair<Type, List<FieldEntry>> slotsForType in m_dependencySlots)
@@ -212,15 +215,20 @@ public class Compositor : MonoBehaviour
         AddService<IAudioService>(new AudioService());
         AddService<ISceneService>(new SceneService());
         AddService<IUICanvasSwitchableService>(new UICanvasService());
+        AddService<ITournamentService>(new TournamentService());
         AddService<IFightService>(new FightService());
         AddService<IInputService>(new InputService());
         AddService<IGameService>(new GameService());
         AddService<IPoolService>(new PoolService());
         AddService<IHypeService>(new HypeService());
+        AddService<IItemsService>(new ItemsService());
+        AddService<ICurrencyService>(new CurrencyService());
+        AddService<IShopService>(new ShopService());
     }
 
-    private void Awake()
+    public void SetupCompositor()
     {
+        UnityEngine.Rendering.DebugManager.instance.enableRuntimeUI = false;
         InitCompositor().Forget();
     }
 

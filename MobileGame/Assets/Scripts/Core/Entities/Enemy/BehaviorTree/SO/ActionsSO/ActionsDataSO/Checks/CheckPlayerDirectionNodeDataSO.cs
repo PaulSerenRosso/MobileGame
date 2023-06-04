@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BehaviorTree.SO.Actions
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Data/Checks/PlayerDirectionDataSO",
-        fileName = "new CH_PlayerDirection_Spe_Data")]
+        fileName = "new Tree_CH_PlayerDirection_Spe_Data")]
     public class CheckPlayerDirectionNodeDataSO : ActionNodeDataSO
     {
         protected override void SetDependencyValues()

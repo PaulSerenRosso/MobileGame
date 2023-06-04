@@ -8,7 +8,6 @@ namespace BehaviorTree.Nodes.Actions
     {
         private CheckPlayerIfInNodeSO _so;
         private CheckPlayerIfInNodeDataSO _data;
-
         private PlayerMovementHandler _playerMovementHandler;
 
         public override NodeSO GetNodeSO()
@@ -24,10 +23,20 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void Evaluate()
         {
+            base.Evaluate();
             int attackIndex = (int)Sharer.InternValues[_so.InternValues[0].HashCode];
-            State = _playerMovementHandler.GetCurrentIndexMovePoint() == attackIndex
-                ? BehaviorTreeEnums.NodeState.SUCCESS
-                : BehaviorTreeEnums.NodeState.FAILURE;
+            if (_data.isCurrentOrLastMovePoint)
+            {
+                State = _playerMovementHandler.GetCurrentIndexMovePoint() == attackIndex
+                    ? BehaviorTreeEnums.NodeState.SUCCESS
+                    : BehaviorTreeEnums.NodeState.FAILURE;
+            }
+            else
+            {
+                State = _playerMovementHandler.GetLastIndexMovePoint() == attackIndex
+                    ? BehaviorTreeEnums.NodeState.SUCCESS
+                    : BehaviorTreeEnums.NodeState.FAILURE;
+            }
             ReturnedEvent?.Invoke();
         }
 
@@ -36,7 +45,7 @@ namespace BehaviorTree.Nodes.Actions
             Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
         {
             _playerMovementHandler =
-                (PlayerMovementHandler)externDependencyValues[BehaviorTreeEnums.TreeExternValues.PlayerHandlerMovement];
+                (PlayerMovementHandler)externDependencyValues[BehaviorTreeEnums.TreeExternValues.PlayerMovementHandler];
         }
 
         public override ActionNodeDataSO GetDataSO()

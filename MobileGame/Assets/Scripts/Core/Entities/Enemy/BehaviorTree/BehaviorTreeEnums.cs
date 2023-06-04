@@ -6,18 +6,42 @@ public class BehaviorTreeEnums
         Animator,
         Transform,
         MeshRenderer,
-        EnemyManager
+        EnemyManager,
+        TauntFX,
+        ShieldFX,
+        StunFX,
+        PrevShoot,
+        MuzzleShoot,
+        PotionSpeedUpFX,
+        MovementFX,
+        ShieldChemistFX,
+        PotionDefenseUpFX,
+        PotionAttackUpFX
     }
 
     public enum TreeExternValues
     {
         PlayerTransform,
-        EnvironmentGridManager,
+        GridManager,
         TickManager,
-        PlayerHandlerMovement,
+        PlayerMovementHandler,
         PoolService,
-        PlayerHealth,
-        HypeService
+        HypeService,
+        PlayerRenderer,
+        PlayerController,
+        UICanvasService,
+        PlayerTauntHandler,
+        FightService
+    }
+
+    public enum HypeFunctionMode
+    {
+        DecreasePlayer, 
+        DecreaseEnemy, 
+        IncreaseEnemy, 
+        IncreasePlayer, 
+        SetPlayer, 
+        SetEnemy,
     }
 
     public enum NodeState
@@ -33,13 +57,30 @@ public class BehaviorTreeEnums
         FLOAT,
         NONE,
         CALLBACK,
-        BOOL
+        BOOL,
+        STRING,
+        VECTOR3LIST
     }
 
     public enum InternValuePropertyType
     {
         GET,
         SET,
+        GETANDSET,
         REMOVE
+    }
+
+    public enum InternValueCalculate
+    {
+        ADD,
+        SUBTRACT,
+        SET
+    }
+
+    public enum PopupValue
+    {
+        MOVE,
+        TAUNT,
+        ULTIMATE
     }
 }

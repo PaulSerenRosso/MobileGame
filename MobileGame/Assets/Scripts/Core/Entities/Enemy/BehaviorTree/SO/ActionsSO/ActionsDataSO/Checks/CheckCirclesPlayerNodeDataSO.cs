@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BehaviorTree.SO.Actions
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Data/Checks/CirclesPlayerNodeDataSO",
-        fileName = "new CH_CirclesPlayer_Spe_Data")]
+        fileName = "new Tree_CH_CirclesPlayer_Spe_Data")]
     public class CheckCirclesPlayerNodeDataSO : ActionNodeDataSO
     {
         public int[] CirclesIndexes;
@@ -14,8 +14,8 @@ namespace BehaviorTree.SO.Actions
         {
             ExternValues = new[]
             {
-                BehaviorTreeEnums.TreeExternValues.PlayerHandlerMovement,
-                BehaviorTreeEnums.TreeExternValues.EnvironmentGridManager
+                BehaviorTreeEnums.TreeExternValues.PlayerMovementHandler,
+                BehaviorTreeEnums.TreeExternValues.GridManager
             };
         }
 

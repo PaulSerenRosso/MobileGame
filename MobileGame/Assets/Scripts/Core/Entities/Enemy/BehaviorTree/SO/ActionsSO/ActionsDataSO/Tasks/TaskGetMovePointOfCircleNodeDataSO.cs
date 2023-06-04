@@ -5,14 +5,14 @@ using UnityEngine;
 namespace BehaviorTree.SO.Actions
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/GetMovePointOfCircleDataSO",
-        fileName = "new T_GetMovePointOfCircle_Spe_Data")]
+        fileName = "new Tree_T_GetMovePointOfCircle_Spe_Data")]
     public class TaskGetMovePointOfCircleNodeDataSO : ActionNodeDataSO
     {
         public int IndexMovedAmount;
 
         protected override void SetDependencyValues()
         {
-            ExternValues = new[] { BehaviorTreeEnums.TreeExternValues.EnvironmentGridManager };
+            ExternValues = new[] { BehaviorTreeEnums.TreeExternValues.GridManager };
         }
 
         public override Type GetTypeNode()

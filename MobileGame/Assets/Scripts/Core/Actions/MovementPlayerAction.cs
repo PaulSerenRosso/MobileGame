@@ -10,19 +10,20 @@ namespace Actions
 
         [SerializeField] private MovementSO _movementSO;
         [SerializeField] private Rigidbody _rb;
-        
-        private Vector3 _startPosition;
-        private float _timer;
+
         private bool _isMoving;
+        private float _timer;
         private float _ratioTime;
+        private Vector3 _startPosition;
 
         public event Action ReachDestinationEvent;
+        public event Action<float> MakeUpdateEvent;
         
         public float GetMaxTimeMovement()
         {
             return _movementSO.MaxTime;
         }
-        
+
         public void OnFixedUpdate()
         {
             if (_timer >= _movementSO.MaxTime)
@@ -34,15 +35,16 @@ namespace Actions
                 EndActionEvent?.Invoke();
                 return;
             }
+
             _timer += Time.fixedDeltaTime;
             _ratioTime = _timer / _movementSO.MaxTime;
             MakeUpdateEvent?.Invoke(_ratioTime);
             _rb.position = Vector3.Lerp(_startPosition, Destination, _movementSO.CurvePosition.Evaluate(_ratioTime));
         }
-        
-        public override bool IsInAction => _isMoving;
 
-        public override  void MakeAction()
+        public override bool IsInAction => _isMoving;
+        
+        public override void MakeAction()
         {
             _startPosition = _rb.position;
             _isMoving = true;
@@ -51,18 +53,23 @@ namespace Actions
             MakeActionEvent?.Invoke();
         }
 
-        public override  void SetupAction(params object[] arguments)
+        public override void SetupAction(params object[] arguments)
         {
             Destination = (Vector3)arguments[0];
             MoveToDestination();
         }
 
-        public event System.Action MakeActionEvent;
-        public event System.Action<float> MakeUpdateEvent;
-
         public void MoveToDestination()
         {
             transform.position = Destination;
+        }
+
+        public override void UnlinkAction()
+        {
+            base.UnlinkAction();
+            ReachDestinationEvent = null;
+            MakeUpdateEvent = null;
+            FixedUpdateManager.UnRegister(this);
         }
     }
 }

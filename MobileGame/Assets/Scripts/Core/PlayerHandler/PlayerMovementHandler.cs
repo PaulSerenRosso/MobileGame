@@ -15,13 +15,18 @@ namespace Player.Handler
         [SerializeField] private List<SwipeSO> _allMovementSwipesSO;
         [SerializeField] private AttackPlayerAction attackPlayerAction;
         [SerializeField] private TauntPlayerAction tauntPlayerAction;
-        [SerializeField] private TickTimer _recoveryTimer;
         [SerializeField] private MovementPlayerAction movementPlayerAction;
         [SerializeField] private float _cooldownTimeBetweenTwoMovement;
+        [SerializeField] private float _dodgeTime;
 
+        private TickTimer _recoveryTimer;
+        private TickTimer _dodgeTimer;
+        private IInputService _inputService;
         private bool _inCooldown;
-        private EnvironmentGridManager _environmentGridManager;
+        private bool _isDodging;
+        private GridManager _gridManager;
         private Swipe _currentSwipe;
+        private int _lastMovePointIndex;
         private int _currentMovePointIndex;
         private int _maxDestinationIndex;
         private MovePoint _currentMovePoint;
@@ -29,10 +34,11 @@ namespace Player.Handler
 
         public event Action FinishRecoveryMovementEvent;
         public event Action<Vector2> MakeActionEvent;
-
-        // override le PlayerRecord 
+        public event Action<Vector3> CheckIsOccupiedEvent;
 
         public float GetRecoveryMovementTime() => _cooldownTimeBetweenTwoMovement;
+
+        public bool GetIsDodging() => _isDodging;
 
         public void TryMakeMovementAction(Swipe swipe)
         {
@@ -59,40 +65,56 @@ namespace Player.Handler
                 {
                     if (_currentMovePoint.NeighborLeftIndex != -1)
                         _maxDestinationIndex = _currentMovePoint.NeighborLeftIndex;
-                    else return false;
+                    else
+                    {
+                        CheckIsOccupiedEvent?.Invoke(_currentSwipe.SwipeSO.DirectionV3);
+                        return false;
+                    }
                     break;
                 }
                 case var v when v == Vector2.right:
                 {
                     if (_currentMovePoint.NeighborRightIndex != -1)
                         _maxDestinationIndex = _currentMovePoint.NeighborRightIndex;
-                    else return false;
+                    else
+                    {
+                        CheckIsOccupiedEvent?.Invoke(_currentSwipe.SwipeSO.DirectionV3);
+                        return false;
+                    }
                     break;
                 }
                 case var v when v == Vector2.up:
                 {
                     if (_currentMovePoint.NeighborTopIndex != -1)
                         _maxDestinationIndex = _currentMovePoint.NeighborTopIndex;
-                    else return false;
+                    else
+                    {
+                        CheckIsOccupiedEvent?.Invoke(_currentSwipe.SwipeSO.DirectionV3);
+                        return false;
+                    }
                     break;
                 }
                 case var v when v == Vector2.down:
                 {
                     if (_currentMovePoint.NeighborDownIndex != -1)
                         _maxDestinationIndex = _currentMovePoint.NeighborDownIndex;
-                    else return false;
+                    else
+                    {
+                        CheckIsOccupiedEvent?.Invoke(_currentSwipe.SwipeSO.DirectionV3);
+                        return false;
+                    }
                     break;
                 }
             }
 
-            if (_environmentGridManager.MovePoints[_maxDestinationIndex].IsOccupied) return false;
-
-            return true;
+            if (_gridManager.MovePoints[_maxDestinationIndex].IsOccupied)
+                CheckIsOccupiedEvent?.Invoke(_currentSwipe.SwipeSO.DirectionV3);
+            return !_gridManager.MovePoints[_maxDestinationIndex].IsOccupied;
         }
 
         public void SetCurrentMovePoint(int movePointIndex)
         {
-            _currentMovePoint = _environmentGridManager.MovePoints[movePointIndex];
+            _currentMovePoint = _gridManager.MovePoints[movePointIndex];
             _currentMovePointIndex = movePointIndex;
         }
 
@@ -101,9 +123,14 @@ namespace Player.Handler
             return _currentMovePointIndex;
         }
 
+        public int GetLastIndexMovePoint()
+        {
+            return _lastMovePointIndex;
+        }
+
         private bool CheckIsOutOfRange()
         {
-            if (_environmentGridManager.CheckIfMovePointInIsCircles(_currentMovePointIndex))
+            if (_gridManager.CheckIfMovePointInIsCircles(_currentMovePointIndex))
             {
                 if (_currentSwipe.SwipeSO.DirectionV2 == Vector2.down)
                 {
@@ -112,6 +139,20 @@ namespace Player.Handler
             }
 
             return true;
+        }
+
+        protected override bool TryRecordInput(object[] args)
+        {
+            if (!base.TryRecordInput(args))
+            {
+                if (!CheckCooldownBetweenTwoMovement())
+                {
+                    SendRecordAction(args);
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private bool CheckIsInAttack()
@@ -130,17 +171,16 @@ namespace Player.Handler
             RemoteConfigManager.RegisterRemoteConfigurable(this);
 
             base.Setup();
-            var inputService = (IInputService)arguments[2];
+            _inputService = (IInputService)arguments[2];
 
             foreach (var movementSwipeSO in _allMovementSwipesSO)
             {
-                inputService.AddSwipe(movementSwipeSO, TryMakeMovementAction);
+                _inputService.AddSwipe(movementSwipeSO, TryMakeMovementAction);
             }
 
-            _environmentGridManager = (EnvironmentGridManager)arguments[0];
+            _gridManager = (GridManager)arguments[0];
             _currentMovePointIndex = (int)arguments[1];
-            _currentMovePoint = _environmentGridManager.MovePoints[_currentMovePointIndex];
-            _conditions = new List<Func<bool>>();
+            _currentMovePoint = _gridManager.MovePoints[_currentMovePointIndex];
             AddCondition(CheckCooldownBetweenTwoMovement);
             AddCondition(CheckIsMoving);
             AddCondition(CheckIsOutOfRange);
@@ -150,8 +190,44 @@ namespace Player.Handler
             _recoveryTimer = new TickTimer(_cooldownTimeBetweenTwoMovement, (TickManager)arguments[3]);
             _recoveryTimer.TickEvent += FinishCooldown;
             _recoveryTimer.InitiateEvent += LaunchCooldownBetweenTwoMovement;
+            // _dodgeTimer = new TickTimer(_dodgeTime, (TickManager)arguments[3]);
+            // _dodgeTimer.TickEvent += FinishDodging;
+            // _dodgeTimer.InitiateEvent += LaunchDodge;
+            // movementPlayerAction.MakeActionEvent += _dodgeTimer.Initiate;
             movementPlayerAction.ReachDestinationEvent += _recoveryTimer.Initiate;
-            FinishRecoveryMovementEvent += _playerHandlerRecordableManager.LaunchRecorderAction;
+            FinishRecoveryMovementEvent += CheckActionsBlockedRecord;
+            GetAction().SetupAction(_currentMovePoint.MeshRenderer.transform.position);
+        }
+
+        private void LaunchDodge()
+        {
+            _isDodging = true;
+        }
+
+        private void FinishDodging()
+        {
+            _isDodging = false;
+        }
+
+        public override void Unlink()
+        {
+            base.Unlink();
+            foreach (var movementSwipeSO in _allMovementSwipesSO)
+            {
+                _inputService.RemoveSwipe(movementSwipeSO);
+            }
+
+            MakeActionEvent = null;
+            FinishRecoveryMovementEvent = null;
+            _recoveryTimer.ResetEvents();
+            _recoveryTimer.Cancel();
+            RemoteConfigManager.UnRegisterRemoteConfigurable(this);
+        }
+
+        public void ResetMovePoint(int indexMovePoint)
+        {
+            _currentMovePoint = _gridManager.MovePoints[indexMovePoint];
+            _currentMovePointIndex = indexMovePoint;
             GetAction().SetupAction(_currentMovePoint.MeshRenderer.transform.position);
         }
 
@@ -166,20 +242,21 @@ namespace Player.Handler
             _inCooldown = true;
         }
 
-        private bool CheckCooldownBetweenTwoMovement()
+        public bool CheckCooldownBetweenTwoMovement()
         {
             return !_inCooldown;
         }
 
-        protected override Actions.PlayerAction GetAction()
+        protected override PlayerAction GetAction()
         {
             return movementPlayerAction;
         }
 
         public override void InitializeAction()
         {
-            _currentMovePoint = _environmentGridManager.MovePoints[_maxDestinationIndex];
+            _currentMovePoint = _gridManager.MovePoints[_maxDestinationIndex];
             movementPlayerAction.Destination = _currentMovePoint.MeshRenderer.transform.position;
+            _lastMovePointIndex = _currentMovePointIndex;
             _currentMovePointIndex = _maxDestinationIndex;
             MakeActionEvent?.Invoke(_currentSwipe.SwipeSO.DirectionV2);
         }
@@ -215,6 +292,11 @@ namespace Player.Handler
 
             _cooldownTimeBetweenTwoMovement = RemoteConfigManager.Config.GetFloat("CooldownTimeBetweenTwoMovement");
             _movementSO.MaxTime = RemoteConfigManager.Config.GetFloat("PlayerMovementMaxTime");
+        }
+
+        protected override bool CheckActionsBlockedCustomCondition()
+        {
+            return CheckCooldownBetweenTwoMovement();
         }
 
         public void SetSwipeSO(SwipeSO so, Enums.Direction direction)

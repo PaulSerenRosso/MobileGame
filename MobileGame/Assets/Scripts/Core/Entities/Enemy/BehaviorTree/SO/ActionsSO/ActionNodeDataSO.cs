@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace BehaviorTree.SO.Actions
 {
-    public abstract class ActionNodeDataSO : ScriptableObject
+    public abstract class ActionNodeDataSO : BehaviourTreeSO
     {
         [Header("Ne pas modifier")] 
         public BehaviorTreeEnums.TreeExternValues[] ExternValues;

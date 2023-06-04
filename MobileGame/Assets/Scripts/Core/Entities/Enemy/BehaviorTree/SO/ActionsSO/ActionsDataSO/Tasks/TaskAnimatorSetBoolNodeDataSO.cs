@@ -5,11 +5,12 @@ using UnityEngine;
 namespace BehaviorTree.SO.Actions
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/AnimatorSetBoolNodeDataSO",
-        fileName = "new T_AnimatorSetBool_Spe_Data")]
+        fileName = "new Tree_T_AnimatorSetBool_Spe_Data")]
     public class TaskAnimatorSetBoolNodeDataSO : ActionNodeDataSO
     {
         public bool ValueToPass;
-        public string NameParameter; 
+        public string NameParameter;
+        public bool IsValueIntern;
             
         protected override void SetDependencyValues()
         {

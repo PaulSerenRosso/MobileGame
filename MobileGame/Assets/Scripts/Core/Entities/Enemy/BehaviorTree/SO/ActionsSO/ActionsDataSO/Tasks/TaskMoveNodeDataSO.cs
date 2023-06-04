@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BehaviorTree.SO.Actions
 {
-    [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/MoveNodeDataSO", fileName = "new T_Move_Spe_Data")]
+    [CreateAssetMenu(menuName = "BehaviorTree/Data/Tasks/MoveNodeDataSO", fileName = "new Tree_T_Move_Spe_Data")]
     public class TaskMoveNodeDataSO : ActionNodeDataSO
     {
         public AnimationCurve CurvePosition;

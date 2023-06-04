@@ -1,38 +1,161 @@
-using System;
 using Environment.MoveGrid;
+using HelperPSR.MonoLoopFunctions;
 using Player.Handler;
-using Service;
 using Service.Hype;
 using Service.Inputs;
+using Service.UI;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Player
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IUpdatable
     {
-        [SerializeField] private PlayerMovementHandler _playerMovementHandler;
-        [SerializeField] private PlayerRotationHandler _playerRotationHandler;
         [SerializeField] private PlayerAttackHandler _playerAttackHandler;
-        [SerializeField] private PlayerTauntHandler _playerTauntHandler;
+        [FormerlySerializedAs("playerUltimateHandler")] [SerializeField] private PlayerUltimateHandler _playerUltimateHandler;
+        [SerializeField] private PlayerMovementHandler _playerMovementHandler;
         [SerializeField] private PlayerRenderer _playerRenderer;
+        [SerializeField] private PlayerRotationHandler _playerRotationHandler;
+        [SerializeField] private PlayerTauntHandler _playerTauntHandler;
+        [FormerlySerializedAs("_timerStun")] [SerializeField] private float _timeStun;
+        [FormerlySerializedAs("CameraPivot")] [FormerlySerializedAs("_cameraPivot")] [SerializeField] public Transform EndFightCameraPivot;
+        [SerializeField] private float _timeInvunerable;
+        [SerializeField] private GameObject[] _particlesPlayer;
+
+        private float _timerStun;
+        private float _timerInvulnerable;
+        private bool _isStun;
+        private bool _isInvulnerable;
         private IInputService _inputService;
         private ITickeableService _tickeableService;
         private EnemyManager _enemyManager;
-        private IHypeService _hypeService; 
-    
+        private GridSO _gridSO;
+        private IHypeService _hypeService;
+        private bool _isLocked;
+
+        private void OnEnable()
+        {
+            UpdateManager.Register(this);
+        }
+
+        private void OnDisable()
+        {
+            UpdateManager.UnRegister(this);
+        }
+
+        public void OnUpdate()
+        {
+            if (_isStun) TimerStun();
+            if (_isInvulnerable) TimerInvunerable();
+        }
+        
+        private void TimerStun()
+        {
+            _timerStun += Time.deltaTime;
+            if (_timerStun >= _timeStun)
+            {
+                _playerRenderer.DeactivateStunFeedback();
+                UnlockController();
+                _timerStun = 0;
+                _isStun = false;
+                _isInvulnerable = true;
+            }
+        }
+        
+        private void TimerInvunerable()
+        {
+            _timerInvulnerable += Time.deltaTime;
+            if (_timerInvulnerable >= _timeInvunerable)
+            {
+                _playerRenderer.DeactivateStunFeedback();
+                UnlockController();
+                _timerInvulnerable = 0;
+                _isStun = false;
+                _isInvulnerable = false;
+            }
+        }
+
 
         public void SetupPlayer(IInputService inputService, ITickeableService tickeableService,
-            EnvironmentGridManager environmentGridManager, EnvironmentSO environmentSO, EnemyManager enemyManager, IHypeService hypeService)
+            GridManager gridManager, GridSO gridSO, EnemyManager enemyManager,
+            IHypeService hypeService)
         {
             _inputService = inputService;
             _tickeableService = tickeableService;
             _enemyManager = enemyManager;
             _hypeService = hypeService;
-            _playerMovementHandler.Setup(environmentGridManager, environmentSO.Index, _inputService, _tickeableService.GetTickManager);
+            _gridSO = gridSO;
+            _playerMovementHandler.AddCondition(CheckIsLockedController);
+            _playerMovementHandler.Setup(gridManager, gridSO.Index, _inputService,
+                _tickeableService.GetTickManager);
+            _playerRotationHandler.AddCondition(CheckIsLockedController);
             _playerRotationHandler.Setup(_enemyManager.transform);
-            _playerAttackHandler.Setup(_inputService, _tickeableService.GetTickManager, enemyManager, environmentGridManager);
-            _playerTauntHandler.Setup(_inputService, _tickeableService.GetTickManager, hypeService);
+            _playerAttackHandler.AddCondition(CheckIsLockedController);
+            _playerAttackHandler.Setup(_inputService, _tickeableService.GetTickManager,
+                _enemyManager.GetComponent<IHypeable>(),
+                gridManager, _hypeService);
+            _playerTauntHandler.AddCondition(CheckIsLockedController);
+            _playerTauntHandler.Setup(_inputService, _tickeableService.GetTickManager, _hypeService);
+            _playerTauntHandler.MakeActionEvent += _playerRenderer.ActivateTauntFX;
+            _playerTauntHandler.MakeFinishActionEvent += _playerRenderer.DeactivateTauntFX;
+            _playerUltimateHandler.AddCondition(CheckIsLockedController);
+            _playerUltimateHandler.Setup(_hypeService);
             _playerRenderer.Init();
+            LockController();
+        }
+
+        public void UnlinkPlayerController()
+        {
+            _playerAttackHandler.Unlink();
+            _playerUltimateHandler.Unlink();
+            _playerRotationHandler.Unlink();
+            _playerMovementHandler.Unlink();
+            _playerTauntHandler.Unlink();
+        }
+
+        private bool CheckIsLockedController()
+        {
+            return !_isLocked;
+        }
+
+        public void ResetPlayer()
+        {
+            _playerRenderer.PlayAnimation("Idle");
+            _playerMovementHandler.ResetMovePoint(_gridSO.Index);
+            transform.rotation = Quaternion.identity;
+            _hypeService.ResetHypePlayer();
+            _isStun = false;
+            _timerStun = 0; 
+            _playerRenderer.DeactivateStunFeedback();
+            _timerInvulnerable = 0;
+            foreach (var particlePlayer in _particlesPlayer)
+            {
+                particlePlayer.SetActive(false);
+            }
+        }
+
+        public void LockController()
+        {
+            _isLocked = true;
+            _playerTauntHandler.TryCancelTaunt();
+        }
+
+        public void UnlockController()
+        {
+            _isLocked = false;
+        }
+        
+        //animation
+        //fx
+        // lock du controller
+        // reset des valeurs de stun et invulnerable
+        public void TakeStun()
+        {
+            if (_isStun || _isInvulnerable) return;
+            _playerRenderer.ActivateStunFeedback();
+            LockController();
+            _isStun = true;
+            Vibration.Vibrate(100);
         }
     }
 }

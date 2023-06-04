@@ -3,7 +3,7 @@
 namespace BehaviorTree
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/GetMovePointOfLineNodeSO",
-        fileName = "new  T_GetMovePointOfLine_Spe")]
+        fileName = "new  Tree_T_GetMovePointOfLine_Spe")]
     public class TaskGetMovePointOfLineNodeSO : TaskNodeSO
     {
         public override void UpdateInterValues()

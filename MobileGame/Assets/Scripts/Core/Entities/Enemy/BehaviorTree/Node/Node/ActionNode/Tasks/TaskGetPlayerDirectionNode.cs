@@ -10,7 +10,7 @@ namespace BehaviorTree.Nodes.Actions
     {
         private TaskGetPlayerDirectionNodeSO _so;
         private TaskGetPlayerDirectionNodeDataSO _data;
-        private EnvironmentGridManager _environmentGridManager;
+        private GridManager _gridManager;
         private Transform _transform;
 
         public override NodeSO GetNodeSO()
@@ -26,8 +26,9 @@ namespace BehaviorTree.Nodes.Actions
 
         public override void Evaluate()
         {
+            base.Evaluate();
             int playerMovePointIndex = (int)Sharer.InternValues[_so.InternValues[0].HashCode];
-            Vector3 direction = _environmentGridManager.MovePoints[playerMovePointIndex].MeshRenderer.transform.position -
+            Vector3 direction = _gridManager.MovePoints[playerMovePointIndex].MeshRenderer.transform.position -
                                 _transform.position;
 
             CollectionHelper.AddOrSet(ref Sharer.InternValues, _so.InternValues[1].HashCode, direction.normalized);
@@ -40,9 +41,9 @@ namespace BehaviorTree.Nodes.Actions
             Dictionary<BehaviorTreeEnums.TreeExternValues, object> externDependencyValues,
             Dictionary<BehaviorTreeEnums.TreeEnemyValues, object> enemyDependencyValues)
         {
-            _environmentGridManager =
-                (EnvironmentGridManager)externDependencyValues[
-                    BehaviorTreeEnums.TreeExternValues.EnvironmentGridManager];
+            _gridManager =
+                (GridManager)externDependencyValues[
+                    BehaviorTreeEnums.TreeExternValues.GridManager];
             _transform = (Transform)enemyDependencyValues[BehaviorTreeEnums.TreeEnemyValues.Transform];
         }
 

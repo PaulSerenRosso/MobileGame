@@ -9,4 +9,11 @@ public class Enums : MonoBehaviour
         Top,
         Down
     }
+
+    public enum ParticlePosition
+    {
+        Uppercut,
+        Neck,
+        Punch
+    }
 }

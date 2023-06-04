@@ -1,11 +1,9 @@
-﻿using System;
-using BehaviorTree.Nodes.Actions;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace BehaviorTree
 {
     [CreateAssetMenu(menuName = "BehaviorTree/Actions/Tasks/InvokeCallbackNodeSO",
-        fileName = "new T_InvokeCallback_Spe")]
+        fileName = "new Tree_T_InvokeCallback_Spe")]
     public class TaskInvokeCallbackNodeSO : TaskNodeSO
     {
         public override void UpdateInterValues()
