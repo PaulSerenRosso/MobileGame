@@ -53,8 +53,12 @@ namespace Service.UI
 
         [Header("Popups")]
         [SerializeField] private Canvas _pubCanvas;
+
+        [SerializeField] private JuicyPopup _pubPopUp;
         [SerializeField] private Canvas _winTournament;
+        [SerializeField] private JuicyPopup _winPopUp;
         [SerializeField] private Canvas _defeatTournament;
+        [SerializeField] private JuicyPopup _defeatPopUp;
         [SerializeField] private TextMeshProUGUI _winTournamentText;
         [SerializeField] private Image _rewardImage;
 
@@ -281,6 +285,7 @@ namespace Service.UI
             _winTournamentText.text = "+" + _tournamentService.GetSettings().CoinsAmountWhenWinTournament;
             _rewardImage.sprite = _tournamentService.GetCurrentFightPlayer().EnemyGlobalSO.ItemSO.SpriteUI;
             _winTournament.gameObject.SetActive(true);
+            _winPopUp.ActivatePopUp();
         }
 
         private void ResetUITournament()
@@ -337,7 +342,9 @@ namespace Service.UI
         public void QuitTournament()
         {
             _defeatTournament.gameObject.SetActive(false);
+            _defeatPopUp.gameObject.SetActive(false);
             _winTournament.gameObject.SetActive(false);
+            _winPopUp.gameObject.SetActive(false);
             _tournamentService.ResetTournament();
             GainEndTournamentCoins();
             ResetUITournament();
@@ -353,13 +360,16 @@ namespace Service.UI
         public void LaunchPub()
         {
             _defeatTournament.gameObject.SetActive(false);
+            _defeatPopUp.gameObject.SetActive(false);
             _tournamentService.GetCurrentFightPlayer().FightState = FightState.WAITING;
             _pubCanvas.gameObject.SetActive(true);
+            _pubPopUp.ActivatePopUp();
         }
 
         public void ClosePub()
         {
             _pubCanvas.gameObject.SetActive(false);
+            _pubPopUp.gameObject.SetActive(false);
             UpdateUITournament();
         }
     }

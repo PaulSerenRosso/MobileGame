@@ -42,10 +42,10 @@ namespace Service.UI
         [SerializeField] private Button _rightArrowTournament;
 
         [SerializeField] private Canvas _unlockTournament;
-
-        [SerializeField] private GameObject _badgesPopup;
+        [SerializeField] private JuicyPopup _unlockTournamentPopup;
+        [SerializeField] private JuicyPopup _badgesPopup;
         [SerializeField] private JuicyPopup _friendsPanel;
-        [SerializeField] private GameObject _friendPopup;
+        [SerializeField] private JuicyPopup _friendPopup;
         [SerializeField] private JuicyPopup _dailyPanel;
         [SerializeField] private GameObject _friendsLayout;
         [SerializeField] private Button _friendTag;
@@ -178,6 +178,7 @@ namespace Service.UI
             if (_actualTournament != 1)
             {
                 _unlockTournament.gameObject.SetActive(true);
+                _unlockTournamentPopup.ActivatePopUp();
                 return;
             }
 
@@ -306,19 +307,20 @@ namespace Service.UI
 
         public void OpenBadges()
         {
-            _badgesPopup.SetActive(true);
+            _badgesPopup.ActivatePopUp();
         }
 
         private void OpenFriendPopup(Sprite picture, string name)
         {
             _friendPopupImage.sprite = picture;
             _friendPopupNameText.text = name;
-            _friendPopup.SetActive(true);
+            _friendPopup.ActivatePopUp();
         }
 
         public void CloseLockTournament()
         {
             _unlockTournament.gameObject.SetActive(false);
+            _unlockTournamentPopup.gameObject.SetActive(false);
         }
 
         public void ClosePopup()
@@ -330,7 +332,7 @@ namespace Service.UI
 
         public void CloseFriendPopup()
         {
-            _friendPopup.SetActive(false);
+            _friendPopup.gameObject.SetActive(false);
         }
     }
 }
