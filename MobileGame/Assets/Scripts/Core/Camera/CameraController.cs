@@ -21,12 +21,11 @@ namespace Service
         private void UpdateCamera()
         {
             if (!_player || !_enemy) return;
-            transform.position = Vector3.Lerp(transform.position, 
-                _player.TransformPoint(_cameraSettingsSO.OffsetPosition),
-                _cameraSettingsSO.SpeedPosition);
-            transform.rotation = Quaternion.Lerp(transform.rotation,
-                Quaternion.LookRotation(((_enemy.position + _player.TransformDirection(_cameraSettingsSO.OffsetRotation).normalized) - transform.position).normalized),
-                _cameraSettingsSO.SpeedRotation );
+            transform.position =
+                _player.TransformPoint(_cameraSettingsSO.OffsetPosition);
+               
+            transform.rotation =
+                Quaternion.LookRotation(((_enemy.position + _player.TransformDirection(_cameraSettingsSO.OffsetRotation).normalized) - transform.position).normalized);
         }
 
         public void Setup(Transform player, Transform enemy)
