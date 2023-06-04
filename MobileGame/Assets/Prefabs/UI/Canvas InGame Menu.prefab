@@ -2940,6 +2940,7 @@ GameObject:
   - component: {fileID: 3262299034966521465}
   - component: {fileID: 42793690570181205}
   - component: {fileID: 1789761681208101657}
+  - component: {fileID: 4745174866780895458}
   m_Layer: 0
   m_Name: Highlight Image
   m_TagString: Untagged
@@ -3005,6 +3006,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4745174866780895458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1819560539793393467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0c7facdbca64f846afba8be063a4b2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rectTransform: {fileID: 3262299034966521465}
+  _canvas: {fileID: 6450475867034787196}
+  currentParent: {fileID: 8675174543937879323}
 --- !u!1 &1980599875510084723
 GameObject:
   m_ObjectHideFlags: 0
@@ -3016,6 +3032,7 @@ GameObject:
   - component: {fileID: 1693851577913884843}
   - component: {fileID: 6647746243503127483}
   - component: {fileID: 2396135049393769274}
+  - component: {fileID: 22001473124345086}
   m_Layer: 0
   m_Name: Highlight Image
   m_TagString: Untagged
@@ -3081,6 +3098,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &22001473124345086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980599875510084723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0c7facdbca64f846afba8be063a4b2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rectTransform: {fileID: 1693851577913884843}
+  _canvas: {fileID: 6450475867034787196}
+  currentParent: {fileID: 5588958588871861774}
 --- !u!1 &2085378515108071372
 GameObject:
   m_ObjectHideFlags: 0
@@ -3689,6 +3721,7 @@ GameObject:
   - component: {fileID: 2109387215803245965}
   - component: {fileID: 4509449997738189957}
   - component: {fileID: 5952345821632651951}
+  - component: {fileID: 6023167463426644310}
   m_Layer: 0
   m_Name: Highlight Image
   m_TagString: Untagged
@@ -3754,6 +3787,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6023167463426644310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2406780929090743434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0c7facdbca64f846afba8be063a4b2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rectTransform: {fileID: 2109387215803245965}
+  _canvas: {fileID: 6450475867034787196}
+  currentParent: {fileID: 148389322508298558}
 --- !u!1 &2522102178442861175
 GameObject:
   m_ObjectHideFlags: 0
@@ -4280,6 +4328,7 @@ GameObject:
   - component: {fileID: 2792051652779345065}
   - component: {fileID: 3707839677907404002}
   - component: {fileID: 8189511747099905876}
+  - component: {fileID: 2359607730548853412}
   m_Layer: 0
   m_Name: Highlight Image
   m_TagString: Untagged
@@ -4345,6 +4394,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2359607730548853412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2819069048255318327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0c7facdbca64f846afba8be063a4b2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rectTransform: {fileID: 2792051652779345065}
+  _canvas: {fileID: 6450475867034787196}
+  currentParent: {fileID: 1681840093859253056}
 --- !u!1 &2829221000074671383
 GameObject:
   m_ObjectHideFlags: 0
@@ -6866,7 +6930,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4707574865801539911
 RectTransform:
   m_ObjectHideFlags: 0
