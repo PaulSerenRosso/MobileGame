@@ -174,6 +174,10 @@ namespace Service.Fight
         private void ResetEntities()
         {
             _gridManager.MoveGrid(new Vector3(0, 0, 0));
+            foreach (var movePoint in _gridManager.MovePoints)
+            {
+                movePoint.IsOccupied = false;
+            }
             _playerController.ResetPlayer();
             _enemyManager.ResetEnemy();
         }
