@@ -25,8 +25,8 @@ namespace BehaviorTree.Nodes.Actions
         {
             base.Evaluate();
             State = _playerTauntHandler.CheckIsTaunting()
-                ? BehaviorTreeEnums.NodeState.SUCCESS
-                : BehaviorTreeEnums.NodeState.FAILURE;
+                ? BehaviorTreeEnums.NodeState.FAILURE
+                : BehaviorTreeEnums.NodeState.SUCCESS;
             ReturnedEvent?.Invoke();
         }
 

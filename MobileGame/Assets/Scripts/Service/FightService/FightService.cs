@@ -200,6 +200,7 @@ namespace Service.Fight
         {
             ResetEntities();
             _cameraController.Unlink();
+            _playerController.LockController();
             _cameraController.transform.parent = _playerController.EndFightCameraPivot;
             _cameraController.transform.localPosition = Vector3.zero;
             _cameraController.transform.localRotation = Quaternion.identity;

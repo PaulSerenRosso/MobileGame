@@ -24,6 +24,7 @@ public class CinematicFightManager : MonoBehaviour
     [SerializeField] private GameObject _versusGameObject;
     [SerializeField] private GameObject _ultimateGameObject;
     [SerializeField] private GameObject _roundWonGameObject;
+    [SerializeField] private GameObject _roundLoseGameObject;
 
     private Transform _player;
     private Transform _boss;
@@ -87,6 +88,7 @@ public class CinematicFightManager : MonoBehaviour
         _versusGameObject.SetActive(false);
         _ultimateGameObject.SetActive(false);
         _roundWonGameObject.SetActive(false);
+        _roundLoseGameObject.SetActive(false);
         _playerAnimator.Play("Idle");
         _enemyAnimator.Play("Idle");
         _player.parent = null;
@@ -108,6 +110,7 @@ public class CinematicFightManager : MonoBehaviour
         _versusGameObject.SetActive(false);
         _ultimateGameObject.SetActive(false);
         _roundWonGameObject.SetActive(false);
+        _roundLoseGameObject.SetActive(false);
         _playerAnimator.Play("Idle");
         _enemyAnimator.Play("Idle");
         _playableDirector.Stop();

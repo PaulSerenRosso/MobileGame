@@ -5062,6 +5062,14 @@ MonoBehaviour:
   _timeStun: 3
   EndFightCameraPivot: {fileID: 1565340844409021714}
   _timeInvunerable: 10
+  _particlesPlayer:
+  - {fileID: 5115301909246342027}
+  - {fileID: 1582931308203619518}
+  - {fileID: 5651458929059124519}
+  - {fileID: 4566444110600149802}
+  - {fileID: 5470164334119375289}
+  - {fileID: 2987641615920897040}
+  - {fileID: 8755845569173248904}
 --- !u!114 &7598208263566444310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5086,10 +5094,7 @@ MonoBehaviour:
   - {fileID: 6901132842937188275}
   - {fileID: 5352999819354286539}
   - {fileID: 7106956100708104796}
-  _movementRecoveryAnimationClip: {fileID: 7400000, guid: c91389c39d842cc4190ea8be0836798a,
-    type: 2}
   _dirParameterName: Direction
-  _endMovementParameterName: IsEndMovement
   _tauntParameterName: IsTaunting
   _tauntParticle: {fileID: 4566444110600149802}
   _stunParticle: {fileID: 5115301909246342027}
@@ -5449,6 +5454,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80f79b28c39767041bdee17b461994df, type: 3}
+--- !u!1 &2987641615920897040 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3192186668465378475, guid: 80f79b28c39767041bdee17b461994df,
+    type: 3}
+  m_PrefabInstance: {fileID: 376843200263768251}
+  m_PrefabAsset: {fileID: 0}
 --- !u!198 &2987641615920897042 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 3192186668465378473, guid: 80f79b28c39767041bdee17b461994df,
@@ -5634,6 +5645,12 @@ PrefabInstance:
 --- !u!4 &1995216016426835868 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2734173244690438128, guid: def7e55c1a874224ca242847fd97b397,
+    type: 3}
+  m_PrefabInstance: {fileID: 4486098087574243436}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5651458929059124519 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8083910226122333515, guid: def7e55c1a874224ca242847fd97b397,
     type: 3}
   m_PrefabInstance: {fileID: 4486098087574243436}
   m_PrefabAsset: {fileID: 0}
@@ -6181,6 +6198,12 @@ PrefabInstance:
 --- !u!4 &958756822120791805 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6935013568107973244, guid: fca284cc0c3fa20488ef57f89cfc9565,
+    type: 3}
+  m_PrefabInstance: {fileID: 7885853906506019969}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1582931308203619518 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8685084110298333247, guid: fca284cc0c3fa20488ef57f89cfc9565,
     type: 3}
   m_PrefabInstance: {fileID: 7885853906506019969}
   m_PrefabAsset: {fileID: 0}

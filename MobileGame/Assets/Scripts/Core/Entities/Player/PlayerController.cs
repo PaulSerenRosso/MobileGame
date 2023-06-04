@@ -20,6 +20,7 @@ namespace Player
         [FormerlySerializedAs("_timerStun")] [SerializeField] private float _timeStun;
         [FormerlySerializedAs("CameraPivot")] [FormerlySerializedAs("_cameraPivot")] [SerializeField] public Transform EndFightCameraPivot;
         [SerializeField] private float _timeInvunerable;
+        [SerializeField] private GameObject[] _particlesPlayer;
 
         private float _timerStun;
         private float _timerInvulnerable;
@@ -123,6 +124,10 @@ namespace Player
             _playerMovementHandler.ResetMovePoint(_gridSO.Index);
             transform.rotation = Quaternion.identity;
             _hypeService.ResetHypePlayer();
+            foreach (var particlePlayer in _particlesPlayer)
+            {
+                particlePlayer.SetActive(false);
+            }
         }
 
         public void LockController()
