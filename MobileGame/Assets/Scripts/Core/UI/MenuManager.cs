@@ -6,6 +6,7 @@ using Service.Items;
 using Service.Shop;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Service.UI
@@ -24,16 +25,20 @@ namespace Service.UI
         [SerializeField] private Canvas _botCanvas;
         [SerializeField] private Canvas _backgroundCanvas;
 
+        [SerializeField] private Color _colorBottomButtonWhenNotSelect;
+        [SerializeField] private Image _homeButtonImage;
         [SerializeField] private Button _homeButton;
         [SerializeField] private MenuTournamentManager _menuTournamentManager;
         [SerializeField] private GameObject _tournamentCanvas;
         [SerializeField] private GameObject _debugFightCanvas;
 
         [SerializeField] private MenuShopManager _menuShopManager;
+        [SerializeField] private Image _shopButtonImage;
         [SerializeField] private Button _shopButton;
         [SerializeField] private Canvas _shopCanvas;
 
         [SerializeField] private MenuInventoryManager _menuInventoryManager;
+        [SerializeField] private Image _inventoryButtonImage;
         [SerializeField] private Button _inventoryButton;
         [SerializeField] private Canvas _inventoryCanvas;
 
@@ -82,8 +87,11 @@ namespace Service.UI
             _menuInventoryManager.Setup(itemsService, player.GetComponentInChildren<PlayerItemsLinker>());
             _menuShopManager.Setup(itemsService, currencyService, shopService);
             _tournaments[_actualTournament].SetActive(true);
-            _leftArrowTournament.interactable = false;
+            _leftArrowTournament.gameObject.SetActive(false);
             _homeButton.interactable = false;
+            SetImageBottomButtonColor(_inventoryButtonImage);
+            SetImageBottomButtonColor(_shopButtonImage);
+            ResetImageBottomButtonColor(_homeButtonImage);
             _menuTournamentManager.SetupMenu(_gameService, _tournamentService, this, _currencyService, itemsService, _fightService);
             _rewardImage.sprite = _tournamentService.GetFights()[^1].EnemyGlobalSO.ItemSO.SpriteUI;
             if (!_fightService.GetFightTutorial() && !_fightService.GetFightDebug())
@@ -139,6 +147,22 @@ namespace Service.UI
             _homeButton.interactable = false;
             _shopButton.interactable = true;
             _inventoryButton.interactable = true;
+            SetImageBottomButtonColor(_inventoryButtonImage);
+            SetImageBottomButtonColor(_shopButtonImage);
+            ResetImageBottomButtonColor(_homeButtonImage);
+        }
+
+        void ResetImageBottomButtonColor(Image image)
+        {
+            var imageColor = image.color;
+            imageColor = Color.white;
+            image.color = imageColor;
+        }
+        void SetImageBottomButtonColor(Image image)
+        {
+            var imageColor = image.color;
+            imageColor = _colorBottomButtonWhenNotSelect;
+            image.color = imageColor;
         }
 
         public void ActivateDebug()
@@ -148,6 +172,9 @@ namespace Service.UI
             _homeButton.interactable = true;
             _shopButton.interactable = true;
             _inventoryButton.interactable = true;
+            ResetImageBottomButtonColor(_inventoryButtonImage);
+            ResetImageBottomButtonColor(_shopButtonImage);
+            ResetImageBottomButtonColor(_homeButtonImage);
         }
 
         public void StartFight()
@@ -228,8 +255,12 @@ namespace Service.UI
         private void MoveLeftTournament(int index)
         {
             _tournaments[index].SetActive(false);
-            _leftArrowTournament.interactable = _actualTournament != 0;
+            if( _actualTournament == 0)
+            _leftArrowTournament.gameObject.SetActive(false);
+            else _leftArrowTournament.gameObject.SetActive(true);
+            _rightArrowTournament.gameObject.SetActive(true);
             _rightArrowTournament.interactable = true;
+            _leftArrowTournament.interactable = true;
         }
 
         public void RightTournament()
@@ -241,8 +272,8 @@ namespace Service.UI
             }
             else
             {
-                _rightArrowTournament.interactable = false;
                 _leftArrowTournament.interactable = false;
+                _rightArrowTournament.interactable = false;
                 for (int i = _actualTournament - 1; i >= 0; i--)
                 {
                     var index = i;
@@ -266,7 +297,11 @@ namespace Service.UI
         private void MoveRightTournament(int index)
         {
             _tournaments[index].SetActive(false);
-            _rightArrowTournament.interactable = _actualTournament != _tournaments.Length - 1;
+            if (_actualTournament == _tournaments.Length - 1)
+                _rightArrowTournament.gameObject.SetActive(false);
+            else _rightArrowTournament.gameObject.SetActive(true);
+            _leftArrowTournament.gameObject.SetActive(true);
+            _rightArrowTournament.interactable = true;
             _leftArrowTournament.interactable = true;
         }
 
@@ -280,6 +315,9 @@ namespace Service.UI
             _homeButton.interactable = true;
             _shopButton.interactable = false;
             _inventoryButton.interactable = true;
+            SetImageBottomButtonColor(_inventoryButtonImage);
+            ResetImageBottomButtonColor(_shopButtonImage);
+            SetImageBottomButtonColor(_homeButtonImage);
         }
 
         public void OpenInventory()
@@ -293,6 +331,9 @@ namespace Service.UI
             _shopButton.interactable = true;
             _inventoryButton.interactable = false;
             _menuInventoryManager.UpdateScrollRect();
+            ResetImageBottomButtonColor(_inventoryButtonImage);
+            SetImageBottomButtonColor(_shopButtonImage);
+            SetImageBottomButtonColor(_homeButtonImage);
         }
 
         public void OpenDaily()
