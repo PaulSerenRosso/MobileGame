@@ -76,6 +76,7 @@ namespace Player.Handler
 
         private void CancelTaunt(InputAction.CallbackContext obj)
         {
+            CancelRecord();
             tauntPlayerAction.TryCancelTaunt();
             MakeFinishActionEvent?.Invoke();
         }

@@ -70,5 +70,11 @@ namespace Player.Handler
 
             return false;
         }
+        
+        public void CancelRecord()
+        {
+            _playerHandlerRecordableManager.InputPlayerActionRecorded = null;
+            _playerHandlerRecordableManager.argsForInputPlayerActionRecorded = null; 
+        }
     }
 }

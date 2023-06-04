@@ -47,7 +47,6 @@ namespace Actions
         {
             if (_isTaunting)
             {
-           
                 if (_isStartTaunting)
                 {
                     _startTauntTimer.TickEvent -= Taunt;
