@@ -117,6 +117,7 @@ public class EnemyManager : MonoBehaviour, IRemoteConfigurable, IHypeable
         Animator.SetInteger("Dodge", -1);
         Animator.SetBool("IsStun", false);
         Animator.SetBool("IsStartShooting", false);
+        Animator.SetInteger("SpeedAttackAnimation", 0);
     }
 
     private void ResetParticles()
