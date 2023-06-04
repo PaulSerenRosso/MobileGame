@@ -77,6 +77,7 @@ namespace Service.UI
         {
             _gameService = gameService;
             _tournamentService = tournamentService;
+            _currencyService = currencyService;
             _menuManager = menuManager;
             _itemsService = itemsService;
             if (!_tournamentService.GetTournamentIsActive()) _tournamentService.SetTournament();
@@ -90,8 +91,6 @@ namespace Service.UI
                 else if (_tournamentService.CompareState(FightState.WAITING)) UpdateCurrentFightUI();
                 else ActivateWinnerUI();
             }
-
-            _currencyService = currencyService;
         }
 
         private void SetTournamentNames()
@@ -184,8 +183,8 @@ namespace Service.UI
             switch (currentFight.TournamentStep)
             {
                 case TournamentStep.DEMI:
-                    _playFightButton.interactable = false;
-                    _backMenuButton.interactable = false;
+                    _playFightButton.gameObject.SetActive(false);
+                    _backMenuButton.gameObject.SetActive(false);
                     foreach (var imageQuarterWinner in _imageQuarterWinners)
                     {
                         imageQuarterWinner.sprite = _winnerImage;
@@ -205,8 +204,8 @@ namespace Service.UI
                     break;
 
                 case TournamentStep.FINAL:
-                    _playFightButton.interactable = false;
-                    _backMenuButton.interactable = false;
+                    _playFightButton.gameObject.SetActive(false);
+                    _backMenuButton.gameObject.SetActive(false);
                     foreach (var imageQuarterWinner in _imageQuarterWinners)
                     {
                         imageQuarterWinner.sprite = _winnerImage;
@@ -243,7 +242,8 @@ namespace Service.UI
 
         private void ActivateWinnerUI()
         {
-            _playFightButton.interactable = false;
+            _playFightButton.gameObject.SetActive(false);
+            _backMenuButton.gameObject.SetActive(false);
             foreach (var imageQuarterWinner in _imageQuarterWinners)
             {
                 imageQuarterWinner.sprite = _winnerImage;
@@ -296,9 +296,19 @@ namespace Service.UI
                 imageQuarterWinner.sprite = _neutralImage;
             }
 
+            foreach (var imageQuarterLoser in _imageQuarterLosers)
+            {
+                imageQuarterLoser.sprite = _neutralImage;
+            }
+
             foreach (var imageDemiWinner in _imageDemiWinners)
             {
                 imageDemiWinner.sprite = _neutralImage;
+            }
+
+            foreach (var imageDemiLoser in _imageDemiLosers)
+            {
+                imageDemiLoser.sprite = _neutralImage;
             }
 
             foreach (var imageFinalWinner in _imageFinalWinners)
@@ -306,16 +316,22 @@ namespace Service.UI
                 imageFinalWinner.sprite = _neutralImage;
             }
 
+            _imageFinalLoser.sprite = _neutralImage;
+
             foreach (var imagePlayerFighter in _imagePlayerFighter)
             {
                 imagePlayerFighter.sprite = _neutralPlayerImage;
             }
+            
+            _fights = _tournamentService.GetFights();
+            _fakes = _tournamentService.GetFakes();
+            SetTournamentNames();
         }
 
         private void ActivateButtons()
         {
-            _playFightButton.interactable = true;
-            _backMenuButton.interactable = true;
+            _playFightButton.gameObject.SetActive(true);
+            _backMenuButton.gameObject.SetActive(true);
         }
 
         private void GainEndTournamentCoins()
