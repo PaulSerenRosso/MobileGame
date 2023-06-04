@@ -352,6 +352,7 @@ namespace Service.UI
         {
             _playFightButton.interactable = false;
             Fight.Fight currentFight = _tournamentService.GetCurrentFightPlayer();
+            LoadingScreenManager.Instance.gameObject.SetActive(true);
             _gameService.LoadGameScene(currentFight.EnvironmentSO.EnvironmentAddressableName,
                 currentFight.EnemyGlobalSO.EnemyAddressableName, false, false);
         }
