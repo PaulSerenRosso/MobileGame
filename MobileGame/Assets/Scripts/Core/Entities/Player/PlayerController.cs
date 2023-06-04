@@ -145,6 +145,10 @@ namespace Player
             _isLocked = false;
         }
         
+        //animation
+        //fx
+        // lock du controller
+        // reset des valeurs de stun et invulnerable
         public void TakeStun()
         {
             if (_isStun || _isInvulnerable) return;
