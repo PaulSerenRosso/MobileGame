@@ -108,7 +108,7 @@ namespace Service.UI
                 if (enemyGlobalSo.EnemyAddressableName.Contains("Tutorial")) continue;
                 var button = Instantiate(_enemyButton, _enemySelectionGrid.transform);
                 button.onClick.AddListener(() => SetEnemyAddressableName(enemyGlobalSo.EnemyAddressableName));
-                button.image.sprite = enemyGlobalSo.IconSprite;
+                button.transform.GetChild(0).GetComponent<Image>().sprite = enemyGlobalSo.IconSprite;
                 button.GetComponentInChildren<TextMeshProUGUI>().text = enemyGlobalSo.Name;
             }
 
@@ -117,7 +117,6 @@ namespace Service.UI
                 var button = Instantiate(_environmentButton, _environnementSelectionGrid.transform);
                 button.onClick.AddListener(
                     () => SetEnvironmentAddressableName(environmentSo.EnvironmentAddressableName));
-                button.image.sprite = environmentSo.EnvironmentSprite;
                 button.GetComponentInChildren<TextMeshProUGUI>().text = environmentSo.Name;
             }
 
