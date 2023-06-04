@@ -192,6 +192,7 @@ namespace Service.UI
 
         private void StartFightTutorial()
         {
+            LoadingScreenManager.Instance.gameObject.SetActive(true);
             _playMatchButton.interactable = false;
             _gameService.LoadGameScene("Coliseum", "ArnoldiosTutorialPrefab", false, true);
         }
