@@ -27,9 +27,12 @@ namespace Service.UI
         [SerializeField] private int _reloadCost;
         [SerializeField] private TextMeshProUGUI _reloadCostText;
         
-        [SerializeField] private GameObject _enoughPanel;
+        [SerializeField] private GameObject _enoughPanel; 
+         [SerializeField] private JuicyPopup _enoughPopUp;
         [SerializeField] private GameObject _purchasedPanel;
+        [SerializeField] private JuicyPopup _purchasedPopUp;
         [SerializeField] private GameObject _newItemPanel;
+        [SerializeField] private JuicyPopup _newItemPopUp;
         [SerializeField] private Image _newItemImage;
 
         private ICurrencyService _currencyService;
@@ -130,16 +133,19 @@ namespace Service.UI
                     if (_currencyService.GetXP() < itemSO.ExperienceStar)
                     {
                         _enoughPanel.SetActive(true);
+                        _enoughPopUp.ActivatePopUp();
                         return;
                     }
 
                     if (_currencyService.GetCoins() < itemSO.Price)
                     {
                         _enoughPanel.SetActive(true);
+                        _enoughPopUp.ActivatePopUp();
                         return;
                     }
                     
                     _newItemPanel.SetActive(true);
+                    _newItemPopUp.ActivatePopUp();
                     _newItemImage.sprite = itemSO.SpriteUI;
                     _itemsButton[index].interactable = false;
                     deactivateItemsPanel[index].SetActive(true);
@@ -150,9 +156,10 @@ namespace Service.UI
                     if (_currencyService.GetCoins() < itemSO.Price)
                     {
                         _enoughPanel.SetActive(true);
+                        _enoughPopUp.ActivatePopUp();
                         return;
                     }
-                    
+                    _newItemPopUp.ActivatePopUp();
                     _newItemPanel.SetActive(true);
                     _newItemImage.sprite = itemSO.SpriteUI;
                     _itemsButton[index].interactable = false;
@@ -173,6 +180,7 @@ namespace Service.UI
             if (_currencyService.GetCoins() < _reloadCost)
             {
                 _enoughPanel.SetActive(true);
+                _enoughPopUp.ActivatePopUp();
                 return;
             }
             _currencyService.RemoveCoins(_reloadCost);
@@ -183,6 +191,7 @@ namespace Service.UI
         public void OpenPurchased()
         {
             _purchasedPanel.SetActive(true);
+            _purchasedPopUp.ActivatePopUp();
         }
 
         public void ClosePopup()
@@ -190,6 +199,9 @@ namespace Service.UI
             _enoughPanel.SetActive(false);
             _purchasedPanel.SetActive(false);
             _newItemPanel.SetActive(false);
+            _enoughPopUp.gameObject.SetActive(false);
+            _purchasedPopUp.gameObject.SetActive(false);
+            _newItemPopUp.gameObject.SetActive(false);
         }
     }
 }
