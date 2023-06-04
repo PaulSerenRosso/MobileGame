@@ -100,6 +100,7 @@ namespace Player
             _playerUltimateHandler.AddCondition(CheckIsLockedController);
             _playerUltimateHandler.Setup(_hypeService);
             _playerRenderer.Init();
+            LockController();
         }
 
         public void UnlinkPlayerController()
