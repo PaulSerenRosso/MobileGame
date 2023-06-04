@@ -1919,36 +1919,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6964128934802873187}
     m_Modifications:
-    - target: {fileID: 601068555569512072, guid: 506b96712bf009443a70d2fdcd5c03b2,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 601068555569512072, guid: 506b96712bf009443a70d2fdcd5c03b2,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 601068555569512072, guid: 506b96712bf009443a70d2fdcd5c03b2,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 601068555569512072, guid: 506b96712bf009443a70d2fdcd5c03b2,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 601068555569512072, guid: 506b96712bf009443a70d2fdcd5c03b2,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 1920
-      objectReference: {fileID: 0}
-    - target: {fileID: 601068555569512072, guid: 506b96712bf009443a70d2fdcd5c03b2,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 3164
-      objectReference: {fileID: 0}
     - target: {fileID: 2402473767879212654, guid: 506b96712bf009443a70d2fdcd5c03b2,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -2174,11 +2144,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8636502532814662784, guid: 506b96712bf009443a70d2fdcd5c03b2,
-        type: 3}
-      propertyPath: m_fontSize
-      value: 79.05
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 506b96712bf009443a70d2fdcd5c03b2, type: 3}
 --- !u!114 &1643471062015330208 stripped
@@ -2202,6 +2167,12 @@ Canvas:
 --- !u!224 &4440613414140776887 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2459048459054823552, guid: 506b96712bf009443a70d2fdcd5c03b2,
+    type: 3}
+  m_PrefabInstance: {fileID: 2269939367841442103}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &4848689729399319000 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6686280062115987695, guid: 506b96712bf009443a70d2fdcd5c03b2,
     type: 3}
   m_PrefabInstance: {fileID: 2269939367841442103}
   m_PrefabAsset: {fileID: 0}
@@ -3842,7 +3813,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _tournamentFinalParent
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4848689729399319000}
     - target: {fileID: 8295636664398110626, guid: d961ebdc078a6b64bb614e94749d6f58,
         type: 3}
       propertyPath: _demiNames.Array.data[0]

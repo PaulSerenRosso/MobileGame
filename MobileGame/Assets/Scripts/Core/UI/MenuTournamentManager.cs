@@ -231,6 +231,7 @@ namespace Service.UI
                     _tournamentQuarterParent.DOAnchorPos(new Vector2(-3840, 0), 0f)
                         .OnComplete(() => _tournamentQuarterCanvas.gameObject.SetActive(false));
                     _tournamentDemiParent.DOAnchorPos(new Vector2(0, 0), 0f);
+                    _tournamentFinalParent.DOAnchorPos(new Vector2(1920, 0), 0f);
                     await UniTask.Delay(1000);
                     _tournamentDemiParent.DOAnchorPos(new Vector2(-1920, 0), 5f)
                         .OnComplete(() => _tournamentDemiCanvas.gameObject.SetActive(false));
@@ -320,7 +321,7 @@ namespace Service.UI
         private void GainEndTournamentCoins()
         {
             _currencyService.AddCoins(_tournamentService.GetSettings().CoinsAmountWhenWinTournament);
-            _itemsService.UnlockItem(_tournamentService.GetCurrentFightPlayer().EnemyGlobalSO.ItemSO);
+            _itemsService.UnlockItem(_tournamentService.GetFights()[^1].EnemyGlobalSO.ItemSO);
         }
 
         private void DeactivateUITournament()
@@ -345,8 +346,8 @@ namespace Service.UI
             _defeatPopUp.gameObject.SetActive(false);
             _winTournament.gameObject.SetActive(false);
             _winPopUp.gameObject.SetActive(false);
-            _tournamentService.ResetTournament();
             GainEndTournamentCoins();
+            _tournamentService.ResetTournament();
             ResetUITournament();
             BackMenu();
         }

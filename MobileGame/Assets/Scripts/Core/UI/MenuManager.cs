@@ -150,6 +150,7 @@ namespace Service.UI
             SetImageBottomButtonColor(_inventoryButtonImage);
             SetImageBottomButtonColor(_shopButtonImage);
             ResetImageBottomButtonColor(_homeButtonImage);
+            _rewardImage.sprite = _tournamentService.GetFights()[^1].EnemyGlobalSO.ItemSO.SpriteUI;
         }
 
         void ResetImageBottomButtonColor(Image image)
