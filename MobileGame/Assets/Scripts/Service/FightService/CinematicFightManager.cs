@@ -77,6 +77,10 @@ public class CinematicFightManager : MonoBehaviour
         _boss.parent = _bossPivot;
         _boss.localPosition = Vector3.zero;
         _boss.localRotation = Quaternion.identity;
+        _playerPivot.position = Vector3.zero;
+        _playerPivot.rotation = Quaternion.identity;
+        _bossPivot.position = Vector3.zero;
+        _bossPivot.rotation = Quaternion.identity;
         _volume.profile = null;
         _camera.enabled = false;
         _playableDirector.playableAsset = timelineAsset;

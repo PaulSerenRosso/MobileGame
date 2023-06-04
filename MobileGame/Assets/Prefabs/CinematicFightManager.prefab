@@ -2108,6 +2108,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 89596c4347c5d984dbd7b31007ec5e85, type: 2}
     - {fileID: 11400000, guid: 50c1ac4f18f884e49a76c302f90d310b, type: 2}
     - {fileID: 11400000, guid: f089b9ab93815f545ad5ea35a8ef168a, type: 2}
+    - {fileID: 11400000, guid: 4f72306ddfdd5b24ba1d48bf364ab4e3, type: 2}
+    - {fileID: 11400000, guid: 70cef522e5d980d41b7b1b847c3856a9, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
@@ -2144,42 +2146,6 @@ MonoBehaviour:
               type: 2}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Rendering.VolumeProfile,
               Unity.RenderPipelines.Core.Runtime
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 6701380354893991469}
-          m_TargetAssemblyTypeName: CinematicFightManager, Service
-          m_MethodName: 
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 6701380354893991469}
-          m_TargetAssemblyTypeName: CinematicFightManager, Service
-          m_MethodName: 
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 6701380354893991469}
-          m_TargetAssemblyTypeName: CinematicFightManager, Service
-          m_MethodName: 
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -2263,6 +2229,70 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: Idle
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 6701380354893991471}
+          m_TargetAssemblyTypeName: CinematicFightManager, Service
+          m_MethodName: LaunchEnemyAnimation
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Idle
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6701380354893991471}
+          m_TargetAssemblyTypeName: CinematicFightManager, Service
+          m_MethodName: LaunchEnemyAnimation
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: UltimateBossPose1
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 6701380354893991471}
+          m_TargetAssemblyTypeName: CinematicFightManager, Service
+          m_MethodName: LaunchPlayerAnimation
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: UltimateBossPose1
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6701380354893991471}
+          m_TargetAssemblyTypeName: CinematicFightManager, Service
+          m_MethodName: LaunchEnemyAnimation
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: UltimateBossPose2
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 6701380354893991471}
+          m_TargetAssemblyTypeName: CinematicFightManager, Service
+          m_MethodName: LaunchPlayerAnimation
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: UltimateBossPose2
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!1 &7085371866443686774
